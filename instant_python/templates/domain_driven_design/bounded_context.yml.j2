@@ -1,0 +1,14 @@
+- name: {{ bounded_context }}
+  type: python-module
+  children:
+    - name: shared
+      type: python-module
+    - name: {{ aggregate_name }}
+      type: python-module
+      children:
+        - name: application
+          type: python-module
+        - name: domain
+          type: python-module
+        - name: infrastructure
+          type: python-module
