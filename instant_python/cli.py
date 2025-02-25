@@ -1,11 +1,17 @@
 import typer
 
+from instant_python.project_generator.project_generator import ProjectGenerator
+from instant_python.question_prompter.basic_prompter import BasicPrompter
+
 app = typer.Typer()
 
 
 @app.command()
 def generate_project():
-    raise NotImplementedError("Not implemented yet")
+    user_requirements = BasicPrompter.ask()
+
+    project_generator = ProjectGenerator(user_requirements)
+    project_generator.generate()
 
 
 if __name__ == "__main__":
