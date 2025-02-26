@@ -7,6 +7,7 @@ class NodeType(StrEnum):
     PYTHON_MODULE = "python-module"
     PYTHON_FILE = "python-file"
     DIRECTORY = "directory"
+    YML_FILE = "yml-file"
 
 
 class Node(ABC):
