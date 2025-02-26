@@ -1,5 +1,7 @@
 from dataclasses import dataclass, asdict, field
 
+import yaml
+
 
 @dataclass
 class UserRequirements:
@@ -22,3 +24,7 @@ class UserRequirements:
 
     def to_dict(self) -> dict:
         return asdict(self)
+
+    def save_in_memory(self):
+        with open("user_requirements.yml", "w") as file:
+            yaml.dump(self.to_dict(), file)
