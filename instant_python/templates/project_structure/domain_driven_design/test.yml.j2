@@ -10,6 +10,6 @@
             - name: random_generator
               type: python-file
     {% set context %}
-    {% include "domain_driven_design/bounded_context.yml.j2" %}
+    {% include "project_structure/domain_driven_design/bounded_context.yml.j2" %}
     {% endset %}
     {{ context | indent(4) }}
