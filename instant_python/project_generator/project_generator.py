@@ -8,5 +8,5 @@ class ProjectGenerator:
         self._template_manager = TemplateManager()
 
     def generate(self) -> None:
-        raw_project_structure = self._template_manager.get_project("domain_driven_design")
+        raw_project_structure = self._template_manager.get_project(template_name="project_structure")
         self._folder_tree.create(raw_project_structure)

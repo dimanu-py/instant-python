@@ -12,7 +12,7 @@ class TemplateManager:
     def get_project(self, template_name: str) -> dict:
         if self._is_ddd_project():
             template = self._get_template(
-                f"{template_name}/main_structure.yml.j2"
+                f"{template_name}/{self._requirements.template}/main_structure.yml.j2"
             )
         raw_project_structure = self._render(template)
         return yaml.safe_load(raw_project_structure)
