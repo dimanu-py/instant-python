@@ -7,6 +7,7 @@ from instant_python.question_prompter.questions_definition import (
     GENERAL_QUESTIONS,
     DDD_QUESTIONS,
 )
+from instant_python.question_prompter.template_types import TemplateTypes
 from instant_python.question_prompter.user_requirements import UserRequirements
 
 
@@ -17,7 +18,7 @@ class BasicPrompter:
             for question in GENERAL_QUESTIONS
         }
 
-        if answers["template"] == "Domain Driven Design":
+        if answers["template"] == TemplateTypes.DDD:
             ddd_answers = {
                 question.key: self._ask_single_question(question)
                 for question in DDD_QUESTIONS

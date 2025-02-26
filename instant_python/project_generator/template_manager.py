@@ -1,6 +1,7 @@
 import yaml
 from jinja2 import FileSystemLoader, Environment, Template
 
+from instant_python.question_prompter.template_types import TemplateTypes
 from instant_python.question_prompter.user_requirements import UserRequirements
 
 
@@ -28,7 +29,7 @@ class TemplateManager:
         return template.render(**self._requirements.to_dict())
 
     def _is_ddd_project(self) -> bool:
-        return self._requirements.template == "DDD"
+        return self._requirements.template == TemplateTypes.DDD
 
     @staticmethod
     def _load_memory_requirements() -> UserRequirements:
