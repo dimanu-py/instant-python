@@ -1,5 +1,4 @@
-import typer
-from click import Choice
+import questionary
 
 from instant_python.question_prompter.question import Question
 from instant_python.question_prompter.questions_definition import (
@@ -33,18 +32,17 @@ class BasicPrompter:
     @staticmethod
     def _prompt(
         text: str,
-        default_value: str | None = None,
-        options: list[str] | None = None,
+        default_value: str,
+        options: list[str],
     ) -> str:
-        options = Choice(options, case_sensitive=False) if options else None
-        show_choices = True if options else False
-        return typer.prompt(
-            text=text,
+        if not options:
+            return questionary.text(text, default=default_value).ask()
+        return questionary.select(
+            text,
+            choices=options,
             default=default_value,
-            type=options,
-            show_choices=show_choices,
-        )
+        ).ask()
 
     @staticmethod
     def _confirm(text: str) -> bool:
-        return typer.confirm(text, default=True)
+        return questionary.confirm(text, default=True).ask()
