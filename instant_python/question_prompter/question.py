@@ -8,3 +8,4 @@ class Question:
 	default: str = field(default_factory=str)
 	options: list[str] = field(default_factory=list)
 	confirm: bool = field(default=False)
+	multiselect: bool = field(default=False)

@@ -1,3 +1,5 @@
+from typing import Any
+
 import questionary
 
 from instant_python.question_prompter.question import Question
@@ -27,6 +29,8 @@ class BasicPrompter:
     def _ask_single_question(self, question: Question) -> str | bool:
         if question.confirm:
             return self._confirm(question.message)
+        elif question.multiselect:
+            return self._multiselect(question.message, question.options)
         return self._prompt(question.message, question.default, question.options)
 
     @staticmethod
@@ -46,3 +50,7 @@ class BasicPrompter:
     @staticmethod
     def _confirm(text: str) -> bool:
         return questionary.confirm(text, default=True).ask()
+
+    @staticmethod
+    def _multiselect(message: str, options: list[str]) -> str:
+        return questionary.checkbox(message, choices=options).ask()
