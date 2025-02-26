@@ -20,7 +20,8 @@ class UserRequirements:
     template: str
     bounded_context: str = field(default=None)
     aggregate_name: str = field(default=None)
-    common_ddd_objects: bool = field(default=False)
+    git: bool = field(default=False)
+    built_in_features: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return asdict(self)
