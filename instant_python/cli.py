@@ -8,7 +8,7 @@ app = typer.Typer()
 
 @app.command()
 def generate_project():
-    user_requirements = BasicPrompter.ask()
+    user_requirements = BasicPrompter().ask()
     user_requirements.save_in_memory()
 
     project_generator = ProjectGenerator()
