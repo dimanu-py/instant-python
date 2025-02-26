@@ -1,0 +1,15 @@
+- name: test
+  type: python-module
+  children:
+    - name: shared
+      type: python-module
+      children:
+        - name: domain
+          type: python-module
+          children:
+            - name: random_generator
+              type: python-file
+    {% set context %}
+    {% include "domain_driven_design/bounded_context.yml.j2" %}
+    {% endset %}
+    {{ context | indent(4) }}

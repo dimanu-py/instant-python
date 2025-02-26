@@ -1,0 +1,16 @@
+- name: {{ source_name }}
+  type: python-module
+  children:
+    - name: shared
+      type: python-module
+        {% if common_ddd_objects %}
+      children:
+          {% set populated_shared %}
+          {% include "domain_driven_design/populated_shared.yml.j2" %}
+          {% endset %}
+          {{ populated_shared | indent(10) }}
+        {% endif %}
+    {%- set context %}
+    {% include "domain_driven_design/bounded_context.yml.j2" %}
+    {% endset %}
+    {{ context | indent(4) }}
