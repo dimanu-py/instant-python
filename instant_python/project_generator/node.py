@@ -1,5 +1,11 @@
 from abc import ABC, abstractmethod
+from enum import StrEnum
 from pathlib import Path
+
+
+class NodeType(StrEnum):
+    PYTHON_MODULE = "python-module"
+    PYTHON_FILE = "python-file"
 
 
 class Node(ABC):

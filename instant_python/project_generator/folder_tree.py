@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from instant_python.project_generator.node import Node
+from instant_python.project_generator.node import Node, NodeType
 from instant_python.project_generator.python_file import PythonFile
 from instant_python.project_generator.python_module import PythonModule
 
@@ -16,10 +16,10 @@ class FolderTree:
         name = node.get("name")
         children = node.get("children", [])
 
-        if node_type == "python-module":
+        if node_type == NodeType.PYTHON_MODULE:
             module_children = [self._build_tree(child) for child in children]
             return PythonModule(name=name, children=module_children)
-        elif node_type == "python-file":
+        elif node_type == NodeType.PYTHON_FILE:
             return PythonFile(name=name)
         else:
             raise ValueError(f"Invalid node type: {node_type}")
