@@ -17,7 +17,10 @@ class TemplateManager:
         raw_project_structure = self._render(template)
         return yaml.safe_load(raw_project_structure)
 
-    def get_template(self, name: str) -> Template:
+    def get_boilerplate(self, template_name: str) -> str:
+        template = self._get_template(f"{template_name}")
+        return self._render(template)
+
     def _get_template(self, name: str) -> Template:
         return self._env.get_template(name)
 
