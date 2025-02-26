@@ -6,7 +6,7 @@ from instant_python.question_prompter.user_requirements import UserRequirements
 
 class TemplateManager:
     def __init__(self) -> None:
-        self._env = Environment(loader=FileSystemLoader("templates"))
+        self._env = Environment(loader=FileSystemLoader("templates"), trim_blocks=True, lstrip_blocks=True)
         self._requirements = self._load_memory_requirements()
 
     def get_project(self, template_name: str) -> dict:
