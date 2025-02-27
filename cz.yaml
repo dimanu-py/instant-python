@@ -1,0 +1,21 @@
+---
+commitizen:
+  major_version_zero: true
+  name: cz_customize
+  tag_format: $version
+  update_changelog_on_bump: true
+  version_provider: pep621
+  version_scheme: pep440
+  customize:
+    message_template: "{{emoji}} {{change_type}}{{#if scope}}({{scope}}){{/if}}: {% if show_message %}{{message}}{% endif %}"
+    example: '✨ feat(templates): add invalid id format error template'
+    schema: "<emoji> <type>(<scope>): <body>"
+    schema_pattern: "^[^\\s]+\\s(feat|fix|refactor)(\\([^)]+\\))?:\\s.*"
+    bump_pattern: "^(?:\\S+\\s)?(fix|feat)"
+    commit_parser: "^(?P<emoji>\\S+)\\s(?P<change_type>feat|fix|refactor)(?:\\((?P<scope>[^)]+)\\))?:\\s(?P<message>.*)$"
+    changelog_pattern: "^(?:\\S+\\s)?(feat|fix|refactor)(?:\\([^)]+\\))?(!)?"
+    change_type_map:
+      feat: "✨ Features"
+      fix: "🐛 Bug Fixes"
+      refactor: "♻️ Code Refactoring"
+    change_type_order: [ "✨ Features", "🐛 Bug Fixes", "♻️ Code Refactoring" ]
