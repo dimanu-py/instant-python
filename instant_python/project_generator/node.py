@@ -5,9 +5,8 @@ from pathlib import Path
 
 class NodeType(StrEnum):
     PYTHON_MODULE = "python-module"
-    PYTHON_FILE = "python-file"
     DIRECTORY = "directory"
-    YML_FILE = "yml-file"
+    FILE = "file"
 
 
 class Node(ABC):
