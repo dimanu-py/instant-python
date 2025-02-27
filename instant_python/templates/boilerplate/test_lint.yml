@@ -1,0 +1,36 @@
+name: Pass checks and tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/python_setup
+      - run: make check-lint
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/python_setup
+      - run: make check-format
+  typing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/python_setup
+      - run: make check-typing
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/python_setup
+      - run: make test

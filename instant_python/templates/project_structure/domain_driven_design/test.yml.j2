@@ -1,0 +1,19 @@
+- name: test
+  type: directory
+  python: True
+  children:
+    - name: shared
+      type: directory
+      python: True
+      children:
+        - name: domain
+          type: directory
+          python: True
+          children:
+            - name: random_generator
+              type: file
+              extension: .py
+    {% set context %}
+    {% include "project_structure/domain_driven_design/bounded_context.yml.j2" %}
+    {% endset %}
+    {{ context | indent(4) }}

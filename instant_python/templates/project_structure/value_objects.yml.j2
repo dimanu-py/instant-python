@@ -1,0 +1,35 @@
+- name: exceptions
+  type: directory
+  python: True
+  children:
+    - name: domain_error
+      type: file
+      extension: .py
+    - name: incorrect_value_type_error
+      type: file
+      extension: .py
+    - name: invalid_negative_value_error
+      type: file
+      extension: .py
+    - name: invalid_id_format_error
+      type: file
+      extension: .py
+    - name: required_value_error
+      type: file
+      extension: .py
+- name: value_object
+  type: directory
+  python: True
+  children:
+    - name: value_object
+      type: file
+      extension: .py
+    - name: string_value_object
+      type: file
+      extension: .py
+    - name: int_value_object
+      type: file
+      extension: .py
+    - name: uuid
+      type: file
+      extension: .py
