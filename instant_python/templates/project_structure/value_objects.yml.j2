@@ -1,5 +1,6 @@
 - name: exceptions
-  type: python-module
+  type: directory
+  python: True
   children:
     - name: domain_error
       type: file
@@ -17,7 +18,8 @@
       type: file
       extension: .py
 - name: value_object
-  type: python-module
+  type: directory
+  python: True
   children:
     - name: value_object
       type: file

@@ -1,8 +1,10 @@
 - name: persistence
-  type: python-module
+  type: directory
+  python: True
   children:
     - name: sqlalchemy
-      type: python-module
+      type: directory
+      python: True
       children:
         - name: base
           type: file

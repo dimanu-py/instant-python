@@ -1,20 +1,24 @@
 {% import "project_structure/macros.j2" as macros with context %}
 - name: {{ source_name }}
-  type: python-module
+  type: directory
+  python: True
   children:
     - name: shared
-      type: python-module
+      type: directory
+      python: True
       {% if ["value_objects", "synchronous_sqlalchemy"] | is_in(built_in_features) %}
       children:
       {% if "value_objects" in built_in_features %}
         - name: domain
-          type: python-module
+          type: directory
+          python: True
           children:
             {{ macros.include_and_indent("project_structure/value_objects.yml.j2", 12) }}
       {% endif %}
       {% if "synchronous_sqlalchemy" in built_in_features %}
         - name: infra
-          type: python-module
+          type: directory
+          python: True
           children:
             {{ macros.include_and_indent("project_structure/synchronous_sqlalchemy.yml.j2", 12) }}
       {% endif %}

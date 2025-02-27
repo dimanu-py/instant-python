@@ -1,11 +1,14 @@
 - name: test
-  type: python-module
+  type: directory
+  python: True
   children:
     - name: shared
-      type: python-module
+      type: directory
+      python: True
       children:
         - name: domain
-          type: python-module
+          type: directory
+          python: True
           children:
             - name: random_generator
               type: file

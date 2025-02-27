@@ -1,14 +1,20 @@
 - name: {{ bounded_context }}
-  type: python-module
+  type: directory
+  python: True
   children:
     - name: shared
-      type: python-module
+      type: directory
+      python: True
     - name: {{ aggregate_name }}
-      type: python-module
+      type: directory
+      python: True
       children:
         - name: application
-          type: python-module
+          type: directory
+          python: True
         - name: domain
-          type: python-module
+          type: directory
+          python: True
         - name: infrastructure
-          type: python-module
+          type: directory
+          python: True
