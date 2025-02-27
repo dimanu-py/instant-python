@@ -1,0 +1,12 @@
+- name: persistence
+  type: python-module
+  children:
+    - name: sqlalchemy
+      type: python-module
+      children:
+        - name: base
+          type: python-file
+        - name: session_maker
+          type: python-file
+        - name: sqlalchemy_repository
+          type: python-file

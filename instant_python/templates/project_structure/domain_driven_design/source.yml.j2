@@ -12,5 +12,11 @@
           children:
             {{ macros.include_and_indent("project_structure/value_objects.yml.j2", 12) }}
       {% endif %}
+      {% if "synchronous_sqlalchemy" in built_in_features %}
+        - name: infra
+          type: python-module
+          children:
+            {{ macros.include_and_indent("project_structure/synchronous_sqlalchemy.yml.j2", 12) }}
+      {% endif %}
       {% endif %}
     {{ macros.include_and_indent("project_structure/domain_driven_design/bounded_context.yml.j2", 4) }}
