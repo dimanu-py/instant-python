@@ -14,9 +14,9 @@ jobs:
       - name: Check out
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.CODENET_TOKEN }}
+          token: ${{ secrets.CHANGELOG_TOKEN }}
           fetch-depth: 0
       - name: Bump version and update changelog
         uses: commitizen-tools/commitizen-action@master
         with:
-          github_token: ${{ secrets.CODENET_TOKEN }}
+          github_token: ${{ secrets.CHANGELOG_TOKEN }}
