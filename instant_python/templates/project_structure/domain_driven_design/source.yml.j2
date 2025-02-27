@@ -1,16 +1,14 @@
+{% import "project_structure/macros.j2" as macros with context %}
 - name: {{ source_name }}
   type: python-module
   children:
     - name: shared
       type: python-module
-        {% if common_ddd_objects %}
+      {% if "value_objects" in built_in_features %}
       children:
-          {% set populated_shared %}
-          {% include "project_structure/domain_driven_design/populated_shared.yml.j2" %}
-          {% endset %}
-          {{ populated_shared | indent(10) }}
-        {% endif %}
-    {%- set context %}
-    {% include "project_structure/domain_driven_design/bounded_context.yml.j2" %}
-    {% endset %}
-    {{ context | indent(4) }}
+        - name: domain
+          type: python-module
+          children:
+            {{ macros.include_and_indent("project_structure/value_objects.yml.j2", 12) }}
+      {% endif %}
+    {{ macros.include_and_indent("project_structure/domain_driven_design/bounded_context.yml.j2", 4) }}
