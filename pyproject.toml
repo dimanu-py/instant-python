@@ -1,6 +1,6 @@
 [project]
 name = "python-template"
-version = "0.1.0"
+version = "0.3.0"
 description = "Python template for projects"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -12,4 +12,6 @@ dependencies = [
     "typer>=0.15.1",
     "jinja2>=3.1.5",
     "questionary>=2.1.0",
+    "commitizen>=4.2.2",
+    "cz-conventional-gitmoji>=0.6.1",
 ]
