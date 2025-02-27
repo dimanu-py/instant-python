@@ -4,7 +4,6 @@ from pathlib import Path
 from instant_python.project_generator.directory import Directory
 from instant_python.project_generator.node import Node, NodeType
 from instant_python.project_generator.file import File
-from instant_python.project_generator.python_module import PythonModule
 
 
 class FolderTree:
@@ -19,12 +18,10 @@ class FolderTree:
         name = node.get("name")
         children = node.get("children", [])
 
-        if node_type == NodeType.PYTHON_MODULE:
-            module_children = [self._build_tree(child) for child in children]
-            return PythonModule(name=name, children=module_children)
-        elif node_type == NodeType.DIRECTORY:
+        if node_type == NodeType.DIRECTORY:
+            is_python_module = node.get("python", False)
             directory_children = [self._build_tree(child) for child in children]
-            return Directory(name=name, children=directory_children)
+            return Directory(name=name, children=directory_children, init=is_python_module)
         elif node_type == NodeType.FILE:
             extension = node.get("extension", "")
             return File(name=name, extension=extension)
