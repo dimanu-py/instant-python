@@ -4,11 +4,13 @@
   children:
     - name: shared
       type: python-module
-      {% if "value_objects" in built_in_features %}
+      {% if ["value_objects", "synchronous_sqlalchemy"] | is_in(built_in_features) %}
       children:
+      {% if "value_objects" in built_in_features %}
         - name: domain
           type: python-module
           children:
             {{ macros.include_and_indent("project_structure/value_objects.yml.j2", 12) }}
+      {% endif %}
       {% endif %}
     {{ macros.include_and_indent("project_structure/domain_driven_design/bounded_context.yml.j2", 4) }}
