@@ -55,7 +55,7 @@ GENERAL_QUESTIONS = [
         key="built_in_features",
         message="Select the built-in features you want to include",
         multiselect=True,
-        options=["Value Objects", "Github Actions", "Makefile", "Pre commit"],
+        options=["Value Objects", "Github Actions", "Makefile", "Pre commit", "Synchronous SQLAlchemy"],
     ),
     Question(
         key="template",
