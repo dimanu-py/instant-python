@@ -1,5 +1,3 @@
-from typing import Any
-
 import questionary
 
 from instant_python.question_prompter.question import Question
@@ -27,7 +25,7 @@ class BasicPrompter:
 
         return UserRequirements(**answers)
 
-    def _ask_single_question(self, question: Question) -> str | bool:
+    def _ask_single_question(self, question: Question) -> str | bool | list[str]:
         if question.confirm:
             return self._confirm(question.message)
         elif question.multiselect:
@@ -42,16 +40,22 @@ class BasicPrompter:
     ) -> str:
         if not options:
             return questionary.text(text, default=default_value).ask()
-        return questionary.select(
+        answer = questionary.select(
             text,
             choices=options,
             default=default_value,
         ).ask()
+        return BasicPrompter._snake_case(answer)
 
     @staticmethod
     def _confirm(text: str) -> bool:
         return questionary.confirm(text, default=True).ask()
 
     @staticmethod
-    def _multiselect(message: str, options: list[str]) -> str:
-        return questionary.checkbox(message, choices=options).ask()
+    def _multiselect(message: str, options: list[str]) -> list[str]:
+        answer = questionary.checkbox(message, choices=options).ask()
+        return [BasicPrompter._snake_case(option) for option in answer]
+
+    @staticmethod
+    def _snake_case(answer: str) -> str:
+        return answer.replace(" ", "_").lower()
