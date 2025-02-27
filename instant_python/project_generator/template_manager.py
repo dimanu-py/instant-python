@@ -1,14 +1,16 @@
 import yaml
 from jinja2 import FileSystemLoader, Environment, Template
 
+from instant_python.project_generator.jinja_custom_filters import is_in
 from instant_python.question_prompter.template_types import TemplateTypes
 from instant_python.question_prompter.user_requirements import UserRequirements
 
 
 class TemplateManager:
     def __init__(self) -> None:
-        self._env = Environment(loader=FileSystemLoader("templates"), trim_blocks=True, lstrip_blocks=True)
         self._requirements = self._load_memory_requirements()
+        self._env = Environment(loader=FileSystemLoader("templates"), trim_blocks=True, lstrip_blocks=True)
+        self._env.filters["is_in"] = is_in
 
     def get_project(self, template_name: str) -> dict:
         if self._is_ddd_project():
