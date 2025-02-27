@@ -13,7 +13,7 @@ GENERAL_QUESTIONS = [
 	Question(key="python_manager", message="Select a python manager", default="uv", options=["pyenv", "uv", "pdm"]),
 	Question(key="license", message="Select a license", default="MIT", options=["MIT", "Apache", "GPL"]),
 	Question(key="git", message="Do you want to initialize a git repository?", confirm=True),
-	Question(key="built_in_features", message="Select the built-in features you want to include", multiselect=True, options=["Value Objects", "Github Actions", "Makefile"]),
+	Question(key="built_in_features", message="Select the built-in features you want to include", multiselect=True, options=["Value Objects", "Github Actions", "Makefile", "Pre commit"]),
 	Question(key="template", message="Select a template", default= "Domain Driven Design", options=["Domain Driven Design", "Clean Architecture", "Empty Project"]),
 ]
 
