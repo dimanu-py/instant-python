@@ -1,15 +1,7 @@
+{% import "project_structure/macros.j2" as macros with context %}
 root:
-  {% set source_folder %}
-  {% include "project_structure/domain_driven_design/source.yml.j2" %}
-  {% endset %}
-  {{ source_folder | indent(2) }}
-  {% set test_folder %}
-  {% include "project_structure/domain_driven_design/test.yml.j2" %}
-  {%- endset %}
-  {{ test_folder | indent(2) }}
+  {{ macros.include_and_indent("project_structure/domain_driven_design/source.yml.j2", 2) }}
+  {{ macros.include_and_indent("project_structure/domain_driven_design/test.yml.j2", 2) }}
   {% if "github_actions" in built_in_features %}
-  {% set github %}
-  {% include "project_structure/github_action.yml.j2" %}
-  {% endset %}
-  {{ github | indent(2) }}
+  {{ macros.include_and_indent("project_structure/github_action.yml.j2", 2) }}
   {% endif %}
