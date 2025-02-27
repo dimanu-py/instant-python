@@ -4,7 +4,6 @@ from pathlib import Path
 
 
 class NodeType(StrEnum):
-    PYTHON_MODULE = "python-module"
     DIRECTORY = "directory"
     FILE = "file"
 
