@@ -1,0 +1,6 @@
+{% macro include_and_indent(template_name, indent) -%}
+{%- set content -%}
+{%- include template_name -%}
+{%- endset -%}
+{{ content | indent(indent, false) }}
+{%- endmacro %}
