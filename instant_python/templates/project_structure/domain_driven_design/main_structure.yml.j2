@@ -11,3 +11,7 @@ root:
   {{ macros.include_and_indent("project_structure/pyproject.yml.j2", 2) }}
   {{ macros.include_and_indent("project_structure/gitignore.yml.j2", 2) }}
   {{ macros.include_and_indent("project_structure/python_version.yml.j2", 2) }}
+  {% if default_dependencies %}
+  {{ macros.include_and_indent("project_structure/pytest.yml.j2", 2) }}
+  {{ macros.include_and_indent("project_structure/mypy.yml.j2", 2) }}
+  {% endif %}
