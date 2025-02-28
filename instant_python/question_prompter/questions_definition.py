@@ -55,13 +55,13 @@ GENERAL_QUESTIONS = [
         key="built_in_features",
         message="Select the built-in features you want to include",
         multiselect=True,
-        options=["Value Objects", "Github Actions", "Makefile", "Pre commit", "Synchronous SQLAlchemy"],
+        options=["value_objects", "github_actions", "makefile", "synchronous_sqlalchemy"],
     ),
     Question(
         key="template",
         message="Select a template",
-        default="Domain Driven Design",
-        options=["Domain Driven Design", "Clean Architecture", "Empty Project"],
+        default="domain_driven_design",
+        options=["domain_driven_design", "clean_architecture", "empty_project"],
     ),
 ]
 
