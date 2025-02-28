@@ -1,0 +1,19 @@
+- name: event_bus/aggregate_root
+  type: file
+  extension: .py
+- name: event
+  type: directory
+  python: True
+  children:
+    - name: domain_event
+      type: file
+      extension: .py
+    - name: domain_event_subscriber
+      type: file
+      extension: .py
+    - name: event_bus
+      type: file
+      extension: .py
+    - name: exchange_type
+      type: file
+      extension: .py
