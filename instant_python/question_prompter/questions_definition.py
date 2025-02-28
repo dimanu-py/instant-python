@@ -55,7 +55,17 @@ GENERAL_QUESTIONS = [
         key="built_in_features",
         message="Select the built-in features you want to include",
         multiselect=True,
-        options=["value_objects", "github_actions", "makefile", "synchronous_sqlalchemy"],
+        options=[
+            "value_objects",
+            "github_actions",
+            "makefile",
+            "synchronous_sqlalchemy",
+        ],
+    ),
+    Question(
+        key="default_dependencies",
+        message="Do you want to include default dependencies? (coverage, doublex, doublex-expects, expects, pytest, pytest-watch, pytest-xdist, pytest-sugar, mypy, ruff)",
+        confirm=True,
     ),
     Question(
         key="template",
@@ -72,9 +82,4 @@ DDD_QUESTIONS = [
         default="backoffice",
     ),
     Question(key="aggregate_name", message="Enter the aggregate name", default="user"),
-    Question(
-        key="default_dependencies",
-        message="Do you want to include default dependencies?",
-        confirm=True,
-    ),
 ]
