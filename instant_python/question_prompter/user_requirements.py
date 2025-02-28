@@ -1,4 +1,5 @@
 from dataclasses import dataclass, asdict, field
+from datetime import datetime
 
 import yaml
 
@@ -22,6 +23,7 @@ class UserRequirements:
     aggregate_name: str = field(default=None)
     git: bool = field(default=False)
     built_in_features: list[str] = field(default_factory=list)
+    year: int = field(default=datetime.now().year)
 
     def to_dict(self) -> dict:
         return asdict(self)
