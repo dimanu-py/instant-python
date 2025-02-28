@@ -1,0 +1,10 @@
+- name: log
+  type: directory
+  python: True
+  children:
+    - name: json_formatter
+      type: file
+      extension: .py
+    - name: logger
+      type: file
+      extension: .py
