@@ -11,8 +11,8 @@ class UserRequirements:
     license: str
     version: str
     description: str
-    github_username: str
-    github_email: str
+    author: str
+    email: str
     python_version: str
     dependency_manager: str
     python_manager: str

@@ -22,8 +22,8 @@ GENERAL_QUESTIONS = [
     Question(
         key="version", message="Enter the project initial version", default="0.1.0"
     ),
-    Question(key="github_username", message="Enter your github username"),
-    Question(key="github_email", message="Enter your github email"),
+    Question(key="author", message="Enter your name"),
+    Question(key="email", message="Enter your email"),
     Question(
         key="python_version",
         message="Enter the python version",
