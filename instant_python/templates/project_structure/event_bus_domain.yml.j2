@@ -5,15 +5,22 @@
   type: directory
   python: True
   children:
-    - name: domain_event
+    - name: event_bus/domain_event
       type: file
       extension: .py
-    - name: domain_event_subscriber
+    - name: event_bus/domain_event_subscriber
       type: file
       extension: .py
-    - name: event_bus
+    - name: event_bus/event_bus
       type: file
       extension: .py
-    - name: exchange_type
+    - name: event_bus/exchange_type
+      type: file
+      extension: .py
+- name: exceptions
+  type: directory
+  python: True
+  children:
+    - name: event_bus/domain_event_type_not_found_error
       type: file
       extension: .py

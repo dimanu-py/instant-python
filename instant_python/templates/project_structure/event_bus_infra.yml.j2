@@ -2,31 +2,31 @@
   type: directory
   python: True
   children:
-    - name: domain_event_json_deserializer
+    - name: event_bus/domain_event_json_deserializer
       type: file
       extension: .py
-    - name: domain_event_json_serializer
+    - name: event_bus/domain_event_json_serializer
       type: file
       extension: .py
     - name: rabbit_mq
       type: directory
       python: True
       children:
-        - name: rabbit_mq_configurer
+        - name: event_bus/rabbit_mq_configurer
           type: file
           extension: .py
-        - name: rabbit_mq_connection
+        - name: event_bus/rabbit_mq_connection
           type: file
           extension: .py
-        - name: rabbit_mq_consumer
+        - name: event_bus/rabbit_mq_consumer
           type: file
           extension: .py
-        - name: rabbit_mq_event_bus
+        - name: event_bus/rabbit_mq_event_bus
           type: file
           extension: .py
-        - name: rabbit_mq_queue_formatter
+        - name: event_bus/rabbit_mq_queue_formatter
           type: file
           extension: .py
-        - name: rabbit_mq_settings
+        - name: event_bus/rabbit_mq_settings
           type: file
           extension: .py
