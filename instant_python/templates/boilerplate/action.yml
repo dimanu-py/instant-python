@@ -17,5 +17,6 @@ runs:
       run: python -m pip install {{ dependency_manager }}
       shell: bash
     - name: Install dependencies
-      run: make install
+      run: {% if dependency_manager == "uv" %}uv sync --all-groups{% elif dependency_manager == "pdm" %}pdm install {% endif %}
+
       shell: bash
