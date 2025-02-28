@@ -8,6 +8,4 @@ root:
   {% if "makefile" in built_in_features %}
   {{ macros.include_and_indent("project_structure/makefile.yml.j2", 2) }}
   {% endif %}
-  {% if "pre_commit" in built_in_features %}
-  {{ macros.include_and_indent("project_structure/pre_commit.yml.j2", 2) }}
-  {% endif %}
+  {{ macros.include_and_indent("project_structure/pyproject.yml.j2", 2) }}
