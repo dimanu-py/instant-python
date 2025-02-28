@@ -60,6 +60,7 @@ GENERAL_QUESTIONS = [
             "github_actions",
             "makefile",
             "synchronous_sqlalchemy",
+            "logger",
             "event_bus",
         ],
     ),
