@@ -37,7 +37,7 @@ coverage:  ## Run all test with coverage.
 
 .PHONY: local-setup
 local-setup:  ## Setup git hooks and install dependencies.
-	@scripts/local-setup.sh
+	@scripts/local_setup.sh
 	@make install
 
 .PHONY: install
@@ -58,11 +58,11 @@ update:  ## Update dependencies.
 
 .PHONY: add-dep
 add-dep:  ## Add a new dependency.
-	@scripts/add-dependency.sh
+	@scripts/add_dependency.sh
 
 .PHONY: remove-dep
 remove-dep:  ## Remove a dependency.
-	@scripts/remove-dependency.sh
+	@scripts/remove_dependency.sh
 
 .PHONY: check-typing
 check-typing:  ## Run mypy type checking.

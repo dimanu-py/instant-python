@@ -22,7 +22,7 @@
           type: file
         - name: scripts/post-merge
           type: file
-    {% if "domain_driven_design" in built_in_features %}
+    {% if template == "domain_driven_design" %}
     - name: test
       type: directory
       children:
