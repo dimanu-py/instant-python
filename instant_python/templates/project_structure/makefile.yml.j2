@@ -1,2 +1,38 @@
-- name: makefile
+{% import "project_structure/macros.j2" as macros with context %}
+- name: scripts/makefile
   type: file
+- name: scripts
+  type: directory
+  children:
+    - name: scripts/add_dependency
+      type: file
+      extension: .sh
+    - name: scripts/remove_dependency
+      type: file
+      extension: .sh
+    - name: scripts/local_setup
+      type: file
+      extension: .sh
+    - name: hooks
+      type: directory
+      children:
+        - name: scripts/pre-commit
+          type: file
+        - name: scripts/pre-push
+          type: file
+        - name: scripts/post-merge
+          type: file
+    {% if "domain_driven_design" in built_in_features %}
+    - name: test
+      type: directory
+      children:
+        - name: scripts/unit
+          type: file
+          extension: .sh
+        - name: scripts/integration
+          type: file
+          extension: .sh
+    - name: scripts/create_aggregate
+      type: file
+      extension: .py
+    {% endif %}
