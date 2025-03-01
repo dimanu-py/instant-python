@@ -1,3 +1,45 @@
+## 0.3.0 (2025-03-01)
+
+### ✨ Features
+
+- **template**: include mock event bus template for testing
+- **template**: add scripts templates
+- **prompter**: add fastapi option to built in features
+- **template**: include templates for fasta api application with error handlers, http response modelled with logger
+- **prompter**: add async alembic to built in features options
+- **template**: include templates for async alembic
+- **prompter**: add async sqlalchemy to built in features options
+- **template**: add templates for async sqlalchemy
+- **prompter**: include logger as built in feature
+- **template**: add template for logger
+- **prompter**: include event bus as built in feature
+- **templates**: add project structure template for event bus
+- **templates**: add LICENSE template
+- **prompter**: add year to user requirements fields with automatic computation
+- **templates**: include mypy and pytest init files when default dependencies are selected
+- **templates**: add .python-version template
+- **templates**: add .gitignore template
+- **templates**: add pyproject template
+- **templates**: add makefile template
+
+### ♻️ Code Refactoring
+
+- **cli**: generate user requirements only if no other file has been already generated.
+- **template**: move makefile template to scripts folder as this folder only makes sense if it's use with the makefile
+- **template**: move base from sync sqlalchemy to persistence folder as it would be the same for both sync and async
+- **template**: move sqlalchemy sync templates to specific folder
+- **template**: move exceptions templates to specific folder
+- **template**: move value object templates to specific folder
+- **template**: move github actions templates to specific folder
+- **template**: move logger templates to specific folder
+- **project-generator**: modify File class to be able to manage the difference between the path to the template and the path where the file should be written
+- **template**: change all yml templates to point to inner event_bus folder boilerplate
+- **template**: move all boilerplate related to event bus inside specific folder
+- **prompter**: change github information for basic name and email
+- **prompter**: move default dependencies question to general questions and include the default dependencies that will be included
+- **prompter**: remove converting to snake case all answers and set directly those answers in snake case if needed
+- **templates**: use raw command inside github action instead of make
+
 ## 0.2.0 (2025-02-27)
 
 ### ✨ Features
