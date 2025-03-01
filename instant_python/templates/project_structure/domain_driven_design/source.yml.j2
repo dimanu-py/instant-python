@@ -6,7 +6,7 @@
     - name: shared
       type: directory
       python: True
-      {% if ["value_objects", "synchronous_sqlalchemy", "event_bus"] | is_in(built_in_features) %}
+      {% if ["value_objects", "synchronous_sqlalchemy", "event_bus", "async_alembic"] | is_in(built_in_features) %}
       children:
       {% if ["value_objects", "event_bus"] | is_in(built_in_features) %}
         - name: domain
@@ -20,7 +20,7 @@
             {{ macros.include_and_indent("project_structure/event_bus_domain.yml.j2", 12) }}
             {% endif %}
       {% endif %}
-      {% if ["synchronous_sqlalchemy", "event_bus", "logger", "async_sqlalchemy"] | is_in(built_in_features) %}
+      {% if ["synchronous_sqlalchemy", "event_bus", "logger", "async_sqlalchemy", "async_alembic"] | is_in(built_in_features) %}
         - name: infra
           type: directory
           python: True
@@ -36,6 +36,9 @@
             {% endif %}
             {% if "async_sqlalchemy" in built_in_features %}
             {{ macros.include_and_indent("project_structure/async_sqlalchemy.yml.j2", 12) }}
+            {% endif %}
+            {% if "async_alembic" in built_in_features %}
+            {{ macros.include_and_indent("project_structure/alembic_migrator.yml.j2", 12) }}
             {% endif %}
       {% endif %}
       {% endif %}
