@@ -20,7 +20,7 @@
             {{ macros.include_and_indent("project_structure/event_bus_domain.yml.j2", 12) }}
             {% endif %}
       {% endif %}
-      {% if ["synchronous_sqlalchemy", "event_bus", "logger"] | is_in(built_in_features) %}
+      {% if ["synchronous_sqlalchemy", "event_bus", "logger", "async_sqlalchemy"] | is_in(built_in_features) %}
         - name: infra
           type: directory
           python: True
@@ -33,6 +33,9 @@
             {% endif %}
             {% if "logger" in built_in_features %}
             {{ macros.include_and_indent("project_structure/logger.yml.j2", 12) }}
+            {% endif %}
+            {% if "async_sqlalchemy" in built_in_features %}
+            {{ macros.include_and_indent("project_structure/async_sqlalchemy.yml.j2", 12) }}
             {% endif %}
       {% endif %}
       {% endif %}
