@@ -1,0 +1,20 @@
+- name: persistence/async/alembic
+  type: file
+  extension: .ini
+- name: migrations
+  type: directory
+  children:
+    - name: versions
+      type: directory
+    - name: persistence/async/README
+      type: file
+      extension: .md
+    - name: persistence/async/env
+      type: file
+      extension: .py
+    - name: persistence/async/models_metadata
+      type: file
+      extension: .py
+    - name: persistence/async/script
+      type: file
+      extension: .py.mako

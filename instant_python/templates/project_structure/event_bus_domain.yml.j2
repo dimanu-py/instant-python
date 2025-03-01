@@ -1,0 +1,26 @@
+- name: event_bus/aggregate_root
+  type: file
+  extension: .py
+- name: event
+  type: directory
+  python: True
+  children:
+    - name: event_bus/domain_event
+      type: file
+      extension: .py
+    - name: event_bus/domain_event_subscriber
+      type: file
+      extension: .py
+    - name: event_bus/event_bus
+      type: file
+      extension: .py
+    - name: event_bus/exchange_type
+      type: file
+      extension: .py
+- name: exceptions
+  type: directory
+  python: True
+  children:
+    - name: exceptions/domain_event_type_not_found_error
+      type: file
+      extension: .py

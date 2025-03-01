@@ -40,12 +40,11 @@ class BasicPrompter:
     ) -> str:
         if not options:
             return questionary.text(text, default=default_value).ask()
-        answer = questionary.select(
+        return questionary.select(
             text,
             choices=options,
             default=default_value,
         ).ask()
-        return BasicPrompter._snake_case(answer)
 
     @staticmethod
     def _confirm(text: str) -> bool:
@@ -53,9 +52,4 @@ class BasicPrompter:
 
     @staticmethod
     def _multiselect(message: str, options: list[str]) -> list[str]:
-        answer = questionary.checkbox(message, choices=options).ask()
-        return [BasicPrompter._snake_case(option) for option in answer]
-
-    @staticmethod
-    def _snake_case(answer: str) -> str:
-        return answer.replace(" ", "_").lower()
+        return questionary.checkbox(message, choices=options).ask()

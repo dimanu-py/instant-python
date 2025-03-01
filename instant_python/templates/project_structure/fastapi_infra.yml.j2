@@ -1,0 +1,10 @@
+- name: http
+  type: directory
+  python: True
+  children:
+    - name: fastapi/http_response
+      type: file
+      extension: .py
+    - name: fastapi/status_code
+      type: file
+      extension: .py

@@ -22,8 +22,8 @@ GENERAL_QUESTIONS = [
     Question(
         key="version", message="Enter the project initial version", default="0.1.0"
     ),
-    Question(key="github_username", message="Enter your github username"),
-    Question(key="github_email", message="Enter your github email"),
+    Question(key="author", message="Enter your name"),
+    Question(key="email", message="Enter your email"),
     Question(
         key="python_version",
         message="Enter the python version",
@@ -53,15 +53,30 @@ GENERAL_QUESTIONS = [
     ),
     Question(
         key="built_in_features",
-        message="Select the built-in features you want to include",
+        message="Select the built-in features you want to include (fastapi_application option requires logger)",
         multiselect=True,
-        options=["Value Objects", "Github Actions", "Makefile", "Pre commit", "Synchronous SQLAlchemy"],
+        options=[
+            "value_objects",
+            "github_actions",
+            "makefile",
+            "synchronous_sqlalchemy",
+            "logger",
+            "event_bus",
+            "async_sqlalchemy",
+            "async_alembic",
+            "fastapi_application"
+        ],
+    ),
+    Question(
+        key="default_dependencies",
+        message="Do you want to include default dependencies? (coverage, doublex, doublex-expects, expects, pytest, pytest-watch, pytest-xdist, pytest-sugar, mypy, ruff)",
+        confirm=True,
     ),
     Question(
         key="template",
         message="Select a template",
-        default="Domain Driven Design",
-        options=["Domain Driven Design", "Clean Architecture", "Empty Project"],
+        default="domain_driven_design",
+        options=["domain_driven_design", "clean_architecture", "empty_project"],
     ),
 ]
 
@@ -72,9 +87,4 @@ DDD_QUESTIONS = [
         default="backoffice",
     ),
     Question(key="aggregate_name", message="Enter the aggregate name", default="user"),
-    Question(
-        key="default_dependencies",
-        message="Do you want to include default dependencies?",
-        confirm=True,
-    ),
 ]
