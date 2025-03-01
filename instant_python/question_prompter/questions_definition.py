@@ -53,7 +53,7 @@ GENERAL_QUESTIONS = [
     ),
     Question(
         key="built_in_features",
-        message="Select the built-in features you want to include",
+        message="Select the built-in features you want to include (fastapi_application option requires logger)",
         multiselect=True,
         options=[
             "value_objects",
@@ -64,6 +64,7 @@ GENERAL_QUESTIONS = [
             "event_bus",
             "async_sqlalchemy",
             "async_alembic",
+            "fastapi_application"
         ],
     ),
     Question(
