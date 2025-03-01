@@ -62,7 +62,8 @@ GENERAL_QUESTIONS = [
             "synchronous_sqlalchemy",
             "logger",
             "event_bus",
-            "async_sqlalchemy"
+            "async_sqlalchemy",
+            "async_alembic",
         ],
     ),
     Question(
