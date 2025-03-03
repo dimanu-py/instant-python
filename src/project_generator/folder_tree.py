@@ -6,6 +6,12 @@ from src.project_generator.node import Node, NodeType
 from src.project_generator.file import File
 
 
+class UnknownNodeType(ValueError):
+    def __init__(self, node_type: str) -> None:
+        self._message = f"Unknown node type: {node_type}"
+        super().__init__(self._message)
+
+
 class FolderTree:
     def create(self, project_structure: dict) -> None:
         tree = [self._build_tree(node) for node in project_structure.get("root", [])]
@@ -26,4 +32,4 @@ class FolderTree:
             extension = node.get("extension", "")
             return File(name=name, extension=extension)
         else:
-            raise ValueError(f"Invalid node type: {node_type}")
+            raise UnknownNodeType(node_type)
