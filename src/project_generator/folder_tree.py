@@ -16,9 +16,9 @@ class FolderTree:
     def _build_tree(self, node: dict) -> Node:
         node_type = node.get("type")
         name = node.get("name")
-        children = node.get("children", [])
 
         if node_type == NodeType.DIRECTORY:
+            children = node.get("children", [])
             is_python_module = node.get("python", False)
             directory_children = [self._build_tree(child) for child in children]
             return Directory(name=name, children=directory_children, init=is_python_module)
