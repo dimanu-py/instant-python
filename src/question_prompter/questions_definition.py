@@ -46,6 +46,12 @@ GENERAL_QUESTIONS = [
         options=["pyenv", "uv", "pdm"],
     ),
     ChoiceQuestion(
+        key="os",
+        message="Select your operating system",
+        default="linux",
+        options=["linux", "macos", "windows"],
+    ),
+    ChoiceQuestion(
         key="license",
         message="Select a license",
         default="MIT",

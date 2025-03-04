@@ -18,6 +18,7 @@ class UserRequirements:
     python_version: str
     dependency_manager: str
     python_manager: str
+    operating_system: str
     default_dependencies: bool
     template: str
     bounded_context: str = field(default=None)
