@@ -1,6 +1,3 @@
-import questionary
-
-from src.question_prompter.question import Question
 from src.question_prompter.questions_definition import (
     GENERAL_QUESTIONS,
     DDD_QUESTIONS,

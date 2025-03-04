@@ -40,18 +40,6 @@ GENERAL_QUESTIONS = [
         options=["uv", "pdm"],
     ),
     ChoiceQuestion(
-        key="python_manager",
-        message="Select a python manager",
-        default="uv",
-        options=["pyenv", "uv", "pdm"],
-    ),
-    ChoiceQuestion(
-        key="os",
-        message="Select your operating system",
-        default="linux",
-        options=["linux", "macos", "windows"],
-    ),
-    ChoiceQuestion(
         key="license",
         message="Select a license",
         default="MIT",
