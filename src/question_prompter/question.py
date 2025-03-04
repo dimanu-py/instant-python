@@ -7,7 +7,6 @@ class Question[T](ABC):
     key: str
     message: str
     default: str = field(default_factory=str)
-    confirm: bool = field(default=False)
     multiselect: bool = field(default=False)
 
     @abstractmethod
