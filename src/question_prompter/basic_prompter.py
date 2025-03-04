@@ -10,18 +10,23 @@ from src.question_prompter.user_requirements import UserRequirements
 
 
 class BasicPrompter:
-    @staticmethod
-    def ask() -> UserRequirements:
-        answers = {
+    def __init__(self) -> None:
+        self._answers = {}
+
+    def ask(self) -> UserRequirements:
+        self._answers = {
             question.key: question.ask()
             for question in GENERAL_QUESTIONS
         }
 
-        if answers["template"] == TemplateTypes.DDD:
+        if self._is_ddd_template():
             ddd_answers = {
                 question.key: question.ask()
                 for question in DDD_QUESTIONS
             }
-            answers.update(ddd_answers)
+            self._answers.update(ddd_answers)
 
-        return UserRequirements(**answers)
+        return UserRequirements(**self._answers)
+
+    def _is_ddd_template(self) -> bool:
+        return self._answers["template"] == TemplateTypes.DDD
