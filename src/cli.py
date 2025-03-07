@@ -2,6 +2,9 @@ from pathlib import Path
 
 import typer
 
+from src.installer.installer import Installer
+from src.installer.uv_manager import UvManager
+from src.installer.zsh_configurator import ZshConfigurator
 from src.project_generator.project_generator import ProjectGenerator
 from src.question_prompter.basic_prompter import BasicPrompter
 from src.question_prompter.user_requirements import UserRequirements
@@ -23,6 +26,12 @@ def generate_project():
 
     project_generator = ProjectGenerator()
     project_generator.generate()
+
+    installer = Installer(
+        dependency_manager=UvManager(),
+        shell_configurator=ZshConfigurator()
+    )
+    installer.perform_installation(user_requirements.python_version)
 
 
 if __name__ == "__main__":
