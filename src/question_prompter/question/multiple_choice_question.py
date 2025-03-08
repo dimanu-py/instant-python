@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 
 import questionary
 
-from src.question_prompter.question import Question
+from src.question_prompter.question.question import Question
 
 
 @dataclass(frozen=True)

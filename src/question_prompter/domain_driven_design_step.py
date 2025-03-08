@@ -1,4 +1,4 @@
-from src.question_prompter.free_text_question import FreeTextQuestion
+from src.question_prompter.question.free_text_question import FreeTextQuestion
 from src.question_prompter.steps import Step
 from src.question_prompter.template_types import TemplateTypes
 
