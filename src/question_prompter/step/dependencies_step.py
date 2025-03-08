@@ -1,7 +1,7 @@
 from src.question_prompter.question.boolean_question import BooleanQuestion
 from src.question_prompter.question.choice_question import ChoiceQuestion
 from src.question_prompter.question.multiple_choice_question import MultipleChoiceQuestion
-from src.question_prompter.steps import Step
+from src.question_prompter.step.steps import Step
 
 
 class DependenciesStep(Step):

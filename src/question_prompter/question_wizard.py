@@ -1,4 +1,4 @@
-from src.question_prompter.steps import Steps
+from src.question_prompter.step.steps import Steps
 from src.question_prompter.user_requirements import UserRequirements
 
 
