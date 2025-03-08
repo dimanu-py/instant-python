@@ -9,7 +9,7 @@ from src.question_prompter.user_requirements import UserRequirements
 class TemplateManager:
     def __init__(self) -> None:
         self._requirements = self._load_memory_requirements()
-        self._env = Environment(loader=FileSystemLoader("templates"), trim_blocks=True, lstrip_blocks=True)
+        self._env = Environment(loader=FileSystemLoader("src/templates"), trim_blocks=True, lstrip_blocks=True)
         self._env.filters["is_in"] = is_in
 
     def get_project(self, template_name: str) -> dict:
