@@ -7,14 +7,13 @@ from src.question_prompter.question.free_text_question import FreeTextQuestion
 
 class UvManager(DependencyManager):
     def __init__(self) -> None:
-        self._uv_install_command = "curl -LsSf https://astral.sh/uv/install.sh | sh"
         self._uv = "~/.local/bin/uv"
         self._executable = "/bin/bash"
 
     def install(self) -> None:
         print(">>> Installing uv...")
         subprocess.run(
-            self._uv_install_command, shell=True, check=True, executable=self._executable
+            "curl -LsSf https://astral.sh/uv/install.sh | sh", shell=True, check=True, executable=self._executable
         )
         print(">>> uv installed successfully")
 
