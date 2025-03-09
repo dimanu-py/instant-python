@@ -2,8 +2,8 @@ import tempfile
 from pathlib import Path
 
 from src.project_generator.directory import Directory
-from src.project_generator.node import Node, NodeType
 from src.project_generator.file import File
+from src.project_generator.node import Node, NodeType
 
 
 class UnknownNodeType(ValueError):
@@ -13,11 +13,17 @@ class UnknownNodeType(ValueError):
 
 
 class FolderTree:
+    def __init__(self) -> None:
+        self._project_directory = Path(tempfile.mkdtemp())
+
     def create(self, project_structure: dict) -> None:
         tree = [self._build_tree(node) for node in project_structure.get("root", [])]
-        temporary_directory = Path(tempfile.mkdtemp())
         for node in tree:
-            node.create(base_path=temporary_directory)
+            node.create(base_path=self._project_directory)
+
+    @property
+    def project_directory(self) -> str:
+        return str(self._project_directory)
 
     def _build_tree(self, node: dict) -> Node:
         node_type = node.get("type")
