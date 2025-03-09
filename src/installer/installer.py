@@ -14,7 +14,8 @@ class Installer:
         self._shell_configurator = shell_configurator
         self._dependency_manager = dependency_manager
 
-    def perform_installation(self, python_version: str) -> None:
+    def perform_installation(self, python_version: str, dependencies: list[str]) -> None:
         self._dependency_manager.install()
         self._shell_configurator.configure()
         self._dependency_manager.install_python(python_version)
+        self._dependency_manager.install_dependencies(dependencies)
