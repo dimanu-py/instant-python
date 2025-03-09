@@ -1,3 +1,59 @@
+## 0.4.0 (2025-03-09)
+
+### ✨ Features
+
+- **project-generator**: expose generated project path through ProjectGenerator
+- **installer**: add project_directory field to UvManager to know where to create the virtual environment
+- **installer**: add install_dependencies step to Installer
+- **installer**: implement logic to install dependencies selected by the user in UvManager
+- **installer**: add install_dependencies method to DependencyManger interface
+- **prompter**: implement DependencyQuestion to manage recursive question about what dependencies to install
+- **prompter**: implement DependenciesStep with all questions related to python versions, dependencies etc.
+- **prompter**: implement DomainDrivenDesignStep with bounded context questions.
+- **prompter**: implement GeneralProjectStep that will have common questions such as project name, slug, license etc.
+- **prompter**: implement Steps collection and Step interface
+- **prompter**: implement QuestionWizard to separate questions into steps and be more flexible and dynamic
+- **cli**: install uv by default and python version specified by the user
+- **installer**: implement Installer that will act as the manager class that coordinates all operation required to fully install the project
+- **installer**: implement zsh shell configurator
+- **installer**: create ShellConfigurator interface
+- **installer**: implement UvManager that is in charge of installing uv and the python version required by the user
+- **installer**: add dependency manager interface
+- **installer**: include enums for managers options and operating systems
+- **prompter**: add question to know user's operating system
+- **prompter**: create MultipleChoiceQuestion for questions where the user can select zero, one or more options
+- **prompter**: create BooleanQuestion for yes or no questions
+- **prompter**: create FreeTextQuestion for those questions where the user has to write something
+- **prompter**: create ChoiceQuestion to encapsulate questions that have different options the user needs to choose from
+- **project-generator**: create custom exception when node type does not exist
+- **cli**: make sure user_requirements are loaded
+- **prompter**: add load_from_file method to UserRequirements
+
+### 🐛 Bug Fixes
+
+- **project-generator**: correct path to templates
+
+### ♻️ Code Refactoring
+
+- **installer**: specify working directory to UvManager so it installs everything at the generated project
+- **cli**: pass generated project path to UvManager
+- **installer**: inline uv install command attribute as is not something reusable
+- **cli**: inject folder tree and template manager to project generator
+- **project-generator**: set the directory where user project will be generated as FolderTree attribute and expose it through a property
+- **project-generator**: pass folder_tree and template_manager injected into ProjectGenerator
+- **cli**: pass user dependencies to installer
+- **prompter**: substitute fixed default dependencies by dynamic ones that will be asked to the user
+- **prompter**: remove question definition lists and basic prompter
+- **cli**: substitute BasicPrompter for QuestionWizard
+- **prompter**: remove python manager and operating system questions
+- **prompter**: extract helper method to know if template is ddd
+- **prompter**: delegate ask logic to each question instead of letting prompter what to do depending on flags
+- **prompter**: redefine questions using concrete implementations
+- **prompter**: make Question abstract and add ask abstract method
+- **project-generator**: rename Directory's init attribute to python_module and remove default value for children
+- **project-generator**: move children extraction only when node is a directory
+- **src**: remove old src folder with cookiecutter project and convert current instant_python module into src
+
 ## 0.3.0 (2025-03-01)
 
 ### ✨ Features
