@@ -14,3 +14,7 @@ class ProjectGenerator:
             template_name="project_structure"
         )
         self._folder_tree.create(raw_project_structure)
+
+    @property
+    def path(self) -> str:
+        return self._folder_tree.project_directory
