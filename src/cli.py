@@ -38,7 +38,7 @@ def generate_project():
         dependency_manager=UvManager(),
         shell_configurator=ZshConfigurator()
     )
-    installer.perform_installation(user_requirements.python_version)
+    installer.perform_installation(user_requirements.python_version, user_requirements.dependencies)
 
 
 if __name__ == "__main__":
