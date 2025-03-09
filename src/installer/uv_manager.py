@@ -6,7 +6,8 @@ from src.question_prompter.question.free_text_question import FreeTextQuestion
 
 
 class UvManager(DependencyManager):
-    def __init__(self) -> None:
+    def __init__(self, project_directory: str) -> None:
+        self._project_directory = project_directory
         self._uv = "~/.local/bin/uv"
         self._executable = "/bin/bash"
 
