@@ -1,5 +1,5 @@
-from src.question_prompter.question.boolean_question import BooleanQuestion
 from src.question_prompter.question.choice_question import ChoiceQuestion
+from src.question_prompter.question.dependencies_question import DependenciesQuestion
 from src.question_prompter.question.multiple_choice_question import MultipleChoiceQuestion
 from src.question_prompter.step.steps import Step
 
@@ -34,10 +34,10 @@ class DependenciesStep(Step):
                     "fastapi_application",
                 ],
             ),
-            BooleanQuestion(
-                key="default_dependencies",
-                message="Do you want to include default dependencies? (coverage, doublex, doublex-expects, expects, pytest, pytest-watch, pytest-xdist, pytest-sugar, mypy, ruff)",
-            ),
+            DependenciesQuestion(
+                key="dependencies",
+                message="Do you want to install any dependencies?",
+            )
         ]
 
     def run(self, answers_so_far: dict[str, str]) -> dict[str, str]:
