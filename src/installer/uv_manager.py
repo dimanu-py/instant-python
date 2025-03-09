@@ -14,14 +14,23 @@ class UvManager(DependencyManager):
     def install(self) -> None:
         print(">>> Installing uv...")
         subprocess.run(
-            "curl -LsSf https://astral.sh/uv/install.sh | sh", shell=True, check=True, executable=self._executable
+            "curl -LsSf https://astral.sh/uv/install.sh | sh",
+            shell=True,
+            check=True,
+            executable=self._executable,
         )
         print(">>> uv installed successfully")
 
     def install_python(self, version: str) -> None:
         command = f"{self._uv} python install {version}"
         print(f">>> Installing Python {version}...")
-        subprocess.run(command, shell=True, check=True, executable=self._executable)
+        subprocess.run(
+            command,
+            shell=True,
+            check=True,
+            executable=self._executable,
+            cwd=self._project_directory,
+        )
         print(f">>> Python {version} installed successfully")
 
     def install_dependencies(self, dependencies: list[str]) -> None:
@@ -43,7 +52,13 @@ class UvManager(DependencyManager):
         flag = self._generate_flag(add_to_group, is_dev)
 
         command = f"{self._uv} add {flag} {dependency_name}"
-        subprocess.run(command, shell=True, check=True, executable=self._executable)
+        subprocess.run(
+            command,
+            shell=True,
+            check=True,
+            executable=self._executable,
+            cwd=self._project_directory,
+        )
 
     @staticmethod
     def _generate_flag(add_to_group: bool, is_dev: bool) -> str:
