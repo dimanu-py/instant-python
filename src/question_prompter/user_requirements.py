@@ -18,6 +18,7 @@ class UserRequirements:
     python_version: str
     dependency_manager: str
     template: str
+    shell: str
     dependencies: list[str] = field(default_factory=list)
     bounded_context: str = field(default=None)
     aggregate_name: str = field(default=None)

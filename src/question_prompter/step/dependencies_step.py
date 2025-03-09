@@ -19,6 +19,12 @@ class DependenciesStep(Step):
                 default="uv",
                 options=["uv", "pdm"],
             ),
+            ChoiceQuestion(
+                key="shell",
+                message="Select the shell you use",
+                default="zsh",
+                options=["zsh", "bash", "fish"],
+            ),
             MultipleChoiceQuestion(
                 key="built_in_features",
                 message="Select the built-in features you want to include (fastapi_application option requires logger)",
