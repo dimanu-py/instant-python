@@ -43,7 +43,7 @@ def generate_project():
     project_generator.generate()
 
     installer = Installer(
-        dependency_manager=UvManager(), shell_configurator=ZshConfigurator()
+        dependency_manager=UvManager(project_generator.path), shell_configurator=ZshConfigurator()
     )
     installer.perform_installation(
         user_requirements.python_version, user_requirements.dependencies
