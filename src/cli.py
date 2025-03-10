@@ -2,8 +2,8 @@ from pathlib import Path
 
 import typer
 
+from src.installer.dependency_manager_factory import DependencyManagerFactory
 from src.installer.installer import Installer
-from src.installer.uv_manager import UvManager
 from src.project_generator.folder_tree import FolderTree
 from src.project_generator.project_generator import ProjectGenerator
 from src.project_generator.template_manager import TemplateManager
@@ -41,8 +41,9 @@ def generate_project():
     )
     project_generator.generate()
 
+
     installer = Installer(
-        dependency_manager=UvManager(project_generator.path)
+        dependency_manager=DependencyManagerFactory.create(user_requirements.dependency_manager, project_generator.path)
     )
     installer.perform_installation(
         user_requirements.python_version, user_requirements.dependencies
