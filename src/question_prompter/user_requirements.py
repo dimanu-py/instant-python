@@ -7,7 +7,6 @@ import yaml
 
 @dataclass
 class UserRequirements:
-    project_name: str
     project_slug: str
     source_name: str
     license: str
