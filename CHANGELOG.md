@@ -1,3 +1,24 @@
+## 0.5.0 (2025-03-10)
+
+### ✨ Features
+
+- **installer**: create factory method to choose which dependency manager gets instantiated
+- **installer**: implement PdmInstaller
+
+### 🐛 Bug Fixes
+
+- **template**: use project_slug for project name inside pyproject.toml
+
+### ♻️ Code Refactoring
+
+- **cli**: use DependencyManagerFactory instead of always instantiating UvManager
+- **installer**: remove ShellConfigurator and ZshConfigurator
+- **cli**: remove shell configurator injection
+- **installer**: remove the use of ShellConfigurator inside installer
+- **prompter**: warn the user that project name cannot contain spaces
+- **prompter**: remove project name question and just leave project slug
+- **installer**: remove executable attribute from UvManager
+
 ## 0.4.0 (2025-03-09)
 
 ### ✨ Features
