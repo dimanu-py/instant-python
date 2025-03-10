@@ -9,7 +9,7 @@ class GeneralProjectStep(Step):
         self._questions = [
             FreeTextQuestion(
                 key="project_slug",
-                message="Enter the slug of the project",
+                message="Enter the name of the project (CANNOT CONTAIN SPACES)",
                 default="python-project",
             ),
             FreeTextQuestion(
