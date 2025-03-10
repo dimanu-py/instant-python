@@ -9,7 +9,6 @@ class UvManager(DependencyManager):
     def __init__(self, project_directory: str) -> None:
         self._project_directory = project_directory
         self._uv = "~/.local/bin/uv"
-        self._executable = "/bin/bash"
 
     def install(self) -> None:
         print(">>> Installing uv...")
@@ -17,7 +16,6 @@ class UvManager(DependencyManager):
             "curl -LsSf https://astral.sh/uv/install.sh | sh",
             shell=True,
             check=True,
-            executable=self._executable,
         )
         print(">>> uv installed successfully")
 
@@ -28,7 +26,6 @@ class UvManager(DependencyManager):
             command,
             shell=True,
             check=True,
-            executable=self._executable,
             cwd=self._project_directory,
         )
         print(f">>> Python {version} installed successfully")
@@ -56,7 +53,6 @@ class UvManager(DependencyManager):
             command,
             shell=True,
             check=True,
-            executable=self._executable,
             cwd=self._project_directory,
         )
 
