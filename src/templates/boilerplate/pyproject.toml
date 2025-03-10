@@ -1,5 +1,5 @@
 [project]
-name = "{{ project_name }}"
+name = "{{ project_slug }}"
 version = "{{ version }}"
 description = "{{ description }}"
 {% if dependency_manager == "pdm" %}

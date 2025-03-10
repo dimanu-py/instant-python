@@ -5,22 +5,22 @@ from src.question_prompter.question.boolean_question import BooleanQuestion
 from src.question_prompter.question.free_text_question import FreeTextQuestion
 
 
-class UvManager(DependencyManager):
+class PdmManager(DependencyManager):
     def __init__(self, project_directory: str) -> None:
         self._project_directory = project_directory
-        self._uv = "~/.local/bin/uv"
+        self._pdm = "~/.local/bin/pdm"
 
     def install(self) -> None:
-        print(">>> Installing uv...")
+        print(">>> Installing pdm...")
         subprocess.run(
-            "curl -LsSf https://astral.sh/uv/install.sh | sh",
+            "curl -sSL https://pdm-project.org/install-pdm.py | python3 -",
             shell=True,
             check=True,
         )
-        print(">>> uv installed successfully")
+        print(">>> pdm installed successfully")
 
     def install_python(self, version: str) -> None:
-        command = f"{self._uv} python install {version}"
+        command = f"{self._pdm} python install {version}"
         print(f">>> Installing Python {version}...")
         subprocess.run(
             command,
@@ -34,7 +34,7 @@ class UvManager(DependencyManager):
         for dependency_name in dependencies:
             self._install_dependency(dependency_name)
 
-    def _install_dependency(self, dependency_name: str) -> None:
+    def _install_dependency(self, dependency_name):
         is_dev = BooleanQuestion(
             key="is_dev",
             message=f"Do you want to install {dependency_name} as a dev dependency?",
@@ -48,7 +48,7 @@ class UvManager(DependencyManager):
 
         flag = self._generate_flag(add_to_group, is_dev)
 
-        command = f"{self._uv} add {flag} {dependency_name}"
+        command = f"{self._pdm} add {flag} {dependency_name}"
         subprocess.run(
             command,
             shell=True,
@@ -58,12 +58,15 @@ class UvManager(DependencyManager):
 
     @staticmethod
     def _generate_flag(add_to_group: bool, is_dev: bool) -> str:
-        flag = ""
-        if is_dev:
-            flag = "--dev"
+        dev_flag = "--dev" if is_dev else ""
+        group_flag = ""
         if add_to_group:
             group_name = FreeTextQuestion(
                 key="group_name", message="Enter the name of the group"
             ).ask()
-            flag = f"--group {group_name}"
-        return flag
+            group_flag += f"--group {group_name}"
+        return f"{dev_flag} {group_flag}"
+
+
+
+
