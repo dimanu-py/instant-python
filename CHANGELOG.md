@@ -1,3 +1,16 @@
+## 0.6.0 (2025-03-11)
+
+### ✨ Features
+
+- **template**: add standard project project structure templates
+
+### ♻️ Code Refactoring
+
+- **project-generator**: remove condition of loading the template only when is domain driven design
+- **template**: use include_and_indent custom macro inside domain_driven_design/test template
+- **template**: include always mypy and pytest ini configuration
+- **prompter**: rename empty project template to standard project
+
 ## 0.5.0 (2025-03-10)
 
 ### ✨ Features
