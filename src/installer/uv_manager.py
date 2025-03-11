@@ -16,6 +16,7 @@ class UvManager(DependencyManager):
             "curl -LsSf https://astral.sh/uv/install.sh | sh",
             shell=True,
             check=True,
+            stdout=subprocess.DEVNULL,
         )
         print(">>> uv installed successfully")
 
@@ -27,6 +28,7 @@ class UvManager(DependencyManager):
             shell=True,
             check=True,
             cwd=self._project_directory,
+            stdout=subprocess.DEVNULL,
         )
         print(f">>> Python {version} installed successfully")
 
@@ -54,7 +56,9 @@ class UvManager(DependencyManager):
             shell=True,
             check=True,
             cwd=self._project_directory,
+            stdout=subprocess.DEVNULL,
         )
+        print(f">>> {dependency_name} installed successfully")
 
     @staticmethod
     def _generate_flag(add_to_group: bool, is_dev: bool) -> str:
