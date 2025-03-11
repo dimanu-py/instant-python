@@ -3,7 +3,7 @@ name = "{{ project_slug }}"
 version = "{{ version }}"
 description = "{{ description }}"
 {% if dependency_manager == "pdm" %}
-authors = [{name = "{{ author }}", email = "{{ email }}"}]
+authors = [{name = "{{ author }}", email = "{{ git_email }}"}]
 {% endif %}
 {% if default_dependencies in ["yes", "y"] %}
 dependencies = [
