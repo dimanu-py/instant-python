@@ -3,6 +3,7 @@ from pathlib import Path
 import typer
 
 from src.installer.dependency_manager_factory import DependencyManagerFactory
+from src.installer.git_configurer import GitConfigurer
 from src.installer.installer import Installer
 from src.project_generator.folder_tree import FolderTree
 from src.project_generator.project_generator import ProjectGenerator
@@ -53,6 +54,10 @@ def generate_project():
     installer.perform_installation(
         user_requirements.python_version, user_requirements.dependencies
     )
+
+    if user_requirements.git:
+        git_configurer = GitConfigurer(project_generator.path)
+        git_configurer.configure(user_requirements.git_email, user_requirements.git_user_name)
 
 
 if __name__ == "__main__":
