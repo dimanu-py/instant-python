@@ -1,0 +1,23 @@
+{% import "project_structure/macros.j2" as macros with context %}
+- name: test
+  type: directory
+  python: True
+  children:
+    - name: unit
+      type: directory
+      python: True
+      {% if "event_bus" in built_in_features %}
+      children:
+        - name: event_bus/mock_event_bus
+          type: file
+          extension: .py
+      {% endif %}
+    - name: integration
+      type: directory
+      python: True
+    - name: acceptance
+      type: directory
+      python: True
+    - name: random_generator
+      type: file
+      extension: .py
