@@ -28,7 +28,6 @@ class GeneralProjectStep(Step):
                 default="0.1.0",
             ),
             FreeTextQuestion(key="author", message="Enter your name"),
-            FreeTextQuestion(key="email", message="Enter your email"),
             ChoiceQuestion(
                 key="license",
                 message="Select a license",
