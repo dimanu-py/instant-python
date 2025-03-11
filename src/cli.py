@@ -28,7 +28,10 @@ def generate_project():
         wizard = QuestionWizard(
             steps=(
                 Steps(
-                    GeneralProjectStep(), DomainDrivenDesignStep(), GitStep(), DependenciesStep()
+                    GeneralProjectStep(),
+                    DomainDrivenDesignStep(),
+                    GitStep(),
+                    DependenciesStep(),
                 )
             )
         )
@@ -42,9 +45,10 @@ def generate_project():
     )
     project_generator.generate()
 
-
     installer = Installer(
-        dependency_manager=DependencyManagerFactory.create(user_requirements.dependency_manager, project_generator.path)
+        dependency_manager=DependencyManagerFactory.create(
+            user_requirements.dependency_manager, project_generator.path
+        )
     )
     installer.perform_installation(
         user_requirements.python_version, user_requirements.dependencies
