@@ -1,3 +1,9 @@
+## 0.7.0 (2025-03-11)
+
+### ✨ Features
+
+- **template**: add clean architecture template project structure
+
 ## 0.6.0 (2025-03-11)
 
 ### ✨ Features
