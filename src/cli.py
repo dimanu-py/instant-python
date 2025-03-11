@@ -11,6 +11,7 @@ from src.question_prompter.question_wizard import QuestionWizard
 from src.question_prompter.step.dependencies_step import DependenciesStep
 from src.question_prompter.step.domain_driven_design_step import DomainDrivenDesignStep
 from src.question_prompter.step.general_project_step import GeneralProjectStep
+from src.question_prompter.step.git_step import GitStep
 from src.question_prompter.step.steps import Steps
 from src.question_prompter.user_requirements import UserRequirements
 
@@ -27,7 +28,7 @@ def generate_project():
         wizard = QuestionWizard(
             steps=(
                 Steps(
-                    GeneralProjectStep(), DomainDrivenDesignStep(), DependenciesStep()
+                    GeneralProjectStep(), DomainDrivenDesignStep(), GitStep(), DependenciesStep()
                 )
             )
         )
