@@ -13,10 +13,11 @@ class UserRequirements:
     version: str
     description: str
     author: str
-    email: str
     python_version: str
     dependency_manager: str
     template: str
+    git_email: str = field(default=None)
+    git_user_name: str = field(default=None)
     dependencies: list[str] = field(default_factory=list)
     bounded_context: str = field(default=None)
     aggregate_name: str = field(default=None)
