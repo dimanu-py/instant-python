@@ -2,7 +2,6 @@ import yaml
 from jinja2 import FileSystemLoader, Environment, Template
 
 from src.project_generator.jinja_custom_filters import is_in
-from src.question_prompter.template_types import TemplateTypes
 from src.question_prompter.user_requirements import UserRequirements
 
 
@@ -13,10 +12,9 @@ class TemplateManager:
         self._env.filters["is_in"] = is_in
 
     def get_project(self, template_name: str) -> dict:
-        if self._is_ddd_project():
-            template = self._get_template(
-                f"{template_name}/{self._requirements.template}/main_structure.yml.j2"
-            )
+        template = self._get_template(
+            f"{template_name}/{self._requirements.template}/main_structure.yml.j2"
+        )
         raw_project_structure = self._render(template)
         return yaml.safe_load(raw_project_structure)
 
@@ -29,9 +27,6 @@ class TemplateManager:
 
     def _render(self, template: Template) -> str:
         return template.render(**self._requirements.to_dict())
-
-    def _is_ddd_project(self) -> bool:
-        return self._requirements.template == TemplateTypes.DDD
 
     @staticmethod
     def _load_memory_requirements() -> UserRequirements:
