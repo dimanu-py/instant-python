@@ -1,3 +1,19 @@
+## 0.8.0 (2025-03-11)
+
+### ✨ Features
+
+- **cli**: call to git configurer when user wants to initialize a git repository
+- **installer**: implement GitConfigurer
+- **cli**: include git step into cli steps
+- **prompter**: implement step to ask the user information to initialize a git repository
+
+### ♻️ Code Refactoring
+
+- **installer**: avoid printing executed commands output by stdout
+- **template**: use git_email field in pyproject.toml
+- **prompter**: remove email field from UserRequirements and add git_email and git_user_name
+- **prompter**: remove email question from general project step
+
 ## 0.7.0 (2025-03-11)
 
 ### ✨ Features
