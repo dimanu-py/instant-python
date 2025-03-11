@@ -4,4 +4,4 @@ from enum import StrEnum
 class TemplateTypes(StrEnum):
 	DDD = "domain_driven_design"
 	CLEAN = "clean_architecture"
-	EMPTY = "empty_project"
+	STANDARD = "standard_project"

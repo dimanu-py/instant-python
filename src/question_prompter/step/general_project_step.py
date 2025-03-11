@@ -40,7 +40,7 @@ class GeneralProjectStep(Step):
                 key="template",
                 message="Select a template",
                 default="domain_driven_design",
-                options=["domain_driven_design", "clean_architecture", "empty_project"],
+                options=["domain_driven_design", "clean_architecture", "standard_project"],
             ),
         ]
 
