@@ -1,0 +1,30 @@
+{% import "project_structure/macros.j2" as macros with context %}
+- name: {{ source_name }}
+  type: directory
+  python: True
+  {% if ["value_objects", "synchronous_sqlalchemy", "event_bus", "async_alembic", "logger", "async_sqlalchemy", "fastapi_app"] | is_in(built_in_features) %}
+  children:
+    {% if "value_objects" in built_in_features %}
+    {{ macros.include_and_indent("project_structure/value_objects.yml.j2", 4) }}
+    {% endif %}
+    {% if "event_bus" in built_in_features %}
+    {{ macros.include_and_indent("project_structure/event_bus_domain.yml.j2", 4) }}
+    {{ macros.include_and_indent("project_structure/event_bus_infra.yml.j2", 4) }}
+    {% endif %}
+    {% if "synchronous_sqlalchemy" in built_in_features %}
+    {{ macros.include_and_indent("project_structure/synchronous_sqlalchemy.yml.j2", 4) }}
+    {% endif %}
+    {% if "logger" in built_in_features %}
+    {{ macros.include_and_indent("project_structure/logger.yml.j2", 4) }}
+    {% endif %}
+    {% if "async_sqlalchemy" in built_in_features %}
+    {{ macros.include_and_indent("project_structure/async_sqlalchemy.yml.j2", 4) }}
+    {% endif %}
+    {% if "async_alembic" in built_in_features %}
+    {{ macros.include_and_indent("project_structure/alembic_migrator.yml.j2", 4) }}
+    {% endif %}
+    {% if "fastapi_app" in built_in_features %}
+    {{ macros.include_and_indent("project_structure/fastapi_app.yml.j2", 4) }}
+    {{ macros.include_and_indent("project_structure/fastapi_infra.yml.j2", 4) }}
+    {% endif %}
+  {% endif %}
