@@ -7,9 +7,27 @@ site_description: >
 
 repo_name: instant-python
 repo_url: https://github.com/dimanu-py/instant-python-ddd
-
+plugins:
+  - search
+  - tags
+markdown_extensions:
+  - admonition
 theme:
   name: material
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.svg
+  logo: assets/logo.svg
+  icon:
+    logo: logo
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - search.suggest
+    - search.highlight
 nav:
   - Home: index.md
   - Requirements: requirements.md
