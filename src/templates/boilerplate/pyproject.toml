@@ -12,7 +12,7 @@ dependencies = []
 {% endif %}
 requires-python = "=={{ python_version }}.*"
 readme = "README.md"
-license = {text = "{{ license }}", file = "LICENSE"}
+license = { file = "LICENSE" }
 
 {% if dependency_manager == "pdm" %}
 [tool.pdm]
