@@ -11,14 +11,20 @@ license = { file = "LICENSE" }
 authors = [{name = "dimanu-py", email = "diegomtz126@gmail.com"}]
 requires-python = ">=3.12"
 dependencies = [
-    "sphinx>=8.1.3",
-    "myst-parser>=4.0.0",
-    "sphinx-wagtail-theme>=6.4.0",
     "typer>=0.15.1",
     "jinja2>=3.1.5",
     "questionary>=2.1.0",
-    "commitizen>=4.2.2",
 ]
 
 [project.scripts]
 instant-python = "instant_python.cli:app"
+
+[dependency-groups]
+docs = [
+    "myst-parser>=4.0.1",
+    "sphinx>=8.2.3",
+    "sphinx-wagtail-theme>=6.5.0",
+]
+git = [
+    "commitizen>=4.2.2",
+]
