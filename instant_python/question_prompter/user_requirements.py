@@ -31,8 +31,3 @@ class UserRequirements:
     def save_in_memory(self) -> None:
         with open("user_requirements.yml", "w") as file:
             yaml.dump(self.to_dict(), file)
-
-    @classmethod
-    def load_from_file(cls) -> Self:
-        with open("user_requirements.yml") as file:
-            return cls(**yaml.safe_load(file))

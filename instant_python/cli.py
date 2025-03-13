@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import typer
 
 from instant_python.installer.dependency_manager_factory import DependencyManagerFactory
@@ -14,32 +12,24 @@ from instant_python.question_prompter.step.domain_driven_design_step import Doma
 from instant_python.question_prompter.step.general_project_step import GeneralProjectStep
 from instant_python.question_prompter.step.git_step import GitStep
 from instant_python.question_prompter.step.steps import Steps
-from instant_python.question_prompter.user_requirements import UserRequirements
 
 app = typer.Typer()
 
 
-def user_requirements_has_not_been_generated_before() -> bool:
-    return Path("user_requirements.yml").exists() is False
-
-
 @app.command()
-def generate_project():
-    if user_requirements_has_not_been_generated_before():
-        wizard = QuestionWizard(
-            steps=(
-                Steps(
-                    GeneralProjectStep(),
-                    DomainDrivenDesignStep(),
-                    GitStep(),
-                    DependenciesStep(),
-                )
+def generate_project() -> None:
+    wizard = QuestionWizard(
+        steps=(
+            Steps(
+                GeneralProjectStep(),
+                DomainDrivenDesignStep(),
+                GitStep(),
+                DependenciesStep(),
             )
         )
-        user_requirements = wizard.run()
-        user_requirements.save_in_memory()
-    else:
-        user_requirements = UserRequirements.load_from_file()
+    )
+    user_requirements = wizard.run()
+    user_requirements.save_in_memory()
 
     project_generator = ProjectGenerator(
         folder_tree=FolderTree(), template_manager=TemplateManager()
