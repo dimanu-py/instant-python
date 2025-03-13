@@ -1,7 +1,7 @@
 [project]
-name = "python-template"
+name = "instant-python"
 version = "0.8.0"
-description = "Python template for projects"
+description = "Python automatic project generator"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
