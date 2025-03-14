@@ -1,6 +1,6 @@
 from dataclasses import dataclass, asdict, field
 from datetime import datetime
-from typing import Self
+from pathlib import Path
 
 import yaml
 
@@ -34,3 +34,6 @@ class UserRequirements:
     def save_in_memory(self) -> None:
         with open(self._file_path, "w") as file:
             yaml.dump(self.to_dict(), file)
+
+    def remove(self) -> None:
+        Path(self._file_path).unlink()
