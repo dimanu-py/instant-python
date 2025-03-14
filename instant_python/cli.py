@@ -18,36 +18,30 @@ app = typer.Typer()
 
 @app.command()
 def generate_project() -> None:
-    wizard = QuestionWizard(
-        steps=(
-            Steps(
-                GeneralProjectStep(),
-                DomainDrivenDesignStep(),
-                GitStep(),
-                DependenciesStep(),
-            )
-        )
-    )
+    wizard = QuestionWizard(steps=(Steps(
+        GeneralProjectStep(),
+        DomainDrivenDesignStep(),
+        GitStep(),
+        DependenciesStep(),
+    )))
     user_requirements = wizard.run()
     user_requirements.save_in_memory()
 
-    project_generator = ProjectGenerator(
-        folder_tree=FolderTree(user_requirements.project_slug), template_manager=TemplateManager()
-    )
+    project_generator = ProjectGenerator(folder_tree=FolderTree(
+        user_requirements.project_slug),
+                                         template_manager=TemplateManager())
     project_generator.generate()
 
-    installer = Installer(
-        dependency_manager=DependencyManagerFactory.create(
-            user_requirements.dependency_manager, project_generator.path
-        )
-    )
-    installer.perform_installation(
-        user_requirements.python_version, user_requirements.dependencies
-    )
+    installer = Installer(dependency_manager=DependencyManagerFactory.create(
+        user_requirements.dependency_manager, project_generator.path))
+    installer.perform_installation(user_requirements.python_version,
+                                   user_requirements.dependencies)
 
     if user_requirements.git:
         git_configurer = GitConfigurer(project_generator.path)
-        git_configurer.configure(user_requirements.git_email, user_requirements.git_user_name)
+        git_configurer.configure(user_requirements.git_email,
+                                 user_requirements.git_user_name)
+
     user_requirements.remove()
 
 
