@@ -24,11 +24,7 @@ include = [
 ipy = "instant_python.cli:app"
 
 [dependency-groups]
-docs = [
-    "myst-parser>=4.0.1",
-    "sphinx>=8.2.3",
-    "sphinx-wagtail-theme>=6.5.0",
-]
+docs = []
 git = [
     "commitizen>=4.2.2",
 ]
