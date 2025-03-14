@@ -25,9 +25,12 @@ class UserRequirements:
     built_in_features: list[str] = field(default_factory=list)
     year: int = field(default=datetime.now().year)
 
+    def __post_init__(self) -> None:
+        self._file_path = "user_requirements.yml"
+
     def to_dict(self) -> dict:
         return asdict(self)
 
     def save_in_memory(self) -> None:
-        with open("user_requirements.yml", "w") as file:
+        with open(self._file_path, "w") as file:
             yaml.dump(self.to_dict(), file)
