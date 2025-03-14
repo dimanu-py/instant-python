@@ -48,6 +48,7 @@ def generate_project() -> None:
     if user_requirements.git:
         git_configurer = GitConfigurer(project_generator.path)
         git_configurer.configure(user_requirements.git_email, user_requirements.git_user_name)
+    user_requirements.remove()
 
 
 if __name__ == "__main__":
