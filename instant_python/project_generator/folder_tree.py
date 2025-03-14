@@ -1,4 +1,3 @@
-import tempfile
 from pathlib import Path
 
 from instant_python.project_generator.directory import Directory
@@ -13,8 +12,8 @@ class UnknownNodeType(ValueError):
 
 
 class FolderTree:
-    def __init__(self) -> None:
-        self._project_directory = Path(tempfile.mkdtemp())
+    def __init__(self, project_directory: str) -> None:
+        self._project_directory = Path(project_directory)
 
     def create(self, project_structure: dict) -> None:
         tree = [self._build_tree(node) for node in project_structure.get("root", [])]
