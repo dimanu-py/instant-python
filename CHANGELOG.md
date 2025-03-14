@@ -1,3 +1,17 @@
+## 0.8.1 (2025-03-14)
+
+### 🐛 Bug Fixes
+
+- **prompter**: correct default source folder name
+- **template**: correct license field from pyproject.toml template
+
+### ♻️ Code Refactoring
+
+- **cli**: pass project slug name as the project directory that will be created
+- **project-generator**: pass the directory where the project will be created to FolderTree
+- **cli**: remove checking if a user_requirements file exists
+- **template**: remove writing author and email info only if manager is pdm
+
 ## 0.8.0 (2025-03-11)
 
 ### ✨ Features
