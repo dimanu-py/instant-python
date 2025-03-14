@@ -1,3 +1,20 @@
+## 0.9.0 (2025-03-14)
+
+### ✨ Features
+
+- **project-generator**: format all project files with ruff once everything is generated
+- **cli**: remove user_requirements file once project has been generated
+- **prompter**: add remove method to UserRequirements class
+
+### 🐛 Bug Fixes
+
+- **build**: change build system and ensure templates directory gets included
+- **project-generator**: substitute FileSystemLoader for PackageLoader to safer load when using it as a package
+
+### ♻️ Code Refactoring
+
+- **prompter**: add file_path field to user requirements class
+
 ## 0.8.1 (2025-03-14)
 
 ### 🐛 Bug Fixes
