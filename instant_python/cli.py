@@ -32,7 +32,7 @@ def generate_project() -> None:
     user_requirements.save_in_memory()
 
     project_generator = ProjectGenerator(
-        folder_tree=FolderTree(), template_manager=TemplateManager()
+        folder_tree=FolderTree(user_requirements.project_slug), template_manager=TemplateManager()
     )
     project_generator.generate()
 
