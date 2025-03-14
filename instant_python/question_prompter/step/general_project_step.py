@@ -15,7 +15,7 @@ class GeneralProjectStep(Step):
             FreeTextQuestion(
                 key="source_name",
                 message="Enter the name of the source folder",
-                default="instant_python",
+                default="src",
             ),
             FreeTextQuestion(
                 key="description",
