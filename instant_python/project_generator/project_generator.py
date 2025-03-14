@@ -14,6 +14,16 @@ class ProjectGenerator:
             template_name="project_structure"
         )
         self._folder_tree.create(raw_project_structure)
+        self._format_project_files()
+
+    def _format_project_files(self) -> None:
+        subprocess.run(
+            "uvx ruff format",
+            shell=True,
+            check=True,
+            cwd=self._folder_tree.project_directory,
+            stdout=subprocess.DEVNULL,
+        )
 
     @property
     def path(self) -> str:
