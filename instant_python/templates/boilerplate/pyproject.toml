@@ -1,0 +1,20 @@
+[project]
+name = "{{ project_slug }}"
+version = "{{ version }}"
+description = "{{ description }}"
+authors = [{name = "{{ author }}", email = "{{ git_email }}"}]
+{% if default_dependencies in ["yes", "y"] %}
+dependencies = [
+    "sqlalchemy>=2.0.36"
+]
+{% else %}
+dependencies = []
+{% endif %}
+requires-python = "=={{ python_version }}.*"
+readme = "README.md"
+license = { file = "LICENSE" }
+
+{% if dependency_manager == "pdm" %}
+[tool.pdm]
+distribution = false
+{% endif %}

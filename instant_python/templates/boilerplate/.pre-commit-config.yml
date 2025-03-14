@@ -1,0 +1,33 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-case-conflict
+      - id: check-merge-conflict
+
+  - repo: local
+    hooks:
+      - id: type-check
+        name: check typing
+        entry: make check-typing
+        language: system
+      - id: lint
+        name: check for lint
+        entry: make lint
+        language: system
+      - id: format
+        name: check for code format
+        entry: make format
+        language: system
+      - id: unit-test
+        name: run all unit test
+        entry: make all-unit
+        language: system
+      - id: pre-push
+        name: run integration and acceptance test
+        entry: make pre-push
+        language: system
+        stages:
+          - pre-push
