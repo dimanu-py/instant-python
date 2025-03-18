@@ -30,7 +30,14 @@ theme:
     - search.highlight
 nav:
   - Home: index.md
-  - Requirements: requirements.md
-  - Usage: usage.md
-  - Customization: customization.md
+  - Getting Started:
+      - getting-started/index.md
+      - Installation: getting-started/installation.md
+      - First Steps: getting-started/first-steps.md
+      - Features: getting-started/features.md
+  - Guide:
+      - guide/index.md
+      - Creating a Project: guide/creating-a-project.md
+      - Folder Structure: guide/folder-structure.md
+      - Adding Boilerplate: guide/adding-boilerplate.md
   - Contributing: contributing.md
