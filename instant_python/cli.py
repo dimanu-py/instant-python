@@ -20,7 +20,7 @@ from instant_python.question_prompter.step.steps import Steps
 app = typer.Typer()
 
 
-@app.command()
+@app.command(help="Create all the folders and files for a new project")
 def folder() -> None:
     wizard = QuestionWizard(
         steps = Steps(
@@ -40,7 +40,7 @@ def folder() -> None:
     user_requirements.remove()
 
 
-@app.command()
+@app.command(help="Generate a full project, including folders, dependencies, manager, boilerplate etc.")
 def new() -> None:
     wizard = QuestionWizard(
         steps=(
