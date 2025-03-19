@@ -21,6 +21,26 @@ app = typer.Typer()
 
 
 @app.command()
+def folder() -> None:
+    wizard = QuestionWizard(
+        steps = Steps(
+            GeneralProjectStep(),
+            DomainDrivenDesignStep()
+        )
+    )
+    user_requirements = wizard.run()
+    user_requirements.save_in_memory()
+    
+    project_generator = ProjectGenerator(
+        folder_tree=FolderTree(user_requirements.project_slug),
+        template_manager=TemplateManager(),
+    )
+    project_generator.generate()
+    
+    user_requirements.remove()
+
+
+@app.command()
 def new() -> None:
     wizard = QuestionWizard(
         steps=(
