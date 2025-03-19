@@ -39,5 +39,6 @@ nav:
       - guide/index.md
       - Creating a Project: guide/creating-a-project.md
       - Folder Structure: guide/folder-structure.md
-      - Adding Boilerplate: guide/adding-boilerplate.md
+      - Features: guide/features.md
+      - Custom Templates: guide/custom-templates.md
   - Contributing: contributing.md
