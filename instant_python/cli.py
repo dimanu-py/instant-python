@@ -1,3 +1,6 @@
+from tempfile import template
+from typing import Annotated
+
 import typer
 
 from instant_python.installer.dependency_manager_factory import DependencyManagerFactory
@@ -21,27 +24,38 @@ app = typer.Typer()
 
 
 @app.command(help="Create all the folders and files for a new project")
-def folder() -> None:
-    wizard = QuestionWizard(
-        steps = Steps(
-            GeneralProjectStep(),
-            DomainDrivenDesignStep()
-        )
-    )
+def folder(
+    template: Annotated[
+        str | None,
+        typer.Option(
+            None, "--template", "-t", help="Path to custom folder structure YML file"
+        ),
+    ],
+) -> None:
+    wizard = QuestionWizard(steps=Steps(GeneralProjectStep(), DomainDrivenDesignStep()))
     user_requirements = wizard.run()
     user_requirements.save_in_memory()
-    
+
     project_generator = ProjectGenerator(
         folder_tree=FolderTree(user_requirements.project_slug),
         template_manager=TemplateManager(),
     )
     project_generator.generate()
-    
+
     user_requirements.remove()
 
 
-@app.command(help="Generate a full project, including folders, dependencies, manager, boilerplate etc.")
-def new() -> None:
+@app.command(
+    help="Generate a full project, including folders, dependencies, manager, boilerplate etc."
+)
+def new(
+    template: Annotated[
+        str | None,
+        typer.Option(
+            None, "--template", "-t", help="Path to custom folder structure YML file"
+        ),
+    ],
+) -> None:
     wizard = QuestionWizard(
         steps=(
             Steps(
