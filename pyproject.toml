@@ -20,7 +20,7 @@ include = [
 ]
 
 [project.scripts]
-instant-python = "instant_python.cli:app"
+ipy = "instant_python.cli:app"
 
 [dependency-groups]
 docs = [
