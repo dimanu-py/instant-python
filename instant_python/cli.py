@@ -21,7 +21,7 @@ app = typer.Typer()
 
 
 @app.command()
-def generate_project() -> None:
+def new() -> None:
     wizard = QuestionWizard(
         steps=(
             Steps(
