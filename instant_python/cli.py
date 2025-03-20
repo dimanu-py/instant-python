@@ -2,6 +2,7 @@ from typing import Annotated
 
 import typer
 
+from instant_python import folder_cli
 from instant_python.installer.dependency_manager_factory import DependencyManagerFactory
 from instant_python.installer.git_configurer import GitConfigurer
 from instant_python.installer.installer import Installer
@@ -20,28 +21,7 @@ from instant_python.question_prompter.step.git_step import GitStep
 from instant_python.question_prompter.step.steps import Steps
 
 app = typer.Typer()
-
-
-@app.command(help="Create all the folders and files for a new project")
-def folder(
-    template: Annotated[
-        str | None,
-        typer.Option(
-            None, "--template", "-t", help="Path to custom folder structure YML file"
-        ),
-    ],
-) -> None:
-    wizard = QuestionWizard(steps=Steps(GeneralProjectStep(), DomainDrivenDesignStep()))
-    user_requirements = wizard.run()
-    user_requirements.save_in_memory()
-
-    project_generator = ProjectGenerator(
-        folder_tree=FolderTree(user_requirements.project_slug),
-        template_manager=DefaultTemplateManager(),
-    )
-    project_generator.generate()
-
-    user_requirements.remove()
+app.add_typer(folder_cli.app, name="folder")
 
 
 @app.command(
