@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from instant_python.project_generator.node import Node
-from instant_python.project_generator.template_manager import TemplateManager
+from instant_python.project_generator.default_template_manager import TemplateManager
 
 
 class File(Node):

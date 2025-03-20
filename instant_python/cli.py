@@ -1,4 +1,3 @@
-from tempfile import template
 from typing import Annotated
 
 import typer
@@ -6,9 +5,9 @@ import typer
 from instant_python.installer.dependency_manager_factory import DependencyManagerFactory
 from instant_python.installer.git_configurer import GitConfigurer
 from instant_python.installer.installer import Installer
+from instant_python.project_generator.default_template_manager import DefaultTemplateManager
 from instant_python.project_generator.folder_tree import FolderTree
 from instant_python.project_generator.project_generator import ProjectGenerator
-from instant_python.project_generator.template_manager import TemplateManager
 from instant_python.question_prompter.question_wizard import QuestionWizard
 from instant_python.question_prompter.step.dependencies_step import DependenciesStep
 from instant_python.question_prompter.step.domain_driven_design_step import (
@@ -38,7 +37,7 @@ def folder(
 
     project_generator = ProjectGenerator(
         folder_tree=FolderTree(user_requirements.project_slug),
-        template_manager=TemplateManager(),
+        template_manager=DefaultTemplateManager(),
     )
     project_generator.generate()
 
@@ -71,7 +70,7 @@ def new(
 
     project_generator = ProjectGenerator(
         folder_tree=FolderTree(user_requirements.project_slug),
-        template_manager=TemplateManager(),
+        template_manager=DefaultTemplateManager(),
     )
     project_generator.generate()
 
