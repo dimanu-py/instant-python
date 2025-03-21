@@ -14,7 +14,7 @@ app = typer.Typer()
 
 
 @app.command("template", help="Create all the folders and files for a new project using a custom template")
-def template(template_name: str) -> None:
+def create_folder_structure_from_template(template_name: str) -> None:
 	project_name = FreeTextQuestion(
 		key="project_slug",
 		message="Enter the name of the project (CANNOT CONTAIN SPACES)",
@@ -29,7 +29,7 @@ def template(template_name: str) -> None:
 
 
 @app.command("new", help="Create all the folders and files for a new project")
-def new() -> None:
+def create_default_project_structure() -> None:
 	wizard = QuestionWizard(
 		steps=Steps(GeneralProjectStep(), DomainDrivenDesignStep())
 	)
