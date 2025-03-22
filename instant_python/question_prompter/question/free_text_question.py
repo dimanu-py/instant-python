@@ -1,11 +1,12 @@
-from dataclasses import dataclass
-
 import questionary
 
 from instant_python.question_prompter.question.question import Question
 
 
-@dataclass(frozen=True)
 class FreeTextQuestion(Question[str]):
+    def __init__(self, key: str, message: str, default: str | None = None) -> None:
+        super().__init__(key, message)
+        self._default = default if default else ""
+    
     def ask(self) -> str:
-        return questionary.text(self.message, default=self.default).ask()
+        return questionary.text(self._message, default=self._default).ask()

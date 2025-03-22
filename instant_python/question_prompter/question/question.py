@@ -1,13 +1,15 @@
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
 
 
-@dataclass(frozen=True)
 class Question[T](ABC):
-    key: str
-    message: str
-    default: str = field(default_factory=str)
+    def __init__(self, key: str, message: str) -> None:
+        self._key = key
+        self._message = message
 
     @abstractmethod
     def ask(self) -> T:
         raise NotImplementedError
+    
+    @property
+    def key(self) -> str:
+        return self._key

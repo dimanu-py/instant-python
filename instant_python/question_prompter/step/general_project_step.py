@@ -31,26 +31,22 @@ class GeneralProjectStep(Step):
             ChoiceQuestion(
                 key="license",
                 message="Select a license",
-                default="MIT",
                 options=["MIT", "Apache", "GPL"],
             ),
             ChoiceQuestion(
                 key="python_version",
                 message="Enter the python version",
-                default="3.13",
                 options=["3.13", "3.12", "3.11", "3.10"],
             ),
             ChoiceQuestion(
                 key="dependency_manager",
                 message="Select a dependency manager",
-                default="uv",
                 options=["uv", "pdm"],
             ),
-	        BooleanQuestion(key="git", message="Do you want to initialize a git repository?"),
+	        BooleanQuestion(key="git", message="Do you want to initialize a git repository?", default=True),
 	        ChoiceQuestion(
                 key="template",
                 message="Select a template",
-                default="domain_driven_design",
                 options=["domain_driven_design", "clean_architecture", "standard_project"],
             ),
         ]
