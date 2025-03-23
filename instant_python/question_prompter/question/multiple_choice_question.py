@@ -1,13 +1,13 @@
-from dataclasses import dataclass, field
-
 import questionary
 
 from instant_python.question_prompter.question.question import Question
 
 
-@dataclass(frozen=True)
 class MultipleChoiceQuestion(Question[list[str]]):
-    options: list[str] = field(default_factory=list)
-
-    def ask(self) -> list[str]:
-        return questionary.checkbox(self.message, choices=self.options).ask()
+    def __init__(self, key: str, message: str, options: list[str]) -> None:
+        super().__init__(key, message)
+        self._options = options
+    
+    def ask(self) -> dict[str, list[str]]:
+        answer = questionary.checkbox(self._message, choices=self._options).ask()
+        return {self._key: answer}

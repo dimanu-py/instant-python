@@ -1,4 +1,3 @@
-from instant_python.question_prompter.question.boolean_question import BooleanQuestion
 from instant_python.question_prompter.question.choice_question import ChoiceQuestion
 from instant_python.question_prompter.question.free_text_question import FreeTextQuestion
 from instant_python.question_prompter.step.steps import Step
@@ -31,22 +30,21 @@ class GeneralProjectStep(Step):
             ChoiceQuestion(
                 key="license",
                 message="Select a license",
-                default="MIT",
                 options=["MIT", "Apache", "GPL"],
             ),
-	        BooleanQuestion(key="git", message="Do you want to initialize a git repository?"),
-	        ChoiceQuestion(
-                key="template",
-                message="Select a template",
-                default="domain_driven_design",
-                options=["domain_driven_design", "clean_architecture", "standard_project"],
+            ChoiceQuestion(
+                key="python_version",
+                message="Enter the python version",
+                options=["3.13", "3.12", "3.11", "3.10"],
+            ),
+            ChoiceQuestion(
+                key="dependency_manager",
+                message="Select a dependency manager",
+                options=["uv", "pdm"],
             ),
         ]
 
     def run(self, answers_so_far: dict[str, str]) -> dict[str, str]:
         for question in self._questions:
-            answers_so_far[question.key] = question.ask()
+            answers_so_far.update(question.ask())
         return answers_so_far
-
-    def should_not_ask(self, answers_so_far: dict[str, str]) -> bool:
-        return False

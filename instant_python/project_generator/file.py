@@ -1,7 +1,7 @@
 from pathlib import Path
 
+from instant_python.project_generator.default_template_manager import DefaultTemplateManager
 from instant_python.project_generator.node import Node
-from instant_python.project_generator.template_manager import TemplateManager
 
 
 class File(Node):
@@ -9,7 +9,7 @@ class File(Node):
     def __init__(self, name: str, extension: str) -> None:
         self._file_name = f"{name.split("/")[-1]}{extension}"
         self._template_path = f"boilerplate/{name}{extension}"
-        self._template_manager = TemplateManager()
+        self._template_manager = DefaultTemplateManager()
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(name={self._file_name})"

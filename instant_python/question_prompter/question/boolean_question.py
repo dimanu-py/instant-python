@@ -1,13 +1,13 @@
-from dataclasses import dataclass, field
-
 import questionary
 
 from instant_python.question_prompter.question.question import Question
 
 
-@dataclass(frozen=True)
 class BooleanQuestion(Question[bool]):
-    default: bool = field(default=True)
+    def __init__(self, key: str, message: str, default: bool) -> None:
+        super().__init__(key, message)
+        self._default = default
 
-    def ask(self) -> bool:
-        return questionary.confirm(self.message, default=self.default).ask()
+    def ask(self) -> dict[str, bool]:
+        answer = questionary.confirm(self._message, default=self._default).ask()
+        return {self._key: answer}

@@ -157,6 +157,7 @@ version = "0.8.0"
 source = { editable = "." }
 dependencies = [
     { name = "jinja2" },
+    { name = "pyyaml" },
     { name = "questionary" },
     { name = "typer" },
 ]
@@ -174,6 +175,7 @@ git = [
 [package.metadata]
 requires-dist = [
     { name = "jinja2", specifier = ">=3.1.5" },
+    { name = "pyyaml", specifier = ">=6.0.2" },
     { name = "questionary", specifier = ">=2.1.0" },
     { name = "typer", specifier = ">=0.15.1" },
 ]

@@ -9,8 +9,6 @@ class QuestionWizard:
 
     def run(self) -> UserRequirements:
         for step in self._steps:
-            if step.should_not_ask(self._answers):
-                continue
             answer = step.run(self._answers)
             self._answers.update(answer)
 

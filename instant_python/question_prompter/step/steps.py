@@ -7,10 +7,6 @@ class Step(ABC):
     def run(self, answers_so_far: dict[str, str]) -> dict[str, str]:
         raise NotImplementedError
 
-    @abstractmethod
-    def should_not_ask(self, answers_so_far: dict[str, str]) -> bool:
-        raise NotImplementedError
-
 
 class Steps:
     def __init__(self, *step: Step) -> None:
