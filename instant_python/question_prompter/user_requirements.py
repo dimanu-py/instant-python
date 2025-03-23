@@ -14,7 +14,7 @@ class UserRequirements:
     author: str
     python_version: str
     dependency_manager: str
-    git: bool
+    git: bool = field(default=False)
     source_name: str = field(default_factory=str)
     template: str = field(default_factory=str)
     git_email: str = field(default_factory=str)
