@@ -3,6 +3,7 @@ import typer
 from instant_python.installer.dependency_manager_factory import DependencyManagerFactory
 from instant_python.installer.git_configurer import GitConfigurer
 from instant_python.installer.installer import Installer
+from instant_python.project_generator.custom_template_manager import CustomTemplateManager
 from instant_python.project_generator.default_template_manager import (
     DefaultTemplateManager,
 )
@@ -18,6 +19,40 @@ from instant_python.question_prompter.step.steps import Steps
 from instant_python.question_prompter.step.template_step import TemplateStep
 
 app = typer.Typer()
+
+
+@app.command("template", help="Generate a project using a custom template")
+def create_folder_structure_from_template(template_name: str) -> None:
+    wizard = QuestionWizard(steps=Steps(
+        GeneralProjectStep(),
+        GitStep(),
+        DependenciesStep(),
+    ))
+    user_requirements = wizard.run()
+    user_requirements.save_in_memory()
+    
+    project_generator = ProjectGenerator(
+        folder_tree=FolderTree(user_requirements.project_slug),
+        template_manager=CustomTemplateManager(template_name),
+    )
+    project_generator.generate()
+
+    installer = Installer(
+        dependency_manager=DependencyManagerFactory.create(
+            user_requirements.dependency_manager, project_generator.path
+        )
+    )
+    installer.perform_installation(
+        user_requirements.python_version, user_requirements.dependencies
+    )
+
+    if user_requirements.git:
+        git_configurer = GitConfigurer(project_generator.path)
+        git_configurer.configure(
+            user_requirements.git_email, user_requirements.git_user_name
+        )
+
+    user_requirements.remove()
 
 
 @app.command(
