@@ -12,10 +12,14 @@ class ConditionalQuestion:
     def ask(self) -> dict[str, str]:
         base_answer = self._base_question.ask()
 
-        if base_answer != self._condition:
+        if self._base_answer_does_not_satisfies_condition(base_answer):
             return base_answer
 
         answers = base_answer
         for question in self._subquestions:
             answers.update(question.ask())
         return answers
+
+    def _base_answer_does_not_satisfies_condition(self, base_answer: dict[str, str]) -> bool:
+        answer_value = next(iter(base_answer.values()))
+        return answer_value != self._condition
