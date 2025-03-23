@@ -13,7 +13,7 @@ from instant_python.question_prompter.step.template_step import TemplateStep
 app = typer.Typer()
 
 
-@app.command("template", help="Pass a custom template folder structure")
+@app.command("template", help="Pass a custom template folder structure", hidden=True)
 def create_folder_structure_from_template(template_name: str) -> None:
 	project_name = FreeTextQuestion(
 		key="project_slug",
