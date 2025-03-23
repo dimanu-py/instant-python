@@ -11,6 +11,7 @@ from instant_python.project_generator.folder_tree import FolderTree
 from instant_python.project_generator.project_generator import ProjectGenerator
 from instant_python.question_prompter.question_wizard import QuestionWizard
 from instant_python.question_prompter.step.dependencies_step import DependenciesStep
+from instant_python.question_prompter.step.general_custom_template_project_step import GeneralCustomTemplateProjectStep
 from instant_python.question_prompter.step.general_project_step import (
     GeneralProjectStep,
 )
@@ -24,7 +25,7 @@ app = typer.Typer()
 @app.command("template", help="Generate a project using a custom template")
 def create_folder_structure_from_template(template_name: str) -> None:
     wizard = QuestionWizard(steps=Steps(
-        GeneralProjectStep(),
+        GeneralCustomTemplateProjectStep(),
         GitStep(),
         DependenciesStep(),
     ))
