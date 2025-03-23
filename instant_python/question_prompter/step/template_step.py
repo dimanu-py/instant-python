@@ -49,7 +49,7 @@ class TemplateStep(Step):
         template = self._questions[0].ask()
         answers_so_far[self._questions[0].key] = template
         if template == "domain_driven_design":
-            for question in self._questions[1:3]:
+            for question in self._questions[1:]:
                 answers_so_far[question.key] = question.ask()
         else:
             for question in self._questions[3:]:
