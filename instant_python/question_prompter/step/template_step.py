@@ -56,6 +56,3 @@ class TemplateStep(Step):
                 answers_so_far[question.key] = question.ask()
             
         return answers_so_far
-
-    def should_not_ask(self, answers_so_far: dict[str, str]) -> bool:
-        raise NotImplementedError

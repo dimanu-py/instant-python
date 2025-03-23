@@ -1,5 +1,3 @@
-import questionary
-
 from instant_python.question_prompter.question.boolean_question import BooleanQuestion
 from instant_python.question_prompter.question.free_text_question import FreeTextQuestion
 from instant_python.question_prompter.step.steps import Step
@@ -22,6 +20,3 @@ class GitStep(Step):
         for question in self._questions[1:]:
             answers_so_far[question.key] = question.ask()
         return answers_so_far
-
-    def should_not_ask(self, answers_so_far: dict[str, str]) -> bool:
-        return False
