@@ -1,3 +1,51 @@
+## 0.10.0 (2025-03-23)
+
+### ✨ Features
+
+- **prompter**: implement general project step that will only be used when custom template is passed
+- **cli**: add template command for project_cli.py to let users create a project using a custom template
+- **prompter**: implement ConditionalQuestion
+- **prompter**: implement TemplateStep to group all questions related to default template management
+- **project-generator**: implement CustomTemplateManager to manage when user passes a custom template file
+- **project-generator**: create TemplateManager interface
+- **cli**: add folder command to allow users to just generate the folder structure of the project
+
+### 🐛 Bug Fixes
+
+- **cli**: temporarily disable template commands
+- **prompter**: extract the value of the base answer to check it with condition
+- **prompter**: remove init argument from year field
+- **cli**: access project_name value when using custom template command
+- **prompter**: set default value for git field in UserRequirements to avoid failing when executing folder command
+- **prompter**: include last question in TemplateStep if selected template is domain_driven_design
+- **project-generator**: instantiate DefaultTemplateManager inside File class
+
+### ♻️ Code Refactoring
+
+- **prompter**: update answers dictionary instead of add manually question key and answer
+- **prompter**: return a dictionary with the key of the question and the answer instead of just the answer
+- **cli**: modify cli help commands and descriptions
+- **prompter**: modify default values for UserRequirements
+- **cli**: use new GeneralCustomTemplateProjectStep in template command
+- **cli**: add name to command and rename command function
+- **prompter**: substitute template and ddd specific questions in TemplateStep for ConditionalQuestion
+- **prompter**: substitute set of question in GitStep for ConditionalQuestion
+- **prompter**: remove should_not_ask method from Step interface
+- **prompter**: remove DomainDrivenDesignStep
+- **cli**: remove DDD step and add TemplateStep
+- **prompter**: remove boilerplate question from DependenciesStep
+- **prompter**: remove template related questions from GeneralProjectStep
+- **prompter**: move git question to GitStep and remove auxiliar continue_git question
+- **cli**: rename function names for better clarity
+- **cli**: move new command to its own typer app
+- **cli**: move folder command to its own typer app and separate the app in two commands
+- **project-generator**: let DefaultTemplateManager implement TemplateManager interface
+- **project-generator**: rename TemplateManager to DefaultTemplateManager
+- **cli**: add template argument to both command to begin allow the user to pass a custom path for the project structure
+- **cli**: add help description to both commands
+- **prompter**: move python and dependency manager from dependencies step to general project step as it's information that is needed in general to fill all files information
+- **cli**: rename generate_project command to new
+
 ## 0.9.0 (2025-03-14)
 
 ### ✨ Features
