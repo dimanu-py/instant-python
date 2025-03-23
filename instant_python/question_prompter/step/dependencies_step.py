@@ -7,21 +7,6 @@ from instant_python.question_prompter.step.steps import Step
 class DependenciesStep(Step):
     def __init__(self) -> None:
         self._questions = [
-            MultipleChoiceQuestion(
-                key="built_in_features",
-                message="Select the built-in features you want to include (fastapi_application option requires logger)",
-                options=[
-                    "value_objects",
-                    "github_actions",
-                    "makefile",
-                    "synchronous_sqlalchemy",
-                    "logger",
-                    "event_bus",
-                    "async_sqlalchemy",
-                    "async_alembic",
-                    "fastapi_application",
-                ],
-            ),
             DependenciesQuestion(
                 key="dependencies",
                 message="Do you want to install any dependencies?",
