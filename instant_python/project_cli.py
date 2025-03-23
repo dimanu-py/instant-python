@@ -21,17 +21,16 @@ app = typer.Typer()
 
 
 @app.command(
-    help="Generate a full project, including folders, dependencies, manager, boilerplate etc."
+    "new",
+    help="Generate a full project, including folders, dependencies, manager, boilerplate etc.",
 )
-def new() -> None:
+def create_full_project() -> None:
     wizard = QuestionWizard(
-        steps=(
-            Steps(
-                GeneralProjectStep(),
-                GitStep(),
-                TemplateStep(),
-                DependenciesStep(),
-            )
+        steps=Steps(
+            GeneralProjectStep(),
+            GitStep(),
+            TemplateStep(),
+            DependenciesStep(),
         )
     )
     user_requirements = wizard.run()
