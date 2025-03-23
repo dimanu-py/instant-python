@@ -22,7 +22,7 @@ from instant_python.question_prompter.step.template_step import TemplateStep
 app = typer.Typer()
 
 
-@app.command("template", help="Generate a project using a custom template")
+@app.command("template", help="Pass a custom template folder structure")
 def create_folder_structure_from_template(template_name: str) -> None:
     wizard = QuestionWizard(steps=Steps(
         GeneralCustomTemplateProjectStep(),
@@ -58,7 +58,7 @@ def create_folder_structure_from_template(template_name: str) -> None:
 
 @app.command(
     "new",
-    help="Generate a full project, including folders, dependencies, manager, boilerplate etc.",
+    help="Use default built-in template to create a new project",
 )
 def create_full_project() -> None:
     wizard = QuestionWizard(
