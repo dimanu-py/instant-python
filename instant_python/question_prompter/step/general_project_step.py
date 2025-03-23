@@ -1,4 +1,3 @@
-from instant_python.question_prompter.question.boolean_question import BooleanQuestion
 from instant_python.question_prompter.question.choice_question import ChoiceQuestion
 from instant_python.question_prompter.question.free_text_question import FreeTextQuestion
 from instant_python.question_prompter.step.steps import Step
@@ -43,7 +42,6 @@ class GeneralProjectStep(Step):
                 message="Select a dependency manager",
                 options=["uv", "pdm"],
             ),
-	        BooleanQuestion(key="git", message="Do you want to initialize a git repository?", default=True),
 	        ChoiceQuestion(
                 key="template",
                 message="Select a template",
