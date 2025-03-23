@@ -23,7 +23,7 @@ class UserRequirements:
     bounded_context: str = field(default_factory=str)
     aggregate_name: str = field(default_factory=str)
     built_in_features: list[str] = field(default_factory=list)
-    year: int = field(init=False, default=datetime.now().year)
+    year: int = field(default=datetime.now().year)
 
     def __post_init__(self) -> None:
         self._file_path = "user_requirements.yml"
