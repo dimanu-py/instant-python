@@ -8,5 +8,6 @@ class MultipleChoiceQuestion(Question[list[str]]):
         super().__init__(key, message)
         self._options = options
     
-    def ask(self) -> list[str]:
-        return questionary.checkbox(self._message, choices=self._options).ask()
+    def ask(self) -> dict[str, list[str]]:
+        answer = questionary.checkbox(self._message, choices=self._options).ask()
+        return {self._key: answer}

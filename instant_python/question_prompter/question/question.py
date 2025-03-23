@@ -7,7 +7,7 @@ class Question[T](ABC):
         self._message = message
 
     @abstractmethod
-    def ask(self) -> T:
+    def ask(self) -> dict[str, T]:
         raise NotImplementedError
     
     @property

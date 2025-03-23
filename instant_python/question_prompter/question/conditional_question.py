@@ -13,9 +13,9 @@ class ConditionalQuestion:
         base_answer = self._base_question.ask()
 
         if base_answer != self._condition:
-            return {self._base_question.key: base_answer}
+            return base_answer
 
-        answers = {self._base_question.key: base_answer}
+        answers = base_answer
         for question in self._subquestions:
-            answers[question.key] = question.ask()
+            answers.update(question.ask())
         return answers

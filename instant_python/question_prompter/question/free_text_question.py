@@ -8,5 +8,6 @@ class FreeTextQuestion(Question[str]):
         super().__init__(key, message)
         self._default = default if default else ""
     
-    def ask(self) -> str:
-        return questionary.text(self._message, default=self._default).ask()
+    def ask(self) -> dict[str, str]:
+        answer = questionary.text(self._message, default=self._default).ask()
+        return {self._key: answer}

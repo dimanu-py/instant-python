@@ -9,9 +9,10 @@ class ChoiceQuestion(Question[str]):
         self._default = options[0] if options else ""
         self._options = options if options else []
     
-    def ask(self) -> str:
-        return questionary.select(
+    def ask(self) -> dict[str, str]:
+        answer = questionary.select(
             self._message,
             choices=self._options,
             default=self._default,
         ).ask()
+        return {self._key: answer}

@@ -8,5 +8,6 @@ class BooleanQuestion(Question[bool]):
         super().__init__(key, message)
         self._default = default
 
-    def ask(self) -> bool:
-        return questionary.confirm(self._message, default=self._default).ask()
+    def ask(self) -> dict[str, bool]:
+        answer = questionary.confirm(self._message, default=self._default).ask()
+        return {self._key: answer}

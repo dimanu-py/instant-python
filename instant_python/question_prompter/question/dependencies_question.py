@@ -9,7 +9,7 @@ class DependenciesQuestion(Question[list[str]]):
     def __init__(self, key: str, message: str) -> None:
         super().__init__(key, message)
 
-    def ask(self) -> list[str]:
+    def ask(self) -> dict[str, list[str]]:
         dependencies = []
         while True:
             user_wants_to_install_dependencies = BooleanQuestion(
@@ -40,4 +40,4 @@ class DependenciesQuestion(Question[list[str]]):
             else:
                 print("Let's try again.")
 
-        return dependencies
+        return {self._key: dependencies}
