@@ -42,11 +42,6 @@ class GeneralProjectStep(Step):
                 message="Select a dependency manager",
                 options=["uv", "pdm"],
             ),
-	        ChoiceQuestion(
-                key="template",
-                message="Select a template",
-                options=["domain_driven_design", "clean_architecture", "standard_project"],
-            ),
         ]
 
     def run(self, answers_so_far: dict[str, str]) -> dict[str, str]:
