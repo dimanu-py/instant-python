@@ -41,5 +41,5 @@ class GeneralCustomTemplateProjectStep(Step):
 
 	def run(self, answers_so_far: dict[str, str]) -> dict[str, str]:
 		for question in self._questions:
-			answers_so_far[question.key] = question.ask()
+			answers_so_far.update(question.ask())
 		return answers_so_far
