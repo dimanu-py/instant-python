@@ -1,4 +1,7 @@
 from instant_python.question_prompter.question.choice_question import ChoiceQuestion
+from instant_python.question_prompter.question.conditional_question import (
+    ConditionalQuestion,
+)
 from instant_python.question_prompter.question.free_text_question import (
     FreeTextQuestion,
 )
@@ -6,28 +9,12 @@ from instant_python.question_prompter.question.multiple_choice_question import (
     MultipleChoiceQuestion,
 )
 from instant_python.question_prompter.step.steps import Step
+from instant_python.question_prompter.template_types import TemplateTypes
 
 
 class TemplateStep(Step):
     def __init__(self) -> None:
         self._questions = [
-            ChoiceQuestion(
-                key="template",
-                message="Select a template",
-                options=[
-                    "domain_driven_design",
-                    "clean_architecture",
-                    "standard_project",
-                ],
-            ),
-            FreeTextQuestion(
-                key="bounded_context",
-                message="Enter the bounded context name",
-                default="backoffice",
-            ),
-            FreeTextQuestion(
-                key="aggregate_name", message="Enter the aggregate name", default="user"
-            ),
             MultipleChoiceQuestion(
                 key="built_in_features",
                 message="Select the built-in features you want to include (fastapi_application option requires logger)",
@@ -43,16 +30,34 @@ class TemplateStep(Step):
                     "fastapi_application",
                 ],
             ),
+            ConditionalQuestion(
+                base_question=ChoiceQuestion(
+                    key="template",
+                    message="Select a template",
+                    options=[
+                        "domain_driven_design",
+                        "clean_architecture",
+                        "standard_project",
+                    ],
+                ),
+                subquestions=[
+                    FreeTextQuestion(
+                        key="bounded_context",
+                        message="Enter the bounded context name",
+                        default="backoffice",
+                    ),
+                    FreeTextQuestion(
+                        key="aggregate_name",
+                        message="Enter the aggregate name",
+                        default="user",
+                    ),
+                ],
+                condition=TemplateTypes.DDD,
+            ),
         ]
 
     def run(self, answers_so_far: dict[str, str]) -> dict[str, str]:
-        template = self._questions[0].ask()
-        answers_so_far[self._questions[0].key] = template
-        if template == "domain_driven_design":
-            for question in self._questions[1:]:
-                answers_so_far[question.key] = question.ask()
-        else:
-            for question in self._questions[3:]:
-                answers_so_far[question.key] = question.ask()
-            
+        for question in self._questions:
+            answers_so_far.update(question.ask())
+
         return answers_so_far
