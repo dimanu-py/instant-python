@@ -6,9 +6,9 @@ from instant_python.project_generator.folder_tree import FolderTree
 from instant_python.project_generator.project_generator import ProjectGenerator
 from instant_python.question_prompter.question.free_text_question import FreeTextQuestion
 from instant_python.question_prompter.question_wizard import QuestionWizard
-from instant_python.question_prompter.step.domain_driven_design_step import DomainDrivenDesignStep
 from instant_python.question_prompter.step.general_project_step import GeneralProjectStep
 from instant_python.question_prompter.step.steps import Steps
+from instant_python.question_prompter.step.template_step import TemplateStep
 
 app = typer.Typer()
 
@@ -31,7 +31,7 @@ def create_folder_structure_from_template(template_name: str) -> None:
 @app.command("new", help="Create all the folders and files for a new project")
 def create_default_project_structure() -> None:
 	wizard = QuestionWizard(
-		steps=Steps(GeneralProjectStep(), DomainDrivenDesignStep())
+		steps=Steps(GeneralProjectStep(), TemplateStep())
 	)
 	user_requirements = wizard.run()
 	user_requirements.save_in_memory()

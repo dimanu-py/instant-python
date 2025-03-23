@@ -10,14 +10,12 @@ from instant_python.project_generator.folder_tree import FolderTree
 from instant_python.project_generator.project_generator import ProjectGenerator
 from instant_python.question_prompter.question_wizard import QuestionWizard
 from instant_python.question_prompter.step.dependencies_step import DependenciesStep
-from instant_python.question_prompter.step.domain_driven_design_step import (
-    DomainDrivenDesignStep,
-)
 from instant_python.question_prompter.step.general_project_step import (
     GeneralProjectStep,
 )
 from instant_python.question_prompter.step.git_step import GitStep
 from instant_python.question_prompter.step.steps import Steps
+from instant_python.question_prompter.step.template_step import TemplateStep
 
 app = typer.Typer()
 
@@ -30,8 +28,8 @@ def new() -> None:
         steps=(
             Steps(
                 GeneralProjectStep(),
-                DomainDrivenDesignStep(),
                 GitStep(),
+                TemplateStep(),
                 DependenciesStep(),
             )
         )
