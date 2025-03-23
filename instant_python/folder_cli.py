@@ -21,7 +21,7 @@ def create_folder_structure_from_template(template_name: str) -> None:
 		default="python-project",
 	).ask()
 	project_generator = ProjectGenerator(
-		folder_tree=FolderTree(project_name),
+		folder_tree=FolderTree(project_name["project_slug"]),
 		template_manager=CustomTemplateManager(template_name),
 	)
 
