@@ -1,3 +1,9 @@
+## 0.10.2 (2025-03-24)
+
+### 🐛 Bug Fixes
+
+- **installer**: correct answers when installing dependencies
+
 ## 0.10.1 (2025-03-24)
 
 ### 🐛 Bug Fixes
