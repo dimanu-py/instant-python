@@ -27,12 +27,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Set up Python environment
-        uses: ./.github/actions/python_setup
       - name: Build documentation
+        uses: ./.github/actions/python_setup
         run: mkdocs build
       - name: Deploy to GitHub Pages
-        run: ghp-import -n -p -b gh-pages site
+        uses: ./.github/actions/python_setup
+        run: mkdocs gh-deploy --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
