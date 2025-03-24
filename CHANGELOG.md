@@ -1,3 +1,9 @@
+## 0.10.4 (2025-03-24)
+
+### 🐛 Bug Fixes
+
+- correct pages workflow
+
 ## 0.10.3 (2025-03-24)
 
 ### 🐛 Bug Fixes
