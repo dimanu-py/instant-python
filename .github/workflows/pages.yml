@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - develop
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,13 +30,9 @@ jobs:
       - name: Set up Python environment
         uses: ./.github/actions/python_setup
       - name: Build documentation
-        run: |
-          cd docs
-          make html
+        run: mkdocs build
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/build/html
-          publish_branch: gh-pages
+        run: ghp-import -n -p -b gh-pages site
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       

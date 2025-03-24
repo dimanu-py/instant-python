@@ -25,9 +25,8 @@ ipy = "instant_python.cli:app"
 
 [dependency-groups]
 docs = [
-    "myst-parser>=4.0.1",
-    "sphinx>=8.2.3",
-    "sphinx-wagtail-theme>=6.5.0",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.8",
 ]
 git = [
     "commitizen>=4.2.2",
