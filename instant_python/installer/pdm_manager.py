@@ -34,17 +34,17 @@ class PdmManager(DependencyManager):
         for dependency_name in dependencies:
             self._install_dependency(dependency_name)
 
-    def _install_dependency(self, dependency_name):
+    def _install_dependency(self, dependency_name: str) -> None:
         is_dev = BooleanQuestion(
             key="is_dev",
             message=f"Do you want to install {dependency_name} as a dev dependency?",
             default=False,
-        ).ask()
+        ).ask()["is_dev"]
         add_to_group = BooleanQuestion(
             key="add_to_group",
             message=f"Do you want to install the {dependency_name} inside a group?",
             default=False,
-        ).ask()
+        ).ask()["add_to_group"]
 
         flag = self._generate_flag(add_to_group, is_dev)
 
@@ -63,7 +63,7 @@ class PdmManager(DependencyManager):
         if add_to_group:
             group_name = FreeTextQuestion(
                 key="group_name", message="Enter the name of the group"
-            ).ask()
+            ).ask()["group_name"]
             group_flag += f"--group {group_name}"
         return f"{dev_flag} {group_flag}"
 

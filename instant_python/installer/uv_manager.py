@@ -41,12 +41,12 @@ class UvManager(DependencyManager):
             key="is_dev",
             message=f"Do you want to install {dependency_name} as a dev dependency?",
             default=False,
-        ).ask()
+        ).ask()["is_dev"]
         add_to_group = BooleanQuestion(
             key="add_to_group",
             message=f"Do you want to install the {dependency_name} inside a group?",
             default=False,
-        ).ask()
+        ).ask()["add_to_group"]
 
         flag = self._generate_flag(add_to_group, is_dev)
 
@@ -68,6 +68,6 @@ class UvManager(DependencyManager):
         if add_to_group:
             group_name = FreeTextQuestion(
                 key="group_name", message="Enter the name of the group"
-            ).ask()
+            ).ask()["group_name"]
             flag = f"--group {group_name}"
         return flag
