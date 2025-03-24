@@ -25,14 +25,12 @@ jobs:
   pages:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/python_setup
       - name: Build documentation
-        uses: ./.github/actions/python_setup
-        run: mkdocs build
+        run: uv run mkdocs build
       - name: Deploy to GitHub Pages
-        uses: ./.github/actions/python_setup
-        run: mkdocs gh-deploy --force
+        run: uv run mkdocs gh-deploy --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
