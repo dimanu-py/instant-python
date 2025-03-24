@@ -12,7 +12,7 @@ your project.
 - `ipy folder template <template>`: will allow you to use a custom template where you specify the folder structure
 you want to have.
 
-## Subcommand `new`
+## New
 
 The `new` subcommand will use the default templates that come with the library and that the user can select
 to create the folder structure of the project.
@@ -31,15 +31,15 @@ can check in the [features](features.md) section:
 - Default templates
 - Out of the box implementations (value objects, exceptions, GitHub actions, makefile, logger, FastAPI, SQL Alchemy, Alembic, event bus)
 
-## Subcommand `template`
+## Template
 
 The `template` subcommand will only create the folder structure of the project using a custom template that the user
 provides.
 
-```{important}
-With this option the user will only be able to create directories. No additional configuration will be made and
-no additional files will be created.
-```
+!!! important
+    With this option the user will only be able to create directories. No additional configuration will be made and
+    no additional files will be created.
+
 
 When using this subcommand you would be able to configure the following out of the box implementations that you
 can check in the [features](features.md) section:

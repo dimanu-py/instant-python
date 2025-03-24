@@ -3,10 +3,10 @@
 When using the subcommand `new` with either the `project` or `folder` command, you will be able to configure
 different aspects of your project through a set of questions that will guide you through the process.
 
-```{note}
-Depending on the main command you use, you will be able to configure differnt kind of things. Here
-is an overview of all the options that can be configured.
-```
+!!! note
+    Depending on the main command you use, you will be able to configure differnt kind of things. Here
+    is an overview of all the options that can be configured.
+
 
 ## Project slug
 
@@ -215,9 +215,9 @@ raise a 500 status code, and another handler that catches `DomainError` instance
 - A lifespan that will execute the migrations with alembic when the application starts.
 - A decoupled implementation to model your status codes and http responses.
 
-```{note}
-When selecting this feature, you will need to have the logger boilerplate included.
-```
+!!! info
+    When selecting this feature, you will need to have the logger boilerplate included.
+
 
 ### Asynchronous SQL Alchemy
 
