@@ -1,3 +1,9 @@
+## 0.10.1 (2025-03-24)
+
+### 🐛 Bug Fixes
+
+- **prompter**: modify DependenciesQuestion to not enter an infinite loop of asking the user
+
 ## 0.10.0 (2025-03-23)
 
 ### ✨ Features
