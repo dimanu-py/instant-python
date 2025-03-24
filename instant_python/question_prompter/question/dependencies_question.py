@@ -14,7 +14,7 @@ class DependenciesQuestion(Question[list[str]]):
         while True:
             user_wants_to_install_dependencies = BooleanQuestion(
                 key="keep_asking", message=self._message, default=False
-            ).ask()
+            ).ask()["keep_asking"]
 
             if not user_wants_to_install_dependencies:
                 break
@@ -22,7 +22,7 @@ class DependenciesQuestion(Question[list[str]]):
             dependency = FreeTextQuestion(
                 key="dependency",
                 message="Enter the name of the dependency you want to install",
-            ).ask()
+            ).ask()["dependency"]
 
             if not dependency:
                 print("Dependency name cannot be empty. Let's try again.")
@@ -32,7 +32,7 @@ class DependenciesQuestion(Question[list[str]]):
                 key="dependency_is_correct",
                 message=f"Is '{dependency}' spelled correctly?",
                 default=True,
-            ).ask()
+            ).ask()["dependency_is_correct"]
 
             if dependency_is_correct:
                 print(f"Dependency {dependency} will be installed.")
