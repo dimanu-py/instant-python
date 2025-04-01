@@ -1,10 +1,11 @@
+{% set template_domain_import = "shared.domain"|compute_base_path(template) %}
 import json
 
-from {{ source_name }}.shared.domain.event.domain_event import DomainEvent
-from {{ source_name }}.shared.domain.event.domain_event_subscriber import (
+from {{ source_name }}.{{ template_domain_import }}.event.domain_event import DomainEvent
+from {{ source_name }}.{{ template_domain_import }}.event.domain_event_subscriber import (
     DomainEventSubscriber,
 )
-from {{ source_name }}.shared.domain.exceptions.domain_event_type_not_found import (
+from {{ source_name }}.{{ template_domain_import }}.exceptions.domain_event_type_not_found import (
     DomainEventTypeNotFound,
 )
 
