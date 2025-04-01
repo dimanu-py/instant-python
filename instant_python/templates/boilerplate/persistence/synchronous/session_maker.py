@@ -1,7 +1,8 @@
+{% set template_infra_import = "shared.infra"|compute_base_path(template) %}
 from sqlalchemy import create_engine, Engine
 from sqlalchemy.orm import sessionmaker, Session
 
-from {{ source_name }}.shared.infra.persistence.sqlalchemy.base import (
+from {{ source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.base import (
 	Base,
 )
 

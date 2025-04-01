@@ -1,6 +1,7 @@
+{% set template_infra_import = "shared.infra"|compute_base_path(template) %}
 import asyncio
 
-from {{ source_name }}.shared.infra.persistence.sqlalchemy.postgres_settings import PostgresSettings
+from {{ source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.postgres_settings import PostgresSettings
 from alembic import command
 from alembic.config import Config
 

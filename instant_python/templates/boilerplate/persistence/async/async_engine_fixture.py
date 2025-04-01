@@ -1,9 +1,9 @@
+{% set template_infra_import = "shared.infra"|compute_base_path(template) %}
 from collections.abc import AsyncGenerator
-
 import pytest
 from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 
-from {{ source_name }}.shared.infra.persistence.sqlalchemy.postgres_settings import PostgresSettings
+from {{ source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.postgres_settings import PostgresSettings
 
 
 @pytest.fixture

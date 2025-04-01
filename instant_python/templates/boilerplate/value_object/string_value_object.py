@@ -1,10 +1,11 @@
-from {{ source_name }}.shared.domain.exceptions.incorrect_value_type_error import (
+{% set template_domain_import = "shared.domain"|compute_base_path(template) %}
+from {{ source_name }}.{{ template_domain_import }}.exceptions.incorrect_value_type_error import (
     IncorrectValueTypeError,
 )
-from {{ source_name }}.shared.domain.exceptions.required_value_error import (
+from {{ source_name }}.{{ template_domain_import }}.exceptions.required_value_error import (
     RequiredValueError,
 )
-from {{ source_name }}.shared.domain.value_objects.value_object import ValueObject
+from {{ source_name }}.{{ template_domain_import }}.value_objects.value_object import ValueObject
 
 
 class StringValueObject(ValueObject[str]):

@@ -1,13 +1,15 @@
+{% set template_domain_import = "shared.domain"|compute_base_path(template) %}
+{% set template_infra_import = "shared.infra"|compute_base_path(template) %}
 from typing import Callable
 
 import pika
 from pika.adapters.blocking_connection import BlockingChannel
 
-from {{ source_name }}.shared.domain.event.exchange_type import ExchangeType
-from {{ source_name }}.shared.domain.exceptions.rabbit_mq_connection_not_established_error import (
+from {{ source_name }}.{{ template_domain_import }}.event.exchange_type import ExchangeType
+from {{ source_name }}.{{ template_domain_import }}.exceptions.rabbit_mq_connection_not_established_error import (
     RabbitMqConnectionNotEstablishedError,
 )
-from {{ source_name }}.shared.infra.event.rabbit_mq.rabbit_mq_settings import (
+from {{ source_name }}.{{ template_infra_import }}.event.rabbit_mq.rabbit_mq_settings import (
     RabbitMqSettings,
 )
 

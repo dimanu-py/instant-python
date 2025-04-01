@@ -1,7 +1,8 @@
-from {{ source_name }}.shared.domain.exceptions.invalid_negative_value_error import (
+{% set template_domain_import = "shared.domain"|compute_base_path(template) %}
+from {{ source_name }}.{{ template_domain_import }}.exceptions.invalid_negative_value_error import (
 	InvalidNegativeValueError,
 )
-from {{ source_name }}.shared.domain.value_objects.value_object import ValueObject
+from {{ source_name }}.{{ template_domain_import }}.value_objects.value_object import ValueObject
 
 
 class IntValueObject(ValueObject[int]):

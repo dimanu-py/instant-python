@@ -1,8 +1,10 @@
+{% set template_domain_import = "shared.domain"|compute_base_path(template) %}
+{% set template_infra_import = "shared.infra"|compute_base_path(template) %}
 from fastapi.responses import JSONResponse
 
-from {{ source_name }}.shared.domain.exceptions.domain_error import DomainError
-from {{ source_name }}.shared.infra.http.status_code import StatusCode
-from {{ source_name }}.shared.infra.log.logger import create_logger
+from {{ source_name }}.{{ template_domain_import }}.exceptions.domain_error import DomainError
+from {{ source_name }}.{{ template_infra_import }}.http.status_code import StatusCode
+from {{ source_name }}.{{ template_infra_import }}.log.logger import create_logger
 
 logger = create_logger("logger")
 
