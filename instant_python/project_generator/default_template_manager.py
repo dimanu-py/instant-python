@@ -36,7 +36,7 @@ class DefaultTemplateManager(TemplateManager):
         return self._env.get_template(name)
 
     def _render(self, template: Template) -> str:
-        return template.render(**self._requirements.to_dict())
+        return template.render(**self._requirements.to_dict(), template_types=TemplateTypes)
 
     @staticmethod
     def _load_memory_requirements() -> UserRequirements:
