@@ -1,3 +1,15 @@
+## 0.12.1 (2025-04-06)
+
+### 🐛 Bug Fixes
+
+- **project-generator**: add template types values to be able to use enum in jinja templates
+- **template**: write correct option when fastapi built in feature is selected
+
+### ♻️ Code Refactoring
+
+- **template**: include mypy, git and pytest configuration files only when the user has selected these options
+- **template**: include dependencies depending on user built in features selection
+
 ## 0.12.0 (2025-04-06)
 
 ### ✨ Features
