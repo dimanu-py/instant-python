@@ -3,9 +3,9 @@
   <strong>Start your Python project right away</strong>
 </div>
 <p align="center">
-  <a href="https://dimanu-py.github.io/instant-python/getting_started.html">Getting Started</a>&nbsp;&nbsp;•&nbsp;
-  <a href="https://dimanu-py.github.io/instant-python/guide.html">Guide</a>&nbsp;&nbsp;•&nbsp;
-  <a href="https://dimanu-py.github.io/instant-python/contributing.html">Contributing</a>
+  <a href="https://dimanu-py.github.io/instant-python/getting-started/">Getting Started</a>&nbsp;&nbsp;•&nbsp;
+  <a href="https://dimanu-py.github.io/instant-python/guide">Guide</a>&nbsp;&nbsp;•&nbsp;
+  <a href="https://dimanu-py.github.io/instant-python/contributing">Contributing</a>
 </p>
 <p align="center">
   <img 
@@ -44,7 +44,7 @@ ipy --help
 
 With `instant-python` there is a lot of features you can customize easily so you can start coding on your project
 as soon as possible. An overview of the features is given below, but you can find a more detailed explanation in the
-[documentation](https://dimanu-py.github.io/instant-python/guide/features.html).
+[documentation](https://dimanu-py.github.io/instant-python/guide/features/).
 
 - Project slug: Configure the name of the main folder of your project.
 - Source name: Configure the name of the source code of your project.
