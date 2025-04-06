@@ -1,7 +1,9 @@
+{% set template_domain_import = "shared.domain"|compute_base_path(template) %}
+{% set template_infra_import = "shared.infra"|compute_base_path(template) %}
 from typing import TypeVar
 
-from {{ source_name }}.shared.domain.value_objects.uuid import Uuid
-from {{ source_name }}.shared.infra.persistence.sqlalchemy.base import Base
+from {{ source_name }}.{{ template_domain_import }}.value_objects.uuid import Uuid
+from {{ source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.base import Base
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, asynce_sessionmaker
 
 

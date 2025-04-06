@@ -1,4 +1,5 @@
-from {{ source_name }}.shared.domain.exceptions.domain_error import DomainError
+{% set template_domain_import = "shared.domain"|compute_base_path(template) %}
+from {{ source_name }}.{{ template_domain_import }}.exceptions.domain_error import DomainError
 
 
 class DomainEventTypeNotFound(DomainError):

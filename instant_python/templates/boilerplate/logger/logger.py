@@ -1,9 +1,10 @@
+{% set template_infra_import = "shared.infra"|compute_base_path(template) %}
 import logging
 from datetime import date
 from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
 
-from {{ source_name }}.shared.infra.log.json_formatter import JSONFormatter
+from {{ source_name }}.{{ template_infra_import }}.log.json_formatter import JSONFormatter
 
 
 def create_file_handler(file_name: str, level: int) -> TimedRotatingFileHandler:

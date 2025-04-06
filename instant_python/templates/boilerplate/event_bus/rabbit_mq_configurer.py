@@ -1,11 +1,14 @@
-from {{ source_name }}.shared.domain.event.domain_event import DomainEvent
-from {{ source_name }}.shared.domain.event.domain_event_subscriber import (
+{% set template_domain_import = "shared.domain"|compute_base_path(template) %}
+{% set template_infra_import = "shared.infra"|compute_base_path(template) %}
+
+from {{ source_name }}.{{ template_domain_import }}.event.domain_event import DomainEvent
+from {{ source_name }}.{{ template_domain_import }}.event.domain_event_subscriber import (
     DomainEventSubscriber,
 )
-from {{ source_name }}.shared.infra.event.rabbit_mq.rabbit_mq_connection import (
+from {{ source_name }}.{{ template_infra_import }}.event.rabbit_mq.rabbit_mq_connection import (
     RabbitMqConnection,
 )
-from {{ source_name }}.shared.infra.event.rabbit_mq.rabbit_mq_queue_formatter import (
+from {{ source_name }}.{{ template_infra_import }}.event.rabbit_mq.rabbit_mq_queue_formatter import (
     RabbitMqQueueFormatter,
 )
 
