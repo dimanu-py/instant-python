@@ -1,3 +1,13 @@
+## 0.12.0 (2025-04-06)
+
+### ✨ Features
+
+- **project-generator**: create new custom function to generate import path in templates
+
+### 🐛 Bug Fixes
+
+- **template**: generate correctly the import statement in templates depending on the user selection
+
 ## 0.11.0 (2025-03-24)
 
 ## 0.10.4 (2025-03-24)
