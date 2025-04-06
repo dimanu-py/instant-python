@@ -9,7 +9,7 @@ This command has two subcommands that you can use to create a new project:
 
 - `ipy folder new`: will generate a question wizard that will guide you through all steps to create the folders of 
 your project.
-- `ipy folder template <template>`: will allow you to use a custom template where you specify the folder structure
+- [COMING SOON] `ipy folder template <template>`: will allow you to use a custom template where you specify the folder structure
 you want to have.
 
 ## New
@@ -31,17 +31,25 @@ can check in the [features](features.md) section:
 - Default templates
 - Out of the box implementations (value objects, exceptions, GitHub actions, makefile, logger, FastAPI, SQL Alchemy, Alembic, event bus)
 
-## Template
+[//]: # (## Template)
 
-The `template` subcommand will only create the folder structure of the project using a custom template that the user
-provides.
+[//]: # ()
+[//]: # (The `template` subcommand will only create the folder structure of the project using a custom template that the user)
 
-!!! important
-    With this option the user will only be able to create directories. No additional configuration will be made and
-    no additional files will be created.
+[//]: # (provides.)
 
+[//]: # ()
+[//]: # (!!! important)
 
-When using this subcommand you would be able to configure the following out of the box implementations that you
-can check in the [features](features.md) section:
+[//]: # (    With this option the user will only be able to create directories. No additional configuration will be made and)
 
-- Project slug
+[//]: # (    no additional files will be created.)
+
+[//]: # ()
+[//]: # ()
+[//]: # (When using this subcommand you would be able to configure the following out of the box implementations that you)
+
+[//]: # (can check in the [features]&#40;features.md&#41; section:)
+
+[//]: # ()
+[//]: # (- Project slug)

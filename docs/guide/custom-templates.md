@@ -1,4 +1,4 @@
-# Custom Templates
+# Custom Templates [COMING SOON]
 
 Both commands available with `instant-python` allow the option of providing a custom template to generate
 the project folder structure instead of using the default templates provided by the library.

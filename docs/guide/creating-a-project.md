@@ -15,7 +15,7 @@ This command has two subcommands that you can use to create a new project:
 
 - `ipy project new`: will generate a question wizard that will guide you through all the questions and
 available options you can configure to create your project.
-- `ipy project template <template>`: will generate a question wizard like the previous command, but
+- [COMING SOON] `ipy project template <template>`: will generate a question wizard like the previous command, but
 you could use a custom template to create the folder structure of your project.
 
 ## New
@@ -39,20 +39,33 @@ can check in the [features](features.md) section:
 - Out of the box implementations (value objects, exceptions, GitHub actions, makefile, logger, FastAPI, SQL Alchemy, Alembic, event bus)
 - Install dependencies
 
-## Template
+[//]: # (## Template)
 
-The `template` subcommand will delegate all the logic of creating the folder structure to the custom file that the user
-provides.
+[//]: # ()
+[//]: # (The `template` subcommand will delegate all the logic of creating the folder structure to the custom file that the user)
 
-When using this subcommand you would be able to configure the following out of the box implementations that you
-can check in the [features](features.md) section:
+[//]: # (provides.)
 
-- Project slug
-- Description
-- Version
-- Author
-- License
-- Python version
-- Dependency manager
-- Git
-- Install dependencies
+[//]: # ()
+[//]: # (When using this subcommand you would be able to configure the following out of the box implementations that you)
+
+[//]: # (can check in the [features]&#40;features.md&#41; section:)
+
+[//]: # ()
+[//]: # (- Project slug)
+
+[//]: # (- Description)
+
+[//]: # (- Version)
+
+[//]: # (- Author)
+
+[//]: # (- License)
+
+[//]: # (- Python version)
+
+[//]: # (- Dependency manager)
+
+[//]: # (- Git)
+
+[//]: # (- Install dependencies)

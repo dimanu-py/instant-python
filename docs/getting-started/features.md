@@ -8,14 +8,14 @@ generating a complete project to add some boilerplate or even create your custom
 Create a new project setting up all projects files and configurations.
 
 - `ipy project new`: Create a new project from scratch, including folders, files, dependencies, git configuration and much more.
-- `ipy project template <template>`: Create a new project using a custom template for your folder structure.
+- [COMING SOON] `ipy project template <template>`: Create a new project using a custom template for your folder structure.
 
 ## Folder structure
 
 Generate the folder structure for your project.
 
 - `ipy folder new`: Generate just the folders and files for your project, without any additional installation.
-- `ipy folder template <template>`: Generate the folder structure using a custom template.
+- [COMING SOON] `ipy folder template <template>`: Generate the folder structure using a custom template.
 
 ## Next steps
 

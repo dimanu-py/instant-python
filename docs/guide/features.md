@@ -70,7 +70,7 @@ configured for Python projects.
 There are some project templates already configured that you can use to create your project. These templates
 will create the folder structure of your project following a specific pattern.
 
-<details><summary>Domain Driven Design</summary>
+### Domain Driven Design
  
 Follows DDD pattern and screaming architecture. 
 
@@ -100,9 +100,7 @@ Each aggregate will contain the known _domain_, _application_ and _infra_ layers
       └── api
 ```
 
-</details>
-
-<details><summary>Clean Architecture</summary> 
+### Clean Architecture
 
 Will create your folders following the clean architecture pattern. 
 
@@ -116,16 +114,12 @@ Separates the source code and test folder in _domain_, _application_, _infrastru
 │  └── delivery
 │     └── api
 └── tests
-   ├── application
-   ├── domain
-   ├── infra
-   └── delivery
-      └── api
+   ├── acceptance
+   ├── unit
+   └── integration
 ```
 
-</details>
-
-<details><summary>Standard project</summary>
+### Standard project
 
 Will create your project with the common pattern of source code and test folder.
 
@@ -133,8 +127,6 @@ Will create your project with the common pattern of source code and test folder.
 ├── src
 └── tests
 ```
-
-</details>
 
 ## Out of the box implementations
 
