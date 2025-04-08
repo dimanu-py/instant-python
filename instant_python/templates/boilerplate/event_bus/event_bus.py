@@ -6,5 +6,5 @@ from {{ source_name }}.{{ template_domain_import }}.event.domain_event import Do
 
 class EventBus(ABC):
     @abstractmethod
-    def publish(self, events: list[DomainEvent]) -> None:
+    async def publish(self, events: list[DomainEvent]) -> None:
         raise NotImplementedError
