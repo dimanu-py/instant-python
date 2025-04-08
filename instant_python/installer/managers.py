@@ -1,7 +1,7 @@
-from enum import StrEnum
+from enum import Enum
 
 
-class Managers(StrEnum):
+class Managers(str, Enum):
     PYENV = "pyenv"
     UV = "uv"
     PDM = "pdm"
