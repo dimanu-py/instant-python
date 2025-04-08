@@ -1,9 +1,12 @@
-# Contributing
+# Contributing & Reporting
 
 If you would like to contribute and help to improve this library feel free to fork this project and create a pull request.
 
 You may as well check out the [open issues](https://github.com/dimanu-py/instant-python/issues) to see whether somebody is already 
 addressing your problem or solve your doubts. If not, feel free to open a new issue with any improvement that can be made.
+
+Any bug that you find is welcome to be reported. Please make sure to include as much information as possible and follow the
+correct templates. This will help us to understand the problem and fix it as soon as possible.
 
 If you find this library useful and want to help, you can also give it a star on GitHub or donate in the following link
 
