@@ -18,8 +18,12 @@ class ConditionalQuestion:
             return base_answer
 
         answers = base_answer
-        for question in self._subquestions:
-            answers.update(question.ask())
+        
+        if isinstance(self._subquestions, ConditionalQuestion):
+            answers.update(self._subquestions.ask())
+        else:
+            for question in self._subquestions:
+                answers.update(question.ask())
         return answers
 
     def _base_answer_does_not_satisfies_condition(self, base_answer: dict[str, str]) -> bool:
