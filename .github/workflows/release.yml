@@ -7,6 +7,8 @@ jobs:
   bump-version:
     if: "!startsWith(github.event.head_commit.message, 'bump:')"
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.bump.outputs.new_tag }}
     steps:
       - name: Check out
         uses: actions/checkout@v3
@@ -28,14 +30,22 @@ jobs:
         with:
           token: ${{ secrets.CHANGELOG_TOKEN }}
           fetch-depth: 0
-      - name: Get last tag
-        id: last_tag
-        run: echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
+      - name: Get release tag
+        id: release_tag
+        run: |
+          if [ -z "${{ needs.bump_version.outputs.tag }}" ]; then
+            echo "No tag provided from bump version job. Running fallback command..."
+            fallback_tag=$(git describe --tags --abbrev=0)
+            echo "release_tag=${fallback_tag}" >> $GITHUB_OUTPUT
+          else
+            echo "Using tag provided from bump version job."
+            echo "release_tag=${{ needs.bump_version.outputs.tag }}" >> $GITHUB_OUTPUT
+          fi
 
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.CHANGELOG_TOKEN }}
-          tag: ${{ steps.last_tag.outputs.tag }}
-          name: Release ${{ steps.last_tag.outputs.tag }}
+          tag: ${{ steps.determine_tag.outputs.release_tag }}
+          name: Release ${{ steps.determine_tag.outputs.release_tag }}
           bodyFile: CHANGELOG.md
