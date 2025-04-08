@@ -1,3 +1,21 @@
+## 0.1.1 (2025-04-08)
+
+### 🐛 Bug Fixes
+
+- **template**: correct typo in ExchangeType enum declaration
+- **template**: correct typo on TypeVar declaration
+
+### ♻️ Code Refactoring
+
+- **question**: use old generic type syntax to keep compatibility with old python versions
+- **template**: update boilerplates so they can adhere to correct python versions syntax
+- **project-generator**: standardize path separator in file name construction
+- **installer**: remove unused enum OperatingSystems
+- **prompter**: change TemplateTypes class to inherit from str and Enum for improved compatibility
+- **project-generator**: change NodeType class to inherit from str and Enum for improved compatibility
+- **installer**: change Managers class to inherit from str and Enum for better compatibility
+- **project-generator**: remove override typing decorator to allow lower python versions compatibility
+
 ## 0.1.0 (2025-04-06)
 
 ### 🐛 Bug Fixes
