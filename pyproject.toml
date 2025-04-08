@@ -9,7 +9,7 @@ description = "Python automatic project generator"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [{name = "dimanu-py", email = "diegomtz126@gmail.com"}]
-requires-python = ">=3.12"
+requires-python = ">=3.9"
 dependencies = [
     "typer>=0.15.1",
     "jinja2>=3.1.5",
@@ -30,4 +30,8 @@ docs = [
 ]
 git = [
     "commitizen>=4.2.2",
+]
+lint = [
+    "tox>=4.25.0",
+    "vermin>=1.6.0",
 ]
