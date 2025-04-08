@@ -17,12 +17,11 @@ class TemplateStep(Step):
         self._questions = [
             MultipleChoiceQuestion(
                 key="built_in_features",
-                message="Select the built-in features you want to include (fastapi_application option requires logger)",
+                message="Select the built-in features you want to include",
                 options=[
                     "value_objects",
                     "github_actions",
                     "makefile",
-                    "synchronous_sqlalchemy",
                     "logger",
                     "event_bus",
                     "async_sqlalchemy",
