@@ -33,6 +33,7 @@ class UvManager(DependencyManager):
         print(f">>> Python {version} installed successfully")
 
     def install_dependencies(self, dependencies: list[str]) -> None:
+        self._create_virtual_environment()
         for dependency_name in dependencies:
             self._install_dependency(dependency_name)
 
@@ -71,3 +72,13 @@ class UvManager(DependencyManager):
             ).ask()["group_name"]
             flag = f"--group {group_name}"
         return flag
+
+    def _create_virtual_environment(self) -> None:
+        command = f"{self._uv} sync"
+        subprocess.run(
+            command,
+            shell=True,
+            check=True,
+            cwd=self._project_directory,
+            stdout=subprocess.DEVNULL,
+        )

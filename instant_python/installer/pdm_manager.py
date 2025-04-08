@@ -31,6 +31,7 @@ class PdmManager(DependencyManager):
         print(f">>> Python {version} installed successfully")
 
     def install_dependencies(self, dependencies: list[str]) -> None:
+        self._create_virtual_environment()
         for dependency_name in dependencies:
             self._install_dependency(dependency_name)
 
@@ -67,6 +68,12 @@ class PdmManager(DependencyManager):
             group_flag += f"--group {group_name}"
         return f"{dev_flag} {group_flag}"
 
-
-
-
+    def _create_virtual_environment(self) -> None:
+        command = f"{self._pdm} install"
+        subprocess.run(
+            command,
+            shell=True,
+            check=True,
+            cwd=self._project_directory,
+            stdout=subprocess.DEVNULL,
+        )
