@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "instant-python"
 version = "0.2.0"
-description = "Python automatic project generator"
+description = "Instant boilerplate generation for Python projects"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [{name = "dimanu-py", email = "diegomtz126@gmail.com"}]
