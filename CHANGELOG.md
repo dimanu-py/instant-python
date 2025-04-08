@@ -1,3 +1,28 @@
+## 0.2.0 (2025-04-08)
+
+### ✨ Features
+
+- **template**: add new rabbit mq error when user selects event bus built in feature
+- **template**: create rabbit_mq_connection_not_established_error.py boilerplate
+
+### 🐛 Bug Fixes
+
+- **template**: correct domain event type not found error import and class name
+- **template**: set event bus publish method async
+- **template**: correct imports in value objects boilerplate
+
+### ♻️ Code Refactoring
+
+- **installer**: add virtual environment creation before installing dependencies
+- **template**: conditionally include bounded context based on specify_bounded_context field
+- **template**: add specify_bounded_context field to user requirements
+- **prompter**: be able to execute nested conditional questions
+- **template**: update subquestions structure to use ConditionalQuestion for bounded context specification
+- **prompter**: extend ConditionalQuestion subquestions type hint
+- **prompter**: remove note when prompting built in features for the user to select and remove temporarily synch sql alchemy option
+- **template**: modify project structure templates to include logger and alembic migrator automatically if fastapi application is selected
+- **template**: modify DomainEventSubscriber boilerplate to follow generic type syntax depending on python version
+
 ## 0.1.1 (2025-04-08)
 
 ### 🐛 Bug Fixes
