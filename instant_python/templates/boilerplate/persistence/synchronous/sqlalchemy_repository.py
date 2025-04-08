@@ -1,6 +1,10 @@
 {% set template_domain_import = "shared.domain"|compute_base_path(template) %}
 {% set template_infra_import = "shared.infra"|compute_base_path(template) %}
-from typing import Type, TypeVar
+{% if python_version in ["3.13", "3.12", "3.11"] %}
+from typing import TypeVar
+{% else %}
+from typing import TypeVar, Generic
+{% endif %}
 
 from {{ source_name }}.{{ template_domain_import }}.value_objects.uuid import Uuid
 from {{ source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.base import Base
@@ -9,10 +13,13 @@ from {{ source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.sessio
 )
 
 Entity = TypeVar("Entity")
-
-
-class SqlAlchemyRepository[Model: Base]:
-	_model_class: Type[Model]
+{% if python_version in ["3.13", "3.12", "3.11"] %}
+class SqlAlchemyRepository[Model: Base]:	
+{% else %}
+Model = TypeVar("Model", bound=Base)
+class SqlAlchemyRepository(Generic[Model]):
+{% endif %}
+	_model_class: type[Model]
 	_session_maker: SessionMaker
 
 	def __init__(self, session_maker: SessionMaker, model_class: Type[Model]) -> None:
