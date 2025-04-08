@@ -20,6 +20,7 @@ class UserRequirements:
     git_email: str = field(default_factory=str)
     git_user_name: str = field(default_factory=str)
     dependencies: list[str] = field(default_factory=list)
+    specify_bounded_context: bool = field(default=False)
     bounded_context: str = field(default_factory=str)
     aggregate_name: str = field(default_factory=str)
     built_in_features: list[str] = field(default_factory=list)
