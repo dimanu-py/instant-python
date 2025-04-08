@@ -5,8 +5,8 @@ from {{ source_name }}.{{ template_domain_import }}.event.domain_event import Do
 from {{ source_name }}.{{ template_domain_import }}.event.domain_event_subscriber import (
     DomainEventSubscriber,
 )
-from {{ source_name }}.{{ template_domain_import }}.exceptions.domain_event_type_not_found import (
-    DomainEventTypeNotFound,
+from {{ source_name }}.{{ template_domain_import }}.exceptions.domain_event_type_not_found_error import (
+    DomainEventTypeNotFoundError,
 )
 
 
@@ -23,6 +23,6 @@ class DomainEventJsonDeserializer:
         event_class = self._events_mapping.get(content["data"]["type"])
 
         if not event_class:
-            raise DomainEventTypeNotFound(content["data"]["type"])
+            raise DomainEventTypeNotFoundError(content["data"]["type"])
 
         return event_class(**content["data"]["attributes"])

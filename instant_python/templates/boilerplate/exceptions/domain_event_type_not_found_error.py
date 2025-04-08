@@ -2,7 +2,7 @@
 from {{ source_name }}.{{ template_domain_import }}.exceptions.domain_error import DomainError
 
 
-class DomainEventTypeNotFound(DomainError):
+class DomainEventTypeNotFoundError(DomainError):
 	def __init__(self, name: str) -> None:
 		self._message = f"Event type {name} not found among subscriber."
 		self._type = "domain_event_type_not_found"
