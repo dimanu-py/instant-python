@@ -23,10 +23,9 @@ class ValueObject[T](ABC):
 		return self.value == other.value
 {% else %}
 from abc import ABC, abstractmethod
-from typing import TyperVar, Generic
+from typing import TypeVar, Generic
 
-T = TyperVar("T")
-
+T = TypeVar("T")
 
 class ValueObject(Generic[T], ABC):
 	_value: T
