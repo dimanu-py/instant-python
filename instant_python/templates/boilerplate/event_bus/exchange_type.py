@@ -7,7 +7,7 @@ class ExchangeType(StrEnum):
 from enum import Enum
 
 
-class ExhangeType(str, Enum):
+class ExchangeType(str, Enum):
 {% endif %}
     TOPIC = "topic"
     DIRECT = "direct"
