@@ -1,0 +1,43 @@
+name: Generate Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bump-version:
+    if: "!startsWith(github.event.head_commit.message, 'bump:')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.CHANGELOG_TOKEN }}
+          fetch-depth: 0
+
+      - name: Bump version and update changelog
+        uses: commitizen-tools/commitizen-action@master
+        with:
+          github_token: ${{ secrets.CHANGELOG_TOKEN }}
+
+  create-release:
+    needs: bump-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.CHANGELOG_TOKEN }}
+          fetch-depth: 0
+      - name: Get last tag
+        id: last_tag
+        run: echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.CHANGELOG_TOKEN }}
+          tag: ${{ steps.last_tag.outputs.tag }}
+          name: Release ${{ steps.last_tag.outputs.tag }}
+          bodyFile: CHANGELOG.md
