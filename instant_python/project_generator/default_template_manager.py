@@ -1,5 +1,3 @@
-from typing import override
-
 import yaml
 from jinja2 import Environment, Template, PackageLoader
 
@@ -20,7 +18,6 @@ class DefaultTemplateManager(TemplateManager):
         self._env.filters["is_in"] = is_in
         self._env.filters["compute_base_path"] = compute_base_path
 
-    @override
     def get_project(self, template_name: str) -> dict:
         template = self._get_template(
             f"{template_name}/{self._requirements.template}/main_structure.yml.j2"
