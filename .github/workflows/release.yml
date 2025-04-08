@@ -46,6 +46,6 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.CHANGELOG_TOKEN }}
-          tag: ${{ steps.determine_tag.outputs.release_tag }}
-          name: Release ${{ steps.determine_tag.outputs.release_tag }}
+          tag: ${{ steps.release_tag.outputs.release_tag }}
+          name: Release ${{ steps.release_tag.outputs.release_tag }}
           bodyFile: CHANGELOG.md
