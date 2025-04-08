@@ -52,4 +52,6 @@
             {% endif %}
       {% endif %}
       {% endif %}
+    {% if specify_bounded_context %}
     {{ macros.include_and_indent("project_structure/domain_driven_design/bounded_context.yml.j2", 4) }}
+    {% endig %}
