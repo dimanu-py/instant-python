@@ -35,8 +35,8 @@ jobs:
         run: |
           if [ -z "${{ needs.bump_version.outputs.tag }}" ]; then
             echo "No tag provided from bump version job. Running fallback command..."
-            fallback_tag=$(git describe --tags --abbrev=0)
-            echo "release_tag=${fallback_tag}" >> $GITHUB_OUTPUT
+            git fetch --tags
+            echo "release_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
           else
             echo "Using tag provided from bump version job."
             echo "release_tag=${{ needs.bump_version.outputs.tag }}" >> $GITHUB_OUTPUT
