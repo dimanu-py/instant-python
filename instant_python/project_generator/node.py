@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
-from enum import StrEnum
+from enum import Enum
 from pathlib import Path
 
 
-class NodeType(StrEnum):
+class NodeType(str, Enum):
     DIRECTORY = "directory"
     FILE = "file"
 

@@ -1,65 +1,12 @@
-## 0.12.1 (2025-04-06)
+## 0.1.0 (2025-04-06)
 
 ### 🐛 Bug Fixes
 
 - **project-generator**: add template types values to be able to use enum in jinja templates
 - **template**: write correct option when fastapi built in feature is selected
-
-### ♻️ Code Refactoring
-
-- **template**: include mypy, git and pytest configuration files only when the user has selected these options
-- **template**: include dependencies depending on user built in features selection
-
-## 0.12.0 (2025-04-06)
-
-### ✨ Features
-
-- **project-generator**: create new custom function to generate import path in templates
-
-### 🐛 Bug Fixes
-
 - **template**: generate correctly the import statement in templates depending on the user selection
-
-## 0.11.0 (2025-03-24)
-
-## 0.10.4 (2025-03-24)
-
-### 🐛 Bug Fixes
-
-- correct pages workflow
-
-## 0.10.3 (2025-03-24)
-
-### 🐛 Bug Fixes
-
-- correct pages workflow
-
-## 0.10.2 (2025-03-24)
-
-### 🐛 Bug Fixes
-
 - **installer**: correct answers when installing dependencies
-
-## 0.10.1 (2025-03-24)
-
-### 🐛 Bug Fixes
-
 - **prompter**: modify DependenciesQuestion to not enter an infinite loop of asking the user
-
-## 0.10.0 (2025-03-23)
-
-### ✨ Features
-
-- **prompter**: implement general project step that will only be used when custom template is passed
-- **cli**: add template command for project_cli.py to let users create a project using a custom template
-- **prompter**: implement ConditionalQuestion
-- **prompter**: implement TemplateStep to group all questions related to default template management
-- **project-generator**: implement CustomTemplateManager to manage when user passes a custom template file
-- **project-generator**: create TemplateManager interface
-- **cli**: add folder command to allow users to just generate the folder structure of the project
-
-### 🐛 Bug Fixes
-
 - **cli**: temporarily disable template commands
 - **prompter**: extract the value of the base answer to check it with condition
 - **prompter**: remove init argument from year field
@@ -67,9 +14,18 @@
 - **prompter**: set default value for git field in UserRequirements to avoid failing when executing folder command
 - **prompter**: include last question in TemplateStep if selected template is domain_driven_design
 - **project-generator**: instantiate DefaultTemplateManager inside File class
+- **build**: change build system and ensure templates directory gets included
+- **project-generator**: substitute FileSystemLoader for PackageLoader to safer load when using it as a package
+- **prompter**: correct default source folder name
+- **template**: correct license field from pyproject.toml template
+- **template**: use project_slug for project name inside pyproject.toml
+- **project-generator**: correct path to templates
+- **project-generator**: correct extra blocks that where being created when including templates
 
 ### ♻️ Code Refactoring
 
+- **template**: include mypy, git and pytest configuration files only when the user has selected these options
+- **template**: include dependencies depending on user built in features selection
 - **prompter**: update answers dictionary instead of add manually question key and answer
 - **prompter**: return a dictionary with the key of the question and the answer instead of just the answer
 - **cli**: modify cli help commands and descriptions
@@ -93,86 +49,19 @@
 - **cli**: add help description to both commands
 - **prompter**: move python and dependency manager from dependencies step to general project step as it's information that is needed in general to fill all files information
 - **cli**: rename generate_project command to new
-
-## 0.9.0 (2025-03-14)
-
-### ✨ Features
-
-- **project-generator**: format all project files with ruff once everything is generated
-- **cli**: remove user_requirements file once project has been generated
-- **prompter**: add remove method to UserRequirements class
-
-### 🐛 Bug Fixes
-
-- **build**: change build system and ensure templates directory gets included
-- **project-generator**: substitute FileSystemLoader for PackageLoader to safer load when using it as a package
-
-### ♻️ Code Refactoring
-
 - **prompter**: add file_path field to user requirements class
-
-## 0.8.1 (2025-03-14)
-
-### 🐛 Bug Fixes
-
-- **prompter**: correct default source folder name
-- **template**: correct license field from pyproject.toml template
-
-### ♻️ Code Refactoring
-
 - **cli**: pass project slug name as the project directory that will be created
 - **project-generator**: pass the directory where the project will be created to FolderTree
 - **cli**: remove checking if a user_requirements file exists
 - **template**: remove writing author and email info only if manager is pdm
-
-## 0.8.0 (2025-03-11)
-
-### ✨ Features
-
-- **cli**: call to git configurer when user wants to initialize a git repository
-- **installer**: implement GitConfigurer
-- **cli**: include git step into cli steps
-- **prompter**: implement step to ask the user information to initialize a git repository
-
-### ♻️ Code Refactoring
-
 - **installer**: avoid printing executed commands output by stdout
 - **template**: use git_email field in pyproject.toml
 - **prompter**: remove email field from UserRequirements and add git_email and git_user_name
 - **prompter**: remove email question from general project step
-
-## 0.7.0 (2025-03-11)
-
-### ✨ Features
-
-- **template**: add clean architecture template project structure
-
-## 0.6.0 (2025-03-11)
-
-### ✨ Features
-
-- **template**: add standard project project structure templates
-
-### ♻️ Code Refactoring
-
 - **project-generator**: remove condition of loading the template only when is domain driven design
 - **template**: use include_and_indent custom macro inside domain_driven_design/test template
 - **template**: include always mypy and pytest ini configuration
 - **prompter**: rename empty project template to standard project
-
-## 0.5.0 (2025-03-10)
-
-### ✨ Features
-
-- **installer**: create factory method to choose which dependency manager gets instantiated
-- **installer**: implement PdmInstaller
-
-### 🐛 Bug Fixes
-
-- **template**: use project_slug for project name inside pyproject.toml
-
-### ♻️ Code Refactoring
-
 - **cli**: use DependencyManagerFactory instead of always instantiating UvManager
 - **installer**: remove ShellConfigurator and ZshConfigurator
 - **cli**: remove shell configurator injection
@@ -180,11 +69,86 @@
 - **prompter**: warn the user that project name cannot contain spaces
 - **prompter**: remove project name question and just leave project slug
 - **installer**: remove executable attribute from UvManager
+- **installer**: specify working directory to UvManager so it installs everything at the generated project
+- **cli**: pass generated project path to UvManager
+- **installer**: inline uv install command attribute as is not something reusable
+- **cli**: inject folder tree and template manager to project generator
+- **project-generator**: set the directory where user project will be generated as FolderTree attribute and expose it through a property
+- **project-generator**: pass folder_tree and template_manager injected into ProjectGenerator
+- **cli**: pass user dependencies to installer
+- **prompter**: substitute fixed default dependencies by dynamic ones that will be asked to the user
+- **prompter**: remove question definition lists and basic prompter
+- **cli**: substitute BasicPrompter for QuestionWizard
+- **prompter**: remove python manager and operating system questions
+- **prompter**: extract helper method to know if template is ddd
+- **prompter**: delegate ask logic to each question instead of letting prompter what to do depending on flags
+- **prompter**: redefine questions using concrete implementations
+- **prompter**: make Question abstract and add ask abstract method
+- **project-generator**: rename Directory's init attribute to python_module and remove default value for children
+- **project-generator**: move children extraction only when node is a directory
+- **src**: remove old src folder with cookiecutter project and convert current instant_python module into src
+- **cli**: generate user requirements only if no other file has been already generated.
+- **template**: move makefile template to scripts folder as this folder only makes sense if it's use with the makefile
+- **template**: move base from sync sqlalchemy to persistence folder as it would be the same for both sync and async
+- **template**: move sqlalchemy sync templates to specific folder
+- **template**: move exceptions templates to specific folder
+- **template**: move value object templates to specific folder
+- **template**: move github actions templates to specific folder
+- **template**: move logger templates to specific folder
+- **project-generator**: modify File class to be able to manage the difference between the path to the template and the path where the file should be written
+- **template**: change all yml templates to point to inner event_bus folder boilerplate
+- **template**: move all boilerplate related to event bus inside specific folder
+- **prompter**: change github information for basic name and email
+- **prompter**: move default dependencies question to general questions and include the default dependencies that will be included
+- **prompter**: remove converting to snake case all answers and set directly those answers in snake case if needed
+- **templates**: use raw command inside github action instead of make
+- **templates**: modify error templates to use DomainError
+- **templates**: change all python-module types to directory and add python flag when need it
+- **project-generator**: make Directory general for any type of folder and remove python module class
+- **project-generator**: remove python_module node type
+- **templates**: set all files of type file and add them the extension variable
+- **project-generator**: add extension field to node and remove deprecated options
+- **project-generator**: create a single node type File that will work with any kind of file
+- **project-generator**: substitute python file and yml file node type for single file
+- **templates**: use new operator to write a single children command in source
+- **project-generator**: include new custom operator in jinja environment
+- **templates**: remove populated shared template
+- **templates**: include value objects template when is specified by the user
+- **templates**: import and call macro inside project structures templates
+- **prompter**: format all answers to snake case
+- use TemplateTypes instead of literal string
+- **project-generator**: change template path name when generating project
+- **templates**: move ddd templates inside project_structure folder
+- **prompter**: migrate BasicPrompter to use questionary instead of typer to make the questions as it manages multiple selections better
+- **cli**: instantiate BasicPrompter instead of using class method
+- **prompter**: simplify ask method by using Question object an iterating over the list of defined questions
+- **templates**: modularize main_structure file
+- **project-generator**: create project structure inside a temporary directory
+- **project-generator**: delegate template management to TemplateManager
+- **cli**: call BasicPrompter and ProjectGenerator inside cli app
 
-## 0.4.0 (2025-03-09)
 
 ### ✨ Features
 
+- **project-generator**: create new custom function to generate import path in templates
+- **prompter**: implement general project step that will only be used when custom template is passed
+- **cli**: add template command for project_cli.py to let users create a project using a custom template
+- **prompter**: implement ConditionalQuestion
+- **prompter**: implement TemplateStep to group all questions related to default template management
+- **project-generator**: implement CustomTemplateManager to manage when user passes a custom template file
+- **project-generator**: create TemplateManager interface
+- **cli**: add folder command to allow users to just generate the folder structure of the project
+- **project-generator**: format all project files with ruff once everything is generated
+- **cli**: remove user_requirements file once project has been generated
+- **prompter**: add remove method to UserRequirements class
+- **cli**: call to git configurer when user wants to initialize a git repository
+- **installer**: implement GitConfigurer
+- **cli**: include git step into cli steps
+- **prompter**: implement step to ask the user information to initialize a git repository
+- **template**: add clean architecture template project structure
+- **template**: add standard project project structure templates
+- **installer**: create factory method to choose which dependency manager gets instantiated
+- **installer**: implement PdmInstaller
 - **project-generator**: expose generated project path through ProjectGenerator
 - **installer**: add project_directory field to UvManager to know where to create the virtual environment
 - **installer**: add install_dependencies step to Installer
@@ -211,36 +175,6 @@
 - **project-generator**: create custom exception when node type does not exist
 - **cli**: make sure user_requirements are loaded
 - **prompter**: add load_from_file method to UserRequirements
-
-### 🐛 Bug Fixes
-
-- **project-generator**: correct path to templates
-
-### ♻️ Code Refactoring
-
-- **installer**: specify working directory to UvManager so it installs everything at the generated project
-- **cli**: pass generated project path to UvManager
-- **installer**: inline uv install command attribute as is not something reusable
-- **cli**: inject folder tree and template manager to project generator
-- **project-generator**: set the directory where user project will be generated as FolderTree attribute and expose it through a property
-- **project-generator**: pass folder_tree and template_manager injected into ProjectGenerator
-- **cli**: pass user dependencies to installer
-- **prompter**: substitute fixed default dependencies by dynamic ones that will be asked to the user
-- **prompter**: remove question definition lists and basic prompter
-- **cli**: substitute BasicPrompter for QuestionWizard
-- **prompter**: remove python manager and operating system questions
-- **prompter**: extract helper method to know if template is ddd
-- **prompter**: delegate ask logic to each question instead of letting prompter what to do depending on flags
-- **prompter**: redefine questions using concrete implementations
-- **prompter**: make Question abstract and add ask abstract method
-- **project-generator**: rename Directory's init attribute to python_module and remove default value for children
-- **project-generator**: move children extraction only when node is a directory
-- **src**: remove old src folder with cookiecutter project and convert current instant_python module into src
-
-## 0.3.0 (2025-03-01)
-
-### ✨ Features
-
 - **template**: include mock event bus template for testing
 - **template**: add scripts templates
 - **prompter**: add fastapi option to built in features
@@ -260,29 +194,6 @@
 - **templates**: add .gitignore template
 - **templates**: add pyproject template
 - **templates**: add makefile template
-
-### ♻️ Code Refactoring
-
-- **cli**: generate user requirements only if no other file has been already generated.
-- **template**: move makefile template to scripts folder as this folder only makes sense if it's use with the makefile
-- **template**: move base from sync sqlalchemy to persistence folder as it would be the same for both sync and async
-- **template**: move sqlalchemy sync templates to specific folder
-- **template**: move exceptions templates to specific folder
-- **template**: move value object templates to specific folder
-- **template**: move github actions templates to specific folder
-- **template**: move logger templates to specific folder
-- **project-generator**: modify File class to be able to manage the difference between the path to the template and the path where the file should be written
-- **template**: change all yml templates to point to inner event_bus folder boilerplate
-- **template**: move all boilerplate related to event bus inside specific folder
-- **prompter**: change github information for basic name and email
-- **prompter**: move default dependencies question to general questions and include the default dependencies that will be included
-- **prompter**: remove converting to snake case all answers and set directly those answers in snake case if needed
-- **templates**: use raw command inside github action instead of make
-
-## 0.2.0 (2025-02-27)
-
-### ✨ Features
-
 - **templates**: add invalid id format error template
 - **templates**: add domain error template
 - **prompter**: add synchronous sqlalchemy option to built in features question
@@ -316,33 +227,3 @@
 - **prompter**: create basic class that asks project requirements to user
 - **cli**: create basic typer application with no implementation
 
-### 🐛 Bug Fixes
-
-- **project-generator**: correct extra blocks that where being created when including templates
-
-### ♻️ Code Refactoring
-
-- **templates**: modify error templates to use DomainError
-- **templates**: change all python-module types to directory and add python flag when need it
-- **project-generator**: make Directory general for any type of folder and remove python module class
-- **project-generator**: remove python_module node type
-- **templates**: set all files of type file and add them the extension variable
-- **project-generator**: add extension field to node and remove deprecated options
-- **project-generator**: create a single node type File that will work with any kind of file
-- **project-generator**: substitute python file and yml file node type for single file
-- **templates**: use new operator to write a single children command in source
-- **project-generator**: include new custom operator in jinja environment
-- **templates**: remove populated shared template
-- **templates**: include value objects template when is specified by the user
-- **templates**: import and call macro inside project structures templates
-- **prompter**: format all answers to snake case
-- use TemplateTypes instead of literal string
-- **project-generator**: change template path name when generating project
-- **templates**: move ddd templates inside project_structure folder
-- **prompter**: migrate BasicPrompter to use questionary instead of typer to make the questions as it manages multiple selections better
-- **cli**: instantiate BasicPrompter instead of using class method
-- **prompter**: simplify ask method by using Question object an iterating over the list of defined questions
-- **templates**: modularize main_structure file
-- **project-generator**: create project structure inside a temporary directory
-- **project-generator**: delegate template management to TemplateManager
-- **cli**: call BasicPrompter and ProjectGenerator inside cli app

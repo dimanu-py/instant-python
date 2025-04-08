@@ -1,7 +1,10 @@
 from abc import ABC, abstractmethod
 
+from typing import TypeVar, Generic
 
-class Question[T](ABC):
+T = TypeVar("T")
+
+class Question(Generic[T], ABC):
     def __init__(self, key: str, message: str) -> None:
         self._key = key
         self._message = message
