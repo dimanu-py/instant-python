@@ -2,7 +2,7 @@
 from {{ source_name }}.{{ template_domain_import }}.exceptions.invalid_negative_value_error import (
 	InvalidNegativeValueError,
 )
-from {{ source_name }}.{{ template_domain_import }}.value_objects.value_object import ValueObject
+from {{ source_name }}.{{ template_domain_import }}.value_object.value_object import ValueObject
 
 
 class IntValueObject(ValueObject[int]):

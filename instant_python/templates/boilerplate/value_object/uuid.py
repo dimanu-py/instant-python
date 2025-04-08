@@ -4,7 +4,7 @@ from uuid import UUID
 from {{ source_name }}.{{ template_domain_import }}.exceptions.required_value_error import (
     RequiredValueError,
 )
-from {{ source_name }}.{{ template_domain_import }}.value_objects.value_object import ValueObject
+from {{ source_name }}.{{ template_domain_import }}.value_object.value_object import ValueObject
 
 
 class Uuid(ValueObject[str]):

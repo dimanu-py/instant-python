@@ -6,7 +6,7 @@ from typing import TypeVar
 from typing import TypeVar, Generic
 {% endif %}
 
-from {{ source_name }}.{{ template_domain_import }}.value_objects.uuid import Uuid
+from {{ source_name }}.{{ template_domain_import }}.value_object.uuid import Uuid
 from {{ source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.base import Base
 from {{ source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.session_maker import (
 	SessionMaker,

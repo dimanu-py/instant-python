@@ -5,7 +5,7 @@ from {{ source_name }}.{{ template_domain_import }}.exceptions.incorrect_value_t
 from {{ source_name }}.{{ template_domain_import }}.exceptions.required_value_error import (
     RequiredValueError,
 )
-from {{ source_name }}.{{ template_domain_import }}.value_objects.value_object import ValueObject
+from {{ source_name }}.{{ template_domain_import }}.value_object.value_object import ValueObject
 
 
 class StringValueObject(ValueObject[str]):
