@@ -7,7 +7,7 @@ from instant_python.project_generator.node import Node
 class File(Node):
 
     def __init__(self, name: str, extension: str) -> None:
-        self._file_name = f"{name.split("/")[-1]}{extension}"
+        self._file_name = f"{name.split('/')[-1]}{extension}"
         self._template_path = f"boilerplate/{name}{extension}"
         self._template_manager = DefaultTemplateManager()
 
