@@ -1,3 +1,4 @@
+from instant_python.question_prompter.question.boolean_question import BooleanQuestion
 from instant_python.question_prompter.question.choice_question import ChoiceQuestion
 from instant_python.question_prompter.question.conditional_question import (
     ConditionalQuestion,
@@ -39,18 +40,26 @@ class TemplateStep(Step):
                         "standard_project",
                     ],
                 ),
-                subquestions=[
-                    FreeTextQuestion(
-                        key="bounded_context",
-                        message="Enter the bounded context name",
-                        default="backoffice",
+                subquestions=ConditionalQuestion(
+                    base_question=BooleanQuestion(
+                        key="specify_bounded_context",
+                        message="Do you want to specify your first bounded context?",
+                        default=True,
                     ),
-                    FreeTextQuestion(
-                        key="aggregate_name",
-                        message="Enter the aggregate name",
-                        default="user",
-                    ),
-                ],
+                    subquestions=[
+                        FreeTextQuestion(
+                            key="bounded_context",
+                            message="Enter the bounded context name",
+                            default="backoffice",
+                        ),
+                        FreeTextQuestion(
+                            key="aggregate_name",
+                            message="Enter the aggregate name",
+                            default="user",
+                        ),
+                    ],
+                    condition=True,
+                ),
                 condition=TemplateTypes.DDD,
             ),
         ]
