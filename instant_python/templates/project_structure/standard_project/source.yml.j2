@@ -14,13 +14,13 @@
     {% if "synchronous_sqlalchemy" in built_in_features %}
     {{ macros.include_and_indent("project_structure/synchronous_sqlalchemy.yml.j2", 4) }}
     {% endif %}
-    {% if "logger" in built_in_features %}
+    {% if ["logger", "fastapi_application"] | is_in(built_in_features) %}
     {{ macros.include_and_indent("project_structure/logger.yml.j2", 4) }}
     {% endif %}
     {% if "async_sqlalchemy" in built_in_features %}
     {{ macros.include_and_indent("project_structure/async_sqlalchemy.yml.j2", 4) }}
     {% endif %}
-    {% if "async_alembic" in built_in_features %}
+    {% if ["async_alembic", "fastapi_application"] | is_in(built_in_features) %}
     {{ macros.include_and_indent("project_structure/alembic_migrator.yml.j2", 4) }}
     {% endif %}
     {% if "fastapi_application" in built_in_features %}
