@@ -4,7 +4,7 @@ from jinja2 import Template
 from instant_python.project_generator.jinja_environment import JinjaEnvironment
 from instant_python.project_generator.template_manager import TemplateManager
 from instant_python.question_prompter.template_types import TemplateTypes
-from instant_python.question_prompter.user_requirements import UserRequirements
+from instant_python.question_prompter.requirements_configuration import RequirementsConfiguration
 
 
 class JinjaTemplateManager(TemplateManager):
@@ -33,5 +33,6 @@ class JinjaTemplateManager(TemplateManager):
     @staticmethod
     def _load_memory_requirements() -> UserRequirements:
         with open("user_requirements.yml") as file:
+    def _load_memory_requirements() -> RequirementsConfiguration:
             requirements = yaml.safe_load(file)
-        return UserRequirements(**requirements)
+        return RequirementsConfiguration(**requirements)

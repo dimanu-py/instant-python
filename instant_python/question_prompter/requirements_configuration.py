@@ -6,7 +6,7 @@ import yaml
 
 
 @dataclass
-class UserRequirements:
+class RequirementsConfiguration:
     project_slug: str
     license: str
     version: str
