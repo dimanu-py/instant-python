@@ -1,7 +1,7 @@
 import yaml
-from jinja2 import Environment, Template, PackageLoader
+from jinja2 import Template
 
-from instant_python.project_generator.jinja_custom_filters import is_in, compute_base_path
+from instant_python.project_generator.jinja_environment import JinjaEnvironment
 from instant_python.project_generator.template_manager import TemplateManager
 from instant_python.question_prompter.template_types import TemplateTypes
 from instant_python.question_prompter.user_requirements import UserRequirements
@@ -11,12 +11,7 @@ class DefaultTemplateManager(TemplateManager):
 
     def __init__(self) -> None:
         self._requirements = self._load_memory_requirements()
-        self._env = Environment(loader=PackageLoader("instant_python",
-                                                     "templates"),
-                                trim_blocks=True,
-                                lstrip_blocks=True)
-        self._env.filters["is_in"] = is_in
-        self._env.filters["compute_base_path"] = compute_base_path
+        self._env = JinjaEnvironment()
 
     def get_project(self, template_name: str) -> dict:
         template = self._get_template(
