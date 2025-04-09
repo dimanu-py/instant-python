@@ -16,9 +16,20 @@ dependencies = [
     "questionary>=2.1.0",
     "pyyaml>=6.0.2",
 ]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+]
+
 include = [
     "instant_python/templates/**/*",
 ]
+
+[project.urls]
+documentation = "https://dimanu-py.github.io/instant-python/"
+repository = "https://github.com/dimanu-py/instant-python/"
 
 [project.scripts]
 ipy = "instant_python.cli:app"
