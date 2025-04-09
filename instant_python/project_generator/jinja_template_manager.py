@@ -7,7 +7,7 @@ from instant_python.question_prompter.template_types import TemplateTypes
 from instant_python.question_prompter.user_requirements import UserRequirements
 
 
-class DefaultTemplateManager(TemplateManager):
+class JinjaTemplateManager(TemplateManager):
 
     def __init__(self) -> None:
         self._requirements = self._load_memory_requirements()

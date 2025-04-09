@@ -4,8 +4,8 @@ from instant_python.installer.dependency_manager_factory import DependencyManage
 from instant_python.installer.git_configurer import GitConfigurer
 from instant_python.installer.installer import Installer
 from instant_python.project_generator.custom_template_manager import CustomTemplateManager
-from instant_python.project_generator.default_template_manager import (
-    DefaultTemplateManager,
+from instant_python.project_generator.jinja_template_manager import (
+    JinjaTemplateManager,
 )
 from instant_python.project_generator.folder_tree import FolderTree
 from instant_python.project_generator.project_generator import ProjectGenerator
@@ -74,7 +74,7 @@ def create_full_project() -> None:
 
     project_generator = ProjectGenerator(
         folder_tree=FolderTree(user_requirements.project_slug),
-        template_manager=DefaultTemplateManager(),
+        template_manager=JinjaTemplateManager(),
     )
     project_generator.generate()
 

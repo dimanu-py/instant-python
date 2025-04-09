@@ -1,7 +1,7 @@
 import typer
 
 from instant_python.project_generator.custom_template_manager import CustomTemplateManager
-from instant_python.project_generator.default_template_manager import DefaultTemplateManager
+from instant_python.project_generator.jinja_template_manager import JinjaTemplateManager
 from instant_python.project_generator.folder_tree import FolderTree
 from instant_python.project_generator.project_generator import ProjectGenerator
 from instant_python.question_prompter.question.free_text_question import FreeTextQuestion
@@ -38,7 +38,7 @@ def create_default_project_structure() -> None:
 
 	project_generator = ProjectGenerator(
 		folder_tree=FolderTree(user_requirements.project_slug),
-		template_manager=DefaultTemplateManager(),
+		template_manager=JinjaTemplateManager(),
 	)
 
 	project_generator.generate()
