@@ -33,17 +33,17 @@ def create_default_project_structure() -> None:
 	wizard = QuestionWizard(
 		steps=Steps(GeneralProjectStep(), TemplateStep())
 	)
-	user_requirements = wizard.run()
-	user_requirements.save_in_memory()
+	requirements = wizard.run()
+	requirements.save_in_memory()
 
 	project_generator = ProjectGenerator(
-		folder_tree=FolderTree(user_requirements.project_slug),
+		folder_tree=FolderTree(requirements.project_slug),
 		template_manager=JinjaTemplateManager(),
 	)
 
 	project_generator.generate()
 
-	user_requirements.remove()
+	requirements.remove()
 
 
 if __name__ == "__main__":
