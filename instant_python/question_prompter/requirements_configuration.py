@@ -27,7 +27,7 @@ class RequirementsConfiguration:
     year: int = field(default=datetime.now().year)
 
     def __post_init__(self) -> None:
-        self._file_path = "user_requirements.yml"
+        self._file_path = "ipy.yml"
 
     def to_dict(self) -> dict:
         return asdict(self)

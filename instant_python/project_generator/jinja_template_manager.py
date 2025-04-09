@@ -31,8 +31,7 @@ class JinjaTemplateManager(TemplateManager):
         return template.render(**self._requirements.to_dict(), template_types=TemplateTypes)
 
     @staticmethod
-    def _load_memory_requirements() -> UserRequirements:
-        with open("user_requirements.yml") as file:
     def _load_memory_requirements() -> RequirementsConfiguration:
+        with open("ipy.yml") as file:
             requirements = yaml.safe_load(file)
         return RequirementsConfiguration(**requirements)
