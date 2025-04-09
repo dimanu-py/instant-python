@@ -13,8 +13,8 @@ from instant_python.question_prompter.step.template_step import TemplateStep
 app = typer.Typer()
 
 
-@app.command("template", help="Pass a custom template folder structure", hidden=True)
-def create_folder_structure_from_template(template_name: str) -> None:
+@app.command("template", help="Pass a custom template folder structure")
+def create_folder_structure_from_template(template_path: str) -> None:
 	project_name = FreeTextQuestion(
 		key="project_slug",
 		message="Enter the name of the project (CANNOT CONTAIN SPACES)",
@@ -22,7 +22,7 @@ def create_folder_structure_from_template(template_name: str) -> None:
 	).ask()
 	project_generator = ProjectGenerator(
 		folder_tree=FolderTree(project_name["project_slug"]),
-		template_manager=CustomTemplateManager(template_name),
+		template_manager=CustomTemplateManager(template_path),
 	)
 
 	project_generator.generate()
