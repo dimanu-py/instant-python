@@ -4,7 +4,7 @@ from instant_python.project_generator.jinja_template_manager import JinjaTemplat
 from instant_python.project_generator.node import Node
 
 
-class File(Node):
+class BoilerplateFile(Node):
 
     def __init__(self, name: str, extension: str) -> None:
         self._file_name = f"{name.split('/')[-1]}{extension}"

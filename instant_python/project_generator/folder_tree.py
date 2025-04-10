@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from instant_python.project_generator.directory import Directory
-from instant_python.project_generator.file import File
+from instant_python.project_generator.boilerplate_file import BoilerplateFile
 from instant_python.project_generator.node import Node, NodeType
 
 
@@ -33,8 +33,8 @@ class FolderTree:
             is_python_module = node.get("python", False)
             directory_children = [self._build_tree(child) for child in children]
             return Directory(name=name, children=directory_children, python_module=is_python_module)
-        elif node_type == NodeType.FILE:
+        elif node_type == NodeType.BOILERPLATE:
             extension = node.get("extension", "")
-            return File(name=name, extension=extension)
+            return BoilerplateFile(name=name, extension=extension)
         else:
             raise UnknownNodeType(node_type)
