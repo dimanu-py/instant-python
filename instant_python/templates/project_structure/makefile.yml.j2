@@ -1,38 +1,38 @@
 {% import "project_structure/macros.j2" as macros with context %}
 - name: scripts/makefile
-  type: file
+  type: boilerplate_file
 - name: scripts
   type: directory
   children:
     - name: scripts/add_dependency
-      type: file
+      type: boilerplate_file
       extension: .sh
     - name: scripts/remove_dependency
-      type: file
+      type: boilerplate_file
       extension: .sh
     - name: scripts/local_setup
-      type: file
+      type: boilerplate_file
       extension: .sh
     - name: hooks
       type: directory
       children:
         - name: scripts/pre-commit
-          type: file
+          type: boilerplate_file
         - name: scripts/pre-push
-          type: file
+          type: boilerplate_file
         - name: scripts/post-merge
-          type: file
+          type: boilerplate_file
     {% if template == "domain_driven_design" %}
     - name: test
       type: directory
       children:
         - name: scripts/unit
-          type: file
+          type: boilerplate_file
           extension: .sh
         - name: scripts/integration
-          type: file
+          type: boilerplate_file
           extension: .sh
     - name: scripts/create_aggregate
-      type: file
+      type: boilerplate_file
       extension: .py
     {% endif %}
