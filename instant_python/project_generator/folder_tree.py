@@ -2,6 +2,7 @@ from pathlib import Path
 
 from instant_python.project_generator.directory import Directory
 from instant_python.project_generator.boilerplate_file import BoilerplateFile
+from instant_python.project_generator.file import File
 from instant_python.project_generator.node import Node, NodeType
 
 
@@ -36,5 +37,8 @@ class FolderTree:
         elif node_type == NodeType.BOILERPLATE:
             extension = node.get("extension", "")
             return BoilerplateFile(name=name, extension=extension)
+        elif node_type == NodeType.FILE:
+            extension = node.get("extension", "")
+            return File(name=name, extension=extension)
         else:
             raise UnknownNodeType(node_type)
