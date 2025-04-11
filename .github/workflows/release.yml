@@ -17,6 +17,7 @@ jobs:
           fetch-depth: 0
 
       - name: Bump version and update changelog
+        id: bump
         uses: commitizen-tools/commitizen-action@master
         with:
           github_token: ${{ secrets.CHANGELOG_TOKEN }}
@@ -34,19 +35,19 @@ jobs:
       - name: Get release tag
         id: release_tag
         run: |
-          if [ -z "${{ needs.bump_version.outputs.tag }}" ]; then
+          if [ -z "${{ needs.bump-version.outputs.tag }}" ]; then
             echo "No tag provided from bump version job. Running fallback command..."
             git fetch --tags
             echo "release_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
           else
             echo "Using tag provided from bump version job."
-            echo "release_tag=${{ needs.bump_version.outputs.tag }}" >> $GITHUB_OUTPUT
+            echo "release_tag=${{ needs.bump-version.outputs.tag }}" >> $GITHUB_OUTPUT
           fi
 
       - name: Extract Changelog for Release
         id: extract_changelog
         run: |
-          release="${{ steps.determine_tag.outputs.release_tag }}"
+          release="${{ steps.release_tag.outputs.release_tag }}"
           echo "Extracting changelog for tag: ${release}"
           
           awk -v tag="$release" '
