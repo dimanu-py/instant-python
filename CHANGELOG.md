@@ -1,3 +1,9 @@
+## 0.4.0 (2025-04-11)
+
+### ✨ Features
+
+- **template**: add README template and include in main structure
+
 ## 0.3.0 (2025-04-11)
 
 ### ✨ Features
