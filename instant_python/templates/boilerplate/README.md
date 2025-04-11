@@ -1,0 +1,5 @@
+# {{ project-slug }}
+
+## Description
+
+{{ description }}

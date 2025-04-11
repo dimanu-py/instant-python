@@ -11,6 +11,7 @@ root:
   {{ macros.include_and_indent("project_structure/pyproject.yml.j2", 2) }}
   {% if git %}
   {{ macros.include_and_indent("project_structure/gitignore.yml.j2", 2) }}
+  {{ macros.include_and_indent("project_structure/readme.yml.j2", 2) }}
   {%  endif %}
   {{ macros.include_and_indent("project_structure/python_version.yml.j2", 2) }}
   {% if "pytest" in dependencies %}
