@@ -3,24 +3,23 @@
 When using the subcommand `new` with either the `project` or `folder` command, you will be able to configure
 different aspects of your project through a set of questions that will guide you through the process.
 
-!!! note
-    Depending on the main command you use, you will be able to configure differnt kind of things. Here
+!!! info
+    Depending on the main command you use, you will be able to configure different kind of things. Here
     is an overview of all the options that can be configured.
-
 
 ## Project slug
 
 Configure the name of the main folder of your project. This name will be used in the _pyproject.toml_ file too.
 
-When writing the project slug, you must convey _pyproject.toml_ conventions, so you should not write spaces
-between words.
+!!! warning
+    When writing the project slug, you must convey _pyproject.toml_ conventions, so you should not write spaces
+    between words.
 
 ## Source name
 
 Configure the name of the source code of your project.
 
 The most typical option for this folder is _src_, but you can change it to whatever you want: _source_, _code_, _app_, etc.
-
 
 ## Description
 
@@ -42,7 +41,8 @@ This value will be included in the _pyproject.toml_ and _LICENSE_ files.
 Choose between _MIT_, _Apache_ or _GPL_ licenses to set your project. By default, 
 it will place you on _MIT_ option to be the most popular license.
 
-If you want to use a different license, unfortunately, you will have to change it manually in the _LICENSE_ file.
+!!! info
+    If you want to use a different license, unfortunately, you will have to change it manually in the _LICENSE_ file.
 
 ## Python version
 
@@ -52,8 +52,12 @@ By default, it will place you on the latest version available.
 ## Dependency manager
 
 Choose between two of the most popular dependencies and project manager for Python: 
+
  - [_uv_](https://docs.astral.sh/uv)
  - [_pdm_](https://pdm-project.org/en/latest/)
+
+These managers will allow you to manage your virtual environment, install dependencies and run tasks in your project. By default, it
+will place you on _uv_ option, as is it the fastest and most lightweight dependency manager available.
 
 ## Git
 
@@ -70,9 +74,12 @@ configured for Python projects.
 There are some project templates already configured that you can use to create your project. These templates
 will create the folder structure of your project following a specific pattern.
 
+!!! info
+    These templates do not reflect your architecture, but the folder structure of your project. There is a key difference between these concepts.
+
 ### Domain Driven Design
  
-Follows DDD pattern and screaming architecture. 
+Follows DDD pattern and screaming architecture organization. 
 
 Separates the source code and test folder in bounded contexts and aggregates. 
 Each aggregate will contain the known _domain_, _application_ and _infra_ layers. This template will allow you to create your first bounded context and aggregate. 
@@ -131,26 +138,177 @@ Will create your project with the common pattern of source code and test folder.
 ## Out of the box implementations
 
 When creating a new project, you will be able to include some boilerplate and implementations code
-that will help you to start your project
+that will help you to start your project.
+
+!!! info
+    These implementations are completely subjective and personal. This does not mean that you must implement 
+    them in the same way or that they are the best way to implement them. You can use them as a starting point
+    and iterate them as you need.
 
 ### Value objects and exceptions
 
 Value objects are a common pattern in DDD to encapsulate primitives and encapsulate domain logic. If 
 you choose this option, it will include the following value objects:
 
-- Base ValueObject
-- UUID
-- StringValueObject
-- IntValueObject
+???+ example "Base ValueObject"
+
+    ```python
+    class ValueObject[T](ABC):
+      _value: T
+    
+      def __init__(self, value: T) -> None:
+          self._validate(value)
+          self._value = value
+    
+      @abstractmethod
+      def _validate(self, value: T) -> None: ...
+    
+      @property
+      def value(self) -> T:
+        return self._value
+    
+      @override
+      def __eq__(self, other: object) -> bool:
+          if not isinstance(other, ValueObject):
+            return False
+          return self.value == other.value
+    ```
+
+???+ example "UUID"
+    
+    ```python
+
+    class Uuid(ValueObject[str]):
+        def __init__(self, value: str) -> None:
+            super().__init__(value)
+    
+        def _validate(self, value: str) -> None:
+            if value is None:
+                raise RequiredValueError
+            UUID(value)
+    ```
+
+???+ example "StringValueObject"
+
+    ```python
+    class StringValueObject(ValueObject[str]):
+        def __init__(self, value: str) -> None:
+        super().__init__(value)
+
+    def _validate(self, value: str) -> None:
+        if value is None:
+            raise RequiredValueError
+        if not isinstance(value, str):
+            raise IncorrectValueTypeError
+    ```
+???+ example "IntValueObject"
+
+    ```python
+    class IntValueObject(ValueObject[int]):
+        def __init__(self, value: int) -> None:
+            super().__init__(value)
+
+        def _validate(self, value: int) -> None:
+            if value < 0:
+                raise InvalidNegativeValueError(value)
+    ```
 
 Along with these value objects, it will include a base exception class that you can use to create your own exceptions and
 some common exceptions that you can use in your project:
 
-- Base DomainError
-- IncorrectValueTypeError
-- InvalidIdFormatError
-- InvalidNegativeValueError
-- RequiredValueError
+???+ example "Base DomainError"
+    
+    ```python
+    class DomainError(Exception, ABC):
+        @property
+        @abstractmethod
+        def type(self) -> str: ...
+    
+        @property
+        @abstractmethod
+        def message(self) -> str: ...
+    
+        def to_dict(self) -> dict:
+            return {
+                "type": self.type,
+                "message": self.message,
+            }
+    ```
+
+???+ example "IncorrectValueTypeError"
+
+    ```python
+    T = TypeVar("T")
+    
+    
+    class IncorrectValueTypeError(DomainError):
+        def __init__(self, value: T) -> None:
+            self._message = f"Value '{value}' is not of type {type(value).__name__}"
+            self._type = "incorrect_value_type"
+            super().__init__(self._message)
+    
+        @property
+        def type(self) -> str:
+            return self._type
+    
+        @property
+        def message(self) -> str:
+            return self._message
+    ```
+
+???+ example "InvalidIdFormatError"
+
+    ```python
+    class InvalidIdFormatError(DomainError):
+        def __init__(self) -> None:
+            self._message = "User id must be a valid UUID"
+            self._type = "invalid_id_format"
+            super().__init__(self._message)
+    
+        @property
+        def type(self) -> str:
+            return self._type
+    
+        @property
+        def message(self) -> str:
+            return self._message
+    ```
+
+???+ example "InvalidNegativeValueError"
+
+    ```python
+    class InvalidNegativeValueError(DomainError):
+        def __init__(self, value: int) -> None:
+            self._message = f"Invalid negative value: {value}"
+            self._type = "invalid_negative_value"
+            super().__init__(self._message)
+    
+        @property
+        def type(self) -> str:
+            return self._type
+    
+        @property
+        def message(self) -> str:
+            return self._message
+    ```
+
+???+ example "RequiredValueError"
+    
+    ```python
+    class RequiredValueError(DomainError):
+        def __init__(self) -> None:
+            self._message = "Value is required, can't be None"
+            self._type = "required_value"
+            super().__init__(self._message)
+    
+        @property
+        def type(self) -> str:
+            return self._type
+    
+        @property
+        def message(self) -> str:
+            return self._message
+    ```
 
 ### GitHub actions and workflows
 

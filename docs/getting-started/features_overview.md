@@ -1,4 +1,4 @@
-# Features
+# Features Overview
 
 `instant-python` provides a set of commands that allow you to generate different aspects of your Python project, from 
 generating a complete project to add some boilerplate or even create your custom template.
@@ -15,7 +15,7 @@ Create a new project setting up all projects files and configurations.
 Generate the folder structure for your project.
 
 - `ipy folder new`: Generate just the folders and files for your project, without any additional installation.
-- [COMING SOON] `ipy folder template <template>`: Generate the folder structure using a custom template.
+- `ipy folder template <template>`: Generate the folder structure using a custom template.
 
 ## Next steps
 

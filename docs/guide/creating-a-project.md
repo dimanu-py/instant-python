@@ -5,7 +5,7 @@
 One of the main commands you can use with `instant-pyton` is the `project` command. This command
 will allow you to create and configure a complete new project from scratch.
 
-!!! note 
+!!! info 
     The `project` command it won't only create the folder structure of your project, but it will also
     allow you to generate a bunch of boilerplate, install the Python version you want to use, install
     dependencies and even configure a git repository for your project.

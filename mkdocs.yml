@@ -34,6 +34,7 @@ theme:
   icon:
     logo: logo
   features:
+    - navigation.path
     - navigation.instant
     - navigation.instant.progress
     - navigation.tabs
@@ -55,14 +56,15 @@ theme:
       accent: '#FAB387'
 nav:
   - Home:
-      - index.md
+      - welcome.md
   - Getting Started:
       - getting-started/index.md
       - Installation: getting-started/installation.md
       - First Steps: getting-started/first-steps.md
-      - Features: getting-started/features.md
+      - Features Overview: getting-started/features_overview.md
   - Guide:
       - guide/index.md
+      - Choosing between commands: guide/when-to-use-commands.md
       - Creating a Project: guide/creating-a-project.md
       - Folder Structure: guide/folder-structure.md
       - Features: guide/features.md
