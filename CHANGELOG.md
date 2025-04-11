@@ -1,3 +1,28 @@
+## 0.3.0 (2025-04-11)
+
+### ✨ Features
+
+- **project-generator**: add support for creating user File instances in folder tree
+- **project-generator**: create new File class to model user files
+- **project-generator**: create JinjaEnvironment class to manage independently jinja env
+
+### 🐛 Bug Fixes
+
+- **template**: correct IntValueObject template to call super init
+- **template**: remove unnecessary newline in template import
+- **template**: correct typo in jinja template
+
+### ♻️ Code Refactoring
+
+- **template**: modify all template file types
+- **project-generator**: rename File class to BoilerplateFile to be able to differentiate a normal file introduced by the user and a file of the library that contains boilerplate
+- **cli**: update template command parameter from template_name to template_path
+- **cli**: rename configuration variable name from user_requirements to requirements
+- **prompter**: modify configuration file name from user_requirements.yml to ipy.yml
+- **prompter**: rename UserRequirements to RequirementsConfiguration
+- **project-generator**: rename DefaultTemplateManager to JinjaTemplateManager
+- **project-generator**: delegate jinja env management to JinjaEnvironment in DefaultTemplateManager
+
 ## 0.2.0 (2025-04-08)
 
 ### ✨ Features
