@@ -1,7 +1,7 @@
 import subprocess
 
 from instant_python.project_generator.folder_tree import FolderTree
-from instant_python.project_generator.default_template_manager import TemplateManager
+from instant_python.project_generator.jinja_template_manager import TemplateManager
 
 
 class ProjectGenerator:

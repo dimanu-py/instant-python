@@ -47,7 +47,7 @@ as soon as possible. An overview of the features is given below, but you can fin
 [documentation](https://dimanu-py.github.io/instant-python/guide/features/).
 
 - Project slug: Configure the name of the main folder of your project.
-- Source name: Configure the name of the source code of your project.
+- Source name: Configure the name of the source code folder of your project.
 - Description: Include a description about your project.
 - Version: Set the initial version of your project.
 - Author: Set the author of the project.

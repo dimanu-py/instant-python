@@ -30,6 +30,7 @@ jobs:
         with:
           token: ${{ secrets.CHANGELOG_TOKEN }}
           fetch-depth: 0
+
       - name: Get release tag
         id: release_tag
         run: |
@@ -42,10 +43,27 @@ jobs:
             echo "release_tag=${{ needs.bump_version.outputs.tag }}" >> $GITHUB_OUTPUT
           fi
 
+      - name: Extract Changelog for Release
+        id: extract_changelog
+        run: |
+          release="${{ steps.determine_tag.outputs.release_tag }}"
+          echo "Extracting changelog for tag: ${release}"
+          
+          awk -v tag="$release" '
+            BEGIN {flag=0}
+            /^## / {
+              if (flag == 1 && $0 !~ ("^## " tag)) { exit }
+              if ($0 ~ ("^## " tag)) { flag=1 }
+            }
+            flag { print }
+          ' CHANGELOG.md > release_changelog.md
+
+          cat release_changelog.md
+
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.CHANGELOG_TOKEN }}
           tag: ${{ steps.release_tag.outputs.release_tag }}
           name: Release ${{ steps.release_tag.outputs.release_tag }}
-          bodyFile: CHANGELOG.md
+          bodyFile: release_changelog.md

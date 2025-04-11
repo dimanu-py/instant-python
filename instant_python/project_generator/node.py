@@ -6,6 +6,7 @@ from pathlib import Path
 class NodeType(str, Enum):
     DIRECTORY = "directory"
     FILE = "file"
+    BOILERPLATE = "boilerplate_file"
 
 
 class Node(ABC):
