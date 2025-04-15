@@ -22,7 +22,6 @@ pip install instant-python
 
 ## Documentation Structure
 
-- [Welcome](./welcome.md)
 - [Getting Started](./getting-started/index.md)
     - [Installation](./getting-started/installation.md)
     - [First Steps](./getting-started/first-steps.md)

@@ -28,7 +28,7 @@ include = [
 ]
 
 [project.urls]
-documentation = "https://dimanu-py.github.io/instant-python/welcome/"
+documentation = "https://dimanu-py.github.io/instant-python/"
 repository = "https://github.com/dimanu-py/instant-python/"
 
 [project.scripts]
