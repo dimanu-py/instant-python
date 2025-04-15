@@ -1,4 +1,5 @@
 from instant_python.errors.application_error import ApplicationError
+from instant_python.errors.error_types import ErrorTypes
 
 
 class CommandExecutionError(ApplicationError):
@@ -12,7 +13,7 @@ class CommandExecutionError(ApplicationError):
 
     @property
     def type(self) -> str:
-        return "installer_error"
+        return ErrorTypes.INSTALLER.value
 
     @property
     def message(self) -> str:
