@@ -1,15 +1,10 @@
 from pathlib import Path
 
-from instant_python.project_generator.directory import Directory
+from instant_python.errors.unknown_node_typer_error import UnknownNodeTypeError
 from instant_python.project_generator.boilerplate_file import BoilerplateFile
+from instant_python.project_generator.directory import Directory
 from instant_python.project_generator.file import File
 from instant_python.project_generator.node import Node, NodeType
-
-
-class UnknownNodeType(ValueError):
-    def __init__(self, node_type: str) -> None:
-        self._message = f"Unknown node type: {node_type}"
-        super().__init__(self._message)
 
 
 class FolderTree:
@@ -41,4 +36,4 @@ class FolderTree:
             extension = node.get("extension", "")
             return File(name=name, extension=extension)
         else:
-            raise UnknownNodeType(node_type)
+            raise UnknownNodeTypeError(node_type)
