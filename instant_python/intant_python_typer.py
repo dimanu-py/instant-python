@@ -1,3 +1,4 @@
+import sys
 from collections.abc import Callable
 
 import typer
@@ -26,5 +27,8 @@ class InstantPythonTyper(typer.Typer):
         try:
             super().__call__(*args, **kwargs)
         except Exception as error:
-            callback = self.error_handlers.get(error.__class__.__base__)
-            callback(error)
+            for registered_exc_type, handler in self.error_handlers.items():
+                if isinstance(error, registered_exc_type):
+                    handler(error)
+                    sys.exit(1)
+            raise
