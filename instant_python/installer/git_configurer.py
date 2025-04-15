@@ -21,6 +21,7 @@ class GitConfigurer:
             check=True,
             cwd=self._project_directory,
             stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
         )
         print(">>> Git repository initialized successfully")
 
@@ -32,6 +33,7 @@ class GitConfigurer:
             check=True,
             cwd=self._project_directory,
             stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
         )
         print(">>> Git user and email configured successfully")
 
@@ -43,5 +45,6 @@ class GitConfigurer:
 	        check=True,
 	        cwd=self._project_directory,
             stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
         )
         print(">>> Initial commit made successfully")

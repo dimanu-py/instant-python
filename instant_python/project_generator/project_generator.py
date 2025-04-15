@@ -24,6 +24,7 @@ class ProjectGenerator:
             check=True,
             cwd=self._folder_tree.project_directory,
             stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
         )
 
     @property

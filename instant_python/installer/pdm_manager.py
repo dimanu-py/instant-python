@@ -16,6 +16,8 @@ class PdmManager(DependencyManager):
             "curl -sSL https://pdm-project.org/install-pdm.py | python3 -",
             shell=True,
             check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
         )
         print(">>> pdm installed successfully")
 
@@ -27,6 +29,8 @@ class PdmManager(DependencyManager):
             shell=True,
             check=True,
             cwd=self._project_directory,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
         )
         print(f">>> Python {version} installed successfully")
 
@@ -55,6 +59,8 @@ class PdmManager(DependencyManager):
             shell=True,
             check=True,
             cwd=self._project_directory,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
         )
 
     @staticmethod
@@ -76,4 +82,5 @@ class PdmManager(DependencyManager):
             check=True,
             cwd=self._project_directory,
             stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
         )
