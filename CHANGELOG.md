@@ -1,3 +1,33 @@
+## 0.5.0 (2025-04-15)
+
+### ✨ Features
+
+- **cli**: create main application based on custom implementation and add error handlers
+- **cli**: implement a custom version of Typer application to be able to handle exceptions in FastAPI way using decorators
+- **errors**: add UnknownTemplateError for handling unknown template types
+- **errors**: add TemplateFileNotFoundError for missing template files and extend ErrorTypes with GENERATOR
+- **errors**: add ErrorTypes enum for categorizing error types
+- **errors**: add CommandExecutionError for handling command execution failures
+- **errors**: add UnknownDependencyManagerError for handling unknown dependency managers
+- **installer**: remove unused PYENV manager from Enum
+- **errors**: create application error to be able to capture all expected errors
+
+### 🐛 Bug Fixes
+
+- **errors**: correct typo in UnknownTemplateError message
+
+### ♻️ Code Refactoring
+
+- **project-generator**: manage when a command fails by raising custom CommandExecutionError
+- **installer**: manage when a command fails by raising custom CommandExecutionError
+- **cli**: enhance error handling with rich console output
+- **project-generator**: raise UnknownTemplateError for unknown template types
+- **project-generator**: move UnknownErrorTypeError to errors module and inherit from ApplicationError
+- **project-generator**: raise TemplateFileNotFoundError for missing template files
+- **errors**: use ErrorTypes enum for error type in CommandExecutionError and UnknownDependencyManagerError
+- **installer**: add stderr handling for subprocess calls
+- **installer**: raise UnknownDependencyManagerError for unknown user managers
+
 ## 0.4.0 (2025-04-11)
 
 ### ✨ Features
