@@ -4,7 +4,7 @@ from instant_python.errors.error_types import ErrorTypes
 
 class UnknownTemplateError(ApplicationError):
     def __init__(self, template_name: str) -> None:
-        self._message = f"Uknown template type: {template_name}"
+        self._message = f"Unknown template type: {template_name}"
         super().__init__(self._message)
 
     @property
