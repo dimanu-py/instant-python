@@ -1,3 +1,9 @@
+## 0.5.1 (2025-04-15)
+
+### 🐛 Bug Fixes
+
+- **cli**: manage and detect correctly raised exceptions and exit the application with exit code 1
+
 ## 0.5.0 (2025-04-15)
 
 ### ✨ Features
