@@ -1,3 +1,4 @@
+from instant_python.errors.unknown_dependency_manager_error import UnknownDependencyManagerError
 from instant_python.installer.dependency_manager import DependencyManager
 from instant_python.installer.managers import Managers
 from instant_python.installer.pdm_manager import PdmManager
@@ -11,4 +12,7 @@ class DependencyManagerFactory:
             Managers.UV: UvManager,
             Managers.PDM: PdmManager,
         }
-        return managers[Managers(user_manager)](project_path)
+        try:
+            return managers[Managers(user_manager)](project_path)
+        except KeyError:
+            raise UnknownDependencyManagerError(user_manager)

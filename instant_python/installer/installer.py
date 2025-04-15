@@ -1,3 +1,6 @@
+import subprocess
+
+from instant_python.errors.command_execution_error import CommandExecutionError
 from instant_python.installer.dependency_manager import DependencyManager
 
 
@@ -13,6 +16,9 @@ class Installer:
     def perform_installation(
         self, python_version: str, dependencies: list[str]
     ) -> None:
-        self._dependency_manager.install()
-        self._dependency_manager.install_python(python_version)
-        self._dependency_manager.install_dependencies(dependencies)
+        try:
+            self._dependency_manager.install()
+            self._dependency_manager.install_python(python_version)
+            self._dependency_manager.install_dependencies(dependencies)
+        except subprocess.CalledProcessError as error:
+            raise CommandExecutionError(exit_code=error.returncode, stderr_output=error.stderr)

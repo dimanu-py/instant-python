@@ -1,3 +1,4 @@
+from instant_python.errors.unknown_template_error import UnknownTemplateError
 from instant_python.question_prompter.template_types import TemplateTypes
 
 
@@ -15,4 +16,4 @@ def compute_base_path(initial_path: str, template_type: str) -> str:
     elif template_type == TemplateTypes.STANDARD:
         return ".".join(path_components[2:])
     else:
-        raise ValueError(f"Unknown template type: {template_type}")
+        raise UnknownTemplateError(template_type)

@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  bump-version:
+  bump_version:
     if: "!startsWith(github.event.head_commit.message, 'bump:')"
     runs-on: ubuntu-latest
     outputs:
-      tag: ${{ steps.bump.outputs.new_tag }}
+      tag: ${{ steps.bump.outputs.version }}
     steps:
       - name: Check out
         uses: actions/checkout@v3
@@ -22,8 +22,8 @@ jobs:
         with:
           github_token: ${{ secrets.CHANGELOG_TOKEN }}
 
-  create-release:
-    needs: bump-version
+  create_release:
+    needs: bump_version
     runs-on: ubuntu-latest
     steps:
       - name: Check out
@@ -35,13 +35,13 @@ jobs:
       - name: Get release tag
         id: release_tag
         run: |
-          if [ -z "${{ needs.bump-version.outputs.tag }}" ]; then
+          if [ -z "${{ needs.bump_version.outputs.tag }}" ]; then
             echo "No tag provided from bump version job. Running fallback command..."
             git fetch --tags
             echo "release_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
           else
             echo "Using tag provided from bump version job."
-            echo "release_tag=${{ needs.bump-version.outputs.tag }}" >> $GITHUB_OUTPUT
+            echo "release_tag=${{ needs.bump_version.outputs.tag }}" >> $GITHUB_OUTPUT
           fi
 
       - name: Extract Changelog for Release

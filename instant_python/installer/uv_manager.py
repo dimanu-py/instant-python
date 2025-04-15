@@ -17,6 +17,7 @@ class UvManager(DependencyManager):
             shell=True,
             check=True,
             stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
         )
         print(">>> uv installed successfully")
 
@@ -29,6 +30,7 @@ class UvManager(DependencyManager):
             check=True,
             cwd=self._project_directory,
             stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
         )
         print(f">>> Python {version} installed successfully")
 
@@ -58,6 +60,7 @@ class UvManager(DependencyManager):
             check=True,
             cwd=self._project_directory,
             stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
         )
         print(f">>> {dependency_name} installed successfully")
 
@@ -81,4 +84,5 @@ class UvManager(DependencyManager):
             check=True,
             cwd=self._project_directory,
             stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
         )
