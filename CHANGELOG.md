@@ -1,3 +1,9 @@
+## 0.5.2 (2025-04-16)
+
+### 🐛 Bug Fixes
+
+- **template**: fix project slug placeholder in README template
+
 ## 0.5.1 (2025-04-15)
 
 ### 🐛 Bug Fixes
