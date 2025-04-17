@@ -1,7 +1,7 @@
 from rich.console import Console
 from rich.panel import Panel
 
-from instant_python import folder_cli, project_cli
+from instant_python.commands import folder_cli, project_cli
 from instant_python.errors.application_error import ApplicationError
 from instant_python.intant_python_typer import InstantPythonTyper
 
