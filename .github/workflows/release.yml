@@ -51,14 +51,19 @@ jobs:
           echo "Extracting changelog for tag: ${release}"
           
           awk -v tag="$release" '
-            BEGIN {flag=0}
-            /^## / {
-              if (flag == 1 && $0 !~ ("^## " tag)) { exit }
-              if ($0 ~ ("^## " tag)) { flag=1 }
+            BEGIN { printing=0 }
+            # start printing when we hit "## 0.5.2 "
+            $0 ~ ("^## " tag " ") {
+              printing=1
+              print
+              next
             }
-            flag { print }
+            # stop printing when we hit another "## " after having printed
+            /^## / && printing { exit }
+            # print everything in between
+            printing { print }
           ' CHANGELOG.md > release_changelog.md
-
+    
           cat release_changelog.md
 
       - name: Create release
