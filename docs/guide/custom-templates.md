@@ -16,7 +16,7 @@ This custom template must follow a specific structure and syntax to be able to g
      this field.
   - `children`: A list of elements that will be created inside the folder. This can be either another directory or files.
 
-The available templates can be found in the [features](../getting-started/features.md) section. The library
+The available templates can be found in the [features](./features.md) section. The library
 offers a Domain Driven Design, Clean Architecture and Standard templates.
 
 ## Examples
@@ -38,7 +38,7 @@ root:
           - name: adapter_for_paying_spy
             type: file
             extension: .py
-          - name: adapter_for_obtaining_grates_stup
+          - name: adapter_for_obtaining_grates_stub
             type: file
             extension: .py
       - name: driving_adapters

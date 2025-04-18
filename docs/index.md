@@ -6,6 +6,54 @@ Welcome to the [**Instant Python**](https://github.com/dimanu-py/instant-python-
 scaffold a modern Python project with best practices and a clean architecture. This template includes ready-to-use scripts, project
 structure options, and automated setup commands to help you kickstart your Python projects.
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  /* give the container a fixed size */
+  .chart-container {
+    width: 600px;
+    height: 350px;
+    margin: auto;
+  }
+  /* make sure the canvas fills that container */
+  .chart-container canvas {
+    width: 100%  !important;
+    height: 100% !important;
+  }
+</style>
+
+<div class="chart-container">
+  <canvas id="downloads-chart"></canvas>
+</div><script>
+  const raw =  {{ download_data("instant-python") | tojson }};
+  // Filter out the 'with_mirrors' series—keep only real-user downloads:
+  const daily = raw.filter(d => d.category === 'without_mirrors');
+  const labels = daily.map(d => d.date);
+  const counts = daily.map(d => d.downloads);
+
+  // Render the chart:
+  new Chart(
+    document.getElementById('downloads-chart').getContext('2d'),
+    {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Daily downloads',
+          data: counts,
+          fill: false
+        }]
+      },
+      options: {
+        scales: {
+          x: { type: 'category' , ticks: { display: false } },
+          y: { beginAtZero: true }
+        }
+      }
+    }
+  );
+</script>
+
+
 ## Installation
 
 Install `instant-python` from PyPI:

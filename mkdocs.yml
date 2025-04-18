@@ -9,6 +9,10 @@ repo_url: https://github.com/dimanu-py/instant-python
 plugins:
   - search
   - tags
+  - macros:
+      module_name: docs/downloads_macro
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/chart.js
 markdown_extensions:
   - admonition
   - pymdownx.details
