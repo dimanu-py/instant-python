@@ -1,4 +1,4 @@
-# {{ project_slug }}
+# {{ slug }}
 
 ## Description
 

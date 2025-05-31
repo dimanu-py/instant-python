@@ -16,12 +16,12 @@ app = typer.Typer()
 @app.command("template", help="Pass a custom template folder structure")
 def create_folder_structure_from_template(template_path: str) -> None:
 	project_name = FreeTextQuestion(
-		key="project_slug",
+		key="slug",
 		message="Enter the name of the project (CANNOT CONTAIN SPACES)",
 		default="python-project",
 	).ask()
 	project_generator = ProjectGenerator(
-		folder_tree=FolderTree(project_name["project_slug"]),
+		folder_tree=FolderTree(project_name["slug"]),
 		template_manager=CustomTemplateManager(template_path),
 	)
 

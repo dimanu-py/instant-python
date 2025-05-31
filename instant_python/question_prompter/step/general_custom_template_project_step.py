@@ -7,7 +7,7 @@ class GeneralCustomTemplateProjectStep(Step):
 	def __init__(self) -> None:
 		self._questions = [
 			FreeTextQuestion(
-				key="project_slug",
+				key="slug",
 				message="Enter the name of the project (CANNOT CONTAIN SPACES)",
 				default="python-project",
 			),
