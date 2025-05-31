@@ -1,4 +1,4 @@
-from instant_python.configuration.general_configuration import SUPPORTED_PYTHON_VERSIONS
+from instant_python.configuration.constants import SUPPORTED_PYTHON_VERSIONS
 from instant_python.errors.application_error import ApplicationError
 from instant_python.errors.error_types import ErrorTypes
 
