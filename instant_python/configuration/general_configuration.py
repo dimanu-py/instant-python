@@ -1,6 +1,8 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 
-from instant_python.configuration.invalid_dependency_manager_value import InvalidDependencyManagerValue
+from instant_python.configuration.invalid_dependency_manager_value import (
+    InvalidDependencyManagerValue,
+)
 from instant_python.configuration.invalid_license_value import InvalidLicenseValue
 from instant_python.configuration.invalid_version_value import InvalidPythonVersionValue
 
@@ -36,3 +38,6 @@ class GeneralConfiguration:
     def _ensure_dependency_manager_is_supported(self) -> None:
         if self.dependency_manager not in SUPPORTED_DEPENDENCY_MANAGERS:
             raise InvalidDependencyManagerValue(self.dependency_manager)
+
+    def to_primitives(self) -> dict[str, str]:
+        return asdict(self)
