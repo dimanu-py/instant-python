@@ -12,6 +12,7 @@ from instant_python.configuration.parser.configuration_file_not_found import (
 from instant_python.configuration.parser.empty_configuration_not_allowed import (
     EmptyConfigurationNotAllowed,
 )
+from instant_python.configuration.parser.missing_mandatory_fields import MissingMandatoryFields
 from instant_python.configuration.parser.parser import Parser
 
 
