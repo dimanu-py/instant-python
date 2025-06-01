@@ -2,6 +2,7 @@ import yaml
 
 from instant_python.configuration.config_key_not_present import ConfigKeyNotPresent
 from instant_python.configuration.configuration_schema import ConfigurationSchema
+from instant_python.configuration.general.general_configuration import GeneralConfiguration
 from instant_python.configuration.parser.configuration_file_not_found import (
     ConfigurationFileNotFound,
 )
@@ -16,7 +17,11 @@ class Parser:
     @classmethod
     def parse(cls, config_file_path: str) -> ConfigurationSchema:
         content = cls._get_config_file_content(config_file_path)
-        return content
+        
+        general_configuration = cls._parse_general_configuration(content["general"])
+        return ConfigurationSchema(
+            general=general_configuration,
+        )
 
     @classmethod
     def _get_config_file_content(cls, config_file_path: str) -> dict[str, dict]:
@@ -45,3 +50,16 @@ class Parser:
         ]
         if missing_keys:
             raise ConfigKeyNotPresent(missing_keys, Parser.REQUIRED_CONFIG_KEYS)
+
+    @staticmethod
+    def _parse_general_configuration(fields: dict[str, str]) -> GeneralConfiguration:
+        return GeneralConfiguration(
+            slug=fields["slug"],
+            source_name=fields["source_name"],
+            description=fields["description"],
+            version=str(fields["version"]),
+            author=fields["author"],
+            license=fields["license"],
+            python_version=str(fields["python_version"]),
+            dependency_manager=fields["dependency_manager"],
+        )
