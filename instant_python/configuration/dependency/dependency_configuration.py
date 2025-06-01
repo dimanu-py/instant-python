@@ -13,6 +13,7 @@ class DependencyConfiguration:
     group: str = field(default_factory=str)
 
     def __post_init__(self) -> None:
+        self.version = str(self.version)
         self._ensure_dependency_is_dev_if_group_is_set()
 
     def to_primitives(self) -> dict[str, str | bool]:

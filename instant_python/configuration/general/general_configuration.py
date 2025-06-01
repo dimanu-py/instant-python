@@ -28,6 +28,8 @@ class GeneralConfiguration:
     SUPPORTED_LICENSES: ClassVar[list[str]] = ["MIT", "Apache", "GPL"]
 
     def __post_init__(self) -> None:
+        self.version = str(self.version)
+        self.python_version = str(self.python_version)
         self._ensure_license_is_supported()
         self._ensure_python_version_is_supported()
         self._ensure_dependency_manager_is_supported()
