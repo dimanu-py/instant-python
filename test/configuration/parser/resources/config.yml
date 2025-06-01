@@ -10,11 +10,11 @@ general:
 dependencies:
   - name: pytest
     version: latest
-    dev: true
+    is_dev: true
     group: test
   - name: fastapi
     version: latest
-    dev: false
+    is_dev: false
 git:
   initialize: true
   user_name: dimanu-py
