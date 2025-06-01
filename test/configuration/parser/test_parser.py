@@ -8,6 +8,7 @@ from instant_python.configuration.dependency.dependency_configuration import Dep
 from instant_python.configuration.general.general_configuration import (
     GeneralConfiguration,
 )
+from instant_python.configuration.git.git_configuration import GitConfiguration
 from instant_python.configuration.parser.configuration_file_not_found import (
     ConfigurationFileNotFound,
 )
@@ -82,6 +83,19 @@ class TestParser:
         ]
         expect(config.dependencies).to(equal(expected_dependencies))
 
+    def test_should_parse_git_configuration_key(self) -> None:
+        config_file_path = self._build_config_file_path("config")
+        
+        config = Parser.parse(config_file_path)
+        
+        expected_git_config = GitConfiguration(
+            initialize=True,
+            username="dimanu-py",
+            email="dimanu.py@gmail.com",
+        )
+        expect(config.git).to(equal(expected_git_config))
+        
+        
     @pytest.mark.parametrize(
         "file_name",
         [
