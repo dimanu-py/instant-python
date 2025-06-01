@@ -17,6 +17,7 @@ from instant_python.configuration.parser.empty_configuration_not_allowed import 
 )
 from instant_python.configuration.parser.missing_mandatory_fields import MissingMandatoryFields
 from instant_python.configuration.parser.parser import Parser
+from instant_python.configuration.template.template_configuration import TemplateConfiguration
 
 
 class TestParser:
@@ -94,7 +95,20 @@ class TestParser:
             email="dimanu.py@gmail.com",
         )
         expect(config.git).to(equal(expected_git_config))
+    
+    def test_should_parse_template_config(self) -> None:
+        config_file_path = self._build_config_file_path("config")
         
+        config = Parser.parse(config_file_path)
+        
+        expected_template_config = TemplateConfiguration(
+            name="domain_driven_design",
+            built_in_features=[],
+            specify_bounded_context=False,
+            bounded_context=None,
+            aggregate_name=None,
+        )
+        expect(config.template).to(equal(expected_template_config))
         
     @pytest.mark.parametrize(
         "file_name",
