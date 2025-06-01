@@ -1,12 +1,12 @@
 import pytest
 from expects import expect, raise_error
 
-from instant_python.configuration.invalid_dependency_manager_value import (
+from instant_python.configuration.general.invalid_dependency_manager_value import (
     InvalidDependencyManagerValue,
 )
-from instant_python.configuration.invalid_license_value import InvalidLicenseValue
-from instant_python.configuration.invalid_version_value import InvalidPythonVersionValue
-from test.configuration.general_configuration_mother import GeneralConfigurationMother
+from instant_python.configuration.general.invalid_license_value import InvalidLicenseValue
+from instant_python.configuration.general.invalid_python_version_value import InvalidPythonVersionValue
+from test.configuration.general.general_configuration_mother import GeneralConfigurationMother
 
 
 class TestGeneralConfiguration:

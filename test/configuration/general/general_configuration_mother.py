@@ -1,6 +1,6 @@
 import random
 
-from instant_python.configuration.general_configuration import GeneralConfiguration
+from instant_python.configuration.general.general_configuration import GeneralConfiguration
 from test.random_generator import RandomGenerator
 
 

@@ -1,11 +1,11 @@
 from dataclasses import dataclass, asdict
 
-from instant_python.configuration.constants import SUPPORTED_DEPENDENCY_MANAGERS, SUPPORTED_PYTHON_VERSIONS, SUPPORTED_LICENSES
-from instant_python.configuration.invalid_dependency_manager_value import (
+from instant_python.configuration.general.constants import SUPPORTED_DEPENDENCY_MANAGERS, SUPPORTED_PYTHON_VERSIONS, SUPPORTED_LICENSES
+from instant_python.configuration.general.invalid_dependency_manager_value import (
     InvalidDependencyManagerValue,
 )
-from instant_python.configuration.invalid_license_value import InvalidLicenseValue
-from instant_python.configuration.invalid_version_value import InvalidPythonVersionValue
+from instant_python.configuration.general.invalid_license_value import InvalidLicenseValue
+from instant_python.configuration.general.invalid_python_version_value import InvalidPythonVersionValue
 
 
 @dataclass

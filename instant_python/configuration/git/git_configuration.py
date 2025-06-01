@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field, asdict
 
-from instant_python.configuration.git_user_or_email_not_present import (
+from instant_python.configuration.git.git_user_or_email_not_present import (
     GitUserOrEmailNotPresent,
 )
 

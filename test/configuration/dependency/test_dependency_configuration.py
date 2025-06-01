@@ -1,9 +1,9 @@
 from expects import expect, be_true, be_false, be_none, be, raise_error
 
-from instant_python.configuration.not_dev_dependency_included_in_group import (
+from instant_python.configuration.dependency.not_dev_dependency_included_in_group import (
     NotDevDependencyIncludedInGroup,
 )
-from test.configuration.dependency_configuration_mother import (
+from test.configuration.dependency.dependency_configuration_mother import (
     DependencyConfigurationMother,
 )
 

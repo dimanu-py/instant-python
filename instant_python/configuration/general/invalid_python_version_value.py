@@ -1,11 +1,11 @@
-from instant_python.configuration.constants import SUPPORTED_DEPENDENCY_MANAGERS
+from instant_python.configuration.general.constants import SUPPORTED_PYTHON_VERSIONS
 from instant_python.errors.application_error import ApplicationError
 from instant_python.errors.error_types import ErrorTypes
 
 
-class InvalidDependencyManagerValue(ApplicationError):
+class InvalidPythonVersionValue(ApplicationError):
     def __init__(self, value: str) -> None:
-        self._message = f"Invalid dependency manager: {value}. Allowed values are {SUPPORTED_DEPENDENCY_MANAGERS}."
+        self._message = f"Invalid Python version: {value}. Allowed versions are {SUPPORTED_PYTHON_VERSIONS}."
         super().__init__(self._message)
 
     @property

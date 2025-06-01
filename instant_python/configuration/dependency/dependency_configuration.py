@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field, asdict
 
-from instant_python.configuration.not_dev_dependency_included_in_group import NotDevDependencyIncludedInGroup
+from instant_python.configuration.dependency.not_dev_dependency_included_in_group import NotDevDependencyIncludedInGroup
 
 
 @dataclass
