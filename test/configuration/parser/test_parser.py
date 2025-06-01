@@ -21,3 +21,10 @@ class TestParser:
         
         expect(config).to_not(be_none)
         expect(config).to_not(be_empty)
+        
+    def test_should_raise_error_if_config_file_is_empty(self) -> None:
+        config_file_path = str(Path(__file__).parent / "resources" / "empty_config.yml")
+        
+        expect(lambda: Parser.parse(config_file_path)).to(
+            raise_error(EmptyConfigurationNotAllowed)
+        )
