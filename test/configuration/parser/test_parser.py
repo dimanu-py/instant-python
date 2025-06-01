@@ -1,4 +1,6 @@
-from expects import expect, raise_error
+from pathlib import Path
+
+from expects import expect, raise_error, be_none, be_empty
 
 from instant_python.configuration.parser.configuration_file_not_found import ConfigurationFileNotFound
 from instant_python.configuration.parser.parser import Parser
@@ -11,3 +13,11 @@ class TestParser:
         expect(lambda: Parser.parse(config_file_path)).to(
             raise_error(ConfigurationFileNotFound)
         )
+
+    def test_should_load_config_file_when_exists(self) -> None:
+        config_file_path = str(Path(__file__).parent / "resources" / "config.yml")
+        
+        config = Parser.parse(config_file_path)
+        
+        expect(config).to_not(be_none)
+        expect(config).to_not(be_empty)
