@@ -1,5 +1,6 @@
-from expects import expect, be_true, be_false, be_none, be
+from expects import expect, be_true, be_false, be_none, be, raise_error
 
+from instant_python.configuration.not_dev_dependency_included_in_group import NotDevDependencyIncludedInGroup
 from test.configuration.dependency_configuration_mother import (
     DependencyConfigurationMother,
 )
@@ -29,3 +30,8 @@ class TestDependencyConfiguration:
         dependency_configuration = DependencyConfigurationMother.any()
 
         expect(dependency_configuration.group).to(be(""))
+        
+    def test_should_not_allow_to_create_not_dev_dependency_inside_group(self) -> None:
+        expect(lambda: DependencyConfigurationMother.with_parameter(group="test")).to(
+	        raise_error(NotDevDependencyIncludedInGroup)
+        )
