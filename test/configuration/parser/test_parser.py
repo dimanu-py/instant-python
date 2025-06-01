@@ -64,3 +64,10 @@ class TestParser:
             dependency_manager="uv",
         )
         expect(config.general).to(equal(expected_general_config))
+
+    def test_should_raise_error_if_general_configuration_has_missing_mandatory_fields(self) -> None:
+        config_file_path = self._build_config_file_path("missing_general_fields_config.yml")
+        
+        expect(lambda: Parser.parse(config_file_path)).to(
+            raise_error(MissingMandatoryFields)
+        )
