@@ -1,3 +1,5 @@
+import yaml
+
 from instant_python.configuration.configuration_schema import ConfigurationSchema
 from instant_python.configuration.parser.configuration_file_not_found import ConfigurationFileNotFound
 
@@ -5,4 +7,8 @@ from instant_python.configuration.parser.configuration_file_not_found import Con
 class Parser:
     @classmethod
     def parse(cls, config_file_path: str) -> ConfigurationSchema:
-        raise ConfigurationFileNotFound(config_file_path)
+        try:
+            with open(config_file_path, "r") as file:
+                return yaml.safe_load(file)
+        except FileNotFoundError:
+            raise ConfigurationFileNotFound(config_file_path)
