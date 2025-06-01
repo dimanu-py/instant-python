@@ -85,3 +85,8 @@ class TestParser:
             ),
         ]
         expect(config.dependencies).to(equal(expected_dependencies))
+
+    def test_should_raise_error_when_parsing_dependencies_configuration_with_missing_mandatory_field(self) -> None:
+        config_file_path = self._build_config_file_path("missing_dependencies_fields_config")
+
+        expect(lambda: Parser.parse(config_file_path)).to(raise_error(MissingMandatoryFields))
