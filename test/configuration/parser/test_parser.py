@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from expects import expect, raise_error, be_none, be_empty, equal
+import pytest
+from expects import expect, raise_error, be_none, equal
 
 from instant_python.configuration.config_key_not_present import ConfigKeyNotPresent
 from instant_python.configuration.dependency.dependency_configuration import DependencyConfiguration
@@ -61,11 +62,6 @@ class TestParser:
         )
         expect(config.general).to(equal(expected_general_config))
 
-    def test_should_raise_error_if_general_configuration_has_missing_mandatory_fields(self) -> None:
-        config_file_path = self._build_config_file_path("missing_general_fields_config")
-
-        expect(lambda: Parser.parse(config_file_path)).to(raise_error(MissingMandatoryFields))
-
     def test_should_parse_dependencies_configuration_key(self) -> None:
         config_file_path = self._build_config_file_path("config")
 
@@ -86,7 +82,14 @@ class TestParser:
         ]
         expect(config.dependencies).to(equal(expected_dependencies))
 
-    def test_should_raise_error_when_parsing_dependencies_configuration_with_missing_mandatory_field(self) -> None:
-        config_file_path = self._build_config_file_path("missing_dependencies_fields_config")
+    @pytest.mark.parametrize(
+        "file_name",
+        [
+            pytest.param("missing_general_fields_config", id="missing_general_fields"),
+            pytest.param("missing_dependencies_fields_config", id="missing_dependencies_fields"),
+        ],
+    )
+    def test_should_raise_error_when_mandatory_fields_are_missing_in_configuration(self, file_name: str) -> None:
+        config_file_path = self._build_config_file_path(file_name)
 
         expect(lambda: Parser.parse(config_file_path)).to(raise_error(MissingMandatoryFields))
