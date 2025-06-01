@@ -21,4 +21,6 @@ class Installer:
             self._dependency_manager.install_python(python_version)
             self._dependency_manager.install_dependencies(dependencies)
         except subprocess.CalledProcessError as error:
-            raise CommandExecutionError(exit_code=error.returncode, stderr_output=error.stderr)
+            raise CommandExecutionError(
+                exit_code=error.returncode, stderr_output=error.stderr
+            )

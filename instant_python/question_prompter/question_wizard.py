@@ -1,5 +1,7 @@
 from instant_python.question_prompter.step.steps import Steps
-from instant_python.question_prompter.requirements_configuration import RequirementsConfiguration
+from instant_python.question_prompter.requirements_configuration import (
+    RequirementsConfiguration,
+)
 
 
 class QuestionWizard:

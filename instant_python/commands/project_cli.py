@@ -3,7 +3,9 @@ import typer
 from instant_python.installer.dependency_manager_factory import DependencyManagerFactory
 from instant_python.installer.git_configurer import GitConfigurer
 from instant_python.installer.installer import Installer
-from instant_python.project_generator.custom_template_manager import CustomTemplateManager
+from instant_python.project_generator.custom_template_manager import (
+    CustomTemplateManager,
+)
 from instant_python.project_generator.jinja_template_manager import (
     JinjaTemplateManager,
 )
@@ -11,7 +13,9 @@ from instant_python.project_generator.folder_tree import FolderTree
 from instant_python.project_generator.project_generator import ProjectGenerator
 from instant_python.question_prompter.question_wizard import QuestionWizard
 from instant_python.question_prompter.step.dependencies_step import DependenciesStep
-from instant_python.question_prompter.step.general_custom_template_project_step import GeneralCustomTemplateProjectStep
+from instant_python.question_prompter.step.general_custom_template_project_step import (
+    GeneralCustomTemplateProjectStep,
+)
 from instant_python.question_prompter.step.general_project_step import (
     GeneralProjectStep,
 )
@@ -24,11 +28,13 @@ app = typer.Typer()
 
 @app.command("template", help="Pass a custom template folder structure", hidden=True)
 def create_folder_structure_from_template(template_name: str) -> None:
-    wizard = QuestionWizard(steps=Steps(
-        GeneralCustomTemplateProjectStep(),
-        GitStep(),
-        DependenciesStep(),
-    ))
+    wizard = QuestionWizard(
+        steps=Steps(
+            GeneralCustomTemplateProjectStep(),
+            GitStep(),
+            DependenciesStep(),
+        )
+    )
     user_requirements = wizard.run()
     user_requirements.save_in_memory()
 

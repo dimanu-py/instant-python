@@ -12,7 +12,7 @@ from instant_python.configuration.parser.empty_configuration_not_allowed import 
 
 class Parser:
     REQUIRED_CONFIG_KEYS = ["general", "dependencies", "template", "git"]
-    
+
     @classmethod
     def parse(cls, config_file_path: str) -> ConfigurationSchema:
         content = cls._get_config_file_content(config_file_path)
@@ -40,6 +40,8 @@ class Parser:
 
     @staticmethod
     def _ensure_all_required_keys_are_present(content: dict[str, dict]) -> None:
-        missing_keys = [key for key in Parser.REQUIRED_CONFIG_KEYS if key not in content]
+        missing_keys = [
+            key for key in Parser.REQUIRED_CONFIG_KEYS if key not in content
+        ]
         if missing_keys:
             raise ConfigKeyNotPresent(missing_keys, Parser.REQUIRED_CONFIG_KEYS)

@@ -2,7 +2,9 @@ import subprocess
 
 from instant_python.installer.dependency_manager import DependencyManager
 from instant_python.question_prompter.question.boolean_question import BooleanQuestion
-from instant_python.question_prompter.question.free_text_question import FreeTextQuestion
+from instant_python.question_prompter.question.free_text_question import (
+    FreeTextQuestion,
+)
 
 
 class PdmManager(DependencyManager):

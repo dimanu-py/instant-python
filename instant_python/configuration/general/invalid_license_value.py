@@ -4,9 +4,7 @@ from instant_python.errors.error_types import ErrorTypes
 
 class InvalidLicenseValue(ApplicationError):
     def __init__(self, value: str, supported_values: list[str]) -> None:
-        self._message = (
-            f"Invalid license: {value}. Allowed values are {', '.join(supported_values)}."
-        )
+        self._message = f"Invalid license: {value}. Allowed values are {', '.join(supported_values)}."
         super().__init__(self._message)
 
     @property

@@ -40,10 +40,10 @@ class GitConfigurer:
     def _initial_commit(self) -> None:
         print(">>> Making initial commit...")
         subprocess.run(
-	        "git add . && git commit -m '🎉 chore: initial commit'",
-	        shell=True,
-	        check=True,
-	        cwd=self._project_directory,
+            "git add . && git commit -m '🎉 chore: initial commit'",
+            shell=True,
+            check=True,
+            cwd=self._project_directory,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.PIPE,
         )

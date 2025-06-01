@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field, asdict
 from typing import ClassVar
 
-from instant_python.configuration.template.bounded_context_not_applicable import BoundedContextNotApplicable
+from instant_python.configuration.template.bounded_context_not_applicable import (
+    BoundedContextNotApplicable,
+)
 from instant_python.configuration.template.bounded_context_not_especified import (
     BoundedContextNotSpecified,
 )
@@ -38,7 +40,6 @@ class TemplateConfiguration:
         "fastapi_application",
     ]
 
-
     def __post_init__(self) -> None:
         self._ensure_template_is_supported()
         self._ensure_built_in_features_are_supported()
@@ -56,7 +57,9 @@ class TemplateConfiguration:
             if feature not in self.SUPPORTED_BUILT_IN_FEATURES
         ]
         if unsupported_features:
-            raise InvalidBuiltInFeaturesValues(unsupported_features, self.SUPPORTED_BUILT_IN_FEATURES)
+            raise InvalidBuiltInFeaturesValues(
+                unsupported_features, self.SUPPORTED_BUILT_IN_FEATURES
+            )
 
     def _ensure_bounded_context_is_only_applicable_for_ddd_template(self) -> None:
         if self.specify_bounded_context and self.name != "domain_driven_design":

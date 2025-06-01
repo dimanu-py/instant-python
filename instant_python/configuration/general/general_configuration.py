@@ -4,8 +4,12 @@ from typing import ClassVar
 from instant_python.configuration.general.invalid_dependency_manager_value import (
     InvalidDependencyManagerValue,
 )
-from instant_python.configuration.general.invalid_license_value import InvalidLicenseValue
-from instant_python.configuration.general.invalid_python_version_value import InvalidPythonVersionValue
+from instant_python.configuration.general.invalid_license_value import (
+    InvalidLicenseValue,
+)
+from instant_python.configuration.general.invalid_python_version_value import (
+    InvalidPythonVersionValue,
+)
 
 
 @dataclass
@@ -34,11 +38,15 @@ class GeneralConfiguration:
 
     def _ensure_python_version_is_supported(self) -> None:
         if self.python_version not in self.SUPPORTED_PYTHON_VERSIONS:
-            raise InvalidPythonVersionValue(self.python_version, self.SUPPORTED_PYTHON_VERSIONS)
+            raise InvalidPythonVersionValue(
+                self.python_version, self.SUPPORTED_PYTHON_VERSIONS
+            )
 
     def _ensure_dependency_manager_is_supported(self) -> None:
         if self.dependency_manager not in self.SUPPORTED_DEPENDENCY_MANAGERS:
-            raise InvalidDependencyManagerValue(self.dependency_manager, self.SUPPORTED_DEPENDENCY_MANAGERS)
+            raise InvalidDependencyManagerValue(
+                self.dependency_manager, self.SUPPORTED_DEPENDENCY_MANAGERS
+            )
 
     def to_primitives(self) -> dict[str, str]:
         return asdict(self)

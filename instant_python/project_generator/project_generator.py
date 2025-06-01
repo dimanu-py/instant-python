@@ -6,15 +6,16 @@ from instant_python.project_generator.jinja_template_manager import TemplateMana
 
 
 class ProjectGenerator:
-
-    def __init__(self, folder_tree: FolderTree,
-                 template_manager: TemplateManager) -> None:
+    def __init__(
+        self, folder_tree: FolderTree, template_manager: TemplateManager
+    ) -> None:
         self._folder_tree = folder_tree
         self._template_manager = template_manager
 
     def generate(self) -> None:
         raw_project_structure = self._template_manager.get_project(
-            template_name="project_structure")
+            template_name="project_structure"
+        )
         self._folder_tree.create(raw_project_structure)
         self._format_project_files()
 
@@ -29,7 +30,9 @@ class ProjectGenerator:
                 stderr=subprocess.PIPE,
             )
         except subprocess.CalledProcessError as error:
-            raise CommandExecutionError(exit_code=error.returncode, stderr_output=error.stderr)
+            raise CommandExecutionError(
+                exit_code=error.returncode, stderr_output=error.stderr
+            )
 
     @property
     def path(self) -> str:

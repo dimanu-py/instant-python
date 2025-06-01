@@ -4,11 +4,12 @@ from jinja2 import Template
 from instant_python.project_generator.jinja_environment import JinjaEnvironment
 from instant_python.project_generator.template_manager import TemplateManager
 from instant_python.question_prompter.template_types import TemplateTypes
-from instant_python.question_prompter.requirements_configuration import RequirementsConfiguration
+from instant_python.question_prompter.requirements_configuration import (
+    RequirementsConfiguration,
+)
 
 
 class JinjaTemplateManager(TemplateManager):
-
     def __init__(self) -> None:
         self._requirements = self._load_memory_requirements()
         self._env = JinjaEnvironment()
@@ -28,7 +29,9 @@ class JinjaTemplateManager(TemplateManager):
         return self._env.get_template(name)
 
     def _render(self, template: Template) -> str:
-        return template.render(**self._requirements.to_dict(), template_types=TemplateTypes)
+        return template.render(
+            **self._requirements.to_dict(), template_types=TemplateTypes
+        )
 
     @staticmethod
     def _load_memory_requirements() -> RequirementsConfiguration:
