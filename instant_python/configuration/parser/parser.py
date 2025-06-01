@@ -2,6 +2,9 @@ import yaml
 
 from instant_python.configuration.config_key_not_present import ConfigKeyNotPresent
 from instant_python.configuration.configuration_schema import ConfigurationSchema
+from instant_python.configuration.dependency.dependency_configuration import (
+    DependencyConfiguration,
+)
 from instant_python.configuration.general.general_configuration import (
     GeneralConfiguration,
 )
@@ -11,7 +14,9 @@ from instant_python.configuration.parser.configuration_file_not_found import (
 from instant_python.configuration.parser.empty_configuration_not_allowed import (
     EmptyConfigurationNotAllowed,
 )
-from instant_python.configuration.parser.missing_mandatory_fields import MissingMandatoryFields
+from instant_python.configuration.parser.missing_mandatory_fields import (
+    MissingMandatoryFields,
+)
 
 
 class Parser:
@@ -22,8 +27,10 @@ class Parser:
         content = cls._get_config_file_content(config_file_path)
 
         general_configuration = cls._parse_general_configuration(content["general"])
+        dependencies_configuration = cls._parse_dependencies_configuration(content["dependencies"])
         return ConfigurationSchema(
             general=general_configuration,
+            dependencies=dependencies_configuration,
         )
 
     @classmethod
@@ -70,3 +77,22 @@ class Parser:
         except KeyError as error:
             raise MissingMandatoryFields(error.args[0], "general") from error
 
+    @staticmethod
+    def _parse_dependencies_configuration(
+        fields: list[dict[str, str | bool]],
+    ) -> list[DependencyConfiguration]:
+        dependencies = []
+        for dependency_fields in fields:
+            try:
+                dependency = DependencyConfiguration(
+                    name=dependency_fields["name"],
+                    version=str(dependency_fields["version"]),
+                    is_dev=dependency_fields.get("dev", False),
+                    group=dependency_fields.get("group", ""),
+                )
+            except KeyError as error:
+                raise MissingMandatoryFields(error.args[0], "dependencies") from error
+
+            dependencies.append(dependency)
+
+        return dependencies
