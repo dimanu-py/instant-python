@@ -3,6 +3,7 @@ from pathlib import Path
 from expects import expect, raise_error, be_none, be_empty, equal
 
 from instant_python.configuration.config_key_not_present import ConfigKeyNotPresent
+from instant_python.configuration.dependency.dependency_configuration import DependencyConfiguration
 from instant_python.configuration.general.general_configuration import (
     GeneralConfiguration,
 )
@@ -78,4 +79,17 @@ class TestParser:
 
         config = Parser.parse(config_file_path)
 
-        expect(config.dependencies).to_not(be_empty)
+        expected_dependencies = [
+            DependencyConfiguration(
+                name="pytest",
+                version="latest",
+                is_dev=True,
+                group="test",
+            ),
+            DependencyConfiguration(
+                name="fastapi",
+                version="latest",
+                is_dev=False,
+            )
+        ]
+        expect(config.dependencies).to(equal(expected_dependencies))
