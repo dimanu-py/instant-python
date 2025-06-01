@@ -18,6 +18,7 @@ from instant_python.configuration.parser.empty_configuration_not_allowed import 
 from instant_python.configuration.parser.missing_mandatory_fields import (
     MissingMandatoryFields,
 )
+from instant_python.configuration.template.template_configuration import TemplateConfiguration
 
 
 class Parser:
@@ -29,10 +30,13 @@ class Parser:
 
         general_configuration = cls._parse_general_configuration(content["general"])
         dependencies_configuration = cls._parse_dependencies_configuration(content["dependencies"])
+        template_configuration = cls._parse_template_configuration(content["template"])
         git_configuration = cls._parse_git_configuration(content["git"])
+        
         return ConfigurationSchema(
             general=general_configuration,
             dependencies=dependencies_configuration,
+            template=template_configuration,
             git=git_configuration,
         )
 
@@ -83,6 +87,10 @@ class Parser:
             dependencies.append(dependency)
 
         return dependencies
+    
+    @staticmethod
+    def _parse_template_configuration(fields: dict[str, str | bool | list[str]]) -> TemplateConfiguration:
+        return TemplateConfiguration(**fields)
 
     @staticmethod
     def _parse_git_configuration(fields: dict[str, str | bool]) -> GitConfiguration:

@@ -16,7 +16,7 @@ from instant_python.configuration.template.template_configuration import (
 class ConfigurationSchema:
     general: GeneralConfiguration
     dependencies: list[DependencyConfiguration]
-    template: TemplateConfiguration = field(init=False)
+    template: TemplateConfiguration
     git: GitConfiguration
 
     def to_primitives(self) -> dict[str, dict]:
