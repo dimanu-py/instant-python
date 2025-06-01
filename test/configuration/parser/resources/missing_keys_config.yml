@@ -9,5 +9,5 @@ general:
   dependency_manager: uv
 git:
   initialize: true
-  user_name: dimanu-py
-  user_email: dimanu.py@gmail.com
+  username: dimanu-py
+  email: dimanu.py@gmail.com

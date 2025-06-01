@@ -17,8 +17,8 @@ dependencies:
     is_dev: false
 git:
   initialize: true
-  user_name: dimanu-py
-  user_email: dimanu.py@gmail.com
+  username: dimanu-py
+  email: dimanu.py@gmail.com
 template:
   name: domain_driven_design
   bounded_context: backoffice
