@@ -2,6 +2,7 @@ from pathlib import Path
 
 from expects import expect, raise_error, be_none, be_empty
 
+from instant_python.configuration.config_key_not_present import ConfigKeyNotPresent
 from instant_python.configuration.parser.configuration_file_not_found import ConfigurationFileNotFound
 from instant_python.configuration.parser.empty_configuration_not_allowed import EmptyConfigurationNotAllowed
 from instant_python.configuration.parser.parser import Parser
