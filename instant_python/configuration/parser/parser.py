@@ -86,4 +86,7 @@ class Parser:
 
     @staticmethod
     def _parse_git_configuration(fields: dict[str, str | bool]) -> GitConfiguration:
-        return GitConfiguration(**fields)
+        try:
+            return GitConfiguration(**fields)
+        except TypeError as error:
+            raise MissingMandatoryFields(error.args[0], "git") from error
