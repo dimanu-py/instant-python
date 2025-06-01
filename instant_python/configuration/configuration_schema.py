@@ -17,7 +17,7 @@ class ConfigurationSchema:
     general: GeneralConfiguration
     dependencies: list[DependencyConfiguration]
     template: TemplateConfiguration = field(init=False)
-    git: GitConfiguration = field(init=False)
+    git: GitConfiguration
 
     def to_primitives(self) -> dict[str, dict]:
         return {

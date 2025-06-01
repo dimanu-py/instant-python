@@ -8,6 +8,7 @@ from instant_python.configuration.dependency.dependency_configuration import (
 from instant_python.configuration.general.general_configuration import (
     GeneralConfiguration,
 )
+from instant_python.configuration.git.git_configuration import GitConfiguration
 from instant_python.configuration.parser.configuration_file_not_found import (
     ConfigurationFileNotFound,
 )
@@ -28,9 +29,11 @@ class Parser:
 
         general_configuration = cls._parse_general_configuration(content["general"])
         dependencies_configuration = cls._parse_dependencies_configuration(content["dependencies"])
+        git_configuration = cls._parse_git_configuration(content["git"])
         return ConfigurationSchema(
             general=general_configuration,
             dependencies=dependencies_configuration,
+            git=git_configuration,
         )
 
     @classmethod
@@ -80,3 +83,7 @@ class Parser:
             dependencies.append(dependency)
 
         return dependencies
+
+    @staticmethod
+    def _parse_git_configuration(fields: dict[str, str | bool]) -> GitConfiguration:
+        return GitConfiguration(**fields)
