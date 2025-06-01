@@ -22,9 +22,7 @@ class ConfigurationSchema:
     def to_primitives(self) -> dict[str, dict]:
         return {
             "general": self.general.to_primitives(),
-            "dependencies": [
-                dependency.to_primitives() for dependency in self.dependencies
-            ],
+            "dependencies": [dependency.to_primitives() for dependency in self.dependencies],
             "template": self.template.to_primitives(),
             "git": self.git.to_primitives(),
         }

@@ -25,9 +25,7 @@ class TestParser:
     def test_should_raise_error_if_config_file_is_not_found(self) -> None:
         config_file_path = "non_existent_config_file"
 
-        expect(lambda: Parser.parse(config_file_path)).to(
-            raise_error(ConfigurationFileNotFound)
-        )
+        expect(lambda: Parser.parse(config_file_path)).to(raise_error(ConfigurationFileNotFound))
 
     def test_should_load_config_file_when_exists(self) -> None:
         config_file_path = self._build_config_file_path("config")
@@ -39,16 +37,12 @@ class TestParser:
     def test_should_raise_error_if_config_file_is_empty(self) -> None:
         config_file_path = self._build_config_file_path("empty_config")
 
-        expect(lambda: Parser.parse(config_file_path)).to(
-            raise_error(EmptyConfigurationNotAllowed)
-        )
+        expect(lambda: Parser.parse(config_file_path)).to(raise_error(EmptyConfigurationNotAllowed))
 
     def test_should_raise_error_if_config_keys_are_not_present(self) -> None:
         config_file_path = self._build_config_file_path("missing_keys_config")
 
-        expect(lambda: Parser.parse(config_file_path)).to(
-            raise_error(ConfigKeyNotPresent)
-        )
+        expect(lambda: Parser.parse(config_file_path)).to(raise_error(ConfigKeyNotPresent))
 
     def test_should_parse_general_configuration_key(self) -> None:
         config_file_path = self._build_config_file_path("config")
@@ -69,10 +63,8 @@ class TestParser:
 
     def test_should_raise_error_if_general_configuration_has_missing_mandatory_fields(self) -> None:
         config_file_path = self._build_config_file_path("missing_general_fields_config")
-        
-        expect(lambda: Parser.parse(config_file_path)).to(
-            raise_error(MissingMandatoryFields)
-        )
+
+        expect(lambda: Parser.parse(config_file_path)).to(raise_error(MissingMandatoryFields))
 
     def test_should_parse_dependencies_configuration_key(self) -> None:
         config_file_path = self._build_config_file_path("config")
@@ -90,6 +82,6 @@ class TestParser:
                 name="fastapi",
                 version="latest",
                 is_dev=False,
-            )
+            ),
         ]
         expect(config.dependencies).to(equal(expected_dependencies))

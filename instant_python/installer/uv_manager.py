@@ -72,9 +72,7 @@ class UvManager(DependencyManager):
         if is_dev:
             flag = "--dev"
         if add_to_group:
-            group_name = FreeTextQuestion(
-                key="group_name", message="Enter the name of the group"
-            ).ask()["group_name"]
+            group_name = FreeTextQuestion(key="group_name", message="Enter the name of the group").ask()["group_name"]
             flag = f"--group {group_name}"
         return flag
 

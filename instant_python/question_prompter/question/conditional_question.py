@@ -29,8 +29,6 @@ class ConditionalQuestion:
                 answers.update(question.ask())
         return answers
 
-    def _base_answer_does_not_satisfies_condition(
-        self, base_answer: dict[str, str]
-    ) -> bool:
+    def _base_answer_does_not_satisfies_condition(self, base_answer: dict[str, str]) -> bool:
         answer_value = next(iter(base_answer.values()))
         return answer_value != self._condition

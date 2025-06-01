@@ -55,9 +55,7 @@ class Parser:
 
     @staticmethod
     def _ensure_all_required_keys_are_present(content: dict[str, dict]) -> None:
-        missing_keys = [
-            key for key in Parser.REQUIRED_CONFIG_KEYS if key not in content
-        ]
+        missing_keys = [key for key in Parser.REQUIRED_CONFIG_KEYS if key not in content]
         if missing_keys:
             raise ConfigKeyNotPresent(missing_keys, Parser.REQUIRED_CONFIG_KEYS)
 

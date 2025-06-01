@@ -12,9 +12,7 @@ class Directory(Node):
         self._children = children
 
     def __repr__(self) -> str:
-        return (
-            f"{self.__class__.__name__}(name={self._name}, children={self._children})"
-        )
+        return f"{self.__class__.__name__}(name={self._name}, children={self._children})"
 
     def create(self, base_path: Path) -> None:
         directory_path = base_path / self._name

@@ -13,14 +13,10 @@ class Installer:
     ) -> None:
         self._dependency_manager = dependency_manager
 
-    def perform_installation(
-        self, python_version: str, dependencies: list[str]
-    ) -> None:
+    def perform_installation(self, python_version: str, dependencies: list[str]) -> None:
         try:
             self._dependency_manager.install()
             self._dependency_manager.install_python(python_version)
             self._dependency_manager.install_dependencies(dependencies)
         except subprocess.CalledProcessError as error:
-            raise CommandExecutionError(
-                exit_code=error.returncode, stderr_output=error.stderr
-            )
+            raise CommandExecutionError(exit_code=error.returncode, stderr_output=error.stderr)

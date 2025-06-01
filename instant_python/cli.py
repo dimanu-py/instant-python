@@ -13,9 +13,7 @@ app.add_typer(
     name="folder",
     help="Generate only the folder structure for a new project",
 )
-app.add_typer(
-    project_cli.app, name="project", help="Generate a full project ready to be used"
-)
+app.add_typer(project_cli.app, name="project", help="Generate a full project ready to be used")
 
 
 @app.error_handler(ApplicationError)
@@ -26,9 +24,7 @@ def handle_application_error(exc: ApplicationError) -> None:
 
 @app.error_handler(Exception)
 def handle_unexpected_error(exc: Exception) -> None:
-    error_panel = Panel(
-        f"An unexpected error occurred: {exc}", title="Error", border_style="red"
-    )
+    error_panel = Panel(f"An unexpected error occurred: {exc}", title="Error", border_style="red")
     console.print(error_panel)
 
 

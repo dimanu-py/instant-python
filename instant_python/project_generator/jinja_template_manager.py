@@ -15,9 +15,7 @@ class JinjaTemplateManager(TemplateManager):
         self._env = JinjaEnvironment()
 
     def get_project(self, template_name: str) -> dict:
-        template = self._get_template(
-            f"{template_name}/{self._requirements.template}/main_structure.yml.j2"
-        )
+        template = self._get_template(f"{template_name}/{self._requirements.template}/main_structure.yml.j2")
         raw_project_structure = self._render(template)
         return yaml.safe_load(raw_project_structure)
 
@@ -29,9 +27,7 @@ class JinjaTemplateManager(TemplateManager):
         return self._env.get_template(name)
 
     def _render(self, template: Template) -> str:
-        return template.render(
-            **self._requirements.to_dict(), template_types=TemplateTypes
-        )
+        return template.render(**self._requirements.to_dict(), template_types=TemplateTypes)
 
     @staticmethod
     def _load_memory_requirements() -> RequirementsConfiguration:

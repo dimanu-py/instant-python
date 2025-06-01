@@ -51,24 +51,16 @@ class TemplateConfiguration:
             raise InvalidTemplateValue(self.name, self.SUPPORTED_TEMPLATES)
 
     def _ensure_built_in_features_are_supported(self) -> None:
-        unsupported_features = [
-            feature
-            for feature in self.built_in_features
-            if feature not in self.SUPPORTED_BUILT_IN_FEATURES
-        ]
+        unsupported_features = [feature for feature in self.built_in_features if feature not in self.SUPPORTED_BUILT_IN_FEATURES]
         if unsupported_features:
-            raise InvalidBuiltInFeaturesValues(
-                unsupported_features, self.SUPPORTED_BUILT_IN_FEATURES
-            )
+            raise InvalidBuiltInFeaturesValues(unsupported_features, self.SUPPORTED_BUILT_IN_FEATURES)
 
     def _ensure_bounded_context_is_only_applicable_for_ddd_template(self) -> None:
         if self.specify_bounded_context and self.name != "domain_driven_design":
             raise BoundedContextNotApplicable(self.name)
 
     def _ensure_bounded_context_is_set_if_specified(self) -> None:
-        if self.specify_bounded_context and (
-            not self.bounded_context or not self.aggregate_name
-        ):
+        if self.specify_bounded_context and (not self.bounded_context or not self.aggregate_name):
             raise BoundedContextNotSpecified()
 
     def to_primitives(self) -> dict[str, str | list[str]]:

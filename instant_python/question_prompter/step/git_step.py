@@ -18,9 +18,7 @@ class GitStep(Step):
                     default=True,
                 ),
                 subquestions=[
-                    FreeTextQuestion(
-                        key="git_user_name", message="Type your git user name"
-                    ),
+                    FreeTextQuestion(key="git_user_name", message="Type your git user name"),
                     FreeTextQuestion(key="git_email", message="Type your git email"),
                 ],
                 condition=True,

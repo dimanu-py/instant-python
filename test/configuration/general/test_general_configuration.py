@@ -39,9 +39,5 @@ class TestGeneralConfiguration:
             ),
         ],
     )
-    def test_should_raise_error_for_unsupported_configuration_parameters(
-        self, field, value, expected_error
-    ) -> None:
-        expect(lambda: GeneralConfigurationMother.with_parameter(**{field: value})).to(
-            raise_error(expected_error)
-        )
+    def test_should_raise_error_for_unsupported_configuration_parameters(self, field, value, expected_error) -> None:
+        expect(lambda: GeneralConfigurationMother.with_parameter(**{field: value})).to(raise_error(expected_error))

@@ -28,9 +28,7 @@ class FolderTree:
             children = node.get("children", [])
             is_python_module = node.get("python", False)
             directory_children = [self._build_tree(child) for child in children]
-            return Directory(
-                name=name, children=directory_children, python_module=is_python_module
-            )
+            return Directory(name=name, children=directory_children, python_module=is_python_module)
         elif node_type == NodeType.BOILERPLATE:
             extension = node.get("extension", "")
             return BoilerplateFile(name=name, extension=extension)

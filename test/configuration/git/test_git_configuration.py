@@ -22,11 +22,7 @@ class TestGitConfiguration:
         expect(git_configuration.email).to(be_none)
 
     def test_should_not_allow_to_initialize_git_if_user_is_not_present(self) -> None:
-        expect(lambda: GitConfigurationMother.with_parameters(username=None)).to(
-            raise_error(GitUserOrEmailNotPresent)
-        )
+        expect(lambda: GitConfigurationMother.with_parameters(username=None)).to(raise_error(GitUserOrEmailNotPresent))
 
     def test_should_not_allow_to_initialize_git_if_email_is_not_present(self) -> None:
-        expect(lambda: GitConfigurationMother.with_parameters(email=None)).to(
-            raise_error(GitUserOrEmailNotPresent)
-        )
+        expect(lambda: GitConfigurationMother.with_parameters(email=None)).to(raise_error(GitUserOrEmailNotPresent))

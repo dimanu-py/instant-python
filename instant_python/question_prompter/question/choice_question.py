@@ -4,9 +4,7 @@ from instant_python.question_prompter.question.question import Question
 
 
 class ChoiceQuestion(Question[str]):
-    def __init__(
-        self, key: str, message: str, options: list[str] | None = None
-    ) -> None:
+    def __init__(self, key: str, message: str, options: list[str] | None = None) -> None:
         super().__init__(key, message)
         self._default = options[0] if options else ""
         self._options = options if options else []
