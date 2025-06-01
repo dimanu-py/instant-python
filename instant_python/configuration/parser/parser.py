@@ -62,17 +62,8 @@ class Parser:
     @staticmethod
     def _parse_general_configuration(fields: dict[str, str]) -> GeneralConfiguration:
         try:
-            return GeneralConfiguration(
-                slug=fields["slug"],
-                source_name=fields["source_name"],
-                description=fields["description"],
-                version=str(fields["version"]),
-                author=fields["author"],
-                license=fields["license"],
-                python_version=str(fields["python_version"]),
-                dependency_manager=fields["dependency_manager"],
-            )
-        except KeyError as error:
+            return GeneralConfiguration(**fields)
+        except TypeError as error:
             raise MissingMandatoryFields(error.args[0], "general") from error
 
     @staticmethod
@@ -82,13 +73,8 @@ class Parser:
         dependencies = []
         for dependency_fields in fields:
             try:
-                dependency = DependencyConfiguration(
-                    name=dependency_fields["name"],
-                    version=str(dependency_fields["version"]),
-                    is_dev=dependency_fields.get("dev", False),
-                    group=dependency_fields.get("group", ""),
-                )
-            except KeyError as error:
+                dependency = DependencyConfiguration(**dependency_fields)
+            except TypeError as error:
                 raise MissingMandatoryFields(error.args[0], "dependencies") from error
 
             dependencies.append(dependency)
