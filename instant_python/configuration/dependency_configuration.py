@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field, asdict
 
+from instant_python.configuration.not_dev_dependency_included_in_group import NotDevDependencyIncludedInGroup
+
 
 @dataclass
 class DependencyConfiguration:
@@ -8,5 +10,12 @@ class DependencyConfiguration:
     is_dev: bool = field(default=False)
     group: str = field(default_factory=str)
 
+    def __post_init__(self) -> None:
+        self._ensure_dependency_is_dev_if_group_is_set()
+
     def to_primitives(self) -> dict[str, str | bool]:
         return asdict(self)
+
+    def _ensure_dependency_is_dev_if_group_is_set(self) -> None:
+        if self.group and not self.is_dev:
+            raise NotDevDependencyIncludedInGroup(self.name, self.group)
