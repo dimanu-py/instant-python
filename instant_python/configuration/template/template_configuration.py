@@ -32,7 +32,7 @@ class TemplateConfiguration:
 
     def _ensure_template_is_supported(self) -> None:
         if self.name not in SUPPORTED_TEMPLATES:
-            raise InvalidTemplateValue(self.name)
+            raise InvalidTemplateValue(self.name, SUPPORTED_TEMPLATES)
 
     def _ensure_built_in_features_are_supported(self) -> None:
         unsupported_features = [
@@ -41,7 +41,7 @@ class TemplateConfiguration:
             if feature not in SUPPORTED_BUILT_IN_FEATURES
         ]
         if unsupported_features:
-            raise InvalidBuiltInFeaturesValues(unsupported_features)
+            raise InvalidBuiltInFeaturesValues(unsupported_features, SUPPORTED_BUILT_IN_FEATURES)
 
     def _ensure_bounded_context_is_only_applicable_for_ddd_template(self) -> None:
         if self.specify_bounded_context and self.name != "domain_driven_design":

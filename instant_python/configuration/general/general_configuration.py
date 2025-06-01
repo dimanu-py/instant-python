@@ -26,15 +26,15 @@ class GeneralConfiguration:
 
     def _ensure_license_is_supported(self) -> None:
         if self.license not in SUPPORTED_LICENSES:
-            raise InvalidLicenseValue(self.license)
+            raise InvalidLicenseValue(self.license, SUPPORTED_LICENSES)
 
     def _ensure_python_version_is_supported(self) -> None:
         if self.python_version not in SUPPORTED_PYTHON_VERSIONS:
-            raise InvalidPythonVersionValue(self.python_version)
+            raise InvalidPythonVersionValue(self.python_version, SUPPORTED_PYTHON_VERSIONS)
 
     def _ensure_dependency_manager_is_supported(self) -> None:
         if self.dependency_manager not in SUPPORTED_DEPENDENCY_MANAGERS:
-            raise InvalidDependencyManagerValue(self.dependency_manager)
+            raise InvalidDependencyManagerValue(self.dependency_manager, SUPPORTED_DEPENDENCY_MANAGERS)
 
     def to_primitives(self) -> dict[str, str]:
         return asdict(self)
