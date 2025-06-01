@@ -15,14 +15,14 @@ from instant_python.configuration.template.template_configuration import (
 @dataclass
 class ConfigurationSchema:
     general: GeneralConfiguration
-    dependency: DependencyConfiguration
+    dependencies: list[DependencyConfiguration]
     template: TemplateConfiguration
     git: GitConfiguration
 
     def to_primitives(self) -> dict[str, dict]:
         return {
             "general": self.general.to_primitives(),
-            "dependency": self.dependency.to_primitives(),
+            "dependencies": [dependency.to_primitives() for dependency in self.dependencies],
             "template": self.template.to_primitives(),
             "git": self.git.to_primitives(),
         }
