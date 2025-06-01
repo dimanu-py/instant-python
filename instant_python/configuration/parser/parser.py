@@ -1,5 +1,3 @@
-from typing import Any
-
 import yaml
 
 from instant_python.configuration.configuration_schema import ConfigurationSchema
@@ -19,11 +17,19 @@ class Parser:
 
     @classmethod
     def _get_config_file_content(cls, config_file_path: str) -> dict[str, dict]:
-        try:
-            with open(config_file_path, "r") as file:
-                content = yaml.safe_load(file)
-        except FileNotFoundError:
-            raise ConfigurationFileNotFound(config_file_path)
+        content = cls._read_config_file(config_file_path)
+        cls._ensure_config_file_is_not_empty(content)
+        return content
+
+    @staticmethod
+    def _ensure_config_file_is_not_empty(content: dict[str, dict]) -> None:
         if not content:
             raise EmptyConfigurationNotAllowed()
-        return content
+
+    @staticmethod
+    def _read_config_file(config_file_path: str) -> dict[str, dict]:
+        try:
+            with open(config_file_path, "r") as file:
+                return yaml.safe_load(file)
+        except FileNotFoundError:
+            raise ConfigurationFileNotFound(config_file_path)
