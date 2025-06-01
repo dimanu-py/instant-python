@@ -29,3 +29,10 @@ class TestParser:
         expect(lambda: Parser.parse(config_file_path)).to(
             raise_error(EmptyConfigurationNotAllowed)
         )
+        
+    def test_should_raise_error_if_config_keys_are_not_present(self) -> None:
+        config_file_path = str(Path(__file__).parent / "resources" / "missing_keys_config.yml")
+        
+        expect(lambda: Parser.parse(config_file_path)).to(
+            raise_error(ConfigKeyNotPresent)
+        )
