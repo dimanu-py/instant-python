@@ -1,5 +1,6 @@
 from expects import expect, raise_error
 
+from instant_python.configuration.parser.configuration_file_not_found import ConfigurationFileNotFound
 from instant_python.configuration.parser.parser import Parser
 
 
