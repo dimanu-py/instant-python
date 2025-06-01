@@ -90,7 +90,10 @@ class Parser:
     
     @staticmethod
     def _parse_template_configuration(fields: dict[str, str | bool | list[str]]) -> TemplateConfiguration:
-        return TemplateConfiguration(**fields)
+        try:
+            return TemplateConfiguration(**fields)
+        except TypeError as error:
+            raise MissingMandatoryFields(error.args[0], "template") from error
 
     @staticmethod
     def _parse_git_configuration(fields: dict[str, str | bool]) -> GitConfiguration:
