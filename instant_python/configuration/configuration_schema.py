@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from instant_python.configuration.dependency.dependency_configuration import (
     DependencyConfiguration,
