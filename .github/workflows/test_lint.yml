@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  id-token: write
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -32,6 +36,8 @@ jobs:
             git commit -m "🚨 chore: fix linting issues via GitHub Actions"
             git push
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Check linting again
         run: uvx ruff check --exclude "instant_python/templates" instant_python test
 
@@ -61,6 +67,8 @@ jobs:
             git commit -m "🎨 style: format code via GitHub Actions"
             git push
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Check code format again
         run: uvx ruff format --check --exclude "instant_python/templates" instant_python test
 
