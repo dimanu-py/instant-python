@@ -32,7 +32,7 @@ class Parser:
         dependencies_configuration = cls._parse_dependencies_configuration(content["dependencies"])
         template_configuration = cls._parse_template_configuration(content["template"])
         git_configuration = cls._parse_git_configuration(content["git"])
-        
+
         return ConfigurationSchema(
             general=general_configuration,
             dependencies=dependencies_configuration,
@@ -87,7 +87,7 @@ class Parser:
             dependencies.append(dependency)
 
         return dependencies
-    
+
     @staticmethod
     def _parse_template_configuration(fields: dict[str, str | bool | list[str]]) -> TemplateConfiguration:
         try:

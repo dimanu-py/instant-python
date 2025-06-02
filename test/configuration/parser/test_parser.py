@@ -86,21 +86,21 @@ class TestParser:
 
     def test_should_parse_git_configuration_key(self) -> None:
         config_file_path = self._build_config_file_path("config")
-        
+
         config = Parser.parse(config_file_path)
-        
+
         expected_git_config = GitConfiguration(
             initialize=True,
             username="dimanu-py",
             email="dimanu.py@gmail.com",
         )
         expect(config.git).to(equal(expected_git_config))
-    
+
     def test_should_parse_template_config(self) -> None:
         config_file_path = self._build_config_file_path("config")
-        
+
         config = Parser.parse(config_file_path)
-        
+
         expected_template_config = TemplateConfiguration(
             name="domain_driven_design",
             built_in_features=[],
@@ -109,7 +109,7 @@ class TestParser:
             aggregate_name=None,
         )
         expect(config.template).to(equal(expected_template_config))
-        
+
     @pytest.mark.parametrize(
         "file_name",
         [
