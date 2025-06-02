@@ -40,6 +40,13 @@ repository = "https://github.com/dimanu-py/instant-python/"
 [project.scripts]
 ipy = "instant_python.cli:app"
 
+[tool.ruff]
+exclude = ["instant_python/templates/**"]
+line-length = 140
+
+[tools.pytest.ini_options]
+testpaths = ["tests"]
+
 [dependency-groups]
 docs = [
     "mkdocs>=1.6.1",
@@ -50,6 +57,15 @@ git = [
     "commitizen>=4.2.2",
 ]
 lint = [
+    "mypy>=1.16.0",
+    "ruff>=0.11.12",
     "tox>=4.25.0",
     "vermin>=1.6.0",
+]
+test = [
+    "expects>=0.9.0",
+    "faker>=37.3.0",
+    "pytest>=8.3.5",
+    "pytest-sugar>=1.0.0",
+    "pytest-watch>=4.2.0",
 ]

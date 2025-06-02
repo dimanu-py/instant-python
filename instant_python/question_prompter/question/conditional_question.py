@@ -5,7 +5,10 @@ from instant_python.question_prompter.question.question import Question
 
 class ConditionalQuestion:
     def __init__(
-        self, base_question: Question, subquestions: Union[list[Question], "ConditionalQuestion"], condition: str | bool
+        self,
+        base_question: Question,
+        subquestions: Union[list[Question], "ConditionalQuestion"],
+        condition: str | bool,
     ) -> None:
         self._base_question = base_question
         self._subquestions = subquestions
@@ -18,7 +21,7 @@ class ConditionalQuestion:
             return base_answer
 
         answers = base_answer
-        
+
         if isinstance(self._subquestions, ConditionalQuestion):
             answers.update(self._subquestions.ask())
         else:

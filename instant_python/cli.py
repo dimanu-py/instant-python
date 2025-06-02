@@ -8,7 +8,11 @@ from instant_python.intant_python_typer import InstantPythonTyper
 app = InstantPythonTyper()
 console = Console()
 
-app.add_typer(folder_cli.app, name="folder", help="Generate only the folder structure for a new project")
+app.add_typer(
+    folder_cli.app,
+    name="folder",
+    help="Generate only the folder structure for a new project",
+)
 app.add_typer(project_cli.app, name="project", help="Generate a full project ready to be used")
 
 

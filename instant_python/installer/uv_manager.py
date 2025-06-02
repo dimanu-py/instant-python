@@ -2,7 +2,9 @@ import subprocess
 
 from instant_python.installer.dependency_manager import DependencyManager
 from instant_python.question_prompter.question.boolean_question import BooleanQuestion
-from instant_python.question_prompter.question.free_text_question import FreeTextQuestion
+from instant_python.question_prompter.question.free_text_question import (
+    FreeTextQuestion,
+)
 
 
 class UvManager(DependencyManager):
@@ -70,9 +72,7 @@ class UvManager(DependencyManager):
         if is_dev:
             flag = "--dev"
         if add_to_group:
-            group_name = FreeTextQuestion(
-                key="group_name", message="Enter the name of the group"
-            ).ask()["group_name"]
+            group_name = FreeTextQuestion(key="group_name", message="Enter the name of the group").ask()["group_name"]
             flag = f"--group {group_name}"
         return flag
 

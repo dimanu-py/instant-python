@@ -1,4 +1,6 @@
-from instant_python.errors.unknown_dependency_manager_error import UnknownDependencyManagerError
+from instant_python.errors.unknown_dependency_manager_error import (
+    UnknownDependencyManagerError,
+)
 from instant_python.installer.dependency_manager import DependencyManager
 from instant_python.installer.managers import Managers
 from instant_python.installer.pdm_manager import PdmManager

@@ -1,5 +1,5 @@
 [project]
-name = "{{ project_slug }}"
+name = "{{ slug }}"
 version = "{{ version }}"
 description = "{{ description }}"
 authors = [{name = "{{ author }}", email = "{{ git_email }}"}]

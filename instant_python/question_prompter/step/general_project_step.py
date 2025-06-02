@@ -1,5 +1,7 @@
 from instant_python.question_prompter.question.choice_question import ChoiceQuestion
-from instant_python.question_prompter.question.free_text_question import FreeTextQuestion
+from instant_python.question_prompter.question.free_text_question import (
+    FreeTextQuestion,
+)
 from instant_python.question_prompter.step.steps import Step
 
 
@@ -7,7 +9,7 @@ class GeneralProjectStep(Step):
     def __init__(self) -> None:
         self._questions = [
             FreeTextQuestion(
-                key="project_slug",
+                key="slug",
                 message="Enter the name of the project (CANNOT CONTAIN SPACES)",
                 default="python-project",
             ),

@@ -8,7 +8,7 @@ class ChoiceQuestion(Question[str]):
         super().__init__(key, message)
         self._default = options[0] if options else ""
         self._options = options if options else []
-    
+
     def ask(self) -> dict[str, str]:
         answer = questionary.select(
             self._message,

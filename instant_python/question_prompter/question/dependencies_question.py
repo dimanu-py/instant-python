@@ -12,9 +12,9 @@ class DependenciesQuestion(Question[list[str]]):
     def ask(self) -> dict[str, list[str]]:
         dependencies = []
         while True:
-            user_wants_to_install_dependencies = BooleanQuestion(
-                key="keep_asking", message=self._message, default=False
-            ).ask()["keep_asking"]
+            user_wants_to_install_dependencies = BooleanQuestion(key="keep_asking", message=self._message, default=False).ask()[
+                "keep_asking"
+            ]
 
             if not user_wants_to_install_dependencies:
                 break
