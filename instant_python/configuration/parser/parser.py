@@ -1,6 +1,6 @@
 import yaml
 
-from instant_python.configuration.config_key_not_present import ConfigKeyNotPresent
+from instant_python.configuration.parser.config_key_not_present import ConfigKeyNotPresent
 from instant_python.configuration.configuration_schema import ConfigurationSchema
 from instant_python.configuration.dependency.dependency_configuration import (
     DependencyConfiguration,

@@ -4,13 +4,5 @@ from instant_python.errors.error_types import ErrorTypes
 
 class GitUserOrEmailNotPresent(ApplicationError):
     def __init__(self) -> None:
-        self._message = "When initializing a git repository, both username and email must be provided."
-        super().__init__(self._message)
-
-    @property
-    def type(self) -> str:
-        return ErrorTypes.CONFIGURATION.value
-
-    @property
-    def message(self) -> str:
-        return self._message
+        message = "When initializing a git repository, both username and email must be provided."
+        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
