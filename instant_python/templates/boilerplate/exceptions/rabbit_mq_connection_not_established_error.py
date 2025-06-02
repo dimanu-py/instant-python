@@ -6,12 +6,4 @@ class RabbitMqConnectionNotEstablishedError(DomainError):
 	def __init__(self) -> None:
 		self._message = "RabbitMQ connection not established."
 		self._type = "rabbit_mq_connection"
-		super().__init__(self._message)
-
-	@property
-	def type(self) -> str:
-		return self._type
-
-	@property
-	def message(self) -> str:
-		return self._message
+		super().__init__(message=self._message, error_type=self._type)

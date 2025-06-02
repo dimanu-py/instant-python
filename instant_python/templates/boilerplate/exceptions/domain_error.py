@@ -1,17 +1,22 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 
 
 class DomainError(Exception, ABC):
-	@property
-	@abstractmethod
-	def type(self) -> str: ...
+    def __init__(self, message: str, error_type: str) -> None:
+        self._message = message
+        self._type = error_type
+        super().__init__(self._message)
 
-	@property
-	@abstractmethod
-	def message(self) -> str: ...
+    @property
+    def type(self) -> str:
+        return self._type
 
-	def to_dict(self) -> dict:
-		return {
-			"type": self.type,
-			"message": self.message,
-		}
+    @property
+    def message(self) -> str:
+        return self._message
+
+    def to_primitives(self) -> dict[str, str]:
+        return {
+            "type": self.type,
+            "message": self.message,
+        }
