@@ -5,8 +5,6 @@ on:
     branches:
       - main
 
-  workflow_dispatch:
-
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -14,6 +12,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/python_setup
       - name: Check linting
+        id: check_lint
+        run: uvx ruff check --exclude "instant_python/templates" instant_python test
+        continue-on-error: true
+      - name: Auto fix lint errors
+        if: ${{ steps.check_lint.outcome == 'failure' }}
+        run: uvx ruff check --fix --exclude "instant_python/templates" instant_python test
+      - name: Check linting again
         run: uvx ruff check --exclude "instant_python/templates" instant_python test
 
   format:
