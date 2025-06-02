@@ -16,8 +16,22 @@ jobs:
         run: uvx ruff check --exclude "instant_python/templates" instant_python test
         continue-on-error: true
       - name: Auto fix lint errors
+        id: fix_lint
         if: ${{ steps.check_lint.outcome == 'failure' }}
         run: uvx ruff check --fix --exclude "instant_python/templates" instant_python test
+      - name: Commit lint fixes
+        if: ${{ steps.fix_lint.outcome == 'success' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          if git diff --quiet; then
+            echo "No changes to commit."
+          else
+            git add .
+            git commit -m "🚨 chore: fix linting issues via GitHub Actions"
+            git push
+          fi
       - name: Check linting again
         run: uvx ruff check --exclude "instant_python/templates" instant_python test
 
