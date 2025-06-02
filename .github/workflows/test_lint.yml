@@ -1,0 +1,41 @@
+name: Run tests and linting
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/python_setup
+      - name: Check linting
+        run: uvx ruff check --exclude "instant_python/templates" instant_python test
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/python_setup
+      - name: Check code format
+        run: uvx ruff format --check --exclude "instant_python/templates" instant_python test
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/python_setup
+      - name: Install test dependencies
+        run: uv pip install pytest pytest-cov
+      - name: Run tests
+        run: uv run pytest --cov=instant_python --cov-report=xml --cov-report=html --cov-report=term-missing test -ra
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v3
+        with:
+          files: coverage.xml
+          flags: unittests
+          name: codecov-coverage
