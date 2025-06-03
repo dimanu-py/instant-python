@@ -41,7 +41,7 @@ def create_default_project_structure() -> None:
     requirements.save_in_memory()
 
     project_generator = ProjectGenerator(
-        folder_tree=FolderTree(requirements.project_slug),
+        folder_tree=FolderTree(requirements.slug),
         template_manager=JinjaTemplateManager(),
     )
 

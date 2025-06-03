@@ -39,7 +39,7 @@ def create_folder_structure_from_template(template_name: str) -> None:
     user_requirements.save_in_memory()
 
     project_generator = ProjectGenerator(
-        folder_tree=FolderTree(user_requirements.project_slug),
+        folder_tree=FolderTree(user_requirements.slug),
         template_manager=CustomTemplateManager(template_name),
     )
     project_generator.generate()
@@ -71,7 +71,7 @@ def create_full_project() -> None:
     user_requirements.save_in_memory()
 
     project_generator = ProjectGenerator(
-        folder_tree=FolderTree(user_requirements.project_slug),
+        folder_tree=FolderTree(user_requirements.slug),
         template_manager=JinjaTemplateManager(),
     )
     project_generator.generate()
