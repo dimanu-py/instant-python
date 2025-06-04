@@ -20,13 +20,13 @@ class ConfigurationSchema:
     template: TemplateConfiguration
     git: GitConfiguration
 
-    def to_primitives(self) -> dict[str, dict]:
-        return {
-            "general": self.general.to_primitives(),
-            "dependencies": [dependency.to_primitives() for dependency in self.dependencies],
-            "template": self.template.to_primitives(),
-            "git": self.git.to_primitives(),
-        }
+    def to_primitives(self) -> "ConfigurationSchemaPrimitives":
+        return ConfigurationSchemaPrimitives(
+            general=self.general.to_primitives(),
+            dependencies=[dependency.to_primitives() for dependency in self.dependencies],
+            template=self.template.to_primitives(),
+            git=self.git.to_primitives(),
+        )
 
     @property
     def template_type(self) -> str:
