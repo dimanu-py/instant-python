@@ -10,7 +10,7 @@ class TestProjectRender:
     def test_should_render_folder_structure(self) -> None:
         render = ProjectRender(jinja_environment=JinjaEnvironment(package_name="test", template_directory="builder/resources"))
 
-        project_structure = render.process_project(configuration=config)
+        project_structure = render.process_project(configuration=config)  # noqa: F821
 
         expected_project_structure = {}
         expect(project_structure).to(equal(expected_project_structure))
