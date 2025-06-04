@@ -9,8 +9,12 @@ from instant_python.configuration.parser.parser import Parser
 
 class TestJinjaProjectRender:
     def setup_method(self) -> None:
-        jinja_environment = JinjaEnvironment(package_name="test", template_directory="builder/resources")
-        self._project_render = JinjaProjectRender(jinja_environment=jinja_environment)
+        jinja_environment = JinjaEnvironment(package_name="test", template_directory="builder")
+        self._project_render = JinjaProjectRender(
+            jinja_environment=jinja_environment,
+            template_base_dir="resources",
+            main_structure_template="example_project.yml.j2",
+        )
 
     def test_should_render_template_with_project_structure(self) -> None:
         configuration = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
