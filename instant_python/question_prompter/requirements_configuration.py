@@ -7,7 +7,7 @@ import yaml
 
 @dataclass
 class RequirementsConfiguration:
-    project_slug: str
+    slug: str
     license: str
     version: str
     description: str

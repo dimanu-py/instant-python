@@ -71,6 +71,7 @@ class Parser:
         try:
             return GeneralConfiguration(**fields)
         except TypeError as error:
+            _ensure_error_is_for_missing_fields(error)
             raise MissingMandatoryFields(error.args[0], "general") from error
 
     @staticmethod
@@ -82,6 +83,7 @@ class Parser:
             try:
                 dependency = DependencyConfiguration(**dependency_fields)
             except TypeError as error:
+                _ensure_error_is_for_missing_fields(error)
                 raise MissingMandatoryFields(error.args[0], "dependencies") from error
 
             dependencies.append(dependency)
@@ -93,6 +95,7 @@ class Parser:
         try:
             return TemplateConfiguration(**fields)
         except TypeError as error:
+            _ensure_error_is_for_missing_fields(error)
             raise MissingMandatoryFields(error.args[0], "template") from error
 
     @staticmethod
@@ -100,4 +103,10 @@ class Parser:
         try:
             return GitConfiguration(**fields)
         except TypeError as error:
+            _ensure_error_is_for_missing_fields(error)
             raise MissingMandatoryFields(error.args[0], "git") from error
+
+
+def _ensure_error_is_for_missing_fields(error: TypeError) -> None:
+    if ".__init__() missing" not in str(error):
+        raise error

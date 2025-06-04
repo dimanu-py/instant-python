@@ -9,9 +9,13 @@ permissions:
 
 jobs:
   lint:
+    name: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
       - uses: ./.github/actions/python_setup
       - name: Check linting
         id: check_lint
@@ -40,9 +44,13 @@ jobs:
         run: uvx ruff check --exclude "instant_python/templates" instant_python test
 
   format:
+    name: format
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
       - uses: ./.github/actions/python_setup
       - name: Check code format
         id: check_format
@@ -71,6 +79,7 @@ jobs:
         run: uvx ruff format --check --exclude "instant_python/templates" instant_python test
 
   test:
+    name: test
     runs-on: ubuntu-latest
     needs: [lint, format]
     steps:
