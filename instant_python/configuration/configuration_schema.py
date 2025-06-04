@@ -26,3 +26,7 @@ class ConfigurationSchema:
             "template": self.template.to_primitives(),
             "git": self.git.to_primitives(),
         }
+
+    @property
+    def template_type(self) -> str:
+        return self.template.name
