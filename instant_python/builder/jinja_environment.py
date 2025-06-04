@@ -14,8 +14,7 @@ class JinjaEnvironment:
         self._env.filters["compute_base_path"] = compute_base_path
 
     def render_template(self, name: str, context: dict[str, str] = None) -> str:
-        """
-        Renders a template with the given context.
+        """Renders a template with the given context.
 
         Args:
             name: The name of the template to render

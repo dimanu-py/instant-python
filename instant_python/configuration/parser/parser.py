@@ -26,6 +26,18 @@ class Parser:
 
     @classmethod
     def parse(cls, config_file_path: str) -> ConfigurationSchema:
+        """ Parses the configuration file and validates its content.
+
+        Args:
+            config_file_path: The path to the configuration file to be parsed.
+        Returns:
+            ConfigurationSchema: An instance of ConfigurationSchema containing the parsed configuration.
+        Raises:
+            ConfigurationFileNotFound: If the configuration file does not exist in that path.
+            EmptyConfigurationNotAllowed: If the configuration file is empty.
+            ConfigKeyNotPresent: If any of the required keys are missing from the configuration.
+            MissingMandatoryFields: If any mandatory fields are missing in the configuration sections.
+        """
         content = cls._get_config_file_content(config_file_path)
 
         general_configuration = cls._parse_general_configuration(content["general"])
