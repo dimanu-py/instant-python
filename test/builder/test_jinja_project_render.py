@@ -15,7 +15,7 @@ class TestJinjaProjectRender:
     def test_should_render_template_with_project_structure(self) -> None:
         configuration = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
 
-        rendered_project = self._project_render.get_project(context_config=configuration)
+        rendered_project = self._project_render.render_project_structure(context_config=configuration)
 
         expected_project = {
             "root": [
