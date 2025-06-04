@@ -12,3 +12,17 @@ class JinjaEnvironment:
         )
         self._env.filters["is_in"] = is_in
         self._env.filters["compute_base_path"] = compute_base_path
+
+    def render_template(self, name: str, context: dict[str, str] = None) -> str:
+        """
+        Renders a template with the given context.
+
+        Args:
+            name: The name of the template to render
+            context: A dictionary of variables to pass to the template
+
+        Returns:
+            The rendered template as a string
+        """
+        template = self._env.get_template(name)
+        return template.render(**(context or {}))
