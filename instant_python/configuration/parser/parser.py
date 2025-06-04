@@ -79,6 +79,10 @@ class Parser:
         fields: list[dict[str, str | bool]],
     ) -> list[DependencyConfiguration]:
         dependencies = []
+
+        if not fields:
+            return dependencies
+
         for dependency_fields in fields:
             try:
                 dependency = DependencyConfiguration(**dependency_fields)
