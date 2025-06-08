@@ -21,4 +21,9 @@ root:
     type: boilerplate_file
     extension: .md
   {% endif %}
+  {% if "pytest" in dependencies %}
+  - name: pytest
+    type: boilerplate_file
+    extension: .ini
+  {% endif %}
 

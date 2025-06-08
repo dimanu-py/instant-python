@@ -36,6 +36,14 @@ class TestJinjaProjectRender:
         
         expected_project = self._load_expected_project("resources/standard_project/expected_project_with_git.json")
         expect(rendered_project).to(equal(expected_project))
+        
+    def test_should_render_standard_project_with_specific_dependency(self) -> None:
+        configuration = Parser.parse(str(Path(__file__).parent / "resources" / "standard_project_with_dependency_config.yml"))
+        
+        rendered_project = self._project_render.render_project_structure(context_config=configuration, template_base_dir="resources")
+        
+        expected_project = self._load_expected_project("resources/standard_project/expected_project_with_dependency.json")
+        expect(rendered_project).to(equal(expected_project))
 
     @staticmethod
     def _load_expected_project(path: str) -> dict:
