@@ -1,0 +1,19 @@
+general:
+  slug: python-project
+  source_name: src
+  description: Python Project Description
+  version: 0.1.0
+  author: Diego
+  license: MIT
+  python_version: 3.13
+  dependency_manager: uv
+dependencies:
+git:
+  initialize: false
+template:
+  name: domain_driven_design
+  specify_bounded_context: true
+  bounded_context: backoffice
+  aggregate_name: user
+  built_in_features:
+    - value_objects

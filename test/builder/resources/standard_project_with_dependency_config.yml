@@ -1,0 +1,20 @@
+general:
+  slug: python-project
+  source_name: src
+  description: Python Project Description
+  version: 0.1.0
+  author: Diego
+  license: MIT
+  python_version: 3.13
+  dependency_manager: uv
+dependencies:
+  - name: pytest
+    version: latest
+    is_dev: true
+    group: test
+git:
+  initialize: false
+template:
+  name: standard_project
+  built_in_features:
+    - value_objects
