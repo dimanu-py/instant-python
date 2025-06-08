@@ -15,6 +15,7 @@ class TestJinjaEnvironment:
     def test_should_register_custom_filters(self) -> None:
         expect("is_in" in self._jinja_environment._env.filters).to(be_true)
         expect("compute_base_path" in self._jinja_environment._env.filters).to(be_true)
+        expect("has_dependency" in self._jinja_environment._env.filters).to(be_true)
 
     def test_should_render_template(self) -> None:
         rendered_content = self._jinja_environment.render_template("test_template.j2", {"name": "World"})

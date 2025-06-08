@@ -1,6 +1,6 @@
 from jinja2 import Environment, PackageLoader
 
-from instant_python.project_generator.jinja_custom_filters import is_in, compute_base_path
+from instant_python.project_generator.jinja_custom_filters import is_in, compute_base_path, has_dependency
 
 
 class JinjaEnvironment:
@@ -12,6 +12,7 @@ class JinjaEnvironment:
         )
         self._env.filters["is_in"] = is_in
         self._env.filters["compute_base_path"] = compute_base_path
+        self._env.filters["has_dependency"] = has_dependency
 
     def render_template(self, name: str, context: dict[str, str] = None) -> str:
         """Renders a template with the given context.
