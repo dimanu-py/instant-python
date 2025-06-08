@@ -11,7 +11,7 @@ class JinjaProjectRender:
         self._jinja_environment = jinja_environment
 
     def render_project_structure(self, context_config: ConfigurationSchema, template_base_dir: str) -> dict[str, list[dict]]:
-        """ Render the project structure based on the provided configuration.
+        """Render the project structure based on the provided configuration.
 
         Args:
             context_config: The configuration schema containing the context for rendering.

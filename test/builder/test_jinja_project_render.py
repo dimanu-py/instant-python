@@ -29,20 +29,20 @@ class TestJinjaProjectRender:
 
         expected_project = self._load_expected_project(f"{self._resources_path}/domain_driven_design/expected_project.json")
         expect(rendered_project).to(equal(expected_project))
-        
+
     def test_should_render_standard_project_with_git_configuration(self) -> None:
         configuration = Parser.parse(f"{self._resources_path}/standard_project_with_git_config.yml")
-        
+
         rendered_project = self._project_render.render_project_structure(context_config=configuration, template_base_dir="resources")
-        
+
         expected_project = self._load_expected_project(f"{self._resources_path}/standard_project/expected_project_with_git.json")
         expect(rendered_project).to(equal(expected_project))
-        
+
     def test_should_render_standard_project_with_specific_dependency(self) -> None:
         configuration = Parser.parse(f"{self._resources_path}/standard_project_with_dependency_config.yml")
-        
+
         rendered_project = self._project_render.render_project_structure(context_config=configuration, template_base_dir="resources")
-        
+
         expected_project = self._load_expected_project(f"{self._resources_path}/standard_project/expected_project_with_dependency.json")
         expect(rendered_project).to(equal(expected_project))
 

@@ -26,7 +26,7 @@ class Parser:
 
     @classmethod
     def parse(cls, config_file_path: str) -> ConfigurationSchema:
-        """ Parses the configuration file and validates its content.
+        """Parses the configuration file and validates its content.
 
         Args:
             config_file_path: The path to the configuration file to be parsed.

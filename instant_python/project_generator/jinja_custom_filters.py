@@ -6,8 +6,11 @@ def is_in(values: list[str], container: list) -> bool:
     return any(value in container for value in values)
 
 
-def has_dependency(dependencies: list[dict], dependency_name: str, ) -> bool:
-    return any(dep.get('name') == dependency_name for dep in dependencies)
+def has_dependency(
+    dependencies: list[dict],
+    dependency_name: str,
+) -> bool:
+    return any(dep.get("name") == dependency_name for dep in dependencies)
 
 
 def compute_base_path(initial_path: str, template_type: str) -> str:
