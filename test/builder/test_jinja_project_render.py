@@ -12,8 +12,8 @@ class TestJinjaProjectRender:
         jinja_environment = JinjaEnvironment(package_name="test", template_directory="builder")
         self._project_render = JinjaProjectRender(jinja_environment=jinja_environment)
 
-    def test_should_render_template_with_project_structure(self) -> None:
-        configuration = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
+    def test_should_render_template_for_clean_architecture_project(self) -> None:
+        configuration = Parser.parse(str(Path(__file__).parent / "resources" / "clean_architecture_config.yml"))
 
         rendered_project = self._project_render.render_project_structure(context_config=configuration, template_base_dir="resources")
 
