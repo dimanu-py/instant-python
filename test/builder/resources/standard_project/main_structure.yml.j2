@@ -14,7 +14,7 @@ root:
             extension: .py
       {% endif %}
     {% endif %}
-  {% if git %}
+  {% if git.initialize %}
   - name: .gitignore
     type: boilerplate_file
   - name: README
