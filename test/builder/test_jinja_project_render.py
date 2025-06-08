@@ -20,7 +20,15 @@ class TestJinjaProjectRender:
 
         expected_project = self._load_expected_project("resources/clean_architecture/expected_project.json")
         expect(rendered_project).to(equal(expected_project))
-        
+
+    def test_should_render_template_for_domain_driven_design_project(self) -> None:
+        configuration = Parser.parse(str(Path(__file__).parent / "resources" / "domain_driven_design_config.yml"))
+
+        rendered_project = self._project_render.render_project_structure(context_config=configuration, template_base_dir="resources")
+
+        expected_project = self._load_expected_project("resources/domain_driven_design/expected_project.json")
+        expect(rendered_project).to(equal(expected_project))
+
     @staticmethod
     def _load_expected_project(path: str) -> dict:
         with open(path, "r") as file:
