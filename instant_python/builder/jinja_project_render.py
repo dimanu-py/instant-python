@@ -8,15 +8,9 @@ class JinjaProjectRender:
     _DEFAULT_TEMPLATE_BASE_DIR = "project_structure"
     _DEFAULT_MAIN_STRUCTURE_TEMPLATE = "main_structure.yml.j2"
 
-    def __init__(
-        self,
-        jinja_environment: JinjaEnvironment,
-        template_base_dir: str | None = None,
-        main_structure_template: str | None = None
-    ) -> None:
+    def __init__(self, jinja_environment: JinjaEnvironment, template_base_dir: str | None = None) -> None:
         self._jinja_environment = jinja_environment
         self._template_base_dir = template_base_dir or self._DEFAULT_TEMPLATE_BASE_DIR
-        self._main_structure_template = main_structure_template or self._DEFAULT_MAIN_STRUCTURE_TEMPLATE
 
     def render_project_structure(self, context_config: ConfigurationSchema) -> dict[str, list[dict]]:
         """ Render the project structure based on the provided configuration.
