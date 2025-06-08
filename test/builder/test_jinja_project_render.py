@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from expects import expect, equal
@@ -17,29 +18,10 @@ class TestJinjaProjectRender:
 
         rendered_project = self._project_render.render_project_structure(context_config=configuration, template_base_dir="resources")
 
-        expected_project = {
-            "root": [
-                {
-                    "name": "src",
-                    "type": "directory",
-                    "python": True,
-                    "children": [
-                        {
-                            "name": "domain",
-                            "type": "directory",
-                            "python": True,
-                            "children": [
-                                {
-                                    "name": "exceptions",
-                                    "type": "directory",
-                                    "python": True,
-                                    "children": [{"name": "exceptions/domain_error", "type": "boilerplate_file", "extension": ".py"}],
-                                }
-                            ],
-                        },
-                        {"name": "application", "type": "directory", "python": True},
-                    ],
-                },
-            ]
-        }
+        expected_project = self._load_expected_project("resources/clean_architecture/expected_project.json")
         expect(rendered_project).to(equal(expected_project))
+        
+    @staticmethod
+    def _load_expected_project(path: str) -> dict:
+        with open(path, "r") as file:
+            return json.load(file)
