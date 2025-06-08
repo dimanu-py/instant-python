@@ -6,7 +6,7 @@ from instant_python.configuration.configuration_schema import ConfigurationSchem
 
 class JinjaProjectRender:
     _DEFAULT_TEMPLATE_BASE_DIR = "project_structure"
-    _DEFAULT_MAIN_STRUCTURE_TEMPLATE = "main_structure.yml.j2"
+    _MAIN_STRUCTURE_TEMPLATE = "main_structure.yml.j2"
 
     def __init__(self, jinja_environment: JinjaEnvironment, template_base_dir: str | None = None) -> None:
         self._jinja_environment = jinja_environment
@@ -26,4 +26,4 @@ class JinjaProjectRender:
         return yaml.safe_load(raw_project_structure)
 
     def _get_main_structure_template_path(self, context_config: ConfigurationSchema) -> str:
-        return f"{self._template_base_dir}/{context_config.template_type}/{self._main_structure_template}"
+        return f"{self._template_base_dir}/{context_config.template_type}/{self._MAIN_STRUCTURE_TEMPLATE}"
