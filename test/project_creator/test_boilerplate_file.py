@@ -4,6 +4,12 @@ from instant_python.project_creator.boilerplate_file import BoilerplateFile
 
 
 class TestBoilerplateFile:
+    def teardown_method(self) -> None:
+        file_path = Path(__file__).parent / "domain_error.py"
+
+        if file_path.exists():
+            file_path.unlink()
+
     def test_should_extract_file_name(self) -> None:
         file = BoilerplateFile(name="exceptions/domain_error", extension=".py")
 
