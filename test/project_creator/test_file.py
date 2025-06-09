@@ -1,9 +1,9 @@
 from pathlib import Path
 
-from instant_python.project_creator.boilerplate_file import BoilerplateFile
+from instant_python.project_creator.file import File
 
 
-class TestBoilerplateFile:
+class TestFile:
     def teardown_method(self) -> None:
         file_path = Path(__file__).parent / "domain_error.py"
 
@@ -11,12 +11,12 @@ class TestBoilerplateFile:
             file_path.unlink()
 
     def test_should_extract_file_name(self) -> None:
-        file = BoilerplateFile(name="exceptions/domain_error", extension=".py")
+        file = File(name="exceptions/domain_error", extension=".py")
 
         assert file._file_name == "domain_error.py"
 
     def test_should_create_file_at_specified_file(self) -> None:
-        file = BoilerplateFile(name="exceptions/domain_error", extension=".py")
+        file = File(name="exceptions/domain_error", extension=".py")
 
         file.create(base_path=Path(__file__).parent)
 
