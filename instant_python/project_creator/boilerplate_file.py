@@ -11,4 +11,5 @@ class BoilerplateFile(Node):
         return f"{self.__class__.__name__}(name={self._file_name})"
 
     def create(self, base_path: Path) -> None:
-        raise NotImplementedError
+        file_path = base_path / self._file_name
+        file_path.touch(exist_ok=True)
