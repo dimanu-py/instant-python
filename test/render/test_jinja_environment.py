@@ -1,11 +1,11 @@
 from expects import expect, be_true, be_none, equal
 
-from instant_python.builder.jinja_environment import JinjaEnvironment
+from instant_python.render.jinja_environment import JinjaEnvironment
 
 
 class TestJinjaEnvironment:
     def setup_method(self) -> None:
-        self._jinja_environment = JinjaEnvironment(package_name="test", template_directory="builder/resources")
+        self._jinja_environment = JinjaEnvironment(package_name="test", template_directory="render/resources")
 
     def test_should_initialize_jinja_environment(self) -> None:
         expect(self._jinja_environment._env).not_to(be_none)

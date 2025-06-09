@@ -1,7 +1,7 @@
 import typer
 
-from instant_python.builder.jinja_environment import JinjaEnvironment
-from instant_python.builder.jinja_project_render import JinjaProjectRender
+from instant_python.render.jinja_environment import JinjaEnvironment
+from instant_python.render.jinja_project_render import JinjaProjectRender
 from instant_python.configuration.parser.parser import Parser
 
 app = typer.Typer()

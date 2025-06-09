@@ -4,14 +4,14 @@ from pathlib import Path
 import pytest
 from expects import expect, equal
 
-from instant_python.builder.jinja_environment import JinjaEnvironment
-from instant_python.builder.jinja_project_render import JinjaProjectRender
+from instant_python.render.jinja_environment import JinjaEnvironment
+from instant_python.render.jinja_project_render import JinjaProjectRender
 from instant_python.configuration.parser.parser import Parser
 
 
 class TestJinjaProjectRender:
     def setup_method(self) -> None:
-        jinja_environment = JinjaEnvironment(package_name="test", template_directory="builder")
+        jinja_environment = JinjaEnvironment(package_name="test", template_directory="render")
         self._project_render = JinjaProjectRender(jinja_environment=jinja_environment)
 
     @pytest.mark.parametrize(
