@@ -13,14 +13,14 @@ class TestDirectory:
             directory.rmdir()
 
     def test_should_create_normal_directory(self) -> None:
-        directory = Directory(name="value_objects", is_python=False)
+        directory = Directory(name="value_objects", is_python=False, children=[])
 
         directory.create(base_path=Path(__file__).parent)
 
         assert (Path(__file__).parent / "value_objects").exists()
 
     def test_should_create_python_directory_with_init_file(self) -> None:
-        directory = Directory(name="value_objects", is_python=True)
+        directory = Directory(name="value_objects", is_python=True, children=[])
 
         directory.create(base_path=Path(__file__).parent)
 
