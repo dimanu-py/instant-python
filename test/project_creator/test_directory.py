@@ -26,3 +26,12 @@ class TestDirectory:
 
         assert (Path(__file__).parent / "value_objects").exists()
         assert (Path(__file__).parent / "value_objects" / "__init__.py").exists()
+
+    def test_should_create_directory_with_other_directory_inside(self) -> None:
+        inner_directory = Directory(name="value_objects", is_python=False, children=[])
+        directory = Directory(name="domain", is_python=False, children=[inner_directory])
+
+        directory.create(base_path=Path(__file__).parent)
+
+        assert (Path(__file__).parent / "domain").exists()
+        assert (Path(__file__).parent / "domain" / "value_objects").exists()
