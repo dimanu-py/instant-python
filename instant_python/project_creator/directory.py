@@ -21,3 +21,6 @@ class Directory(Node):
         if self._is_python_module:
             init_file_path = path / self._INIT_FILE
             init_file_path.touch(exist_ok=True)
+
+        for child in self._children:
+            child.create(base_path=path)
