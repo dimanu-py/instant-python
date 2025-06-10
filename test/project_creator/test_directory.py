@@ -1,6 +1,7 @@
 import shutil
 from pathlib import Path
 
+from instant_python.project_creator.file import File
 from test.project_creator.directory_mother import DirectoryMother
 
 
@@ -32,6 +33,16 @@ class TestDirectory:
 
         directory.create(base_path=Path(__file__).parent)
 
-        directory_name = (Path(__file__).parent / directory._name)
+        directory_name = Path(__file__).parent / directory._name
         assert directory_name.exists()
         assert (directory_name / inner_directory._name).exists()
+
+    def test_should_create_directory_with_file_inside(self) -> None:
+        file = File(name="domain_error", extension=".py")
+        directory = DirectoryMother.with_children(file)
+
+        directory.create(base_path=Path(__file__).parent)
+
+        directory_name = Path(__file__).parent / directory._name
+        assert directory_name.exists()
+        assert (directory_name / "domain_error.py").exists()
