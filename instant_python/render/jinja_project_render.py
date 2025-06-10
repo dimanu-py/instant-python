@@ -1,6 +1,6 @@
 import yaml
 
-from instant_python.builder.jinja_environment import JinjaEnvironment
+from instant_python.render.jinja_environment import JinjaEnvironment
 from instant_python.configuration.configuration_schema import ConfigurationSchema
 
 
