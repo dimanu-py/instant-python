@@ -7,6 +7,9 @@ class TestDirectory:
     def teardown_method(self) -> None:
         directory = Path(__file__).parent / "value_objects"
         if directory.exists():
+            for item in directory.iterdir():
+                if item.is_file():
+                    item.unlink()
             directory.rmdir()
 
     def test_should_create_normal_directory(self) -> None:
