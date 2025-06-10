@@ -15,7 +15,7 @@ class TestFile:
 
         assert file._file_name == "domain_error.py"
 
-    def test_should_create_file_at_specified_file(self) -> None:
+    def test_should_create_file_at_specified_path(self) -> None:
         file = File(name="exceptions/domain_error", extension=".py")
 
         file.create(base_path=Path(__file__).parent)
