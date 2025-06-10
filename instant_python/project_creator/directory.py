@@ -3,7 +3,7 @@ from pathlib import Path
 from instant_python.project_creator.node import Node
 
 
-class Directory:
+class Directory(Node):
     _INIT_FILE = "__init__.py"
 
     def __init__(self, name: str, is_python: bool) -> None:
