@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from instant_python.project_creator.directory import Directory
+from test.project_creator.directory_mother import DirectoryMother
 
 
 class TestDirectory:
@@ -13,25 +13,27 @@ class TestDirectory:
             directory.rmdir()
 
     def test_should_create_normal_directory(self) -> None:
-        directory = Directory(name="value_objects", is_python=False, children=[])
+        directory = DirectoryMother.any()
 
         directory.create(base_path=Path(__file__).parent)
 
-        assert (Path(__file__).parent / "value_objects").exists()
+        assert (Path(__file__).parent / directory._name).exists()
 
     def test_should_create_python_directory_with_init_file(self) -> None:
-        directory = Directory(name="value_objects", is_python=True, children=[])
+        directory = DirectoryMother.as_python()
 
         directory.create(base_path=Path(__file__).parent)
 
-        assert (Path(__file__).parent / "value_objects").exists()
-        assert (Path(__file__).parent / "value_objects" / "__init__.py").exists()
+        directory_name = Path(__file__).parent / directory._name
+        assert directory_name.exists()
+        assert (directory_name / "__init__.py").exists()
 
     def test_should_create_directory_with_other_directory_inside(self) -> None:
-        inner_directory = Directory(name="value_objects", is_python=False, children=[])
-        directory = Directory(name="domain", is_python=False, children=[inner_directory])
+        inner_directory = DirectoryMother.any()
+        directory = DirectoryMother.with_children(inner_directory)
 
         directory.create(base_path=Path(__file__).parent)
 
-        assert (Path(__file__).parent / "domain").exists()
-        assert (Path(__file__).parent / "domain" / "value_objects").exists()
+        directory_name = (Path(__file__).parent / directory._name)
+        assert directory_name.exists()
+        assert (directory_name / inner_directory._name).exists()
