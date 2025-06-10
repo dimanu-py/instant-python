@@ -15,3 +15,11 @@ class TestDirectory:
         directory.create(base_path=Path(__file__).parent)
 
         assert (Path(__file__).parent / "value_objects").exists()
+
+    def test_should_create_python_directory_with_init_file(self) -> None:
+        directory = Directory(name="value_objects", children=[], is_python=True)
+
+        directory.create(base_path=Path(__file__).parent)
+
+        assert (Path(__file__).parent / "value_objects").exists()
+        assert (Path(__file__).parent / "value_objects" / "__init__.py").exists()
