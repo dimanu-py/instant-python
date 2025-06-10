@@ -1,3 +1,4 @@
+import shutil
 from pathlib import Path
 
 from test.project_creator.directory_mother import DirectoryMother
@@ -5,12 +6,9 @@ from test.project_creator.directory_mother import DirectoryMother
 
 class TestDirectory:
     def teardown_method(self) -> None:
-        directory = Path(__file__).parent / "value_objects"
-        if directory.exists():
-            for item in directory.iterdir():
-                if item.is_file():
-                    item.unlink()
-            directory.rmdir()
+        for item in Path(__file__).parent.iterdir():
+            if item.is_dir() and item.name.startswith("test_dir_"):
+                shutil.rmtree(item)
 
     def test_should_create_normal_directory(self) -> None:
         directory = DirectoryMother.any()
