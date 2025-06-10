@@ -1,23 +1,22 @@
-root:
-  - name: {{ general.source_name }}
-    type: directory
-    python: True
-    children:
-      - name: domain
-        type: directory
-        python: True
-        {% if ["value_objects"] | is_in(template.built_in_features) %}
-        children:
-          {% if "value_objects" in template.built_in_features %}
-          - name: exceptions
-            type: directory
-            python: True
-            children:
-              - name: exceptions/domain_error
-                type: boilerplate_file
-                extension: .py
-          {% endif %}
+- name: {{ general.source_name }}
+  type: directory
+  python: True
+  children:
+    - name: domain
+      type: directory
+      python: True
+      {% if ["value_objects"] | is_in(template.built_in_features) %}
+      children:
+        {% if "value_objects" in template.built_in_features %}
+        - name: exceptions
+          type: directory
+          python: True
+          children:
+            - name: exceptions/domain_error
+              type: boilerplate_file
+              extension: .py
         {% endif %}
-      - name: application
-        type: directory
-        python: True
+      {% endif %}
+    - name: application
+      type: directory
+      python: True
