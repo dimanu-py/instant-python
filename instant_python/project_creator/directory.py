@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from instant_python.project_creator.node import Node
 
 
@@ -9,3 +11,7 @@ class Directory:
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(name={self._name}, is_python={self._is_python}, children={self._children})"
+
+    def create(self, base_path: Path) -> None:
+        path = base_path / self._name
+        path.mkdir(parents=True, exist_ok=True)
