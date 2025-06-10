@@ -1,0 +1,26 @@
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "extension": ".py",
+            "name": "exceptions/domain_error",
+            "type": "boilerplate_file"
+          }
+        ],
+        "name": "exceptions",
+        "python": true,
+        "type": "directory"
+      }
+    ],
+    "name": "src",
+    "python": true,
+    "type": "directory"
+  },
+  {
+    "extension": ".ini",
+    "name": "pytest",
+    "type": "boilerplate_file"
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "extension": ".py",
+                "name": "value_objects",
+                "type": "boilerplate_file"
+              }
+            ],
+            "name": "domain",
+            "python": true,
+            "type": "directory"
+          }
+        ],
+        "name": "shared",
+        "python": true,
+        "type": "directory"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "name": "domain",
+                "python": true,
+                "type": "directory"
+              },
+              {
+                "name": "application",
+                "python": true,
+                "type": "directory"
+              },
+              {
+                "name": "infra",
+                "python": true,
+                "type": "directory"
+              }
+            ],
+            "name": "user",
+            "python": true,
+            "type": "directory"
+          }
+        ],
+        "name": "backoffice",
+        "python": true,
+        "type": "directory"
+      }
+    ],
+    "name": "src",
+    "python": true,
+    "type": "directory"
+  }
+]

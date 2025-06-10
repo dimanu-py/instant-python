@@ -1,0 +1,30 @@
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "extension": ".py",
+            "name": "exceptions/domain_error",
+            "type": "boilerplate_file"
+          }
+        ],
+        "name": "exceptions",
+        "python": true,
+        "type": "directory"
+      }
+    ],
+    "name": "src",
+    "python": true,
+    "type": "directory"
+  },
+  {
+    "name": ".gitignore",
+    "type": "boilerplate_file"
+  },
+  {
+    "extension": ".md",
+    "name": "README",
+    "type": "boilerplate_file"
+  }
+]
