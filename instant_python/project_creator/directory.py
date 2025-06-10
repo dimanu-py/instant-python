@@ -6,13 +6,12 @@ from instant_python.project_creator.node import Node
 class Directory:
     _INIT_FILE = "__init__.py"
 
-    def __init__(self, name: str, is_python: bool, children: list[Node]) -> None:
+    def __init__(self, name: str, is_python: bool) -> None:
         self._name = name
         self._is_python_module = is_python
-        self._children = children
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(name={self._name}, is_python={self._is_python_module}, children={self._children})"
+        return f"{self.__class__.__name__}(name={self._name}, is_python={self._is_python_module})"
 
     def create(self, base_path: Path) -> None:
         path = base_path / self._name
