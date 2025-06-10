@@ -14,4 +14,3 @@ def create_new_project(config_file: str = typer.Option(..., "--config", "-c", he
     environment = JinjaEnvironment(package_name="instant_python", template_directory="templates")
     project_structure = JinjaProjectRender(jinja_environment=environment)
     project_structure.render_project_structure(context_config=configuration, template_base_dir="project_structure")
-

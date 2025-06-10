@@ -4,12 +4,12 @@ from pathlib import Path
 
 
 class NodeType(str, Enum):
-	DIRECTORY = "directory"
-	FILE = "file"
-	BOILERPLATE = "boilerplate_file"
+    DIRECTORY = "directory"
+    FILE = "file"
+    BOILERPLATE = "boilerplate_file"
 
 
 class Node(ABC):
-	@abstractmethod
-	def create(self, base_path: Path) -> None:
-		raise NotImplementedError
+    @abstractmethod
+    def create(self, base_path: Path) -> None:
+        raise NotImplementedError
