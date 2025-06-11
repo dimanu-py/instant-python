@@ -1,14 +1,11 @@
+import json
 from pathlib import Path
 
 import pytest
-from expects import expect, raise_error, be_none, equal
+from approvaltests import verify
+from expects import expect, raise_error, be_none
 
 from instant_python.configuration.parser.config_key_not_present import ConfigKeyNotPresent
-from instant_python.configuration.dependency.dependency_configuration import DependencyConfiguration
-from instant_python.configuration.general.general_configuration import (
-    GeneralConfiguration,
-)
-from instant_python.configuration.git.git_configuration import GitConfiguration
 from instant_python.configuration.parser.configuration_file_not_found import (
     ConfigurationFileNotFound,
 )
@@ -17,7 +14,6 @@ from instant_python.configuration.parser.empty_configuration_not_allowed import 
 )
 from instant_python.configuration.parser.missing_mandatory_fields import MissingMandatoryFields
 from instant_python.configuration.parser.parser import Parser
-from instant_python.configuration.template.template_configuration import TemplateConfiguration
 
 
 class TestParser:
@@ -47,69 +43,6 @@ class TestParser:
 
         expect(lambda: Parser.parse(config_file_path)).to(raise_error(ConfigKeyNotPresent))
 
-    def test_should_parse_general_configuration_key(self) -> None:
-        config_file_path = self._build_config_file_path("config")
-
-        config = Parser.parse(config_file_path)
-
-        expected_general_config = GeneralConfiguration(
-            slug="python-project",
-            source_name="src",
-            description="Python Project Description",
-            version="0.1.0",
-            author="Diego Martinez",
-            license="MIT",
-            python_version="3.13",
-            dependency_manager="uv",
-        )
-        expect(config.general).to(equal(expected_general_config))
-
-    def test_should_parse_dependencies_configuration_key(self) -> None:
-        config_file_path = self._build_config_file_path("config")
-
-        config = Parser.parse(config_file_path)
-
-        expected_dependencies = [
-            DependencyConfiguration(
-                name="pytest",
-                version="latest",
-                is_dev=True,
-                group="test",
-            ),
-            DependencyConfiguration(
-                name="fastapi",
-                version="latest",
-                is_dev=False,
-            ),
-        ]
-        expect(config.dependencies).to(equal(expected_dependencies))
-
-    def test_should_parse_git_configuration_key(self) -> None:
-        config_file_path = self._build_config_file_path("config")
-
-        config = Parser.parse(config_file_path)
-
-        expected_git_config = GitConfiguration(
-            initialize=True,
-            username="dimanu-py",
-            email="dimanu.py@gmail.com",
-        )
-        expect(config.git).to(equal(expected_git_config))
-
-    def test_should_parse_template_config(self) -> None:
-        config_file_path = self._build_config_file_path("config")
-
-        config = Parser.parse(config_file_path)
-
-        expected_template_config = TemplateConfiguration(
-            name="domain_driven_design",
-            built_in_features=[],
-            specify_bounded_context=False,
-            bounded_context=None,
-            aggregate_name=None,
-        )
-        expect(config.template).to(equal(expected_template_config))
-
     @pytest.mark.parametrize(
         "file_name",
         [
@@ -123,3 +56,11 @@ class TestParser:
         config_file_path = self._build_config_file_path(file_name)
 
         expect(lambda: Parser.parse(config_file_path)).to(raise_error(MissingMandatoryFields))
+
+    def test_should_parse_configuration(self) -> None:
+        config_file_path = self._build_config_file_path("config")
+
+        config = Parser.parse(config_file_path)
+
+        config_json = json.dumps(config.to_primitives(), indent=2, sort_keys=True)
+        verify(config_json)

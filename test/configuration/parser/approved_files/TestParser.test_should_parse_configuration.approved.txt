@@ -1,0 +1,38 @@
+{
+  "dependencies": [
+    {
+      "group": "test",
+      "is_dev": true,
+      "name": "pytest",
+      "version": "latest"
+    },
+    {
+      "group": "",
+      "is_dev": false,
+      "name": "fastapi",
+      "version": "latest"
+    }
+  ],
+  "general": {
+    "author": "Diego Martinez",
+    "dependency_manager": "uv",
+    "description": "Python Project Description",
+    "license": "MIT",
+    "python_version": "3.13",
+    "slug": "python-project",
+    "source_name": "src",
+    "version": "0.1.0"
+  },
+  "git": {
+    "email": "dimanu.py@gmail.com",
+    "initialize": true,
+    "username": "dimanu-py"
+  },
+  "template": {
+    "aggregate_name": null,
+    "bounded_context": null,
+    "built_in_features": [],
+    "name": "domain_driven_design",
+    "specify_bounded_context": false
+  }
+}
