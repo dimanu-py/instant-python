@@ -6,14 +6,14 @@ from approvaltests import verify
 from approvaltests.namer import NamerFactory
 
 from instant_python.render.jinja_environment import JinjaEnvironment
-from instant_python.render.jinja_project_render import JinjaProjectRender
+from instant_python.render.jinja_project_renderer import JinjaProjectRenderer
 from instant_python.configuration.parser.parser import Parser
 
 
-class TestJinjaProjectRender:
+class TestJinjaProjectRenderer:
     def setup_method(self) -> None:
         jinja_environment = JinjaEnvironment(package_name="test", template_directory="render")
-        self._project_render = JinjaProjectRender(jinja_environment=jinja_environment)
+        self._project_renderer = JinjaProjectRenderer(jinja_environment=jinja_environment)
 
     @pytest.mark.parametrize(
         "config_path",
@@ -28,7 +28,7 @@ class TestJinjaProjectRender:
         resources_path = str(Path(__file__).parent / "resources")
         configuration = Parser.parse(f"{resources_path}/{config_path}")
 
-        rendered_project = self._project_render.render_project_structure(context_config=configuration, template_base_dir="resources")
+        rendered_project = self._project_renderer.render_project_structure(context_config=configuration, template_base_dir="resources")
 
         rendered_project_json = json.dumps(rendered_project, indent=2, sort_keys=True)
         verify(rendered_project_json, options=NamerFactory.with_parameters(config_path))

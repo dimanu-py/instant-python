@@ -4,7 +4,7 @@ from instant_python.render.jinja_environment import JinjaEnvironment
 from instant_python.configuration.configuration_schema import ConfigurationSchema
 
 
-class JinjaProjectRender:
+class JinjaProjectRenderer:
     _MAIN_STRUCTURE_TEMPLATE = "main_structure.yml.j2"
 
     def __init__(self, jinja_environment: JinjaEnvironment) -> None:
