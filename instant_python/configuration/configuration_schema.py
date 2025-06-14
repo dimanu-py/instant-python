@@ -32,6 +32,10 @@ class ConfigurationSchema:
     def template_type(self) -> str:
         return self.template.name
 
+    @property
+    def project_folder_name(self) -> str:
+        return self.general.slug
+
 
 class ConfigurationSchemaPrimitives(TypedDict):
     general: dict[str, str]
