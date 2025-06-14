@@ -22,3 +22,11 @@ class TestFile:
 
         file_path = Path(__file__).parent / "domain_error.py"
         assert file_path.exists()
+
+    def test_should_fill_file_with_template_content(self) -> None:
+        file = File(name="exceptions/domain_error", extension=".py")
+
+        file.create(base_path=Path(__file__).parent)
+
+        file_path = Path(__file__).parent / "domain_error.py"
+        assert file_path.read_text() == "class DomainError(Exception):\n    pass\n"
