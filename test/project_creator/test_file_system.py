@@ -28,7 +28,7 @@ class TestFileSystem:
 
     def _get_file_structure(self, path: Path) -> dict:
         project_file_system = {}
-        for child in path.iterdir():
+        for child in sorted(path.iterdir(), key=lambda folder: folder.name):
             if child.is_dir():
                 project_file_system[child.name] = self._get_file_structure(child)
             else:

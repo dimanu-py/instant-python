@@ -1,1 +1,1 @@
-{'src': {'__init__.py': '', 'domain': {'exceptions': {'__init__.py': '', 'domain_error.py': ''}, '__init__.py': ''}, 'application': {'__init__.py': ''}}}
+{'src': {'__init__.py': '', 'application': {'__init__.py': ''}, 'domain': {'__init__.py': '', 'exceptions': {'__init__.py': '', 'domain_error.py': ''}}}}
