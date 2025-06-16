@@ -6,6 +6,7 @@ from instant_python.project_creator.node import Node
 class File(Node):
     def __init__(self, name: str, extension: str) -> None:
         self._file_name = f"{name.split('/')[-1]}{extension}"
+        self._template_path = f"boilerplate/{name}{extension}"
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(name={self._file_name})"
