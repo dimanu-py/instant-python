@@ -1,6 +1,8 @@
 from pathlib import Path
 
+from instant_python.configuration.parser.parser import Parser
 from instant_python.project_creator.file import File
+from instant_python.render.jinja_environment import JinjaEnvironment
 
 
 class TestFile:
@@ -24,6 +26,13 @@ class TestFile:
 
     def test_should_fill_file_with_template_content(self) -> None:
         self._file.create(base_path=Path(__file__).parent)
+        renderer = JinjaEnvironment(package_name="test", template_directory="project_creator/resources")
+        config = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
+
+        self._file.fill(
+            renderer=renderer,
+            context_config=config,
+        )
 
         file_path = Path(__file__).parent / "domain_error.py"
         assert file_path.read_text() == "class DomainError(Exception):\n    pass\n"
