@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from expects import expect, equal, be_true
+
 from instant_python.configuration.parser.parser import Parser
 from instant_python.project_creator.file import File
 from instant_python.render.jinja_environment import JinjaEnvironment
@@ -16,13 +18,13 @@ class TestFile:
             file_path.unlink()
 
     def test_should_extract_file_name(self) -> None:
-        assert self._file._file_name == "domain_error.py"
+        expect(self._file._file_name).to(equal("domain_error.py"))
 
     def test_should_create_file_at_specified_path(self) -> None:
         self._file.create(base_path=Path(__file__).parent)
 
         file_path = Path(__file__).parent / "domain_error.py"
-        assert file_path.exists()
+        expect(file_path.exists()).to(be_true)
 
     def test_should_fill_file_with_template_content(self) -> None:
         self._file.create(base_path=Path(__file__).parent)
@@ -35,4 +37,4 @@ class TestFile:
         )
 
         file_path = Path(__file__).parent / "domain_error.py"
-        assert file_path.read_text() == "class DomainError(Exception):\n    pass"
+        expect(file_path.read_text()).to(equal("class DomainError(Exception):\n    pass"))
