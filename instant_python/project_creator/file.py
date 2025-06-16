@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from instant_python.configuration.configuration_schema import ConfigurationSchema
+from instant_python.project_creator.file_has_not_been_created import FileHasNotBeenCreated
 from instant_python.project_creator.node import Node
 from instant_python.render.jinja_environment import JinjaEnvironment
 
@@ -19,6 +20,9 @@ class File(Node):
         self._file_path.touch(exist_ok=True)
 
     def fill(self, renderer: JinjaEnvironment, context_config: ConfigurationSchema) -> None:
+        if self._file_path is None:
+            raise FileHasNotBeenCreated(self._file_name)
+
         content = renderer.render_template(
             name=self._template_path,
             context=context_config.to_primitives(),
