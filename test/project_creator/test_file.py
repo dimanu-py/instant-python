@@ -10,23 +10,21 @@ from instant_python.render.jinja_environment import JinjaEnvironment
 
 class TestFile:
     def setup_method(self) -> None:
-        self._file = File(name="domain_error", extension=".py")
+        self._file = File(name="exceptions/domain_error_simple", extension=".py")
 
     def teardown_method(self) -> None:
-        file_path = Path(__file__).parent / "domain_error.py"
+        file_path = Path(__file__).parent / "domain_error_simple.py"
 
         if file_path.exists():
             file_path.unlink()
 
     def test_should_extract_file_name(self) -> None:
-        file = File(name="exceptions/domain_error", extension=".py")
-
-        expect(file._file_name).to(equal("domain_error.py"))
+        expect(self._file._file_name).to(equal("domain_error_simple.py"))
 
     def test_should_create_file_at_specified_path(self) -> None:
         self._file.create(base_path=Path(__file__).parent)
 
-        file_path = Path(__file__).parent / "domain_error.py"
+        file_path = Path(__file__).parent / "domain_error_simple.py"
         expect(file_path.exists()).to(be_true)
 
     def test_should_fill_file_with_template_content(self) -> None:
@@ -39,7 +37,7 @@ class TestFile:
             context_config=config,
         )
 
-        file_path = Path(__file__).parent / "domain_error.py"
+        file_path = Path(__file__).parent / "domain_error_simple.py"
         expect(file_path.read_text()).to(equal("class DomainError(Exception):\n    pass"))
 
     def test_should_not_be_able_to_fill_file_if_does_not_exist(self) -> None:
