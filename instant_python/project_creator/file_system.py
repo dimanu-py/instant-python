@@ -1,20 +1,13 @@
-from pathlib import Path
-
-from instant_python.configuration.configuration_schema import ConfigurationSchema
 from instant_python.errors.unknown_node_typer_error import UnknownNodeTypeError
 from instant_python.project_creator.directory import Directory
 from instant_python.project_creator.file import File
 from instant_python.project_creator.node import Node, NodeType
-from instant_python.render.jinja_environment import JinjaEnvironment
-from instant_python.render.jinja_project_renderer import JinjaProjectRenderer
 
 
 class FileSystem:
-    def __init__(self, jinja_environment: JinjaEnvironment) -> None:
+    def __init__(self) -> None:
         self._boilerplate_files: list[File] = []
         self._tree: list[Node] = []
-        self._jinja_environment = jinja_environment
-        self._project_renderer = JinjaProjectRenderer(jinja_environment=jinja_environment)
 
     def create_folders_and_files(
         self,

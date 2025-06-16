@@ -5,13 +5,11 @@ from pathlib import Path
 from approvaltests import verify
 
 from instant_python.project_creator.file_system import FileSystem
-from instant_python.render.jinja_environment import JinjaEnvironment
 
 
 class TestFileSystem:
     def setup_method(self) -> None:
-        self.jinja_environment = JinjaEnvironment(package_name="test", template_directory="project_creator/resources")
-        self.file_system = FileSystem(jinja_environment=self.jinja_environment)
+        self.file_system = FileSystem()
 
     def teardown_method(self) -> None:
         project_folder = Path("python-project")
