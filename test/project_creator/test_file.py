@@ -7,7 +7,7 @@ from instant_python.render.jinja_environment import JinjaEnvironment
 
 class TestFile:
     def setup_method(self) -> None:
-        self._file = File(name="exceptions/domain_error", extension=".py")
+        self._file = File(name="domain_error", extension=".py")
 
     def teardown_method(self) -> None:
         file_path = Path(__file__).parent / "domain_error.py"
@@ -35,4 +35,4 @@ class TestFile:
         )
 
         file_path = Path(__file__).parent / "domain_error.py"
-        assert file_path.read_text() == "class DomainError(Exception):\n    pass\n"
+        assert file_path.read_text() == "class DomainError(Exception):\n    pass"
