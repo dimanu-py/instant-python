@@ -12,19 +12,15 @@ from instant_python.render.jinja_project_renderer import JinjaProjectRenderer
 class FileSystem:
     def __init__(self, jinja_environment: JinjaEnvironment) -> None:
         self._boilerplate_files: list[File] = []
+        self._tree: list[Node] = []
         self._jinja_environment = jinja_environment
         self._project_renderer = JinjaProjectRenderer(jinja_environment=jinja_environment)
 
     def create_folders_and_files(
         self,
-        context_config: ConfigurationSchema,
         project_structure: list[dict[str, list[str] | str | bool]],
     ) -> None:
-        tree = [self._build_node(node) for node in project_structure]
-        for node in tree:
-            node.create(base_path=Path(context_config.project_folder_name))
-        for file in self._boilerplate_files:
-            file.fill(renderer=self._jinja_environment, context_config=context_config)
+        self._tree = [self._build_node(node) for node in project_structure]
 
     def _build_node(self, node: dict[str, str | list | bool]) -> Node:
         node_type = node["type"]
@@ -42,3 +38,6 @@ class FileSystem:
             return file
         else:
             raise UnknownNodeTypeError(node_type)
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}(boilerplate_files={self._boilerplate_files}, tree={self._tree})"

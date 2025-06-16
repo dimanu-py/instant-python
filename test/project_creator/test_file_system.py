@@ -4,7 +4,6 @@ from pathlib import Path
 
 from approvaltests import verify
 
-from instant_python.configuration.parser.parser import Parser
 from instant_python.project_creator.file_system import FileSystem
 from instant_python.render.jinja_environment import JinjaEnvironment
 
@@ -20,16 +19,13 @@ class TestFileSystem:
             shutil.rmtree(project_folder)
 
     def test_should_create_folders_and_files(self) -> None:
-        configuration = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
         project_structure = self._load_project_structure()
 
         self.file_system.create_folders_and_files(
-            context_config=configuration,
             project_structure=project_structure,
         )
 
-        project = self._get_file_structure(Path(configuration.project_folder_name))
-        verify(project)
+        verify(self.file_system)
 
     def _get_file_structure(self, path: Path) -> dict:
         project_file_system = {}
