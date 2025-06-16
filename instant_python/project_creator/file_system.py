@@ -20,20 +20,20 @@ class FileSystem:
             context_config=context_config,
             template_base_dir=template_base_dir,
         )
-        tree = [self._build_tree(node) for node in project_structure]
+        tree = [self._build_node(node) for node in project_structure]
         for node in tree:
             node.create(base_path=Path(context_config.project_folder_name))
         for file in self._boilerplate_files:
             file.fill(renderer=self._jinja_environment, context_config=context_config)
 
-    def _build_tree(self, node: dict[str, str | list | bool]) -> Node:
+    def _build_node(self, node: dict[str, str | list | bool]) -> Node:
         node_type = node["type"]
         name = node["name"]
 
         if node_type == NodeType.DIRECTORY:
             children = node.get("children", [])
             is_python_module = node.get("python", False)
-            directory_children = [self._build_tree(child) for child in children]
+            directory_children = [self._build_node(child) for child in children]
             return Directory(name=name, children=directory_children, is_python=is_python_module)
         elif node_type == NodeType.BOILERPLATE:
             extension = node.get("extension", "")
