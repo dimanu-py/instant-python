@@ -11,6 +11,7 @@ from instant_python.render.jinja_project_renderer import JinjaProjectRenderer
 
 class FileSystem:
     def __init__(self, jinja_environment: JinjaEnvironment) -> None:
+        self._boilerplate_files: list[File] = []
         self._jinja_environment = jinja_environment
         self._project_renderer = JinjaProjectRenderer(jinja_environment=jinja_environment)
 
@@ -34,6 +35,8 @@ class FileSystem:
             return Directory(name=name, children=directory_children, is_python=is_python_module)
         elif node_type == NodeType.BOILERPLATE:
             extension = node.get("extension", "")
-            return File(name=name, extension=extension)
+            file = File(name=name, extension=extension)
+            self._boilerplate_files.append(file)
+            return file
         else:
             raise UnknownNodeTypeError(node_type)
