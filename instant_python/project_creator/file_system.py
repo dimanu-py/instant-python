@@ -23,6 +23,8 @@ class FileSystem:
         tree = [self._build_tree(node) for node in project_structure]
         for node in tree:
             node.create(base_path=Path(context_config.project_folder_name))
+        for file in self._boilerplate_files:
+            file.fill(renderer=self._jinja_environment, context_config=context_config)
 
     def _build_tree(self, node: dict[str, str | list | bool]) -> Node:
         node_type = node["type"]
