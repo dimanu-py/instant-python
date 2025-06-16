@@ -15,11 +15,11 @@ class FileSystem:
         self._jinja_environment = jinja_environment
         self._project_renderer = JinjaProjectRenderer(jinja_environment=jinja_environment)
 
-    def create_folders_and_files(self, context_config: ConfigurationSchema, template_base_dir: str) -> None:
-        project_structure = self._project_renderer.render_project_structure(
-            context_config=context_config,
-            template_base_dir=template_base_dir,
-        )
+    def create_folders_and_files(
+        self,
+        context_config: ConfigurationSchema,
+        project_structure: list[dict[str, list[str] | str | bool]],
+    ) -> None:
         tree = [self._build_node(node) for node in project_structure]
         for node in tree:
             node.create(base_path=Path(context_config.project_folder_name))

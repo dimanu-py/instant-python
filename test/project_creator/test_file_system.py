@@ -1,3 +1,4 @@
+import json
 import shutil
 from pathlib import Path
 
@@ -20,8 +21,12 @@ class TestFileSystem:
 
     def test_should_create_folders_and_files(self) -> None:
         configuration = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
+        project_structure = self._load_project_structure()
 
-        self.file_system.create_folders_and_files(context_config=configuration, template_base_dir=".")
+        self.file_system.create_folders_and_files(
+            context_config=configuration,
+            project_structure=project_structure,
+        )
 
         project = self._get_file_structure(Path(configuration.project_folder_name))
         verify(project)
@@ -34,3 +39,8 @@ class TestFileSystem:
             else:
                 project_file_system[child.name] = child.read_text()
         return project_file_system
+
+    @staticmethod
+    def _load_project_structure() -> list[dict[str, list[str] | str | bool]]:
+        with open(Path(__file__).parent / "resources" / "rendered_project_structure.json", "r") as file:
+            return json.load(file)
