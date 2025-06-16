@@ -4,6 +4,7 @@ from expects import expect, equal, be_true, raise_error
 
 from instant_python.configuration.parser.parser import Parser
 from instant_python.project_creator.file import File
+from instant_python.project_creator.file_has_not_been_created import FileHasNotBeenCreated
 from instant_python.render.jinja_environment import JinjaEnvironment
 
 
