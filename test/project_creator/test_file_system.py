@@ -10,7 +10,7 @@ from instant_python.render.jinja_environment import JinjaEnvironment
 
 class TestFileSystem:
     def setup_method(self) -> None:
-        self.jinja_environment = JinjaEnvironment(package_name="test", template_directory="project_creator")
+        self.jinja_environment = JinjaEnvironment(package_name="test", template_directory="project_creator/resources")
         self.file_system = FileSystem(jinja_environment=self.jinja_environment)
 
     def teardown_method(self) -> None:
@@ -21,7 +21,7 @@ class TestFileSystem:
     def test_should_create_folders_and_files(self) -> None:
         configuration = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
 
-        self.file_system.create_folders_and_files(context_config=configuration, template_base_dir="resources")
+        self.file_system.create_folders_and_files(context_config=configuration, template_base_dir=".")
 
         project = self._get_file_structure(Path(configuration.project_folder_name))
         verify(project)
