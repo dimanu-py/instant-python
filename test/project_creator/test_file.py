@@ -18,7 +18,9 @@ class TestFile:
             file_path.unlink()
 
     def test_should_extract_file_name(self) -> None:
-        expect(self._file._file_name).to(equal("domain_error.py"))
+        file = File(name="exceptions/domain_error", extension=".py")
+
+        expect(file._file_name).to(equal("domain_error.py"))
 
     def test_should_create_file_at_specified_path(self) -> None:
         self._file.create(base_path=Path(__file__).parent)
