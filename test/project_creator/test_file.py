@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from expects import expect, equal, be_true
+from expects import expect, equal, be_true, raise_error
 
 from instant_python.configuration.parser.parser import Parser
 from instant_python.project_creator.file import File
@@ -40,3 +40,14 @@ class TestFile:
 
         file_path = Path(__file__).parent / "domain_error.py"
         expect(file_path.read_text()).to(equal("class DomainError(Exception):\n    pass"))
+
+    def test_should_not_be_able_to_fill_file_if_does_not_exist(self) -> None:
+        renderer = JinjaEnvironment(package_name="test", template_directory="project_creator/resources")
+        config = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
+
+        expect(
+            lambda: self._file.fill(
+                renderer=renderer,
+                context_config=config,
+            )
+        ).to(raise_error(FileHasNotBeenCreated))
