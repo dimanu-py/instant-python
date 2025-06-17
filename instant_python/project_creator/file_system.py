@@ -9,12 +9,6 @@ class FileSystem:
         self._boilerplate_files: list[File] = []
         self._tree: list[Node] = [self._build_node(node) for node in project_structure]
 
-    def create_folders_and_files(
-        self,
-        project_structure: list[dict[str, list[str] | str | bool]],
-    ) -> None:
-        self._tree = [self._build_node(node) for node in project_structure]
-
     def _build_node(self, node: dict[str, str | list | bool]) -> Node:
         node_type = node["type"]
         name = node["name"]
