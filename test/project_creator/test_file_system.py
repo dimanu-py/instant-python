@@ -4,21 +4,30 @@ from pathlib import Path
 
 from approvaltests import verify
 
+from instant_python.configuration.parser.parser import Parser
 from instant_python.project_creator.file_system import FileSystem
+from instant_python.render.jinja_environment import JinjaEnvironment
 
 
 class TestFileSystem:
-    def teardown_method(self) -> None:
-        project_folder = Path("python-project")
-        if project_folder.exists():
-            shutil.rmtree(project_folder)
-
     def test_should_generate_file_system_tree(self) -> None:
         project_structure = self._load_project_structure()
 
         file_system = FileSystem(project_structure=project_structure)
 
         verify(file_system)
+
+    def test_should_create_file_system_in_disk(self) -> None:
+        project_structure = self._load_project_structure()
+        file_renderer = JinjaEnvironment(package_name="test", template_directory="project_creator/resources")
+        configuration = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
+
+        file_system = FileSystem(project_structure=project_structure)
+        file_system.write_on_disk(file_renderer=file_renderer, context=configuration)
+
+        project_file_system = self._get_file_structure(Path(configuration.project_folder_name))
+        verify(project_file_system)
+        self._clean_up_created_project(Path(configuration.project_folder_name))
 
     def _get_file_structure(self, path: Path) -> dict:
         project_file_system = {}
@@ -33,3 +42,8 @@ class TestFileSystem:
     def _load_project_structure() -> list[dict[str, list[str] | str | bool]]:
         with open(Path(__file__).parent / "resources" / "rendered_project_structure.json", "r") as file:
             return json.load(file)
+
+    @staticmethod
+    def _clean_up_created_project(project_path: Path) -> None:
+        if project_path.exists():
+            shutil.rmtree(project_path)
