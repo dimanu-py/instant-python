@@ -1,0 +1,1 @@
+FileSystem(boilerplate_files=[File(name=domain_error.py)], tree=[Directory(name=src, is_python=True, children=[Directory(name=domain, is_python=True, children=[Directory(name=exceptions, is_python=True, children=[File(name=domain_error.py)])]), Directory(name=application, is_python=True, children=[])])])

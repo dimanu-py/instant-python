@@ -13,7 +13,7 @@ class TestFileSystem:
         if project_folder.exists():
             shutil.rmtree(project_folder)
 
-    def test_should_create_folders_and_files(self) -> None:
+    def test_should_generate_file_system_tree(self) -> None:
         project_structure = self._load_project_structure()
 
         file_system = FileSystem(project_structure=project_structure)
