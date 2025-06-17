@@ -5,9 +5,9 @@ from instant_python.project_creator.node import Node, NodeType
 
 
 class FileSystem:
-    def __init__(self) -> None:
+    def __init__(self, project_structure: list[dict[str, list[str] | str | bool]]) -> None:
         self._boilerplate_files: list[File] = []
-        self._tree: list[Node] = []
+        self._tree: list[Node] = [self._build_node(node) for node in project_structure]
 
     def create_folders_and_files(
         self,

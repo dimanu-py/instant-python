@@ -8,9 +8,6 @@ from instant_python.project_creator.file_system import FileSystem
 
 
 class TestFileSystem:
-    def setup_method(self) -> None:
-        self.file_system = FileSystem()
-
     def teardown_method(self) -> None:
         project_folder = Path("python-project")
         if project_folder.exists():
@@ -19,11 +16,9 @@ class TestFileSystem:
     def test_should_create_folders_and_files(self) -> None:
         project_structure = self._load_project_structure()
 
-        self.file_system.create_folders_and_files(
-            project_structure=project_structure,
-        )
+        file_system = FileSystem(project_structure=project_structure)
 
-        verify(self.file_system)
+        verify(file_system)
 
     def _get_file_structure(self, path: Path) -> dict:
         project_file_system = {}
