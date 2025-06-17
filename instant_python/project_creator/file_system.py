@@ -1,13 +1,25 @@
+from pathlib import Path
+
+from instant_python.configuration.configuration_schema import ConfigurationSchema
 from instant_python.errors.unknown_node_typer_error import UnknownNodeTypeError
 from instant_python.project_creator.directory import Directory
 from instant_python.project_creator.file import File
 from instant_python.project_creator.node import Node, NodeType
+from instant_python.render.jinja_environment import JinjaEnvironment
 
 
 class FileSystem:
     def __init__(self, project_structure: list[dict[str, list[str] | str | bool]]) -> None:
         self._boilerplate_files: list[File] = []
         self._tree: list[Node] = [self._build_node(node) for node in project_structure]
+
+    def write_on_disk(self, file_renderer: JinjaEnvironment, context: ConfigurationSchema) -> None:
+        project_path = Path(context.project_folder_name)
+        for node in self._tree:
+            node.create(base_path=project_path)
+
+        for file in self._boilerplate_files:
+            file.fill(renderer=file_renderer, context_config=context)
 
     def _build_node(self, node: dict[str, str | list | bool]) -> Node:
         node_type = node["type"]
