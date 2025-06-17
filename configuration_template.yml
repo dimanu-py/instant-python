@@ -10,19 +10,19 @@ general:
 dependencies:
   - name: ty
     version: latest # available: latest, specific version
-    dev: true # true or false
+    is_dev: true # true or false
     group: lint
   - name: pytest
     version: latest # available: latest, specific version
-    dev: true # true or false
+    is_dev: true # true or false
     group: test
   - name: fastapi
     version: latest
-    dev: false # true or false
+    is_dev: false # true or false
 git:
   initialize: true # true or false
-  user_name: dimanu-py
-  user_email: dimanu.py@gmail.com
+  username: dimanu-py
+  email: dimanu.py@gmail.com
 template:
   name: domain_driven_design # available: domain_driven_design, clean_architecture, standard_project, custom
   bounded_context: backoffice # only if template is domain_driven_design
