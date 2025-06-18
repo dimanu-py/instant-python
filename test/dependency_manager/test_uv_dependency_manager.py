@@ -1,5 +1,7 @@
 import os
 
+from test.dependency_manager.mock_uv_dependency_manager import MockUvDependencyManager
+
 
 class TestUvDependencyManager:
     def test_should_install_uv(self) -> None:
