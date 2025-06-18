@@ -10,6 +10,11 @@ class UvDependencyManager:
         self._run_command(command="curl -LsSf https://astral.sh/uv/install.sh | sh")
         print(">>> uv installed successfully")
 
+    def _install_python(self, version: str) -> None:
+        print(f">>> Installing Python {version}...")
+        self._run_command(command=f"~/.local/bin/uv python install {version}")
+        print(f">>> Python {version} installed successfully")
+
     def _run_command(self, command: str) -> None:
         subprocess.run(
             command,
