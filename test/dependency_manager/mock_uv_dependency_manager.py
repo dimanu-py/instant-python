@@ -1,4 +1,7 @@
-class MockUvDependencyManager(UvDepenencyManager):
+from instant_python.dependency_manager.uv_dependency_manager import UvDependencyManager
+
+
+class MockUvDependencyManager(UvDependencyManager):
     def __init__(self, project_directory: str) -> None:
-        self._project_directory = project_directory
+        super().__init__(project_directory)
         self._commands = []
