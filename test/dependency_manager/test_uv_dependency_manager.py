@@ -17,5 +17,25 @@ class TestUvDependencyManager:
 
         self._uv_dependency_manager._install_python(version=f"{python_version}")
 
-        self._uv_dependency_manager.expect_to_have_been_called_with(command=f"~/.local/bin/uv python install {python_version}")
         self._uv_dependency_manager.expect_to_have_been_called_with(f"~/.local/bin/uv python install {python_version}")
+
+    def test_should_install_dependencies(self) -> None:
+        dependencies = [
+            {
+                "name": "pytest",
+                "version": "latest",
+                "is_dev": True,
+                "group": "test",
+            },
+            {
+                "name": "requests",
+                "version": "2.32.0",
+            },
+        ]
+
+        self._uv_dependency_manager._install_dependencies(dependencies=dependencies)
+
+        self._uv_dependency_manager.expect_to_have_been_called_with(
+            "~/.local/bin/uv add --dev --group test pytest",
+            "~/.local/bin/uv add requests==2.32.0",
+        )
