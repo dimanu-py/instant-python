@@ -1,9 +1,19 @@
 import subprocess
 
+from instant_python.errors.command_execution_error import CommandExecutionError
+
 
 class UvDependencyManager:
     def __init__(self, project_directory: str) -> None:
         self._project_directory = project_directory
+
+    def setup_environment(self, python_version: str, dependencies: list[dict]) -> None:
+        try:
+            self._install()
+            self._install_python(python_version)
+            self._install_dependencies(dependencies)
+        except subprocess.CalledProcessError as error:
+            raise CommandExecutionError(exit_code=error.returncode, stderr_output=error.stderr)
 
     def _install(self) -> None:
         print(">>> Installing uv...")
