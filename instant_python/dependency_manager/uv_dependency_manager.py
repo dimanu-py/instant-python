@@ -15,6 +15,21 @@ class UvDependencyManager:
         self._run_command(command=f"~/.local/bin/uv python install {version}")
         print(f">>> Python {version} installed successfully")
 
+    def _install_dependencies(self, dependencies: list[dict]) -> None:
+        for dependency in dependencies:
+            name = dependency["name"]
+            version = dependency["version"]
+            is_dev = dependency.get("is_dev", False)
+            group = dependency.get("group", None)
+
+            flag = "--dev" if is_dev else None
+            if group:
+                flag = f"{flag} --group {group}"
+
+            dependency_name = f"{name}=={version}" if version != "latest" else name
+            command = f"~/.local/bin/uv add {flag} {dependency_name}" if flag else f"~/.local/bin/uv add {dependency_name}"
+            self._run_command(command)
+
     def _run_command(self, command: str) -> None:
         subprocess.run(
             command,
