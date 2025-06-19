@@ -14,5 +14,6 @@ class MockUvDependencyManager(UvDependencyManager):
     def _run_command(self, command: str) -> None:
         self._commands.append(command)
 
-    def expect_to_have_been_called_with(self, command: str) -> None:
-        expect(self._commands).to(contain(command))
+    def expect_to_have_been_called_with(self, *commands: str) -> None:
+        for command in commands:
+            expect(self._commands).to(contain(command))
