@@ -16,6 +16,7 @@ class UvDependencyManager:
         print(f">>> Python {version} installed successfully")
 
     def _install_dependencies(self, dependencies: list[dict]) -> None:
+        self._run_command("~/.local/bin/uv sync")
         for dependency in dependencies:
             name = dependency["name"]
             version = dependency["version"]
