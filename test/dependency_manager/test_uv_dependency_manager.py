@@ -36,6 +36,7 @@ class TestUvDependencyManager:
         self._uv_dependency_manager._install_dependencies(dependencies=dependencies)
 
         self._uv_dependency_manager.expect_to_have_been_called_with(
+            "~/.local/bin/uv sync",
             "~/.local/bin/uv add --dev --group test pytest",
             "~/.local/bin/uv add requests==2.32.0",
         )
