@@ -26,7 +26,7 @@ class UvDependencyManager:
         print(f">>> Python {version} installed successfully")
 
     def _install_dependencies(self, dependencies: list[dict]) -> None:
-        self._run_command("~/.local/bin/uv sync")
+        self._create_virtual_environment()
         for dependency in dependencies:
             name = dependency["name"]
             version = dependency["version"]
@@ -40,6 +40,9 @@ class UvDependencyManager:
             dependency_name = f"{name}=={version}" if version != "latest" else name
             command = f"~/.local/bin/uv add {flag} {dependency_name}" if flag else f"~/.local/bin/uv add {dependency_name}"
             self._run_command(command)
+
+    def _create_virtual_environment(self) -> None:
+        self._run_command("~/.local/bin/uv sync")
 
     def _run_command(self, command: str) -> None:
         subprocess.run(
