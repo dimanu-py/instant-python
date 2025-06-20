@@ -34,6 +34,11 @@ class TestUvDependencyManager:
                 "name": "requests",
                 "version": "2.32.0",
             },
+            {
+                "name": "mypy",
+                "version": "latest",
+                "is_dev": True,
+            },
         ]
 
         self._uv_dependency_manager._install_dependencies(dependencies=dependencies)
@@ -42,6 +47,7 @@ class TestUvDependencyManager:
             "~/.local/bin/uv sync",
             "~/.local/bin/uv add --group test pytest",
             "~/.local/bin/uv add requests==2.32.0",
+            "~/.local/bin/uv add --dev mypy",
         )
 
     def test_should_raise_error_when_command_fails(self) -> None:
