@@ -44,7 +44,9 @@ def create_folder_structure_from_template(template_name: str) -> None:
     )
     project_generator.generate()
 
-    installer = Installer(dependency_manager=DependencyManagerFactory.create(user_requirements.dependency_manager, project_generator.path))
+    installer = Installer(
+        dependency_manager=DependencyManagerFactory.create(user_requirements.dependency_manager, project_generator.path)
+    )
     installer.perform_installation(user_requirements.python_version, user_requirements.dependencies)
 
     if user_requirements.git:
@@ -76,7 +78,9 @@ def create_full_project() -> None:
     )
     project_generator.generate()
 
-    installer = Installer(dependency_manager=DependencyManagerFactory.create(user_requirements.dependency_manager, project_generator.path))
+    installer = Installer(
+        dependency_manager=DependencyManagerFactory.create(user_requirements.dependency_manager, project_generator.path)
+    )
     installer.perform_installation(user_requirements.python_version, user_requirements.dependencies)
 
     if user_requirements.git:

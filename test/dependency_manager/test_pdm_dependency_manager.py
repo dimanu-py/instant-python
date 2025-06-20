@@ -3,7 +3,10 @@ import os
 from expects import expect, raise_error
 
 from instant_python.errors.command_execution_error import CommandExecutionError
-from test.dependency_manager.mock_pdm_dependency_manager import MockPdmDependencyManagerWithError, MockPdmDependencyManager
+from test.dependency_manager.mock_pdm_dependency_manager import (
+    MockPdmDependencyManagerWithError,
+    MockPdmDependencyManager,
+)
 
 
 class TestPdmDependencyManager:
@@ -13,14 +16,18 @@ class TestPdmDependencyManager:
     def test_should_install_pdm(self) -> None:
         self._pdm_dependency_manager._install()
 
-        self._pdm_dependency_manager.expect_to_have_been_called_with("curl -sSL https://pdm-project.org/install-pdm.py | python3 -")
+        self._pdm_dependency_manager.expect_to_have_been_called_with(
+            "curl -sSL https://pdm-project.org/install-pdm.py | python3 -"
+        )
 
     def test_should_install_specific_pyton_version(self) -> None:
         python_version = "3.12"
 
         self._pdm_dependency_manager._install_python(version=f"{python_version}")
 
-        self._pdm_dependency_manager.expect_to_have_been_called_with(f"~/.local/bin/pdm python install {python_version}")
+        self._pdm_dependency_manager.expect_to_have_been_called_with(
+            f"~/.local/bin/pdm python install {python_version}"
+        )
 
     def test_should_install_dependencies(self) -> None:
         dependencies = [

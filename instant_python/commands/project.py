@@ -10,7 +10,9 @@ app = typer.Typer()
 
 
 @app.command("new", help="Create a new project")
-def create_new_project(config_file: str = typer.Option(..., "--config", "-c", help="Path to yml configuration file")) -> None:
+def create_new_project(
+    config_file: str = typer.Option(..., "--config", "-c", help="Path to yml configuration file"),
+) -> None:
     configuration = Parser.parse(config_file_path=config_file)
     environment = JinjaEnvironment(package_name="instant_python", template_directory="new_templates")
 

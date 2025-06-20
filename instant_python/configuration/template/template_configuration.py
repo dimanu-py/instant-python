@@ -51,7 +51,9 @@ class TemplateConfiguration:
             raise InvalidTemplateValue(self.name, self.SUPPORTED_TEMPLATES)
 
     def _ensure_built_in_features_are_supported(self) -> None:
-        unsupported_features = [feature for feature in self.built_in_features if feature not in self.SUPPORTED_BUILT_IN_FEATURES]
+        unsupported_features = [
+            feature for feature in self.built_in_features if feature not in self.SUPPORTED_BUILT_IN_FEATURES
+        ]
         if unsupported_features:
             raise InvalidBuiltInFeaturesValues(unsupported_features, self.SUPPORTED_BUILT_IN_FEATURES)
 

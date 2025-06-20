@@ -21,7 +21,9 @@ class JinjaProjectRenderer:
             The structure of files and directories for the project as a dictionary.
         """
         template_name = self._get_main_structure_template_path(context_config, template_base_dir)
-        raw_project_structure = self._jinja_environment.render_template(name=template_name, context=context_config.to_primitives())
+        raw_project_structure = self._jinja_environment.render_template(
+            name=template_name, context=context_config.to_primitives()
+        )
         return yaml.safe_load(raw_project_structure)
 
     def _get_main_structure_template_path(self, context_config: ConfigurationSchema, template_base_dir: str) -> str:

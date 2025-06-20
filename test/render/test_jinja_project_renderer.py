@@ -28,7 +28,9 @@ class TestJinjaProjectRenderer:
         resources_path = str(Path(__file__).parent / "resources")
         configuration = Parser.parse(f"{resources_path}/{config_path}")
 
-        rendered_project = self._project_renderer.render_project_structure(context_config=configuration, template_base_dir="resources")
+        rendered_project = self._project_renderer.render_project_structure(
+            context_config=configuration, template_base_dir="resources"
+        )
 
         rendered_project_json = json.dumps(rendered_project, indent=2, sort_keys=True)
         verify(rendered_project_json, options=NamerFactory.with_parameters(config_path))

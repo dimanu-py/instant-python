@@ -21,7 +21,9 @@ class TestTemplateConfiguration:
     def test_should_not_allow_to_create_template_configuration_with_unsupported_template(
         self,
     ) -> None:
-        expect(lambda: TemplateConfigurationMother.with_parameters(name="hexagonal_architecture")).to(raise_error(InvalidTemplateValue))
+        expect(lambda: TemplateConfigurationMother.with_parameters(name="hexagonal_architecture")).to(
+            raise_error(InvalidTemplateValue)
+        )
 
     def test_should_not_allow_to_create_template_configuration_with_unsupported_built_in_feature(
         self,

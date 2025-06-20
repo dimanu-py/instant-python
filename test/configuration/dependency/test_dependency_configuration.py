@@ -32,4 +32,6 @@ class TestDependencyConfiguration:
         expect(dependency_configuration.group).to(be(""))
 
     def test_should_not_allow_to_create_not_dev_dependency_inside_group(self) -> None:
-        expect(lambda: DependencyConfigurationMother.with_parameter(group="test")).to(raise_error(NotDevDependencyIncludedInGroup))
+        expect(lambda: DependencyConfigurationMother.with_parameter(group="test")).to(
+            raise_error(NotDevDependencyIncludedInGroup)
+        )
