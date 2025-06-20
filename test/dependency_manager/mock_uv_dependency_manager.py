@@ -7,7 +7,6 @@ from instant_python.dependency_manager.uv_dependency_manager import UvDependency
 
 
 class MockUvDependencyManager(UvDependencyManager):
-
     def __init__(self, project_directory: str) -> None:
         super().__init__(project_directory)
         self._commands = []
@@ -22,7 +21,6 @@ class MockUvDependencyManager(UvDependencyManager):
 
 
 class MockUvDependencyManagerWithError(MockUvDependencyManager):
-
     def __init__(self, project_directory: str) -> None:
         super().__init__(project_directory)
 
@@ -33,4 +31,3 @@ class MockUvDependencyManagerWithError(MockUvDependencyManager):
             cmd=command,
             stderr=b"An error occurred while executing the command.",
         )
-
