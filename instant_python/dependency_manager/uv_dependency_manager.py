@@ -6,7 +6,7 @@ from instant_python.errors.command_execution_error import CommandExecutionError
 
 class UvDependencyManager(DependencyManager):
     def __init__(self, project_directory: str) -> None:
-        self._project_directory = project_directory
+        super().__init__(project_directory)
         self._uv = "~/.local/bin/uv"
 
     def setup_environment(self, python_version: str, dependencies: list[dict]) -> None:
@@ -55,13 +55,3 @@ class UvDependencyManager(DependencyManager):
 
     def _create_virtual_environment(self) -> None:
         self._run_command(f"{self._uv} sync")
-
-    def _run_command(self, command: str) -> None:
-        subprocess.run(
-            command,
-            shell=True,
-            check=True,
-            cwd=self._project_directory,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.PIPE,
-        )
