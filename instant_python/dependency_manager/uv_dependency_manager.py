@@ -27,9 +27,11 @@ class UvDependencyManager:
 
     def _install_dependencies(self, dependencies: list[dict]) -> None:
         self._create_virtual_environment()
+        print(">>> Installing dependencies...")
         for dependency in dependencies:
             command = self._build_dependency_install_command(dependency)
             self._run_command(command)
+            print(f">>> Dependency {dependency} installed successfully")
 
     def _build_dependency_install_command(self, dependency: dict[str, str]) -> str:
         name = dependency["name"]
