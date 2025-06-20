@@ -36,6 +36,10 @@ class ConfigurationSchema:
     def project_folder_name(self) -> str:
         return self.general.slug
 
+    @property
+    def dependency_manager(self) -> str:
+        return self.general.dependency_manager
+
 
 class ConfigurationSchemaPrimitives(TypedDict):
     general: dict[str, str]
