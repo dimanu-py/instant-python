@@ -1,9 +1,10 @@
 import subprocess
 
+from instant_python.dependency_manager.dependency_manager import DependencyManager
 from instant_python.errors.command_execution_error import CommandExecutionError
 
 
-class UvDependencyManager:
+class UvDependencyManager(DependencyManager):
     def __init__(self, project_directory: str) -> None:
         self._project_directory = project_directory
         self._uv = "~/.local/bin/uv"
