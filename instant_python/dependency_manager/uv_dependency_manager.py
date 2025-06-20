@@ -28,18 +28,20 @@ class UvDependencyManager:
     def _install_dependencies(self, dependencies: list[dict]) -> None:
         self._create_virtual_environment()
         for dependency in dependencies:
-            name = dependency["name"]
-            version = dependency["version"]
-            is_dev = dependency.get("is_dev", False)
-            group = dependency.get("group", None)
-
-            flag = "--dev" if is_dev else None
-            if group:
-                flag = f"{flag} --group {group}"
-
-            dependency_name = f"{name}=={version}" if version != "latest" else name
-            command = f"~/.local/bin/uv add {flag} {dependency_name}" if flag else f"~/.local/bin/uv add {dependency_name}"
+            command = self._build_dependency_install_command(dependency)
             self._run_command(command)
+
+    def _build_dependency_install_command(self, dependency: dict[str, str]) -> str:
+        name = dependency["name"]
+        version = dependency["version"]
+        is_dev = dependency.get("is_dev", False)
+        group = dependency.get("group", None)
+        flag = "--dev" if is_dev else None
+        if group:
+            flag = f"{flag} --group {group}"
+        dependency_name = f"{name}=={version}" if version != "latest" else name
+        command = f"~/.local/bin/uv add {flag} {dependency_name}" if flag else f"~/.local/bin/uv add {dependency_name}"
+        return command
 
     def _create_virtual_environment(self) -> None:
         self._run_command("~/.local/bin/uv sync")
