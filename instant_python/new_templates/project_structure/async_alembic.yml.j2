@@ -1,0 +1,20 @@
+- name: persistence/async/alembic
+  type: boilerplate_file
+  extension: .ini
+- name: migrations
+  type: directory
+  children:
+    - name: versions
+      type: directory
+    - name: persistence/async/README
+      type: boilerplate_file
+      extension: .md
+    - name: persistence/async/env
+      type: boilerplate_file
+      extension: .py
+    - name: persistence/async/models_metadata
+      type: boilerplate_file
+      extension: .py
+    - name: persistence/async/script
+      type: boilerplate_file
+      extension: .py.mako

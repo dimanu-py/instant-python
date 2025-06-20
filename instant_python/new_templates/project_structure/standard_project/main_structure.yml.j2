@@ -1,0 +1,25 @@
+{% import "project_structure/macros.j2" as macros with context %}
+{{ macros.include_and_indent("project_structure/standard_project/source.yml.j2", 0) }}
+{{ macros.include_and_indent("project_structure/standard_project/test.yml.j2", 0) }}
+{% if "github_actions" in template.built_in_features %}
+{{ macros.include_and_indent("project_structure/github_action.yml.j2", 0) }}
+{% endif %}
+{% if "makefile" in template.built_in_features %}
+{{ macros.include_and_indent("project_structure/makefile.yml.j2", 0) }}
+{% endif %}
+{{ macros.include_and_indent("project_structure/pyproject.yml.j2", 0) }}
+{% if git %}
+{{ macros.include_and_indent("project_structure/gitignore.yml.j2", 0) }}
+{{ macros.include_and_indent("project_structure/readme.yml.j2", 0) }}
+{%  endif %}
+{{ macros.include_and_indent("project_structure/python_version.yml.j2", 0) }}
+{% if dependencies | has_dependency("pytest") %}
+{{ macros.include_and_indent("project_structure/pytest.yml.j2", 0) }}
+{% endif %}
+{% if dependencies | has_dependency("mypy") %}
+{{ macros.include_and_indent("project_structure/mypy.yml.j2", 0) }}
+{% endif %}
+{{ macros.include_and_indent("project_structure/license.yml.j2", 0) }}
+{% if "async_alembic" in template.built_in_features %}
+{{ macros.include_and_indent("project_structure/async_alembic.yml.j2", 0) }}
+{% endif %}

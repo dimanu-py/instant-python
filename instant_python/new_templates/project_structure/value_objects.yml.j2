@@ -1,0 +1,35 @@
+- name: exceptions
+  type: directory
+  python: True
+  children:
+    - name: exceptions/domain_error
+      type: boilerplate_file
+      extension: .py
+    - name: exceptions/incorrect_value_type_error
+      type: boilerplate_file
+      extension: .py
+    - name: exceptions/invalid_negative_value_error
+      type: boilerplate_file
+      extension: .py
+    - name: exceptions/invalid_id_format_error
+      type: boilerplate_file
+      extension: .py
+    - name: exceptions/required_value_error
+      type: boilerplate_file
+      extension: .py
+- name: value_object
+  type: directory
+  python: True
+  children:
+    - name: value_object/value_object
+      type: boilerplate_file
+      extension: .py
+    - name: value_object/string_value_object
+      type: boilerplate_file
+      extension: .py
+    - name: value_object/int_value_object
+      type: boilerplate_file
+      extension: .py
+    - name: value_object/uuid
+      type: boilerplate_file
+      extension: .py

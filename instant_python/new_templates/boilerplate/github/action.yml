@@ -1,0 +1,22 @@
+name: Install Python and setup environment
+
+inputs:
+  python-version:
+    description: 'The version of Python to use'
+    required: false
+    default: {{ general.python_version }}
+outputs: {}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: {% raw %}${{ inputs.python-version }}{% endraw %}
+
+    - name: Install dependency manager
+      run: python -m pip install {{ general.dependency_manager }}
+      shell: bash
+    - name: Install dependencies
+      run: {% if general.dependency_manager == "uv" %}uv sync --all-groups{% elif general.dependency_manager == "pdm" %}pdm install {% endif %}
+
+      shell: bash

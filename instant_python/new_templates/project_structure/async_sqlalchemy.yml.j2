@@ -1,0 +1,17 @@
+- name: persistence
+  type: directory
+  python: True
+  children:
+    - name: sqlalchemy
+      type: directory
+      python: True
+      children:
+        - name: persistence/base
+          type: boilerplate_file
+          extension: .py
+        - name: persistence/async/sqlalchemy_repository
+          type: boilerplate_file
+          extension: .py
+        - name: persistence/async/postgres_settings
+          type: boilerplate_file
+          extension: .py

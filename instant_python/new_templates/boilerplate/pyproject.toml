@@ -1,0 +1,29 @@
+[project]
+name = "{{ general.slug }}"
+version = "{{ general.version }}"
+description = "{{ general.description }}"
+authors = [{name = "{{ general.author }}", email = "{{ git.email }}"}]
+dependencies = [
+    {% if "async_sqlalchemy" in template.built_in_features %}
+    "sqlalchemy",
+    "asyncpg",
+    "psycopg2-binary",
+    {% endif %}
+    {% if "async_alembic" in template.built_in_features %}
+    "alembic",
+    {% endif %}
+    {% if "event_bus" in template.built_in_features %}
+    "pika",
+    {% endif %}
+    {% if "fastapi_application" in template.built_in_features %}
+    "fastapi[standard]",
+    {% endif %}
+]
+requires-python = "=={{ general.python_version }}.*"
+readme = "README.md"
+license = { file = "LICENSE" }
+
+{% if general.dependency_manager == "pdm" %}
+[tool.pdm]
+distribution = false
+{% endif %}

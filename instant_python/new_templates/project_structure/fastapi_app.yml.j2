@@ -1,0 +1,10 @@
+- name: api
+  type: directory
+  python: True
+  children:
+    - name: fastapi/application
+      type: boilerplate_file
+      extension: .py
+    - name: fastapi/lifespan
+      type: boilerplate_file
+      extension: .py

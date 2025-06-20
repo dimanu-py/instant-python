@@ -1,0 +1,18 @@
+- name: .github
+  type: directory
+  children:
+    - name: actions
+      type: directory
+      children:
+        - name: python_setup
+          type: directory
+          children:
+            - name: github/action
+              type: boilerplate_file
+              extension: .yml
+    - name: workflows
+      type: directory
+      children:
+        - name: github/test_lint
+          type: boilerplate_file
+          extension: .yml

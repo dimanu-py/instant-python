@@ -1,0 +1,29 @@
+- name: event_bus/aggregate_root
+  type: boilerplate_file
+  extension: .py
+- name: event
+  type: directory
+  python: True
+  children:
+    - name: event_bus/domain_event
+      type: boilerplate_file
+      extension: .py
+    - name: event_bus/domain_event_subscriber
+      type: boilerplate_file
+      extension: .py
+    - name: event_bus/event_bus
+      type: boilerplate_file
+      extension: .py
+    - name: event_bus/exchange_type
+      type: boilerplate_file
+      extension: .py
+- name: exceptions
+  type: directory
+  python: True
+  children:
+    - name: exceptions/domain_event_type_not_found_error
+      type: boilerplate_file
+      extension: .py
+    - name: exceptions/rabbit_mq_connection_not_established_error
+      type: boilerplate_file
+      extension: .py

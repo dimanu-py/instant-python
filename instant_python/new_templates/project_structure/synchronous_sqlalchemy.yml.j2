@@ -1,0 +1,17 @@
+- name: persistence
+  type: directory
+  python: True
+  children:
+    - name: sqlalchemy
+      type: directory
+      python: True
+      children:
+        - name: persistence/base
+          type: boilerplate_file
+          extension: .py
+        - name: persistence/synchronous/session_maker
+          type: boilerplate_file
+          extension: .py
+        - name: persistence/synchronous/sqlalchemy_repository
+          type: boilerplate_file
+          extension: .py

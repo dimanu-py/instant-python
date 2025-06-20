@@ -1,0 +1,10 @@
+- name: log
+  type: directory
+  python: True
+  children:
+    - name: logger/json_formatter
+      type: boilerplate_file
+      extension: .py
+    - name: logger/logger
+      type: boilerplate_file
+      extension: .py
