@@ -1,6 +1,7 @@
 import typer
 
 from instant_python.configuration.parser.parser import Parser
+from instant_python.dependency_manager.dependency_manager_factory import DependencyManagerFactory
 from instant_python.project_creator.file_system import FileSystem
 from instant_python.render.jinja_environment import JinjaEnvironment
 from instant_python.render.jinja_project_renderer import JinjaProjectRenderer
@@ -22,6 +23,15 @@ def create_new_project(config_file: str = typer.Option(..., "--config", "-c", he
     file_system.write_on_disk(
         file_renderer=environment,
         context=configuration,
+    )
+
+    dependency_manager = DependencyManagerFactory.create(
+        dependency_manager=configuration.dependency_manager,
+        project_directory=configuration.project_folder_name,
+    )
+    dependency_manager.setup_environment(
+        python_version=configuration.python_version,
+        dependencies=configuration.to_primitives()["dependencies"],
     )
 
 
