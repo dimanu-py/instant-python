@@ -1,6 +1,9 @@
 import os
 
-from test.dependency_manager.mock_uv_dependency_manager import MockUvDependencyManager
+from expects import expect, raise_error
+
+from instant_python.errors.command_execution_error import CommandExecutionError
+from test.dependency_manager.mock_uv_dependency_manager import MockUvDependencyManager, MockUvDependencyManagerWithError
 
 
 class TestUvDependencyManager:
@@ -39,4 +42,11 @@ class TestUvDependencyManager:
             "~/.local/bin/uv sync",
             "~/.local/bin/uv add --dev --group test pytest",
             "~/.local/bin/uv add requests==2.32.0",
+        )
+
+    def test_should_raise_error_when_command_fails(self) -> None:
+        uv_dependency_manager = MockUvDependencyManagerWithError(project_directory=os.getcwd())
+
+        expect(lambda: uv_dependency_manager.setup_environment(python_version="3.12", dependencies=[])).to(
+            raise_error(CommandExecutionError)
         )
