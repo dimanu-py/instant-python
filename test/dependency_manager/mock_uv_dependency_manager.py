@@ -20,7 +20,7 @@ class MockUvDependencyManager(UvDependencyManager):
             expect(self._commands).to(contain(command))
 
 
-class MockUvDependencyManagerWithError(MockUvDependencyManager):
+class MockUvDependencyManagerWithError(UvDependencyManager):
     def __init__(self, project_directory: str) -> None:
         super().__init__(project_directory)
 
