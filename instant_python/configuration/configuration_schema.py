@@ -40,6 +40,10 @@ class ConfigurationSchema:
     def dependency_manager(self) -> str:
         return self.general.dependency_manager
 
+    @property
+    def python_version(self) -> str:
+        return self.general.python_version
+
 
 class ConfigurationSchemaPrimitives(TypedDict):
     general: dict[str, str]
