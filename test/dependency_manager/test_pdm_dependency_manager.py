@@ -2,6 +2,7 @@ import os
 
 from expects import expect, raise_error
 
+from instant_python.configuration.dependency.dependency_configuration import DependencyConfiguration
 from instant_python.errors.command_execution_error import CommandExecutionError
 from test.dependency_manager.mock_pdm_dependency_manager import (
     MockPdmDependencyManagerWithError,
@@ -31,23 +32,23 @@ class TestPdmDependencyManager:
 
     def test_should_install_dependencies(self) -> None:
         dependencies = [
-            {
-                "name": "pytest",
-                "version": "latest",
-                "is_dev": True,
-                "group": "test",
-            },
-            {
-                "name": "requests",
-                "version": "2.32.0",
-            },
+            DependencyConfiguration(
+                name="pytest",
+                version="latest",
+                is_dev=True,
+                group="test",
+            ),
+            DependencyConfiguration(
+                name="requests",
+                version="2.32.0",
+            ),
         ]
 
         self._pdm_dependency_manager._install_dependencies(dependencies=dependencies)
 
         self._pdm_dependency_manager.expect_to_have_been_called_with(
             "~/.local/bin/pdm install",
-            "~/.local/bin/pdm add --dev --group test pytest",
+            "~/.local/bin/pdm add --group test pytest",
             "~/.local/bin/pdm add requests==2.32.0",
         )
 
