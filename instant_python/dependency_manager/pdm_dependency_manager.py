@@ -1,5 +1,6 @@
 import subprocess
 
+from instant_python.configuration.dependency.dependency_configuration import DependencyConfiguration
 from instant_python.dependency_manager.dependency_manager import DependencyManager
 from instant_python.errors.command_execution_error import CommandExecutionError
 
@@ -9,7 +10,7 @@ class PdmDependencyManager(DependencyManager):
         super().__init__(project_directory)
         self._pdm = "~/.local/bin/pdm"
 
-    def setup_environment(self, python_version: str, dependencies: list[dict]) -> None:
+    def setup_environment(self, python_version: str, dependencies: list[DependencyConfiguration]) -> None:
         try:
             self._install()
             self._install_python(python_version)
@@ -27,7 +28,7 @@ class PdmDependencyManager(DependencyManager):
         self._run_command(command=f"{self._pdm} python install {version}")
         print(f">>> Python {version} installed successfully")
 
-    def _install_dependencies(self, dependencies: list[dict]) -> None:
+    def _install_dependencies(self, dependencies: list[DependencyConfiguration]) -> None:
         self._create_virtual_environment()
         print(">>> Installing dependencies...")
         for dependency in dependencies:
@@ -35,12 +36,7 @@ class PdmDependencyManager(DependencyManager):
             self._run_command(command)
             print(f">>> Dependency {dependency} installed successfully")
 
-    def _build_dependency_install_command(self, dependency: dict[str, str]) -> str:
-        name = dependency["name"]
-        version = dependency["version"]
-        is_dev = dependency.get("is_dev", False)
-        group = dependency.get("group", None)
-
+    def _build_dependency_install_command(self, dependency: DependencyConfiguration) -> str:
         command = [f"{self._pdm} add"]
 
         if is_dev:

@@ -1,5 +1,6 @@
 import subprocess
 
+from instant_python.configuration.dependency.dependency_configuration import DependencyConfiguration
 from instant_python.dependency_manager.dependency_manager import DependencyManager
 from instant_python.errors.command_execution_error import CommandExecutionError
 
@@ -9,7 +10,7 @@ class UvDependencyManager(DependencyManager):
         super().__init__(project_directory)
         self._uv = "~/.local/bin/uv"
 
-    def setup_environment(self, python_version: str, dependencies: list[dict]) -> None:
+    def setup_environment(self, python_version: str, dependencies: list[DependencyConfiguration]) -> None:
         try:
             self._install()
             self._install_python(python_version)
@@ -27,7 +28,7 @@ class UvDependencyManager(DependencyManager):
         self._run_command(command=f"{self._uv} python install {version}")
         print(f">>> Python {version} installed successfully")
 
-    def _install_dependencies(self, dependencies: list[dict]) -> None:
+    def _install_dependencies(self, dependencies: list[DependencyConfiguration]) -> None:
         self._create_virtual_environment()
         print(">>> Installing dependencies...")
         for dependency in dependencies:
