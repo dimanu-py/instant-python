@@ -33,7 +33,7 @@ def create_new_project(
     )
     dependency_manager.setup_environment(
         python_version=configuration.python_version,
-        dependencies=configuration.to_primitives()["dependencies"],
+        dependencies=configuration.dependencies,
     )
 
 
