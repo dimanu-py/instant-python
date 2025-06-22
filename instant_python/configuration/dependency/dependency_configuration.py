@@ -19,6 +19,18 @@ class DependencyConfiguration:
     def to_primitives(self) -> dict[str, str | bool]:
         return asdict(self)
 
+    def get_installation_flag(self) -> tuple[str, ...]:
+        if self.group:
+            return (f"--group {self.group}",)
+        elif self.is_dev:
+            return ("--dev",)
+        return tuple()
+
+    def get_specification(self) -> str:
+        if self.version == "latest":
+            return self.name
+        return f"{self.name}=={self.version}"
+
     def _ensure_dependency_is_dev_if_group_is_set(self) -> None:
         if self.group and not self.is_dev:
             raise NotDevDependencyIncludedInGroup(self.name, self.group)
