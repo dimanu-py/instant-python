@@ -34,24 +34,11 @@ class UvDependencyManager(DependencyManager):
         for dependency in dependencies:
             command = self._build_dependency_install_command(dependency)
             self._run_command(command)
-            print(f">>> Dependency {dependency['name']} installed successfully")
 
-    def _build_dependency_install_command(self, dependency: dict[str, str]) -> str:
-        name = dependency["name"]
-        version = dependency["version"]
-        is_dev = dependency.get("is_dev", False)
-        group = dependency.get("group", None)
-
+    def _build_dependency_install_command(self, dependency: DependencyConfiguration) -> str:
         command = [f"{self._uv} add"]
-
-        if (is_dev and group) or group:
-            command.append(f"--group {group}")
-        elif is_dev:
-            command.append("--dev")
-
-        dependency_spec = name if version == "latest" else f"{name}=={version}"
-        command.append(dependency_spec)
-
+        command.extend(dependency.get_installation_flag())
+        command.append(dependency.get_specification())
         return " ".join(command)
 
     def _create_virtual_environment(self) -> None:

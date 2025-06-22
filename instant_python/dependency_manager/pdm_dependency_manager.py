@@ -38,14 +38,8 @@ class PdmDependencyManager(DependencyManager):
 
     def _build_dependency_install_command(self, dependency: DependencyConfiguration) -> str:
         command = [f"{self._pdm} add"]
-
-        if is_dev:
-            command.append("--dev")
-        if group:
-            command.append(f"--group {group}")
-
-        dependency_spec = name if version == "latest" else f"{name}=={version}"
-        command.append(dependency_spec)
+        command.extend(dependency.get_installation_flag())
+        command.append(dependency.get_specification())
 
         return " ".join(command)
 
