@@ -12,11 +12,19 @@ class GitConfigurer:
             return
 
         self._initialize_repository()
+        self._set_user_information(
+            username=configuration.username,
+            email=configuration.email,
+        )
 
     def _initialize_repository(self) -> None:
         print(">>> Initializing git repository...")
         self._run_command(command="git init")
         print(">>> Git repository initialized successfully")
+
+    def _set_user_information(self, username: str, email: str) -> None:
+        self._run_command(command=f"git config user.name {username}")
+        self._run_command(command=f"git config user.email {email}")
 
     def _run_command(self, command: str) -> None:
         subprocess.run(
