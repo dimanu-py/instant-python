@@ -21,3 +21,16 @@ class TestGitConfigurer:
         self._git_configurer.setup_repository(configuration=configuration)
 
         self._git_configurer.expect_to_have_been_called_with("git init")
+
+    def test_should_set_username_and_email_when_initializing_repository(self) -> None:
+        configuration = GitConfigurationMother.with_parameters(
+            username="test_user",
+            email="test.user@gmail.com",
+        )
+
+        self._git_configurer.setup_repository(configuration=configuration)
+
+        self._git_configurer.expect_to_have_been_called_with(
+            "git config user.name test_user",
+            "git config user.email test.user@gmail.com",
+        )
