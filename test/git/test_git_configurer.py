@@ -12,3 +12,11 @@ class TestGitConfigurer:
         git_configurer.setup_repository(configuration=configuration)
 
         git_configurer.expect_to_not_have_initialized_repository()
+
+    def test_should_initialize_git_repository(self) -> None:
+        configuration = GitConfigurationMother.initialize()
+        git_configurer = MockGitConfigurer(project_directory=os.getcwd())
+
+        git_configurer.setup_repository(configuration=configuration)
+
+        git_configurer.expect_to_have_been_called_with("git init")
