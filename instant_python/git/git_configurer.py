@@ -16,6 +16,7 @@ class GitConfigurer:
             username=configuration.username,
             email=configuration.email,
         )
+        self._make_initial_commit()
 
     def _initialize_repository(self) -> None:
         print(">>> Initializing git repository...")
@@ -25,6 +26,10 @@ class GitConfigurer:
     def _set_user_information(self, username: str, email: str) -> None:
         self._run_command(command=f"git config user.name {username}")
         self._run_command(command=f"git config user.email {email}")
+
+    def _make_initial_commit(self) -> None:
+        self._run_command(command="git add .")
+        self._run_command(command="git commit -m '🎉 chore: initial commit'")
 
     def _run_command(self, command: str) -> None:
         subprocess.run(
