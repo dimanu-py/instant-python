@@ -16,19 +16,12 @@ class TestGitConfigurer:
         self._git_configurer.expect_to_not_have_initialized_repository()
 
     def test_should_initialize_git_repository(self) -> None:
-        configuration = GitConfigurationMother.initialize()
-
-        self._git_configurer.setup_repository(configuration=configuration)
+        self._git_configurer._initialize_repository()
 
         self._git_configurer.expect_to_have_been_called_with("git init")
 
     def test_should_set_username_and_email_when_initializing_repository(self) -> None:
-        configuration = GitConfigurationMother.with_parameters(
-            username="test_user",
-            email="test.user@gmail.com",
-        )
-
-        self._git_configurer.setup_repository(configuration=configuration)
+        self._git_configurer._set_user_information(username="test_user", email="test.user@gmail.com")
 
         self._git_configurer.expect_to_have_been_called_with(
             "git config user.name test_user",
@@ -36,9 +29,7 @@ class TestGitConfigurer:
         )
 
     def test_should_make_initial_commit_after_initializing_repository(self) -> None:
-        configuration = GitConfigurationMother.initialize()
-
-        self._git_configurer.setup_repository(configuration=configuration)
+        self._git_configurer._make_initial_commit()
 
         self._git_configurer.expect_to_have_been_called_with(
             "git add .",
