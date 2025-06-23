@@ -1,4 +1,5 @@
-from dataclasses import dataclass, asdict
+from datetime import datetime
+from dataclasses import dataclass, asdict, field
 from typing import ClassVar
 
 from instant_python.configuration.general.invalid_dependency_manager_value import (
@@ -22,6 +23,7 @@ class GeneralConfiguration:
     license: str
     python_version: str
     dependency_manager: str
+    year: int = field(default=datetime.now().year)
 
     _SUPPORTED_DEPENDENCY_MANAGERS: ClassVar[list[str]] = ["uv", "pdm"]
     _SUPPORTED_PYTHON_VERSIONS: ClassVar[list[str]] = ["3.10", "3.11", "3.12", "3.13"]
