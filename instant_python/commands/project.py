@@ -2,6 +2,7 @@ import typer
 
 from instant_python.configuration.parser.parser import Parser
 from instant_python.dependency_manager.dependency_manager_factory import DependencyManagerFactory
+from instant_python.git.git_configurer import GitConfigurer
 from instant_python.project_creator.file_system import FileSystem
 from instant_python.render.jinja_environment import JinjaEnvironment
 from instant_python.render.jinja_project_renderer import JinjaProjectRenderer
@@ -35,6 +36,9 @@ def create_new_project(
         python_version=configuration.python_version,
         dependencies=configuration.dependencies,
     )
+
+    git_configurer = GitConfigurer(project_directory=configuration.project_folder_name)
+    git_configurer.setup_repository(configuration.git)
 
 
 if __name__ == "__main__":
