@@ -6,4 +6,5 @@ class GitConfigurer:
         self._project_directory = project_directory
 
     def setup_repository(self, configuration: GitConfiguration) -> None:
-        raise NotImplementedError
+        if not configuration.initialize:
+            return
