@@ -34,3 +34,13 @@ class TestGitConfigurer:
             "git config user.name test_user",
             "git config user.email test.user@gmail.com",
         )
+
+    def test_should_make_initial_commit_after_initializing_repository(self) -> None:
+        configuration = GitConfigurationMother.initialize()
+
+        self._git_configurer.setup_repository(configuration=configuration)
+
+        self._git_configurer.expect_to_have_been_called_with(
+            "git add .",
+            "git commit -m '🎉 chore: initial commit'",
+        )
