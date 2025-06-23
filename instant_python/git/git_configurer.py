@@ -11,17 +11,17 @@ class GitConfigurer:
         if not configuration.initialize:
             return
 
+        print(">>> Setting up git repository...")
         self._initialize_repository()
         self._set_user_information(
             username=configuration.username,
             email=configuration.email,
         )
         self._make_initial_commit()
+        print(">>> Git repository created successfully")
 
     def _initialize_repository(self) -> None:
-        print(">>> Initializing git repository...")
         self._run_command(command="git init")
-        print(">>> Git repository initialized successfully")
 
     def _set_user_information(self, username: str, email: str) -> None:
         self._run_command(command=f"git config user.name {username}")
