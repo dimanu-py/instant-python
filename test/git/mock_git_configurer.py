@@ -14,3 +14,6 @@ class MockGitConfigurer(GitConfigurer):
     def expect_to_have_been_called_with(self, *commands: str) -> None:
         for command in commands:
             expect(self._commands).to(contain(command))
+
+    def _run_command(self, command: str) -> None:
+        self._commands.append(command)
