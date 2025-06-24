@@ -38,7 +38,7 @@ class ConfigurationSchema:
             dependencies=dependencies,
             template=template,
             git=git,
-            _config_file_path=Path(config_file_path)
+            _config_file_path=Path(config_file_path),
         )
 
     def save_on_project_folder(self) -> None:
