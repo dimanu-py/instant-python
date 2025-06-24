@@ -35,6 +35,9 @@ class FileSystem:
             file = File(name=name, extension=extension)
             self._boilerplate_files.append(file)
             return file
+        elif node_type == NodeType.FILE:
+            extension = node.get("extension", "")
+            return File(name=name, extension=extension)
         else:
             raise UnknownNodeTypeError(node_type)
 
