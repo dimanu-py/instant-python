@@ -1,0 +1,1 @@
+{'src': {'__init__.py': '', 'adapters': {'__init__.py': ''}, 'domain': {'__init__.py': '', 'event_bus.py': '', 'models.py': ''}, 'ports': {'__init__.py': ''}}}
