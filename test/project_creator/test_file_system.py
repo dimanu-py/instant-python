@@ -35,8 +35,8 @@ class TestFileSystem:
         file_system.write_on_disk(file_renderer=file_renderer, context=configuration)
 
         project_file_system = self._get_file_structure(Path(configuration.project_folder_name))
-        verify(project_file_system, options=NamerFactory.with_parameters(project_structure_file_name))
         self._clean_up_created_project(Path(configuration.project_folder_name))
+        verify(project_file_system, options=NamerFactory.with_parameters(project_structure_file_name))
 
     def _get_file_structure(self, path: Path) -> dict:
         project_file_system = {}
