@@ -1,3 +1,5 @@
+import os
+import shutil
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TypedDict, Self
@@ -39,6 +41,11 @@ class ConfigurationSchema:
             _config_file_path=Path(config_file_path)
         )
 
+    def save_on_project_folder(self) -> None:
+        destination_folder = Path.cwd() / self.project_folder_name
+        destination_path = destination_folder / self._config_file_path.name
+
+        shutil.move(self._config_file_path, destination_path)
 
     def to_primitives(self) -> "ConfigurationSchemaPrimitives":
         return ConfigurationSchemaPrimitives(
