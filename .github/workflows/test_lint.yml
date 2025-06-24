@@ -21,7 +21,9 @@ jobs:
       - uses: ./.github/actions/python_setup
       - name: Check linting
         id: check_lint
-        run: uvx ruff check --exclude "instant_python/templates,instant_python/new_templates" instant_python test
+        run: |
+          git pull --rebase origin main
+          uvx ruff check --exclude "instant_python/templates,instant_python/new_templates" instant_python test
         continue-on-error: true
       - name: Auto fix lint errors
         id: fix_lint
@@ -56,7 +58,9 @@ jobs:
       - uses: ./.github/actions/python_setup
       - name: Check code format
         id: check_format
-        run: uvx ruff format --check --exclude "instant_python/templates,instant_python/new_templates" instant_python test
+        run: |
+          git pull --rebase origin main
+          uvx ruff format --check --exclude "instant_python/templates,instant_python/new_templates" instant_python test
         continue-on-error: true
       - name: Auto format code
         id: format_code
