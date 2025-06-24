@@ -1,0 +1,81 @@
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "extension": ".py",
+            "name": "models",
+            "type": "file"
+          },
+          {
+            "extension": ".py",
+            "name": "event_bus",
+            "type": "file"
+          }
+        ],
+        "name": "domain",
+        "python": true,
+        "type": "directory"
+      },
+      {
+        "name": "application",
+        "python": true,
+        "type": "directory"
+      },
+      {
+        "name": "ports",
+        "python": true,
+        "type": "directory"
+      },
+      {
+        "name": "adapters",
+        "python": true,
+        "type": "directory"
+      }
+    ],
+    "name": "src",
+    "python": true,
+    "type": "directory"
+  },
+  {
+    "children": [
+      {
+        "name": "domain",
+        "python": true,
+        "type": "directory"
+      },
+      {
+        "name": "application",
+        "python": true,
+        "type": "directory"
+      },
+      {
+        "name": "ports",
+        "python": true,
+        "type": "directory"
+      },
+      {
+        "name": "adapters",
+        "python": true,
+        "type": "directory"
+      }
+    ],
+    "name": "test",
+    "python": true,
+    "type": "directory"
+  },
+  {
+    "name": ".gitignore",
+    "type": "file"
+  },
+  {
+    "extension": ".md",
+    "name": "README",
+    "type": "file"
+  },
+  {
+    "name": "LICENSE",
+    "type": "file"
+  }
+]
