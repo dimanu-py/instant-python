@@ -39,6 +39,7 @@ def create_new_project(
 
     git_configurer = GitConfigurer(project_directory=configuration.project_folder_name)
     git_configurer.setup_repository(configuration.git)
+    configuration.save_on_project_folder()
 
 
 if __name__ == "__main__":
