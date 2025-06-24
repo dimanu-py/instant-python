@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from typing import TypedDict
+from pathlib import Path
+from typing import TypedDict, Self
 
 from instant_python.configuration.dependency.dependency_configuration import (
     DependencyConfiguration,
@@ -19,6 +20,25 @@ class ConfigurationSchema:
     dependencies: list[DependencyConfiguration]
     template: TemplateConfiguration
     git: GitConfiguration
+    _config_file_path: Path
+
+    @classmethod
+    def from_file(
+        cls,
+        config_file_path: str,
+        general: GeneralConfiguration,
+        dependencies: list[DependencyConfiguration],
+        template: TemplateConfiguration,
+        git: GitConfiguration,
+    ) -> Self:
+        return cls(
+            general=general,
+            dependencies=dependencies,
+            template=template,
+            git=git,
+            _config_file_path=Path(config_file_path)
+        )
+
 
     def to_primitives(self) -> "ConfigurationSchemaPrimitives":
         return ConfigurationSchemaPrimitives(
