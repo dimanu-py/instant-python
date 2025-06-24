@@ -1,0 +1,36 @@
+[
+    {
+        "name": "src",
+        "type": "directory",
+        "python": true,
+        "children": [
+            {
+                "name": "domain",
+                "type": "directory",
+                "python": true,
+                "children": [
+                    {
+                        "name": "models",
+                        "type": "file",
+                        "extension": ".py"
+                    },
+                    {
+                        "name": "event_bus",
+                        "type": "file",
+                        "extension": ".py"
+                    }
+                ]
+            },
+            {
+                "name": "ports",
+                "type": "directory",
+                "python": true
+            },
+            {
+                "name": "adapters",
+                "type": "directory",
+                "python": true
+            }
+        ]
+    }
+]

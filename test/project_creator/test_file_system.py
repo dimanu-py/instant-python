@@ -2,7 +2,9 @@ import json
 import shutil
 from pathlib import Path
 
+import pytest
 from approvaltests import verify
+from approvaltests.namer import NamerFactory
 
 from instant_python.configuration.parser.parser import Parser
 from instant_python.project_creator.file_system import FileSystem
@@ -17,8 +19,15 @@ class TestFileSystem:
 
         verify(file_system)
 
-    def test_should_create_file_system_in_disk(self) -> None:
-        project_structure = self._load_project_structure()
+    @pytest.mark.parametrize(
+        "project_structure_file_name",
+        [
+            pytest.param("rendered_project_structure.json", id="base_project_structure"),
+            pytest.param("rendered_custom_project_structure.json", id="custom_project_structure"),
+        ],
+    )
+    def test_should_create_file_system_in_disk(self, project_structure_file_name: str) -> None:
+        project_structure = self._load_project_structure(project_structure_file_name)
         file_renderer = JinjaEnvironment(package_name="test", template_directory="project_creator/resources")
         configuration = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
 
@@ -26,7 +35,7 @@ class TestFileSystem:
         file_system.write_on_disk(file_renderer=file_renderer, context=configuration)
 
         project_file_system = self._get_file_structure(Path(configuration.project_folder_name))
-        verify(project_file_system)
+        verify(project_file_system, options=NamerFactory.with_parameters(project_structure_file_name))
         self._clean_up_created_project(Path(configuration.project_folder_name))
 
     def _get_file_structure(self, path: Path) -> dict:
@@ -39,8 +48,8 @@ class TestFileSystem:
         return project_file_system
 
     @staticmethod
-    def _load_project_structure() -> list[dict[str, list[str] | str | bool]]:
-        with open(Path(__file__).parent / "resources" / "rendered_project_structure.json", "r") as file:
+    def _load_project_structure(project_structure_file_name: str) -> list[dict[str, list[str] | str | bool]]:
+        with open(Path(__file__).parent / "resources" / project_structure_file_name, "r") as file:
             return json.load(file)
 
     @staticmethod
