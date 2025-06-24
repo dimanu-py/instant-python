@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 from approvaltests import verify
 
@@ -7,7 +8,8 @@ from instant_python.render.custom_project_renderer import CustomProjectRenderer
 
 class TestCustomProjectRenderer:
 	def setup_method(self) -> None:
-		self._project_renderer = CustomProjectRenderer(template_path="resources/custom_template.yml")
+		template_path = Path(__file__).parent / "resources" / "custom_template.yml"
+		self._project_renderer = CustomProjectRenderer(template_path=str(template_path))
 
 	def test_should_render_custom_template(self) -> None:
 
