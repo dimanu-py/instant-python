@@ -1,0 +1,46 @@
+- name: src
+  type: directory
+  python: true
+  children:
+    - name: domain
+      type: directory
+      python: true
+      children:
+        - name: models
+          type: file
+          extension: .py
+        - name: event_bus
+          type: file
+          extension: .py
+    - name: application
+      type: directory
+      python: true
+    - name: ports
+      type: directory
+      python: true
+    - name: adapters
+      type: directory
+      python: true
+- name: test
+  type: directory
+  python: true
+  children:
+    - name: domain
+      type: directory
+      python: true
+    - name: application
+      type: directory
+      python: true
+    - name: ports
+      type: directory
+      python: true
+    - name: adapters
+      type: directory
+      python: true
+- name: .gitignore
+  type: file
+- name: README
+  type: file
+  extension: .md
+- name: LICENSE
+  type: file
