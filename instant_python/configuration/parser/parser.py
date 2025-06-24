@@ -45,7 +45,8 @@ class Parser:
         template_configuration = cls._parse_template_configuration(content["template"])
         git_configuration = cls._parse_git_configuration(content["git"])
 
-        return ConfigurationSchema(
+        return ConfigurationSchema.from_file(
+            config_file_path=config_file_path,
             general=general_configuration,
             dependencies=dependencies_configuration,
             template=template_configuration,
