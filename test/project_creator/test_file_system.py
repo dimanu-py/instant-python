@@ -13,7 +13,7 @@ from instant_python.render.jinja_environment import JinjaEnvironment
 
 class TestFileSystem:
     def test_should_generate_file_system_tree(self) -> None:
-        project_structure = self._load_project_structure()
+        project_structure = self._load_project_structure("rendered_project_structure.json")
 
         file_system = FileSystem(project_structure=project_structure)
 
