@@ -2,7 +2,7 @@ from pathlib import Path
 
 import yaml
 
-from instant_python.errors.template_file_not_found_error import TemplateFileNotFoundError
+from instant_python.render.template_file_not_found_error import TemplateFileNotFoundError
 
 
 class CustomProjectRenderer:
