@@ -11,6 +11,7 @@ from instant_python.configuration.general.invalid_license_value import (
 from instant_python.configuration.general.invalid_python_version_value import (
     InvalidPythonVersionValue,
 )
+from instant_python.shared.supported_licenses import SupportedLicenses
 from instant_python.shared.supported_managers import SupportedManagers
 from instant_python.shared.supported_python_versions import SupportedPythonVersions
 
@@ -29,7 +30,7 @@ class GeneralConfiguration:
 
     _SUPPORTED_DEPENDENCY_MANAGERS: ClassVar[list[str]] = SupportedManagers.get_supported_managers()
     _SUPPORTED_PYTHON_VERSIONS: ClassVar[list[str]] = SupportedPythonVersions.get_supported_versions()
-    _SUPPORTED_LICENSES: ClassVar[list[str]] = ["MIT", "Apache", "GPL"]
+    _SUPPORTED_LICENSES: ClassVar[list[str]] = SupportedLicenses.get_supported_licenses()
 
     def __post_init__(self) -> None:
         self.version = str(self.version)
