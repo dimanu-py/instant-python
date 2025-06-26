@@ -11,6 +11,7 @@ from instant_python.configuration.general.invalid_license_value import (
 from instant_python.configuration.general.invalid_python_version_value import (
     InvalidPythonVersionValue,
 )
+from instant_python.shared.managers import Managers
 
 
 @dataclass
@@ -25,7 +26,7 @@ class GeneralConfiguration:
     dependency_manager: str
     year: int = field(default=datetime.now().year)
 
-    _SUPPORTED_DEPENDENCY_MANAGERS: ClassVar[list[str]] = ["uv", "pdm"]
+    _SUPPORTED_DEPENDENCY_MANAGERS: ClassVar[list[str]] = [manager.value for manager in Managers]
     _SUPPORTED_PYTHON_VERSIONS: ClassVar[list[str]] = ["3.10", "3.11", "3.12", "3.13"]
     _SUPPORTED_LICENSES: ClassVar[list[str]] = ["MIT", "Apache", "GPL"]
 
