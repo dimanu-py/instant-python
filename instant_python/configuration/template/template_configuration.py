@@ -13,6 +13,7 @@ from instant_python.configuration.template.invalid_built_in_features_values impo
 from instant_python.configuration.template.invalid_template_value import (
     InvalidTemplateValue,
 )
+from instant_python.configuration.template.supported_templates import SupportedTemplates
 
 
 @dataclass
@@ -23,12 +24,7 @@ class TemplateConfiguration:
     bounded_context: str | None = field(default=None)
     aggregate_name: str | None = field(default=None)
 
-    SUPPORTED_TEMPLATES: ClassVar[list[str]] = [
-        "domain_driven_design",
-        "clean_architecture",
-        "standard_project",
-        "custom",
-    ]
+    SUPPORTED_TEMPLATES: ClassVar[list[str]] = SupportedTemplates.get_supported_templates()
     SUPPORTED_BUILT_IN_FEATURES: ClassVar[list[str]] = [
         "value_objects",
         "github_actions",
