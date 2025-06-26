@@ -17,7 +17,7 @@ def create_new_project(
     template: str | None = typer.Option(None, "--template", "-t", help="Path to custom template file"),
 ) -> None:
     configuration = Parser.parse_from_file(config_file_path=config_file)
-    environment = JinjaEnvironment(package_name="instant_python", template_directory="new_templates")
+    environment = JinjaEnvironment(package_name="instant_python", template_directory="templates")
 
     if template:
         project_renderer = CustomProjectRenderer(template_path=template)
