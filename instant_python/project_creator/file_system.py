@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Union
 
 from instant_python.configuration.configuration_schema import ConfigurationSchema
 from instant_python.errors.unknown_node_typer_error import UnknownNodeTypeError
@@ -9,7 +10,7 @@ from instant_python.render.jinja_environment import JinjaEnvironment
 
 
 class FileSystem:
-    def __init__(self, project_structure: list[dict[str, list[str] | str | bool]]) -> None:
+    def __init__(self, project_structure: list[dict[str, Union[list[str], str, bool]]]) -> None:
         self._boilerplate_files: list[File] = []
         self._tree: list[Node] = [self._build_node(node) for node in project_structure]
 
@@ -21,7 +22,7 @@ class FileSystem:
         for file in self._boilerplate_files:
             file.fill(renderer=file_renderer, context_config=context)
 
-    def _build_node(self, node: dict[str, str | list | bool]) -> Node:
+    def _build_node(self, node: dict[str, Union[str, list, bool]]) -> Node:
         node_type = node["type"]
         name = node["name"]
 
