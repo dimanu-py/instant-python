@@ -7,6 +7,7 @@ from instant_python.configuration.question.free_text_question import FreeTextQue
 from instant_python.configuration.question.multiple_choice_question import MultipleChoiceQuestion
 from instant_python.configuration.question.questionary import Questionary
 from instant_python.configuration.step.steps import Step
+from instant_python.shared.supported_built_in_features import SupportedBuiltInFeatures
 from instant_python.shared.supported_templates import SupportedTemplates
 
 
@@ -17,28 +18,14 @@ class TemplateStep(Step):
             MultipleChoiceQuestion(
                 key="built_in_features",
                 message="Select the built-in features you want to include",
-                options=[
-                    "value_objects",
-                    "github_actions",
-                    "makefile",
-                    "logger",
-                    "event_bus",
-                    "async_sqlalchemy",
-                    "async_alembic",
-                    "fastapi_application",
-                ],
+                options=SupportedBuiltInFeatures.get_supported_built_in_features(),
                 questionary=self._questionary,
             ),
             ConditionalQuestion(
                 base_question=ChoiceQuestion(
                     key="name",
                     message="Select a template",
-                    options=[
-                        "domain_driven_design",
-                        "clean_architecture",
-                        "standard_project",
-                        "custom",
-                    ],
+                    options=SupportedTemplates.get_supported_templates(),
                     questionary=self._questionary,
                 ),
                 subquestions=ConditionalQuestion(

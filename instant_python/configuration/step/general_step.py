@@ -2,6 +2,9 @@ from instant_python.configuration.question.choice_question import ChoiceQuestion
 from instant_python.configuration.question.free_text_question import FreeTextQuestion
 from instant_python.configuration.question.questionary import Questionary
 from instant_python.configuration.step.steps import Step
+from instant_python.shared.supported_licenses import SupportedLicenses
+from instant_python.shared.supported_managers import SupportedManagers
+from instant_python.shared.supported_python_versions import SupportedPythonVersions
 
 
 class GeneralStep(Step):
@@ -40,19 +43,19 @@ class GeneralStep(Step):
             ChoiceQuestion(
                 key="license",
                 message="Select a license",
-                options=["MIT", "Apache", "GPL"],
+                options=SupportedLicenses.get_supported_licenses(),
                 questionary=self._questionary,
             ),
             ChoiceQuestion(
                 key="python_version",
                 message="Enter the python version",
-                options=["3.13", "3.12", "3.11", "3.10"],
+                options=SupportedPythonVersions.get_supported_versions(),
                 questionary=self._questionary,
             ),
             ChoiceQuestion(
                 key="dependency_manager",
                 message="Select a dependency manager",
-                options=["uv", "pdm"],
+                options=SupportedManagers.get_supported_managers(),
                 questionary=self._questionary,
             ),
         ]
