@@ -39,12 +39,9 @@ class Parser:
             MissingMandatoryFields: If any mandatory fields are missing in the configuration sections.
         """
         content = cls._get_config_file_content(config_file_path)
-
-        general_configuration = cls._parse_general_configuration(content["general"])
-        dependencies_configuration = cls._parse_dependencies_configuration(content["dependencies"])
-        template_configuration = cls._parse_template_configuration(content["template"])
-        git_configuration = cls._parse_git_configuration(content["git"])
-
+        general_configuration, dependencies_configuration, template_configuration, git_configuration = (
+            cls._parse_configuration(content=content)
+        )
         return ConfigurationSchema.from_file(
             config_file_path=config_file_path,
             general=general_configuration,
@@ -52,6 +49,14 @@ class Parser:
             template=template_configuration,
             git=git_configuration,
         )
+
+    @classmethod
+    def _parse_configuration(cls, content: dict[str, dict]) -> tuple:
+        general_configuration = cls._parse_general_configuration(content["general"])
+        dependencies_configuration = cls._parse_dependencies_configuration(content["dependencies"])
+        template_configuration = cls._parse_template_configuration(content["template"])
+        git_configuration = cls._parse_git_configuration(content["git"])
+        return general_configuration, dependencies_configuration, template_configuration, git_configuration
 
     @classmethod
     def _get_config_file_content(cls, config_file_path: str) -> dict[str, dict]:
