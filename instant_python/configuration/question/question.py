@@ -20,4 +20,3 @@ class Question(Generic[T], ABC):
     @property
     def key(self) -> str:
         return self._key
-

@@ -26,5 +26,6 @@ class TestMultipleChoiceQuestion:
 
     def _given_user_selects_first_two_options(self) -> None:
         expect_call(self._questionary).multiselect_question(
-            "Test message", options=["option1", "option2", "option3"],
+            "Test message",
+            options=["option1", "option2", "option3"],
         ).returns(["option1", "option2"])

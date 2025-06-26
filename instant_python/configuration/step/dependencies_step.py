@@ -66,4 +66,3 @@ class DependenciesStep(Step):
             )
 
         return {"dependencies": dependencies}
-

@@ -25,6 +25,6 @@ class TestFreeTextQuestion:
         expect(self._questionary).to(have_been_satisfied)
 
     def _given_user_writes_free_answer(self) -> None:
-        expect_call(self._questionary).free_text_question(
-            "Test message", default="default answer"
-        ).returns("user input answer")
+        expect_call(self._questionary).free_text_question("Test message", default="default answer").returns(
+            "user input answer"
+        )
