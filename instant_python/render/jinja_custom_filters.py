@@ -1,5 +1,5 @@
+from instant_python.configuration.template.template_types import TemplateTypes
 from instant_python.errors.unknown_template_error import UnknownTemplateError
-from instant_python.question_prompter.template_types import TemplateTypes
 
 
 def is_in(values: list[str], container: list) -> bool:

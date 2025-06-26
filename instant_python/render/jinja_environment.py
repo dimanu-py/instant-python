@@ -1,6 +1,6 @@
 from jinja2 import Environment, PackageLoader
 
-from instant_python.project_generator.jinja_custom_filters import is_in, compute_base_path, has_dependency
+from instant_python.render.jinja_custom_filters import is_in, compute_base_path, has_dependency
 
 
 class JinjaEnvironment:
