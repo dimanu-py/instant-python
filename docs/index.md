@@ -30,8 +30,8 @@ This section provides a high-level overview of the `instant-python` library, its
 For detailed instructions and examples, please refer to the [full Instant Python documentation](https://dimanu-py.github.io/instant-python/).
 
 - [Installation](#installation)
-- [Contributing](#contributing)
-- [Examples](#examples)
+- [Getting Started](getting_started.md)
+- [Examples](examples/)
 
 ### Need help?
 
@@ -40,8 +40,6 @@ For detailed instructions and examples, please refer to the [full Instant Python
 
 [GitHub Discussions]: https://github.com/dimanu-py/instant-python/discussions
 [GitHub Issues]: https://github.com/dimanu-py/instant-python/issues
-
-
 
 ## Installation
 

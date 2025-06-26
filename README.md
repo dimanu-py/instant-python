@@ -43,8 +43,8 @@ This section provides a high-level overview of the `instant-python` library, its
 For detailed instructions and examples, please refer to the [full Instant Python documentation](https://dimanu-py.github.io/instant-python/).
 
 - [Installation](#installation)
-- [Contributing](#contributing)
-- [Examples](#examples)
+- [Getting Started](./docs/getting_started.md)
+- [Examples](./docs/examples/index.md)
 
 ### Need help?
 
@@ -54,8 +54,6 @@ For detailed instructions and examples, please refer to the [full Instant Python
 [GitHub Discussions]: https://github.com/dimanu-py/instant-python/discussions
 [GitHub Issues]: https://github.com/dimanu-py/instant-python/issues
 
-
-
 ## Installation
 
 The latest version of `instant-python` can be installed from PyPI:
@@ -64,8 +62,8 @@ The latest version of `instant-python` can be installed from PyPI:
 pip install instant-python
 ```
 
-> [!NOTE]
-> We highly recommend using a virtual environment to avoid conflicts with other Python packages.
+!!! info
+We highly recommend using a virtual environment to avoid conflicts with other Python packages.
 
 ### Requirements
 
@@ -87,4 +85,4 @@ Older versions of Python may work, but they are not guaranteed to be compatible.
 ## Contributing
 
 We welcome contributions to `instant-python`! If you have ideas, suggestions, or improvements, please check out our
-[contributing guide](./contributing.md) for details on how to get involved.
+[contributing guide](./docs/contributing.md) for details on how to get involved.
