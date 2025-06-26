@@ -13,6 +13,7 @@ from instant_python.configuration.template.invalid_built_in_features_values impo
 from instant_python.configuration.template.invalid_template_value import (
     InvalidTemplateValue,
 )
+from instant_python.shared.supported_built_in_features import SupportedBuiltInFeatures
 from instant_python.shared.supported_templates import SupportedTemplates
 
 
@@ -25,16 +26,7 @@ class TemplateConfiguration:
     aggregate_name: str | None = field(default=None)
 
     SUPPORTED_TEMPLATES: ClassVar[list[str]] = SupportedTemplates.get_supported_templates()
-    SUPPORTED_BUILT_IN_FEATURES: ClassVar[list[str]] = [
-        "value_objects",
-        "github_actions",
-        "makefile",
-        "logger",
-        "event_bus",
-        "async_sqlalchemy",
-        "async_alembic",
-        "fastapi_application",
-    ]
+    SUPPORTED_BUILT_IN_FEATURES: ClassVar[list[str]] = SupportedBuiltInFeatures.get_supported_built_in_features()
 
     def __post_init__(self) -> None:
         self._ensure_template_is_supported()
