@@ -64,6 +64,8 @@ lint = [
 ]
 test = [
     "approvaltests>=14.6.0",
+    "doublex>=1.9.6.1",
+    "doublex-expects>=0.7.1",
     "expects>=0.9.0",
     "faker>=37.3.0",
     "pytest>=8.3.5",
