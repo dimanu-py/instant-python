@@ -28,7 +28,7 @@
     - name: infra
       type: directory
       python: True
-      {% if ["synchronous_sqlalchemy", "event_bus", "logger", "async_sqlalchemy", "async_alembic", "fastapi_application"] | is_in(template.template.built_in_features) %}
+      {% if ["synchronous_sqlalchemy", "event_bus", "logger", "async_sqlalchemy", "async_alembic", "fastapi_application"] | is_in(template.built_in_features) %}
       children:
         {% if "synchronous_sqlalchemy" in template.built_in_features %}
         {{ macros.include_and_indent("project_structure/synchronous_sqlalchemy.yml.j2", 8) }}
