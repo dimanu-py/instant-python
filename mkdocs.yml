@@ -8,6 +8,8 @@ repo_name: instant-python
 repo_url: https://github.com/dimanu-py/instant-python
 plugins:
   - search
+  - literate-nav:
+      nav_file: summary.md
   - tags
   - macros:
       module_name: docs/downloads_macro
@@ -58,19 +60,3 @@ theme:
         name: Light Mode
       primary: '#B4BEFE'
       accent: '#FAB387'
-nav:
-  - index.md
-  - Getting Started:
-      - getting-started/index.md
-      - Installation: getting-started/installation.md
-      - First Steps: getting-started/first-steps.md
-      - Features Overview: getting-started/features_overview.md
-  - Guide:
-      - guide/index.md
-      - Choosing between commands: guide/when-to-use-commands.md
-      - Creating a Project: guide/creating-a-project.md
-      - Folder Structure: guide/folder-structure.md
-      - Features: guide/features.md
-      - Custom Templates: guide/custom-templates.md
-  - Contributing:
-      - contributing.md

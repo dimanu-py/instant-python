@@ -1,0 +1,5 @@
+-   [Home](index.md)
+    -   [Getting Started](getting_started.md)
+    -   [Contributing](contributing.md)
+-   [Instant Python](guide/)
+-   [Examples](examples/)
