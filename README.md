@@ -4,7 +4,7 @@
 </div>
 
 <p align="center">
-  <a href="https://dimanu-py.github.io/instant-python/getting-started/">Getting Started</a>&nbsp;&nbsp;•&nbsp;
+  <a href="https://dimanu-py.github.io/instant-python/getting_started/">Getting Started</a>&nbsp;&nbsp;•&nbsp;
   <a href="https://dimanu-py.github.io/instant-python/guide">Guide</a>&nbsp;&nbsp;•&nbsp;
   <a href="https://dimanu-py.github.io/instant-python/contributing">Contributing</a>
 </p>
