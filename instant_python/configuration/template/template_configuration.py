@@ -13,7 +13,7 @@ from instant_python.configuration.template.invalid_built_in_features_values impo
 from instant_python.configuration.template.invalid_template_value import (
     InvalidTemplateValue,
 )
-from instant_python.configuration.template.supported_templates import SupportedTemplates
+from instant_python.shared.supported_templates import SupportedTemplates
 
 
 @dataclass

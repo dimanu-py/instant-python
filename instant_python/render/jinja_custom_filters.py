@@ -1,4 +1,4 @@
-from instant_python.configuration.template.supported_templates import SupportedTemplates
+from instant_python.shared.supported_templates import SupportedTemplates
 from instant_python.errors.unknown_template_error import UnknownTemplateError
 
 
