@@ -3,6 +3,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import TypedDict, Self
 
+import yaml
+
 from instant_python.configuration.dependency.dependency_configuration import (
     DependencyConfiguration,
 )
@@ -45,6 +47,11 @@ class ConfigurationSchema:
         destination_path = destination_folder / self._config_file_path.name
 
         shutil.move(self._config_file_path, destination_path)
+
+    def save_on_current_directory(self) -> None:
+        destination_folder = Path.cwd() / self._config_file_path
+        with open(destination_folder, "w") as file:
+            yaml.dump(self.to_primitives(), file)
 
     def to_primitives(self) -> "ConfigurationSchemaPrimitives":
         return ConfigurationSchemaPrimitives(
