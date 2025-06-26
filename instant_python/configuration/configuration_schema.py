@@ -1,5 +1,5 @@
 import shutil
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import TypedDict, Self
 
@@ -21,7 +21,7 @@ class ConfigurationSchema:
     dependencies: list[DependencyConfiguration]
     template: TemplateConfiguration
     git: GitConfiguration
-    _config_file_path: Path
+    _config_file_path: Path = field(default_factory=lambda: Path("ipy.yml"))
 
     @classmethod
     def from_file(
