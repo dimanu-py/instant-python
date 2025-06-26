@@ -9,7 +9,7 @@ class Step(ABC):
         self._questionary = questionary
 
     @abstractmethod
-    def run(self) -> dict[str, str]:
+    def run(self) -> dict[str, dict]:
         raise NotImplementedError
 
 

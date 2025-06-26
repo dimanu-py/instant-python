@@ -1,3 +1,5 @@
+from typing import Union
+
 from instant_python.configuration.question.boolean_question import BooleanQuestion
 from instant_python.configuration.question.conditional_question import ConditionalQuestion
 from instant_python.configuration.question.free_text_question import FreeTextQuestion
@@ -32,7 +34,7 @@ class GitStep(Step):
             )
         ]
 
-    def run(self) -> dict[str, dict[str, str | bool]]:
+    def run(self) -> dict[str, dict[str, Union[str, bool]]]:
         answers = {}
         for question in self._questions:
             answers.update(question.ask())

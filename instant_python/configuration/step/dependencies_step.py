@@ -1,3 +1,5 @@
+from typing import Union
+
 from instant_python.configuration.question.boolean_question import BooleanQuestion
 from instant_python.configuration.question.conditional_question import ConditionalQuestion
 from instant_python.configuration.question.free_text_question import FreeTextQuestion
@@ -9,7 +11,7 @@ class DependenciesStep(Step):
     def __init__(self, questionary: Questionary) -> None:
         super().__init__(questionary)
 
-    def run(self) -> dict[str, list[dict[str, str | bool]]]:
+    def run(self) -> dict[str, list[dict[str, Union[str, bool]]]]:
         dependencies = []
         while True:
             user_wants_to_install_dependencies = BooleanQuestion(

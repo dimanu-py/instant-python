@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field, asdict
-from typing import ClassVar
+from typing import ClassVar, Optional, Union
 
 from instant_python.configuration.template.bounded_context_not_applicable import (
     BoundedContextNotApplicable,
@@ -22,8 +22,8 @@ class TemplateConfiguration:
     name: str
     built_in_features: list[str] = field(default_factory=list)
     specify_bounded_context: bool = field(default=False)
-    bounded_context: str | None = field(default=None)
-    aggregate_name: str | None = field(default=None)
+    bounded_context: Optional[str] = field(default=None)
+    aggregate_name: Optional[str] = field(default=None)
 
     SUPPORTED_TEMPLATES: ClassVar[list[str]] = SupportedTemplates.get_supported_templates()
     SUPPORTED_BUILT_IN_FEATURES: ClassVar[list[str]] = SupportedBuiltInFeatures.get_supported_built_in_features()
@@ -53,5 +53,5 @@ class TemplateConfiguration:
         if self.specify_bounded_context and (not self.bounded_context or not self.aggregate_name):
             raise BoundedContextNotSpecified()
 
-    def to_primitives(self) -> dict[str, str | list[str]]:
+    def to_primitives(self) -> dict[str, Union[str, list[str]]]:
         return asdict(self)

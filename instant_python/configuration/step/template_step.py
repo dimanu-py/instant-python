@@ -1,3 +1,5 @@
+from typing import Union
+
 from instant_python.configuration.question.boolean_question import BooleanQuestion
 from instant_python.configuration.question.choice_question import ChoiceQuestion
 from instant_python.configuration.question.conditional_question import ConditionalQuestion
@@ -66,7 +68,7 @@ class TemplateStep(Step):
             ),
         ]
 
-    def run(self) -> dict[str, dict[str, str | list[str]]]:
+    def run(self) -> dict[str, dict[str, Union[str, list[str]]]]:
         answers = {}
         for question in self._questions:
             answers.update(question.ask())

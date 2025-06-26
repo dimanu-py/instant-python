@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field, asdict
+from typing import Optional
 
 from instant_python.configuration.git.git_user_or_email_not_present import (
     GitUserOrEmailNotPresent,
@@ -8,8 +9,8 @@ from instant_python.configuration.git.git_user_or_email_not_present import (
 @dataclass
 class GitConfiguration:
     initialize: bool
-    username: str | None = field(default=None)
-    email: str | None = field(default=None)
+    username: Optional[str] = field(default=None)
+    email: Optional[str] = field(default=None)
 
     def __post_init__(self) -> None:
         self._ensure_username_and_email_are_set_if_initializing()

@@ -1,7 +1,7 @@
 import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import TypedDict, Self
+from typing import TypedDict, Self, Union
 
 import yaml
 
@@ -80,6 +80,6 @@ class ConfigurationSchema:
 
 class ConfigurationSchemaPrimitives(TypedDict):
     general: dict[str, str]
-    dependencies: list[dict[str, str | bool]]
-    template: dict[str, str | list[str]]
-    git: dict[str, str | bool]
+    dependencies: list[dict[str, Union[str, bool]]]
+    template: dict[str, Union[str, list[str]]]
+    git: dict[str, Union[str, bool]]

@@ -8,7 +8,7 @@ class ConditionalQuestion:
         self,
         base_question: Question,
         subquestions: Union[list[Question], "ConditionalQuestion"],
-        condition: str | bool,
+        condition: Union[str, bool],
     ) -> None:
         self._base_question = base_question
         self._subquestions = subquestions

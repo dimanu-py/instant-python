@@ -1,3 +1,5 @@
+from typing import Union
+
 import yaml
 
 from instant_python.configuration.parser.config_key_not_present import ConfigKeyNotPresent
@@ -106,7 +108,7 @@ class Parser:
 
     @staticmethod
     def _parse_dependencies_configuration(
-        fields: list[dict[str, str | bool]],
+        fields: list[dict[str, Union[str, bool]]],
     ) -> list[DependencyConfiguration]:
         dependencies = []
 
@@ -125,7 +127,7 @@ class Parser:
         return dependencies
 
     @staticmethod
-    def _parse_template_configuration(fields: dict[str, str | bool | list[str]]) -> TemplateConfiguration:
+    def _parse_template_configuration(fields: dict[str, Union[str, bool, list[str]]]) -> TemplateConfiguration:
         try:
             return TemplateConfiguration(**fields)
         except TypeError as error:
@@ -133,7 +135,7 @@ class Parser:
             raise MissingMandatoryFields(error.args[0], "template") from error
 
     @staticmethod
-    def _parse_git_configuration(fields: dict[str, str | bool]) -> GitConfiguration:
+    def _parse_git_configuration(fields: dict[str, Union[str, bool]]) -> GitConfiguration:
         try:
             return GitConfiguration(**fields)
         except TypeError as error:
