@@ -12,6 +12,7 @@ from instant_python.configuration.general.invalid_python_version_value import (
     InvalidPythonVersionValue,
 )
 from instant_python.shared.supported_managers import SupportedManagers
+from instant_python.shared.supported_python_versions import SupportedPythonVersions
 
 
 @dataclass
@@ -26,9 +27,8 @@ class GeneralConfiguration:
     dependency_manager: str
     year: int = field(default=datetime.now().year)
 
-    _SUPPORTED_DEPENDENCY_MANAGERS: ClassVar[list[str]] = [manager.value for manager in SupportedManagers]
-    _SUPPORTED_PYTHON_VERSIONS: ClassVar[list[str]] = ["3.10", "3.11", "3.12", "3.13"]
     _SUPPORTED_DEPENDENCY_MANAGERS: ClassVar[list[str]] = SupportedManagers.get_supported_managers()
+    _SUPPORTED_PYTHON_VERSIONS: ClassVar[list[str]] = SupportedPythonVersions.get_supported_versions()
     _SUPPORTED_LICENSES: ClassVar[list[str]] = ["MIT", "Apache", "GPL"]
 
     def __post_init__(self) -> None:
