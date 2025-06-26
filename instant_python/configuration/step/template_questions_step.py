@@ -29,7 +29,7 @@ class TemplateStep(Step):
             ),
             ConditionalQuestion(
                 base_question=ChoiceQuestion(
-                    key="template",
+                    key="name",
                     message="Select a template",
                     options=[
                         "domain_driven_design",
