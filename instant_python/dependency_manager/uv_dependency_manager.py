@@ -2,7 +2,7 @@ import subprocess
 
 from instant_python.configuration.dependency.dependency_configuration import DependencyConfiguration
 from instant_python.dependency_manager.dependency_manager import DependencyManager
-from instant_python.errors.command_execution_error import CommandExecutionError
+from instant_python.dependency_manager.command_execution_error import CommandExecutionError
 
 
 class UvDependencyManager(DependencyManager):
