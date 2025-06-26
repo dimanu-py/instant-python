@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from instant_python.errors.application_error import ApplicationError
-from instant_python.errors.error_types import ErrorTypes
+from instant_python.shared.application_error import ApplicationError
+from instant_python.shared.error_types import ErrorTypes
 
 
 class TemplateFileNotFoundError(ApplicationError):
