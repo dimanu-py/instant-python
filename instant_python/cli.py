@@ -1,19 +1,13 @@
 from rich.console import Console
 from rich.panel import Panel
 
-from instant_python.commands import folder_cli, project_cli, project, config
+from instant_python.commands import project, config
 from instant_python.errors.application_error import ApplicationError
 from instant_python.instant_python_typer import InstantPythonTyper
 
 app = InstantPythonTyper()
 console = Console()
 
-app.add_typer(
-    folder_cli.app,
-    name="folder",
-    help="Generate only the folder structure for a new project",
-)
-app.add_typer(project_cli.app, name="project", help="Generate a full project ready to be used")
 app.add_typer(project.app)
 app.add_typer(config.app)
 
