@@ -1,9 +1,9 @@
 from pathlib import Path
 
 from instant_python.configuration.configuration_schema import ConfigurationSchema
+from instant_python.configuration.template.template_types import TemplateTypes
 from instant_python.project_creator.file_has_not_been_created import FileHasNotBeenCreated
 from instant_python.project_creator.node import Node
-from instant_python.question_prompter.template_types import TemplateTypes
 from instant_python.render.jinja_environment import JinjaEnvironment
 
 
