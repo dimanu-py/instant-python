@@ -2,21 +2,31 @@ from instant_python.configuration.question.boolean_question import BooleanQuesti
 from instant_python.configuration.question.conditional_question import ConditionalQuestion
 from instant_python.configuration.question.free_text_question import FreeTextQuestion
 from instant_python.configuration.question.questionary import Questionary
+from instant_python.configuration.step.steps import Step
 
 
-class GitStep:
+class GitStep(Step):
     def __init__(self, questionary: Questionary) -> None:
+        super().__init__(questionary)
         self._questions = [
             ConditionalQuestion(
                 base_question=BooleanQuestion(
                     key="initialize",
                     message="Do you want to initialize a git repository?",
                     default=True,
-                    questionary=questionary,
+                    questionary=self._questionary,
                 ),
                 subquestions=[
-                    FreeTextQuestion(key="username", message="Type your git user name", questionary=questionary),
-                    FreeTextQuestion(key="email", message="Type your git email", questionary=questionary),
+                    FreeTextQuestion(
+                        key="username",
+                        message="Type your git user name",
+                        questionary=self._questionary,
+                    ),
+                    FreeTextQuestion(
+                        key="email",
+                        message="Type your git email",
+                        questionary=self._questionary,
+                    ),
                 ],
                 condition=True,
             )

@@ -2,11 +2,12 @@ from instant_python.configuration.question.boolean_question import BooleanQuesti
 from instant_python.configuration.question.conditional_question import ConditionalQuestion
 from instant_python.configuration.question.free_text_question import FreeTextQuestion
 from instant_python.configuration.question.questionary import Questionary
+from instant_python.configuration.step.steps import Step
 
 
-class DependenciesStep:
+class DependenciesStep(Step):
     def __init__(self, questionary: Questionary) -> None:
-        self._questionary = questionary
+        super().__init__(questionary)
 
     def run(self) -> dict[str, list[dict[str, str | bool]]]:
         dependencies = []
