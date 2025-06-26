@@ -51,6 +51,18 @@ class Parser:
         )
 
     @classmethod
+    def parse_from_answers(cls, content: dict[str, dict]) -> ConfigurationSchema:
+        general_configuration, dependencies_configuration, template_configuration, git_configuration = (
+            cls._parse_configuration(content=content)
+        )
+        return ConfigurationSchema(
+            general=general_configuration,
+            dependencies=dependencies_configuration,
+            template=template_configuration,
+            git=git_configuration,
+        )
+
+    @classmethod
     def _parse_configuration(cls, content: dict[str, dict]) -> tuple:
         general_configuration = cls._parse_general_configuration(content["general"])
         dependencies_configuration = cls._parse_dependencies_configuration(content["dependencies"])
