@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from instant_python.configuration.configuration_schema import ConfigurationSchema
-from instant_python.configuration.template.template_types import TemplateTypes
+from instant_python.configuration.template.supported_templates import SupportedTemplates
 from instant_python.project_creator.file_has_not_been_created import FileHasNotBeenCreated
 from instant_python.project_creator.node import Node
 from instant_python.render.jinja_environment import JinjaEnvironment
@@ -26,6 +26,6 @@ class File(Node):
 
         content = renderer.render_template(
             name=self._template_path,
-            context={**context_config.to_primitives(), "template_types": TemplateTypes},
+            context={**context_config.to_primitives(), "template_types": SupportedTemplates},
         )
         self._file_path.write_text(content)

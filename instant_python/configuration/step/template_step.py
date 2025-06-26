@@ -5,7 +5,7 @@ from instant_python.configuration.question.free_text_question import FreeTextQue
 from instant_python.configuration.question.multiple_choice_question import MultipleChoiceQuestion
 from instant_python.configuration.question.questionary import Questionary
 from instant_python.configuration.step.steps import Step
-from instant_python.configuration.template.template_types import TemplateTypes
+from instant_python.configuration.template.supported_templates import SupportedTemplates
 
 
 class TemplateStep(Step):
@@ -62,7 +62,7 @@ class TemplateStep(Step):
                     ],
                     condition=True,
                 ),
-                condition=TemplateTypes.DDD,
+                condition=SupportedTemplates.DDD,
             ),
         ]
 

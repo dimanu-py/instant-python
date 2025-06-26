@@ -1,4 +1,4 @@
-from instant_python.configuration.template.template_types import TemplateTypes
+from instant_python.configuration.template.supported_templates import SupportedTemplates
 from instant_python.errors.unknown_template_error import UnknownTemplateError
 
 
@@ -11,13 +11,13 @@ def has_dependency(dependencies: list[dict], dependency_name: str) -> bool:
 
 
 def compute_base_path(initial_path: str, template_type: str) -> str:
-    if template_type == TemplateTypes.DDD:
+    if template_type == SupportedTemplates.DDD:
         return initial_path
 
     path_components = initial_path.split(".")
-    if template_type == TemplateTypes.CLEAN:
+    if template_type == SupportedTemplates.CLEAN:
         return ".".join(path_components[1:])
-    elif template_type == TemplateTypes.STANDARD:
+    elif template_type == SupportedTemplates.STANDARD:
         return ".".join(path_components[2:])
     else:
         raise UnknownTemplateError(template_type)
