@@ -13,7 +13,7 @@ app = typer.Typer()
 
 @app.command("init", help="Create a new project")
 def create_new_project(
-    config_file: str = typer.Option(..., "--config", "-c", help="Path to yml configuration file"),
+    config_file: str = typer.Option("ipy.yml", "--config", "-c", help="Path to yml configuration file"),
     template: str | None = typer.Option(None, "--template", "-t", help="Path to custom template file"),
 ) -> None:
     configuration = Parser.parse_from_file(config_file_path=config_file)
