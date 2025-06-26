@@ -4,7 +4,7 @@ from instant_python.configuration.question.questionary import Questionary
 from instant_python.configuration.step.steps import Step
 
 
-class GeneralQuestionsStep(Step):
+class GeneralStep(Step):
     def __init__(self, questionary: Questionary) -> None:
         super().__init__(questionary)
         self._questions = [
