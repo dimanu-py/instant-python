@@ -28,6 +28,7 @@ class GeneralConfiguration:
 
     _SUPPORTED_DEPENDENCY_MANAGERS: ClassVar[list[str]] = [manager.value for manager in SupportedManagers]
     _SUPPORTED_PYTHON_VERSIONS: ClassVar[list[str]] = ["3.10", "3.11", "3.12", "3.13"]
+    _SUPPORTED_DEPENDENCY_MANAGERS: ClassVar[list[str]] = SupportedManagers.get_supported_managers()
     _SUPPORTED_LICENSES: ClassVar[list[str]] = ["MIT", "Apache", "GPL"]
 
     def __post_init__(self) -> None:
