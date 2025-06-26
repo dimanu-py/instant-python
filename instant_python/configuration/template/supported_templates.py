@@ -5,3 +5,4 @@ class SupportedTemplates(str, Enum):
     DDD = "domain_driven_design"
     CLEAN = "clean_architecture"
     STANDARD = "standard_project"
+    CUSTOM = "custom"
