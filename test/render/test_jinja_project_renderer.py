@@ -26,7 +26,7 @@ class TestJinjaProjectRenderer:
     )
     def test_should_render_template_for(self, config_path: str) -> None:
         resources_path = str(Path(__file__).parent / "resources")
-        configuration = Parser.parse(f"{resources_path}/{config_path}")
+        configuration = Parser.parse_from_file(f"{resources_path}/{config_path}")
 
         rendered_project = self._project_renderer.render_project_structure(
             context_config=configuration, template_base_dir="resources"

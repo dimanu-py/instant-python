@@ -30,7 +30,7 @@ class TestFile:
     def test_should_fill_file_with_template_content(self) -> None:
         self._file.create(base_path=Path(__file__).parent)
         renderer = JinjaEnvironment(package_name="test", template_directory="project_creator/resources")
-        config = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
+        config = Parser.parse_from_file(str(Path(__file__).parent / "resources" / "config.yml"))
 
         self._file.fill(
             renderer=renderer,
@@ -42,7 +42,7 @@ class TestFile:
 
     def test_should_not_be_able_to_fill_file_if_does_not_exist(self) -> None:
         renderer = JinjaEnvironment(package_name="test", template_directory="project_creator/resources")
-        config = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
+        config = Parser.parse_from_file(str(Path(__file__).parent / "resources" / "config.yml"))
 
         expect(
             lambda: self._file.fill(

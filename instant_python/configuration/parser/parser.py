@@ -25,7 +25,7 @@ class Parser:
     REQUIRED_CONFIG_KEYS = ["general", "dependencies", "template", "git"]
 
     @classmethod
-    def parse(cls, config_file_path: str) -> ConfigurationSchema:
+    def parse_from_file(cls, config_file_path: str) -> ConfigurationSchema:
         """Parses the configuration file and validates its content.
 
         Args:

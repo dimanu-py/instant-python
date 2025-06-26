@@ -29,7 +29,7 @@ class TestFileSystem:
     def test_should_create_file_system_in_disk(self, project_structure_file_name: str) -> None:
         project_structure = self._load_project_structure(project_structure_file_name)
         file_renderer = JinjaEnvironment(package_name="test", template_directory="project_creator/resources")
-        configuration = Parser.parse(str(Path(__file__).parent / "resources" / "config.yml"))
+        configuration = Parser.parse_from_file(str(Path(__file__).parent / "resources" / "config.yml"))
 
         file_system = FileSystem(project_structure=project_structure)
         file_system.write_on_disk(file_renderer=file_renderer, context=configuration)
