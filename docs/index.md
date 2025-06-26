@@ -1,104 +1,77 @@
-![Python](https://img.shields.io/badge/python-3.10%2B-blue?style=for-the-badge&logo=python) ![License](https://img.shields.io/github/license/dimanu-py/instant-python?style=for-the-badge)
+# Instant Python
 
-# Welcome to Instant Python!
+<div align="center">
+    <b>Fast, easy and reliable project generator for your Python projects.</b>
+</div>
 
-Welcome to the [**Instant Python**](https://github.com/dimanu-py/instant-python-ddd) library, a powerful Python library to quickly
-scaffold a modern Python project with best practices and a clean architecture. This template includes ready-to-use scripts, project
-structure options, and automated setup commands to help you kickstart your Python projects.
+<div align="center"><table><tr><td>
+<b>Instant Python</b> replaces extensive manual setup with a simple command to get started quickly. Its motivation is to emulate
+commands like `ng new` or `create-react-app`, but for Python projects.
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-  /* give the container a fixed size */
-  .chart-container {
-    width: 600px;
-    height: 350px;
-    margin: auto;
-  }
-  /* make sure the canvas fills that container */
-  .chart-container canvas {
-    width: 100%  !important;
-    height: 100% !important;
-  }
-</style>
+<br><br>
 
-<div class="chart-container">
-  <canvas id="downloads-chart"></canvas>
-</div><script>
-  const raw =  {{ download_data("instant-python") | tojson }};
-  // Filter out the 'with_mirrors' series—keep only real-user downloads:
-  const daily = raw.filter(d => d.category === 'without_mirrors');
-  const labels = daily.map(d => d.date);
-  const counts = daily.map(d => d.downloads);
+<b>Why use Instant Python?</b> Generating your Python project with Instant Python lets you:
 
-  // Render the chart:
-  new Chart(
-    document.getElementById('downloads-chart').getContext('2d'),
-    {
-      type: 'bar',
-      data: {
-        labels,
-        datasets: [{
-          label: 'Daily downloads',
-          data: counts,
-          fill: false
-        }]
-      },
-      options: {
-        scales: {
-          x: { type: 'category' , ticks: { display: false } },
-          y: { beginAtZero: true }
-        }
-      }
-    }
-  );
-</script>
+<ul style="list-style-type: none">
+  <li>⏱️ Slash folder & config setup time to seconds</li>
+  <li>🐍 Instantly install & switch between any Python version</li>
+  <li>🔧 Effortlessly configure your favorite project manager</li>
+  <li>📁 Kickstart with ready-made or fully custom project structures</li>
+  <li>🔄 Initialize a Git repo in just a few clicks</li>
+  <li>📦 Auto-install all your go-to dependencies</li>
+  <li>🚀 Ship with production-ready boilerplates out of the box</li>
+</ul>
+
+</td></tr></table></div>
+
+## Documentation
+
+This section provides a high-level overview of the `instant-python` library, its features, and how to get started. 
+For detailed instructions and examples, please refer to the [full Instant Python documentation](https://dimanu-py.github.io/instant-python/).
+
+- [Installation](#installation)
+- [Contributing](#contributing)
+- [Examples](#examples)
+
+### Need help?
+
+-   Join a discussion 💬 on [GitHub Discussions]
+-   [Raise an issue][GitHub Issues] on GitHub
+
+[GitHub Discussions]: https://github.com/dimanu-py/instant-python/discussions
+[GitHub Issues]: https://github.com/dimanu-py/instant-python/issues
+
 
 
 ## Installation
 
-Install `instant-python` from PyPI:
+The latest version of `instant-python` can be installed from PyPI:
 
 ```bash
-# With pipx
-pipx install instant-python
-```
-
-```bash
-# With pip in pyenv
 pip install instant-python
 ```
 
-## Documentation Structure
+!!! info
+    We highly recommend using a virtual environment to avoid conflicts with other Python packages.
 
-- [Getting Started](./getting-started/index.md)
-    - [Installation](./getting-started/installation.md)
-    - [First Steps](./getting-started/first-steps.md)
-    - [Features Overview](./getting-started/features_overview.md)
-- [Guide](./guide/index.md)
-    - [Choosing between templates](./guide/when-to-use-commands.md)
-    - [Creating a new project](./guide/creating-a-project.md)
-    - [Creating a folder structure](./guide/folder-structure.md)
-    - [Features](./guide/features.md)
-    - [Custom Templates](./guide/custom-templates.md)
-- [Contributing](./contributing.md)
+### Requirements
 
-## Features
+Instant Python tries to support the latest Python versions, we officially support from Python 3.10 to 3.13.
+Older versions of Python may work, but they are not guaranteed to be compatible.
 
-With `instant-python` there is a lot of features you can customize easily so you can start coding on your project
-as soon as possible. An overview of the features is given below, but you can find a more detailed explanation in the
-[documentation](https://dimanu-py.github.io/instant-python/guide/features/).
+[//]: # (### Do Not Track)
 
-- Project slug: Configure the name of the main folder of your project.
-- Source name: Configure the name of the source code folder of your project.
-- Description: Include a description about your project.
-- Version: Set the initial version of your project.
-- Author: Set the author of the project.
-- License: Choose between _MIT_, _Apache_ or _GPL_ licenses to set your project.
-- Python version: Select the Python version you want to use for your project between versions 3.13 to 3.10.
-- Dependency manager: Choose between _uv_ or _pdm_ dependency managers.
-- Git: configure your project as a git repository automatically.
-- Default templates: select your project template between Domain Driven Design, Clean Architecture or Standard Project to
-  automatically generate your project folders and files.
-- Out of the box implementations: include some boilerplate and implementations code that will help you to start your project faster.
-  Some of the most popular implementations are value objects, domain error modelling, makefile and Async SQL Alchemy.
-- Dependencies: install dependencies automatically in your project.
+[//]: # ()
+[//]: # (In order to get better insights about the usage of the library, we collect anonymous usage data. The only)
+
+[//]: # (data we collect is the commands you run. No personal data is collected as part of this request.)
+
+[//]: # ()
+[//]: # (You can disable this feature by setting the environment variable `INSTANT_PYTHON_NO_TRACK` to `1` or )
+
+[//]: # (passing the `--no-track` option to any command.)
+
+## Contributing
+
+We welcome contributions to `instant-python`! If you have ideas, suggestions, or improvements, please check out our
+[contributing guide](./contributing.md) for details on how to get involved.
