@@ -1,14 +1,14 @@
 from rich.console import Console
 from rich.panel import Panel
 
-from instant_python.commands import project, config
+from instant_python.commands import init, config
 from instant_python.errors.application_error import ApplicationError
 from instant_python.instant_python_typer import InstantPythonTyper
 
 app = InstantPythonTyper()
 console = Console()
 
-app.add_typer(project.app)
+app.add_typer(init.app)
 app.add_typer(config.app)
 
 
