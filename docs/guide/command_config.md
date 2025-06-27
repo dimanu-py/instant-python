@@ -1,4 +1,4 @@
-# Configuration Command
+# Config
 
 `instant-python` relies on a YAML file to know how your project should be generated. The `config` command walks 
 you through an interactive wizard and produces this file for you.
@@ -8,7 +8,7 @@ ipy config
 ```
 
 Running it will create an **ipy.yml** file in the current directory containing all your answers. 
-Later this file can be used with the [`init`](init.md) command.
+Later this file can be used with the [`init`](command_init.md) command.
 
 ## File format
 
@@ -56,4 +56,4 @@ the command will raise an error.
 - When the template is `domain_driven_design` is it possible to specify the name for a `bounded_context` and its `aggregate_root`. If any
 of these fields is specified for other templates, the command will raise an error.
 - The `built_in_features` field is optional, but if specified, it must be a list of features that are available in the template.
-The list of available features can be found in the [features section](./init.md#available-features).
+The list of available features can be found in the [features section](command_init.md#available-features).

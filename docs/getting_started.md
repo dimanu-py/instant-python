@@ -8,7 +8,7 @@ to quickly begin using the library.
 - [Next steps](#next-steps)
 
 If you want to go directly to the guides and learn all the possibilities that the library offers, you can
-check the [Guide](./guide/index.md) section.
+check the [Guide](./guide/command_config.md) section.
 
 ## Installation
 
