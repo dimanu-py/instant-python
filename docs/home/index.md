@@ -27,7 +27,7 @@ commands like `ng new` or `create-react-app`, but for Python projects.
 ## Documentation
 
 This section provides a high-level overview of the `instant-python` library, its features, and how to get started. 
-For detailed instructions and examples, please refer to the [full Instant Python documentation](../guide/command_config.md).
+For detailed instructions and examples, please refer to the [Commands documentation](../guide/command_config.md).
 
 - [Installation](#installation)
 - [Getting Started](getting_started.md)

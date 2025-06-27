@@ -8,7 +8,7 @@ to quickly begin using the library.
 - [Next steps](#next-steps)
 
 If you want to go directly to the guides and learn all the possibilities that the library offers, you can
-check the [Guide](../guide/command_config.md) section.
+check the [Commands](../guide/command_config.md) section.
 
 ## Installation
 
@@ -72,5 +72,5 @@ If a different file is used or is placed in a different location, you can specif
 
 ## Next steps
 
-Now that you have a basic understanding of how to use `instant-python` you can advance to the [guides](./guide/index.md) 
+Now that you have a basic understanding of how to use `instant-python` you can advance to the [commands](../guide/command_config.md) 
 section to learn more about `instant-python` commands and how to use them in more detail to create your Python projects.

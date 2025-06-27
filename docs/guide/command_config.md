@@ -56,4 +56,4 @@ the command will raise an error.
 - When the template is `domain_driven_design` is it possible to specify the name for a `bounded_context` and its `aggregate_root`. If any
 of these fields is specified for other templates, the command will raise an error.
 - The `built_in_features` field is optional, but if specified, it must be a list of features that are available in the template.
-The list of available features can be found in the [features section](command_init.md#available-features).
+The list of available features can be found in the [out-of-the-box section](command_init.md#out-of-the-box-implementations).
