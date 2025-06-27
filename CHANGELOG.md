@@ -1,3 +1,261 @@
+## 0.6.0 (2025-06-27)
+
+### ✨ Features
+
+- **configuration**: remove white spaces from slug
+- **configuration**: raise error for bounded context if specify_bounded_context is true and no DDD template is set or if either bounded context or aggregate name are set
+- **commands**: set ipy.yml as the default configuration file
+- **shared**: add SupportedBuiltInFeatures enum for built-in feature management
+- **configuration**: add method to retrieve supported templates
+- **configuration**: add CUSTOM template type to SupportedTemplates
+- **shared**: add SupportedLicenses enum with method to retrieve supported licenses
+- **shared**: add SupportedPythonVersions enum with method to retrieve supported versions
+- **shared**: add method to retrieve list of supported managers
+- **cli**: add config command to CLI for configuration management
+- **commands**: add command to generate configuration file for new projects
+- **configuration**: add save_on_current_directory method to save configuration in the current directory
+- **configuration**: implement QuestionWizard class to manage question steps and parse answers
+- **configuration**: add parse_from_answers method to differentiate when parsing comes from user answers
+- **configuration**: add Step interface for all concrete implementations and Steps container to manage configuration steps
+- **configuration**: implement DependenciesStep to manage user input for dependency installation
+- **configuration**: add TemplateStep to manage template selection and built-in features
+- **configuration**: implement GitStep to handle git initialization questions
+- **configuration**: implement GeneralQuestionStep to store all questions that will allow the user to build the general section of the config file
+- **configuration**: implement ConditionalQuestion
+- **configuration**: implement MultipleChoiceQuestion
+- **configuration**: implement FreeTextQuestion
+- **configuration**: implement ChoiceQuestion for questions where user has to select one option between some
+- **configuration**: implement boolean question
+- **configuration**: create base Question class defining common logic for all concrete type of questions
+- **configuration**: add wrapper of questionary library to be able to test easily question classes
+- **cli**: include new "init" command in general application
+- **commands**: allow the option of passing a custom template to generate a project with a custom structure
+- **project-creator**: allow FileSystem to handle normal files apart from boilerplate files
+- **renderer**: implement CustomProjectRenderer
+- **commands**: move configuration file to project
+- **configuration**: add method to move configuration file to generated project
+- **configuration**: add config file path attribute and named constructor to create ConfigurationSchema from file
+- **configuration**: automatically compute "year" value in general configuration
+- **commands**: rename new project command to "init" so the use is ipy init
+- **commands**: integrate GitConfigurer to set up repository during project command
+- **git**: automate initial commit during repository setup
+- **git**: set user information during repository initialization
+- **git**: add repository initialization method to GitConfigurer
+- **git**: do nothing if git is not set to be configured
+- **git**: add "setup_repository" method to GitConfigurer
+- **git**: create GitConfigurer class with basic init arguments
+- **configuration**: add methods to compute flag and name of dependencies inside DependencyConfiguration to not violate encapsulation
+- **templates**: add new templates using new configuration nomenclature
+- **commands**: add logic to instantiate and setup virtual environment using user dependency manager selection
+- **configuration**: add property to expose python version easily
+- **dependency-manager**: implement factory method to encapsulate instantiation of dependency manager based on user selection
+- **configuration**: add dependency_manager property to configuration schema
+- **dependency-manager**: implement concrete version of dependency manager  using pdm
+- **dependency-manager**: create DependencyManager interface
+- **dependency-manager**: implement "setup_environment" method to orchestrate all steps to install manager and dependencies
+- **dependency-manager**: add command to create virtual environment in case no additional dependencies are specified
+- **dependency-manager**: add logic to install dependencies with uv
+- **dependency-manager**: implement "_install_python" method to install user python version using uv
+- **dependency-manager**: implement "_install" method delegating command execution to a helper "_run_command" method
+- **dependency-manager**: add _install method to UvDependencyManager
+- **dependency-manager**: create UvDependencyManager class
+- **project-creator**: implement "write_on_disk" method for FileSystem
+- **project-creator**: let FileSystem constructor receive project structure as an argument
+- **project-creator**: remove unnecessary arguments for FileSystem now that project structure gets injected
+- **project-creator**: treat "create_folders_and_files" method as a named constructor that is in charge of creating the file system tree
+- **project-creator**: add children to Directory __repr__ method
+- **project-creator**: modify file system logic to receive rendered project structure injected instead of be coupled to how it gets generated
+- **project-creator**: implement logic to fill file system files
+- **project-creator**: raise error when file has not been created and its tried to be filled
+- **project-creator**: implement FileHasNotBeenCreated application error
+- **project-creator**: implement File fill method to be able to write template content inside
+- **project-creator**: add template path attribute to File class to be able to locate the template with its content
+- **project-creator**: implement FileSystem class to generate the directories and files of the project
+- **configuration**: add property to expose project folder name based on configuration
+- **project-creator**: create inner directories in Directory
+- **project-creator**: inject children argument to Directory
+- **project-creator**: when directory is defined as python module, create '__init__' file inside
+- **project-creator**: implement logic to create directories
+- **project-creator**: create Directory class with basic attributes
+- **project-creator**: create boilerplate file at desired path
+- **project-creator**: add '__repr__' method to BoilerplateFile class
+- **project-creator**: implement BoilerplateFile extracting file name
+- **project-creator**: define basic interface for different nodes
+- **commands**: render project structure based on parsed configuration file
+- **builder**: include 'has_dependency' custom filter in jinja environment
+- **project-generator**: implement 'has_dependency' custom filter for jinja environment
+- **configuration**: add ConfigurationSchemaPrimitives typed dict to type better to_primitives return
+- **configuration**: add "template_type" property to know which template the user has selected
+- **builder**: implement "get_project" method in JinjaProjectRender class
+- **builder**: define interface of JinjaProjectRender
+- **builder**: implement basic ProjectRender class with constructor to avoid linter fail
+- **builder**: implement "render_template" method to be able to process a jinja template and render its content
+- **builder**: include custom filter in jinja environment
+- **builder**: initialize jinja environment
+- **commands**: add new command that receives config file
+- **configuration**: parse template configuration
+- **configuration**: handler missing mandatory fields for git configuration
+- **configuration**: parse git configuration
+- **configuration**: parse dependencies configuration
+- **configuration**: ensure all mandatory fields are present in general configuration
+- **configuration**: parse general configuration
+- **configuration**: verify all required keys are present in config file
+- **configuration**: handle EmptyConfigurationNotAllowed error for empty config files
+- **configuration**: create Parser class with parser method that raises single error
+- **configuration**: add ConfigurationSchema to encapsulate general, dependency, template, and git configurations
+- **configuration**: add template configuration management with validation for templates and built-in features
+- **configuration**: implement GitConfiguration class to manage user settings
+- **configuration**: add validation to ensure non-dev dependencies are not included in groups
+- **configuration**: add DependencyConfiguration class to store dependencies parameters
+- **configuration**: validate supported dependency managers in GeneralConfiguration
+- **configuration**: add InvalidDependencyManagerValue error for unsupported dependency managers
+- **configuration**: validate supported Python versions in GeneralConfiguration
+- **configuration**: add InvalidPythonVersionValue error for unsupported Python versions
+- **configuration**: validate passed license is supported by the application
+- **configuration**: create application error when invalid license is passed
+- **errors**: add configuration error to possible error types
+- **configuration**: add GeneralConfiguration dataclass for project settings
+- **configuration**: add configuration template for project setup
+
+### 🐛 Bug Fixes
+
+- **template**: correct reference to built_in_features in YAML clean architecture template
+- **configuration**: rename TemplateStep key from 'template' to 'name'
+- **renderer**: manually include pyproject.toml boilerplate file when making a project with custom template to be able to create virtual environment
+- **templates**: correct accessing general information in LICENSE template
+- **commands**: pass configuration dependencies directly when setting up environment
+- **project-creator**: include TemplateTypes in context when rendering files
+- **templates**: correct indentantions in new templates
+- **dependency-manager**: correct test that verifies dependency installation command is called with group flag
+- **dependency-manager**: do not use --dev and --group flag
+- **project-creator**: correct boilerplate template example for test to have correct format
+- **project-creator**: modify test method that extracts project file system structure to iterate the folders in order and avoid test failing only for different order
+- **builder**: modify how test examples files are accessed to use a full path all the times
+- **configuration**: return empty list of dependencies when configuration file has no dependencies specified
+- **commands**: correct requirements access to slug variable
+- **error**: correct message formatting in NotDevDependencyIncludedInGroup exception
+- **configuration**: make dependencies field a list of DependencyConfiguration
+
+### ♻️ Code Refactoring
+
+- **dependency-manager**: do not print installed dependency in pdm manager
+- **templates**: include default dependencies when github actions is selected and write a message in the README to inform the project has been created using ipy
+- **errors**: remove errors folder
+- **errors**: move ApplicationError and ErrorTypes to shared module
+- **render**: move UnknownTemplateError to render module
+- **project-creator**: move UnknownNodeTypeError to project_creator module
+- **dependency-manager**: move UnknownDependencyManagerError to the dependency manager module
+- **renderer**: move TemplateFileNotFoundError import to the render module
+- **dependency-manager**: move CommandExecutionError import to dependency manager module
+- **project-creator**: update type hints to ensure backward compatibility with older python versions
+- **configuration**: replace hardcoded options with dynamic retrieval from SupportedLicenses, SupportedManagers, SupportedPythonVersions, and SupportedBuiltInFeatures
+- **configuration**: update type hints to ensure backward compatibility with older python versions
+- **configuration**: replace hardcoded template name with SupportedTemplates enum
+- **configuration**: replace hardcoded built-in features with dynamic retrieval from SupportedBuiltInFeatures
+- **configuration**: move SupportedTemplates to shared module
+- **configuration**: replace hardcoded supported templates with dynamic retrieval from SupportedTemplates
+- **configuration**: rename TemplateTypes to SupportedTemplates
+- **configuration**: update supported licenses to use SupportedLicenses enum
+- **configuration**: update supported python versions to use respective enums
+- **configuration**: update supported dependency managers to use get_supported_managers method
+- **shared**: rename Managers enum to SupportedManagers
+- **configuration**: update supported dependency managers to use Managers enum
+- **dependency-manager**: move Managers enum to shared folder
+- **templates**: rename new_templates folder to templates now that old templates folder have been removed
+- **templates**: remove old templates files
+- **installer**: remove old installer folder
+- **dependency-manager**: move managers enum to dependency_manager folder
+- **installer**: remove old installer files
+- **prompter**: remove old question prompter folder
+- **project-creator**: use TemplateTypes enum from configuration
+- **project-generator**: remove old project generator folder
+- **renderer**: move jinja_custom_filters.py to renderer folder
+- **project-generator**: remove old files for generating the project
+- **prompter**: remove old questions and steps
+- **commands**: rename project file with init command to init
+- **commands**: remove folder_cli and project_cli commands
+- **cli**: remove folder_cli and project_cli from CLI application
+- **configuration**: rename question step files for consistency and clarity
+- **configuration**: set default value for _config_file_path in ConfigurationSchema
+- **parser**: extract configuration parsing logic into separate method for improved readability
+- **parser**: rename parse method to parse_from_file for clarity
+- **configuration**: refactor question steps to inherit from Step interface
+- **configuration**: move steps to its own folder inside configuration
+- **parser**: use ConfigurationSchema named constructor to generate parsed config from user file
+- **git**: enhance repository setup with informative messages
+- **dependency-manager**: avoid accessing dependency configuration internal data and delegate behavior to it
+- **dependency-manager**: modify uv dependency manager type hint to receive a list of DependencyConfiguration
+- **dependency-manager**: move "_run_command" method to DependencyManager class to be reused by other implementations
+- **dependency-manager**: let UvDependencyManager implement DependencyManager interface
+- **dependency-manager**: add attribute _uv to store the name of uv command
+- **dependency-manager**: add print statements to inform the user about what is happening
+- **dependency-manager**: reorganize the logic to build the command for installing dependencies
+- **dependency-manager**: extract "_build_dependency_install_command" method to encapsulate the logic of creating the command needed to install a dependency
+- **dependency-manager**: extract "_create_virtual_environment" method to express what uv sync command is doing
+- **commands**: update project command to use new "write_on_disk" file system method to create the project on disk
+- **project-creator**: remove unused create_folders_and_files method
+- **project-creator**: rename "build_tree" method to "build_node"
+- **project-creator**: store in a list all the files that are created in the project file system
+- **project-creator**: when creating a File save its path to be able to recover it when filling it
+- **project-creator**: extract setup_method for file tests to clean up file creation
+- **commands**: allow to execute new project command
+- **commands**: change how new project command is handled using directly FyleSystem class
+- **render**: rename JinjaProjectRender to JinjaProjectRenderer
+- **render**: modify JinjaProjectRender return type hint
+- **configuration**: modify configuration parser test for happy paths using approvaltests to verify expected configuration gets parsed correctly instead of making lots of separate tests for each section of the configuration
+- **render**: remove expected project json files for tests
+- **render**: modify tests to use approvaltest and don't need expected project json files
+- **project-creator**: update teardown_method to delete correctly directories generated on tests
+- **project-creator**: modify directory tests to use object mother
+- **render**: modify resources test projects to not contain "root" key
+- **project-creator**: make Directory inherit from Node interface
+- **project-creator**: remove children argument from directory
+- **project-creator**: modify teardown_method to delete files inside directory after test
+- **project-creator**: rename boilerplate file to file
+- **commands**: add type hint to project command
+- **render**: rename builder module to render
+- **builder**: remove old project_render.py and test
+- **builder**: parametrize jinja project render tests
+- **builder**: modify main_structure.yml.j2 for test case with dependency
+- **builder**: load expected project structure from JSON file instead of hardcoding
+- **builder**: rename config file to 'clean_architecture_config.yml' and update test to reflect the change
+- **builder**: set template base dir as argument of 'render_project_structure' method instead of argument to constructor
+- **builder**: rename constant for main structure template
+- **builder**: remove 'main_structure_template' argument from render constructor as the main file must always be named main_structure.yml.j2
+- **builder**: modify JinjaProjectRender arguments for test to point to test example project yml
+- **builder**: rename "get_project" method to express better the intention of the method
+- **builder**: move example template yml of project for test
+- **builder**: parametrize base dir for template and main file to not be coupled to production structure when testing
+- **configuration**: use typed dict to type "to_primitives" return method
+- **configuration**: avoid possibility of accessing GeneralConfiguration class variables
+- **builder**: add setup method to jinja environment test class to clean up jinja env instantiation
+- **builder**: pass package name and template directory to jinja environment to be able to differentiate between production templates and test templates
+- **cli**: rename instant_python_typer correctly and add missing type hints
+- **template**: modify domain error templates to avoid repeating implementation of type and message properties
+- modify all application errors to pass message and type error to base error and not implement neither type or message properties
+- **error**: modify ApplicationError to pass the message and type and avoid repeating the same pattern to return the message and type of error
+- **configuration**: handle when template config mandatory field is missing
+- **configuration**: modify config.yml file to only include template name
+- **configuration**: modify config examples for test to have git fields with same name as class argument
+- **configuration**: pass parsed arguments to configuration classes using ** operator with dicts and handle TypeError to detect missing mandatory fields
+- **configuration**: automatically cast attributes value to string in case yaml reading gets interpreted as a float
+- **configuration**: modify config examples for test to have is_dev field with same name as class argument
+- **configuration**: modify test assertion to compare expected dependencies with parsed dependencies configuration
+- **tests**: update config file path handling to remove file extension
+- **configuration**: extract helper function to build config file path for tests
+- **configuration**: remove unnecessary empty check in tests
+- **configuration**: temporarily set dependencies, template and git configs to not needed when initializing ConfigurationSchema to be able to test it step by step
+- **configuration**: convert constants to class variables
+- **configuration**: modify configuration errors to pass wrong value and supported values instead of accessing them
+- **configuration**: create auxiliar methods for better readability when extracting config file content
+- **configuration**: extract semantic method to encapsulate reading configuration file
+- **configuration**: modify parse method to open config file
+- **configuration**: reorganize configuration files in subfolders to expose clearer the concepts of the configuration
+- **configuration**: join unsupported values test in a parametrized test
+- **configuration**: move supported constants to a separate file to avoid circular import errors
+- **prompter**: rename project_slug to slug for consistency across templates
+- **cli**: move folder and project cli commands to specific command module
+
 ## 0.5.2 (2025-04-16)
 
 ### 🐛 Bug Fixes
