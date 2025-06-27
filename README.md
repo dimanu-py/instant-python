@@ -41,11 +41,11 @@ commands like `ng new` or `create-react-app`, but for Python projects.
 ## Documentation
 
 This section provides a high-level overview of the `instant-python` library, its features, and how to get started.
-For detailed instructions and examples, please refer to the [full Instant Python documentation](https://dimanu-py.github.io/instant-python/).
+For detailed instructions and examples, please refer to the [full Instant Python documentation](https://dimanu-py.github.io/instant-python/home/).
 
-- [Installation](#installation)
-- [Getting Started](docs/home/getting_started.md)
-- [Examples](./docs/examples/index.md)
+- [Installation](https://dimanu-py.github.io/instant-python/home/#installation)
+- [Getting Started](https://dimanu-py.github.io/instant-python/home/getting_started/)
+- [Examples](https://dimanu-py.github.io/instant-python/examples/configuration/)
 
 ### Need help?
 
@@ -86,4 +86,4 @@ Older versions of Python may work, but they are not guaranteed to be compatible.
 ## Contributing
 
 We welcome contributions to `instant-python`! If you have ideas, suggestions, or improvements, please check out our
-[contributing guide](docs/home/contributing.md) for details on how to get involved.
+[contributing guide](https://dimanu-py.github.io/instant-python/home/contributing/) for details on how to get involved.
