@@ -7,17 +7,16 @@ general:
   slug: python-project
   source_name: src
   description: Python Project Description
-  version: 0.1.0
+  version: "0.1.0"
   author: John Doe
   license: MIT
-  python_version: 3.13
+  python_version: "3.13"
   dependency_manager: uv
 git:
   initialize: false
 dependencies:
 template:
-  name: standard
-  built_in_features:
+  name: standard_project
 ```
 
 ## Initializing a git repository
@@ -27,10 +26,10 @@ general:
   slug: python-project
   source_name: src
   description: Python Project Description
-  version: 0.1.0
+  version: "0.1.0"
   author: John Doe
   license: MIT
-  python_version: 3.13
+  python_version: "3.13"
   dependency_manager: uv
 git:
   initialize: true
@@ -38,8 +37,7 @@ git:
   email: johndoe@gmail.com
 dependencies:
 template:
-  name: standard
-  built_in_features:
+  name: standard_project
 ```
 
 ## Domain Driven Design without specifying bounded context
@@ -49,10 +47,10 @@ general:
   slug: python-project
   source_name: src
   description: Python Project Description
-  version: 0.1.0
+  version: "0.1.0"
   author: John Doe
   license: MIT
-  python_version: 3.13
+  python_version: "3.13"
   dependency_manager: uv
 git:
   initialize: true
@@ -62,7 +60,6 @@ dependencies:
 template:
   name: domain_driven_design
   specify_bounded_context: false
-  built_in_features:
 ```
 
 ## Domain Driven Design specifying bounded context
@@ -72,10 +69,10 @@ general:
   slug: python-project
   source_name: src
   description: Python Project Description
-  version: 0.1.0
+  version: "0.1.0"
   author: John Doe
   license: MIT
-  python_version: 3.13
+  python_version: "3.13"
   dependency_manager: uv
 git:
   initialize: true
@@ -87,7 +84,6 @@ template:
   specify_bounded_context: true
   bounded_context: backoffice
   aggregate_name: user
-  built_in_features:
 ```
 
 ## Selecting built-in features
@@ -97,10 +93,10 @@ general:
   slug: python-project
   source_name: src
   description: Python Project Description
-  version: 0.1.0
+  version: "0.1.0"
   author: John Doe
   license: MIT
-  python_version: 3.13
+  python_version: "3.13"
   dependency_manager: uv
 git:
   initialize: true
@@ -122,10 +118,10 @@ general:
   slug: python-project
   source_name: src
   description: Python Project Description
-  version: 0.1.0
+  version: "0.1.0"
   author: John Doe
   license: MIT
-  python_version: 3.13
+  python_version: "3.13"
   dependency_manager: uv
 git:
   initialize: true
@@ -143,7 +139,7 @@ dependencies:
   - name: fastapi
     version: latest
 template:
-  name: standard
+  name: standard_project
   built_in_features:
     - value_objects
     - github_actions
