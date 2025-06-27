@@ -27,3 +27,14 @@ license = { file = "LICENSE" }
 [tool.pdm]
 distribution = false
 {% endif %}
+
+{% if "github_actions" in template.built_in_features %}
+[dependency-groups]
+lint = [
+    "mypy",
+    "ruff",
+]
+test = [
+    "pytest",
+]
+{% endif %}
