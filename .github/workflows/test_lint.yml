@@ -28,7 +28,9 @@ jobs:
       - name: Auto fix lint errors
         id: fix_lint
         if: ${{ steps.check_lint.outcome == 'failure' }}
-        run: uvx ruff check --fix --exclude "instant_python/templates,instant_python/templates" instant_python test
+        run: |
+          git pull --rebase origin main
+          uvx ruff check --fix --exclude "instant_python/templates,instant_python/templates" instant_python test
       - name: Commit lint fixes
         if: ${{ steps.fix_lint.outcome == 'success' }}
         run: |
@@ -65,7 +67,9 @@ jobs:
       - name: Auto format code
         id: format_code
         if: ${{ steps.check_format.outcome == 'failure' }}
-        run: uvx ruff format --exclude "instant_python/templates,instant_python/templates" instant_python test
+        run: |
+          git pull --rebase origin main
+          uvx ruff format --exclude "instant_python/templates,instant_python/templates" instant_python test
       - name: Commit formatted code
         if: ${{ steps.format_code.outcome == 'success' }}
         run: |
