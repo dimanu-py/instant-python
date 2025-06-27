@@ -43,7 +43,7 @@ This section provides a high-level overview of the `instant-python` library, its
 For detailed instructions and examples, please refer to the [full Instant Python documentation](https://dimanu-py.github.io/instant-python/).
 
 - [Installation](#installation)
-- [Getting Started](./docs/getting_started.md)
+- [Getting Started](docs/home/getting_started.md)
 - [Examples](./docs/examples/index.md)
 
 ### Need help?
@@ -85,4 +85,4 @@ Older versions of Python may work, but they are not guaranteed to be compatible.
 ## Contributing
 
 We welcome contributions to `instant-python`! If you have ideas, suggestions, or improvements, please check out our
-[contributing guide](./docs/contributing.md) for details on how to get involved.
+[contributing guide](docs/home/contributing.md) for details on how to get involved.

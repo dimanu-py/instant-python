@@ -72,4 +72,4 @@ Older versions of Python may work, but they are not guaranteed to be compatible.
 ## Contributing
 
 We welcome contributions to `instant-python`! If you have ideas, suggestions, or improvements, please check out our
-[contributing guide](./contributing.md) for details on how to get involved.
+[contributing guide](contributing.md) for details on how to get involved.

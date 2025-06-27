@@ -8,8 +8,6 @@ repo_name: instant-python
 repo_url: https://github.com/dimanu-py/instant-python
 plugins:
   - search
-  - literate-nav:
-      nav_file: summary.md
   - tags
   - section-index
   - macros:
@@ -19,8 +17,8 @@ extra_javascript:
 markdown_extensions:
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
-  - attr_list
+  - pymdownx.superfences:
+  - attr_list:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
@@ -28,9 +26,9 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
+  - pymdownx.inlinehilite:
+  - pymdownx.snippets:
+  - pymdownx.superfences:
 theme:
   name: material
   font:
@@ -43,7 +41,17 @@ theme:
   features:
     - navigation.path
     - navigation.instant
+    - navigation.instant.prefetch
     - navigation.instant.progress
+    - navigation.sections
+    - navigation.indexes
+    - navigation.tracking
+    - content.code.annotate
+    - toc.follow
+    - navigation.footer
+    - navigation.top
+    - content.code.copy
+    - content.tabs.link
     - navigation.tabs
     - navigation.tabs.sticky
     - search.suggest
@@ -61,3 +69,15 @@ theme:
         name: Light Mode
       primary: '#B4BEFE'
       accent: '#FAB387'
+nav:
+  - Home:
+      - home/index.md
+      - Getting Started: home/getting_started.md
+      - Releases: home/releases.md
+      - Contributing: home/contributing.md
+  - Commands:
+      - Config: guide/command_config.md
+      - Init: guide/command_init.md
+  - Examples:
+      - Configuration: examples/configuration.md
+      - Custom Template: examples/custom_template.md
