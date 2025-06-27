@@ -1,3 +1,9 @@
+## 0.6.1 (2025-06-27)
+
+### 🐛 Bug Fixes
+
+- correct links to README.md
+
 ## 0.6.0 (2025-06-27)
 
 ### ✨ Features
