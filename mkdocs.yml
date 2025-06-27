@@ -11,6 +11,7 @@ plugins:
   - literate-nav:
       nav_file: summary.md
   - tags
+  - section-index
   - macros:
       module_name: docs/downloads_macro
 extra_javascript:
