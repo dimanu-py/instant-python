@@ -49,7 +49,7 @@ The latest version of `instant-python` can be installed from PyPI:
 pip install instant-python
 ```
 
-!!! info
+!!! tip
     We highly recommend using a virtual environment to avoid conflicts with other Python packages.
 
 ### Requirements

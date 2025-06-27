@@ -62,8 +62,8 @@ The latest version of `instant-python` can be installed from PyPI:
 pip install instant-python
 ```
 
-!!! info
-We highly recommend using a virtual environment to avoid conflicts with other Python packages.
+> [!TIP]
+> We highly recommend using a virtual environment to avoid conflicts with other Python packages.
 
 ### Requirements
 
