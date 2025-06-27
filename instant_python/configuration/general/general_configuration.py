@@ -35,9 +35,14 @@ class GeneralConfiguration:
     def __post_init__(self) -> None:
         self.version = str(self.version)
         self.python_version = str(self.python_version)
+        self._remove_white_spaces_from_slug_if_present()
         self._ensure_license_is_supported()
         self._ensure_python_version_is_supported()
         self._ensure_dependency_manager_is_supported()
+
+    def _remove_white_spaces_from_slug_if_present(self) -> None:
+        if " " in self.slug:
+            self.slug = self.slug.replace(" ", "")
 
     def _ensure_license_is_supported(self) -> None:
         if self.license not in self._SUPPORTED_LICENSES:
