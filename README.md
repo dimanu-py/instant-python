@@ -4,9 +4,10 @@
 </div>
 
 <p align="center">
-  <a href="https://dimanu-py.github.io/instant-python/getting_started/">Getting Started</a>&nbsp;&nbsp;•&nbsp;
-  <a href="https://dimanu-py.github.io/instant-python/guide">Guide</a>&nbsp;&nbsp;•&nbsp;
-  <a href="https://dimanu-py.github.io/instant-python/contributing">Contributing</a>
+  <a href="https://dimanu-py.github.io/instant-python/home/getting_started/">Getting Started</a>&nbsp;&nbsp;•&nbsp;
+  <a href="https://dimanu-py.github.io/instant-python/guide/command_config/">Usage</a>&nbsp;&nbsp;•&nbsp;
+  <a href="https://dimanu-py.github.io/instant-python/examples/configuration/">Examples</a>&nbsp;&nbsp;•&nbsp;
+  <a href="https://dimanu-py.github.io/instant-python/home/contributing/">Contributing</a>
 </p>
 <p align="center">
   <img 
