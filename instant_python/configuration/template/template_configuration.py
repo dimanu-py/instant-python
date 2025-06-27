@@ -46,7 +46,9 @@ class TemplateConfiguration:
             raise InvalidBuiltInFeaturesValues(unsupported_features, self.SUPPORTED_BUILT_IN_FEATURES)
 
     def _ensure_bounded_context_is_only_applicable_for_ddd_template(self) -> None:
-        if (self.specify_bounded_context or self.bounded_context or self.aggregate_name) and self.name != SupportedTemplates.DDD:
+        if (
+            self.specify_bounded_context or self.bounded_context or self.aggregate_name
+        ) and self.name != SupportedTemplates.DDD:
             raise BoundedContextNotApplicable(self.name)
 
     def _ensure_bounded_context_is_set_if_specified(self) -> None:
