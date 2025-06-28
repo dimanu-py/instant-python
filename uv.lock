@@ -401,8 +401,6 @@ git = [
 lint = [
     { name = "mypy" },
     { name = "ruff" },
-    { name = "tox" },
-    { name = "vermin" },
 ]
 test = [
     { name = "approvaltests" },
@@ -413,6 +411,8 @@ test = [
     { name = "pytest" },
     { name = "pytest-sugar" },
     { name = "pytest-watch" },
+    { name = "tox" },
+    { name = "vermin" },
 ]
 
 [package.metadata]
@@ -435,8 +435,6 @@ git = [{ name = "commitizen", specifier = ">=4.2.2" }]
 lint = [
     { name = "mypy", specifier = ">=1.16.0" },
     { name = "ruff", specifier = ">=0.11.12" },
-    { name = "tox", specifier = ">=4.25.0" },
-    { name = "vermin", specifier = ">=1.6.0" },
 ]
 test = [
     { name = "approvaltests", specifier = ">=14.6.0" },
@@ -447,6 +445,8 @@ test = [
     { name = "pytest", specifier = ">=8.3.5" },
     { name = "pytest-sugar", specifier = ">=1.0.0" },
     { name = "pytest-watch", specifier = ">=4.2.0" },
+    { name = "tox", specifier = ">=4.25.0" },
+    { name = "vermin", specifier = ">=1.6.0" },
 ]
 
 [[package]]
