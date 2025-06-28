@@ -1,7 +1,7 @@
 import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import TypedDict, Self, Union
+from typing import TypedDict, Union
 
 import yaml
 
@@ -33,7 +33,7 @@ class ConfigurationSchema:
         dependencies: list[DependencyConfiguration],
         template: TemplateConfiguration,
         git: GitConfiguration,
-    ) -> Self:
+    ) -> "ConfigurationSchema":
         return cls(
             general=general,
             dependencies=dependencies,
