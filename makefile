@@ -63,3 +63,7 @@ show:  ## Show installed dependencies.
 search:  ## Show package details.
 	@read -p "Enter package name to search: " package;\
 	uv pip show $$package
+
+.PHONY: tox
+tox:  ## Run tox tests
+	@uv run tox
