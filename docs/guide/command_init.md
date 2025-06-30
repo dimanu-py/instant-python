@@ -8,12 +8,16 @@ ipy init
 
 By default `instant-python` will look for **ipy.yml** in the current directory. A different file can be provided with `--config` or `-c` flags. 
 
-Additionally, a custom template for your project structure can be used, you tell `ipy` to use that
-template with the `--template` or `-t` flag.
+Additionally, a [custom template](#using-custom-template) for your project structure can be used, you tell `ipy` to use that
+template with the `--template` or `-t` flag and providing the path to the template file.
 
 ```bash
 ipy init -t /path/to/template.yml
 ```
+
+!!! important
+    When using a [custom template](#using-custom-template), the possibility of using [out-of-the-box implementations](#out-of-the-box-implementations)
+    is not available. The custom template will only create the folder structure and files defined in it.
 
 ## Overview 
 
@@ -118,6 +122,9 @@ that will help you to start your project.
     These implementations are completely subjective and personal. This does not mean that you must implement
     them in the same way or that they are the best way to implement them. You can use them as a starting point
     and iterate them as you need.
+
+!!! warning
+    These implementations are only available when using one of the [default templates](#default-templates).
 
 ### Value objects and exceptions
 
@@ -356,6 +363,10 @@ will set up a decoupled implementation of an event bus using RabbitMQ. This impl
 ## Using custom template
 
 You can create a new project using a custom template instead of one of the [default templates](#default-templates).
+
+!!! important
+    When using a custom template, the possibility of using [out-of-the-box implementations](#out-of-the-box-implementations)
+    is not available.
 
 This custom template must follow a specific structure and syntax to be able to generate the project correctly.
 
