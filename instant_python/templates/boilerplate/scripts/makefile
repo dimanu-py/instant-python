@@ -7,7 +7,7 @@ help:  ## Show this help.
 
 .PHONY: test
 test:  ## Run all test.
-	@{{ general.dependency_manager }} run pytest -n 0 tests -ra
+	@{{ general.dependency_manager }} run pytest -n 0 test -ra
 
 .PHONY: unit
 unit:  ## Run unit test in changed files.
@@ -31,7 +31,7 @@ all-acceptance:  ## Run all acceptance test.
 
 .PHONY: coverage
 coverage:  ## Run all test with coverage.
-	@{{ general.dependency_manager }} run coverage run --branch -m pytest tests
+	@{{ general.dependency_manager }} run coverage run --branch -m pytest test
 	@{{ general.dependency_manager }} run coverage html
 	@$(BROWSER) htmlcov/index.html
 
@@ -71,33 +71,33 @@ check-typing:  ## Run mypy type checking.
 .PHONY: check-lint
 check-lint:  ## Run ruff linting check.
 	{% if general.dependency_manager == "pdm" %}
-	@pdm run ruff check src tests
+	@pdm run ruff check src test
 	{% elif general.dependency_manager == "uv" %}
-	@uvx ruff check src tests
+	@uvx ruff check src test
 	{% endif %}
 
 .PHONY: lint
 lint:  ## Apply ruff linting fix.
 	{% if general.dependency_manager == "pdm" %}
-	@pdm run ruff check --fix src tests
+	@pdm run ruff check --fix src test
 	{% elif general.dependency_manager == "uv" %}
-	@uvx ruff check --fix src tests
+	@uvx ruff check --fix src test
 	{% endif %}
 
 .PHONY: check-format
 check-format:  ## Run ruff format check.
 	{% if general.dependency_manager == "pdm" %}
-	@pdm run ruff format --check src tests
+	@pdm run ruff format --check src test
 	{% elif general.dependency_manager == "uv" %}
-	@uvx ruff format --check src tests
+	@uvx ruff format --check src test
 	{% endif %}
 
 .PHONY: format
 format:  ## Apply ruff format fix.
 	{% if general.dependency_manager == "pdm" %}
-	@pdm run ruff format src tests
+	@pdm run ruff format src test
 	{% elif general.dependency_manager == "uv" %}
-	@uvx ruff format src tests
+	@uvx ruff format src test
 	{% endif %}
 
 .PHONY: pre-commit
@@ -108,7 +108,7 @@ pre-push:  all-integration all-acceptance ## Run pre-push checks.
 
 .PHONY: watch
 watch:  ## Run all test with every change.
-	@{{ general.dependency_manager }} run ptw --runner "pytest -n auto tests -ra"
+	@{{ general.dependency_manager }} run ptw --runner "pytest -n auto test -ra"
 
 .PHONY: insert-template
 insert-template:  ## Insert a template class among the existing ones.
