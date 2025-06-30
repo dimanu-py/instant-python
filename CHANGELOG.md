@@ -1,3 +1,23 @@
+## 0.6.2 (2025-06-30)
+
+### 🐛 Bug Fixes
+
+- **configuration**: ask built in template question only if selected template is not custom
+- **templates**: use valid checkout action in test_lint.yml github action template
+- **templates**: correct test path folder in makefile commands
+- **templates**: rename _log_ folder that gets created when logger built in feature is selected to _logger_ to avoid git ignore its content
+- **templates**: include faker library by default when template is not custom
+- **templates**: include basic dependencies for makefile when is selected in built in features
+
+### ♻️ Code Refactoring
+
+- **templates**: separate template github action in two different workflows, one for test and one for linting and checks
+- **templates**: include makefile by default if github actions built in feature has been selected to be able to reuse its commands
+- **templates**: remove test execution in parallel by default in makefile template
+- **templates**: remove unit and integration commands from makefile
+- **templates**: remove insert_templates command from makefile template
+- **configuration**: do not use Self typing to ensure compatibility with older python versions
+
 ## 0.6.1 (2025-06-27)
 
 ### 🐛 Bug Fixes
