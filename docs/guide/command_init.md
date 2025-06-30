@@ -273,28 +273,26 @@ A common feature in projects is to have a CI/CD pipeline that will run some task
 A Makefile is a common tool to run tasks in your project. This feature is specially useful when automating tasks and
 avoid remembering all the commands. The default Makefile will include the following commands:
 
-| Command                | Description                              |
-|------------------------|------------------------------------------|
-| `make help`            | Show available commands                  |
-| `make test`            | Run all tests                            |
-| `make unit`            | Run unit tests for changed files         |
-| `make all-unit`        | Run all unit tests                       |
-| `make integration`     | Run integration tests for changed files  |
-| `make all-integration` | Run all integration tests                |
-| `make all-acceptance`  | Run all acceptance tests                 |
-| `make coverage`        | Run coverage tests                       |
-| `make install`         | Install all dependencies                 |
-| `make update`          | Update all dependencies                  |
-| `make add-dep`         | Add a new dependency                     |
-| `make remove-dep`      | Remove a dependency                      |
-| `make check-typing`    | Runs type checker                        |
-| `make check-lint`      | Checks lint code with Ruff               |
-| `make lint`            | Fixes lint errors code with Ruff         |
-| `make check-format`    | Checks format code with Ruff             |
-| `make format`          | Format code with Ruff                    |
-| `make local-setup`     | Set up the local development environment |
-| `make show`            | Show all installed dependencies          |
-| `make search`          | Show details of a specific package       |
+| Command           | Description                              |
+|-------------------|------------------------------------------|
+| `make help`       | Show available commands                  |
+| `make test`       | Run all tests                            |
+| `make unit`       | Run all unit tests                       |
+| `make integration` | Run all integration tests                |
+| `make acceptance` | Run all acceptance tests                 |
+| `make coverage`   | Run coverage tests                       |
+| `make install`    | Install all dependencies                 |
+| `make update`     | Update all dependencies                  |
+| `make add-dep`    | Add a new dependency                     |
+| `make remove-dep` | Remove a dependency                      |
+| `make check-typing` | Runs type checker                        |
+| `make check-lint` | Checks lint code with Ruff               |
+| `make lint`       | Fixes lint errors code with Ruff         |
+| `make check-format` | Checks format code with Ruff             |
+| `make format`     | Format code with Ruff                    |
+| `make local-setup` | Set up the local development environment |
+| `make show`       | Show all installed dependencies          |
+| `make search`     | Show details of a specific package       |
 
 ### Logger
 
