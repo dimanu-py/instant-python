@@ -1,4 +1,4 @@
-name: Pass checks and tests
+name: Run lint, format and type checks
 
 on:
   push:
@@ -28,9 +28,3 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/python_setup
       - run: make check-typing
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/python_setup
-      - run: make test
