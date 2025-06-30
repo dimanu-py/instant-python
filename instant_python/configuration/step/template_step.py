@@ -14,50 +14,49 @@ from instant_python.shared.supported_templates import SupportedTemplates
 class TemplateStep(Step):
     def __init__(self, questionary: Questionary) -> None:
         super().__init__(questionary)
-        self._questions = [
-            MultipleChoiceQuestion(
-                key="built_in_features",
-                message="Select the built-in features you want to include",
-                options=SupportedBuiltInFeatures.get_supported_built_in_features(),
+        self._built_in_features_question = MultipleChoiceQuestion(
+            key="built_in_features",
+            message="Select the built-in features you want to include",
+            options=SupportedBuiltInFeatures.get_supported_built_in_features(),
+            questionary=self._questionary,
+        )
+        self._template_question = ConditionalQuestion(
+            base_question=ChoiceQuestion(
+                key="name",
+                message="Select a template",
+                options=SupportedTemplates.get_supported_templates(),
                 questionary=self._questionary,
             ),
-            ConditionalQuestion(
-                base_question=ChoiceQuestion(
-                    key="name",
-                    message="Select a template",
-                    options=SupportedTemplates.get_supported_templates(),
+            subquestions=ConditionalQuestion(
+                base_question=BooleanQuestion(
+                    key="specify_bounded_context",
+                    message="Do you want to specify your first bounded context?",
+                    default=True,
                     questionary=self._questionary,
                 ),
-                subquestions=ConditionalQuestion(
-                    base_question=BooleanQuestion(
-                        key="specify_bounded_context",
-                        message="Do you want to specify your first bounded context?",
-                        default=True,
+                subquestions=[
+                    FreeTextQuestion(
+                        key="bounded_context",
+                        message="Enter the bounded context name",
+                        default="backoffice",
                         questionary=self._questionary,
                     ),
-                    subquestions=[
-                        FreeTextQuestion(
-                            key="bounded_context",
-                            message="Enter the bounded context name",
-                            default="backoffice",
-                            questionary=self._questionary,
-                        ),
-                        FreeTextQuestion(
-                            key="aggregate_name",
-                            message="Enter the aggregate name",
-                            default="user",
-                            questionary=self._questionary,
-                        ),
-                    ],
-                    condition=True,
-                ),
-                condition=SupportedTemplates.DDD,
+                    FreeTextQuestion(
+                        key="aggregate_name",
+                        message="Enter the aggregate name",
+                        default="user",
+                        questionary=self._questionary,
+                    ),
+                ],
+                condition=True,
             ),
-        ]
+            condition=SupportedTemplates.DDD,
+        )
 
     def run(self) -> dict[str, dict[str, Union[str, list[str]]]]:
-        answers = {}
-        for question in self._questions:
-            answers.update(question.ask())
+        answers = self._template_question.ask()
+
+        if answers["name"] != SupportedTemplates.CUSTOM:
+            answers.update(self._built_in_features_question.ask())
 
         return {"template": answers}
