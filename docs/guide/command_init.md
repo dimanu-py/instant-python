@@ -257,17 +257,6 @@ some common exceptions that you can use in your project:
             super().__init__(message=self._message, error_type=self._type)
     ```
 
-### GitHub actions and workflows
-
-A common feature in projects is to have a CI/CD pipeline that will run some tasks. This option will include the following:
-
-- A GitHub action that will set up your Python environment in your pipeline using the dependency manager you selected.
-- A workflow that will execute all the test, lint, type check and code formatting tasks.
-
-!!! info
-    When selecting this feature, by default, the library will include `mypy` as a type checker, `ruff` as a linter and formatter, and
-    `pytest` as a test runner. If you want to use different tools, you can change them later in the workflow file.
-
 ### Makefile
 
 A Makefile is a common tool to run tasks in your project. This feature is specially useful when automating tasks and
@@ -293,6 +282,28 @@ avoid remembering all the commands. The default Makefile will include the follow
 | `make local-setup` | Set up the local development environment |
 | `make show`       | Show all installed dependencies          |
 | `make search`     | Show details of a specific package       |
+
+!!! info
+    The commands `unit`, `integration` and `acceptance` are defined based on the assumption that you will mark your tests with 
+    the `@pytest.mark.unit`, `@pytest.mark.integration` and `@pytest.mark.acceptance` decorators.
+    If this is not your case, you change the commands as needed in the Makefile to match your test structure.
+
+### GitHub actions and workflows
+
+!!! info
+    When selecting this feature, by default, the library will include `mypy` as a type checker, `ruff` as a linter and formatter, and
+    `pytest` as a test runner. If you want to use different tools, you can change them later in the workflow file.
+
+A common feature in projects is to have a CI/CD pipeline that will run some tasks. This option will include the following:
+
+- A GitHub action that will set up your Python environment in your pipeline using the dependency manager you selected.
+- A workflow that will execute all lint, type and code formatting checks.
+- A workflow that will run all tests in your project.
+
+!!! info
+    The test workflow will use `unit`, `integration` and `acceptance` make commands presented in the [previous section](#makefile).
+    These commands are defined based on the assumption that you will mark your tests with the `@pytest.mark.unit`, `@pytest.mark.integration` and `@pytest.mark.acceptance` decorators.
+    If this is not your case, you change the commands in the workflow file to match your test structure.
 
 ### Logger
 
