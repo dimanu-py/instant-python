@@ -1,3 +1,14 @@
+## 0.7.0 (2025-06-30)
+
+### ✨ Features
+
+- **commands**: call project formatter in 'init' command once the file system has been generated
+- **formatter**: add project formatter to be able to format included code in the project
+
+### 🐛 Bug Fixes
+
+- **templates**: include DomainError template when using fastapi application built in feature
+
 ## 0.6.2 (2025-06-30)
 
 ### 🐛 Bug Fixes
