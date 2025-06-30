@@ -10,23 +10,15 @@ test:  ## Run all test.
 	@{{ general.dependency_manager }} run pytest -n 0 test -ra
 
 .PHONY: unit
-unit:  ## Run unit test in changed files.
-	@scripts/tests/unit.sh
-
-.PHONY: integration
-integration:  ## Run integration test in changed files.
-	@scripts/tests/integration.sh
-
-.PHONY: all-unit
-all-unit:  ## Run all unit test.
+unit:  ## Run all unit test.
 	@{{ general.dependency_manager }} run pytest -n auto -m "unit" -ra
 
-.PHONY: all-integration
-all-integration:  ## Run all integration test.
+.PHONY: integration
+integration:  ## Run all integration test.
 	@{{ general.dependency_manager }} run pytest -m "integration" -ra
 
-.PHONY: all-acceptance
-all-acceptance:  ## Run all acceptance test.
+.PHONY: acceptance
+acceptance:  ## Run all acceptance test.
 	@{{ general.dependency_manager }} run pytest -m "acceptance" -ra
 
 .PHONY: coverage
