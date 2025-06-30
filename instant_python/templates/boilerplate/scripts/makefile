@@ -7,11 +7,11 @@ help:  ## Show this help.
 
 .PHONY: test
 test:  ## Run all test.
-	@{{ general.dependency_manager }} run pytest -n 0 test -ra
+	@{{ general.dependency_manager }} run pytest test -ra
 
 .PHONY: unit
 unit:  ## Run all unit test.
-	@{{ general.dependency_manager }} run pytest -n auto -m "unit" -ra
+	@{{ general.dependency_manager }} run pytest -m "unit" -ra
 
 .PHONY: integration
 integration:  ## Run all integration test.
