@@ -28,7 +28,7 @@ license = { file = "LICENSE" }
 distribution = false
 {% endif %}
 
-{% if ["github_actions", "makefile"] | is_in(template.built_in_features) or dependencies | has_dependency("pytest") %}
+{% if ["github_actions", "makefile"] | is_in(template.built_in_features) or dependencies | has_dependency("pytest") and template.name != template_types.CUSTOM %}
 [dependency-groups]
 {% if ["github_actions", "makefile"] | is_in(template.built_in_features) and dependencies | has_dependency("pytest") %}
 lint = [
@@ -36,6 +36,7 @@ lint = [
     "ruff",
 ]
 test = [
+    "faker",
     "pytest",
     "pytest-asyncio",
 ]
@@ -45,12 +46,18 @@ lint = [
     "ruff",
 ]
 test = [
+    "faker",
     "pytest",
     "pytest-asyncio",
 ]
 {% elif dependencies | has_dependency("pytest") %}
 test = [
+    "faker",
     "pytest-asyncio",
+]
+{% elif template.name != template_types.CUSTOM %}
+test = [
+    "faker",
 ]
 {% endif %}
 {% endif %}
