@@ -110,10 +110,6 @@ pre-push:  all-integration all-acceptance ## Run pre-push checks.
 watch:  ## Run all test with every change.
 	@{{ general.dependency_manager }} run ptw --runner "pytest -n auto test -ra"
 
-.PHONY: insert-template
-insert-template:  ## Insert a template class among the existing ones.
-	@{{ general.dependency_manager }} run python -m scripts.insert_template
-
 .PHONY: create-aggregate
 create-aggregate:  ## Create a new aggregate inside contexts folder.
 	@{{ general.dependency_manager }} run python -m scripts.create_aggregate
