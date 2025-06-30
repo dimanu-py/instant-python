@@ -28,13 +28,29 @@ license = { file = "LICENSE" }
 distribution = false
 {% endif %}
 
-{% if "github_actions" in template.built_in_features %}
+{% if "github_actions" in template.built_in_features or dependencies | has_dependency("pytest") %}
 [dependency-groups]
+{% if "github_actions" in template.built_in_features and dependencies | has_dependency("pytest") %}
 lint = [
     "mypy",
     "ruff",
 ]
 test = [
     "pytest",
+    "pytest-asyncio",
 ]
+{% elif "github_actions" in template.built_in_features %}
+lint = [
+    "mypy",
+    "ruff",
+]
+test = [
+    "pytest",
+    "pytest-asyncio",
+]
+{% elif dependencies | has_dependency("pytest") %}
+test = [
+    "pytest-asyncio",
+]
+{% endif %}
 {% endif %}
