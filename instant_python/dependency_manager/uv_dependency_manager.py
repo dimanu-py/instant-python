@@ -21,8 +21,13 @@ class UvDependencyManager(DependencyManager):
 
     def _install(self) -> None:
         print(">>> Installing uv...")
-        self._run_command(command="curl -LsSf https://astral.sh/uv/install.sh | sh")
+        self._run_command(command=self._get_installation_command_based_on_os())
         print(">>> uv installed successfully")
+
+    def _get_installation_command_based_on_os(self) -> str:
+        if self._system_os.startswith("win"):
+            return 'powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"'
+        return "curl -LsSf https://astral.sh/uv/install.sh | sh"
 
     def _install_python(self, version: str) -> None:
         print(f">>> Installing Python {version}...")

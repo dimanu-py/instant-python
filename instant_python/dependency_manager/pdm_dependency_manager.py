@@ -21,8 +21,13 @@ class PdmDependencyManager(DependencyManager):
 
     def _install(self) -> None:
         print(">>> Installing pdm...")
-        self._run_command(command="curl -sSL https://pdm-project.org/install-pdm.py | python3 -")
+        self._run_command(command=self._get_installation_command_based_on_os())
         print(">>> pdm installed successfully")
+
+    def _get_installation_command_based_on_os(self) -> str:
+        if self._system_os.startswith("win"):
+            return 'powershell -ExecutionPolicy ByPass -c "irm https://pdm-project.org/install-pdm.py | py -"'
+        return "curl -sSL https://pdm-project.org/install-pdm.py | python3 -"
 
     def _install_python(self, version: str) -> None:
         print(f">>> Installing Python {version}...")
