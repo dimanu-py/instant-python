@@ -9,11 +9,7 @@ from instant_python.dependency_manager.command_execution_error import CommandExe
 class PdmDependencyManager(DependencyManager):
     def __init__(self, project_directory: str) -> None:
         super().__init__(project_directory)
-        self._pdm = (
-            f"{str(Path.home() / 'AppData' / 'Roaming' / 'Python' / 'Scripts' / 'pdm.exe')}"
-            if self._system_os.startswith("win")
-            else "~/.local/bin/pdm"
-        )
+        self._pdm = self._set_pdm_executable_based_on_os()
 
     def setup_environment(self, python_version: str, dependencies: list[DependencyConfiguration]) -> None:
         try:
@@ -27,6 +23,13 @@ class PdmDependencyManager(DependencyManager):
         print(">>> Installing pdm...")
         self._run_command(command=self._get_installation_command_based_on_os())
         print(">>> pdm installed successfully")
+
+    def _set_pdm_executable_based_on_os(self):
+        return (
+            f"{str(Path.home() / 'AppData' / 'Roaming' / 'Python' / 'Scripts' / 'pdm.exe')}"
+            if self._system_os.startswith("win")
+            else "~/.local/bin/pdm"
+        )
 
     def _get_installation_command_based_on_os(self) -> str:
         if self._system_os.startswith("win"):

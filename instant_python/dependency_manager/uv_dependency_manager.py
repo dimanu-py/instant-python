@@ -9,11 +9,7 @@ from instant_python.dependency_manager.command_execution_error import CommandExe
 class UvDependencyManager(DependencyManager):
     def __init__(self, project_directory: str) -> None:
         super().__init__(project_directory)
-        self._uv = (
-            f"{str(Path.home() / '.local' / 'bin' / 'uv.exe')}"
-            if self._system_os.startswith("win")
-            else "~/.local/bin/uv"
-        )
+        self._uv = self._set_uv_executable_based_on_os()
 
     def setup_environment(self, python_version: str, dependencies: list[DependencyConfiguration]) -> None:
         try:
@@ -32,6 +28,13 @@ class UvDependencyManager(DependencyManager):
         if self._system_os.startswith("win"):
             return 'powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"'
         return "curl -LsSf https://astral.sh/uv/install.sh | sh"
+
+    def _set_uv_executable_based_on_os(self):
+        return (
+            f"{str(Path.home() / '.local' / 'bin' / 'uv.exe')}"
+            if self._system_os.startswith("win")
+            else "~/.local/bin/uv"
+        )
 
     def _install_python(self, version: str) -> None:
         print(f">>> Installing Python {version}...")
