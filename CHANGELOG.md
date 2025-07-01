@@ -1,3 +1,9 @@
+## 0.8.1 (2025-07-01)
+
+### 🐛 Bug Fixes
+
+- **git**: modify command to make initial commit so Windows system does not interpret it as three different commands
+
 ## 0.8.0 (2025-07-01)
 
 ### ✨ Features
