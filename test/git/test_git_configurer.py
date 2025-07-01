@@ -33,7 +33,7 @@ class TestGitConfigurer:
 
         self._git_configurer.expect_to_have_been_called_with(
             "git add .",
-            "git commit -m '🎉 chore: initial commit'",
+            'git commit -m "🎉 chore: initial commit"',
         )
 
     def test_should_setup_git_repository(self) -> None:
@@ -49,5 +49,5 @@ class TestGitConfigurer:
             "git config user.name test_user",
             "git config user.email test_email@gmail.com",
             "git add .",
-            "git commit -m '🎉 chore: initial commit'",
+            'git commit -m "🎉 chore: initial commit"',
         )

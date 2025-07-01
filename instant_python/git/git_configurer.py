@@ -29,7 +29,7 @@ class GitConfigurer:
 
     def _make_initial_commit(self) -> None:
         self._run_command(command="git add .")
-        self._run_command(command="git commit -m '🎉 chore: initial commit'")
+        self._run_command(command='git commit -m "🎉 chore: initial commit"')
 
     def _run_command(self, command: str) -> None:
         subprocess.run(
