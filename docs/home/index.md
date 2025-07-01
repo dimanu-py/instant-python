@@ -43,9 +43,6 @@ For detailed instructions and examples, please refer to the [Commands documentat
 
 ## Installation
 
-!!! important
-    For the moment, `instant-python` is only supported in Unix-like systems. Windows support is coming soon.
-
 The latest version of `instant-python` can be installed from PyPI:
 
 ```bash

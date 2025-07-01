@@ -12,9 +12,6 @@ check the [Commands](../guide/command_config.md) section.
 
 ## Installation
 
-!!! important
-    For the moment, `instant-python` is only supported in Unix-like systems. Windows support is coming soon.
-
 To ensure a clean and isolated environment, we recommend installing `instant-python` using a virtual environment. At your
 own risk, you can install it at your system Python installation, but this is not recommended.
 Below are the preferred installation methods.

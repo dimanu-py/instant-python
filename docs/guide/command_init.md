@@ -267,7 +267,12 @@ some common exceptions that you can use in your project:
 ### Makefile
 
 A Makefile is a common tool to run tasks in your project. This feature is specially useful when automating tasks and
-avoid remembering all the commands. The default Makefile will include the following commands:
+avoid remembering all the commands.
+
+!!! warning
+    If you are running `instant-python` in a Windows environment, the Makefile will not work out of the box. You would need
+    to install a tool like [GNU Make for Windows](https://gnuwin32.sourceforge.net/packages/make.htm) or use a different task runner.
+The default Makefile will include the following commands:
 
 | Command           | Description                              |
 |-------------------|------------------------------------------|
