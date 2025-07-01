@@ -23,6 +23,15 @@ class UvDependencyManager(DependencyManager):
         print(">>> Installing uv...")
         self._run_command(command=self._get_installation_command_based_on_os())
         print(">>> uv installed successfully")
+        if self._system_os.startswith("win"):
+            print(
+                ">>> Remember to add uv to your PATH environment variable. You can do this:\n"
+                "    1. Running the following command if you use cmd:\n"
+                "       set Path=%Path%;%USERPROFILE%\\.local\\bin\n"
+                "    2. Running the following command if you use PowerShell:\n"
+                "       $env:Path = '$env:USERPROFILE\\.local\\bin;$env:Path'\n"
+                "    3. Restarting your shell."
+            )
 
     def _get_installation_command_based_on_os(self) -> str:
         if self._system_os.startswith("win"):
