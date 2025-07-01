@@ -47,6 +47,7 @@ class UvDependencyManager(DependencyManager):
         for dependency in dependencies:
             command = self._build_dependency_install_command(dependency)
             self._run_command(command)
+        print(">>> Dependencies installed successfully")
 
     def _build_dependency_install_command(self, dependency: DependencyConfiguration) -> str:
         command = [f"{self._uv} add"]
