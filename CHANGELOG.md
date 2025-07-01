@@ -1,3 +1,17 @@
+## 0.8.0 (2025-07-01)
+
+### ✨ Features
+
+- **dependency-manager**: get dependency manager installation command based on system os
+- **dependency-manager**: set different commands for dependency executable based on system os
+- **dependency-manager**: add os information in dependency manager to be able to modify installation depending on user os
+
+### ♻️ Code Refactoring
+
+- **dependency-manager**: add message for the user to notify uv should be added to the path when installing it on windows
+- **dependency-manager**: notify the user when all dependencies have been installed
+- **dependency-manager**: extract method to set executable path setting based on system os
+
 ## 0.7.0 (2025-06-30)
 
 ### ✨ Features
