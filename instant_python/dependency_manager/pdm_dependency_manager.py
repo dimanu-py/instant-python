@@ -1,3 +1,4 @@
+from pathlib import Path
 import subprocess
 
 from instant_python.configuration.dependency.dependency_configuration import DependencyConfiguration
@@ -8,7 +9,7 @@ from instant_python.dependency_manager.command_execution_error import CommandExe
 class PdmDependencyManager(DependencyManager):
     def __init__(self, project_directory: str) -> None:
         super().__init__(project_directory)
-        self._pdm = "~/.local/bin/pdm"
+        self._pdm = f"{str(Path.home() / "AppData" / "Roaming" / "Python" / "Scripts" / "pdm.exe")}" if self._system_os.startswith("win") else "~/.local/bin/pdm"
 
     def setup_environment(self, python_version: str, dependencies: list[DependencyConfiguration]) -> None:
         try:
