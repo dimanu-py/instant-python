@@ -7,8 +7,8 @@ help:  ## Show this help.
 
 .PHONY: local-setup
 local-setup:  ## Setup git hooks and install dependencies.
-	@uv run scripts/local_setup.py
 	@make install
+	@uv run -m pre_commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
 
 .PHONY: test
 test:  ## Run all test.
