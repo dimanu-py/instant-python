@@ -16,6 +16,11 @@ jobs:
     outputs:
       should_run: ${{ github.actor == 'dimanu-py' }}
     steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
       - name: 👍 Check triggering user
         run: echo "Workflow triggered by ${{ github.actor }}"
 
@@ -25,6 +30,11 @@ jobs:
     needs: check_user
     if: ${{ needs.check_user.outputs.should_run == 'true' }}
     steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
       - name: 📥 Checkout the repository
         uses: actions/checkout@v4
         with:
@@ -73,6 +83,11 @@ jobs:
     needs: check_user
     if: ${{ needs.check_user.outputs.should_run == 'true' }}
     steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
       - name: 📥 Checkout the repository
         uses: actions/checkout@v4
         with:
