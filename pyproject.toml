@@ -86,3 +86,31 @@ test = [
     "tox>=4.25.0",
     "vermin>=1.6.0",
 ]
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+commit_message = "bump: new version {version} created"
+commit_parser = "conventional"
+major_on_zero = true
+allow_zero_version = false
+no_git_verify = false
+tag_format = "v{version}"
+#build_command_env = []
+
+[tool.semantic_release.commit_parser_options]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf", "refactor", "test", "build"]
+allowed_tags = ["feat", "fix", "refactor", "perf", "build"]
+default_bump_level = 0
+parse_squash_commits = false
+ignore_merge_commits = true
+
+[tool.semantic_release.changelog]
+changelog_file = "CHANGELOG.md"
+exclude_commit_patterns = ['''^Merge pull request #''', '''^Merge branch ''']
+mode = "update"
+template_dir = "docs/changelog"
+
+[tool.semantic_release.changelog.default_templates]
+changelog_file = "CHANGELOG"
+output_format = "md"
