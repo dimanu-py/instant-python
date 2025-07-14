@@ -54,8 +54,8 @@ If you want to implement a new feature, fix a bug, or improve the codebase, it's
 
 3. **Commit Your Changes**: Commit your changes with a descriptive commit message.
     
-   !!! info
-       More information about our commit message guidelines can be found in the [Commit Message Guidelines](#commit-message-guidelines) section.
+    !!! info
+        More information about our commit message guidelines can be found in the [Commit Message Guidelines](#commit-message-guidelines) section.
 
     ```bash
     git add .
@@ -86,8 +86,8 @@ Once you have made your changes, you can follow these steps to contribute:
 
 1. **Commit Your Changes**: Commit your changes with a descriptive commit message.
 
-   !!! info
-   More information about our commit message guidelines can be found in the [Commit Message Guidelines](#commit-message-guidelines) section.
+    !!! info
+        More information about our commit message guidelines can be found in the [Commit Message Guidelines](#commit-message-guidelines) section.
 
     ```bash
     git add .
@@ -102,8 +102,8 @@ Once you have made your changes, you can follow these steps to contribute:
 
 3. **Open a Pull Request**: Open a pull request against the `main` branch and fill out our [`pull request template`](https://github.com/dimanu-py/instant-python/blob/main/.github/pull_request_template.md).
 
-   !!! info
-   More information about our pull request guidelines and feedback can be found in the [Pull Request Guidelines](#pull-request-guidelines) section.
+    !!! info
+        More information about our pull request guidelines and feedback can be found in the [Pull Request Guidelines](#pull-request-guidelines) section.
 
    
 <a name="commit-message-guidelines"></a>
