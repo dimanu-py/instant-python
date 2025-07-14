@@ -1,4 +1,4 @@
-name: Run lint, format and tests
+name: Lint, Format, and Analyze Code Quality
 
 on:
   push:
@@ -40,6 +40,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
+          persist-credentials: false
 
       - name: 🛠️ Setup environment
         uses: ./.github/actions/python_setup
@@ -93,6 +94,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
+          persist-credentials: false
 
       - name: 🛠️ Setup environment
         uses: ./.github/actions/python_setup
@@ -129,3 +131,35 @@ jobs:
 
       - name: 🧐 Check code format again
         run: uvx ruff format --check --exclude "instant_python/templates,instant_python/templates" instant_python test
+
+  analyze-code-quality:
+    name: analyze-code-quality
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: ▶️ CodeQL Initialization
+        uses: github/codeql-action/init@181d5eefc20863364f96762470ba6f862bdef56b # v3.29.2
+        with:
+          languages: python
+          build-mode: none
+          queries: +security-extended,security-and-quality
+
+      - name: 🧐 CodeQL Analysis
+        uses: github/codeql-action/analyze@181d5eefc20863364f96762470ba6f862bdef56b # v3.29.2
+        with:
+          category: '/language:python'
