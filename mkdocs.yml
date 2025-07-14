@@ -75,6 +75,7 @@ nav:
       - Getting Started: home/getting_started.md
       - Releases: home/releases.md
       - Contributing: home/contributing.md
+      - Security: home/security.md
   - Commands:
       - Config: guide/command_config.md
       - Init: guide/command_init.md
