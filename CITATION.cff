@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: Instant Python
+message: If you use this software, please cite it using the metadata below.
+type: software
+authors:
+  - given-names: Diego
+    family-names: Martínez
+repository-code: https://github.com/dimanu-py/instant-python/
+url: https://pypi.org/project/instant-python/
+abstract: >
+    Instant Python is a command-line tool that generates the base structure of a Python project
+    within seconds.
+    It helps you quickly set up a new Python project with a specific structure, including
+    configuration files, directories, dependencies management, initial code files and much more.
+keywords:
+  - python
+  - boilerplate
+  - project-generator
+  - code-generator
+  - cli
+license: Apache-2.0
