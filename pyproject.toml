@@ -41,6 +41,12 @@ repository = "https://github.com/dimanu-py/instant-python/"
 [project.scripts]
 ipy = "instant_python.cli:app"
 
+[tool.uv]
+constraint-dependencies = [
+    "requests>=2.32.4",
+    "urllib3>=2.5.0",
+]
+
 [tool.ruff]
 exclude = ["instant_python/templates/**"]
 line-length = 120
