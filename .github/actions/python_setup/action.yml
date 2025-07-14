@@ -9,12 +9,15 @@ outputs: {}
 runs:
   using: composite
   steps:
-    - uses: actions/setup-python@v5
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ inputs.python-version }}
-    - name: Install dependency manager
+
+    - name: 🔨 Install dependency manager
       run: python -m pip install uv
       shell: bash
-    - name: Install dependencies
+
+    - name: 📦 Install dependencies
       run: uv sync --all-groups
       shell: bash
