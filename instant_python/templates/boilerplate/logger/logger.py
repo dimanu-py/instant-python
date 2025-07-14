@@ -1,3 +1,5 @@
+from collections.abc import Sequence
+
 {% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 import logging
 from datetime import date
@@ -8,7 +10,7 @@ from {{ general.source_name }}.{{ template_infra_import }}.log.json_formatter im
 
 
 def create_file_handler(file_name: str, level: int) -> TimedRotatingFileHandler:
-	root_project_path = Path(__file__).parents[4]
+	root_project_path = _find_project_root(markers=["pyproject.toml"])
 	log_folder = root_project_path / "logs"
 	log_folder.mkdir(parents=True, exist_ok=True)
 
@@ -37,3 +39,10 @@ def create_logger(logger_name: str) -> logging.Logger:
 		logger.addHandler(develop_handler)
 
 	return logger
+
+def _find_project_root(markers: Sequence[str]) -> Path:
+	start = Path(__file__).resolve()
+	for parent in (start, *start.parents):
+		if any((parent / marker).exists() for marker in markers):
+			return parent
+	raise FileNotFoundError(f"Could not find project root (markers: {markers}).")
