@@ -4,92 +4,71 @@ on:
   workflow_dispatch:
 
 jobs:
-  bump_version:
+  release:
     if: "!startsWith(github.event.head_commit.message, 'bump:')"
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
     outputs:
-      tag: ${{ steps.bump.outputs.version }}
+      released: ${{ steps.released.outputs.released }}
+      tag: ${{ steps.released.outputs.tag }}
+
     steps:
-      - name: Check out
-        uses: actions/checkout@v3
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
         with:
-          token: ${{ secrets.CHANGELOG_TOKEN }}
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
           fetch-depth: 0
-
-      - name: Bump version and update changelog
-        id: bump
-        uses: commitizen-tools/commitizen-action@master
-        with:
-          github_token: ${{ secrets.CHANGELOG_TOKEN }}
-
-  create_release:
-    needs: bump_version
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out
-        uses: actions/checkout@v3
-        with:
           token: ${{ secrets.CHANGELOG_TOKEN }}
-          fetch-depth: 0
+          persist-credentials: false
 
-      - name: Get release tag
-        id: release_tag
-        run: |
-          if [ -z "${{ needs.bump_version.outputs.tag }}" ]; then
-            echo "No tag provided from bump version job. Running fallback command..."
-            git fetch --tags
-            echo "release_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
-          else
-            echo "Using tag provided from bump version job."
-            echo "release_tag=${{ needs.bump_version.outputs.tag }}" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Extract Changelog for Release
-        id: extract_changelog
-        run: |
-          release="${{ steps.release_tag.outputs.release_tag }}"
-          echo "Extracting changelog for tag: ${release}"
-          
-          awk -v tag="$release" '
-            BEGIN { printing=0 }
-            # start printing when we hit "## 0.5.2 "
-            $0 ~ ("^## " tag " ") {
-              printing=1
-              print
-              next
-            }
-            # stop printing when we hit another "## " after having printed
-            /^## / && printing { exit }
-            # print everything in between
-            printing { print }
-          ' CHANGELOG.md > release_changelog.md
-    
-          cat release_changelog.md
-
-      - name: Create release
-        uses: ncipollo/release-action@v1
+      - name: 🔖 Semantic Release
+        id: released
+        uses: python-semantic-release/python-semantic-release@2896129e02bb7809d2cf0c1b8e9e795ee27acbcf # v10.0.2
         with:
-          token: ${{ secrets.CHANGELOG_TOKEN }}
-          tag: ${{ steps.release_tag.outputs.release_tag }}
-          name: Release ${{ steps.release_tag.outputs.release_tag }}
-          bodyFile: release_changelog.md
+          build: false
+          push: true
+          changelog: true
+          commit: true
+          tag: true
+          vcs_release: true
+          config_file: pyproject.toml
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   build-and-publish:
+    name: Publish Release to PyPI Workflow
+    needs: release
+    if: needs.release.result == 'success' && needs.release.outputs.released == 'true'
     runs-on: ubuntu-latest
-    if: "github.event_name == 'release' || success()"
-    needs: create_release
     environment: release
+
     permissions:
       id-token: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
 
-      - name: Set up Python environment
+    steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: refs/tags/${{ needs.release.outputs.tag }}
+
+      - name: 🛠️ Setup environment
         uses: ./.github/actions/python_setup
 
-      - name: Build package
+      - name: 🏃 Build package
         run: uv build
 
-      - name: Publish
+      - name: 🚀 Publish
         uses: pypa/gh-action-pypi-publish@release/v1
