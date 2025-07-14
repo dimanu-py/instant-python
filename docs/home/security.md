@@ -5,9 +5,9 @@ We take security issues seriously and appreciate responsible disclosures.
 
 ## Reporting a Vulnerability
 
-> [!NOTE] 
-> **Please do NOT open public issues for security reports.**
-> Use one of the private channels below so we can coordinate a safe disclosure.
+!!! important
+    **Please do NOT open public issues for security reports.**
+    Use one of the private channels below so we can coordinate a safe disclosure.
 
 | Channel                      | How it works                                                                                                                  |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
