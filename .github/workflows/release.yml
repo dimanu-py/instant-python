@@ -1,4 +1,4 @@
-name: Generate Release
+name: Release and Publish
 
 on:
   workflow_dispatch:
@@ -73,3 +73,23 @@ jobs:
           tag: ${{ steps.release_tag.outputs.release_tag }}
           name: Release ${{ steps.release_tag.outputs.release_tag }}
           bodyFile: release_changelog.md
+
+  build-and-publish:
+    runs-on: ubuntu-latest
+    if: "github.event_name == 'release' || success()"
+    needs: create_release
+    environment: release
+    permissions:
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python environment
+        uses: ./.github/actions/python_setup
+
+      - name: Build package
+        run: uv build
+
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@release/v1
