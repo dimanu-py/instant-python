@@ -1,0 +1,67 @@
+name: 🐛 Bug Report
+description: Create a report to help us improve.
+labels:
+  - bug
+  - pending
+
+body:
+  - type: textarea
+    id: description
+    validations:
+      required: true
+    attributes:
+      label: ✏️ Description
+      description: |
+        Please provide a clear and concise description of the bug you are experiencing.
+        
+        Specify what is the expected behavior and what is actually happening. You can add
+        screenshots to help illustrate the issue.
+
+        Please provide as much detail as possible to make understanding and solving your problem as quick as possible. 🙏
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label:  ✅ Steps To Reproduce
+      render: Python
+      description: >
+        Please list the steps needed to reproduce the bug you are experiencing.
+
+        If applicable, please add a self-contained,
+        [minimal, reproducible, example](https://stackoverflow.com/help/minimal-reproducible-example)
+        demonstrating the bug.\
+
+      placeholder: >
+        # 1. Install the package using pip
+        # 2. Run the script with the following command:
+        #    python script.py
+        # 3. Observe the output\
+
+  - type: dropdown
+    id: python-version
+    attributes:
+      label: 🐍  Which version of Python are you using?
+      options:
+        - 3.8
+        - 3.9
+        - 3.10
+        - 3.11
+        - 3.12
+        - 3.13
+        - other
+    validations:
+      required: true
+
+  - type: input
+    id: ipy-version
+    validations:
+      required: true
+    attributes:
+      label: 📦 Which version of Instant Python are you using?
+
+  - type: input
+    id: os
+    validations:
+      required: true
+    attributes:
+      label: 🖥️  Which operating system are you using?
