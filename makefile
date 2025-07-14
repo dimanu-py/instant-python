@@ -72,3 +72,11 @@ search:  ## Show package details.
 .PHONY: tox
 tox:  ## Run tox tests
 	@uv run tox
+
+.PHONY: audit
+audit: # It audits dependencies and source code
+	@uv run -m pip_audit --progress-spinner off
+
+.PHONY: secrets
+secrets: # It checks for secrets in the source code
+	@uv run pre_commit run gitleaks --all-files
