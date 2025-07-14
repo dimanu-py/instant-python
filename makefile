@@ -5,6 +5,11 @@ help:  ## Show this help.
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(firstword $(MAKEFILE_LIST)) | \
 			awk 'BEGIN {FS = ":.*## "}; {printf "%-30s %s\n", $$1, $$2}'
 
+.PHONY: local-setup
+local-setup:  ## Setup git hooks and install dependencies.
+	@uv run scripts/local_setup.py
+	@make install
+
 .PHONY: test
 test:  ## Run all test.
 	@uv run pytest test -ra
@@ -25,11 +30,11 @@ update:  ## Update dependencies.
 
 .PHONY: add-dep
 add-dep:  ## Add a new dependency.
-	@scripts/add_dependency.sh
+	@uv run scripts/add_dependency.py
 
 .PHONY: remove-dep
 remove-dep:  ## Remove a dependency.
-	@scripts/remove_dependency.sh
+	@uv run scripts/remove_dependency.py
 
 .PHONY: check-typing
 check-typing:  ## Run mypy type checking.
