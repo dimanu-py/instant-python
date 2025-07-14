@@ -9,7 +9,6 @@ permissions:
   contents: write
   id-token: write
 
-# Only run this workflow if the user is dimanu-py
 jobs:
   check_user:
     name: Check user
@@ -111,8 +110,8 @@ jobs:
       - name: Install test dependencies
         run: uv pip install pytest pytest-cov
       - name: Run tests
-        run: uv run pytest --cov=instant_python --cov-report=xml --cov-report=html --cov-report=term-missing test -ra -s
-      - name: Upload coverage report
+        run: uv run pytest --cov --cov-report=xml --cov-branch test -ra -s
+      - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v3
         with:
           files: coverage.xml
