@@ -11,12 +11,12 @@ permissions:
 
 jobs:
   check_user:
-    name: Check user
+    name: check-user
     runs-on: ubuntu-latest
     outputs:
       should_run: ${{ github.actor == 'dimanu-py' }}
     steps:
-      - name: Check triggering user
+      - name: 👍 Check triggering user
         run: echo "Workflow triggered by ${{ github.actor }}"
 
   lint:
@@ -25,24 +25,30 @@ jobs:
     needs: check_user
     if: ${{ needs.check_user.outputs.should_run == 'true' }}
     steps:
-      - uses: actions/checkout@v4
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
-      - uses: ./.github/actions/python_setup
-      - name: Check linting
+
+      - name: 🛠️ Setup environment
+        uses: ./.github/actions/python_setup
+
+      - name: 🧐 Check linting
         id: check_lint
         run: |
           git pull --rebase origin main
           uvx ruff check --exclude "instant_python/templates,instant_python/new_templates" instant_python test
         continue-on-error: true
-      - name: Auto fix lint errors
+
+      - name: 🚨 Auto fix lint errors
         id: fix_lint
         if: ${{ steps.check_lint.outcome == 'failure' }}
         run: |
           git pull --rebase origin main
           uvx ruff check --fix --exclude "instant_python/templates,instant_python/templates" instant_python test
-      - name: Commit lint fixes
+
+      - name: ✏️ Commit lint fixes
         if: ${{ steps.fix_lint.outcome == 'success' }}
         run: |
           git config user.name "github-actions[bot]"
@@ -57,7 +63,8 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check linting again
+
+      - name: 🧐 Check linting again
         run: uvx ruff check --exclude "instant_python/templates,instant_python/templates" instant_python test
 
   format:
@@ -66,24 +73,30 @@ jobs:
     needs: check_user
     if: ${{ needs.check_user.outputs.should_run == 'true' }}
     steps:
-      - uses: actions/checkout@v4
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
-      - uses: ./.github/actions/python_setup
-      - name: Check code format
+
+      - name: 🛠️ Setup environment
+        uses: ./.github/actions/python_setup
+
+      - name: 🧐 Check code format
         id: check_format
         run: |
           git pull --rebase origin main
           uvx ruff format --check --exclude "instant_python/templates,instant_python/new_templates" instant_python test
         continue-on-error: true
-      - name: Auto format code
+
+      - name: 🎨 Auto format code
         id: format_code
         if: ${{ steps.check_format.outcome == 'failure' }}
         run: |
           git pull --rebase origin main
           uvx ruff format --exclude "instant_python/templates,instant_python/templates" instant_python test
-      - name: Commit formatted code
+
+      - name: ✏️ Commit formatted code
         if: ${{ steps.format_code.outcome == 'success' }}
         run: |
           git config user.name "github-actions[bot]"
@@ -98,40 +111,6 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check code format again
+
+      - name: 🧐 Check code format again
         run: uvx ruff format --check --exclude "instant_python/templates,instant_python/templates" instant_python test
-
-  test:
-    name: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/python_setup
-      - name: Install test dependencies
-        run: uv pip install pytest pytest-cov
-      - name: Run tests
-        run: uv run pytest --cov --cov-report=xml --cov-branch test -ra -s
-      - name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: coverage.xml
-          flags: unittests
-          name: codecov-coverage
-
-  rollback:
-    name: rollback
-    runs-on: ubuntu-latest
-    needs: [test]
-    if: ${{ always() && needs.test.result == 'failure' }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Reset to previous commit
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git reset --hard ${{ github.event.before }}
-          git push --force-with-lease origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
