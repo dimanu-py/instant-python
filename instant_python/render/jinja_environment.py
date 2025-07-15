@@ -9,6 +9,7 @@ class JinjaEnvironment:
             loader=PackageLoader(package_name, template_directory),
             trim_blocks=True,
             lstrip_blocks=True,
+            autoescape=True,
         )
         self._env.filters["is_in"] = is_in
         self._env.filters["compute_base_path"] = compute_base_path
