@@ -7,26 +7,36 @@ help:  ## Show this help.
 
 .PHONY: local-setup
 local-setup:  ## Setup git hooks and install dependencies.
+	@echo -e "\n⌛ Setting up the project...\n"
 	@make install
 	@uv run -m pre_commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
+	@echo -e "\n✅ Run 'source .venv/bin/activate' to activate the virtual environment.\n"
 
 .PHONY: test
 test:  ## Run all test.
+	@echo -e "\n⌛ Running tests...\n"
 	@uv run pytest test -ra
+	@echo -e "\n✅ Test passed.\n"
 
 .PHONY: coverage
 coverage:  ## Run all test with coverage.
+	@echo -e "\n⌛ Running tests with coverage...\n"
 	@uv run coverage run --branch -m pytest test
 	@uv run coverage html
 	@$(BROWSER) htmlcov/index.html
+	@echo -e "\n✅ Coverage report generated at htmlcov/index.html.\n"
 
 .PHONY: install
 install:  ## Install dependencies.
+	@echo -e "\n⌛ Installing dependencies...\n"
 	@uv sync --all-groups
+	@echo -e "\n✅ Dependencies installed correctly.\n"
 
 .PHONY: update
 update:  ## Update dependencies.
+	@echo -e "\n⌛ Updating dependencies...\n"
 	@uv sync --upgrade
+	@echo -e "\n✅ Dependencies updated correctly.\n"
 
 .PHONY: add-dep
 add-dep:  ## Add a new dependency.
@@ -38,23 +48,33 @@ remove-dep:  ## Remove a dependency.
 
 .PHONY: check-typing
 check-typing:  ## Run mypy type checking.
+	@echo -e "\n⌛ Running type checking with mypy...\n"
 	@uv run mypy
+	@echo -e "\n✅ Type checking completed.\n"
 
 .PHONY: check-lint
 check-lint:  ## Run ruff linting check.
+	@echo -e "\n⌛ Running linting check...\n"
 	@uvx ruff check instant_python test
+	@echo -e "\n✅ Linting check completed.\n"
 
 .PHONY: lint
 lint:  ## Apply ruff linting fix.
+	@echo -e "\n⌛ Applying linting fixes...\n"
 	@uvx ruff check --fix instant_python test
+	@echo -e "\n✅ Linting fixes applied.\n"
 
 .PHONY: check-format
 check-format:  ## Run ruff format check.
+	@echo -e "\n⌛ Checking code formatting...\n"
 	@uvx ruff format --check instant_python test
+	@echo -e "\n✅ Code formatting check completed.\n"
 
 .PHONY: format
 format:  ## Apply ruff format fix.
+	@echo -e "\n⌛ Formatting project code...\n"
 	@uvx ruff format instant_python test
+	@echo -e "\n✅ Code formatted correctly.\n"
 
 .PHONY: watch
 watch:  ## Run all test with every change.
@@ -75,8 +95,37 @@ tox:  ## Run tox tests
 
 .PHONY: audit
 audit: # It audits dependencies and source code
+	@echo -e "\n⌛ Running security audit...\n"
 	@uv run -m pip_audit --progress-spinner off
+	@echo -e "\n✅ Security audit completed correctly.\n"
 
 .PHONY: secrets
 secrets: # It checks for secrets in the source code
+	@echo -e "\n⌛ Checking secrets...\n"
 	@uv run -m pre_commit run gitleaks --all-files
+	@echo -e "\n✅ Secrets checked correctly.\n"
+
+.PHONY: build
+build:  ## Build the project.
+	@echo -e "\n⌛ Building the project...\n"
+	@uv build
+	@echo -e "\n✅ Project built successfully.\n"
+
+.PHONY: clean
+clean: # It cleans up the project, removing the virtual environment and some files
+	@echo -e "\n⌛ Cleaning up the project...\n"
+
+	@uv run -m pre_commit clean)
+	@uv run -m pre_commit uninstall --hook-type pre-commit --hook-type commit-msg)
+	@rm --force --recursive .venv
+	@rm --force --recursive `find . -type f -name '*.py[co]'`
+	@rm --force --recursive `find . -name __pycache__`
+	@rm --force --recursive `find . -name .ruff_cache`
+	@rm --force --recursive `find . -name .mypy_cache`
+	@rm --force --recursive `find . -name .pytest_cache`
+	@rm --force --recursive .coverage
+	@rm --force --recursive .coverage.*
+	@rm --force --recursive coverage.xml
+	@rm --force --recursive htmlcov
+
+	@echo -e "\n✅ Run 'deactivate' to deactivate the virtual environment.\n"
