@@ -129,3 +129,7 @@ clean: # It cleans up the project, removing the virtual environment and some fil
 	@rm --force --recursive htmlcov
 
 	@echo -e "\n✅ Run 'deactivate' to deactivate the virtual environment.\n"
+
+.PHONY: docs-serve
+docs-serve:  ## Start server for documentation.
+	@uv run mkdocs serve
