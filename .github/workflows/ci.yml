@@ -1,4 +1,4 @@
-name: Lint, Format, and Analyze Code Quality
+name: CI - Testing and Code analysis
 
 on:
   push:
@@ -214,3 +214,81 @@ jobs:
 
       - name: 🏃 Run audit
         run: make audit
+
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: 🛠️ Setup environment
+        uses: ./.github/actions/python_setup
+
+      - name: 📦 Install test dependencies
+        run: uv pip install pytest pytest-cov
+
+      - name: 🏃 Run tests
+        run: uv run pytest --cov --cov-report=xml --cov-branch test -ra -s
+
+      - name: 📥 Upload coverage report to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: coverage.xml
+          flags: unittests
+          name: codecov-coverage
+
+  rollback:
+    name: rollback
+    runs-on: ubuntu-latest
+    needs: [ test ]
+    if: ${{ always() && needs.test.result == 'failure' }}
+    steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: ⏪️ Reset to previous commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git reset --hard ${{ github.event.before }}
+          git push --force-with-lease origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  tox-test:
+    name: tox
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: 🛠️ Setup environment
+        uses: ./.github/actions/python_setup
+
+      - name: 🏃 Run tox
+        run: make tox
