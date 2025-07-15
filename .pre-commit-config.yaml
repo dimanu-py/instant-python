@@ -76,9 +76,9 @@ repos:
         stages:
           - pre-push
 
-      - id: unit-test
-        name: 🧪 Run Unit Tests
-        entry: make unit
+      - id: test
+        name: 🧪 Run Tests
+        entry: make test
         language: system
         stages:
           - pre-push
