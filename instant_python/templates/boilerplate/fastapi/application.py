@@ -3,17 +3,23 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
-{% if template.name == template_types.STANDARD %}
+{% if ["async_alembic"] | is_in(template.built_in_features) %}
+{% if template.name == template_types.STANDARD% }
 from {{ general.source_name }}.api.lifespan import lifespan
 {% else %}
 from {{ general.source_name }}.delivery.api.lifespan import lifespan
+{% endif %}
 {% endif %}
 from {{ general.source_name }}.{{ template_infra_import }}.http.http_response import HttpResponse
 from {{ general.source_name }}.{{ template_infra_import }}.http.status_code import StatusCode
 from {{ general.source_name }}.{{ template_domain_import }}.exceptions.domain_error import DomainError
 
-app = FastAPI(lifespan=lifespan)
 
+{% if ["async_alembic"] | is_in(template.built_in_features) %}
+app = FastAPI(lifespan=lifespan)
+{% else %}
+app = FastAPI()
+{% endif %}
 
 @app.exception_handler(Exception)
 async def unexpected_exception_handler(_: Request, exc: Exception) -> JSONResponse:
