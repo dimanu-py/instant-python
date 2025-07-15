@@ -91,10 +91,10 @@ testpaths = ["tests"]
 version_toml = ["pyproject.toml:project.version"]
 commit_message = "bump: new version {version} created"
 commit_parser = "conventional"
-major_on_zero = true
-allow_zero_version = false
+major_on_zero = false
+allow_zero_version = true
 no_git_verify = false
-tag_format = "v{version}"
+tag_format = "{version}"
 #build_command_env = []
 
 [tool.semantic_release.commit_parser_options]
@@ -114,3 +114,4 @@ template_dir = "docs/changelog"
 [tool.semantic_release.changelog.default_templates]
 changelog_file = "CHANGELOG"
 output_format = "md"
+mask_initial_release = false
