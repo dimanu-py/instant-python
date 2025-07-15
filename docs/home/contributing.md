@@ -7,7 +7,7 @@ your help makes the library better for everyone.
 
 1. **Search first**: check for existing [issues](https://github.com/dimanu-py/instant-python/issues) before opening a new one. You might
     find that your issue has already been reported or even fixed in a pull request.
-2. **Security issues**: report privately via our [`Security Policy`](https://github.com/dimanu-py/instant-python/blob/main/docs/home/security.md); **do not** raise a public issue for vulnerabilities.
+2. **Security issues**: report privately via our [`Security Policy`](https://dimanu-py.github.io/instant-python/home/security/); **do not** raise a public issue for vulnerabilities.
 
 ## Start Contributing
 
@@ -177,16 +177,23 @@ We follow [Conventional Comments](https://conventionalcomments.org) to keep revi
 The project provides a [`Makefile`](https://github.com/dimanu-py/instant-python/blob/main/makefile) with some helpful commands, 
 this commands must be run from the root of the project. For more details on each command, run `make help`.
 
-- **Environment Setup:** Run `make setup` to create a virtual environment, install all dependencies (development + production), and install pre-commit hooks.
-- **Install Dependencies:** Run `make install` to install all dependencies (development + production), use the `GROUP` variable to install only a specific group of dependencies (all, audit, coverage, format, lint, release, test, types).
-- **Code Formatting:** Run `make format` to automatically format code using Ruff ([PEP 8](https://peps.python.org/pep-0008) and [PEP 257](https://peps.python.org/pep-0257) compliance), most style issues are auto-corrected.
-- **Linting:** Run `make lint` to check code quality using Ruff and mypy for static analysis and type checking.
+- **Environment Setup:** Run `make local-setup` to create a virtual environment, install all dependencies (development + production), and install pre-commit hooks.
+- **Install Dependencies:** Run `make install` to install all dependencies (development + production).
+- **Code Formatting:** Run `make check-format` to check for code format issues and `make format` to automatically format code using Ruff.
+- **Linting:** Run `make check-lint` to check code quality using Ruff for static analysis and `make lint` to automatically fix linting issues.
 - **Testing:** Run `make test` to execute all tests.
 - **Coverage:** Run `make coverage` to generate a test coverage report.
 - **Build:** Run `make build` to build the project.
 - **Audit:** Run `make audit` to audit dependencies for known vulnerabilities.
 - **Secrets Scanning:** Run `make secrets` to scan for secrets in the hole codebase.
 - **Environment Cleanup:** Run `make clean` to remove the virtual environment, caches, and all generated files.
+
+There are some additional commands that can be used during development:
+
+- **Update Dependencies:** Run `make update` to update all dependencies to their latest versions.
+- **Adding / Removing Dependencies:** Use `make add-dep` or `make remove-dep` to add or remove dependencies from the project.
+- **Run test in watch mode:** Run `make watch` to run tests in watch mode, automatically re-running tests when files change.
+- **Serve Documentation:** Run `make docs-serve` to serve the documentation locally, allowing you to preview changes in real-time.
 
 ## Donating
 
