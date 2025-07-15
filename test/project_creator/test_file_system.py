@@ -25,6 +25,7 @@ class TestFileSystem:
             pytest.param("rendered_project_structure.json", "config.yml", id="base_project_structure"),
             pytest.param("rendered_custom_project_structure.json", "config.yml", id="custom_project_structure"),
             pytest.param("rendered_project_structure_only_with_fastapi.json", "config_with_only_fastapi.yml", id="only_fastapi_project_structure"),
+            pytest.param("rendered_project_structure_fastapi_with_logger.json", "config_fastapi_with_logger.yml", id="fastapi_with_logger_project_structure"),
         ],
     )
     def test_should_create_file_system_in_disk(self, project_structure_file_name: str, config_file: str) -> None:
