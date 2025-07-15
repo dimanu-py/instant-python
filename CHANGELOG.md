@@ -1,3 +1,53 @@
+# CHANGELOG
+
+## v0.9.0 (2025-07-15)
+
+### 🪲 Bug Fixes
+
+- **render**: Create jinja environment with autoscape argument enabled to avoid potential XSS
+  attacks
+  ([`976d459`](https://github.com/dimanu-py/instant-python/commit/976d459538ae8eea403c65300304e6405fec46b6))
+
+- **templates**: Format correctly if statement in application.py template
+  ([`409d606`](https://github.com/dimanu-py/instant-python/commit/409d6064d97ef016c34dab57d3c9456a47e6542f))
+
+- **templates**: Include logger and migrator in fastapi application only if they are selected too
+  for DDD and standard project templates
+  ([`f5a8087`](https://github.com/dimanu-py/instant-python/commit/f5a80870d0ecdd2f47419ad5e51d20131649b422))
+
+- **templates**: Include logger and migrator in fastapi application only if they are selected as
+  built in feature too in clean architecture template
+  ([`191d81f`](https://github.com/dimanu-py/instant-python/commit/191d81fd8ace560f3a6359bc9cf767c73c310d50))
+
+### ⚙️ Build System
+
+- Update semantic release to not update major version if is zero and to allow 0 major version
+  ([`34d251e`](https://github.com/dimanu-py/instant-python/commit/34d251e8a57eafa595a0c54e314238f389218dd6))
+
+- Remove test hook in precommit config
+  ([`b8d451d`](https://github.com/dimanu-py/instant-python/commit/b8d451db1a024ae41a6958dbf9513801f3b69627))
+
+- Remove final echo from makefile commands to let output of the command itself inform the user
+  ([`cd895ad`](https://github.com/dimanu-py/instant-python/commit/cd895adacfe1e470a746165380369c9c365996e8))
+
+- Remove -e command from echo in makefile
+  ([`6a624a3`](https://github.com/dimanu-py/instant-python/commit/6a624a3cacf8b96adaeba20bb635b7e43d853002))
+
+- Exclude resources folder from being formatted or linted
+  ([`cf00038`](https://github.com/dimanu-py/instant-python/commit/cf000382ba13a0bc4dbda8eb346e9cdeb4fe4541))
+
+- Remove AST check from pre commit hook
+  ([`b46437e`](https://github.com/dimanu-py/instant-python/commit/b46437e804a1d54f13444e92827bd15d9fb2fd57))
+
+- Add docs-serve command to makefile
+  ([`9430934`](https://github.com/dimanu-py/instant-python/commit/943093498f168f49cc8b2593ea17911321f2e012))
+
+- Improve messages of make command and add build and clean commands
+  ([`6a0e428`](https://github.com/dimanu-py/instant-python/commit/6a0e4285d3bb43f9e88dad32fd2f93732ab271c8))
+
+- Remove commitizen config as is not longer needed
+  ([`0ed6a8b`](https://github.com/dimanu-py/instant-python/commit/0ed6a8bd50c6ebf30b71e4734fd3e4a81123b280))
+
 ## 0.8.1 (2025-07-01)
 
 ### 🐛 Bug Fixes
@@ -557,7 +607,6 @@
 - **project-generator**: create project structure inside a temporary directory
 - **project-generator**: delegate template management to TemplateManager
 - **cli**: call BasicPrompter and ProjectGenerator inside cli app
-
 
 ### ✨ Features
 
