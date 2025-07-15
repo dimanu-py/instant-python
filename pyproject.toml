@@ -41,19 +41,6 @@ repository = "https://github.com/dimanu-py/instant-python/"
 [project.scripts]
 ipy = "instant_python.cli:app"
 
-[tool.uv]
-constraint-dependencies = [
-    "requests>=2.32.4",
-    "urllib3>=2.5.0",
-]
-
-[tool.ruff]
-exclude = ["instant_python/templates/**"]
-line-length = 120
-
-[tools.pytest.ini_options]
-testpaths = ["tests"]
-
 [dependency-groups]
 docs = [
     "mkdocs>=1.6.1",
@@ -86,6 +73,19 @@ test = [
     "tox>=4.25.0",
     "vermin>=1.6.0",
 ]
+
+[tool.uv]
+constraint-dependencies = [
+    "requests>=2.32.4",
+    "urllib3>=2.5.0",
+]
+
+[tool.ruff]
+exclude = ["instant_python/templates/**"]
+line-length = 120
+
+[tools.pytest.ini_options]
+testpaths = ["tests"]
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
