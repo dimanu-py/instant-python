@@ -275,6 +275,9 @@ jobs:
   tox-test:
     name: tox
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ '3.9', '3.10', '3.11', '3.12', '3.13' ]
     steps:
       - name: 🛡️ Harden runner
         uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
@@ -289,6 +292,9 @@ jobs:
 
       - name: 🛠️ Setup environment
         uses: ./.github/actions/python_setup
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
 
       - name: 🏃 Run tox
         run: make tox
