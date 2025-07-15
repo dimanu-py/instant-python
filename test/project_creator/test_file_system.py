@@ -20,16 +20,16 @@ class TestFileSystem:
         verify(file_system)
 
     @pytest.mark.parametrize(
-        "project_structure_file_name",
+        "project_structure_file_name, config_file",
         [
-            pytest.param("rendered_project_structure.json", id="base_project_structure"),
-            pytest.param("rendered_custom_project_structure.json", id="custom_project_structure"),
+            pytest.param("rendered_project_structure.json", "config.yml", id="base_project_structure"),
+            pytest.param("rendered_custom_project_structure.json", "config.yml", id="custom_project_structure"),
         ],
     )
-    def test_should_create_file_system_in_disk(self, project_structure_file_name: str) -> None:
+    def test_should_create_file_system_in_disk(self, project_structure_file_name: str, config_file: str) -> None:
         project_structure = self._load_project_structure(project_structure_file_name)
         file_renderer = JinjaEnvironment(package_name="test", template_directory="project_creator/resources")
-        configuration = Parser.parse_from_file(str(Path(__file__).parent / "resources" / "config.yml"))
+        configuration = Parser.parse_from_file(str(Path(__file__).parent / "resources" / config_file))
 
         file_system = FileSystem(project_structure=project_structure)
         file_system.write_on_disk(file_renderer=file_renderer, context=configuration)
