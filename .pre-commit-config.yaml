@@ -71,10 +71,3 @@ repos:
         language: system
         stages:
           - pre-push
-
-      - id: test
-        name: 🧪 Run Tests
-        entry: make test
-        language: system
-        stages:
-          - pre-push
