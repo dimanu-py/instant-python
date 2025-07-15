@@ -49,7 +49,7 @@ jobs:
         id: check_lint
         run: |
           git pull --rebase origin main
-          uvx ruff check --exclude "instant_python/templates,instant_python/new_templates" instant_python test
+          uvx ruff check --exclude "instant_python/templates,test/**/resources/**" instant_python test
         continue-on-error: true
 
       - name: 🚨 Auto fix lint errors
@@ -57,7 +57,7 @@ jobs:
         if: ${{ steps.check_lint.outcome == 'failure' }}
         run: |
           git pull --rebase origin main
-          uvx ruff check --fix --exclude "instant_python/templates,instant_python/templates" instant_python test
+          uvx ruff check --fix --exclude "instant_python/templates,test/**/resources/**" instant_python test
 
       - name: ✏️ Commit lint fixes
         if: ${{ steps.fix_lint.outcome == 'success' }}
@@ -76,7 +76,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🧐 Check linting again
-        run: uvx ruff check --exclude "instant_python/templates,instant_python/templates" instant_python test
+        run: uvx ruff check --exclude "instant_python/templates,test/**/resources/**" instant_python test
 
   format:
     name: format
@@ -103,7 +103,7 @@ jobs:
         id: check_format
         run: |
           git pull --rebase origin main
-          uvx ruff format --check --exclude "instant_python/templates,instant_python/new_templates" instant_python test
+          uvx ruff format --check --exclude "instant_python/templates,test/**/resources/**" instant_python test
         continue-on-error: true
 
       - name: 🎨 Auto format code
@@ -111,7 +111,7 @@ jobs:
         if: ${{ steps.check_format.outcome == 'failure' }}
         run: |
           git pull --rebase origin main
-          uvx ruff format --exclude "instant_python/templates,instant_python/templates" instant_python test
+          uvx ruff format --exclude "instant_python/templates,test/**/resources/**" instant_python test
 
       - name: ✏️ Commit formatted code
         if: ${{ steps.format_code.outcome == 'success' }}
@@ -130,7 +130,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🧐 Check code format again
-        run: uvx ruff format --check --exclude "instant_python/templates,instant_python/templates" instant_python test
+        run: uvx ruff format --check --exclude "instant_python/templates,test/**/resources/**" instant_python test
 
   analyze-code-quality:
     name: analyze-code-quality
