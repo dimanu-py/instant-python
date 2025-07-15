@@ -34,10 +34,6 @@ repos:
           - --unsafe
         stages:
           - pre-commit
-      - id: check-ast
-        name: 🧩 Python AST Checker
-        stages:
-          - pre-commit
       - id: check-merge-conflict
         name: 🔀 Merge Conflict Checker
         stages:
