@@ -241,12 +241,13 @@ jobs:
         run: uv run pytest --cov --cov-report=xml --cov-branch test -ra -s
 
       - name: 📥 Upload coverage report to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
           files: coverage.xml
           flags: unittests
           name: codecov-coverage
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: dimanu-py/instant-python
 
   rollback:
     name: rollback
