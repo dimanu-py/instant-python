@@ -79,4 +79,4 @@ audit: # It audits dependencies and source code
 
 .PHONY: secrets
 secrets: # It checks for secrets in the source code
-	@uv run pre_commit run gitleaks --all-files
+	@uv run -m pre_commit run gitleaks --all-files
