@@ -158,7 +158,7 @@ jobs:
           languages: python
           build-mode: none
           queries: +security-extended,security-and-quality
-          config-file: ../codeql-config.yml
+          config-file: ./codeql-config.yml
 
       - name: 🧐 CodeQL Analysis
         uses: github/codeql-action/analyze@181d5eefc20863364f96762470ba6f862bdef56b # v3.29.2
