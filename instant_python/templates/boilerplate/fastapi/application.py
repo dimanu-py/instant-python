@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 {% if ["async_alembic"] | is_in(template.built_in_features) %}
-{% if template.name == template_types.STANDARD% }
+{% if template.name == template_types.STANDARD %}
 from {{ general.source_name }}.api.lifespan import lifespan
 {% else %}
 from {{ general.source_name }}.delivery.api.lifespan import lifespan
