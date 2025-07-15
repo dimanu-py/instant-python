@@ -1,0 +1,52 @@
+[
+    {
+        "name": "src",
+        "type": "directory",
+        "python": true,
+        "children": [
+            {
+                "name": "delivery",
+                "type": "directory",
+                "python": true,
+                "children": [
+                    {
+                        "name": "api",
+                        "type": "directory",
+                        "python": true,
+                        "children": [
+                            {
+                                "name": "fastapi/application",
+                                "type": "boilerplate_file",
+                                "extension": ".py"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "application",
+                "type": "directory",
+                "python": true
+            },
+            {
+                "name": "infra",
+                "type": "directory",
+                "python": true,
+                "children": [
+                    {
+                        "name": "http",
+                        "type": "directory",
+                        "python": true,
+                        "children": [
+                            {
+                                "name": "fastapi/http_response",
+                                "type": "boilerplate_file",
+                                "extension": ".py"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
