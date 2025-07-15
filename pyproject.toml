@@ -81,7 +81,7 @@ constraint-dependencies = [
 ]
 
 [tool.ruff]
-exclude = ["instant_python/templates/**"]
+exclude = ["instant_python/templates/**", "test/**/resources/**"]
 line-length = 120
 
 [tools.pytest.ini_options]
