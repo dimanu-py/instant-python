@@ -1,0 +1,2 @@
+paths-ignore:
+  - "instant_python/templates/**"
