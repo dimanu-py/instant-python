@@ -706,4 +706,3 @@
 - **prompter**: create class to encapsulate user answers
 - **prompter**: create basic class that asks project requirements to user
 - **cli**: create basic typer application with no implementation
-
