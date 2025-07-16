@@ -17,10 +17,16 @@
     - name: event_bus/exchange_type
       type: boilerplate_file
       extension: .py
-- name: exceptions
+- name: errors
   type: directory
   python: True
   children:
+    - name: exceptions/error
+      type: boilerplate_file
+      extension: .py
+    - name: exceptions/domain_error
+      type: boilerplate_file
+      extension: .py
     - name: exceptions/domain_event_type_not_found_error
       type: boilerplate_file
       extension: .py

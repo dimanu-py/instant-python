@@ -1,7 +1,10 @@
-- name: exceptions
+- name: errors
   type: directory
   python: True
   children:
+    - name: exceptions/error
+      type: boilerplate_file
+      extension: .py
     - name: exceptions/domain_error
       type: boilerplate_file
       extension: .py
