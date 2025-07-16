@@ -62,8 +62,8 @@ jobs:
       - name: ✏️ Commit lint fixes
         if: ${{ steps.fix_lint.outcome == 'success' }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name ${{ vars.GIT_COMMITTER_NAME }}
+          git config user.email ${{ vars.GIT_COMMITTER_EMAIL }}
 
           if git diff --quiet; then
             echo "No changes to commit."
@@ -116,8 +116,8 @@ jobs:
       - name: ✏️ Commit formatted code
         if: ${{ steps.format_code.outcome == 'success' }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name ${{ vars.GIT_COMMITTER_NAME }}
+          git config user.email ${{ vars.GIT_COMMITTER_EMAIL }}
 
           if git diff --quiet; then
             echo "No changes to commit."
@@ -268,8 +268,8 @@ jobs:
 
       - name: ⏪️ Reset to previous commit
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name ${{ vars.GIT_COMMITTER_NAME }}
+          git config user.email ${{ vars.GIT_COMMITTER_EMAIL }}
           git reset --hard ${{ github.event.before }}
           git push --force-with-lease origin main
         env:
