@@ -10,3 +10,12 @@
       type: boilerplate_file
       extension: .py
     {% endif %}
+    {%  if "logger" in template.built_in_features %}
+    - name: middleware
+      type: directory
+      python: True
+      children:
+        - name: fastapi/fastapi_log_middleware
+          type: boilerplate_file
+          extension: .py
+    {% endif %}
