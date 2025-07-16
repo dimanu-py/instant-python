@@ -12,7 +12,14 @@ from {{ general.source_name }}.delivery.api.lifespan import lifespan
 {% endif %}
 from {{ general.source_name }}.{{ template_infra_import }}.http.error_response import InternalServerError, UnprocessableEntityError, ResourceNotFoundError
 from {{ general.source_name }}.{{ template_domain_import }}.exceptions.domain_error import DomainError
+{% if "logger" in template.built_in_features %}
 from {{ general.source_name }}.{{ template_infra_import }}.logger.fastapi_file_logger import create_api_logger
+{% if template.name == template_types.STANDARD %}
+from {{ general.source_name }}.api.middleare.fast_api_log_middleware import FastapiLogMiddleware
+{% else %}
+from {{ general.source_name }}.delivery.api.middleare.fast_api_log_middleware import FastapiLogMiddleware
+{% endif %}
+{% endif %}
 
 
 {% if ["async_alembic"] | is_in(template.built_in_features) %}
@@ -21,7 +28,7 @@ app = FastAPI(lifespan=lifespan)
 app = FastAPI()
 {% endif %}
 
-{% if "logger" in template.built_in_features % }
+{% if "logger" in template.built_in_features %}
 logger = create_file_logger(name="{{ general.slug }}")
 
 app.add_middleware(FastapiLogMiddleware, logger=logger)
