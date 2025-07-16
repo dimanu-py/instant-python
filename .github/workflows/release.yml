@@ -39,6 +39,8 @@ jobs:
           vcs_release: true
           config_file: pyproject.toml
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          git_committer_email: ${{ vars.GIT_COMMITTER_EMAIL }}
+          git_committer_name: ${{ vars.GIT_COMMITTER_NAME }}
           ssh_public_signing_key: ${{ vars.SSH_PUBLIC_SIGNING_KEY }}
           ssh_private_signing_key: ${{ secrets.SSH_PRIVATE_SIGNING_KEY }}
 
