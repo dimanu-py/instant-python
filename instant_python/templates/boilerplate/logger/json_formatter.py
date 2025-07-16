@@ -10,7 +10,7 @@ class JSONFormatter(logging.Formatter):
 			"name": record.name,
 			"message": record.getMessage(),
 		}
-		if hasattr(record, "extra"):
-			log_record["extra"] = record.extra
+		if hasattr(record, "details"):
+			log_record["details"] = record.details
 
 		return json.dumps(log_record)
