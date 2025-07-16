@@ -10,8 +10,7 @@ from {{ general.source_name }}.api.lifespan import lifespan
 from {{ general.source_name }}.delivery.api.lifespan import lifespan
 {% endif %}
 {% endif %}
-from {{ general.source_name }}.{{ template_infra_import }}.http.http_response import HttpResponse
-from {{ general.source_name }}.{{ template_infra_import }}.http.status_code import StatusCode
+from {{ general.source_name }}.{{ template_infra_import }}.http.error_response import InternalServerError, UnprocessableEntityError, ResourceNotFoundError
 from {{ general.source_name }}.{{ template_domain_import }}.exceptions.domain_error import DomainError
 
 
@@ -23,9 +22,9 @@ app = FastAPI()
 
 @app.exception_handler(Exception)
 async def unexpected_exception_handler(_: Request, exc: Exception) -> JSONResponse:
-	return HttpResponse.internal_error(exc)
+	return InternalServerError().as_json()
 
 
 @app.exception_handler(DomainError)
 async def domain_error_handler(_: Request, exc: DomainError) -> JSONResponse:
-	return HttpResponse.domain_error(exc, status_code=StatusCode.BAD_REQUEST)
+	return UnprocessableEntityError().as_json()
