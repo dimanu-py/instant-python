@@ -5,6 +5,13 @@
     - name: fastapi/application
       type: boilerplate_file
       extension: .py
+    - name: handlers
+      type: directory
+      python: True
+      children:
+        - name: fastapi/error_handlers
+          type: boilerplate_file
+          extension: .py
     {% if "async_alembic" in template.built_in_features %}
     - name: fastapi/lifespan
       type: boilerplate_file
