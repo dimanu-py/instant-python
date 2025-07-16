@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v0.9.0 (2025-07-15)
+## v0.8.2 (2025-07-16)
 
 ### 🪲 Bug Fixes
 
@@ -706,4 +706,3 @@
 - **prompter**: create class to encapsulate user answers
 - **prompter**: create basic class that asks project requirements to user
 - **cli**: create basic typer application with no implementation
-
