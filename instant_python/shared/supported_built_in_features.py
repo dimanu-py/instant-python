@@ -10,6 +10,7 @@ class SupportedBuiltInFeatures(str, Enum):
     ASYNC_SQLALCHEMY = "async_sqlalchemy"
     ASYNC_ALEMBIC = "async_alembic"
     FASTAPI = "fastapi_application"
+    PRECOMMIT = "precommit_hook"
 
     @classmethod
     def get_supported_built_in_features(cls) -> list[str]:
