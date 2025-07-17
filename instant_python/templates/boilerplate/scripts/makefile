@@ -15,35 +15,9 @@ local-setup:  ## Setup git hooks and install dependencies.
 	@uv run scripts/local_setup.py
 {% endif %}
 
-.PHONY: test
-test:  ## Run all test.
-	@{{ general.dependency_manager }} run pytest test -ra
-
-.PHONY: unit
-unit:  ## Run all unit test.
-	@{{ general.dependency_manager }} run pytest -m "unit" -ra
-
-.PHONY: integration
-integration:  ## Run all integration test.
-	@{{ general.dependency_manager }} run pytest -m "integration" -ra
-
-.PHONY: acceptance
-acceptance:  ## Run all acceptance test.
-	@{{ general.dependency_manager }} run pytest -m "acceptance" -ra
-
-.PHONY: coverage
-coverage:  ## Run all test with coverage.
-	@{{ general.dependency_manager }} run coverage run --branch -m pytest test
-	@{{ general.dependency_manager }} run coverage html
-	@$(BROWSER) htmlcov/index.html
-
-.PHONY: local-setup
-local-setup:  ## Setup git hooks and install dependencies.
-	@scripts/local_setup.sh
-	@make install
-
 .PHONY: install
 install:  ## Install dependencies.
+	@echo "⌛ Installing dependencies...\n"
 	{% if general.dependency_manager == "uv" %}
 	@uv sync --all-groups
 	{% elif general.dependency_manager == "pdm" %}
@@ -52,6 +26,7 @@ install:  ## Install dependencies.
 
 .PHONY: update
 update:  ## Update dependencies.
+	@echo "⌛ Updating dependencies...\n"
 	{% if general.dependency_manager == "uv" %}
 	@uv sync --upgrade
 	{% elif general.dependency_manager == "pdm" %}
@@ -60,18 +35,52 @@ update:  ## Update dependencies.
 
 .PHONY: add-dep
 add-dep:  ## Add a new dependency.
-	@scripts/add_dependency.sh
+	@uv run scripts/add_dependency.py
 
 .PHONY: remove-dep
 remove-dep:  ## Remove a dependency.
-	@scripts/remove_dependency.sh
+	@uv run scripts/remove_dependency.py
+
+.PHONY: test
+test:  ## Run all test.
+	@echo "⌛ Running tests...\n"
+	@{{ general.dependency_manager }} run pytest test -ra
+
+.PHONY: unit
+unit:  ## Run all unit test.
+	@echo "⌛ Running unit tests...\n"
+	@{{ general.dependency_manager }} run pytest -m "unit" -ra
+
+.PHONY: integration
+integration:  ## Run all integration test.
+	@echo "⌛ Running integration tests...\n"
+	@{{ general.dependency_manager }} run pytest -m "integration" -ra
+
+.PHONY: acceptance
+acceptance:  ## Run all acceptance test.
+	@echo "⌛ Running acceptance tests...\n"
+	@{{ general.dependency_manager }} run pytest -m "acceptance" -ra
+
+.PHONY: coverage
+coverage:  ## Run all test with coverage.
+	@echo "⌛ Running tests with coverage...\n"
+	@{{ general.dependency_manager }} run coverage run --branch -m pytest test
+	@{{ general.dependency_manager }} run coverage html
+	@$(BROWSER) htmlcov/index.html
+
+.PHONY: watch
+watch:  ## Run all test with every change.
+	@echo "⌛ Running test in watch mode...\n"
+	@{{ general.dependency_manager }} run ptw --runner "pytest -n auto test -ra"
 
 .PHONY: check-typing
 check-typing:  ## Run mypy type checking.
+	@echo "⌛ Running type checking...\n"
 	@{{ general.dependency_manager }} run mypy
 
 .PHONY: check-lint
 check-lint:  ## Run ruff linting check.
+	@echo "⌛ Running linting check...\n"
 	{% if general.dependency_manager == "pdm" %}
 	@pdm run ruff check src test
 	{% elif general.dependency_manager == "uv" %}
@@ -80,6 +89,7 @@ check-lint:  ## Run ruff linting check.
 
 .PHONY: lint
 lint:  ## Apply ruff linting fix.
+	@echo "\n⌛ Applying linting fixes...\n"
 	{% if general.dependency_manager == "pdm" %}
 	@pdm run ruff check --fix src test
 	{% elif general.dependency_manager == "uv" %}
@@ -88,6 +98,7 @@ lint:  ## Apply ruff linting fix.
 
 .PHONY: check-format
 check-format:  ## Run ruff format check.
+	@echo "⌛ Checking code formatting...\n"
 	{% if general.dependency_manager == "pdm" %}
 	@pdm run ruff format --check src test
 	{% elif general.dependency_manager == "uv" %}
@@ -96,25 +107,42 @@ check-format:  ## Run ruff format check.
 
 .PHONY: format
 format:  ## Apply ruff format fix.
+	@echo "⌛ Formatting project code...\n"
 	{% if general.dependency_manager == "pdm" %}
 	@pdm run ruff format src test
 	{% elif general.dependency_manager == "uv" %}
 	@uvx ruff format src test
 	{% endif %}
 
+{% if "precommit_hook" in template.built_in_features %}
+.PHONY: secrets
+secrets: # Check for secrets in the source code
+	@echo "\n⌛ Checking secrets...\n"
+	@uv run -m pre_commit run gitleaks --all-files
+{% else %}
 .PHONY: pre-commit
 pre-commit: check-typing check-lint check-format all-unit ## Run pre-commit checks.
 
 .PHONY: pre-push
 pre-push:  all-integration all-acceptance ## Run pre-push checks.
+{% endif %}
 
-.PHONY: watch
-watch:  ## Run all test with every change.
-	@{{ general.dependency_manager }} run ptw --runner "pytest -n auto test -ra"
+.PHONY: clean
+clean: # Clean up the project, removing the virtual environment and some files
+	@echo "\n⌛ Cleaning up the project...\n"
 
-.PHONY: create-aggregate
-create-aggregate:  ## Create a new aggregate inside contexts folder.
-	@{{ general.dependency_manager }} run python -m scripts.create_aggregate
+	@uv run -m pre_commit clean)
+	@uv run -m pre_commit uninstall --hook-type pre-commit --hook-type commit-msg)
+	@rm --force --recursive .venv
+	@rm --force --recursive `find . -type f -name '*.py[co]'`
+	@rm --force --recursive `find . -name __pycache__`
+	@rm --force --recursive `find . -name .ruff_cache`
+	@rm --force --recursive `find . -name .mypy_cache`
+	@rm --force --recursive `find . -name .pytest_cache`
+	@rm --force --recursive .coverage
+	@rm --force --recursive .coverage.*
+	@rm --force --recursive coverage.xml
+	@rm --force --recursive htmlcov
 
 .PHONY: show
 show:  ## Show installed dependencies.
