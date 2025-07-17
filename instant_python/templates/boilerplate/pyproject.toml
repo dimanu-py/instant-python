@@ -28,22 +28,26 @@ license = { file = "LICENSE" }
 distribution = false
 {% endif %}
 
-{% if ["github_actions", "makefile"] | is_in(template.built_in_features) or dependencies | has_dependency("pytest") and template.name != template_types.CUSTOM %}
+{% if ["github_actions", "makefile", "precommit_hook"] | is_in(template.built_in_features) or dependencies | has_dependency("pytest") and template.name != template_types.CUSTOM %}
 [dependency-groups]
-{% if ["github_actions", "makefile"] | is_in(template.built_in_features) and dependencies | has_dependency("pytest") %}
+{% if ["github_actions", "makefile", "precommit_hook"] | is_in(template.built_in_features) and dependencies | has_dependency("pytest") %}
 lint = [
     "mypy",
     "ruff",
+    "pip-audit",
+    "pre-commit",
 ]
 test = [
     "faker",
     "pytest",
     "pytest-asyncio",
 ]
-{% elif ["github_actions", "makefile"] | is_in(template.built_in_features) %}
+{% elif ["github_actions", "makefile", "precommit_hook"] | is_in(template.built_in_features) %}
 lint = [
     "mypy",
     "ruff",
+    "pip-audit",
+    "pre-commit",
 ]
 test = [
     "faker",
