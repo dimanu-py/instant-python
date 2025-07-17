@@ -4,6 +4,7 @@ from enum import Enum
 class SupportedBuiltInFeatures(str, Enum):
     VALUE_OBJECTS = "value_objects"
     GITHUB_ACTIONS = "github_actions"
+    GITHUB_ISSUES_TEMPLATE = "github_issues_template"
     MAKEFILE = "makefile"
     LOGGER = "logger"
     EVENT_BUS = "event_bus"
