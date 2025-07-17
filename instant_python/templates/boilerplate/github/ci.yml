@@ -22,7 +22,7 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: {% raw %}${{ github.head_ref }}{% endraw %}
           fetch-depth: 0
           persist-credentials: false
 
@@ -44,7 +44,7 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: {% raw %}${{ github.head_ref }}{% endraw %}
           fetch-depth: 0
           persist-credentials: false
 
@@ -65,7 +65,7 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: {% raw %}${{ github.head_ref }}{% endraw %}
           fetch-depth: 0
           persist-credentials: false
 
@@ -91,7 +91,7 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: {% raw %}${{ github.head_ref }}{% endraw %}
           fetch-depth: 0
           persist-credentials: false
 
@@ -190,5 +190,5 @@ jobs:
           files: coverage.xml
           flags: unittests
           name: codecov-coverage
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: {% raw %}${{ secrets.CODECOV_TOKEN }}{% endraw %}
           slug: {{ git.username }}/{{ general.slug }}

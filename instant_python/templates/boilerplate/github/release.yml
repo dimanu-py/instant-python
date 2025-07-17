@@ -22,8 +22,8 @@ jobs:
       pull-requests: write
 
     outputs:
-      released: ${{ steps.released.outputs.released }}
-      tag: ${{ steps.released.outputs.tag }}
+      released: {% raw %}${{ steps.released.outputs.released }}{% endraw %}
+      tag: {% raw %}${{ steps.released.outputs.tag }}
 
     steps:
       - name: 🛡️ Harden runner
@@ -48,11 +48,11 @@ jobs:
           tag: true
           vcs_release: true
           config_file: pyproject.toml
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          git_committer_email: ${{ vars.GIT_COMMITTER_EMAIL }}
-          git_committer_name: ${{ vars.GIT_COMMITTER_NAME }}
-          ssh_public_signing_key: ${{ vars.SSH_PUBLIC_SIGNING_KEY }}
-          ssh_private_signing_key: ${{ secrets.SSH_PRIVATE_SIGNING_KEY }}
+          github_token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+          git_committer_email: {% raw %}${{ vars.GIT_COMMITTER_EMAIL }}{% endraw %}
+          git_committer_name: {% raw %}${{ vars.GIT_COMMITTER_NAME }}{% endraw %}
+          ssh_public_signing_key: {% raw %}${{ vars.SSH_PUBLIC_SIGNING_KEY }}{% endraw %}
+          ssh_private_signing_key: {% raw %}${{ secrets.SSH_PRIVATE_SIGNING_KEY }}{% endraw %}
 
   build-and-publish:
     name: Publish Release to PyPI Workflow
@@ -75,7 +75,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-          ref: refs/tags/${{ needs.release.outputs.tag }}
+          ref: {% raw %}refs/tags/${{ needs.release.outputs.tag }}{% endraw %}
 
       - name: 🛠️ Setup environment
         uses: ./.github/actions/python_setup
