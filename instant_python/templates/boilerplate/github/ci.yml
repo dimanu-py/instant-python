@@ -1,0 +1,194 @@
+name: CI - Testing and Code analysis
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: 🛠️ Setup environment
+        uses: ./.github/actions/python_setup
+
+      - name: 🧐 Check linting
+        run: make check-lint
+
+  format:
+    name: format
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: 🛠️ Setup environment
+        uses: ./.github/actions/python_setup
+
+      - name: 🧐 Check code format
+        run: make check-format
+
+  typing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: 🛠️ Setup environment
+        uses: ./.github/actions/python_setup
+
+      - name: 🧐 Check static types
+        run: make check-typing
+
+  analyze-code-quality:
+    name: analyze-code-quality
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: ▶️ CodeQL Initialization
+        uses: github/codeql-action/init@181d5eefc20863364f96762470ba6f862bdef56b # v3.29.2
+        with:
+          languages: python
+          build-mode: none
+          queries: +security-extended,security-and-quality
+      #          config-file: ./codeql-config.yml
+
+      - name: 🧐 CodeQL Analysis
+        uses: github/codeql-action/analyze@181d5eefc20863364f96762470ba6f862bdef56b # v3.29.2
+        with:
+          category: '/language:python'
+
+  {% if "precommit_hooks" in template.built_in_features %}
+  secrets:
+    name: secrets-scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      pull-requests: write
+
+    steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: 🛠️ Setup environment
+        uses: ./.github/actions/python_setup
+
+      - name: 🏃 Run secrets scanner
+        run: make secrets
+  {% endif %}
+
+  audit:
+    name: audit-dependencies
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: 🛠️ Setup environment
+        uses: ./.github/actions/python_setup
+
+      - name: 🏃 Run audit
+        run: make audit
+
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛡️ Harden runner
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: 🛠️ Setup environment
+        uses: ./.github/actions/python_setup
+
+      - name: 📦 Install test dependencies
+        run: uv pip install pytest pytest-cov
+
+      - name: 🏃 Run tests
+        run: uv run pytest --cov --cov-report=xml --cov-branch test -ra -s
+
+      - name: 📥 Upload coverage report to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: coverage.xml
+          flags: unittests
+          name: codecov-coverage
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: {{ git.username }}/{{ general.slug }}
