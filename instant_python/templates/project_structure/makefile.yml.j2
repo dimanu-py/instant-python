@@ -6,33 +6,24 @@
   children:
     - name: scripts/add_dependency
       type: boilerplate_file
-      extension: .sh
+      extension: .py
     - name: scripts/remove_dependency
       type: boilerplate_file
-      extension: .sh
+      extension: .py
     - name: scripts/local_setup
       type: boilerplate_file
-      extension: .sh
+      extension: .py
+    {% if "precommit_hook" not in template.built_in_features %}
     - name: hooks
       type: directory
       children:
         - name: scripts/pre-commit
           type: boilerplate_file
+          extension: .py
         - name: scripts/pre-push
           type: boilerplate_file
+          extension: .py
         - name: scripts/post-merge
           type: boilerplate_file
-    {% if template.name == "domain_driven_design" %}
-    - name: test
-      type: directory
-      children:
-        - name: scripts/unit
-          type: boilerplate_file
-          extension: .sh
-        - name: scripts/integration
-          type: boilerplate_file
-          extension: .sh
-    - name: scripts/create_aggregate
-      type: boilerplate_file
-      extension: .py
+          extension: .py
     {% endif %}
