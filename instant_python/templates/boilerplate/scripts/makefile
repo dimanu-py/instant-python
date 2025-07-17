@@ -83,11 +83,11 @@ check-typing:  ## Run mypy type checking.
 {% if dependencies | has_dependency("mypy") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
 	@{{ general.dependency_manager }} run mypy
 {% elif dependencies | has_dependency("ty") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
-    @{{ general.dependency_manager }} run ty
+	@{{ general.dependency_manager }} run ty
 {% elif dependencies | has_dependency("pyright") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
-    @{{ general.dependency_manager }} run pyright
+	@{{ general.dependency_manager }} run pyright
 {% elif dependencies | has_dependency("pyrefly") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
-    @{{ general.dependency_manager }} run pyrefly
+	@{{ general.dependency_manager }} run pyrefly
 {% endif %}
 
 {% if dependencies | has_dependency("ruff") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
@@ -145,15 +145,15 @@ pre-push:  all-integration all-acceptance ## Run pre-push checks.
 .PHONY: audit
 audit: # It audits dependencies and source code
 	@echo "⌛ Checking for vulnerabilities in dependencies...\n"
-	@uv run -m pip_audit --progress-spinner off
+	@{{ general.dependency_manager }} run -m pip_audit --progress-spinner off
 { % endif %}
 
 .PHONY: clean
 clean: # Clean up the project, removing the virtual environment and some files
 	@echo "\n⌛ Cleaning up the project...\n"
 
-	@uv run -m pre_commit clean)
-	@uv run -m pre_commit uninstall --hook-type pre-commit --hook-type commit-msg)
+	@{{ general.dependency_manager }} run -m pre_commit clean)
+	@{{ general.dependency_manager }} run -m pre_commit uninstall --hook-type pre-commit --hook-type commit-msg)
 	@rm --force --recursive .venv
 	@rm --force --recursive `find . -type f -name '*.py[co]'`
 	@rm --force --recursive `find . -name __pycache__`
@@ -177,8 +177,8 @@ show:  ## Show installed dependencies.
 search:  ## Show package details.
 	@read -p "Enter package name to search: " package;\
 	{% if general.dependency_manager == "pdm" %}
-	pdm show $$package
+	@pdm show $$package
 	{% elif general.dependency_manager == "uv" %}
-	uv pip show $$package
+	@uv pip show $$package
 	{% endif %}
 
