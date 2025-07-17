@@ -30,3 +30,6 @@
 {% if "citation_file" in template.built_in_features %}
 {{ macros.include_and_indent("project_structure/citation.yml.j2", 0) }}
 {%  endif %}
+{% if "security_file" in template.built_in_features %}
+{{ macros.include_and_indent("project_structure/security.yml.j2", 0) }}
+{%  endif %}
