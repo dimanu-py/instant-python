@@ -1,8 +1,9 @@
 {% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
 from {{ general.source_name }}.{{ template_domain_import }}.event.domain_event import DomainEvent
+from {{ general.source_name }}.{{ template_domain_import }}.value_objects.aggregate import Aggregate
 
 
-class AggregateRoot:
+class EventAggregate(Aggregate):
     _domain_events: list[DomainEvent]
 
     def __init__(self) -> None:
