@@ -8,6 +8,9 @@
 {{ macros.include_and_indent("project_structure/github_action.yml.j2", 0) }}
 {{ macros.include_and_indent("project_structure/makefile.yml.j2", 0) }}
 {% endif %}
+{%  if "github_issues_template" in template.built_in_features %}
+{{ macros.include_and_indent("project_structure/github_issues_template.yml.j2", 0) }}
+{%  endif %}
 {% if "makefile" in template.built_in_features %}
 {{ macros.include_and_indent("project_structure/makefile.yml.j2", 0) }}
 {% endif %}
