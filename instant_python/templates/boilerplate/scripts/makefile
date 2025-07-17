@@ -41,6 +41,7 @@ add-dep:  ## Add a new dependency.
 remove-dep:  ## Remove a dependency.
 	@uv run scripts/remove_dependency.py
 
+{% if dependencies | has_dependency("pytest") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
 .PHONY: test
 test:  ## Run all test.
 	@echo "⌛ Running tests...\n"
@@ -67,17 +68,29 @@ coverage:  ## Run all test with coverage.
 	@{{ general.dependency_manager }} run coverage run --branch -m pytest test
 	@{{ general.dependency_manager }} run coverage html
 	@$(BROWSER) htmlcov/index.html
+{% endif %}
 
+{% if dependencies | has_dependency("pytest-watch") %}
 .PHONY: watch
 watch:  ## Run all test with every change.
 	@echo "⌛ Running test in watch mode...\n"
-	@{{ general.dependency_manager }} run ptw --runner "pytest -n auto test -ra"
+	@{{ general.dependency_manager }} run ptw --runner "pytest test -ra"
+{% endif %}
 
 .PHONY: check-typing
 check-typing:  ## Run mypy type checking.
 	@echo "⌛ Running type checking...\n"
+{% if dependencies | has_dependency("mypy") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
 	@{{ general.dependency_manager }} run mypy
+{% elif dependencies | has_dependency("ty") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
+    @{{ general.dependency_manager }} run ty
+{% elif dependencies | has_dependency("pyright") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
+    @{{ general.dependency_manager }} run pyright
+{% elif dependencies | has_dependency("pyrefly") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
+    @{{ general.dependency_manager }} run pyrefly
+{% endif %}
 
+{% if dependencies | has_dependency("ruff") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
 .PHONY: check-lint
 check-lint:  ## Run ruff linting check.
 	@echo "⌛ Running linting check...\n"
@@ -113,6 +126,7 @@ format:  ## Apply ruff format fix.
 	{% elif general.dependency_manager == "uv" %}
 	@uvx ruff format src test
 	{% endif %}
+{% endif %}
 
 {% if "precommit_hook" in template.built_in_features %}
 .PHONY: secrets
