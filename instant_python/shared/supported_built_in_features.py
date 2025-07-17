@@ -11,6 +11,7 @@ class SupportedBuiltInFeatures(str, Enum):
     ASYNC_ALEMBIC = "async_alembic"
     FASTAPI = "fastapi_application"
     PRECOMMIT = "precommit_hook"
+    CITATION = "citation_file"
 
     @classmethod
     def get_supported_built_in_features(cls) -> list[str]:
