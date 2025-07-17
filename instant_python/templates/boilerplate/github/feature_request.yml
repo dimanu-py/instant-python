@@ -1,0 +1,21 @@
+name: 🚀 Feature Request
+description: Suggest a new idea for {{ general.slug }}.
+labels:
+  - enhancement
+  - pending
+
+body:
+  - type: textarea
+    id: description
+    validations:
+      required: true
+    attributes:
+      label: ✏️ Description
+      description: |
+        Please give as much detail as possible about the feature you would like to suggest.
+
+        You might like to add:
+        * A clear and concise description of the idea that should be implemented
+        * An example of how the feature should work
+        * Any relevant links or resources that can help understand the feature better
+        * A list of scenarios or validations that the feature should cover as well as any restrictions or limitations that should be considered
