@@ -1,6 +1,3 @@
-- name: event_bus/aggregate_root
-  type: boilerplate_file
-  extension: .py
 - name: event
   type: directory
   python: True
@@ -31,5 +28,18 @@
       type: boilerplate_file
       extension: .py
     - name: exceptions/rabbit_mq_connection_not_established_error
+      type: boilerplate_file
+      extension: .py
+- name: value_objects
+  type: directory
+  python: True
+  children:
+    - name: value_object/aggregate
+      type: boilerplate_file
+      extension: .py
+    - name: value_object/value_object
+      type: boilerplate_file
+      extension: .py
+    - name: event_bus/event_aggregate
       type: boilerplate_file
       extension: .py
