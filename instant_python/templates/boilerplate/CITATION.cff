@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: {{ general.slug }}
+message: If you use this software, please cite it using the metadata below.
+type: software
+authors:
+  - given-names: {{ general.author }}
+repository-code: https://github.com/{{ git.username }}/{{ general.slug }}/
+url: https://pypi.org/project/{{ general.slug }}/
+abstract: >
+    {{ general.description }}
+keywords:
+  - python
+license: {{ general.license }}
