@@ -20,6 +20,16 @@ runs:
 
     - name: 📦 Install dependencies
       run: |
-        {% if general.dependency_manager == "uv" %}uv sync --all-groups{% elif general.dependency_manager == "pdm" %}pdm install {% endif %}
-        {% if "precommit_hook" in template.built_in_features %}{% if general.dependency_manager == "uv" %}uv run -m pre_commit install{% elif general.dependency_manager == "pdm" %}pdm run pre-commit install{% endif %}{% endif %}
+        {% if general.dependency_manager == "uv" %}
+        uv sync --all-groups
+        {% elif general.dependency_manager == "pdm" %}
+        pdm install
+        {% endif %}
+        {% if "precommit_hook" in template.built_in_features %}
+        {% if general.dependency_manager == "uv" %}
+        uv run -m pre_commit install
+        {% elif general.dependency_manager == "pdm" %}
+        pdm run pre-commit install
+        {% endif %}
+        {% endif %}
       shell: bash
