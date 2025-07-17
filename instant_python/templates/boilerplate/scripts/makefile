@@ -5,6 +5,16 @@ help:  ## Show this help.
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(firstword $(MAKEFILE_LIST)) | \
 			awk 'BEGIN {FS = ":.*## "}; {printf "%-30s %s\n", $$1, $$2}'
 
+.PHONY: local-setup
+local-setup:  ## Setup git hooks and install dependencies.
+	@echo "⌛ Setting up the project...\n"
+	@make install
+{% if "precommit_hook" in template.built_in_features %}
+	@uv run -m pre_commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
+{% else %}
+	@uv run scripts/local_setup.py
+{% endif %}
+
 .PHONY: test
 test:  ## Run all test.
 	@{{ general.dependency_manager }} run pytest test -ra
