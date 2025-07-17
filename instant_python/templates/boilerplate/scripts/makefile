@@ -146,7 +146,7 @@ pre-push:  all-integration all-acceptance ## Run pre-push checks.
 audit: # It audits dependencies and source code
 	@echo "⌛ Checking for vulnerabilities in dependencies...\n"
 	@{{ general.dependency_manager }} run -m pip_audit --progress-spinner off
-{ % endif %}
+{% endif %}
 
 .PHONY: clean
 clean: # Clean up the project, removing the virtual environment and some files
