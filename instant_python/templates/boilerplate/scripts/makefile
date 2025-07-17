@@ -131,7 +131,7 @@ format:  ## Apply ruff format fix.
 {% if "precommit_hook" in template.built_in_features %}
 .PHONY: secrets
 secrets: # Check for secrets in the source code
-	@echo "\n⌛ Checking secrets...\n"
+	@echo "⌛ Checking secrets...\n"
 	@uv run -m pre_commit run gitleaks --all-files
 {% else %}
 .PHONY: pre-commit
@@ -140,6 +140,13 @@ pre-commit: check-typing check-lint check-format all-unit ## Run pre-commit chec
 .PHONY: pre-push
 pre-push:  all-integration all-acceptance ## Run pre-push checks.
 {% endif %}
+
+{% if "github_actions" in template.built_in_features %}
+.PHONY: audit
+audit: # It audits dependencies and source code
+	@echo "⌛ Checking for vulnerabilities in dependencies...\n"
+	@uv run -m pip_audit --progress-spinner off
+{ % endif %}
 
 .PHONY: clean
 clean: # Clean up the project, removing the virtual environment and some files
