@@ -88,6 +88,7 @@ build_command = """
     uv lock --upgrade-package instant-python
     git add uv.lock
 """
+
 [tool.semantic_release.commit_parser_options]
 minor_tags = ["feat"]
 patch_tags = ["fix", "perf", "refactor", "test", "build"]
@@ -97,7 +98,6 @@ parse_squash_commits = false
 ignore_merge_commits = true
 
 [tool.semantic_release.changelog]
-changelog_file = "CHANGELOG.md"
 exclude_commit_patterns = ['''^Merge pull request #''', '''^Merge branch ''']
 mode = "update"
 #template_dir = "docs/changelog"
