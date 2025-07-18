@@ -1,5 +1,148 @@
 # CHANGELOG
 
+## v0.9.0 (2025-07-18)
+
+### ✨ Features
+
+- **templates**: Add github action release to project structure for github actions ([`9e3309f`](https://github.com/dimanu-py/instant-python/commit/9e3309f8154a72954427f947ae61753d37253060))
+
+- **templates**: Include python semantic release library in default dependencies if github actions is selected ([`5374ba4`](https://github.com/dimanu-py/instant-python/commit/5374ba4e77f8790dc6d5b691d3f511889df87f24))
+
+- **shared**: Add github issues template as possible built in feature ([`9d97ce5`](https://github.com/dimanu-py/instant-python/commit/9d97ce53baded8ed6e782ea437daa9110c74c316))
+
+- **templates**: Add template for release with python semantic release ([`23569a0`](https://github.com/dimanu-py/instant-python/commit/23569a0bafb33b1726beab47bf11e6f7fde95065))
+
+- **templates**: Include github issues template into project structure templates ([`36a2975`](https://github.com/dimanu-py/instant-python/commit/36a2975e726db3172965e2f8866b2af48488c193))
+
+- **templates**: Add templates for github issues templates ([`fec68e4`](https://github.com/dimanu-py/instant-python/commit/fec68e48418875c57e98a16dbc041e3eeeffdea9))
+
+- **templates**: Include pip audit and precommit as default dependencies if they are selected as built in features ([`86a8af5`](https://github.com/dimanu-py/instant-python/commit/86a8af5592c03046d0228131beb4b9718bd00f57))
+
+- **templates**: Include audit command in makefile template if github actions is selected ([`8035fab`](https://github.com/dimanu-py/instant-python/commit/8035fab7a66b1735da07d6a750bc754b1f6c4d48))
+
+- **templates**: Modify project structure for github action including joined ci workflow ([`4ae4bd7`](https://github.com/dimanu-py/instant-python/commit/4ae4bd77d292697761dd4b631a6f87b32dc0796e))
+
+- **templates**: Join lint and test github workflows into one single file and include more security and code quality jobs ([`a21eafe`](https://github.com/dimanu-py/instant-python/commit/a21eafebc11da2fe2d440acdfc96e3d6910e8bdc))
+
+- **shared**: Include security as supported built in feature ([`5cfa228`](https://github.com/dimanu-py/instant-python/commit/5cfa228abca91b5e0d09ca7f68baa0a910f5da26))
+
+- **templates**: Include security template into project structures ([`65c9b84`](https://github.com/dimanu-py/instant-python/commit/65c9b849f2b37faf5c0fcae8993e9981b71da829))
+
+- **templates**: Create security file template ([`21b1bb0`](https://github.com/dimanu-py/instant-python/commit/21b1bb0257e1caa23db66e645e9e047010c10920))
+
+- **shared**: Add citation as supported built in feature ([`893abab`](https://github.com/dimanu-py/instant-python/commit/893abab4e16a66b0da7e8b9e26d2f2ed452453d5))
+
+- **templates**: Add citation project structure template to default templates ([`0a798d5`](https://github.com/dimanu-py/instant-python/commit/0a798d57642eb990f42b2e614d840f543829c767))
+
+- **templates**: Add citation file template ([`888e8c6`](https://github.com/dimanu-py/instant-python/commit/888e8c696ad1ab2ce9916fa4a85c6ceae529cf14))
+
+- **shared**: Add precommit option in SupportedBuiltInFeatures enum ([`f69cadb`](https://github.com/dimanu-py/instant-python/commit/f69cadb733634a6ecb4e9ab092e2a2bb375f98c9))
+
+- **templates**: Include precommit template project structure in all default templates ([`8601841`](https://github.com/dimanu-py/instant-python/commit/8601841cb74c7a3a68b1d06daa89c25b3b23c0f3))
+
+- **templates**: Include specific make commands in template based on installed dependencies and selected built in features ([`62688c0`](https://github.com/dimanu-py/instant-python/commit/62688c072cb6bfa1d00e7f6a08f82a1ed975aa8e))
+
+- **templates**: Include pre commit hook in makefile if it's selected as built in features ([`2c391fb`](https://github.com/dimanu-py/instant-python/commit/2c391fb6c1c69990ae551c6bf8621bb1b40811d1))
+
+- **templates**: Update pre commit config file to be included as built in feature ([`972aaa4`](https://github.com/dimanu-py/instant-python/commit/972aaa4131e54d3e875b14e3d117ea30a23bc0e9))
+
+- **templates**: Include new base aggregate in value objects and when in EDA project structure ([`4f038ef`](https://github.com/dimanu-py/instant-python/commit/4f038ef59fd4f0c54ba2880c4a505984560a4254))
+
+- **templates**: Create base aggregate class and make aggregate for event driven architecture inherit from it ([`44f843d`](https://github.com/dimanu-py/instant-python/commit/44f843de0c6fcf739309f37350e9ba8b4c7bc650))
+
+- **templates**: Include error handlers in fastapi application template for project structure ([`add3634`](https://github.com/dimanu-py/instant-python/commit/add36343fb11e4be42c96dca42ef00153d178187))
+
+- **templates**: Separate template files for fastapi error handlers ([`cfd7d14`](https://github.com/dimanu-py/instant-python/commit/cfd7d14cd1f515b513774df5f25f2180baee2cb3))
+
+- **templates**: Include new model for value objects in project structure ([`39d2ba1`](https://github.com/dimanu-py/instant-python/commit/39d2ba101aab089addd80ce38ee1753c0dff7883))
+
+- **templates**: Update value object templates to use new version that autovalidates using @validate decorator ([`186ecd5`](https://github.com/dimanu-py/instant-python/commit/186ecd518b8c9ca685a4db04598eb55e27fc3316))
+
+- **templates**: Update project structure templates that were using old version of domain error an include error base class as well as rename the folder to errors instead of exceptions ([`5c363b6`](https://github.com/dimanu-py/instant-python/commit/5c363b6e126942531f6bb1ca5990ede9dc92bf18))
+
+- **templates**: Implement new error template as base class for errors and let domain error inherit from it ([`1e15d5d`](https://github.com/dimanu-py/instant-python/commit/1e15d5d58dbb583fb681df648ddda573ef2c1679))
+
+- **templates**: Update logger project structure template to include new handler and new logger implementation ([`b33bd1e`](https://github.com/dimanu-py/instant-python/commit/b33bd1e4021006b236607d28dd7472431bfc3ddf))
+
+- **templates**: Include log middleware in fastapi application project structure if logger is selected ([`4ca7641`](https://github.com/dimanu-py/instant-python/commit/4ca76411a0f906ec51aac38653ec29cec9cdf9b1))
+
+- **templates**: Update fastapi main application template to include log middleware if logger is selected too ([`c92810c`](https://github.com/dimanu-py/instant-python/commit/c92810ce79b199892a03ce7e29dd03daacf00130))
+
+- **templates**: Create fastapi log middleware template ([`b196afc`](https://github.com/dimanu-py/instant-python/commit/b196afce1838180439c2a4a900816fdda5063ef5))
+
+- **templates**: Modify fastapi main application template with new logger ([`021039d`](https://github.com/dimanu-py/instant-python/commit/021039de56a92bf018dbbbd68d57bc60bbd2126d))
+
+- **templates**: Add new templates for logger implementation ([`d937478`](https://github.com/dimanu-py/instant-python/commit/d9374786fd1cb95c89933331b678ef6fa0e2d7cf))
+
+- **templates**: Remove http_response and status_code templates ([`5f75969`](https://github.com/dimanu-py/instant-python/commit/5f759699f15818cf0b73e9c88e13cc4ff567dc57))
+
+- **templates**: Use new response model in fastapi error handlers ([`ef4e543`](https://github.com/dimanu-py/instant-python/commit/ef4e54308ae783360fb0eaa75fab8642c896a0d7))
+
+- **templates**: Substitute http_response and status_code templates from fastapi infra for success and error responses model ([`2c086be`](https://github.com/dimanu-py/instant-python/commit/2c086bebdb646d34447f82f2cdf93aef894b0e66))
+
+- **templates**: Add ErrorResponse and SuccessResponse templates for fastapi application ([`9ec98f1`](https://github.com/dimanu-py/instant-python/commit/9ec98f1e8db59386f76c636825f889f117ff9871))
+
+### 🪲 Bug Fixes
+
+- **templates**: Add semantic release config to pyproject template if github actions is selected ([`a6533ce`](https://github.com/dimanu-py/instant-python/commit/a6533ceeb62b2877b5698f4ca39eb1e4cdb2a374))
+
+- **templates**: Fix indentations in github actions templates ([`cd0d882`](https://github.com/dimanu-py/instant-python/commit/cd0d88293612e4e83206615b903ff40af69b5dac))
+
+- **templates**: Add {% raw %} and {% endraw %} tags in github actions templates when they access repository variables ([`46ec5c1`](https://github.com/dimanu-py/instant-python/commit/46ec5c1489b937065b6ebd8a1723ae581adc9445))
+
+- **templates**: Correct forma of helper scripts when makefile built in feature is selected and include custom hooks only if precommit feature is not selected ([`fe15d7e`](https://github.com/dimanu-py/instant-python/commit/fe15d7e7521bd70879490e1a96973477524518f3))
+
+- **templates**: Correct error in conditional in makefile template ([`b126eed`](https://github.com/dimanu-py/instant-python/commit/b126eed146787cf254070e4169afbde1433b5ce2))
+
+- **templates**: Use selected dependency manager for new make commands ([`80bf833`](https://github.com/dimanu-py/instant-python/commit/80bf8333d06facae66b3f15992f0d59bc5bab785))
+
+- **templates**: Include makefile if precommit built in feature is selected ([`9dcec97`](https://github.com/dimanu-py/instant-python/commit/9dcec97973b1a91a78d2bdf11a3bd20e097e8c68))
+
+- **templates**: Write correct name for aggregate template file in value objects project structure ([`d651243`](https://github.com/dimanu-py/instant-python/commit/d651243d7baf602f262ed63d31bc4b0d0c2c2952))
+
+- **render**: Create jinja environment with autoscape argument enabled to avoid potential XSS attacks ([`976d459`](https://github.com/dimanu-py/instant-python/commit/976d459538ae8eea403c65300304e6405fec46b6))
+
+- **templates**: Format correctly if statement in application.py template ([`409d606`](https://github.com/dimanu-py/instant-python/commit/409d6064d97ef016c34dab57d3c9456a47e6542f))
+
+- **templates**: Include logger and migrator in fastapi application only if they are selected too for DDD and standard project templates ([`f5a8087`](https://github.com/dimanu-py/instant-python/commit/f5a80870d0ecdd2f47419ad5e51d20131649b422))
+
+- **templates**: Include logger and migrator in fastapi application only if they are selected as built in feature too in clean architecture template ([`191d81f`](https://github.com/dimanu-py/instant-python/commit/191d81fd8ace560f3a6359bc9cf767c73c310d50))
+
+### ⚙️ Build System
+
+- Modify release job and semantic release configuration to be able to update uv.lock with the new version ([`2d52828`](https://github.com/dimanu-py/instant-python/commit/2d5282804956e4e5ab31c20b320663f9184f0a84))
+
+- Update version in uv.lock ([`9d1bd2c`](https://github.com/dimanu-py/instant-python/commit/9d1bd2c380293c7e1635a03da0654e7084b9e1eb))
+
+- Update semantic release to not update major version if is zero and to allow 0 major version ([`34d251e`](https://github.com/dimanu-py/instant-python/commit/34d251e8a57eafa595a0c54e314238f389218dd6))
+
+- Remove test hook in precommit config ([`b8d451d`](https://github.com/dimanu-py/instant-python/commit/b8d451db1a024ae41a6958dbf9513801f3b69627))
+
+- Remove final echo from makefile commands to let output of the command itself inform the user ([`cd895ad`](https://github.com/dimanu-py/instant-python/commit/cd895adacfe1e470a746165380369c9c365996e8))
+
+- Remove -e command from echo in makefile ([`6a624a3`](https://github.com/dimanu-py/instant-python/commit/6a624a3cacf8b96adaeba20bb635b7e43d853002))
+
+- Exclude resources folder from being formatted or linted ([`cf00038`](https://github.com/dimanu-py/instant-python/commit/cf000382ba13a0bc4dbda8eb346e9cdeb4fe4541))
+
+- Remove AST check from pre commit hook ([`b46437e`](https://github.com/dimanu-py/instant-python/commit/b46437e804a1d54f13444e92827bd15d9fb2fd57))
+
+- Add docs-serve command to makefile ([`9430934`](https://github.com/dimanu-py/instant-python/commit/943093498f168f49cc8b2593ea17911321f2e012))
+
+- Improve messages of make command and add build and clean commands ([`6a0e428`](https://github.com/dimanu-py/instant-python/commit/6a0e4285d3bb43f9e88dad32fd2f93732ab271c8))
+
+- Remove commitizen config as is not longer needed ([`0ed6a8b`](https://github.com/dimanu-py/instant-python/commit/0ed6a8bd50c6ebf30b71e4734fd3e4a81123b280))
+
+### ♻️ Refactoring
+
+- **templates**: Improve format of github action template ([`a01b4b0`](https://github.com/dimanu-py/instant-python/commit/a01b4b0c5f57ecbc5c66995abda26157b923ecd8))
+
+- **templates**: Improve formatting of makefile and reorganize commands ([`efa8de5`](https://github.com/dimanu-py/instant-python/commit/efa8de5c5bae2bd79c8e4a0a01ef4aa016b0e54c))
+
+- **templates**: Convert local setup and custom hooks into python scripts ([`12af46c`](https://github.com/dimanu-py/instant-python/commit/12af46c7cf2bd437f2f81b412ceb615a7cd563e5))
+
+- **templates**: Convert add and remove dependency scripts into python scripts instead of bash scripts ([`0d29c14`](https://github.com/dimanu-py/instant-python/commit/0d29c14a7aa7a113fe365d1e30055ead52908b29))
+
+
 ## v0.8.2 (2025-07-16)
 
 ### 🪲 Bug Fixes
