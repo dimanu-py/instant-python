@@ -8,7 +8,7 @@ version = "0.9.0"
 description = "Instant boilerplate generation for Python projects"
 readme = "README.md"
 license = { file = "LICENSE" }
-authors = [{name = "dimanu-py", email = "diegomtz126@gmail.com"}]
+authors = [{name = "dimanu-py", email = "dimanu.py@gmail.com"}]
 requires-python = ">=3.9"
 dependencies = [
     "typer>=0.15.1",
@@ -39,7 +39,7 @@ documentation = "https://dimanu-py.github.io/instant-python/"
 repository = "https://github.com/dimanu-py/instant-python/"
 
 [project.scripts]
-ipy = "instant_python.cli:app"
+ipy = "instant_python.cli.cli:app"
 
 [dependency-groups]
 docs = [
