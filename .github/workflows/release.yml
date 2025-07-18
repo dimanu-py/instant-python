@@ -4,69 +4,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    env:
-      dist_artifacts_name: dist
-      dist_artifacts_dir: dist
-      lock_file_artifact: uv.lock
-    outputs:
-      new-release-detected: ${{ steps.version.outputs.released }}
-      distribution-artifacts: ${{ env.dist_artifacts_name }}
-      lock-file-artifact: ${{ env.lock_file_artifact }}
-    steps:
-      - name: 🛡️ Harden runner
-        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
-        with:
-          egress-policy: audit
-
-      - name: 📥 Checkout the repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: 🛠️ Setup environment
-        uses: ./.github/actions/python_setup
-
-      - name: 📦 Build package
-        id: version
-        run: uv run semantic-release -v version --no-commit --no-tag
-
-      - name: 📤 Upload dist artifacts
-        if: ${{ steps.version.outputs.released == 'true' }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4.6.2
-        with:
-          name: ${{ env.dist_artifacts_name }}
-          path: ${{ format('{0}/**', env.dist_artifacts_dir) }}
-          if-no-files-found: error
-          retention-days: 2
-
-      - name: 📤 Upload lock file artifact
-        if: ${{ steps.version.outputs.released == 'true' }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4.6.2
-        with:
-          name: ${{ env.lock_file_artifact }}
-          path: ${{ env.lock_file_artifact }}
-          if-no-files-found: error
-          retention-days: 2
-
   release:
-    if: ${{ !startsWith(github.event.head_commit.message, 'bump:') && needs.build.outputs.new-release-detected == 'true' }}
+    if: "!startsWith(github.event.head_commit.message, 'bump:')"
     runs-on: ubuntu-latest
-    needs:
-      - build
-    concurrency:
-      group: ${{ github.workflow }}-release-${{ github.ref_name }}
-      cancel-in-progress: false
     permissions:
       contents: write
     outputs:
       released: ${{ steps.released.outputs.released }}
       tag: ${{ steps.released.outputs.tag }}
-      version: ${{ steps.released.outputs.version }}
 
     steps:
       - name: 🛡️ Harden runner
@@ -83,38 +28,30 @@ jobs:
       - name: 🛠️ Setup environment
         uses: ./.github/actions/python_setup
 
-      - name: 📥 Download build artifacts
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093  # v4.3.0
-        id: artifact-download
-        with:
-          name: ${{ needs.build.outputs.distribution-artifacts }}
-          path: dist
-
-      - name: 📥 Download lock file artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093  # v4.3.0
-        with:
-          name: ${{ needs.build.outputs.lock-file-artifact }}
-
-      - name: 📋 Stage lock file
-        run: git add uv.lock
-
       - name: 🔖 Create release
-        id: release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          uv run semantic-release -v --strict version --skip-build
-          uv run semantic-release publish
+        id: released
+        uses: python-semantic-release/python-semantic-release@2896129e02bb7809d2cf0c1b8e9e795ee27acbcf # v10.0.2
+        with:
+          build: true
+          push: true
+          changelog: true
+          commit: true
+          tag: true
+          vcs_release: true
+          config_file: pyproject.toml
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          git_committer_email: ${{ vars.GIT_COMMITTER_EMAIL }}
+          git_committer_name: ${{ vars.GIT_COMMITTER_NAME }}
+          ssh_public_signing_key: ${{ vars.SSH_PUBLIC_SIGNING_KEY }}
+          ssh_private_signing_key: ${{ secrets.SSH_PRIVATE_SIGNING_KEY }}
 
-  publish:
-    name: Publish Release to PyPI Workflow
+  build-and-publish:
+    name: Publish to PyPI
     needs:
-     - build
-     - release
-    if: ${{ needs.release.result == 'success' && needs.release.outputs.released == 'true' }}
+      - release
+    if: needs.release.outputs.released == 'true'
     runs-on: ubuntu-latest
     environment: release
-
     permissions:
       id-token: write
 
@@ -124,12 +61,18 @@ jobs:
         with:
           egress-policy: audit
 
-      - name: 📥 Download build artifacts
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093  # v4.3.0
-        id: artifact-download
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v4
         with:
-          name: ${{ needs.build.outputs.distribution-artifacts }}
-          path: dist
+          fetch-depth: 0
+          persist-credentials: false
+          ref: refs/tags/${{ needs.release.outputs.tag }}
+
+      - name: 🛠️ Setup environment
+        uses: ./.github/actions/python_setup
+
+      - name: 🏃 Build package
+        run: uv build
 
       - name: 🚀 Publish
         uses: pypa/gh-action-pypi-publish@release/v1

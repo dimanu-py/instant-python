@@ -41,9 +41,6 @@ repository = "https://github.com/dimanu-py/instant-python/"
 [project.scripts]
 ipy = "instant_python.cli:app"
 
-[project.optional-dependencies]
-build = ["python-semantic-release>=10.2.0"]
-
 [dependency-groups]
 docs = [
     "mkdocs>=1.6.1",
@@ -99,9 +96,8 @@ allow_zero_version = true
 no_git_verify = false
 tag_format = "{version}"
 build_command = """
-    uv sync --extra build
     uv lock --upgrade-package instant-python
-    uv build
+    git add uv.lock
 """
 
 [tool.semantic_release.commit_parser_options]
