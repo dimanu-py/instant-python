@@ -72,6 +72,9 @@ test = [
 {% endif %}
 
 {% if "github_actions" in template.built_in_features %}
+[project.optional-dependencies]
+build = ["uv>=0.7.21"]
+
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
 commit_message = "bump: new version {version} created"
@@ -84,7 +87,6 @@ build_command = """
     pip install -e '.[build]'
     uv lock --upgrade-package instant-python
     git add uv.lock
-    uv build
 """
 [tool.semantic_release.commit_parser_options]
 minor_tags = ["feat"]
