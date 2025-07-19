@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from starlette.responses import JSONResponse
+from fastapi.responses import JSONResponse
 
 
 class SuccessResponse(BaseModel):
