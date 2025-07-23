@@ -10,10 +10,10 @@
     - name: scripts/remove_dependency
       type: boilerplate_file
       extension: .py
+    {% if "precommit_hook" not in template.built_in_features %}
     - name: scripts/local_setup
       type: boilerplate_file
       extension: .py
-    {% if "precommit_hook" not in template.built_in_features %}
     - name: hooks
       type: directory
       children:
