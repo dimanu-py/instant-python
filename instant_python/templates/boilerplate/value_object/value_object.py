@@ -43,6 +43,10 @@ class ValueObject[T](ABC):
 		return str(self._value)
 
 	@override
+	def __hash__(self) -> int:
+		return hash(self._value)
+
+	@override
 	def __setattr__(self, name: str, value: T) -> None:
 		"""Prevents modification of the value after initialization."""
 		if name in self.__slots__:
@@ -101,6 +105,10 @@ class ValueObject(Generic[T], ABC):
 	@override
 	def __str__(self) -> str:
 		return str(self._value)
+
+	@override
+	def __hash__(self) -> int:
+		return hash(self._value)
 	
 	@override
 	def __setattr__(self, name: str, value: T) -> None:
