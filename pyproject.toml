@@ -116,8 +116,3 @@ ignore_merge_commits = true
 exclude_commit_patterns = ['''^Merge pull request #''', '''^Merge branch ''']
 mode = "update"
 template_dir = "docs/changelog"
-
-[tool.semantic_release.changelog.default_templates]
-changelog_file = "CHANGELOG.md"
-output_format = "md"
-mask_initial_release = false
