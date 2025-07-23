@@ -14,6 +14,9 @@
             - name: random_generator
               type: boilerplate_file
               extension: .py
+            {% if "value_objects" in template.built_in_features %}
+            {{ macros.include_and_indent("project_structure/test_value_objects.yml.j2", 12) }}
+            {% endif %}
         {% if "event_bus" in template.built_in_features %}
         - name: infra
           type: directory

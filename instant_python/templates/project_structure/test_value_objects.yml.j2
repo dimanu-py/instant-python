@@ -1,0 +1,26 @@
+- name: value_objects
+  type: directory
+  python: True
+  children:
+    - name: value_object/int_primitives_mother
+      type: boilerplate_file
+      extension: .py
+    - name: value_object/string_primitives_mother
+      type: boilerplate_file
+      extension: .py
+    - name: value_object/uuid_primitives_mother
+      type: boilerplate_file
+      extension: .py
+    - name: usables
+      type: directory
+      python: True
+      children:
+        - name: value_object/test_int_value_object
+          type: boilerplate_file
+          extension: .py
+        - name: value_object/test_string_value_object
+          type: boilerplate_file
+          extension: .py
+        - name: value_object/test_uuid_value_object
+          type: boilerplate_file
+          extension: .py
