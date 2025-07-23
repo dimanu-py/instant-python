@@ -2,6 +2,8 @@ name: Release and Publish
 
 on:
   workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   release:
@@ -46,7 +48,7 @@ jobs:
     name: Publish to PyPI
     needs:
       - release
-    if: needs.release.outputs.released == 'true'
+    if: needs.release.outputs.released == 'true' || github.event_name == 'release'
     runs-on: ubuntu-latest
     environment: release
     permissions:
