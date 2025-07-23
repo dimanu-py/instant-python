@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## v0.9.1 (2025-07-18)
+
+### 🪲 Bug Fixes
+
+- **cli**: Update command in tox.ini file to be able to make reference to new location for application entry point ([`a8baef2`](https://github.com/dimanu-py/instant-python/commit/a8baef2eb88018cb6a0210122348e753dc10cacb))
+
+- **templates**: Update pyproject.toml template to include optional build dependencies when github actions built-in feature is selected ([`b765ec8`](https://github.com/dimanu-py/instant-python/commit/b765ec81f3e61ce170873eaed371910e41e2e871))
+
+- **templates**: Update release action template to work running build command to update uv.lock ([`9824451`](https://github.com/dimanu-py/instant-python/commit/982445188567c61d31ffc11d04ccdab163fb1ee4))
+
+### ⚙️ Build System
+
+- Update changelog section in semantic release config ([`7a413cf`](https://github.com/dimanu-py/instant-python/commit/7a413cf7a95b4da30ef23efafdf94cb2e2118168))
+
+- Update application entry point ([`8b5330a`](https://github.com/dimanu-py/instant-python/commit/8b5330a99ae432dc0e04c19f67ccc55e5ee9fe5a))
+
+### ♻️ Refactoring
+
+- **cli**: Move cli files to its own folder ([`81b8c3c`](https://github.com/dimanu-py/instant-python/commit/81b8c3c3839bf548a5ffac3432615d392ad2a05e))
+
+- **templates**: Update name of test workflow ([`80225f5`](https://github.com/dimanu-py/instant-python/commit/80225f51014aef1d06660803aa0fec65633f41bd))
+
 ## v0.9.0 (2025-07-18)
 
 ### ✨ Features
