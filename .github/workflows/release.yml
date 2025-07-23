@@ -23,11 +23,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          fetch-tags: true
           persist-credentials: false
 
       - name: 🔖 Create release
-        id: released
+        id: release
         uses: python-semantic-release/python-semantic-release@2896129e02bb7809d2cf0c1b8e9e795ee27acbcf # v10.0.2
         with:
           build: true
