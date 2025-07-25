@@ -1,5 +1,7 @@
 # CHANGELOG
 
+<!-- version list -->
+
 ## v0.9.1 (2025-07-18)
 
 ### 🪲 Bug Fixes
