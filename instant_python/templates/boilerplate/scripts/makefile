@@ -34,12 +34,12 @@ update:  ## Update dependencies.
 	{% endif %}
 
 .PHONY: add-dep
-add-dep:  ## Add a new dependency.
-	@uv run scripts/add_dependency.py
+add-dep:  ## Add a new dependency <make add-dep dep="pytest --group test>"
+	@uv add $(dep)
 
 .PHONY: remove-dep
-remove-dep:  ## Remove a dependency.
-	@uv run scripts/remove_dependency.py
+remove-dep:  ## Remove a dependency <make remove-dep dep="pytest --group test">
+	@uv remove $(dep)
 
 {% if dependencies | has_dependency("pytest") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
 .PHONY: test
