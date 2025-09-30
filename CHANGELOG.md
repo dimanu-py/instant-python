@@ -2,6 +2,31 @@
 
 <!-- version list -->
 
+## v0.10.0 (2025-09-30)
+
+### ✨ Features
+
+- **templates**: Add 'changelog_file' entry to semantic release section in pyproject template to
+  avoid warning
+  ([`0a80d5a`](https://github.com/dimanu-py/instant-python/commit/0a80d5a4dc1cec80259d4d6e9ba0ac0a9581fc6a))
+
+### 🪲 Bug Fixes
+
+- **templates**: Correct errors import in fastapi application template
+  ([`e42cfbb`](https://github.com/dimanu-py/instant-python/commit/e42cfbb0116fa52596be60121a27bb6ee39e10cf))
+
+- **templates**: Correct errors in release.yml template
+  ([`65b96f0`](https://github.com/dimanu-py/instant-python/commit/65b96f0a0c890e18e597fb4edc4c8402b733d84d))
+
+### ⚙️ Build System
+
+- Add 'dev' dependency group for improved development workflow
+  ([`37d4c25`](https://github.com/dimanu-py/instant-python/commit/37d4c250696c07cb22b8a594b5d68309a1659c83))
+
+- Update dependencies
+  ([`31572ab`](https://github.com/dimanu-py/instant-python/commit/31572ab38b253abfee97f3e8926499e0a8f57a00))
+
+
 ## v0.9.1 (2025-07-18)
 
 ### 🪲 Bug Fixes
