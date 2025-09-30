@@ -2,6 +2,30 @@
 
 <!-- version list -->
 
+## v0.11.0 (2025-09-30)
+
+### ✨ Features
+
+- **templates**: Add ruff linter and formatter rules in pyproject.toml template file
+  ([`b600f62`](https://github.com/dimanu-py/instant-python/commit/b600f62ab807d0ed5309ee199fd6b772dad55317))
+
+### 🪲 Bug Fixes
+
+- **templates**: Correct imports when selected template was standard project
+  ([`4d8bda4`](https://github.com/dimanu-py/instant-python/commit/4d8bda4fb246a59e5556c78b5317845614e3f8b5))
+
+### ♻️ Refactoring
+
+- **templates**: Modify makefile template file simplifying add-dep and remove-dep commands
+  ([`eb883f3`](https://github.com/dimanu-py/instant-python/commit/eb883f31aba41faf8b38908317ea02b53e700874))
+
+- **templates**: Rename template file for base error
+  ([`3a30d3d`](https://github.com/dimanu-py/instant-python/commit/3a30d3d3533bc88fe70f0822f204d34e3ad4280a))
+
+- **commands**: Move ipy configuration file to project folder before creating first commit
+  ([`8997e98`](https://github.com/dimanu-py/instant-python/commit/8997e984b2384e70ca2418e4cf7eb21aa3d7bdad))
+
+
 ## v0.10.0 (2025-09-30)
 
 ### ✨ Features
