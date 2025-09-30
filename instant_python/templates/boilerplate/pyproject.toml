@@ -71,6 +71,22 @@ test = [
 {% endif %}
 {% endif %}
 
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "C4", "UP", "I"]
+ignore = ["B008"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["{{ general.source_name }}", "test"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+
+
 {% if "github_actions" in template.built_in_features %}
 [project.optional-dependencies]
 build = ["uv>=0.7.21"]
