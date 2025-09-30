@@ -42,6 +42,14 @@ repository = "https://github.com/dimanu-py/instant-python/"
 ipy = "instant_python.cli.cli:app"
 
 [dependency-groups]
+dev = [
+    {include-group = "docs"},
+    {include-group = "git"},
+    {include-group = "lint"},
+    {include-group = "release"},
+    {include-group = "test"},
+]
+
 docs = [
     "mkdocs>=1.6.1",
     "mkdocs-literate-nav>=0.6.2",
