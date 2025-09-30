@@ -4,6 +4,7 @@ import pytest
 from expects import expect, equal, raise_error
 {% endif %}
 
+{% if template_domain_import %}
 from {{ general.source_name }}.{{ template_domain_import }}.errors.incorrect_value_type_error import (
 	IncorrectValueTypeError,
 )
@@ -14,6 +15,18 @@ from {{ general.source_name }}.{{ template_domain_import }}.value_objects.usable
 from test.{{ template_domain_import }}.value_objects.string_primitives_mother import (
 	StringPrimitivesMother,
 )
+{% else %}
+from {{ general.source_name }}.errors.incorrect_value_type_error import (
+	IncorrectValueTypeError,
+)
+from {{ general.source_name }}.errors.required_value_error import RequiredValueError
+from {{ general.source_name }}.value_objects.usables.string_value_object import (
+	StringValueObject,
+)
+from test.value_objects.string_primitives_mother import (
+	StringPrimitivesMother,
+)
+{% endif %}
 
 
 @pytest.mark.unit

@@ -6,11 +6,22 @@ from typing import TypeVar
 from typing import TypeVar, Generic
 {% endif %}
 
+{% if template_domain_import %}
 from {{ general.source_name }}.{{ template_domain_import }}.value_object.uuid import Uuid
+{% else %}
+from {{ general.source_name }}.value_object.uuid import Uuid
+{% endif %}
+{% if template_infra_import %}
 from {{ general.source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.base import Base
 from {{ general.source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.session_maker import (
 	SessionMaker,
 )
+{% else %}
+from {{ general.source_name }}.persistence.sqlalchemy.base import Base
+from {{ general.source_name }}.persistence.sqlalchemy.session_maker import (
+	SessionMaker,
+)
+{% endif %}
 
 Entity = TypeVar("Entity")
 {% if general.python_version in ["3.13", "3.12", "3.11"] %}

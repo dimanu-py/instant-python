@@ -2,9 +2,15 @@
 from sqlalchemy import create_engine, Engine
 from sqlalchemy.orm import sessionmaker, Session
 
+{% if template_infra_import %}
 from {{ general.source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.base import (
 	Base,
 )
+{% else %}
+from {{ general.source_name }}.persistence.sqlalchemy.base import (
+	Base,
+)
+{% endif %}
 
 
 class SessionMaker:

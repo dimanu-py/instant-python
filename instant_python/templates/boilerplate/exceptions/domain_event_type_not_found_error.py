@@ -1,9 +1,10 @@
 {% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
-from {{ general.source_name }}.{{ template_domain_import }}.exceptions.domain_error import DomainError
-
+{% if template_domain_import %}
+from {{ general.source_name }}.{{ template_domain_import }}.errors.domain_error import DomainError
+{% else %}
+from {{ general.source_name }}.errors.domain_error import DomainError
+{% endif %}
 
 class DomainEventTypeNotFoundError(DomainError):
 	def __init__(self, name: str) -> None:
-		self._message = f"Event type {name} not found among subscriber."
-		self._type = "domain_event_type_not_found"
-		super().__init__(message=self._message, error_type=self._type)
+		super().__init__(message=f"Event type {name} not found among subscriber.", error_type="domain_event_type_not_found",)

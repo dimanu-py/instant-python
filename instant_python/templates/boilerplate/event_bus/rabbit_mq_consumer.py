@@ -3,10 +3,18 @@
 from pika.adapters.blocking_connection import BlockingChannel
 from pika.spec import Basic, BasicProperties
 
+{% if template_domain_import %}
 from {{ general.source_name }}.{{ template_domain_import }}.event.domain_event import DomainEvent
 from {{ general.source_name }}.{{ template_domain_import }}.event.domain_event_subscriber import (
     DomainEventSubscriber,
 )
+{% else %}
+from {{ general.source_name }}.event.domain_event import DomainEvent
+from {{ general.source_name }}.event.domain_event_subscriber import (
+    DomainEventSubscriber,
+)
+{% endif %}
+{% if template_infra_import %}
 from {{ general.source_name }}.{{ template_infra_import }}.event.domain_event_json_deserializer import (
     DomainEventJsonDeserializer,
 )
@@ -16,6 +24,17 @@ from {{ general.source_name }}.{{ template_infra_import }}.event.rabbit_mq.rabbi
 from {{ general.source_name }}.{{ template_infra_import }}.event.rabbit_mq.rabbit_mq_queue_formatter import (
     RabbitMqQueueFormatter,
 )
+{% else %}
+from {{ general.source_name }}.event.domain_event_json_deserializer import (
+    DomainEventJsonDeserializer,
+)
+from {{ general.source_name }}.event.rabbit_mq.rabbit_mq_connection import (
+    RabbitMqConnection,
+)
+from {{ general.source_name }}.event.rabbit_mq.rabbit_mq_queue_formatter import (
+    RabbitMqQueueFormatter,
+)
+{% endif %}
 
 
 class RabbitMqConsumer:

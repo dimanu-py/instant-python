@@ -9,7 +9,11 @@ from typing_extensions import override
 {% endif %}
 from inspect import Parameter, _empty, signature
 
+{% if template_domain_import %}
 from {{ general.source_name }}.{{ template_domain_import }}.value_objects.value_object import ValueObject
+{% else %}
+from {{ general.source_name }}.value_objects.value_object import ValueObject
+{% endif %}
 
 
 class Aggregate(ABC):

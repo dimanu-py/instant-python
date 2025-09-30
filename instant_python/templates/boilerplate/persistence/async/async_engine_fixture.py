@@ -3,7 +3,11 @@ from collections.abc import AsyncGenerator
 import pytest
 from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 
+{% if template_infra_import %}
 from {{ general.source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.postgres_settings import PostgresSettings
+{% else %}
+from {{ general.source_name }}.persistence.sqlalchemy.postgres_settings import PostgresSettings
+{% endif %}
 
 
 @pytest.fixture

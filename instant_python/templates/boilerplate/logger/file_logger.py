@@ -1,7 +1,11 @@
 {% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 import logging
 
+{% if template_infra_import %}
 from {{ general.source_name }}.{{ template_infra_import }}.logger.file_rotating_handler import TimeRotatingFileHandler
+{% else %}
+from {{ general.source_name }}.logger.file_rotating_handler import TimeRotatingFileHandler
+{% endif %}
 
 
 class FileLogger:

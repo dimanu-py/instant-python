@@ -1,13 +1,23 @@
 {% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
 import json
 
+{% if template_domain_import %}
 from {{ general.source_name }}.{{ template_domain_import }}.event.domain_event import DomainEvent
 from {{ general.source_name }}.{{ template_domain_import }}.event.domain_event_subscriber import (
     DomainEventSubscriber,
 )
-from {{ general.source_name }}.{{ template_domain_import }}.exceptions.domain_event_type_not_found_error import (
+from {{ general.source_name }}.{{ template_domain_import }}.errors.domain_event_type_not_found_error import (
     DomainEventTypeNotFoundError,
 )
+{% else %}
+from {{ general.source_name }}.event.domain_event import DomainEvent
+from {{ general.source_name }}.event.domain_event_subscriber import (
+    DomainEventSubscriber,
+)
+from {{ general.source_name }}.errors.domain_event_type_not_found_error import (
+    DomainEventTypeNotFoundError,
+)
+{% endif %}
 
 
 class DomainEventJsonDeserializer:

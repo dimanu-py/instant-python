@@ -4,7 +4,11 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+{% if template_infra_import %}
 from {{ general.source_name }}.{{ template_infra_import }}.alembic_migrator import AlembicMigrator
+{% else %}
+from {{ general.source_name }}.alembic_migrator import AlembicMigrator
+{% endif %}
 
 
 @asynccontextmanager

@@ -1,16 +1,32 @@
 {% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
 {% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 
+{% if template_domain_import %}
 from {{ general.source_name }}.{{ template_domain_import }}.event.domain_event import DomainEvent
 from {{ general.source_name }}.{{ template_domain_import }}.event.domain_event_subscriber import (
     DomainEventSubscriber,
 )
+{% else %}
+from {{ general.source_name }}.event.domain_event import DomainEvent
+from {{ general.source_name }}.event.domain_event_subscriber import (
+    DomainEventSubscriber,
+)
+{% endif %}
+{% if template_infra_import %}
 from {{ general.source_name }}.{{ template_infra_import }}.event.rabbit_mq.rabbit_mq_connection import (
     RabbitMqConnection,
 )
 from {{ general.source_name }}.{{ template_infra_import }}.event.rabbit_mq.rabbit_mq_queue_formatter import (
     RabbitMqQueueFormatter,
 )
+{% else %}
+from {{ general.source_name }}.event.rabbit_mq.rabbit_mq_connection import (
+    RabbitMqConnection,
+)
+from {{ general.source_name }}.event.rabbit_mq.rabbit_mq_queue_formatter import (
+    RabbitMqQueueFormatter,
+)
+{% endif %}
 
 
 class RabbitMqConfigurer:

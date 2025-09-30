@@ -40,9 +40,17 @@ from {{ general.source_name }}.api.lifespan import lifespan
 from {{ general.source_name }}.delivery.api.lifespan import lifespan
 {% endif %}
 {% endif %}
-from {{ general.source_name }}.{{ template_domain_import }}.exceptions.domain_error import DomainError
+{% if template_domain_import %}
+from {{ general.source_name }}.{{ template_domain_import }}.errors.domain_error import DomainError
+{% else %}
+from {{ general.source_name }}.errors.domain_error import DomainError
+{% endif %}
 {% if "logger" in template.built_in_features %}
+{% if template_infra_import %}
 from {{ general.source_name }}.{{ template_infra_import }}.logger.file_logger import create_file_logger
+{% else %}
+from {{ general.source_name }}.logger.file_logger import create_file_logger
+{% endif %}
 {% if template.name == template_types.STANDARD %}
 from {{ general.source_name }}.api.middleare.fast_api_log_middleware import FastapiLogMiddleware
 {% else %}
@@ -65,4 +73,3 @@ app.add_exception_handler(RequestValidationError, validation_error_handler)
 {% endif %}
 app.add_exception_handler(Exception, unexpected_exception_handler)
 app.add_exception_handler(DomainError, domain_error_handler)
-

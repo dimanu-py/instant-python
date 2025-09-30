@@ -6,7 +6,11 @@ from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
 from typing import Self
 
+{% if template_infra_import %}
 from {{ general.source_name }}.{{ template_infra_import }}.logger.json_formatter import JSONFormatter
+{% else %}
+from {{ general.source_name }}.logger.json_formatter import JSONFormatter
+{% endif %}
 
 
 class TimeRotatingFileHandler(logging.Handler):

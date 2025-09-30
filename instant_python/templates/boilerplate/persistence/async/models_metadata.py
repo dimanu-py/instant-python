@@ -6,6 +6,10 @@ have already been imported. To keep the env.py file clean, we import the Base.me
 needed models.
 """
 {% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
+{% if template_infra_import %}
 from {{ general.source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.base import Base
+{% else %}
+from {{ general.source_name }}.persistence.sqlalchemy.base import Base
+{% endif %}
 
 base = Base

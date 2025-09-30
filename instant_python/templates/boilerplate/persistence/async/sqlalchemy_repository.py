@@ -2,9 +2,17 @@
 {% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 from typing import TypeVar
 
+{% if template_domain_import %}
 from {{ general.source_name }}.{{ template_domain_import }}.value_objects.uuid import Uuid
+{% else %}
+from {{ general.source_name }}.value_objects.uuid import Uuid
+{% endif %}
+{% if template_infra_import %}
 from {{ general.source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.base import Base
-from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, asynce_sessionmaker
+{% else %}
+from {{ general.source_name }}.persistence.sqlalchemy.base import Base
+{% endif %}
+from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker
 
 
 Entity = TypeVar("Entity")
@@ -12,7 +20,7 @@ Entity = TypeVar("Entity")
 
 class SqlalchemyRepository[Model: Base]:
 	_model_class: type[Model]
-	_session_maker: asynce_sessionmaker[AssyncSession]
+	_session_maker: async_sessionmaker[AssyncSession]
 
 	def __init__(self, engine: AsyncEngine, model_class: type[Model]) -> None:
 		self._session_maker = async_sessionmaker(bind=engine)

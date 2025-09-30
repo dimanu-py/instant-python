@@ -8,7 +8,11 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from migrations.models_metadata import base
+{% if template_infra_import %}
 from {{ general.source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.postgres_settings import PostgresSettings
+{% else %}
+from {{ general.source_name }}.persistence.sqlalchemy.postgres_settings import PostgresSettings
+{% endif %}
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
