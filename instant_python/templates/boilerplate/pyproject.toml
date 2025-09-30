@@ -98,6 +98,7 @@ parse_squash_commits = false
 ignore_merge_commits = true
 
 [tool.semantic_release.changelog]
+changelog_file = "CHANGELOG.md"
 exclude_commit_patterns = ['''^Merge pull request #''', '''^Merge branch ''']
 mode = "update"
 #template_dir = "docs/changelog"
