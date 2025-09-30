@@ -2,7 +2,7 @@
 {% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 from fastapi import FastAPI
 {% if "logger" in template.built_in_features %}
-from fastapi.exceptions import RequestValidationError
+from fastapi.errors import RequestValidationError
 {% endif %}
 
 {% if template.name == template_types.STANDARD %}
