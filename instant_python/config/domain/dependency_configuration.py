@@ -1,8 +1,7 @@
 from dataclasses import dataclass, field, asdict
 
-from instant_python.configuration.dependency.not_dev_dependency_included_in_group import (
-    NotDevDependencyIncludedInGroup,
-)
+from instant_python.shared.application_error import ApplicationError
+from instant_python.shared.error_types import ErrorTypes
 
 
 @dataclass
@@ -34,3 +33,9 @@ class DependencyConfiguration:
     def _ensure_dependency_is_dev_if_group_is_set(self) -> None:
         if self.group and not self.is_dev:
             raise NotDevDependencyIncludedInGroup(self.name, self.group)
+
+
+class NotDevDependencyIncludedInGroup(ApplicationError):
+    def __init__(self, dependency_name: str, dependency_group: str) -> None:
+        message = f"Dependency '{dependency_name}' has been included in group '{dependency_group}' but it is not a development dependency. Please ensure that only development dependencies are included in groups."
+        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)

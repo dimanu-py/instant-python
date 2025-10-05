@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from instant_python.configuration.configuration_schema import ConfigurationSchema
+from instant_python.config.domain.configuration_schema import ConfigurationSchema
 from instant_python.shared.supported_templates import SupportedTemplates
 from instant_python.project_creator.file_has_not_been_created import FileHasNotBeenCreated
 from instant_python.project_creator.node import Node

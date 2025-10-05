@@ -1,7 +1,7 @@
 from pathlib import Path
 import subprocess
 
-from instant_python.configuration.dependency.dependency_configuration import DependencyConfiguration
+from instant_python.config.domain.dependency_configuration import DependencyConfiguration
 from instant_python.dependency_manager.dependency_manager import DependencyManager
 from instant_python.dependency_manager.command_execution_error import CommandExecutionError
 

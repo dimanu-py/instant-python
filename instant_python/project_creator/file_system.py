@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Union
 
-from instant_python.configuration.configuration_schema import ConfigurationSchema
+from instant_python.config.domain.configuration_schema import ConfigurationSchema
 from instant_python.project_creator.unknown_node_typer_error import UnknownNodeTypeError
 from instant_python.project_creator.directory import Directory
 from instant_python.project_creator.file import File

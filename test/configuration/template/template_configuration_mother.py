@@ -1,6 +1,6 @@
 import random
 
-from instant_python.configuration.template.template_configuration import (
+from instant_python.config.domain.template_configuration import (
     TemplateConfiguration,
 )
 

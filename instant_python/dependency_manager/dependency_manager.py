@@ -2,7 +2,7 @@ import subprocess
 from abc import ABC, abstractmethod
 import sys
 
-from instant_python.configuration.dependency.dependency_configuration import DependencyConfiguration
+from instant_python.config.domain.dependency_configuration import DependencyConfiguration
 
 
 class DependencyManager(ABC):

@@ -2,15 +2,8 @@ from datetime import datetime
 from dataclasses import dataclass, asdict, field
 from typing import ClassVar
 
-from instant_python.configuration.general.invalid_dependency_manager_value import (
-    InvalidDependencyManagerValue,
-)
-from instant_python.configuration.general.invalid_license_value import (
-    InvalidLicenseValue,
-)
-from instant_python.configuration.general.invalid_python_version_value import (
-    InvalidPythonVersionValue,
-)
+from instant_python.shared.application_error import ApplicationError
+from instant_python.shared.error_types import ErrorTypes
 from instant_python.shared.supported_licenses import SupportedLicenses
 from instant_python.shared.supported_managers import SupportedManagers
 from instant_python.shared.supported_python_versions import SupportedPythonVersions
@@ -58,3 +51,21 @@ class GeneralConfiguration:
 
     def to_primitives(self) -> dict[str, str]:
         return asdict(self)
+
+
+class InvalidDependencyManagerValue(ApplicationError):
+    def __init__(self, value: str, supported_values: list[str]) -> None:
+        message = f"Invalid dependency manager: {value}. Allowed values are {', '.join(supported_values)}."
+        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
+
+
+class InvalidLicenseValue(ApplicationError):
+    def __init__(self, value: str, supported_values: list[str]) -> None:
+        message = f"Invalid license: {value}. Allowed values are {', '.join(supported_values)}."
+        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
+
+
+class InvalidPythonVersionValue(ApplicationError):
+    def __init__(self, value: str, supported_values: list[str]) -> None:
+        message = f"Invalid Python version: {value}. Allowed versions are {', '.join(supported_values)}."
+        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)

@@ -2,7 +2,7 @@ import os
 
 from expects import expect, raise_error
 
-from instant_python.configuration.dependency.dependency_configuration import DependencyConfiguration
+from instant_python.config.domain.dependency_configuration import DependencyConfiguration
 from instant_python.dependency_manager.command_execution_error import CommandExecutionError
 from test.dependency_manager.mock_pdm_dependency_manager import (
     MockPdmDependencyManagerWithError,

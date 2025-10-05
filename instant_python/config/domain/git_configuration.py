@@ -1,9 +1,8 @@
 from dataclasses import dataclass, field, asdict
 from typing import Optional
 
-from instant_python.configuration.git.git_user_or_email_not_present import (
-    GitUserOrEmailNotPresent,
-)
+from instant_python.shared.application_error import ApplicationError
+from instant_python.shared.error_types import ErrorTypes
 
 
 @dataclass
@@ -21,3 +20,9 @@ class GitConfiguration:
 
     def to_primitives(self) -> dict[str, str | bool]:
         return asdict(self)
+
+
+class GitUserOrEmailNotPresent(ApplicationError):
+    def __init__(self) -> None:
+        message = "When initializing a git repository, both username and email must be provided."
+        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)

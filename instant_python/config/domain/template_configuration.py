@@ -1,18 +1,8 @@
 from dataclasses import dataclass, field, asdict
 from typing import ClassVar, Optional, Union
 
-from instant_python.configuration.template.bounded_context_not_applicable import (
-    BoundedContextNotApplicable,
-)
-from instant_python.configuration.template.bounded_context_not_especified import (
-    BoundedContextNotSpecified,
-)
-from instant_python.configuration.template.invalid_built_in_features_values import (
-    InvalidBuiltInFeaturesValues,
-)
-from instant_python.configuration.template.invalid_template_value import (
-    InvalidTemplateValue,
-)
+from instant_python.shared.application_error import ApplicationError
+from instant_python.shared.error_types import ErrorTypes
 from instant_python.shared.supported_built_in_features import SupportedBuiltInFeatures
 from instant_python.shared.supported_templates import SupportedTemplates
 
@@ -57,3 +47,29 @@ class TemplateConfiguration:
 
     def to_primitives(self) -> dict[str, Union[str, list[str]]]:
         return asdict(self)
+
+
+class BoundedContextNotApplicable(ApplicationError):
+    def __init__(self, value: str) -> None:
+        message = f"Bounded context feature is not applicable for template '{value}'. Is only applicable for 'domain_driven_design' template."
+        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
+
+
+class BoundedContextNotSpecified(ApplicationError):
+    def __init__(self) -> None:
+        message = "Option to specify bounded context is set as True, but either bounded context or aggregate name is not specified."
+        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
+
+
+class InvalidBuiltInFeaturesValues(ApplicationError):
+    def __init__(self, values: list[str], supported_values: list[str]) -> None:
+        message = (
+            f"Features {', '.join(values)} are not supported. Supported features are: {', '.join(supported_values)}."
+        )
+        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
+
+
+class InvalidTemplateValue(ApplicationError):
+    def __init__(self, value: str, supported_values: list[str]) -> None:
+        message = f"Invalid template: '{value}'. Supported templates are: {', '.join(supported_values)}."
+        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)

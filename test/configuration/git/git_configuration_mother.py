@@ -1,4 +1,4 @@
-from instant_python.configuration.git.git_configuration import GitConfiguration
+from instant_python.config.domain.git_configuration import GitConfiguration
 from test.random_generator import RandomGenerator
 
 

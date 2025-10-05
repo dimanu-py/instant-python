@@ -1,17 +1,7 @@
 from expects import expect, raise_error
 
-from instant_python.configuration.template.bounded_context_not_applicable import (
-    BoundedContextNotApplicable,
-)
-from instant_python.configuration.template.bounded_context_not_especified import (
-    BoundedContextNotSpecified,
-)
-from instant_python.configuration.template.invalid_built_in_features_values import (
-    InvalidBuiltInFeaturesValues,
-)
-from instant_python.configuration.template.invalid_template_value import (
-    InvalidTemplateValue,
-)
+from instant_python.config.domain.template_configuration import BoundedContextNotApplicable, BoundedContextNotSpecified, \
+    InvalidBuiltInFeaturesValues, InvalidTemplateValue
 from test.configuration.template.template_configuration_mother import (
     TemplateConfigurationMother,
 )
