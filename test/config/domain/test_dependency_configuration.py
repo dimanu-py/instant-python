@@ -1,7 +1,7 @@
 from expects import expect, be_true, be_false, be_none, be, raise_error
 
 from instant_python.config.domain.dependency_configuration import NotDevDependencyIncludedInGroup
-from test.configuration.dependency.dependency_configuration_mother import (
+from test.config.domain.mothers.dependency_configuration_mother import (
     DependencyConfigurationMother,
 )
 

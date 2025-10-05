@@ -2,7 +2,7 @@ from expects import expect, raise_error
 
 from instant_python.config.domain.template_configuration import BoundedContextNotApplicable, BoundedContextNotSpecified, \
     InvalidBuiltInFeaturesValues, InvalidTemplateValue
-from test.configuration.template.template_configuration_mother import (
+from test.config.domain.mothers.template_configuration_mother import (
     TemplateConfigurationMother,
 )
 

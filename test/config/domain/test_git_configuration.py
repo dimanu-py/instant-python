@@ -1,7 +1,7 @@
 from expects import expect, be_true, be_none, be_false, raise_error
 
 from instant_python.config.domain.git_configuration import GitUserOrEmailNotPresent
-from test.configuration.git.git_configuration_mother import GitConfigurationMother
+from test.config.domain.mothers.git_configuration_mother import GitConfigurationMother
 
 
 class TestGitConfiguration:

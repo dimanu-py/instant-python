@@ -3,7 +3,7 @@ from expects import expect, raise_error
 
 from instant_python.config.domain.general_configuration import InvalidDependencyManagerValue, InvalidLicenseValue, \
     InvalidPythonVersionValue
-from test.configuration.general.general_configuration_mother import (
+from test.config.domain.mothers.general_configuration_mother import (
     GeneralConfigurationMother,
 )
 

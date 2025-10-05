@@ -1,6 +1,6 @@
 import os
 
-from test.configuration.git.git_configuration_mother import GitConfigurationMother
+from test.config.domain.mothers.git_configuration_mother import GitConfigurationMother
 from test.git.mock_git_configurer import MockGitConfigurer
 
 
