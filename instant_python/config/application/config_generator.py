@@ -4,11 +4,11 @@ from instant_python.config.domain.general_configuration import GeneralConfigurat
 from instant_python.config.domain.git_configuration import GitConfiguration
 from instant_python.config.domain.template_configuration import TemplateConfiguration
 from instant_python.config.domain.yaml_writer import YamlWriter
-from instant_python.configuration.question_wizard import QuestionWizard
+from instant_python.configuration.questionary_question_wizard import QuestionaryQuestionWizard
 
 
 class ConfigGenerator:
-    def __init__(self, question_wizard: QuestionWizard, writer: YamlWriter) -> None:
+    def __init__(self, question_wizard: QuestionaryQuestionWizard, writer: YamlWriter) -> None:
         self._question_wizard = question_wizard
         self._writer = writer
 
