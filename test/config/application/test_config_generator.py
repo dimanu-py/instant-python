@@ -1,4 +1,6 @@
-from doublex import Mock
+from doublex import Mock, expect_call
+from doublex_expects import have_been_satisfied
+from expects import expect
 
 from instant_python.config.domain.yaml_writer import YamlWriter
 from instant_python.configuration.question_wizard import QuestionWizard
@@ -16,7 +18,10 @@ class TestConfigGenerator:
         )
         configuration = ConfigurationSchemaMother.any()
 
+        expect_call(question_wizard).run().returns(configuration.to_primitives())
+        expect_call(configuration_writer).write(configuration)
+
         config_generator.execute()
 
-        self._should_have_called_question_wizard(configuration)
-        self._should_have_called_configuration_writer(configuration)
+        expect(question_wizard).to(have_been_satisfied)
+        expect(configuration_writer).to(have_been_satisfied)
