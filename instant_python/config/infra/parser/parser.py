@@ -8,9 +8,15 @@ class Parser(ConfigParser):
     _REQUIRED_CONFIG_KEYS = ["general", "dependencies", "template", "git"]
 
     def parse(self, content: dict[str, dict]) -> ConfigurationSchema:
-        if not content:
-            raise EmptyConfigurationNotAllowed
+        self._ensure_configuration_is_not_empty(content)
+        self._ensure_all_required_sections_are_present(content)
 
+    def _ensure_all_required_sections_are_present(self, content: dict[str, dict]):
         missing_keys = [key for key in self._REQUIRED_CONFIG_KEYS if key not in content]
         if missing_keys:
             raise ConfigKeyNotPresent(missing_keys, self._REQUIRED_CONFIG_KEYS)
+
+    @staticmethod
+    def _ensure_configuration_is_not_empty(content: dict[str, dict]):
+        if not content:
+            raise EmptyConfigurationNotAllowed
