@@ -22,9 +22,11 @@ class TestConfigGenerator:
         configuration = ConfigurationSchemaMother.any()
 
         expect_call(question_wizard).run().returns(configuration.to_primitives())
+        expect_call(configuration_parser).parse(configuration.to_primitives()).returns(configuration)
         expect_call(configuration_writer).write(configuration)
 
         config_generator.execute()
 
         expect(question_wizard).to(have_been_satisfied)
+        expect(configuration_parser).to(have_been_satisfied)
         expect(configuration_writer).to(have_been_satisfied)
