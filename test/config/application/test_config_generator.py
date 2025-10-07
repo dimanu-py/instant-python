@@ -4,14 +4,14 @@ from expects import expect
 
 from instant_python.config.application.config_generator import ConfigGenerator
 from instant_python.config.domain.question_wizard import QuestionWizard
-from instant_python.config.domain.yaml_writer import YamlWriter
+from instant_python.config.domain.config_writer import ConfigWriter
 from test.config.domain.mothers.configuration_schema_mother import ConfigurationSchemaMother
 
 
 class TestConfigGenerator:
     def test_should_generate_configuration(self) -> None:
         question_wizard = Mock(QuestionWizard)
-        configuration_writer = Mock(YamlWriter)
+        configuration_writer = Mock(ConfigWriter)
         config_generator = ConfigGenerator(
             question_wizard=question_wizard,
             writer=configuration_writer,
