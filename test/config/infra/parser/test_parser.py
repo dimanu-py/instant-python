@@ -1,11 +1,13 @@
 from pathlib import Path
 
+import pytest
 import yaml
 from expects import expect, raise_error
 
 from instant_python.config.infra.parser.parser import Parser
 from instant_python.configuration.parser.config_key_not_present import ConfigKeyNotPresent
 from instant_python.configuration.parser.empty_configuration_not_allowed import EmptyConfigurationNotAllowed
+from instant_python.configuration.parser.missing_mandatory_fields import MissingMandatoryFields
 
 
 class TestParser:
@@ -20,6 +22,20 @@ class TestParser:
         answers = self._read_fake_answers_from_file("missing_keys_answers")
 
         expect(lambda: parser.parse(answers)).to(raise_error(ConfigKeyNotPresent))
+
+    @pytest.mark.parametrize(
+        "file_name",
+        [
+            pytest.param("missing_general_fields_answers", id="missing_general_fields"),
+        ],
+    )
+    def test_should_raise_error_when_mandatory_fields_are_missing_inside_answers_section(
+        self, file_name: str
+    ) -> None:
+        parser = Parser()
+        answers = self._read_fake_answers_from_file(file_name)
+
+        expect(lambda: parser.parse(answers)).to(raise_error(MissingMandatoryFields))
 
     @staticmethod
     def _read_fake_answers_from_file(file_name: str) -> dict[str, dict]:
