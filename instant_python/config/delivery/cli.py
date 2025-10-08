@@ -1,13 +1,13 @@
 import typer
 
 from instant_python.configuration.parser.parser import Parser
-from instant_python.configuration.question.questionary import Questionary
-from instant_python.configuration.questionary_console_wizard import QuestionaryConsoleWizard
-from instant_python.configuration.step.dependencies_step import DependenciesStep
-from instant_python.configuration.step.general_step import GeneralStep
-from instant_python.configuration.step.git_step import GitStep
-from instant_python.configuration.step.steps import Steps
-from instant_python.configuration.step.template_step import TemplateStep
+from instant_python.config.infra.question_wizard.question import Questionary
+from instant_python.config.infra.question_wizard.questionary_console_wizard import QuestionaryConsoleWizard
+from instant_python.config.infra.question_wizard.step import DependenciesStep
+from instant_python.config.infra.question_wizard.step import GeneralStep
+from instant_python.config.infra.question_wizard.step import GitStep
+from instant_python.config.infra.question_wizard.step import Steps
+from instant_python.config.infra.question_wizard.step import TemplateStep
 
 app = typer.Typer()
 

@@ -1,12 +1,12 @@
 from typing import Union
 
-from instant_python.configuration.question.boolean_question import BooleanQuestion
-from instant_python.configuration.question.choice_question import ChoiceQuestion
-from instant_python.configuration.question.conditional_question import ConditionalQuestion
-from instant_python.configuration.question.free_text_question import FreeTextQuestion
-from instant_python.configuration.question.multiple_choice_question import MultipleChoiceQuestion
-from instant_python.configuration.question.questionary import Questionary
-from instant_python.configuration.step.steps import Step
+from instant_python.config.infra.question_wizard.question.boolean_question import BooleanQuestion
+from instant_python.config.infra.question_wizard.question.choice_question import ChoiceQuestion
+from instant_python.config.infra.question_wizard.question.conditional_question import ConditionalQuestion
+from instant_python.config.infra.question_wizard.question.free_text_question import FreeTextQuestion
+from instant_python.config.infra.question_wizard.question.multiple_choice_question import MultipleChoiceQuestion
+from instant_python.config.infra.question_wizard.question.questionary import Questionary
+from instant_python.config.infra.question_wizard.step.steps import Step
 from instant_python.shared.supported_built_in_features import SupportedBuiltInFeatures
 from instant_python.shared.supported_templates import SupportedTemplates
 

@@ -1,10 +1,10 @@
 from typing import Union
 
-from instant_python.configuration.question.boolean_question import BooleanQuestion
-from instant_python.configuration.question.conditional_question import ConditionalQuestion
-from instant_python.configuration.question.free_text_question import FreeTextQuestion
-from instant_python.configuration.question.questionary import Questionary
-from instant_python.configuration.step.steps import Step
+from instant_python.config.infra.question_wizard.question.boolean_question import BooleanQuestion
+from instant_python.config.infra.question_wizard.question.conditional_question import ConditionalQuestion
+from instant_python.config.infra.question_wizard.question.free_text_question import FreeTextQuestion
+from instant_python.config.infra.question_wizard.question.questionary import Questionary
+from instant_python.config.infra.question_wizard.step.steps import Step
 
 
 class DependenciesStep(Step):

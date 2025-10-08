@@ -1,7 +1,7 @@
 from typing import Optional
 
-from instant_python.configuration.question.question import Question
-from instant_python.configuration.question.questionary import Questionary
+from instant_python.config.infra.question_wizard.question.question import Question
+from instant_python.config.infra.question_wizard.question.questionary import Questionary
 
 
 class FreeTextQuestion(Question[str]):

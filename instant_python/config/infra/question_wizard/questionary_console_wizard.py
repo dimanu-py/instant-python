@@ -1,5 +1,5 @@
 from instant_python.config.domain.question_wizard import QuestionWizard
-from instant_python.configuration.step.steps import Steps
+from instant_python.config.infra.question_wizard.step.steps import Steps
 
 
 class QuestionaryConsoleWizard(QuestionWizard):

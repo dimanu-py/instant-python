@@ -2,8 +2,8 @@ from doublex import Mimic, Mock, expect_call
 from doublex_expects import have_been_satisfied
 from expects import expect, equal
 
-from instant_python.configuration.question.boolean_question import BooleanQuestion
-from instant_python.configuration.question.questionary import Questionary
+from instant_python.config.infra.question_wizard.question.boolean_question import BooleanQuestion
+from instant_python.config.infra.question_wizard.question.questionary import Questionary
 
 
 class TestBooleanQuestion:

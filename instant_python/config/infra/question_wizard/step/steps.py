@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from collections.abc import Iterator
 
-from instant_python.configuration.question.questionary import Questionary
+from instant_python.config.infra.question_wizard.question.questionary import Questionary
 
 
 class Step(ABC):
