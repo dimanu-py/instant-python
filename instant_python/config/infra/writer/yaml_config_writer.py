@@ -8,6 +8,6 @@ from instant_python.config.domain.configuration_schema import ConfigurationSchem
 
 class YamlConfigWriter(ConfigWriter):
     def write(self, configuration: ConfigurationSchema) -> None:
-        destination_folder = Path.cwd() / configuration._config_file_path
+        destination_folder = Path.cwd() / configuration.config_file_path
         with destination_folder.open("w") as file:
             yaml.dump(configuration.to_primitives(), file)

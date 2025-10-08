@@ -11,6 +11,6 @@ class TestYamlConfigWriter:
 
         config_writer.write(configuration)
 
-        expected_output_path = Path.cwd() / configuration._config_file_path
+        expected_output_path = Path.cwd() / configuration.config_file_path
         assert expected_output_path.exists()
         expected_output_path.unlink()

@@ -23,7 +23,7 @@ class ConfigurationSchema:
     dependencies: list[DependencyConfiguration]
     template: TemplateConfiguration
     git: GitConfiguration
-    _config_file_path: Path = field(default_factory=lambda: Path("ipy.yml"))
+    config_file_path: Path = field(default_factory=lambda: Path("ipy.yml"))
 
     @classmethod
     def from_file(
@@ -39,17 +39,17 @@ class ConfigurationSchema:
             dependencies=dependencies,
             template=template,
             git=git,
-            _config_file_path=Path(config_file_path),
+            config_file_path=Path(config_file_path),
         )
 
     def save_on_project_folder(self) -> None:
         destination_folder = Path.cwd() / self.project_folder_name
-        destination_path = destination_folder / self._config_file_path.name
+        destination_path = destination_folder / self.config_file_path.name
 
-        shutil.move(self._config_file_path, destination_path)
+        shutil.move(self.config_file_path, destination_path)
 
     def save_on_current_directory(self) -> None:
-        destination_folder = Path.cwd() / self._config_file_path
+        destination_folder = Path.cwd() / self.config_file_path
         with open(destination_folder, "w") as file:
             yaml.dump(self.to_primitives(), file)
 
