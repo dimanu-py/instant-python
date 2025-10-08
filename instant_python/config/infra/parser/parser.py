@@ -21,6 +21,12 @@ class Parser(ConfigParser):
         dependencies_section = self._parse_dependencies_section(content["dependencies"])
         template_section = self._parse_template_section(content["template"])
         git_section = self._parse_git_section(content["git"])
+        return ConfigurationSchema(
+            general=general_section,
+            dependencies=dependencies_section,
+            template=template_section,
+            git=git_section,
+        )
 
     def _parse_general_section(self, fields: dict[str, str]) -> GeneralConfiguration:
         try:
