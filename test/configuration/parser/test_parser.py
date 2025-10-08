@@ -5,7 +5,11 @@ import pytest
 from approvaltests import verify
 from expects import expect, raise_error, be_none
 
-from instant_python.config.infra.parser.errors import ConfigKeyNotPresent, EmptyConfigurationNotAllowed, MissingMandatoryFields
+from instant_python.config.infra.parser.errors import (
+    ConfigKeyNotPresent,
+    EmptyConfigurationNotAllowed,
+    MissingMandatoryFields,
+)
 from instant_python.configuration.parser.configuration_file_not_found import (
     ConfigurationFileNotFound,
 )

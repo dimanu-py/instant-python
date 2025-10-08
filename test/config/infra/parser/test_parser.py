@@ -7,7 +7,11 @@ from approvaltests import verify
 from expects import expect, raise_error, be_none
 
 from instant_python.config.infra.parser.parser import Parser
-from instant_python.config.infra.parser.errors import ConfigKeyNotPresent, EmptyConfigurationNotAllowed, MissingMandatoryFields
+from instant_python.config.infra.parser.errors import (
+    ConfigKeyNotPresent,
+    EmptyConfigurationNotAllowed,
+    MissingMandatoryFields,
+)
 
 
 class TestParser:
@@ -33,9 +37,7 @@ class TestParser:
             pytest.param("missing_git_fields", id="missing_git_fields"),
         ],
     )
-    def test_should_raise_error_when_mandatory_fields_are_missing_inside_answers_section(
-        self, file_name: str
-    ) -> None:
+    def test_should_raise_error_when_mandatory_fields_are_missing_inside_answers_section(self, file_name: str) -> None:
         answers = self._read_fake_answers_from_file(file_name)
 
         expect(lambda: self._parser.parse(answers)).to(raise_error(MissingMandatoryFields))

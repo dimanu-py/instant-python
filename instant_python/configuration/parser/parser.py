@@ -2,7 +2,11 @@ from typing import Union
 
 import yaml
 
-from instant_python.config.infra.parser.errors import ConfigKeyNotPresent, EmptyConfigurationNotAllowed, MissingMandatoryFields
+from instant_python.config.infra.parser.errors import (
+    ConfigKeyNotPresent,
+    EmptyConfigurationNotAllowed,
+    MissingMandatoryFields,
+)
 from instant_python.config.domain.configuration_schema import ConfigurationSchema
 from instant_python.config.domain.dependency_configuration import (
     DependencyConfiguration,
