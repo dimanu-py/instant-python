@@ -2,7 +2,7 @@ from rich.console import Console
 from rich.panel import Panel
 
 from instant_python.config.delivery import cli as config
-from instant_python.commands import init
+from instant_python.initialize.delivery import cli as init
 from instant_python.shared.application_error import ApplicationError
 from instant_python.cli.instant_python_typer import InstantPythonTyper
 
