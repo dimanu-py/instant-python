@@ -4,6 +4,7 @@ from instant_python.config.domain.config_parser import ConfigParser
 from instant_python.config.domain.configuration_schema import ConfigurationSchema
 from instant_python.config.domain.dependency_configuration import DependencyConfiguration
 from instant_python.config.domain.general_configuration import GeneralConfiguration
+from instant_python.config.domain.git_configuration import GitConfiguration
 from instant_python.configuration.parser.config_key_not_present import ConfigKeyNotPresent
 from instant_python.configuration.parser.empty_configuration_not_allowed import EmptyConfigurationNotAllowed
 from instant_python.configuration.parser.missing_mandatory_fields import MissingMandatoryFields
@@ -17,6 +18,7 @@ class Parser(ConfigParser):
         self._ensure_all_required_sections_are_present(content)
         general_section = self._parse_general_section(content["general"])
         dependencies_section = self._parse_dependencies_section(content["dependencies"])
+        git_section = self._parse_git_section(content["git"])
 
     def _parse_general_section(self, fields: dict[str, str]) -> GeneralConfiguration:
         try:
@@ -44,6 +46,13 @@ class Parser(ConfigParser):
             dependencies.append(dependency)
 
         return dependencies
+
+    def _parse_git_section(self,fields: dict[str, Union[str, bool]]) -> GitConfiguration:
+        try:
+            return GitConfiguration(**fields)
+        except TypeError as error:
+            self._ensure_error_is_for_missing_fields(error)
+            raise MissingMandatoryFields(error.args[0], "git") from error
 
     def _ensure_all_required_sections_are_present(self, content: dict[str, dict]):
         missing_keys = [key for key in self._REQUIRED_CONFIG_KEYS if key not in content]
