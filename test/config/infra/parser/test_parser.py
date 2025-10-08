@@ -1,8 +1,10 @@
+import json
 from pathlib import Path
 
 import pytest
 import yaml
-from expects import expect, raise_error
+from approvaltests import verify
+from expects import expect, raise_error, be_none
 
 from instant_python.config.infra.parser.parser import Parser
 from instant_python.configuration.parser.config_key_not_present import ConfigKeyNotPresent
@@ -39,6 +41,15 @@ class TestParser:
         answers = self._read_fake_answers_from_file(file_name)
 
         expect(lambda: parser.parse(answers)).to(raise_error(MissingMandatoryFields))
+
+    def test_should_parse_valid_answers(self) -> None:
+        parser = Parser()
+        answers = self._read_fake_answers_from_file("valid_answers")
+
+        config = parser.parse(answers)
+
+        expect(config).to_not(be_none)
+        verify(json.dumps(config.to_primitives(), indent=2))
 
     @staticmethod
     def _read_fake_answers_from_file(file_name: str) -> dict[str, dict]:
