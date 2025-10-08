@@ -11,17 +11,18 @@ from instant_python.config.infra.parser.errors import ConfigKeyNotPresent, Empty
 
 
 class TestParser:
+    def setup_method(self) -> None:
+        self._parser = Parser()
+
     def test_should_raise_error_if_answers_is_empty(self) -> None:
-        parser = Parser()
         empty_answers = {}
 
-        expect(lambda: parser.parse(empty_answers)).to(raise_error(EmptyConfigurationNotAllowed))
+        expect(lambda: self._parser.parse(empty_answers)).to(raise_error(EmptyConfigurationNotAllowed))
 
     def test_should_raise_error_if_some_section_is_missing(self) -> None:
-        parser = Parser()
         answers = self._read_fake_answers_from_file("missing_keys_answers")
 
-        expect(lambda: parser.parse(answers)).to(raise_error(ConfigKeyNotPresent))
+        expect(lambda: self._parser.parse(answers)).to(raise_error(ConfigKeyNotPresent))
 
     @pytest.mark.parametrize(
         "file_name",
@@ -35,16 +36,14 @@ class TestParser:
     def test_should_raise_error_when_mandatory_fields_are_missing_inside_answers_section(
         self, file_name: str
     ) -> None:
-        parser = Parser()
         answers = self._read_fake_answers_from_file(file_name)
 
-        expect(lambda: parser.parse(answers)).to(raise_error(MissingMandatoryFields))
+        expect(lambda: self._parser.parse(answers)).to(raise_error(MissingMandatoryFields))
 
     def test_should_parse_valid_answers(self) -> None:
-        parser = Parser()
         answers = self._read_fake_answers_from_file("valid_answers")
 
-        config = parser.parse(answers)
+        config = self._parser.parse(answers)
 
         expect(config).to_not(be_none)
         verify(json.dumps(config.to_primitives(), indent=2))
