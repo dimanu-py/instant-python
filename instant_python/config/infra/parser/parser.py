@@ -12,15 +12,19 @@ from instant_python.configuration.parser.missing_mandatory_fields import Missing
 
 
 class Parser(ConfigParser):
-    _REQUIRED_CONFIG_KEYS = ["general", "dependencies", "template", "git"]
+    _GENERAL = "general"
+    _DEPENDENCIES = "dependencies"
+    _TEMPLATE = "template"
+    _GIT = "git"
+    _REQUIRED_CONFIG_KEYS = [_GENERAL, _DEPENDENCIES, _TEMPLATE, _GIT]
 
     def parse(self, content: dict[str, dict]) -> ConfigurationSchema:
         self._ensure_configuration_is_not_empty(content)
         self._ensure_all_required_sections_are_present(content)
-        general_section = self._parse_general_section(content["general"])
-        dependencies_section = self._parse_dependencies_section(content["dependencies"])
-        template_section = self._parse_template_section(content["template"])
-        git_section = self._parse_git_section(content["git"])
+        general_section = self._parse_general_section(content[self._GENERAL])
+        dependencies_section = self._parse_dependencies_section(content[self._DEPENDENCIES])
+        template_section = self._parse_template_section(content[self._TEMPLATE])
+        git_section = self._parse_git_section(content[self._GIT])
         return ConfigurationSchema(
             general=general_section,
             dependencies=dependencies_section,
@@ -33,7 +37,7 @@ class Parser(ConfigParser):
             return GeneralConfiguration(**fields)
         except TypeError as error:
             self._ensure_error_is_for_missing_fields(error)
-            raise MissingMandatoryFields(error.args[0], "general") from error
+            raise MissingMandatoryFields(error.args[0], self._GENERAL) from error
 
     def _parse_dependencies_section(
         self,
@@ -49,7 +53,7 @@ class Parser(ConfigParser):
                 dependency = DependencyConfiguration(**dependency_fields)
             except TypeError as error:
                 self._ensure_error_is_for_missing_fields(error)
-                raise MissingMandatoryFields(error.args[0], "dependencies") from error
+                raise MissingMandatoryFields(error.args[0], self._DEPENDENCIES) from error
 
             dependencies.append(dependency)
 
@@ -60,14 +64,14 @@ class Parser(ConfigParser):
             return TemplateConfiguration(**fields)
         except TypeError as error:
             self._ensure_error_is_for_missing_fields(error)
-            raise MissingMandatoryFields(error.args[0], "template") from error
+            raise MissingMandatoryFields(error.args[0], self._TEMPLATE) from error
 
     def _parse_git_section(self,fields: dict[str, Union[str, bool]]) -> GitConfiguration:
         try:
             return GitConfiguration(**fields)
         except TypeError as error:
             self._ensure_error_is_for_missing_fields(error)
-            raise MissingMandatoryFields(error.args[0], "git") from error
+            raise MissingMandatoryFields(error.args[0], self._GIT) from error
 
     def _ensure_all_required_sections_are_present(self, content: dict[str, dict]):
         missing_keys = [key for key in self._REQUIRED_CONFIG_KEYS if key not in content]
