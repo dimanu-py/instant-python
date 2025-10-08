@@ -28,6 +28,7 @@ class TestParser:
         [
             pytest.param("missing_general_fields", id="missing_general_fields"),
             pytest.param("missing_dependencies_fields", id="missing_dependencies_fields"),
+            pytest.param("missing_template_fields", id="missing_template_fields"),
             pytest.param("missing_git_fields", id="missing_git_fields"),
         ],
     )
