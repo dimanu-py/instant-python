@@ -5,6 +5,7 @@ from instant_python.config.domain.configuration_schema import ConfigurationSchem
 from instant_python.config.domain.dependency_configuration import DependencyConfiguration
 from instant_python.config.domain.general_configuration import GeneralConfiguration
 from instant_python.config.domain.git_configuration import GitConfiguration
+from instant_python.config.domain.template_configuration import TemplateConfiguration
 from instant_python.configuration.parser.config_key_not_present import ConfigKeyNotPresent
 from instant_python.configuration.parser.empty_configuration_not_allowed import EmptyConfigurationNotAllowed
 from instant_python.configuration.parser.missing_mandatory_fields import MissingMandatoryFields
@@ -18,6 +19,7 @@ class Parser(ConfigParser):
         self._ensure_all_required_sections_are_present(content)
         general_section = self._parse_general_section(content["general"])
         dependencies_section = self._parse_dependencies_section(content["dependencies"])
+        template_section = self._parse_template_section(content["template"])
         git_section = self._parse_git_section(content["git"])
 
     def _parse_general_section(self, fields: dict[str, str]) -> GeneralConfiguration:
@@ -46,6 +48,13 @@ class Parser(ConfigParser):
             dependencies.append(dependency)
 
         return dependencies
+
+    def _parse_template_section(self, fields: dict[str, Union[str, bool, list[str]]]) -> TemplateConfiguration:
+        try:
+            return TemplateConfiguration(**fields)
+        except TypeError as error:
+            self._ensure_error_is_for_missing_fields(error)
+            raise MissingMandatoryFields(error.args[0], "template") from error
 
     def _parse_git_section(self,fields: dict[str, Union[str, bool]]) -> GitConfiguration:
         try:
