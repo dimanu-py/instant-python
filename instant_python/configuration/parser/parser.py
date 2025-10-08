@@ -2,7 +2,7 @@ from typing import Union
 
 import yaml
 
-from instant_python.configuration.parser.config_key_not_present import ConfigKeyNotPresent
+from instant_python.config.infra.parser.errors import ConfigKeyNotPresent, EmptyConfigurationNotAllowed, MissingMandatoryFields
 from instant_python.config.domain.configuration_schema import ConfigurationSchema
 from instant_python.config.domain.dependency_configuration import (
     DependencyConfiguration,
@@ -13,12 +13,6 @@ from instant_python.config.domain.general_configuration import (
 from instant_python.config.domain.git_configuration import GitConfiguration
 from instant_python.configuration.parser.configuration_file_not_found import (
     ConfigurationFileNotFound,
-)
-from instant_python.configuration.parser.empty_configuration_not_allowed import (
-    EmptyConfigurationNotAllowed,
-)
-from instant_python.configuration.parser.missing_mandatory_fields import (
-    MissingMandatoryFields,
 )
 from instant_python.config.domain.template_configuration import TemplateConfiguration
 

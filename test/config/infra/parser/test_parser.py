@@ -7,9 +7,7 @@ from approvaltests import verify
 from expects import expect, raise_error, be_none
 
 from instant_python.config.infra.parser.parser import Parser
-from instant_python.configuration.parser.config_key_not_present import ConfigKeyNotPresent
-from instant_python.configuration.parser.empty_configuration_not_allowed import EmptyConfigurationNotAllowed
-from instant_python.configuration.parser.missing_mandatory_fields import MissingMandatoryFields
+from instant_python.config.infra.parser.errors import ConfigKeyNotPresent, EmptyConfigurationNotAllowed, MissingMandatoryFields
 
 
 class TestParser:

@@ -6,9 +6,7 @@ from instant_python.config.domain.dependency_configuration import DependencyConf
 from instant_python.config.domain.general_configuration import GeneralConfiguration
 from instant_python.config.domain.git_configuration import GitConfiguration
 from instant_python.config.domain.template_configuration import TemplateConfiguration
-from instant_python.configuration.parser.config_key_not_present import ConfigKeyNotPresent
-from instant_python.configuration.parser.empty_configuration_not_allowed import EmptyConfigurationNotAllowed
-from instant_python.configuration.parser.missing_mandatory_fields import MissingMandatoryFields
+from instant_python.config.infra.parser.errors import ConfigKeyNotPresent, EmptyConfigurationNotAllowed, MissingMandatoryFields
 
 
 class Parser(ConfigParser):
