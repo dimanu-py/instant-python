@@ -1,62 +1,63 @@
 from typing import Union
 
-from instant_python.config.infra.question_wizard.question.boolean_question import BooleanQuestion
-from instant_python.config.infra.question_wizard.question.choice_question import ChoiceQuestion
-from instant_python.config.infra.question_wizard.question.conditional_question import ConditionalQuestion
-from instant_python.config.infra.question_wizard.question.free_text_question import FreeTextQuestion
-from instant_python.config.infra.question_wizard.question.multiple_choice_question import MultipleChoiceQuestion
-from instant_python.config.infra.question_wizard.question.questionary import Questionary
+from instant_python.config.infra.question_wizard.step.questionary import Questionary
 from instant_python.config.infra.question_wizard.step.steps import Step
 from instant_python.shared.supported_built_in_features import SupportedBuiltInFeatures
 from instant_python.shared.supported_templates import SupportedTemplates
 
 
 class TemplateStep(Step):
+    _KEY = "template"
+
     def __init__(self, questionary: Questionary) -> None:
         super().__init__(questionary)
-        self._built_in_features_question = MultipleChoiceQuestion(
-            key="built_in_features",
-            message="Select the built-in features you want to include",
-            options=SupportedBuiltInFeatures.get_supported_built_in_features(),
-            questionary=self._questionary,
-        )
-        self._template_question = ConditionalQuestion(
-            base_question=ChoiceQuestion(
-                key="name",
-                message="Select a template",
-                options=SupportedTemplates.get_supported_templates(),
-                questionary=self._questionary,
-            ),
-            subquestions=ConditionalQuestion(
-                base_question=BooleanQuestion(
-                    key="specify_bounded_context",
-                    message="Do you want to specify your first bounded context?",
-                    default=True,
-                    questionary=self._questionary,
-                ),
-                subquestions=[
-                    FreeTextQuestion(
-                        key="bounded_context",
-                        message="Enter the bounded context name",
-                        default="backoffice",
-                        questionary=self._questionary,
-                    ),
-                    FreeTextQuestion(
-                        key="aggregate_name",
-                        message="Enter the aggregate name",
-                        default="user",
-                        questionary=self._questionary,
-                    ),
-                ],
-                condition=True,
-            ),
-            condition=SupportedTemplates.DDD,
-        )
+        self._answers = {}
 
     def run(self) -> dict[str, dict[str, Union[str, list[str]]]]:
-        answers = self._template_question.ask()
+        name = self._choose_template_name_from_options()
 
-        if answers["name"] != SupportedTemplates.CUSTOM:
-            answers.update(self._built_in_features_question.ask())
+        if name == SupportedTemplates.DDD and self._user_wants_to_specify_bounded_context():
+            self._ask_bounded_context_name()
+            self._ask_aggregate_name()
 
-        return {"template": answers}
+        if name != SupportedTemplates.CUSTOM:
+            self._select_built_in_features()
+
+        return {self._KEY: self._answers}
+
+    def _choose_template_name_from_options(self) -> str:
+        answer = self._questionary.single_choice_question(
+            message="Select a template",
+            options=SupportedTemplates.get_supported_templates(),
+        )
+        self._answers["name"] = answer
+        return answer
+
+    def _user_wants_to_specify_bounded_context(self) -> None:
+        answer = self._questionary.boolean_question(
+            message="Do you want to specify your first bounded context?",
+            default=True,
+        )
+        self._answers["specify_bounded_context"] = answer
+
+    def _ask_bounded_context_name(self) -> str:
+        answer = self._questionary.free_text_question(
+            message="Enter the bounded context name",
+            default="backoffice",
+        )
+        self._answers["bounded_context"] = answer
+        return answer
+
+    def _ask_aggregate_name(self) -> None:
+        answer = self._questionary.free_text_question(
+            message="Enter the aggregate name",
+            default="user",
+        )
+        self._answers["aggregate_name"] = answer
+
+    def _select_built_in_features(self) -> None:
+        answer = self._questionary.multiselect_question(
+            message="Select the built-in features you want to include",
+            options=SupportedBuiltInFeatures.get_supported_built_in_features(),
+        )
+        self._answers["built_in_features"] = answer

@@ -2,7 +2,7 @@ import typer
 
 from instant_python.config.application.config_generator import ConfigGenerator
 from instant_python.config.infra.parser.parser import Parser
-from instant_python.config.infra.question_wizard.question.questionary import Questionary
+from instant_python.config.infra.question_wizard.step.questionary import Questionary
 from instant_python.config.infra.question_wizard.questionary_console_wizard import QuestionaryConsoleWizard
 from instant_python.config.infra.question_wizard.step.dependencies_step import DependenciesStep
 from instant_python.config.infra.question_wizard.step.general_step import GeneralStep
