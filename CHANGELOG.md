@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.12.1 (2025-10-23)
+
+### 🪲 Bug Fixes
+
+- **templates**: Create github issues templates folder with correct name
+  ([`751e58f`](https://github.com/dimanu-py/instant-python/commit/751e58fa2ffd637e7984e4c2040616deb300f2f8))
+
+
 ## v0.12.0 (2025-10-23)
 
 ### ✨ Features
