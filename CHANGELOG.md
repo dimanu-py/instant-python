@@ -2,6 +2,138 @@
 
 <!-- version list -->
 
+## v0.12.0 (2025-10-23)
+
+### ✨ Features
+
+- **initialize**: Move init command cli to its own folder for hexagonal architecture
+  ([`3101896`](https://github.com/dimanu-py/instant-python/commit/310189634553c297095d8f3bd40fcd32cc87228f))
+
+- **config**: Implement YAML config writer to save configuration to file
+  ([`99b2e5e`](https://github.com/dimanu-py/instant-python/commit/99b2e5ed5ac0aea6859dc852a5bf5ed15e34f659))
+
+- **config**: Return parsed configuration
+  ([`330dc00`](https://github.com/dimanu-py/instant-python/commit/330dc0056fdef9ae9fc983ab9cbe080c8fc27fca))
+
+- **config**: Add parsing logic for template section in configuration
+  ([`9f9e83a`](https://github.com/dimanu-py/instant-python/commit/9f9e83a5c684c634cb00826fe57db98dcdaee45b))
+
+- **config**: Add parsing logic for git section in configuration
+  ([`818febc`](https://github.com/dimanu-py/instant-python/commit/818febc61febbc509caf1a9ec2946f3d71ff6eb3))
+
+- **config**: Add parsing logic for dependencies section in configuration
+  ([`b6fec2a`](https://github.com/dimanu-py/instant-python/commit/b6fec2a4c2d7b9773b7bca1707acf6193e0dd986))
+
+- **config**: Implement logic to parse general section of config
+  ([`e6ef56c`](https://github.com/dimanu-py/instant-python/commit/e6ef56c2988e8af8d0a9ffadcc882c643a2e580e))
+
+- **config**: Validate required configuration keys and raise appropriate exceptions
+  ([`697b115`](https://github.com/dimanu-py/instant-python/commit/697b1153472189ae7dd8b58825830644282ef9bc))
+
+- **config**: Raise EmptyConfigurationNotAllowed for empty content in parse method
+  ([`b3f51e4`](https://github.com/dimanu-py/instant-python/commit/b3f51e4a5dd483d4a2f3fa58c2e4b3b035dec1ca))
+
+- **config**: Inject ConfigParser port into ConfigGenerator use case
+  ([`4f0a8f6`](https://github.com/dimanu-py/instant-python/commit/4f0a8f6be698c54b1ae75755a4807c6c8184c9d4))
+
+- **config**: Define ConfigParser interface as driver port
+  ([`59ec2b9`](https://github.com/dimanu-py/instant-python/commit/59ec2b9c5c3ffb145547b98c06721c8121cab907))
+
+- **config**: Extend QuestionaryQuestionWizard to inherit from QuestionWizard
+  ([`ed3674c`](https://github.com/dimanu-py/instant-python/commit/ed3674c41547504a95817498c759324a7607700d))
+
+- **config**: Add abstract QuestionWizard class for question handling
+  ([`abb9a22`](https://github.com/dimanu-py/instant-python/commit/abb9a226be6f257ed5924fe935ccbfae338e9c10))
+
+- **config**: Implement execute method for configuration generation
+  ([`936b2c6`](https://github.com/dimanu-py/instant-python/commit/936b2c61fc69c013e618093bfa62e8599876f2d7))
+
+- **config**: Create ConfigGenerator class for configuration generation
+  ([`377564e`](https://github.com/dimanu-py/instant-python/commit/377564e5e9057c79f2f07b0889bae55f749e8981))
+
+- **config**: Create yaml writer interface
+  ([`4e6f3b5`](https://github.com/dimanu-py/instant-python/commit/4e6f3b5a29a7970f67836bb18c07349cc0a93897))
+
+### 🪲 Bug Fixes
+
+- **templates**: Point to correct base error template file when including fastapi built in feature
+  ([`c2ce3f3`](https://github.com/dimanu-py/instant-python/commit/c2ce3f35a1eb9cb268906e78990abd7c25604955))
+
+- **cli**: Correct import for new place of config command
+  ([`f23b0fc`](https://github.com/dimanu-py/instant-python/commit/f23b0fc3204483bbac44c87fd70611e742c50c61))
+
+### ⚙️ Build System
+
+- Update audit make command to ignore pip vulnerability
+  ([`963d5f6`](https://github.com/dimanu-py/instant-python/commit/963d5f6c0fdbc9528cd90489429db692a36fb8c5))
+
+- Exclude resources folders from mypy analysis
+  ([`7f2b3b8`](https://github.com/dimanu-py/instant-python/commit/7f2b3b818d4b608aa466e50d9dfdedd42e6af4f7))
+
+### ♻️ Refactoring
+
+- **config**: Instantiate question wizard steps inside directly coupling them
+  ([`8785304`](https://github.com/dimanu-py/instant-python/commit/8785304b744f9dba777e2518014e4a40146753c0))
+
+- **config**: Remove complex class hierarchy for different types of questions and streamline
+  questions using questionary wrapper
+  ([`35e266b`](https://github.com/dimanu-py/instant-python/commit/35e266bfb3afc97b88f6432e08463a80553ff32b))
+
+- **config**: Streamline dependency installation questions in CLI
+  ([`33f0bd6`](https://github.com/dimanu-py/instant-python/commit/33f0bd6d95d7aa0d9c87a74c2a5e0a638b1541a1))
+
+- **config**: Modify cli application to use new config generator use case
+  ([`530fe7e`](https://github.com/dimanu-py/instant-python/commit/530fe7e47ed7f9fb81077c4efdbe31c0967e339c))
+
+- **config**: Move question wizard concrete implementation to new infra folder in config command
+  ([`0f8b481`](https://github.com/dimanu-py/instant-python/commit/0f8b48128eb97fb1c8ed54852307cb995c183739))
+
+- **config**: Turn config file path attribute to public
+  ([`8fa7f3e`](https://github.com/dimanu-py/instant-python/commit/8fa7f3e6aa31e287b050601732db1ecd7260e325))
+
+- **config**: Clean up parser tests adding setup_method
+  ([`eb3c095`](https://github.com/dimanu-py/instant-python/commit/eb3c0958b36bb161ff7874458761b1c1871e1db4))
+
+- **config**: Move config parsing errors to new architecture and to errors file
+  ([`c18a969`](https://github.com/dimanu-py/instant-python/commit/c18a96965d35faa1a8e735974e3e1e9c8ae64810))
+
+- **config**: Extract string values to constants
+  ([`49ac047`](https://github.com/dimanu-py/instant-python/commit/49ac04775ca140464eb8f79a246bed63fe6cd9b4))
+
+- **config**: Extract semantic methods for better readability in parser
+  ([`42cc355`](https://github.com/dimanu-py/instant-python/commit/42cc35588acb3ef256d22bbf9062b9d367e28f0a))
+
+- **config**: Decouple configuration generation from specific schema classes validating answers with
+  parser
+  ([`2a3bea5`](https://github.com/dimanu-py/instant-python/commit/2a3bea55ae87317580012ab6eb940675c6089c4a))
+
+- **config**: Rename QuestionaryQuestionWizard to QuestionaryConsoleWizard
+  ([`66a6671`](https://github.com/dimanu-py/instant-python/commit/66a6671f9765ca91836229d3c32c4c21ba6ecc4d))
+
+- **config**: Apply dependency inversion to ConfigGenerator constructor
+  ([`8ae285f`](https://github.com/dimanu-py/instant-python/commit/8ae285f2d0c26e03513ac874435dbc100360cea0))
+
+- **config**: Rename YamlWriter interface to ConfigWriter
+  ([`4921828`](https://github.com/dimanu-py/instant-python/commit/4921828e171c8e999c643da1df583b1c4bfa3d43))
+
+- **config**: Update test to use QuestionWizard instead of QuestionaryQuestionWizard for mock
+  ([`00fb764`](https://github.com/dimanu-py/instant-python/commit/00fb764239ed6fffa94ec211bc32b544d407cf4a))
+
+- **config**: Rename QuestionWizard to QuestionaryQuestionWizard to express its implementation uses
+  questionary
+  ([`74d124d`](https://github.com/dimanu-py/instant-python/commit/74d124d68318fa333cb48f98aa43c6f59667a6c1))
+
+- **config**: Structure tests for config domain following same structure as source
+  ([`eafda5e`](https://github.com/dimanu-py/instant-python/commit/eafda5e240b84483962daeed5d5c85b3354b2a15))
+
+- **config**: Move domain classes for config command to domain module
+  ([`c6aa3ad`](https://github.com/dimanu-py/instant-python/commit/c6aa3ad5f5649fc4f3dd61d9d02fc9d0de70a7ca))
+
+- **commands**: Move cli application for 'config' command to specific module config that will follow
+  hexagonal architecture to reduce coupling
+  ([`a1fa9ab`](https://github.com/dimanu-py/instant-python/commit/a1fa9ab605a0fe622e529f086352d5eefc3b8ece))
+
+
 ## v0.11.0 (2025-09-30)
 
 ### ✨ Features
