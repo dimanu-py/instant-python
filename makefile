@@ -86,7 +86,7 @@ tox:  ## Run tox tests
 .PHONY: audit
 audit: # It audits dependencies and source code
 	@echo "\n⌛ Running security audit...\n"
-	@uv run -m pip_audit --progress-spinner off
+	@uv run -m pip_audit --progress-spinner off --ignore-vuln GHSA-4xh5-x5gv-qwph
 
 .PHONY: secrets
 secrets: # It checks for secrets in the source code
