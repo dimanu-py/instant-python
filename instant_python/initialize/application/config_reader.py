@@ -9,6 +9,6 @@ class ConfigReader:
         self._parser = parser
 
     def execute(self, config_file_path: str) -> ConfigurationSchema:
-        raw_config = self._repository.read_from_file(config_file_path)
+        raw_config = self._repository.read(config_file_path)
         configuration = self._parser.parse(raw_config)
         return configuration

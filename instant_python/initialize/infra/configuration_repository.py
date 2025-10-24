@@ -7,7 +7,7 @@ from instant_python.initialize.domain.configuration_repository import Configurat
 
 
 class YamlConfigurationRepository(ConfigurationRepository):
-    def read_from_file(self, path: str) -> dict:
+    def read(self, path: str) -> dict:
         try:
             with Path(path).open("r") as file:
                 return yaml.safe_load(file)

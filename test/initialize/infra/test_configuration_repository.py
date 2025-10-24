@@ -13,7 +13,7 @@ class TestConfigurationRepository:
         repository = YamlConfigurationRepository()
         config_path = str(Path(__file__).parent / "resources" / "config.yml")
 
-        raw_config = repository.read_from_file(config_path)
+        raw_config = repository.read(config_path)
 
         expect(raw_config).to_not(be_none)
         verify(json.dumps(raw_config, indent=2))
@@ -22,4 +22,4 @@ class TestConfigurationRepository:
         repository = YamlConfigurationRepository()
         config_path = "non/existing/path/config.yml"
 
-        expect(lambda: repository.read_from_file(config_path)).to(raise_error(ConfigurationFileNotFound))
+        expect(lambda: repository.read(config_path)).to(raise_error(ConfigurationFileNotFound))

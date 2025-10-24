@@ -19,7 +19,7 @@ class TestConfigReader:
         config_file_path = "path/to/config/file.yml"
         config = ConfigurationSchemaMother.any()
 
-        expect_call(configuration_repository).read_from_file(config_file_path).returns(config.to_primitives())
+        expect_call(configuration_repository).read(config_file_path).returns(config.to_primitives())
         expect_call(configuration_parser).parse(config.to_primitives()).returns(config)
 
         parsed_config = config_reader.execute(config_file_path)
