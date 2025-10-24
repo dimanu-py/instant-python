@@ -1,0 +1,23 @@
+general:
+  slug: python-project
+  source_name: src
+  description: Python Project Description
+  version: 0.1.0
+  author: Diego Martinez
+  license: MIT
+  python_version: 3.13
+  dependency_manager: uv
+dependencies:
+  - name: pytest
+    version: latest
+    is_dev: true
+    group: test
+  - name: fastapi
+    version: latest
+    is_dev: false
+git:
+  initialize: true
+  username: dimanu-py
+  email: dimanu.py@gmail.com
+template:
+  name: domain_driven_design
