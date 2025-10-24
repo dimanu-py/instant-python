@@ -1,0 +1,2 @@
+class ConfigurationRepository:
+    pass
