@@ -1,7 +1,4 @@
-from abc import ABC
-
-
-class ApplicationError(Exception, ABC):
+class ApplicationError(Exception):
     def __init__(self, message: str, error_type: str) -> None:
         self._message = message
         self._type = error_type
