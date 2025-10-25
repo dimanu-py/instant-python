@@ -32,6 +32,12 @@ class Parser(ConfigParser):
             dependencies=dependencies_section,
             template=template_section,
             git=git_section,
+        ) if not custom_config_path else ConfigurationSchema.from_file(
+            config_file_path=custom_config_path,
+            general=general_section,
+            dependencies=dependencies_section,
+            template=template_section,
+            git=git_section,
         )
 
     def _parse_general_section(self, fields: dict[str, str]) -> GeneralConfiguration:
