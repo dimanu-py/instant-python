@@ -13,11 +13,19 @@ class PdmDependencyManager(DependencyManager):
 
     def setup_environment(self, python_version: str, dependencies: list[DependencyConfiguration]) -> None:
         try:
-            self._install()
+            if self._pdm_is_not_installed():
+                self._install()
             self._install_python(python_version)
             self._install_dependencies(dependencies)
         except subprocess.CalledProcessError as error:
             raise CommandExecutionError(exit_code=error.returncode, stderr_output=error.stderr)
+
+    def _pdm_is_not_installed(self) -> bool:
+        try:
+            self._run_command("pdm --version")
+            return False
+        except subprocess.CalledProcessError:
+            return True
 
     def _install(self) -> None:
         print(">>> Installing pdm...")
