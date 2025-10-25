@@ -7,6 +7,7 @@ from approvaltests import verify_all_combinations
 from typer.testing import CliRunner
 
 from instant_python.initialize.delivery.cli import app
+from instant_python.shared.supported_built_in_features import SupportedBuiltInFeatures
 from instant_python.shared.supported_licenses import SupportedLicenses
 from instant_python.shared.supported_managers import SupportedManagers
 from instant_python.shared.supported_python_versions import SupportedPythonVersions
@@ -23,6 +24,7 @@ class TestInitCli:
         python_versions = SupportedPythonVersions.get_supported_versions()
         create_git_repository = [True, False]
         templates = SupportedTemplates.get_supported_templates()
+        built_in_feature = SupportedBuiltInFeatures.get_supported_built_in_features()
 
         verify_all_combinations(
             self._run_cli_with_config,
@@ -32,6 +34,7 @@ class TestInitCli:
                 python_versions,
                 create_git_repository,
                 templates,
+                built_in_feature,
             ],
         )
 
@@ -42,6 +45,7 @@ class TestInitCli:
         python_version: str,
         initialize_git: bool,
         template: str,
+        built_in_feature: str,
     ) -> dict:
         config = self._create_config_with_parameters(
             dependency_manager=dependency_manager,
@@ -49,6 +53,7 @@ class TestInitCli:
             python_version=python_version,
             initialize_git=initialize_git,
             template=template,
+            built_in_feature=built_in_feature,
         )
 
         with tempfile.NamedTemporaryFile(mode="w", suffix=".yml", delete=False) as config_file:
@@ -67,6 +72,7 @@ class TestInitCli:
                 "python_version": python_version,
                 "initialize_git": initialize_git,
                 "template": template,
+                "built_in_feature": built_in_feature,
             },
         }
 
@@ -77,6 +83,7 @@ class TestInitCli:
         python_version: str,
         initialize_git: bool,
         template: str,
+        built_in_feature: str,
     ) -> dict:
         config = json.loads(json.dumps(self._read_base_config()))
 
@@ -87,6 +94,7 @@ class TestInitCli:
         config["git"]["initialize"] = initialize_git
 
         config["template"]["name"] = template
+        config["template"]["built_in_features"] = [built_in_feature]
 
         return config
 
