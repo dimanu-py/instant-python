@@ -15,8 +15,14 @@ class GitConfiguration:
         self._ensure_username_and_email_are_set_if_initializing()
 
     def _ensure_username_and_email_are_set_if_initializing(self) -> None:
-        if self.initialize and (self.username is None or self.email is None):
+        if self.initialize and (self._username_is_not_specified() or self._email_is_not_specified()):
             raise GitUserOrEmailNotPresent()
+
+    def _email_is_not_specified(self) -> bool:
+        return self.email is None or self.email == ""
+
+    def _username_is_not_specified(self) -> bool:
+        return self.username is None or self.username == ""
 
     def to_primitives(self) -> dict[str, str | bool]:
         return asdict(self)
