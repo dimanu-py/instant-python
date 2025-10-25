@@ -20,7 +20,7 @@ class Parser(ConfigParser):
     _GIT = "git"
     _REQUIRED_CONFIG_KEYS = [_GENERAL, _DEPENDENCIES, _TEMPLATE, _GIT]
 
-    def parse(self, content: dict[str, dict]) -> ConfigurationSchema:
+    def parse(self, content: dict[str, dict], custom_config_path: Union[str, None] = None) -> ConfigurationSchema:
         self._ensure_configuration_is_not_empty(content)
         self._ensure_all_required_sections_are_present(content)
         general_section = self._parse_general_section(content[self._GENERAL])
