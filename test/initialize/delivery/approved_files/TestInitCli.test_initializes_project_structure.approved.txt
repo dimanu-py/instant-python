@@ -1,0 +1,2 @@
+args: ('uv',) => {'exit_code': 0, 'output': '>>> Installing uv...\n>>> uv installed successfully\n>>> Installing Python 3.10...\n>>> Python 3.10 installed successfully\n>>> Installing dependencies...\n>>> Dependencies installed successfully\n', 'config': {'dependency_manager': 'uv'}}
+args: ('pdm',) => {'exit_code': 0, 'output': '>>> Installing pdm...\n>>> pdm installed successfully\n>>> Installing Python 3.10...\n>>> Python 3.10 installed successfully\n>>> Installing dependencies...\n>>> Dependencies installed successfully\n', 'config': {'dependency_manager': 'pdm'}}
