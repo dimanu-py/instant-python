@@ -1,0 +1,2 @@
+args: (True,) => {'exit_code': 0, 'errors': None}
+args: (False,) => {'exit_code': 0, 'errors': None}
