@@ -7,6 +7,7 @@ from approvaltests import verify_all_combinations
 from typer.testing import CliRunner
 
 from instant_python.initialize.delivery.cli import app
+from instant_python.shared.supported_licenses import SupportedLicenses
 from instant_python.shared.supported_managers import SupportedManagers
 
 
@@ -16,20 +17,24 @@ class TestInitCli:
 
     def test_initializes_project_structure(self) -> None:
         dependency_managers = SupportedManagers.get_supported_managers()
+        licenses = SupportedLicenses.get_supported_licenses()
 
         verify_all_combinations(
             self._run_cli_with_config,
             [
                 dependency_managers,
+                licenses
             ],
         )
 
     def _run_cli_with_config(
         self,
         dependency_manager: str,
+        license_type: str,
     ) -> dict:
         config = self._create_config_with_parameters(
             dependency_manager=dependency_manager,
+            license_type=license_type,
         )
 
         with tempfile.NamedTemporaryFile(mode="w", suffix=".yml", delete=False) as config_file:
@@ -44,16 +49,19 @@ class TestInitCli:
             "errors": result.exception,
             "config": {
                 "dependency_manager": dependency_manager,
+                "license": license_type,
             },
         }
 
     def _create_config_with_parameters(
         self,
         dependency_manager: str,
+        license_type: str,
     ) -> dict:
         config = json.loads(json.dumps(self._read_base_config()))
 
         config["general"]["dependency_manager"] = dependency_manager
+        config["general"]["license"] = license_type
 
         return config
 

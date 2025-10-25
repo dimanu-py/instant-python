@@ -1,2 +1,6 @@
-args: ('uv',) => {'exit_code': 0, 'errors': None, 'config': {'dependency_manager': 'uv'}}
-args: ('pdm',) => {'exit_code': 0, 'errors': None, 'config': {'dependency_manager': 'pdm'}}
+args: ('uv', 'MIT') => {'exit_code': 0, 'errors': None, 'config': {'dependency_manager': 'uv', 'license': 'MIT'}}
+args: ('uv', 'Apache') => {'exit_code': 0, 'errors': None, 'config': {'dependency_manager': 'uv', 'license': 'Apache'}}
+args: ('uv', 'GPL') => {'exit_code': 0, 'errors': None, 'config': {'dependency_manager': 'uv', 'license': 'GPL'}}
+args: ('pdm', 'MIT') => {'exit_code': 0, 'errors': None, 'config': {'dependency_manager': 'pdm', 'license': 'MIT'}}
+args: ('pdm', 'Apache') => {'exit_code': 0, 'errors': None, 'config': {'dependency_manager': 'pdm', 'license': 'Apache'}}
+args: ('pdm', 'GPL') => {'exit_code': 0, 'errors': None, 'config': {'dependency_manager': 'pdm', 'license': 'GPL'}}
