@@ -13,7 +13,8 @@ class UvDependencyManager(DependencyManager):
 
     def setup_environment(self, python_version: str, dependencies: list[DependencyConfiguration]) -> None:
         try:
-            self._install()
+            if self._uv_is_not_installed():
+                self._install()
             self._install_python(python_version)
             self._install_dependencies(dependencies)
         except subprocess.CalledProcessError as error:
@@ -66,3 +67,10 @@ class UvDependencyManager(DependencyManager):
 
     def _create_virtual_environment(self) -> None:
         self._run_command(f"{self._uv} sync")
+
+    def _uv_is_not_installed(self) -> bool:
+        try:
+            self._run_command("uv --version")
+            return False
+        except subprocess.CalledProcessError:
+            return True
