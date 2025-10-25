@@ -10,9 +10,9 @@ general:
   version: 0.1.0
   year: 2025
 git:
-  email: null
+  email: johndoe@gmail.com
   initialize: false
-  username: null
+  username: johndoe
 template:
   aggregate_name: null
   bounded_context: null

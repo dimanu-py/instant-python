@@ -20,6 +20,7 @@ class TestInitCli:
         dependency_managers = SupportedManagers.get_supported_managers()
         licenses = SupportedLicenses.get_supported_licenses()
         python_versions = SupportedPythonVersions.get_supported_versions()
+        create_git_repository = [True, False]
 
         verify_all_combinations(
             self._run_cli_with_config,
@@ -27,6 +28,7 @@ class TestInitCli:
                 dependency_managers,
                 licenses,
                 python_versions,
+                create_git_repository,
             ],
         )
 
@@ -35,11 +37,13 @@ class TestInitCli:
         dependency_manager: str,
         license_type: str,
         python_version: str,
+        initialize_git: bool,
     ) -> dict:
         config = self._create_config_with_parameters(
             dependency_manager=dependency_manager,
             license_type=license_type,
             python_version=python_version,
+            initialize_git=initialize_git,
         )
 
         with tempfile.NamedTemporaryFile(mode="w", suffix=".yml", delete=False) as config_file:
@@ -56,15 +60,24 @@ class TestInitCli:
                 "dependency_manager": dependency_manager,
                 "license": license_type,
                 "python_version": python_version,
+                "initialize_git": initialize_git,
             },
         }
 
-    def _create_config_with_parameters(self, dependency_manager: str, license_type: str, python_version: str) -> dict:
+    def _create_config_with_parameters(
+        self,
+        dependency_manager: str,
+        license_type: str,
+        python_version: str,
+        initialize_git: bool,
+    ) -> dict:
         config = json.loads(json.dumps(self._read_base_config()))
 
         config["general"]["dependency_manager"] = dependency_manager
         config["general"]["license"] = license_type
         config["general"]["python_version"] = python_version
+
+        config["git"]["initialize"] = initialize_git
 
         return config
 
