@@ -41,7 +41,7 @@ class TestInitCli:
 
         return {
             "exit_code": result.exit_code,
-            "output": result.output,
+            "errors": result.exception,
             "config": {
                 "dependency_manager": dependency_manager,
             },
