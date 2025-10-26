@@ -54,6 +54,21 @@ class TestInitCli:
             ],
         )
 
+    def test_should_initializes_project_with_predefined_dependencies_and_different_managers(self) -> None:
+        dependency_managers = SupportedManagers.get_supported_managers()
+        predefined_dependencies = [
+            {"name": "requests", "version": "latest", "is_dev": False, "group": ""},
+            {"name": "pytest", "version": "6.2.5", "is_dev": True, "group": "testing"},
+        ]
+
+        verify_all_combinations(
+            self._run_cli_with_predefined_dependencies,
+            [
+                dependency_managers,
+                predefined_dependencies,
+            ],
+        )
+
     def _run_cli_with_general_config(
         self,
         dependency_manager: str,
@@ -87,6 +102,21 @@ class TestInitCli:
             template=template,
             built_in_feature=built_in_feature,
         )
+
+        return self._run_cli_with_config(config)
+
+    def _run_cli_with_predefined_dependencies(
+        self,
+        dependency_manager: str,
+        predefined_dependency: dict,
+    ) -> dict:
+        config = self._create_general_config(
+            dependency_manager=dependency_manager,
+            license_type="MIT",
+            python_version="3.10",
+        )
+
+        config["dependencies"] = [predefined_dependency]
 
         return self._run_cli_with_config(config)
 
