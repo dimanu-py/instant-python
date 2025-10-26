@@ -2,6 +2,7 @@ import json
 import tempfile
 from pathlib import Path
 
+import pytest
 import yaml
 from approvaltests import verify_all_combinations
 from typer.testing import CliRunner
@@ -14,6 +15,7 @@ from instant_python.shared.supported_python_versions import SupportedPythonVersi
 from instant_python.shared.supported_templates import SupportedTemplates
 
 
+@pytest.mark.acceptance
 class TestInitCli:
     def setup_method(self) -> None:
         self._runner = CliRunner()
