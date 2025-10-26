@@ -97,6 +97,11 @@ line-length = 120
 
 [tools.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+    "acceptance: mark a test as an acceptance test.",
+    "integration: mark a test as an integration test.",
+    "unit: mark a test as a unit test.",
+]
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
