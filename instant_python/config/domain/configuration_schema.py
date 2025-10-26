@@ -48,11 +48,6 @@ class ConfigurationSchema:
 
         shutil.move(self.config_file_path, destination_path)
 
-    def save_on_current_directory(self) -> None:
-        destination_folder = Path.cwd() / self.config_file_path
-        with open(destination_folder, "w") as file:
-            yaml.dump(self.to_primitives(), file)
-
     def to_primitives(self) -> "ConfigurationSchemaPrimitives":
         return ConfigurationSchemaPrimitives(
             general=self.general.to_primitives(),
