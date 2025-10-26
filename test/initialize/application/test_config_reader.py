@@ -20,7 +20,7 @@ class TestConfigReader:
         config = ConfigurationSchemaMother.any()
 
         expect_call(configuration_repository).read(config_file_path).returns(config.to_primitives())
-        expect_call(configuration_parser).parse(config.to_primitives()).returns(config)
+        expect_call(configuration_parser).parse(config.to_primitives(), config_file_path).returns(config)
 
         parsed_config = config_reader.execute(config_file_path)
 
