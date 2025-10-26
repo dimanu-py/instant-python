@@ -1,13 +1,13 @@
 import subprocess
 
-from instant_python.config.domain.git_configuration import GitConfiguration
+from instant_python.config.domain.git_config import GitConfig
 
 
 class GitConfigurer:
     def __init__(self, project_directory: str) -> None:
         self._project_directory = project_directory
 
-    def setup_repository(self, configuration: GitConfiguration) -> None:
+    def setup_repository(self, configuration: GitConfig) -> None:
         if not configuration.initialize:
             return
 

@@ -5,35 +5,35 @@ from typing import TypedDict, Union
 
 import yaml
 
-from instant_python.config.domain.dependency_configuration import (
-    DependencyConfiguration,
+from instant_python.config.domain.dependency_config import (
+    DependencyConfig,
 )
-from instant_python.config.domain.general_configuration import (
-    GeneralConfiguration,
+from instant_python.config.domain.general_config import (
+    GeneralConfig,
 )
-from instant_python.config.domain.git_configuration import GitConfiguration
-from instant_python.config.domain.template_configuration import (
-    TemplateConfiguration,
+from instant_python.config.domain.git_config import GitConfig
+from instant_python.config.domain.template_config import (
+    TemplateConfig,
 )
 
 
 @dataclass
-class ConfigurationSchema:
-    general: GeneralConfiguration
-    dependencies: list[DependencyConfiguration]
-    template: TemplateConfiguration
-    git: GitConfiguration
+class ConfigSchema:
+    general: GeneralConfig
+    dependencies: list[DependencyConfig]
+    template: TemplateConfig
+    git: GitConfig
     config_file_path: Path = field(default_factory=lambda: Path("ipy.yml"))
 
     @classmethod
     def from_file(
         cls,
         config_file_path: str,
-        general: GeneralConfiguration,
-        dependencies: list[DependencyConfiguration],
-        template: TemplateConfiguration,
-        git: GitConfiguration,
-    ) -> "ConfigurationSchema":
+        general: GeneralConfig,
+        dependencies: list[DependencyConfig],
+        template: TemplateConfig,
+        git: GitConfig,
+    ) -> "ConfigSchema":
         return cls(
             general=general,
             dependencies=dependencies,
@@ -48,8 +48,8 @@ class ConfigurationSchema:
 
         shutil.move(self.config_file_path, destination_path)
 
-    def to_primitives(self) -> "ConfigurationSchemaPrimitives":
-        return ConfigurationSchemaPrimitives(
+    def to_primitives(self) -> "ConfigSchemaPrimitives":
+        return ConfigSchemaPrimitives(
             general=self.general.to_primitives(),
             dependencies=[dependency.to_primitives() for dependency in self.dependencies],
             template=self.template.to_primitives(),
@@ -73,7 +73,7 @@ class ConfigurationSchema:
         return self.general.python_version
 
 
-class ConfigurationSchemaPrimitives(TypedDict):
+class ConfigSchemaPrimitives(TypedDict):
     general: dict[str, str]
     dependencies: list[dict[str, Union[str, bool]]]
     template: dict[str, Union[str, list[str]]]

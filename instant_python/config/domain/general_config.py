@@ -10,7 +10,7 @@ from instant_python.shared.supported_python_versions import SupportedPythonVersi
 
 
 @dataclass
-class GeneralConfiguration:
+class GeneralConfig:
     slug: str
     source_name: str
     description: str

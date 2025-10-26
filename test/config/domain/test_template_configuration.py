@@ -1,28 +1,28 @@
 from expects import expect, raise_error
 
-from instant_python.config.domain.template_configuration import (
+from instant_python.config.domain.template_config import (
     BoundedContextNotApplicable,
     BoundedContextNotSpecified,
     InvalidBuiltInFeaturesValues,
     InvalidTemplateValue,
 )
-from test.config.domain.mothers.template_configuration_mother import (
-    TemplateConfigurationMother,
+from test.config.domain.mothers.template_config_mother import (
+    TemplateConfigMother,
 )
 
 
-class TestTemplateConfiguration:
-    def test_should_not_allow_to_create_template_configuration_with_unsupported_template(
+class TestTemplateConfig:
+    def test_should_not_allow_to_create_template_config_with_unsupported_template(
         self,
     ) -> None:
-        expect(lambda: TemplateConfigurationMother.with_parameters(name="hexagonal_architecture")).to(
+        expect(lambda: TemplateConfigMother.with_parameters(name="hexagonal_architecture")).to(
             raise_error(InvalidTemplateValue)
         )
 
-    def test_should_not_allow_to_create_template_configuration_with_unsupported_built_in_feature(
+    def test_should_not_allow_to_create_template_config_with_unsupported_built_in_feature(
         self,
     ) -> None:
-        expect(lambda: TemplateConfigurationMother.with_parameters(built_in_features=["javascript"])).to(
+        expect(lambda: TemplateConfigMother.with_parameters(built_in_features=["javascript"])).to(
             raise_error(InvalidBuiltInFeaturesValues)
         )
 
@@ -30,7 +30,7 @@ class TestTemplateConfiguration:
         self,
     ) -> None:
         expect(
-            lambda: TemplateConfigurationMother.with_parameters(
+            lambda: TemplateConfigMother.with_parameters(
                 name="standard_project",
                 specify_bounded_context=True,
             )
@@ -40,7 +40,7 @@ class TestTemplateConfiguration:
         self,
     ) -> None:
         expect(
-            lambda: TemplateConfigurationMother.with_parameters(
+            lambda: TemplateConfigMother.with_parameters(
                 name="domain_driven_design",
                 specify_bounded_context=True,
                 bounded_context=None,

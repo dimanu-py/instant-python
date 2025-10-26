@@ -8,15 +8,15 @@ from instant_python.shared.supported_templates import SupportedTemplates
 
 
 @dataclass
-class TemplateConfiguration:
+class TemplateConfig:
     name: str
     built_in_features: list[str] = field(default_factory=list)
     specify_bounded_context: bool = field(default=False)
     bounded_context: Optional[str] = field(default=None)
     aggregate_name: Optional[str] = field(default=None)
 
-    SUPPORTED_TEMPLATES: ClassVar[list[str]] = SupportedTemplates.get_supported_templates()
-    SUPPORTED_BUILT_IN_FEATURES: ClassVar[list[str]] = SupportedBuiltInFeatures.get_supported_built_in_features()
+    _SUPPORTED_TEMPLATES: ClassVar[list[str]] = SupportedTemplates.get_supported_templates()
+    _SUPPORTED_BUILT_IN_FEATURES: ClassVar[list[str]] = SupportedBuiltInFeatures.get_supported_built_in_features()
 
     def __post_init__(self) -> None:
         self._ensure_template_is_supported()
@@ -25,15 +25,15 @@ class TemplateConfiguration:
         self._ensure_bounded_context_is_set_if_specified()
 
     def _ensure_template_is_supported(self) -> None:
-        if self.name not in self.SUPPORTED_TEMPLATES:
-            raise InvalidTemplateValue(self.name, self.SUPPORTED_TEMPLATES)
+        if self.name not in self._SUPPORTED_TEMPLATES:
+            raise InvalidTemplateValue(self.name, self._SUPPORTED_TEMPLATES)
 
     def _ensure_built_in_features_are_supported(self) -> None:
         unsupported_features = [
-            feature for feature in self.built_in_features if feature not in self.SUPPORTED_BUILT_IN_FEATURES
+            feature for feature in self.built_in_features if feature not in self._SUPPORTED_BUILT_IN_FEATURES
         ]
         if unsupported_features:
-            raise InvalidBuiltInFeaturesValues(unsupported_features, self.SUPPORTED_BUILT_IN_FEATURES)
+            raise InvalidBuiltInFeaturesValues(unsupported_features, self._SUPPORTED_BUILT_IN_FEATURES)
 
     def _ensure_bounded_context_is_only_applicable_for_ddd_template(self) -> None:
         if (

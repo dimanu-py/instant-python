@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from instant_python.config.domain.configuration_schema import ConfigurationSchema
+from instant_python.config.domain.config_schema import ConfigSchema
 from instant_python.shared.supported_templates import SupportedTemplates
 from instant_python.project_creator.file_has_not_been_created import FileHasNotBeenCreated
 from instant_python.project_creator.node import Node
@@ -20,7 +20,7 @@ class File(Node):
         self._file_path = base_path / self._file_name
         self._file_path.touch(exist_ok=True)
 
-    def fill(self, renderer: JinjaEnvironment, context_config: ConfigurationSchema) -> None:
+    def fill(self, renderer: JinjaEnvironment, context_config: ConfigSchema) -> None:
         if self._file_path is None:
             raise FileHasNotBeenCreated(self._file_name)
 

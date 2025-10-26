@@ -11,5 +11,5 @@ class ConfigGenerator:
 
     def execute(self) -> None:
         answers = self._question_wizard.run()
-        configuration = self._parser.parse(answers)
-        self._writer.write(configuration)
+        config = self._parser.parse(answers)
+        self._writer.write(config)

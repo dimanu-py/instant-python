@@ -6,7 +6,7 @@ from instant_python.shared.error_types import ErrorTypes
 
 
 @dataclass
-class GitConfiguration:
+class GitConfig:
     initialize: bool
     username: Optional[str] = field(default=None)
     email: Optional[str] = field(default=None)

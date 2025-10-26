@@ -5,7 +5,7 @@ from instant_python.shared.error_types import ErrorTypes
 
 
 @dataclass
-class DependencyConfiguration:
+class DependencyConfig:
     name: str
     version: str
     is_dev: bool = field(default=False)

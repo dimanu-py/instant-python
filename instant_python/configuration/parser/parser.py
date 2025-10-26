@@ -7,31 +7,31 @@ from instant_python.config.infra.parser.errors import (
     EmptyConfigurationNotAllowed,
     MissingMandatoryFields,
 )
-from instant_python.config.domain.configuration_schema import ConfigurationSchema
-from instant_python.config.domain.dependency_configuration import (
-    DependencyConfiguration,
+from instant_python.config.domain.config_schema import ConfigSchema
+from instant_python.config.domain.dependency_config import (
+    DependencyConfig,
 )
-from instant_python.config.domain.general_configuration import (
-    GeneralConfiguration,
+from instant_python.config.domain.general_config import (
+    GeneralConfig,
 )
-from instant_python.config.domain.git_configuration import GitConfiguration
+from instant_python.config.domain.git_config import GitConfig
 from instant_python.configuration.parser.configuration_file_not_found import (
     ConfigurationFileNotFound,
 )
-from instant_python.config.domain.template_configuration import TemplateConfiguration
+from instant_python.config.domain.template_config import TemplateConfig
 
 
 class Parser:
     REQUIRED_CONFIG_KEYS = ["general", "dependencies", "template", "git"]
 
     @classmethod
-    def parse_from_file(cls, config_file_path: str) -> ConfigurationSchema:
+    def parse_from_file(cls, config_file_path: str) -> ConfigSchema:
         """Parses the configuration file and validates its content.
 
         Args:
             config_file_path: The path to the configuration file to be parsed.
         Returns:
-            ConfigurationSchema: An instance of ConfigurationSchema containing the parsed configuration.
+            ConfigSchema: An instance of ConfigurationSchema containing the parsed configuration.
         Raises:
             ConfigurationFileNotFound: If the configuration file does not exist in that path.
             EmptyConfigurationNotAllowed: If the configuration file is empty.
@@ -42,7 +42,7 @@ class Parser:
         general_configuration, dependencies_configuration, template_configuration, git_configuration = (
             cls._parse_configuration(content=content)
         )
-        return ConfigurationSchema.from_file(
+        return ConfigSchema.from_file(
             config_file_path=config_file_path,
             general=general_configuration,
             dependencies=dependencies_configuration,
@@ -51,11 +51,11 @@ class Parser:
         )
 
     @classmethod
-    def parse_from_answers(cls, content: dict[str, dict]) -> ConfigurationSchema:
+    def parse_from_answers(cls, content: dict[str, dict]) -> ConfigSchema:
         general_configuration, dependencies_configuration, template_configuration, git_configuration = (
             cls._parse_configuration(content=content)
         )
-        return ConfigurationSchema(
+        return ConfigSchema(
             general=general_configuration,
             dependencies=dependencies_configuration,
             template=template_configuration,
@@ -97,9 +97,9 @@ class Parser:
             raise ConfigKeyNotPresent(missing_keys, Parser.REQUIRED_CONFIG_KEYS)
 
     @staticmethod
-    def _parse_general_configuration(fields: dict[str, str]) -> GeneralConfiguration:
+    def _parse_general_configuration(fields: dict[str, str]) -> GeneralConfig:
         try:
-            return GeneralConfiguration(**fields)
+            return GeneralConfig(**fields)
         except TypeError as error:
             _ensure_error_is_for_missing_fields(error)
             raise MissingMandatoryFields(error.args[0], "general") from error
@@ -107,7 +107,7 @@ class Parser:
     @staticmethod
     def _parse_dependencies_configuration(
         fields: list[dict[str, Union[str, bool]]],
-    ) -> list[DependencyConfiguration]:
+    ) -> list[DependencyConfig]:
         dependencies = []
 
         if not fields:
@@ -115,7 +115,7 @@ class Parser:
 
         for dependency_fields in fields:
             try:
-                dependency = DependencyConfiguration(**dependency_fields)
+                dependency = DependencyConfig(**dependency_fields)
             except TypeError as error:
                 _ensure_error_is_for_missing_fields(error)
                 raise MissingMandatoryFields(error.args[0], "dependencies") from error
@@ -125,17 +125,17 @@ class Parser:
         return dependencies
 
     @staticmethod
-    def _parse_template_configuration(fields: dict[str, Union[str, bool, list[str]]]) -> TemplateConfiguration:
+    def _parse_template_configuration(fields: dict[str, Union[str, bool, list[str]]]) -> TemplateConfig:
         try:
-            return TemplateConfiguration(**fields)
+            return TemplateConfig(**fields)
         except TypeError as error:
             _ensure_error_is_for_missing_fields(error)
             raise MissingMandatoryFields(error.args[0], "template") from error
 
     @staticmethod
-    def _parse_git_configuration(fields: dict[str, Union[str, bool]]) -> GitConfiguration:
+    def _parse_git_configuration(fields: dict[str, Union[str, bool]]) -> GitConfig:
         try:
-            return GitConfiguration(**fields)
+            return GitConfig(**fields)
         except TypeError as error:
             _ensure_error_is_for_missing_fields(error)
             raise MissingMandatoryFields(error.args[0], "git") from error

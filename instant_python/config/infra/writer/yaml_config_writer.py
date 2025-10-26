@@ -3,11 +3,11 @@ from pathlib import Path
 import yaml
 
 from instant_python.config.domain.config_writer import ConfigWriter
-from instant_python.config.domain.configuration_schema import ConfigurationSchema
+from instant_python.config.domain.config_schema import ConfigSchema
 
 
 class YamlConfigWriter(ConfigWriter):
-    def write(self, configuration: ConfigurationSchema) -> None:
-        destination_folder = Path.cwd() / configuration.config_file_path
+    def write(self, config: ConfigSchema) -> None:
+        destination_folder = Path.cwd() / config.config_file_path
         with destination_folder.open("w") as file:
-            yaml.dump(configuration.to_primitives(), file)
+            yaml.dump(config.to_primitives(), file)

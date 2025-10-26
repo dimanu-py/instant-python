@@ -1,4 +1,4 @@
-from instant_python.config.domain.configuration_schema import ConfigurationSchema
+from instant_python.config.domain.config_schema import ConfigSchema
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
 
 
@@ -9,7 +9,7 @@ class ProjectInitializer:
     ) -> None:
         self._project_renderer = renderer
 
-    def execute(self, config: ConfigurationSchema) -> None:
+    def execute(self, config: ConfigSchema) -> None:
         project_structure = self._project_renderer.render_project_structure(
             context_config=config,
             template_base_dir="project_structure",

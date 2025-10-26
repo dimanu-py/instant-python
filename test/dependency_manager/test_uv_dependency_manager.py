@@ -2,7 +2,7 @@ import os
 
 from expects import expect, raise_error
 
-from instant_python.config.domain.dependency_configuration import DependencyConfiguration
+from instant_python.config.domain.dependency_config import DependencyConfig
 from instant_python.dependency_manager.command_execution_error import CommandExecutionError
 from test.dependency_manager.mock_uv_dependency_manager import MockUvDependencyManager, MockUvDependencyManagerWithError
 
@@ -25,17 +25,17 @@ class TestUvDependencyManager:
 
     def test_should_install_dependencies(self) -> None:
         dependencies = [
-            DependencyConfiguration(
+            DependencyConfig(
                 name="pytest",
                 version="latest",
                 is_dev=True,
                 group="test",
             ),
-            DependencyConfiguration(
+            DependencyConfig(
                 name="requests",
                 version="2.32.0",
             ),
-            DependencyConfiguration(
+            DependencyConfig(
                 name="mypy",
                 version="latest",
                 is_dev=True,

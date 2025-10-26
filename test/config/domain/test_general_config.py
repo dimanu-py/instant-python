@@ -1,21 +1,21 @@
 import pytest
 from expects import expect, raise_error
 
-from instant_python.config.domain.general_configuration import (
+from instant_python.config.domain.general_config import (
     InvalidDependencyManagerValue,
     InvalidLicenseValue,
     InvalidPythonVersionValue,
 )
-from test.config.domain.mothers.general_configuration_mother import (
-    GeneralConfigurationMother,
+from test.config.domain.mothers.general_config_mother import (
+    GeneralConfigMother,
 )
 
 
-class TestGeneralConfiguration:
-    def test_should_allow_to_create_general_configuration_with_valid_parameters(
+class TestGeneralConfig:
+    def test_should_allow_to_create_general_config_with_valid_parameters(
         self,
     ) -> None:
-        GeneralConfigurationMother.any()
+        GeneralConfigMother.any()
 
     @pytest.mark.parametrize(
         "field, value, expected_error",
@@ -35,5 +35,5 @@ class TestGeneralConfiguration:
             ),
         ],
     )
-    def test_should_raise_error_for_unsupported_configuration_parameters(self, field, value, expected_error) -> None:
-        expect(lambda: GeneralConfigurationMother.with_parameter(**{field: value})).to(raise_error(expected_error))
+    def test_should_raise_error_for_unsupported_config_parameters(self, field, value, expected_error) -> None:
+        expect(lambda: GeneralConfigMother.with_parameter(**{field: value})).to(raise_error(expected_error))

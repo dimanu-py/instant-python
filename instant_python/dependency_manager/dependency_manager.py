@@ -2,7 +2,7 @@ import subprocess
 from abc import ABC, abstractmethod
 import sys
 
-from instant_python.config.domain.dependency_configuration import DependencyConfiguration
+from instant_python.config.domain.dependency_config import DependencyConfig
 
 
 class DependencyManager(ABC):
@@ -11,7 +11,7 @@ class DependencyManager(ABC):
         self._system_os = sys.platform
 
     @abstractmethod
-    def setup_environment(self, python_version: str, dependencies: list[DependencyConfiguration]) -> None:
+    def setup_environment(self, python_version: str, dependencies: list[DependencyConfig]) -> None:
         raise NotImplementedError
 
     def _run_command(self, command: str) -> None:

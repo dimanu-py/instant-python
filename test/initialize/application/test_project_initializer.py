@@ -4,13 +4,13 @@ from expects import expect
 
 from instant_python.initialize.application.project_initializer import ProjectInitializer
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
-from test.config.domain.mothers.configuration_schema_mother import ConfigurationSchemaMother
+from test.config.domain.mothers.config_schema_mother import ConfigSchemaMother
 
 
 class TestProjectInitializer:
     def test_should_initialize_project(self) -> None:
         renderer = Mock(ProjectRenderer)
-        config = ConfigurationSchemaMother.any()
+        config = ConfigSchemaMother.any()
 
         expect_call(renderer).render_project_structure(config, "project_structure").returns({})
 

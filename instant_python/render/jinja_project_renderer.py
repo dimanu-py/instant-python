@@ -1,7 +1,7 @@
 import yaml
 
 from instant_python.render.jinja_environment import JinjaEnvironment
-from instant_python.config.domain.configuration_schema import ConfigurationSchema
+from instant_python.config.domain.config_schema import ConfigSchema
 
 
 class JinjaProjectRenderer:
@@ -10,7 +10,7 @@ class JinjaProjectRenderer:
     def __init__(self, jinja_environment: JinjaEnvironment) -> None:
         self._jinja_environment = jinja_environment
 
-    def render_project_structure(self, context_config: ConfigurationSchema, template_base_dir: str) -> list[dict]:
+    def render_project_structure(self, context_config: ConfigSchema, template_base_dir: str) -> list[dict]:
         """Render the project structure based on the provided configuration.
 
         Args:
@@ -26,5 +26,5 @@ class JinjaProjectRenderer:
         )
         return yaml.safe_load(raw_project_structure)
 
-    def _get_main_structure_template_path(self, context_config: ConfigurationSchema, template_base_dir: str) -> str:
+    def _get_main_structure_template_path(self, context_config: ConfigSchema, template_base_dir: str) -> str:
         return f"{template_base_dir}/{context_config.template_type}/{self._MAIN_STRUCTURE_TEMPLATE}"

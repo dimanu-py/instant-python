@@ -1,11 +1,11 @@
 from typing import Union
 
 from instant_python.config.domain.config_parser import ConfigParser
-from instant_python.config.domain.configuration_schema import ConfigurationSchema
-from instant_python.config.domain.dependency_configuration import DependencyConfiguration
-from instant_python.config.domain.general_configuration import GeneralConfiguration
-from instant_python.config.domain.git_configuration import GitConfiguration
-from instant_python.config.domain.template_configuration import TemplateConfiguration
+from instant_python.config.domain.config_schema import ConfigSchema
+from instant_python.config.domain.dependency_config import DependencyConfig
+from instant_python.config.domain.general_config import GeneralConfig
+from instant_python.config.domain.git_config import GitConfig
+from instant_python.config.domain.template_config import TemplateConfig
 from instant_python.config.infra.parser.errors import (
     ConfigKeyNotPresent,
     EmptyConfigurationNotAllowed,
@@ -20,22 +20,22 @@ class Parser(ConfigParser):
     _GIT = "git"
     _REQUIRED_CONFIG_KEYS = [_GENERAL, _DEPENDENCIES, _TEMPLATE, _GIT]
 
-    def parse(self, content: dict[str, dict], custom_config_path: Union[str, None] = None) -> ConfigurationSchema:
-        self._ensure_configuration_is_not_empty(content)
+    def parse(self, content: dict[str, dict], custom_config_path: Union[str, None] = None) -> ConfigSchema:
+        self._ensure_config_is_not_empty(content)
         self._ensure_all_required_sections_are_present(content)
         general_section = self._parse_general_section(content[self._GENERAL])
         dependencies_section = self._parse_dependencies_section(content[self._DEPENDENCIES])
         template_section = self._parse_template_section(content[self._TEMPLATE])
         git_section = self._parse_git_section(content[self._GIT])
         return (
-            ConfigurationSchema(
+            ConfigSchema(
                 general=general_section,
                 dependencies=dependencies_section,
                 template=template_section,
                 git=git_section,
             )
             if not custom_config_path
-            else ConfigurationSchema.from_file(
+            else ConfigSchema.from_file(
                 config_file_path=custom_config_path,
                 general=general_section,
                 dependencies=dependencies_section,
@@ -44,9 +44,9 @@ class Parser(ConfigParser):
             )
         )
 
-    def _parse_general_section(self, fields: dict[str, str]) -> GeneralConfiguration:
+    def _parse_general_section(self, fields: dict[str, str]) -> GeneralConfig:
         try:
-            return GeneralConfiguration(**fields)
+            return GeneralConfig(**fields)
         except TypeError as error:
             self._ensure_error_is_for_missing_fields(error)
             raise MissingMandatoryFields(error.args[0], self._GENERAL) from error
@@ -54,7 +54,7 @@ class Parser(ConfigParser):
     def _parse_dependencies_section(
         self,
         fields: list[dict[str, Union[str, bool]]],
-    ) -> list[DependencyConfiguration]:
+    ) -> list[DependencyConfig]:
         dependencies = []
 
         if not fields:
@@ -62,7 +62,7 @@ class Parser(ConfigParser):
 
         for dependency_fields in fields:
             try:
-                dependency = DependencyConfiguration(**dependency_fields)
+                dependency = DependencyConfig(**dependency_fields)
             except TypeError as error:
                 self._ensure_error_is_for_missing_fields(error)
                 raise MissingMandatoryFields(error.args[0], self._DEPENDENCIES) from error
@@ -71,16 +71,16 @@ class Parser(ConfigParser):
 
         return dependencies
 
-    def _parse_template_section(self, fields: dict[str, Union[str, bool, list[str]]]) -> TemplateConfiguration:
+    def _parse_template_section(self, fields: dict[str, Union[str, bool, list[str]]]) -> TemplateConfig:
         try:
-            return TemplateConfiguration(**fields)
+            return TemplateConfig(**fields)
         except TypeError as error:
             self._ensure_error_is_for_missing_fields(error)
             raise MissingMandatoryFields(error.args[0], self._TEMPLATE) from error
 
-    def _parse_git_section(self, fields: dict[str, Union[str, bool]]) -> GitConfiguration:
+    def _parse_git_section(self, fields: dict[str, Union[str, bool]]) -> GitConfig:
         try:
-            return GitConfiguration(**fields)
+            return GitConfig(**fields)
         except TypeError as error:
             self._ensure_error_is_for_missing_fields(error)
             raise MissingMandatoryFields(error.args[0], self._GIT) from error
@@ -91,7 +91,7 @@ class Parser(ConfigParser):
             raise ConfigKeyNotPresent(missing_keys, self._REQUIRED_CONFIG_KEYS)
 
     @staticmethod
-    def _ensure_configuration_is_not_empty(content: dict[str, dict]):
+    def _ensure_config_is_not_empty(content: dict[str, dict]):
         if not content:
             raise EmptyConfigurationNotAllowed
 

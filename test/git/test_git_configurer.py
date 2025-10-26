@@ -1,6 +1,6 @@
 import os
 
-from test.config.domain.mothers.git_configuration_mother import GitConfigurationMother
+from test.config.domain.mothers.git_config_mother import GitConfigMother
 from test.git.mock_git_configurer import MockGitConfigurer
 
 
@@ -9,7 +9,7 @@ class TestGitConfigurer:
         self._git_configurer = MockGitConfigurer(project_directory=os.getcwd())
 
     def test_should_not_initialize_git_repository_if_is_not_specified(self) -> None:
-        configuration = GitConfigurationMother.not_initialize()
+        configuration = GitConfigMother.not_initialize()
 
         self._git_configurer.setup_repository(configuration=configuration)
 
@@ -37,7 +37,7 @@ class TestGitConfigurer:
         )
 
     def test_should_setup_git_repository(self) -> None:
-        configuration = GitConfigurationMother.with_parameters(
+        configuration = GitConfigMother.with_parameters(
             username="test_user",
             email="test_email@gmail.com",
         )

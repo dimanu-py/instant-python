@@ -1,7 +1,7 @@
 from pathlib import Path
 import subprocess
 
-from instant_python.config.domain.dependency_configuration import DependencyConfiguration
+from instant_python.config.domain.dependency_config import DependencyConfig
 from instant_python.dependency_manager.dependency_manager import DependencyManager
 from instant_python.dependency_manager.command_execution_error import CommandExecutionError
 
@@ -11,7 +11,7 @@ class UvDependencyManager(DependencyManager):
         super().__init__(project_directory)
         self._uv = self._set_uv_executable_based_on_os()
 
-    def setup_environment(self, python_version: str, dependencies: list[DependencyConfiguration]) -> None:
+    def setup_environment(self, python_version: str, dependencies: list[DependencyConfig]) -> None:
         try:
             if self._uv_is_not_installed():
                 self._install()
@@ -51,7 +51,7 @@ class UvDependencyManager(DependencyManager):
         self._run_command(command=f"{self._uv} python install {version}")
         print(f">>> Python {version} installed successfully")
 
-    def _install_dependencies(self, dependencies: list[DependencyConfiguration]) -> None:
+    def _install_dependencies(self, dependencies: list[DependencyConfig]) -> None:
         self._create_virtual_environment()
         print(">>> Installing dependencies...")
         for dependency in dependencies:
@@ -59,7 +59,7 @@ class UvDependencyManager(DependencyManager):
             self._run_command(command)
         print(">>> Dependencies installed successfully")
 
-    def _build_dependency_install_command(self, dependency: DependencyConfiguration) -> str:
+    def _build_dependency_install_command(self, dependency: DependencyConfig) -> str:
         command = [f"{self._uv} add"]
         command.extend(dependency.get_installation_flag())
         command.append(dependency.get_specification())
