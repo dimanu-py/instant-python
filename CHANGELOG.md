@@ -2,6 +2,80 @@
 
 <!-- version list -->
 
+## v0.13.0 (2025-10-26)
+
+### ✨ Features
+
+- **config**: Raise error when git repo is set to be initialized but username or email is either not
+  passed or an empty string
+  ([`2e9f852`](https://github.com/dimanu-py/instant-python/commit/2e9f85287b3beab29bfd2745a830d6972939938f))
+
+- **dependency-manager**: Inform the user that the selected dependency manager is already installed
+  ([`71ac1f7`](https://github.com/dimanu-py/instant-python/commit/71ac1f7c7da63ce55d27aacb9c1db03c34963de4))
+
+- **config**: Allow custom configuration path for loading configurations
+  ([`b7bfc97`](https://github.com/dimanu-py/instant-python/commit/b7bfc97fa8d7ada19d39c2c04a491e625ab83366))
+
+- **config**: Add 'custom_config_path' parameter to Parser port to be able to generate
+  configurations with custom paths to the config file
+  ([`350dbeb`](https://github.com/dimanu-py/instant-python/commit/350dbebab016dda71f42bef4d389e48e0ca2b197))
+
+- **initialize**: Handle FileNotFoundError in read_from_file method
+  ([`00fb79f`](https://github.com/dimanu-py/instant-python/commit/00fb79f5ec282525433b5d0e6abb4880cac23b33))
+
+- **initialize**: Implement read_from_file method to load YAML configuration
+  ([`5630929`](https://github.com/dimanu-py/instant-python/commit/5630929f3a5615e0f93d6d688e01d07cc31bafbd))
+
+- **initialize**: Convert ConfigurationRepository into an interface and define the signature of
+  'read_from_file' method
+  ([`b8c768f`](https://github.com/dimanu-py/instant-python/commit/b8c768fb958b96f9fa2749cf9668c02951d0426c))
+
+- **initialize**: Implement execute method to return parsed configuration schema from config file
+  ([`a009371`](https://github.com/dimanu-py/instant-python/commit/a00937100e8cef46036dce1dc16db18f20602a03))
+
+### 🪲 Bug Fixes
+
+- **dependency-manager**: Use dynamic command for version check in dependency managers
+  ([`46c9726`](https://github.com/dimanu-py/instant-python/commit/46c972601cf1ad217d6a0aca845fe0410d8cc176))
+
+- **config**: Configure parser mock in config reader unit test to be called with the config file
+  path
+  ([`71655ea`](https://github.com/dimanu-py/instant-python/commit/71655ea654392978c339314482a5e94a51fbf888))
+
+- **templates**: Correct error exception boilerplate file to base_error
+  ([`8dda0d7`](https://github.com/dimanu-py/instant-python/commit/8dda0d7ae296c42d9eed496920785e6f5b608779))
+
+- **dependency-manager**: Install uv manager only if is not installed
+  ([`e2a9ad5`](https://github.com/dimanu-py/instant-python/commit/e2a9ad5fdede2da1bb94e2bf7c75c74f04be9a23))
+
+- **dependency-manager**: Install pdm manager only if is not installed
+  ([`f4eb3ff`](https://github.com/dimanu-py/instant-python/commit/f4eb3fffbfe5c067f1997ddb7eb70dcddde43de4))
+
+- **initialize**: Pass config file path to parser for accurate parsing
+  ([`de58185`](https://github.com/dimanu-py/instant-python/commit/de58185ab722863a92627adf6b065c796e1860d5))
+
+### ⚙️ Build System
+
+- Add pytest marks to be able to discriminate which tests are run
+  ([`33e8e3d`](https://github.com/dimanu-py/instant-python/commit/33e8e3df683483a3745583cc03cd9a877c33f937))
+
+### ♻️ Refactoring
+
+- **render**: Encapsulate filter addition in _add_filter method
+  ([`caf805b`](https://github.com/dimanu-py/instant-python/commit/caf805b1f9c38782e011d237cc131798c6c9b565))
+
+- **initialize**: Use config reader in init cli application
+  ([`20f8178`](https://github.com/dimanu-py/instant-python/commit/20f8178f398b5db6b8cb7f48f12fc1a4143fe1b8))
+
+- **initialize**: Rename read_from_file method to read to not expose implementation details on the
+  interface
+  ([`2aa94f4`](https://github.com/dimanu-py/instant-python/commit/2aa94f44835122421eaa8af3303c76addf30b1b0))
+
+- **shared**: Modify ApplicationError to not be abstract class so it can be instantiated as a
+  general app error
+  ([`da086de`](https://github.com/dimanu-py/instant-python/commit/da086def1d643fed11b3ee7005435b6d45bea40c))
+
+
 ## v0.12.1 (2025-10-23)
 
 ### 🪲 Bug Fixes
