@@ -172,32 +172,6 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: dimanu-py/instant-python
 
-  rollback:
-    name: rollback
-    runs-on: ubuntu-latest
-    needs: [ test ]
-    if: ${{ always() && needs.test.result == 'failure' }}
-    steps:
-      - name: 🛡️ Harden runner
-        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
-        with:
-          egress-policy: audit
-
-      - name: 📥 Checkout the repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: ⏪️ Reset to previous commit
-        run: |
-          git config user.name ${{ vars.GIT_COMMITTER_NAME }}
-          git config user.email ${{ vars.GIT_COMMITTER_EMAIL }}
-          git reset --hard ${{ github.event.before }}
-          git push --force-with-lease origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   tox-test:
     name: tox
     runs-on: ubuntu-latest
