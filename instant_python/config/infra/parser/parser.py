@@ -27,17 +27,21 @@ class Parser(ConfigParser):
         dependencies_section = self._parse_dependencies_section(content[self._DEPENDENCIES])
         template_section = self._parse_template_section(content[self._TEMPLATE])
         git_section = self._parse_git_section(content[self._GIT])
-        return ConfigurationSchema(
-            general=general_section,
-            dependencies=dependencies_section,
-            template=template_section,
-            git=git_section,
-        ) if not custom_config_path else ConfigurationSchema.from_file(
-            config_file_path=custom_config_path,
-            general=general_section,
-            dependencies=dependencies_section,
-            template=template_section,
-            git=git_section,
+        return (
+            ConfigurationSchema(
+                general=general_section,
+                dependencies=dependencies_section,
+                template=template_section,
+                git=git_section,
+            )
+            if not custom_config_path
+            else ConfigurationSchema.from_file(
+                config_file_path=custom_config_path,
+                general=general_section,
+                dependencies=dependencies_section,
+                template=template_section,
+                git=git_section,
+            )
         )
 
     def _parse_general_section(self, fields: dict[str, str]) -> GeneralConfiguration:
