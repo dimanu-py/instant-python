@@ -22,7 +22,7 @@ class PdmDependencyManager(DependencyManager):
 
     def _pdm_is_not_installed(self) -> bool:
         try:
-            self._run_command("pdm --version")
+            self._run_command(f"{self._pdm} --version")
             print(">>> pdm is already installed, skipping installation")
             return False
         except subprocess.CalledProcessError:

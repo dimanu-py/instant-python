@@ -70,7 +70,7 @@ class UvDependencyManager(DependencyManager):
 
     def _uv_is_not_installed(self) -> bool:
         try:
-            self._run_command("uv --version")
+            self._run_command(f"{self._uv} --version")
             print(">>> uv is already installed, skipping installation")
             return False
         except subprocess.CalledProcessError:
