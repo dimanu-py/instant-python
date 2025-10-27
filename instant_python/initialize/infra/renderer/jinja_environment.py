@@ -7,7 +7,7 @@ from instant_python.shared.supported_templates import SupportedTemplates
 
 
 class JinjaEnvironment:
-    def __init__(self) -> None:
+    def __init__(self, user_template_path: str) -> None:
         self._env = Environment(
             trim_blocks=True,
             lstrip_blocks=True,
