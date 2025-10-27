@@ -18,6 +18,18 @@ class JinjaEnvironment:
         self.add_filter("compute_base_path", _compute_base_path)
         self.add_filter("has_dependency", _has_dependency)
 
+    def render_template(self, name: str, context: dict[str, str] = None) -> str:
+        """Renders a template with the given context.
+
+        Args:
+            name: The name of the template to render
+            context: A dictionary of variables to pass to the template
+
+        Returns:
+            The rendered template as a string
+        """
+        raise NotImplementedError
+
     def add_filter(self, name: str, filter_: Callable) -> None:
         self._env.filters[name] = filter_
 
