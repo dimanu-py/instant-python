@@ -7,6 +7,8 @@ from instant_python.shared.supported_templates import SupportedTemplates
 
 
 class JinjaEnvironment:
+    _EMPTY_CONTEXT = {}
+
     def __init__(self, user_template_path: str) -> None:
         self._env = Environment(
             loader=FileSystemLoader(user_template_path),
@@ -28,7 +30,8 @@ class JinjaEnvironment:
         Returns:
             The rendered template as a string
         """
-        raise NotImplementedError
+        template = self._env.get_template(name)
+        return template.render(**(context or self._EMPTY_CONTEXT))
 
     def add_filter(self, name: str, filter_: Callable) -> None:
         self._env.filters[name] = filter_
