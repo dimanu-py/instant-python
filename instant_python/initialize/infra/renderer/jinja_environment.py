@@ -1,6 +1,6 @@
 from collections.abc import Callable
 
-from jinja2 import Environment
+from jinja2 import Environment, FileSystemLoader
 
 from instant_python.render.unknown_template_error import UnknownTemplateError
 from instant_python.shared.supported_templates import SupportedTemplates
@@ -9,6 +9,7 @@ from instant_python.shared.supported_templates import SupportedTemplates
 class JinjaEnvironment:
     def __init__(self, user_template_path: str) -> None:
         self._env = Environment(
+            loader=FileSystemLoader(user_template_path),
             trim_blocks=True,
             lstrip_blocks=True,
             autoescape=True,
