@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from expects import be_none, expect, have_keys, equal
+from expects import be_none, expect, have_keys, equal, raise_error
+from jinja2 import TemplateNotFound
 
 from instant_python.initialize.infra.renderer.jinja_environment import JinjaEnvironment
 
@@ -32,3 +33,8 @@ class TestJinjaEnvironment:
         rendered_content = jinja_environment.render_template("makefile")
 
         expect(rendered_content).to_not(be_none)
+
+    def test_should_raise_error_when_template_is_not_found_anywhere(self) -> None:
+        jinja_environment = JinjaEnvironment(".")
+
+        expect(lambda: jinja_environment.render_template("non_existing_template.j2")).to(raise_error(TemplateNotFound))
