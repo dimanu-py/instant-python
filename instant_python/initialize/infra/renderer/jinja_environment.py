@@ -1,6 +1,6 @@
 from collections.abc import Callable
 
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader, ChoiceLoader, PackageLoader
 
 from instant_python.render.unknown_template_error import UnknownTemplateError
 from instant_python.shared.supported_templates import SupportedTemplates
@@ -8,10 +8,19 @@ from instant_python.shared.supported_templates import SupportedTemplates
 
 class JinjaEnvironment:
     _EMPTY_CONTEXT = {}
+    _BASE_PACKAGE_NAME = "instant_python"
+    _PROJECT_STRUCTURE_TEMPLATE_PATH = "templates/project_structure"
+    _BOILERPLATE_TEMPLATE_PATH = "templates/boilerplate"
 
     def __init__(self, user_template_path: str) -> None:
         self._env = Environment(
-            loader=FileSystemLoader(user_template_path),
+            loader=ChoiceLoader(
+                [
+                    FileSystemLoader(user_template_path),
+                    PackageLoader(package_name=self._BASE_PACKAGE_NAME, package_path=self._PROJECT_STRUCTURE_TEMPLATE_PATH),
+                    PackageLoader(package_name=self._BASE_PACKAGE_NAME, package_path=self._BOILERPLATE_TEMPLATE_PATH),
+                ]
+            ),
             trim_blocks=True,
             lstrip_blocks=True,
             autoescape=True,
