@@ -30,7 +30,6 @@ class TestJinjaEnvironment:
     def test_should_render_template_from_default_templates_folder_when_custom_template_is_not_found(self) -> None:
         jinja_environment = JinjaEnvironment(".")
 
-        rendered_content = jinja_environment.render_template("makefile")
 
         expect(rendered_content).to_not(be_none)
 
