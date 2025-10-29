@@ -5,7 +5,7 @@ from approvaltests import verify
 from expects import expect, be_none, raise_error
 
 from instant_python.configuration.parser.configuration_file_not_found import ConfigurationFileNotFound
-from instant_python.initialize.infra.configuration_repository import YamlConfigurationRepository
+from instant_python.initialize.infra.persistence.configuration_repository import YamlConfigurationRepository
 
 
 class TestConfigurationRepository:
