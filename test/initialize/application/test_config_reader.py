@@ -4,13 +4,13 @@ from expects import expect, be_none
 
 from instant_python.config.domain.config_parser import ConfigParser
 from instant_python.initialize.application.config_reader import ConfigReader
-from instant_python.initialize.domain.configuration_repository import ConfigurationRepository
+from instant_python.initialize.domain.config_repository import ConfigRepository
 from test.config.domain.mothers.config_schema_mother import ConfigSchemaMother
 
 
 class TestConfigReader:
     def test_should_read_existing_configuration_from_file(self) -> None:
-        configuration_repository = Mock(ConfigurationRepository)
+        configuration_repository = Mock(ConfigRepository)
         configuration_parser = Mock(ConfigParser)
         config_reader = ConfigReader(
             repository=configuration_repository,

@@ -1,10 +1,10 @@
 from instant_python.config.domain.config_parser import ConfigParser
 from instant_python.config.domain.config_schema import ConfigSchema
-from instant_python.initialize.domain.configuration_repository import ConfigurationRepository
+from instant_python.initialize.domain.config_repository import ConfigRepository
 
 
 class ConfigReader:
-    def __init__(self, repository: ConfigurationRepository, parser: ConfigParser) -> None:
+    def __init__(self, repository: ConfigRepository, parser: ConfigParser) -> None:
         self._repository = repository
         self._parser = parser
 

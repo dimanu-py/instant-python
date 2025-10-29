@@ -5,7 +5,7 @@ from instant_python.dependency_manager.dependency_manager_factory import Depende
 from instant_python.formatter.project_formatter import ProjectFormatter
 from instant_python.git.git_configurer import GitConfigurer
 from instant_python.initialize.application.config_reader import ConfigReader
-from instant_python.initialize.infra.persistence.configuration_repository import YamlConfigurationRepository
+from instant_python.initialize.infra.persistence.config_repository import YamlConfigRepository
 from instant_python.project_creator.file_system import FileSystem
 from instant_python.render.custom_project_renderer import CustomProjectRenderer
 from instant_python.render.jinja_environment import JinjaEnvironment
@@ -20,7 +20,7 @@ def create_new_project(
     template: str | None = typer.Option(None, "--template", "-t", help="Path to custom template file"),
 ) -> None:
     config_reader = ConfigReader(
-        repository=YamlConfigurationRepository(),
+        repository=YamlConfigRepository(),
         parser=Parser(),
     )
     config = config_reader.execute(config_file_path=config_file)

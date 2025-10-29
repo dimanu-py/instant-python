@@ -3,10 +3,10 @@ from pathlib import Path
 import yaml
 
 from instant_python.configuration.parser.configuration_file_not_found import ConfigurationFileNotFound
-from instant_python.initialize.domain.configuration_repository import ConfigurationRepository
+from instant_python.initialize.domain.config_repository import ConfigRepository
 
 
-class YamlConfigurationRepository(ConfigurationRepository):
+class YamlConfigRepository(ConfigRepository):
     def read(self, path: str) -> dict:
         try:
             with Path(path).open("r") as file:
