@@ -12,7 +12,7 @@ class TestProjectInitializer:
         renderer = Mock(ProjectRenderer)
         config = ConfigSchemaMother.any()
 
-        expect_call(renderer).render_project_structure(config, "project_structure").returns({})
+        expect_call(renderer).render_project_structure(config).returns({})
 
         project_initializer = ProjectInitializer(
             renderer=renderer,
