@@ -10,7 +10,7 @@ class TestJinjaProjectRenderer:
         config = ConfigSchemaMother.any()
         renderer = JinjaProjectRenderer(env=JinjaEnvironment("test"))
 
-        project_structure = renderer.render_project_structure(context_config=config)
+        project_structure = renderer.render(context_config=config)
 
         expect(project_structure).to_not(be_none)
         expect(project_structure).to_not(be_empty)
