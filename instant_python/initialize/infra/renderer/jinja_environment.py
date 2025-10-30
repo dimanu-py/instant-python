@@ -1,4 +1,5 @@
 from collections.abc import Callable
+from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, ChoiceLoader, PackageLoader
 
@@ -29,16 +30,7 @@ class JinjaEnvironment:
         self.add_filter("compute_base_path", _compute_base_path)
         self.add_filter("has_dependency", _has_dependency)
 
-    def render_template(self, name: str, context: dict[str, str] = None) -> str:
-        """Renders a template with the given context.
-
-        Args:
-            name: The name of the template to render
-            context: A dictionary of variables to pass to the template
-
-        Returns:
-            The rendered template as a string
-        """
+    def render_template(self, name: str, context: dict[str, Any] | None = None) -> str:
         template = self._env.get_template(name)
         return template.render(**(context or self._EMPTY_CONTEXT))
 
