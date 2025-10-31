@@ -173,6 +173,10 @@ class TestInitCli:
 
     @staticmethod
     def _read_base_config() -> dict:
-        config_path = Path(__file__).parent / "ipy.yml"
-        with config_path.open("r") as file:
+        resources_path =  test_resources_path() / "base_ipy_config.yml"
+        with resources_path.open("r") as file:
             return yaml.safe_load(file)
+
+
+def test_resources_path() -> Path:
+    return Path("test").resolve() / "resources"

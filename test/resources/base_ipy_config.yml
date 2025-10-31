@@ -1,0 +1,21 @@
+dependencies: []
+general:
+  author: ''
+  dependency_manager: uv
+  description: Python Project Description
+  license: MIT
+  python_version: '3.10'
+  slug: python-project
+  source_name: src
+  version: 0.1.0
+  year: 2025
+git:
+  email: johndoe@gmail.com
+  initialize: false
+  username: johndoe
+template:
+  aggregate_name: null
+  bounded_context: null
+  built_in_features: []
+  name: standard_project
+  specify_bounded_context: false
