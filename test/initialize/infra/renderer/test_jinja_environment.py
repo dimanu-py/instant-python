@@ -28,4 +28,6 @@ class TestJinjaEnvironment:
         expect(rendered_content).to_not(be_none)
 
     def test_should_raise_error_when_template_is_not_found_anywhere(self) -> None:
-        expect(lambda: self._jinja_environment.render_template("non_existing_template.j2")).to(raise_error(TemplateNotFound))
+        expect(lambda: self._jinja_environment.render_template("non_existing_template.j2")).to(
+            raise_error(TemplateNotFound)
+        )

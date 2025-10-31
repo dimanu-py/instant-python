@@ -30,9 +30,7 @@ class TestGitConfig:
         ],
     )
     def test_should_not_allow_to_initialize_git_if_user_is_not_present(self, username: Union[str, None]) -> None:
-        expect(lambda: GitConfigMother.with_parameters(username=username)).to(
-            raise_error(GitUserOrEmailNotPresent)
-        )
+        expect(lambda: GitConfigMother.with_parameters(username=username)).to(raise_error(GitUserOrEmailNotPresent))
 
     @pytest.mark.parametrize(
         "email",

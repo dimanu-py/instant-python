@@ -3,7 +3,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import TypedDict, Union
 
-import yaml
 
 from instant_python.config.domain.dependency_config import (
     DependencyConfig,

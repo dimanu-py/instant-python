@@ -10,9 +10,7 @@ from test.initialize.utils import resources_path
 
 class TestJinjaProjectRenderer:
     def test_should_render_standard_project_structure(self) -> None:
-        config = ConfigSchemaMother.with_template(
-            template=SupportedTemplates.STANDARD.value
-        )
+        config = ConfigSchemaMother.with_template(template=SupportedTemplates.STANDARD.value)
         renderer = JinjaProjectRenderer(env=JinjaEnvironment(str(resources_path())))
 
         project_structure = renderer.render(context_config=config)
@@ -21,16 +19,13 @@ class TestJinjaProjectRenderer:
         expect(project_structure).to_not(be_empty)
 
     def test_should_include_file_template_content_in_project_structure(self) -> None:
-        config = ConfigSchemaMother.with_template(
-            template=SupportedTemplates.STANDARD.value
-        )
+        config = ConfigSchemaMother.with_template(template=SupportedTemplates.STANDARD.value)
         renderer = JinjaProjectRenderer(env=JinjaEnvironment(str(resources_path())))
 
         project_structure = renderer.render(context_config=config)
 
         first_file = next(
-            (item for item in self._flatten_structure(project_structure) if item.get("type") == "file"),
-            None
+            (item for item in self._flatten_structure(project_structure) if item.get("type") == "file"), None
         )
         expect(first_file).to_not(be_none)
         expect(first_file.get("content")).to_not(be_empty)

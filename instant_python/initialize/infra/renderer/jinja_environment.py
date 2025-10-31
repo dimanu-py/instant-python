@@ -18,7 +18,9 @@ class JinjaEnvironment:
             loader=ChoiceLoader(
                 [
                     FileSystemLoader(user_template_path),
-                    PackageLoader(package_name=self._BASE_PACKAGE_NAME, package_path=self._PROJECT_STRUCTURE_TEMPLATE_PATH),
+                    PackageLoader(
+                        package_name=self._BASE_PACKAGE_NAME, package_path=self._PROJECT_STRUCTURE_TEMPLATE_PATH
+                    ),
                     PackageLoader(package_name=self._BASE_PACKAGE_NAME, package_path=self._BOILERPLATE_TEMPLATE_PATH),
                 ]
             ),

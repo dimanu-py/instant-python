@@ -16,7 +16,9 @@ class JinjaProjectRenderer(ProjectRenderer):
     def render(self, context_config: ConfigSchema) -> list[dict]:
         template_name = self._get_project_main_structure_template(context_config.template_type)
         basic_project_structure = self._render_project_structure_with_jinja(context_config, template_name)
-        project_structure_with_files_content = self._add_template_content_to_files(context_config, basic_project_structure)
+        project_structure_with_files_content = self._add_template_content_to_files(
+            context_config, basic_project_structure
+        )
         return project_structure_with_files_content
 
     def _render_project_structure_with_jinja(self, context_config: ConfigSchema, template_name: str) -> list[dict]:
