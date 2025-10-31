@@ -1,14 +1,13 @@
-from pathlib import Path
-
 from expects import be_none, expect, have_keys, equal, raise_error
 from jinja2 import TemplateNotFound
 
 from instant_python.initialize.infra.renderer.jinja_environment import JinjaEnvironment
+from test.initialize.delivery.test_init_cli import test_resources_path
 
 
 class TestJinjaEnvironment:
     def setup_method(self) -> None:
-        self._jinja_environment = JinjaEnvironment(user_template_path=str(Path(__file__).parent / "resources"))
+        self._jinja_environment = JinjaEnvironment(user_template_path=str(test_resources_path()))
 
     def test_should_initialize_environment(self) -> None:
         expect(self._jinja_environment._env).not_to(be_none)

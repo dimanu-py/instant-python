@@ -1,33 +1,26 @@
 {
+  "dependencies": [],
   "general": {
+    "author": "",
+    "dependency_manager": "uv",
+    "description": "Python Project Description",
+    "license": "MIT",
+    "python_version": "3.10",
     "slug": "python-project",
     "source_name": "src",
-    "description": "Python Project Description",
     "version": "0.1.0",
-    "author": "Diego Martinez",
-    "license": "MIT",
-    "python_version": 3.13,
-    "dependency_manager": "uv"
+    "year": 2025
   },
-  "dependencies": [
-    {
-      "name": "pytest",
-      "version": "latest",
-      "is_dev": true,
-      "group": "test"
-    },
-    {
-      "name": "fastapi",
-      "version": "latest",
-      "is_dev": false
-    }
-  ],
   "git": {
-    "initialize": true,
-    "username": "dimanu-py",
-    "email": "dimanu.py@gmail.com"
+    "email": "johndoe@gmail.com",
+    "initialize": false,
+    "username": "johndoe"
   },
   "template": {
-    "name": "domain_driven_design"
+    "aggregate_name": null,
+    "bounded_context": null,
+    "built_in_features": [],
+    "name": "standard_project",
+    "specify_bounded_context": false
   }
 }
