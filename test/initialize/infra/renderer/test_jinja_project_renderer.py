@@ -2,6 +2,7 @@ from expects import be_none, expect, be_empty
 
 from instant_python.initialize.infra.renderer.jinja_environment import JinjaEnvironment
 from instant_python.initialize.infra.renderer.jinja_project_renderer import JinjaProjectRenderer
+from instant_python.project_creator.node import NodeType
 from instant_python.shared.supported_templates import SupportedTemplates
 from test.config.domain.mothers.config_schema_mother import ConfigSchemaMother
 from test.initialize.utils import test_resources_path
@@ -27,16 +28,15 @@ class TestJinjaProjectRenderer:
 
         project_structure = renderer.render(context_config=config)
 
-        first_file = self._extract_first_file_from_structure(project_structure)
+        first_file = next(
+            (item for item in self._flatten_structure(project_structure) if item.get("type") == "file"),
+            None
+        )
         expect(first_file).to_not(be_none)
         expect(first_file.get("content")).to_not(be_empty)
 
-    def _extract_first_file_from_structure(self, project_structure):
-        for item in project_structure:
-            if item.get("type") == "file":
-                return item
-            elif item.get("type") == "directory":
-                nested_file = self._extract_first_file_from_structure(item.get("children", []))
-                if nested_file:
-                    return nested_file
-        return None
+    def _flatten_structure(self, structure):
+        for item in structure:
+            yield item
+            if item.get("type") == NodeType.DIRECTORY:
+                yield from self._flatten_structure(item.get("children", []))
