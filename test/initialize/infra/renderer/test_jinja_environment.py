@@ -2,7 +2,7 @@ from expects import be_none, expect, have_keys, equal, raise_error
 from jinja2 import TemplateNotFound
 
 from instant_python.initialize.infra.renderer.jinja_environment import JinjaEnvironment
-from test.initialize.delivery.test_init_cli import test_resources_path
+from test.initialize.utils import test_resources_path
 
 
 class TestJinjaEnvironment:

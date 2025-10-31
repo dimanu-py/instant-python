@@ -1,6 +1,5 @@
 import json
 import tempfile
-from pathlib import Path
 
 import pytest
 import yaml
@@ -13,6 +12,7 @@ from instant_python.shared.supported_licenses import SupportedLicenses
 from instant_python.shared.supported_managers import SupportedManagers
 from instant_python.shared.supported_python_versions import SupportedPythonVersions
 from instant_python.shared.supported_templates import SupportedTemplates
+from test.initialize.utils import test_resources_path
 
 
 @pytest.mark.acceptance
@@ -173,10 +173,6 @@ class TestInitCli:
 
     @staticmethod
     def _read_base_config() -> dict:
-        resources_path =  test_resources_path() / "base_ipy_config.yml"
+        resources_path = test_resources_path() / "base_ipy_config.yml"
         with resources_path.open("r") as file:
             return yaml.safe_load(file)
-
-
-def test_resources_path() -> Path:
-    return Path("test").resolve() / "resources"

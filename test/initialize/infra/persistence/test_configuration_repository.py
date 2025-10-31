@@ -5,7 +5,7 @@ from expects import expect, be_none, raise_error
 
 from instant_python.configuration.parser.configuration_file_not_found import ConfigurationFileNotFound
 from instant_python.initialize.infra.persistence.config_repository import YamlConfigRepository
-from test.initialize.delivery.test_init_cli import test_resources_path
+from test.initialize.utils import test_resources_path
 
 
 class TestConfigurationRepository:
