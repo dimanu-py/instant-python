@@ -12,8 +12,11 @@ class JinjaProjectRenderer(ProjectRenderer):
         self._env = env
 
     def render(self, context_config: ConfigSchema) -> list[dict]:
-        template_name = f"{context_config.template_type}/{self._MAIN_STRUCTURE_TEMPLATE_FILE}"
+        template_name = self._get_project_main_structure_template(context_config.template_type)
         raw_project_structure = self._env.render_template(
             name=template_name, context=context_config.to_primitives()
         )
         return yaml.safe_load(raw_project_structure)
+
+    def _get_project_main_structure_template(self, template_type: str) -> str:
+        return f"{template_type}/{self._MAIN_STRUCTURE_TEMPLATE_FILE}"
