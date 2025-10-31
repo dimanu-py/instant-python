@@ -14,3 +14,12 @@ class ConfigSchemaMother:
             template=TemplateConfigMother.any(),
             git=GitConfigMother.initialize(),
         )
+
+    @staticmethod
+    def with_template(template: str) -> ConfigSchema:
+        return ConfigSchema(
+            general=GeneralConfigMother.any(),
+            dependencies=[DependencyConfigMother.any() for _ in range(3)],
+            template=TemplateConfigMother.with_parameters(name=template),
+            git=GitConfigMother.initialize(),
+        )
