@@ -5,6 +5,15 @@
     - name: domain
       type: directory
       python: True
+      children:
+        - name: errors
+          type: directory
+          python: True
+          children:
+            - name: domain_error
+              type: file
+              extension: .py
+              template: domain_error_template.py
     - name: application
       type: directory
       python: True
