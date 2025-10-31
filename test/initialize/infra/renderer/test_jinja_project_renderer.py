@@ -5,7 +5,7 @@ from instant_python.initialize.infra.renderer.jinja_project_renderer import Jinj
 from instant_python.project_creator.node import NodeType
 from instant_python.shared.supported_templates import SupportedTemplates
 from test.config.domain.mothers.config_schema_mother import ConfigSchemaMother
-from test.initialize.utils import test_resources_path
+from test.initialize.utils import resources_path
 
 
 class TestJinjaProjectRenderer:
@@ -13,7 +13,7 @@ class TestJinjaProjectRenderer:
         config = ConfigSchemaMother.with_template(
             template=SupportedTemplates.STANDARD.value
         )
-        renderer = JinjaProjectRenderer(env=JinjaEnvironment(str(test_resources_path())))
+        renderer = JinjaProjectRenderer(env=JinjaEnvironment(str(resources_path())))
 
         project_structure = renderer.render(context_config=config)
 
@@ -24,7 +24,7 @@ class TestJinjaProjectRenderer:
         config = ConfigSchemaMother.with_template(
             template=SupportedTemplates.STANDARD.value
         )
-        renderer = JinjaProjectRenderer(env=JinjaEnvironment(str(test_resources_path())))
+        renderer = JinjaProjectRenderer(env=JinjaEnvironment(str(resources_path())))
 
         project_structure = renderer.render(context_config=config)
 

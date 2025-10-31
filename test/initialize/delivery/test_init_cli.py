@@ -12,7 +12,7 @@ from instant_python.shared.supported_licenses import SupportedLicenses
 from instant_python.shared.supported_managers import SupportedManagers
 from instant_python.shared.supported_python_versions import SupportedPythonVersions
 from instant_python.shared.supported_templates import SupportedTemplates
-from test.initialize.utils import test_resources_path
+from test.initialize.utils import resources_path
 
 
 @pytest.mark.acceptance
@@ -173,6 +173,6 @@ class TestInitCli:
 
     @staticmethod
     def _read_base_config() -> dict:
-        resources_path = test_resources_path() / "base_ipy_config.yml"
-        with resources_path.open("r") as file:
+        base_config_path = resources_path() / "base_ipy_config.yml"
+        with base_config_path.open("r") as file:
             return yaml.safe_load(file)

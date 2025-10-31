@@ -5,13 +5,13 @@ from expects import expect, be_none, raise_error
 
 from instant_python.configuration.parser.configuration_file_not_found import ConfigurationFileNotFound
 from instant_python.initialize.infra.persistence.config_repository import YamlConfigRepository
-from test.initialize.utils import test_resources_path
+from test.initialize.utils import resources_path
 
 
 class TestConfigurationRepository:
     def test_should_read_existing_config_file(self) -> None:
         repository = YamlConfigRepository()
-        config_path = str(test_resources_path() / "base_ipy_config.yml")
+        config_path = str(resources_path() / "base_ipy_config.yml")
 
         raw_config = repository.read(config_path)
 
