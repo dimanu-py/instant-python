@@ -10,4 +10,4 @@ class ProjectInitializer:
         self._project_renderer = renderer
 
     def execute(self, config: ConfigSchema) -> None:
-        project_structure = self._project_renderer.render(context_config=config)
+        _ = self._project_renderer.render(context_config=config)
