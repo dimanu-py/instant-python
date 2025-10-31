@@ -15,9 +15,9 @@ class JinjaProjectRenderer(ProjectRenderer):
 
     def render(self, context_config: ConfigSchema) -> list[dict]:
         template_name = self._get_project_main_structure_template(context_config.template_type)
-        project_structure = self._render_project_structure_with_jinja(context_config, template_name)
-        self._add_template_content_to_files(project_structure, context_config)
-        return project_structure
+        basic_project_structure = self._render_project_structure_with_jinja(context_config, template_name)
+        project_structure_with_files_content = self._add_template_content_to_files(context_config, basic_project_structure)
+        return project_structure_with_files_content
 
     def _render_project_structure_with_jinja(self, context_config: ConfigSchema, template_name: str) -> list[dict]:
         raw_project_structure = self._env.render_template(name=template_name, context=context_config.to_primitives())
@@ -26,17 +26,21 @@ class JinjaProjectRenderer(ProjectRenderer):
     def _get_project_main_structure_template(self, template_type: str) -> str:
         return f"{template_type}/{self._MAIN_STRUCTURE_TEMPLATE_FILE}"
 
-    def _add_template_content_to_files(self, basic_project_structure: list[dict], context_config: ConfigSchema) -> None:
-        for node in basic_project_structure:
-            if node.get("type") == NodeType.FILE:
-                file_content = self._env.render_template(
-                    name=node["template"],
-                    context={
-                        **context_config.to_primitives(),
-                        "template_types": SupportedTemplates,
-                    },
-                )
-                node["content"] = file_content
-            elif node.get("type") == NodeType.DIRECTORY:
-                children = node.get("children", [])
-                self._add_template_content_to_files(children, context_config)
+    def _add_template_content_to_files(self, context_config: ConfigSchema, project_structure: list[dict]) -> list[dict]:
+        for node in project_structure:
+            self._populate_file_content(context_config, node)
+        return project_structure
+
+    def _populate_file_content(self, context_config: ConfigSchema, node: dict) -> None:
+        if node.get("type") == NodeType.FILE:
+            file_content = self._env.render_template(
+                name=node["template"],
+                context={
+                    **context_config.to_primitives(),
+                    "template_types": SupportedTemplates,
+                },
+            )
+            node["content"] = file_content
+
+        for child in node.get("children", []):
+            self._populate_file_content(context_config, child)
