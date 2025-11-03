@@ -2,6 +2,118 @@
 
 <!-- version list -->
 
+## v0.14.0 (2025-11-03)
+
+### ✨ Features
+
+- **templates**: Add new template that implements a general way of getting async sessions
+  ([`0f6d37e`](https://github.com/dimanu-py/instant-python/commit/0f6d37e1ae9cf676c41719bd7c39e7056b15d15c))
+
+- **initialize**: Implement build_path_for method to construct file paths
+  ([`f1f253f`](https://github.com/dimanu-py/instant-python/commit/f1f253f1cd255b416bb7f337e7dcd85db8c4cf09))
+
+- **initialize**: Enhance project structure rendering by adding template content to files
+  ([`8b6c98c`](https://github.com/dimanu-py/instant-python/commit/8b6c98c35a4572f905bfae9a52e744cf02af7817))
+
+- **initialize**: Implement rendering of project structure using YAML template
+  ([`6d93e9a`](https://github.com/dimanu-py/instant-python/commit/6d93e9a61d2822068163cfe983be8c9ea189b3a4))
+
+- **initialize**: Enhance JinjaEnvironment to support multiple template loaders
+  ([`5b69e4f`](https://github.com/dimanu-py/instant-python/commit/5b69e4f7c35b526b8de41b663108918c2d2ffba3))
+
+- **initialize**: Implement render_template method in JinjaEnvironment
+  ([`860bc0b`](https://github.com/dimanu-py/instant-python/commit/860bc0b6285c0bf4ec36d9c20d3c6febf71d0a37))
+
+- **initialize**: Add render_template method to JinjaEnvironment with placeholder implementation
+  ([`4c67ad3`](https://github.com/dimanu-py/instant-python/commit/4c67ad300473719fbac6f8dab3470407dc1c5559))
+
+- **initialize**: Set FileSystemLoader with user_template_path in JinjaEnvironment
+  ([`d6ef776`](https://github.com/dimanu-py/instant-python/commit/d6ef7766adcc89ef03f8ad2905931fc8541b949e))
+
+- **initialize**: Add user_template_path parameter to JinjaEnvironment constructor
+  ([`42d34ac`](https://github.com/dimanu-py/instant-python/commit/42d34ac4a46c097a7dca0f75175e7ad64b3ca98c))
+
+- **initialize**: Add custom filters for jinja and load them by default in jinja env
+  ([`4194509`](https://github.com/dimanu-py/instant-python/commit/419450927edd6b3e81199b7301ebdad25fbfb8b2))
+
+- **initialize**: Add method to register custom filters in jinja environment
+  ([`ec1d01a`](https://github.com/dimanu-py/instant-python/commit/ec1d01a84faa2c65618938ccbd47d46f3026dddc))
+
+- **initialize**: Add test to verify jinja environment loads custom filters
+  ([`31ff4a5`](https://github.com/dimanu-py/instant-python/commit/31ff4a50d1a6b8dff97813ccc4fe99db4376301b))
+
+- **initialize**: Instantiate jinja 2 environment inside wrapper class
+  ([`c0f7ec0`](https://github.com/dimanu-py/instant-python/commit/c0f7ec0d39f721d999cd4a9330c3fab7c32192c9))
+
+- **initializer**: Implement project structure rendering in execute method
+  ([`a91b8ae`](https://github.com/dimanu-py/instant-python/commit/a91b8ae66e81291b56963b8e9ea39eb47618daba))
+
+### 🪲 Bug Fixes
+
+- **templates**: Correct spelling error in sqlalchemy repository template
+  ([`97f6003`](https://github.com/dimanu-py/instant-python/commit/97f6003a4b89d9553e969bce9794ce3f0e59ac17))
+
+- **initialize**: Search for default template that is at first level of boilerplate folder
+  ([`841badc`](https://github.com/dimanu-py/instant-python/commit/841badc6af64490729fd448f3797393d9ed47cd4))
+
+### ⚙️ Build System
+
+- Update testpaths to point to the correct directory
+  ([`61bc700`](https://github.com/dimanu-py/instant-python/commit/61bc700f99533bf119c03590fabd44738f88f7a7))
+
+### ♻️ Refactoring
+
+- **templates**: Modify all errors template to not include 'error_type' attribute and leave just
+  typical message field
+  ([`1fc2a39`](https://github.com/dimanu-py/instant-python/commit/1fc2a39e0662a50c5a701c1f2cacb625482175c1))
+
+- **templates**: Modify source structure of all project templates so exclude sync sqlalchemy and
+  include async sqlalchemy when present
+  ([`244b597`](https://github.com/dimanu-py/instant-python/commit/244b5975c6fb2d64d503a9a64b1961ee0837e082))
+
+- **templates**: Modify async sqlalchemy structure template to exclude sqlalchemy repository
+  template and include async session template
+  ([`447caa4`](https://github.com/dimanu-py/instant-python/commit/447caa4472a7e080f15bc45a5da37c3694b686ae))
+
+- **initialize**: Extract semantic method to populate file keys with content from template
+  ([`5ceb8ec`](https://github.com/dimanu-py/instant-python/commit/5ceb8ec574d366902d671b816cc893df8d4d919f))
+
+- **initialize**: Extract semantic method to express operation of rendering the project structure
+  using jinja
+  ([`f610639`](https://github.com/dimanu-py/instant-python/commit/f61063922d0e64c3fbb19832d6e663c5b15adbad))
+
+- **initialize**: Extract semantic method to generate main structure template path
+  ([`ff69c87`](https://github.com/dimanu-py/instant-python/commit/ff69c87829d71e52d4f66fa36dbc879fd276dc56))
+
+- **config**: Extract semantic methods in ConfigGenerator use case to keep high level expressions in
+  main 'execute' method
+  ([`766a2bc`](https://github.com/dimanu-py/instant-python/commit/766a2bcd1ed614a093dfe6bd99a1f45ba997df8b))
+
+- **initialize**: Update render_template method to accept Any type for context
+  ([`e6501bc`](https://github.com/dimanu-py/instant-python/commit/e6501bcb777f5ba2be8903f04629affd6ba66521))
+
+- **initialize**: Rename render_project_structure method to render
+  ([`49fd942`](https://github.com/dimanu-py/instant-python/commit/49fd942a0bdcfdbababee08d0f0c304e5f9d78a5))
+
+- **initialize**: Rename configuration repository classes for consistency
+  ([`4b4fa94`](https://github.com/dimanu-py/instant-python/commit/4b4fa94e95f77e9f08d64dc96462551b218324f8))
+
+- **initialize**: Move config repository to a persistence module to keep modules organized
+  ([`3d9a7e0`](https://github.com/dimanu-py/instant-python/commit/3d9a7e02481c5fe5401f28c035ca21bc20374ba0))
+
+- **initialize**: Modify signature of renderer interface to only accept context config parameter
+  ([`835060f`](https://github.com/dimanu-py/instant-python/commit/835060feb47d2446a06977b2deb3116beed67adf))
+
+- **initialize**: Clean up jinja environment tests extracting common object instantiation
+  ([`c73e2e3`](https://github.com/dimanu-py/instant-python/commit/c73e2e38e75d839a1c1ae8a63798db9630d05fd9))
+
+- **config**: Rename all references from 'configuration' to 'config' for naming consistency
+  ([`7691173`](https://github.com/dimanu-py/instant-python/commit/769117371e59d5642b5cc8fbffe9a55099e5386d))
+
+- **config**: Remove unused method 'save_on_current_directory' method
+  ([`e760771`](https://github.com/dimanu-py/instant-python/commit/e760771438653b669cbdac0a9c8049dc298d7c0c))
+
+
 ## v0.13.0 (2025-10-26)
 
 ### ✨ Features
