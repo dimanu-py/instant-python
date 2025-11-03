@@ -23,6 +23,10 @@ class ProjectStructureMother:
         return ProjectStructure(nodes=nodes)
 
     @classmethod
+    def with_one_directory(cls) -> ProjectStructure:
+        return ProjectStructure(nodes=[DirectoryMother.without_children()])
+
+    @classmethod
     def _create_random_node(cls, depth: int) -> Node:
         node_types = [NodeType.FILE, NodeType.DIRECTORY]
 
