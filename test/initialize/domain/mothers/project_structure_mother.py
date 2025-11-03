@@ -6,8 +6,6 @@ from test.initialize.domain.mothers.nodes_mother import FileMother, DirectoryMot
 
 
 class ProjectStructureMother:
-    _PYTHON_EXTENSION = ".py"
-    _EMPTY_CONTENT = ""
     _MIN_NODES = 1
     _MAX_NODES = 5
     _MAX_DEPTH = 3
@@ -25,6 +23,10 @@ class ProjectStructureMother:
     @classmethod
     def with_one_directory(cls, name: str, is_python_module: bool) -> ProjectStructure:
         return ProjectStructure(nodes=[DirectoryMother.without_children(name, is_python_module)])
+
+    @classmethod
+    def with_one_python_file(cls, name: str) -> ProjectStructure:
+        return ProjectStructure(nodes=[FileMother.empty(name)])
 
     @classmethod
     def _create_random_node(cls, depth: int) -> Node:
