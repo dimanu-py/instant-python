@@ -32,7 +32,6 @@ async def unexpected_exception_handler(request: Request, exc: Exception) -> JSON
 		details={
 			"error": {
 				"message": str(exc),
-				"type": "unexpected_error",
 			},
 			"method": request.method,
 			"source": request.url.path,
@@ -45,7 +44,7 @@ async def domain_error_handler(request: Request, exc: DomainError) -> JSONRespon
 	logger.error(
 		message=f"error - {request.url.path}",
 		details={
-			"error": exc.to_primitives(),
+			"error": {"message": exc.message},
 			"method": request.method,
 			"source": request.url.path,
 		},
@@ -60,7 +59,7 @@ async def validation_error_handler(
 	logger.error(
 		message=f"error - {request.url.path}",
 		details={
-			"error": {"message": str(exc), "type": "validation_error"},
+			"error": {"message": str(exc)},
 			"method": request.method,
 			"source": request.url.path,
 		},

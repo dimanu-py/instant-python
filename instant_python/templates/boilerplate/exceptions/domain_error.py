@@ -6,6 +6,6 @@ from {{ general.source_name }}.errors.base_error import BaseError
 {% endif %}
 
 
-class DomainError(Error):
+class DomainError(BaseError):
     ...
 

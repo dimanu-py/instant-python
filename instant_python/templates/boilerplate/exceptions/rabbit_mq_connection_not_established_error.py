@@ -9,4 +9,4 @@ from {{ general.source_name }}.errors.domain_error import DomainError
 
 class RabbitMqConnectionNotEstablishedError(DomainError):
     def __init__(self) -> None:
-        super().__init__(message="RabbitMQ connection not established.", error_type="rabbit_mq_connection",)
+        super().__init__(message="RabbitMQ connection not established.")
