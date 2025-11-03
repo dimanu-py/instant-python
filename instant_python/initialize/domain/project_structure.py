@@ -1,3 +1,5 @@
+from collections.abc import Iterator
+
 from instant_python.initialize.domain.nodes import Node, NodeType, Directory, File
 from instant_python.project_creator.unknown_node_typer_error import UnknownNodeTypeError
 
@@ -24,3 +26,9 @@ class ProjectStructure:
             return File(name=name, extension=extension, content=content)
         else:
             raise UnknownNodeTypeError(node_type)
+
+    def __iter__(self) -> Iterator[Node]:
+        return iter(self._nodes)
+
+    def __len__(self) -> int:
+        return len(self._nodes)
