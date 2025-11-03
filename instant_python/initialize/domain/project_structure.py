@@ -5,8 +5,14 @@ from instant_python.project_creator.unknown_node_typer_error import UnknownNodeT
 
 
 class ProjectStructure:
-    def __init__(self, nodes: list[dict]) -> None:
-        self._nodes = self._build_project_structure(nodes)
+    def __init__(self, nodes: list[Node]) -> None:
+        self._nodes = nodes
+
+    @classmethod
+    def from_raw_structure(cls, structure: list[dict]) -> "ProjectStructure":
+        return cls(
+            nodes=cls._build_project_structure(structure)
+        )
 
     def flatten(self) -> Iterator[Node]:
         for node in self._nodes:
@@ -14,17 +20,19 @@ class ProjectStructure:
             if isinstance(node, Directory):
                 yield from self._flatten_directory(node)
 
-    def _build_project_structure(self, nodes: list[dict]) -> list[Node]:
-        return [self._build_node(node) for node in nodes]
+    @classmethod
+    def _build_project_structure(cls, nodes: list[dict]) -> list[Node]:
+        return [cls._build_node(node) for node in nodes]
 
-    def _build_node(self, node: dict) -> Node:
+    @classmethod
+    def _build_node(cls, node: dict) -> Node:
         node_type = node["type"]
         name = node["name"]
 
         if node_type == NodeType.DIRECTORY:
             children = node.get("children", [])
             is_python_module = node.get("python", False)
-            directory_children = [self._build_node(child) for child in children]
+            directory_children = [cls._build_node(child) for child in children]
             return Directory(name=name, is_python_module=is_python_module, children=directory_children)
         elif node_type == NodeType.FILE:
             extension = node.get("extension", "")
