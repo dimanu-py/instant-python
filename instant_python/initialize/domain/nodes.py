@@ -5,4 +5,4 @@ class File:
         self._content = content
 
     def build_path_for(self, path: str) -> str:
-        raise NotImplementedError
+        return f"{path}/{self._name}{self._extension}"
