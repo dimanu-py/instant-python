@@ -4,6 +4,7 @@ from expects import expect
 
 from instant_python.initialize.application.project_initializer import ProjectInitializer
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
+from instant_python.initialize.domain.project_writer import ProjectWriter
 from test.config.domain.mothers.config_schema_mother import ConfigSchemaMother
 from test.initialize.domain.mothers.project_structure_mother import ProjectStructureMother
 
@@ -11,13 +12,18 @@ from test.initialize.domain.mothers.project_structure_mother import ProjectStruc
 class TestProjectInitializer:
     def test_should_initialize_project(self) -> None:
         renderer = Mock(ProjectRenderer)
+        writer = Mock(ProjectWriter)
         config = ConfigSchemaMother.any()
+        project_structure = ProjectStructureMother.any()
 
-        expect_call(renderer).render(config).returns(ProjectStructureMother.any())
+        expect_call(renderer).render(config).returns(project_structure)
+        expect_call(writer).write(project_structure, config).returns(None)
 
         project_initializer = ProjectInitializer(
             renderer=renderer,
+            writer=writer,
         )
         project_initializer.execute(config=config)
 
         expect(renderer).to(have_been_satisfied)
+        expect(writer).to(have_been_satisfied)
