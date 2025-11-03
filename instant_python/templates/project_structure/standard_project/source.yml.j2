@@ -2,7 +2,7 @@
 - name: {{ general.source_name }}
   type: directory
   python: True
-  {% if ["value_objects", "synchronous_sqlalchemy", "event_bus", "async_alembic", "logger", "async_sqlalchemy", "fastapi_application"] | is_in(template.built_in_features) %}
+  {% if ["value_objects", "event_bus", "async_alembic", "logger", "async_sqlalchemy", "fastapi_application"] | is_in(template.built_in_features) %}
   children:
     {% if "value_objects" in template.built_in_features %}
     {{ macros.include_and_indent("project_structure/value_objects.yml.j2", 4) }}
@@ -10,9 +10,6 @@
     {% if "event_bus" in template.built_in_features %}
     {{ macros.include_and_indent("project_structure/event_bus_domain.yml.j2", 4) }}
     {{ macros.include_and_indent("project_structure/event_bus_infra.yml.j2", 4) }}
-    {% endif %}
-    {% if "synchronous_sqlalchemy" in template.built_in_features %}
-    {{ macros.include_and_indent("project_structure/synchronous_sqlalchemy.yml.j2", 4) }}
     {% endif %}
     {% if ["logger"] | is_in(template.built_in_features) %}
     {{ macros.include_and_indent("project_structure/logger.yml.j2", 4) }}
