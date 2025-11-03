@@ -1,6 +1,6 @@
 from expects import expect, equal
 
-from instant_python.initialize.domain.nodes import File
+from instant_python.initialize.domain.nodes import File, Directory
 
 
 class TestFile:
@@ -10,3 +10,12 @@ class TestFile:
         path = file.build_path_for(path="my_project")
 
         expect(path).to(equal("my_project/sample.py"))
+
+
+class TestDirectory:
+    def test_should_build_directory_path_inside_project(self) -> None:
+        directory = Directory(name="config", is_python_module=True, children=[])
+
+        path = directory.build_path_for(path="my_project")
+
+        expect(path).to(equal("my_project/config"))
