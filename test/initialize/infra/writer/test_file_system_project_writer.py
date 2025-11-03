@@ -10,6 +10,18 @@ from test.initialize.domain.mothers.project_structure_mother import ProjectStruc
 
 
 class TestFileSystemProjectWriter:
+    def test_should_create_standard_directory_in_file_system(self) -> None:
+        project_structure = ProjectStructureMother.with_one_directory(name="standard_directory", is_python_module=False)
+        config = ConfigSchemaMother.any()
+        writer = FileSystemProjectWriter()
+
+        with tempfile.TemporaryDirectory() as project_dir:
+            project_location_path = Path(project_dir)
+            writer.write(project_structure, config, project_location_path)
+            created_structure = self._read_folder_structure(project_location_path)
+
+        verify(json.dumps(created_structure, indent=2))
+
     def test_should_create_python_module_in_file_system(self) -> None:
         project_structure = ProjectStructureMother.with_one_directory(name="awesome_module", is_python_module=True)
         config = ConfigSchemaMother.any()
