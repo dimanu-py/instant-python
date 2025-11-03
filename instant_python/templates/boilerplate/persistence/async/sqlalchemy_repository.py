@@ -20,7 +20,7 @@ Entity = TypeVar("Entity")
 
 class SqlalchemyRepository[Model: Base]:
 	_model_class: type[Model]
-	_session_maker: async_sessionmaker[AssyncSession]
+	_session_maker: async_sessionmaker[AsyncSession]
 
 	def __init__(self, engine: AsyncEngine, model_class: type[Model]) -> None:
 		self._session_maker = async_sessionmaker(bind=engine)
