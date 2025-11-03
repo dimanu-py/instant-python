@@ -5,6 +5,7 @@ from expects import expect
 from instant_python.initialize.application.project_initializer import ProjectInitializer
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
 from test.config.domain.mothers.config_schema_mother import ConfigSchemaMother
+from test.initialize.domain.mothers.project_structure_mother import ProjectStructureMother
 
 
 class TestProjectInitializer:
@@ -12,7 +13,7 @@ class TestProjectInitializer:
         renderer = Mock(ProjectRenderer)
         config = ConfigSchemaMother.any()
 
-        expect_call(renderer).render(config).returns({})
+        expect_call(renderer).render(config).returns(ProjectStructureMother.any())
 
         project_initializer = ProjectInitializer(
             renderer=renderer,
