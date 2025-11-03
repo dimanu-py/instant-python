@@ -20,7 +20,7 @@ class JinjaProjectRenderer(ProjectRenderer):
         project_structure_with_files_content = self._add_template_content_to_files(
             context_config, basic_project_structure
         )
-        return ProjectStructure(nodes=project_structure_with_files_content)
+        return ProjectStructure.from_raw_structure(structure=project_structure_with_files_content)
 
     def _render_project_structure_with_jinja(self, context_config: ConfigSchema, template_name: str) -> list[dict]:
         raw_project_structure = self._env.render_template(name=template_name, context=context_config.to_primitives())
