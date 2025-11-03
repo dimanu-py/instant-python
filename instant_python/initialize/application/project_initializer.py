@@ -13,4 +13,5 @@ class ProjectInitializer:
         self._writer = writer
 
     def execute(self, config: ConfigSchema) -> None:
-        _ = self._project_renderer.render(context_config=config)
+        project_structure = self._project_renderer.render(context_config=config)
+        self._writer.write(project_structure=project_structure, config=config)
