@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import TypeAlias, Union
 
 
@@ -25,6 +26,11 @@ class Directory:
 
     def build_path_for(self, path: str) -> str:
         return f"{path}/{self._name}"
+
+
+class NodeType(str, Enum):
+    DIRECTORY = "directory"
+    FILE = "file"
 
 
 Node: TypeAlias = Union[File, Directory]
