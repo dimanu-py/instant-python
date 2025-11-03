@@ -18,10 +18,21 @@ class TestFileSystemProjectWriter:
         with tempfile.TemporaryDirectory() as project_dir:
             project_location_path = Path(project_dir)
             writer.write(project_structure, config, project_location_path)
-            created_structure = self._read_folder_structure(Path(project_location_path))
+            created_structure = self._read_folder_structure(project_location_path)
 
         verify(json.dumps(created_structure, indent=2))
 
     def _read_folder_structure(self, path: Path) -> dict:
-        raise NotImplementedError
+        structure = {}
+
+        if not path.exists():
+            return structure
+
+        for child in sorted(path.iterdir(), key=lambda p: p.name):
+            if child.is_dir():
+                structure[f"{child.name}/"] = self._read_folder_structure(child)
+            else:
+                structure[child.name] = child.read_text()
+
+        return structure
 
