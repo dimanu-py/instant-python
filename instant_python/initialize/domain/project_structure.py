@@ -8,6 +8,12 @@ class ProjectStructure:
     def __init__(self, nodes: list[dict]) -> None:
         self._nodes = self._build_project_structure(nodes)
 
+    def flatten(self) -> Iterator[Node]:
+        for node in self._nodes:
+            yield node
+            if isinstance(node, Directory):
+                yield from self._flatten_directory(node)
+
     def _build_project_structure(self, nodes: list[dict]) -> list[Node]:
         return [self._build_node(node) for node in nodes]
 
@@ -32,3 +38,9 @@ class ProjectStructure:
 
     def __len__(self) -> int:
         return len(self._nodes)
+
+    def _flatten_directory(self, directory: Directory) -> Iterator[Node]:
+        for child in directory:
+            yield child
+            if isinstance(child, Directory):
+                yield from self._flatten_directory(child)
