@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from doublex import Mock, expect_call
 from doublex_expects import have_been_satisfied
 from expects import expect
@@ -15,15 +17,16 @@ class TestProjectInitializer:
         writer = Mock(ProjectWriter)
         config = ConfigSchemaMother.any()
         project_structure = ProjectStructureMother.any()
+        destination_folder = Path.cwd()
 
         expect_call(renderer).render(config).returns(project_structure)
-        expect_call(writer).write(project_structure, config).returns(None)
+        expect_call(writer).write(project_structure, config, destination_folder).returns(None)
 
         project_initializer = ProjectInitializer(
             renderer=renderer,
             writer=writer,
         )
-        project_initializer.execute(config=config)
+        project_initializer.execute(config=config, destination_project_folder=destination_folder)
 
         expect(renderer).to(have_been_satisfied)
         expect(writer).to(have_been_satisfied)
