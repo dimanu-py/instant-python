@@ -2,6 +2,7 @@ import yaml
 
 from instant_python.config.domain.config_schema import ConfigSchema
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
+from instant_python.initialize.domain.project_structure import ProjectStructure
 from instant_python.initialize.infra.renderer.jinja_environment import JinjaEnvironment
 from instant_python.project_creator.node import NodeType
 from instant_python.shared.supported_templates import SupportedTemplates
@@ -13,13 +14,13 @@ class JinjaProjectRenderer(ProjectRenderer):
     def __init__(self, env: JinjaEnvironment) -> None:
         self._env = env
 
-    def render(self, context_config: ConfigSchema) -> list[dict]:
+    def render(self, context_config: ConfigSchema) -> ProjectStructure:
         template_name = self._get_project_main_structure_template(context_config.template_type)
         basic_project_structure = self._render_project_structure_with_jinja(context_config, template_name)
         project_structure_with_files_content = self._add_template_content_to_files(
             context_config, basic_project_structure
         )
-        return project_structure_with_files_content
+        return ProjectStructure(nodes=project_structure_with_files_content)
 
     def _render_project_structure_with_jinja(self, context_config: ConfigSchema, template_name: str) -> list[dict]:
         raw_project_structure = self._env.render_template(name=template_name, context=context_config.to_primitives())
