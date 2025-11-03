@@ -1,5 +1,6 @@
 from collections.abc import Iterator
 from enum import Enum
+from pathlib import Path
 from typing import TypeAlias, Union
 
 
@@ -12,8 +13,8 @@ class File:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(name={self._name}, extension={self._extension})"
 
-    def build_path_for(self, path: str) -> str:
-        return f"{path}/{self._name}{self._extension}"
+    def build_path_for(self, path: Path) -> Path:
+        return path / f"{self._name}{self._extension}"
 
     def is_empty(self) -> bool:
         return self._content is None or self._content == ""
@@ -28,8 +29,8 @@ class Directory:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(name={self._name}, is_python_module={self._is_python_module})"
 
-    def build_path_for(self, path: str) -> str:
-        return f"{path}/{self._name}"
+    def build_path_for(self, path: Path) -> Path:
+        return path / self._name
 
     def __iter__(self) -> Iterator["Node"]:
         return iter(self._children)
