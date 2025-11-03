@@ -20,10 +20,10 @@ class DirectoryMother:
     _EMPTY = []
 
     @classmethod
-    def without_children(cls) -> Directory:
+    def without_children(cls, name: str | None = None, is_python_module: bool | None = None) -> Directory:
         return Directory(
-            name=RandomGenerator.word(),
-            is_python_module=cls._PYTHON_MODULE,
+            name=name if name else RandomGenerator.word(),
+            is_python_module=is_python_module if is_python_module is not None else cls._PYTHON_MODULE,
             children=cls._EMPTY,
         )
 

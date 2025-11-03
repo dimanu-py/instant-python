@@ -23,8 +23,8 @@ class ProjectStructureMother:
         return ProjectStructure(nodes=nodes)
 
     @classmethod
-    def with_one_directory(cls) -> ProjectStructure:
-        return ProjectStructure(nodes=[DirectoryMother.without_children()])
+    def with_one_directory(cls, name: str, is_python_module: bool) -> ProjectStructure:
+        return ProjectStructure(nodes=[DirectoryMother.without_children(name, is_python_module)])
 
     @classmethod
     def _create_random_node(cls, depth: int) -> Node:

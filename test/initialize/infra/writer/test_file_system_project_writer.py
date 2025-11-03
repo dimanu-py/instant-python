@@ -11,7 +11,7 @@ from test.initialize.domain.mothers.project_structure_mother import ProjectStruc
 
 class TestFileSystemProjectWriter:
     def test_should_create_python_module_in_file_system(self) -> None:
-        project_structure = ProjectStructureMother.with_one_directory()
+        project_structure = ProjectStructureMother.with_one_directory(name="awesome_module", is_python_module=True)
         config = ConfigSchemaMother.any()
         writer = FileSystemProjectWriter()
 
