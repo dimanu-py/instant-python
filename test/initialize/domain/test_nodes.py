@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from doublex import Spy
-from doublex_expects import have_been_called_with
+from doublex_expects import have_been_called_with, have_been_called
 from expects import expect, equal
 
 from instant_python.initialize.domain.project_writer import NodeWriter
@@ -42,4 +42,10 @@ class TestDirectory:
         expect(str(path)).to(equal("my_project/config"))
 
     def test_should_create_empty_directory(self) -> None:
-        directory = Directory()
+        directory = Directory(name="docs", is_python_module=False, children=[])
+        directory_writer = Spy(NodeWriter)
+
+        directory.create(writer=directory_writer, destination=Path("my_project"))
+
+        expect(directory_writer.create_directory).to(have_been_called_with(Path("my_project/docs")))
+        expect(directory_writer.create_file).to_not(have_been_called)
