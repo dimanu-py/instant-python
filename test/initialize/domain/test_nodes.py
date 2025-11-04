@@ -17,6 +17,13 @@ class TestFile:
 
         expect(file_writer.create_file).to(have_been_called_with(Path("my_project/sample.py"), ""))
 
+    def test_should_create_file_with_content(self) -> None:
+        file = File(name="sample", extension=".py", content="print('Hello, World!')")
+        file_writer = Spy(NodeWriter)
+
+        file.create(writer=file_writer, destination=Path("my_project"))
+
+        expect(file_writer.create_file).to(have_been_called_with(Path("my_project/sample.py"), "print('Hello, World!')"))
 
 class TestDirectory:
     def test_should_build_directory_path_inside_project(self) -> None:
