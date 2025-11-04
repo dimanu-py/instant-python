@@ -1,7 +1,7 @@
 from collections.abc import Iterator
 from enum import Enum
 from pathlib import Path
-from typing import TypeAlias, Union, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from instant_python.initialize.domain.project_writer import NodeWriter
@@ -16,7 +16,7 @@ class Node(ABC):
         raise NotImplementedError
 
 
-class File:
+class File(Node):
     def __init__(self, name: str, extension: str, content: str | None = None) -> None:
         self._name = name
         self._extension = extension
@@ -36,10 +36,10 @@ class File:
         return path / f"{self._name}{self._extension}"
 
 
-class Directory:
+class Directory(Node):
     _INIT_FILE_NAME = "__init__.py"
 
-    def __init__(self, name: str, is_python_module: bool, children: list["Node"]) -> None:
+    def __init__(self, name: str, is_python_module: bool, children: list[Node]) -> None:
         self._name = name
         self._is_python_module = is_python_module
         self._children = children
@@ -68,6 +68,3 @@ class Directory:
 class NodeType(str, Enum):
     DIRECTORY = "directory"
     FILE = "file"
-
-
-Node: TypeAlias = Union[File, Directory]
