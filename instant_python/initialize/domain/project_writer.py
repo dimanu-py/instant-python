@@ -9,3 +9,13 @@ class ProjectWriter(ABC):
     @abstractmethod
     def write(self, project_structure: ProjectStructure, config: ConfigSchema, destination: Path) -> None:
         raise NotImplementedError
+
+
+class NodeWriter(ABC):
+    @abstractmethod
+    def create_directory(self, path: Path) -> None:
+        raise NotImplementedError
+
+    @abstractmethod
+    def create_file(self, path: Path, content: str | None = None) -> None:
+        raise NotImplementedError
