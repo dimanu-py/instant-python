@@ -54,6 +54,6 @@ class TestUvEnvManager:
     def test_should_raise_error_when_command_fails(self) -> None:
         uv_dependency_manager = MockUvEnvManagerWithError(project_directory=os.getcwd())
 
-        expect(lambda: uv_dependency_manager.setup_environment(python_version="3.12", dependencies=[])).to(
+        expect(lambda: uv_dependency_manager.setup(python_version="3.12", dependencies=[])).to(
             raise_error(CommandExecutionError)
         )
