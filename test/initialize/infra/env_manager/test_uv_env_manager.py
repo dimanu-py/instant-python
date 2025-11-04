@@ -3,13 +3,13 @@ import os
 from expects import expect, raise_error
 
 from instant_python.config.domain.dependency_config import DependencyConfig
-from instant_python.dependency_manager.command_execution_error import CommandExecutionError
-from test.dependency_manager.mock_uv_dependency_manager import MockUvDependencyManager, MockUvDependencyManagerWithError
+from instant_python.initialize.domain.env_manager import CommandExecutionError
+from test.initialize.infra.env_manager.mock_uv_env_manager import MockUvEnvManager, MockUvEnvManagerWithError
 
 
-class TestUvDependencyManager:
+class TestUvEnvManager:
     def setup_method(self) -> None:
-        self._uv_dependency_manager = MockUvDependencyManager(project_directory=os.getcwd())
+        self._uv_dependency_manager = MockUvEnvManager(project_directory=os.getcwd())
 
     def test_should_install_uv(self) -> None:
         self._uv_dependency_manager._install()
@@ -52,7 +52,7 @@ class TestUvDependencyManager:
         )
 
     def test_should_raise_error_when_command_fails(self) -> None:
-        uv_dependency_manager = MockUvDependencyManagerWithError(project_directory=os.getcwd())
+        uv_dependency_manager = MockUvEnvManagerWithError(project_directory=os.getcwd())
 
         expect(lambda: uv_dependency_manager.setup_environment(python_version="3.12", dependencies=[])).to(
             raise_error(CommandExecutionError)

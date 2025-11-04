@@ -3,16 +3,16 @@ import os
 from expects import expect, raise_error
 
 from instant_python.config.domain.dependency_config import DependencyConfig
-from instant_python.dependency_manager.command_execution_error import CommandExecutionError
-from test.dependency_manager.mock_pdm_dependency_manager import (
-    MockPdmDependencyManagerWithError,
-    MockPdmDependencyManager,
+from instant_python.initialize.domain.env_manager import CommandExecutionError
+from test.initialize.infra.env_manager.mock_pdm_env_manager import (
+    MockPdmEnvManagerWithError,
+    MockPdmEnvManager,
 )
 
 
-class TestPdmDependencyManager:
+class TestPdmEnvManager:
     def setup_method(self) -> None:
-        self._pdm_dependency_manager = MockPdmDependencyManager(project_directory=os.getcwd())
+        self._pdm_dependency_manager = MockPdmEnvManager(project_directory=os.getcwd())
 
     def test_should_install_pdm(self) -> None:
         self._pdm_dependency_manager._install()
@@ -53,7 +53,7 @@ class TestPdmDependencyManager:
         )
 
     def test_should_raise_error_when_command_fails(self) -> None:
-        pdm_dependency_manager = MockPdmDependencyManagerWithError(project_directory=os.getcwd())
+        pdm_dependency_manager = MockPdmEnvManagerWithError(project_directory=os.getcwd())
 
         expect(lambda: pdm_dependency_manager.setup_environment(python_version="3.12", dependencies=[])).to(
             raise_error(CommandExecutionError)

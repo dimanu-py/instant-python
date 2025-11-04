@@ -3,10 +3,10 @@ from typing import override
 
 from expects import expect, contain
 
-from instant_python.dependency_manager.uv_dependency_manager import UvDependencyManager
+from instant_python.initialize.infra.env_manager.uv_env_manager import UvEnvManager
 
 
-class MockUvDependencyManager(UvDependencyManager):
+class MockUvEnvManager(UvEnvManager):
     def __init__(self, project_directory: str) -> None:
         super().__init__(project_directory)
         self._commands = []
@@ -20,7 +20,7 @@ class MockUvDependencyManager(UvDependencyManager):
             expect(self._commands).to(contain(command))
 
 
-class MockUvDependencyManagerWithError(UvDependencyManager):
+class MockUvEnvManagerWithError(UvEnvManager):
     def __init__(self, project_directory: str) -> None:
         super().__init__(project_directory)
 

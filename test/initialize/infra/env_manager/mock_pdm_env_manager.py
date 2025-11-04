@@ -3,10 +3,10 @@ from typing import override
 
 from expects import expect, contain
 
-from instant_python.dependency_manager.pdm_dependency_manager import PdmDependencyManager
+from instant_python.initialize.infra.env_manager.pdm_env_manager import PdmEnvManager
 
 
-class MockPdmDependencyManager(PdmDependencyManager):
+class MockPdmEnvManager(PdmEnvManager):
     def __init__(self, project_directory: str) -> None:
         super().__init__(project_directory)
         self._commands = []
@@ -20,7 +20,7 @@ class MockPdmDependencyManager(PdmDependencyManager):
             expect(self._commands).to(contain(command))
 
 
-class MockPdmDependencyManagerWithError(PdmDependencyManager):
+class MockPdmEnvManagerWithError(PdmEnvManager):
     def __init__(self, project_directory: str) -> None:
         super().__init__(project_directory)
 
