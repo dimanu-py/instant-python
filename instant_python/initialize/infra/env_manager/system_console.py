@@ -17,7 +17,10 @@ class SystemConsole:
         self._working_directory = working_directory
 
     def execute(self, command: str) -> CommandExecutionResult:
-        return self._run_command(command)
+        try:
+            return self._run_command(command)
+        except Exception as error:
+            return self._unexpected_error_result(error)
 
     def _run_command(self, command: str) -> CommandExecutionResult:
         result = subprocess.run(
@@ -32,4 +35,12 @@ class SystemConsole:
             exit_code=result.returncode,
             stdout=result.stdout,
             stderr=result.stderr,
+        )
+
+    @staticmethod
+    def _unexpected_error_result(error: Exception) -> CommandExecutionResult:
+        return CommandExecutionResult(
+            exit_code=-1,
+            stdout="",
+            stderr=str(error),
         )
