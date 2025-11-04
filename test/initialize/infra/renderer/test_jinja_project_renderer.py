@@ -24,8 +24,6 @@ class TestJinjaProjectRenderer:
 
         project_structure = renderer.render(context_config=config)
 
-        first_file = next(
-            (node for node in project_structure.flatten() if isinstance(node, File)), None
-        )
+        first_file = next((node for node in project_structure.flatten() if isinstance(node, File)), None)
         expect(first_file).to_not(be_none)
         expect(first_file.is_empty()).to(be_false)

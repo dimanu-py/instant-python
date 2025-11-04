@@ -10,9 +10,7 @@ class ProjectStructure:
 
     @classmethod
     def from_raw_structure(cls, structure: list[dict]) -> "ProjectStructure":
-        return cls(
-            nodes=cls._build_project_structure(structure)
-        )
+        return cls(nodes=cls._build_project_structure(structure))
 
     def flatten(self) -> Iterator[Node]:
         for node in self._nodes:

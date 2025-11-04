@@ -2,7 +2,7 @@ from pathlib import Path
 
 from doublex import Spy
 from doublex_expects import have_been_called_with, have_been_called
-from expects import expect, equal
+from expects import expect
 
 from instant_python.initialize.domain.project_writer import NodeWriter
 from instant_python.initialize.domain.node import File, Directory
@@ -60,7 +60,9 @@ class TestDirectory:
         directory.create(writer=self._directory_writer, destination=Path("my_project"))
 
         expect(self._directory_writer.create_directory).to(have_been_called_with(Path("my_project/awesome_module")))
-        expect(self._directory_writer.create_file).to(have_been_called_with(Path("my_project/awesome_module/__init__.py")))
+        expect(self._directory_writer.create_file).to(
+            have_been_called_with(Path("my_project/awesome_module/__init__.py"))
+        )
 
     def test_should_create_python_module_with_files_inside(self) -> None:
         files = [FileMother.empty() for _ in range(2)]

@@ -55,4 +55,3 @@ class TestFileSystemProjectWriter:
                 structure[child.name] = child.read_text()
 
         return structure
-
