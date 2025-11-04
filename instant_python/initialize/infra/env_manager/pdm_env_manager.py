@@ -1,4 +1,5 @@
 import subprocess
+import sys
 from pathlib import Path
 
 from instant_python.config.domain.dependency_config import DependencyConfig
@@ -7,7 +8,8 @@ from instant_python.initialize.domain.env_manager import EnvManager, CommandExec
 
 class PdmEnvManager(EnvManager):
     def __init__(self, project_directory: str) -> None:
-        super().__init__(project_directory)
+        self._project_directory = project_directory
+        self._system_os = sys.platform
         self._pdm = self._set_pdm_executable_based_on_os()
 
     def setup(self, python_version: str, dependencies: list[DependencyConfig]) -> None:
@@ -66,3 +68,13 @@ class PdmEnvManager(EnvManager):
 
     def _create_virtual_environment(self) -> None:
         self._run_command(f"{self._pdm} install")
+
+    def _run_command(self, command: str) -> None:
+        subprocess.run(
+            command,
+            shell=True,
+            check=True,
+            cwd=self._project_directory,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+        )
