@@ -1,15 +1,20 @@
 import os
 
+from doublex import Mock, Mimic
 from expects import expect, raise_error
 
 from instant_python.config.domain.dependency_config import DependencyConfig
 from instant_python.initialize.domain.env_manager import CommandExecutionError
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole
+from instant_python.initialize.infra.env_manager.uv_env_manager import UvEnvManager
 from test.initialize.infra.env_manager.mock_uv_env_manager import MockUvEnvManager, MockUvEnvManagerWithError
 
 
 class TestUvEnvManager:
     def setup_method(self) -> None:
         self._uv_dependency_manager = MockUvEnvManager(project_directory=os.getcwd())
+        self._console = Mimic(Mock, SystemConsole)
+        self._uv_env_manager = UvEnvManager(project_directory=os.getcwd(), console=self._console)
 
     def test_should_install_uv(self) -> None:
         self._uv_dependency_manager._install()
