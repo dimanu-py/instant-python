@@ -6,6 +6,7 @@ from expects import expect, equal
 
 from instant_python.initialize.domain.project_writer import NodeWriter
 from instant_python.initialize.domain.nodes import File, Directory
+from test.initialize.domain.mothers.nodes_mother import FileMother
 
 
 class TestFile:
@@ -51,3 +52,13 @@ class TestDirectory:
 
         expect(directory_writer.create_directory).to(have_been_called_with(Path("my_project/awesome_module")))
         expect(directory_writer.create_file).to(have_been_called_with(Path("my_project/awesome_module/__init__.py")))
+
+    def test_should_create_python_module_with_files_inside(self) -> None:
+        files = [FileMother.empty() for _ in range(2)]
+        directory = Directory(name="awesome_module", is_python_module=True, children=files)
+        directory_writer = Spy(NodeWriter)
+
+        directory.create(writer=directory_writer, destination=Path("my_project"))
+
+        expect(directory_writer.create_directory).to(have_been_called_with(Path("my_project/awesome_module")))
+        expect(directory_writer.create_file).to(have_been_called.exactly(3))

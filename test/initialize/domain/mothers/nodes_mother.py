@@ -7,7 +7,7 @@ class FileMother:
     _PYTHON_EXTENSION = ".py"
 
     @classmethod
-    def empty(cls, name: str) -> File:
+    def empty(cls, name: str | None = None) -> File:
         return File(
             name=name if name else RandomGenerator.word(),
             extension=cls._PYTHON_EXTENSION,
