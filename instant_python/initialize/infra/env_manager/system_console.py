@@ -8,6 +8,9 @@ class CommandExecutionResult:
     stdout: str
     stderr: str
 
+    def success(self) -> bool:
+        return self.exit_code == 0
+
 
 class SystemConsole:
     def __init__(self, working_directory: str) -> None:
