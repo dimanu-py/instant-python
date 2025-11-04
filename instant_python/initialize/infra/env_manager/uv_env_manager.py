@@ -4,10 +4,12 @@ from pathlib import Path
 
 from instant_python.config.domain.dependency_config import DependencyConfig
 from instant_python.initialize.domain.env_manager import EnvManager, CommandExecutionError
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole
 
 
 class UvEnvManager(EnvManager):
-    def __init__(self, project_directory: str) -> None:
+    def __init__(self, project_directory: str, console: SystemConsole | None = None) -> None:
+        self._console = console
         self._project_directory = project_directory
         self._system_os = sys.platform
         self._uv = self._set_uv_executable_based_on_os()
