@@ -50,4 +50,4 @@ class TestDirectory:
         directory.create(writer=directory_writer, destination=Path("my_project"))
 
         expect(directory_writer.create_directory).to(have_been_called_with(Path("my_project/awesome_module")))
-        expect(directory_writer.create_file).to(have_been_called_with(Path("my_project/awesome_module/__init__.py"), None))
+        expect(directory_writer.create_file).to(have_been_called_with(Path("my_project/awesome_module/__init__.py")))
