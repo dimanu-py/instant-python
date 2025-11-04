@@ -1,6 +1,6 @@
 from collections.abc import Iterator
 
-from instant_python.initialize.domain.nodes import Node, NodeType, Directory, File
+from instant_python.initialize.domain.node import Node, NodeType, Directory, File
 from instant_python.project_creator.unknown_node_typer_error import UnknownNodeTypeError
 
 

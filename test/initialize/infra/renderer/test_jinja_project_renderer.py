@@ -1,6 +1,6 @@
 from expects import be_none, expect, be_empty, be_false
 
-from instant_python.initialize.domain.nodes import File
+from instant_python.initialize.domain.node import File
 from instant_python.initialize.infra.renderer.jinja_environment import JinjaEnvironment
 from instant_python.initialize.infra.renderer.jinja_project_renderer import JinjaProjectRenderer
 from instant_python.shared.supported_templates import SupportedTemplates

@@ -5,8 +5,8 @@ from doublex_expects import have_been_called_with, have_been_called
 from expects import expect, equal
 
 from instant_python.initialize.domain.project_writer import NodeWriter
-from instant_python.initialize.domain.nodes import File, Directory
-from test.initialize.domain.mothers.nodes_mother import FileMother
+from instant_python.initialize.domain.node import File, Directory
+from test.initialize.domain.mothers.node_mother import FileMother
 
 
 class TestFile:

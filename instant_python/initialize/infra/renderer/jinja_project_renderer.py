@@ -1,7 +1,7 @@
 import yaml
 
 from instant_python.config.domain.config_schema import ConfigSchema
-from instant_python.initialize.domain.nodes import NodeType
+from instant_python.initialize.domain.node import NodeType
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
 from instant_python.initialize.domain.project_structure import ProjectStructure
 from instant_python.initialize.infra.renderer.jinja_environment import JinjaEnvironment

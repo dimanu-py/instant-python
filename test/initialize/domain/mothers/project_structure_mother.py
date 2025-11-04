@@ -1,8 +1,8 @@
 import random
 
-from instant_python.initialize.domain.nodes import NodeType, File, Node, Directory
+from instant_python.initialize.domain.node import NodeType, File, Node, Directory
 from instant_python.initialize.domain.project_structure import ProjectStructure
-from test.initialize.domain.mothers.nodes_mother import FileMother, DirectoryMother
+from test.initialize.domain.mothers.node_mother import FileMother, DirectoryMother
 
 
 class ProjectStructureMother:

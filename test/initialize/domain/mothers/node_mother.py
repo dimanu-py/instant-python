@@ -1,4 +1,4 @@
-from instant_python.initialize.domain.nodes import File, Directory, Node
+from instant_python.initialize.domain.node import File, Directory, Node
 from test.random_generator import RandomGenerator
 
 
