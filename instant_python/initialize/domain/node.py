@@ -7,6 +7,15 @@ if TYPE_CHECKING:
     from instant_python.initialize.domain.project_writer import NodeWriter
 
 
+from abc import ABC, abstractmethod
+
+
+class Node(ABC):
+    @abstractmethod
+    def create(self, writer: "NodeWriter", destination: Path) -> None:
+        raise NotImplementedError
+
+
 class File:
     def __init__(self, name: str, extension: str, content: str | None = None) -> None:
         self._name = name
