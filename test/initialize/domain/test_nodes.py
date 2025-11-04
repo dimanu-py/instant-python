@@ -9,21 +9,29 @@ from instant_python.initialize.domain.nodes import File, Directory
 
 
 class TestFile:
+    _EMPTY_CONTENT = ""
+    _SOME_CONTENT = "print('Hello, World!')"
+    _SOME_PROJECT_PATH = Path("my_project")
+    _SOME_NAME = "sample"
+    _SOME_EXTENSION = ".py"
+
+    def setup_method(self) -> None:
+        self._file_writer = Spy(NodeWriter)
+
     def test_should_create_empty_file(self) -> None:
-        file = File(name="sample", extension=".py", content="")
-        file_writer = Spy(NodeWriter)
+        file = File(name=self._SOME_NAME, extension=self._SOME_EXTENSION, content=self._EMPTY_CONTENT)
 
-        file.create(writer=file_writer, destination=Path("my_project"))
+        file.create(writer=self._file_writer, destination=self._SOME_PROJECT_PATH)
 
-        expect(file_writer.create_file).to(have_been_called_with(Path("my_project/sample.py"), ""))
+        expect(self._file_writer.create_file).to(have_been_called_with(Path("my_project/sample.py"), self._EMPTY_CONTENT))
 
     def test_should_create_file_with_content(self) -> None:
-        file = File(name="sample", extension=".py", content="print('Hello, World!')")
-        file_writer = Spy(NodeWriter)
+        file = File(name=self._SOME_NAME, extension=self._SOME_EXTENSION, content=self._SOME_CONTENT)
 
-        file.create(writer=file_writer, destination=Path("my_project"))
+        file.create(writer=self._file_writer, destination=self._SOME_PROJECT_PATH)
 
-        expect(file_writer.create_file).to(have_been_called_with(Path("my_project/sample.py"), "print('Hello, World!')"))
+        expect(self._file_writer.create_file).to(have_been_called_with(Path("my_project/sample.py"), self._SOME_CONTENT))
+
 
 class TestDirectory:
     def test_should_build_directory_path_inside_project(self) -> None:
@@ -32,3 +40,6 @@ class TestDirectory:
         path = directory.build_path_for(path=Path("my_project"))
 
         expect(str(path)).to(equal("my_project/config"))
+
+    def test_should_create_empty_directory(self) -> None:
+        directory = Directory()
