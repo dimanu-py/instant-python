@@ -15,7 +15,12 @@ class ProjectInitializer:
     ) -> None:
         self._project_renderer = renderer
         self._writer = writer
+        self._env_manager = env_manager
 
     def execute(self, config: ConfigSchema, destination_project_folder: Path) -> None:
         project_structure = self._project_renderer.render(context_config=config)
         self._writer.write(project_structure=project_structure, destination=destination_project_folder)
+        self._env_manager.setup(
+            python_version=config.python_version,
+            dependencies=config.dependencies,
+        )
