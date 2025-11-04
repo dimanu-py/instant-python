@@ -14,6 +14,9 @@ class SystemConsole:
         self._working_directory = working_directory
 
     def execute(self, command: str) -> CommandExecutionResult:
+        return self._run_command(command)
+
+    def _run_command(self, command: str) -> CommandExecutionResult:
         result = subprocess.run(
             command,
             shell=True,
