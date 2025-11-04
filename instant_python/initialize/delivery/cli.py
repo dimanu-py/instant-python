@@ -1,7 +1,7 @@
 import typer
 
 from instant_python.config.infra.parser.parser import Parser
-from instant_python.dependency_manager.dependency_manager_factory import DependencyManagerFactory
+from instant_python.initialize.infra.env_manager.env_manager_factory import EnvManagerFactory
 from instant_python.formatter.project_formatter import ProjectFormatter
 from instant_python.git.git_configurer import GitConfigurer
 from instant_python.initialize.application.config_reader import ConfigReader
@@ -42,11 +42,11 @@ def create_new_project(
         context=config,
     )
 
-    dependency_manager = DependencyManagerFactory.create(
+    dependency_manager = EnvManagerFactory.create(
         dependency_manager=config.dependency_manager,
         project_directory=config.project_folder_name,
     )
-    dependency_manager.setup_environment(
+    dependency_manager.setup(
         python_version=config.python_version,
         dependencies=config.dependencies,
     )

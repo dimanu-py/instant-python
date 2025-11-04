@@ -1,17 +1,16 @@
-from pathlib import Path
 import subprocess
+from pathlib import Path
 
 from instant_python.config.domain.dependency_config import DependencyConfig
-from instant_python.dependency_manager.dependency_manager import DependencyManager
-from instant_python.dependency_manager.command_execution_error import CommandExecutionError
+from instant_python.initialize.domain.env_manager import EnvManager, CommandExecutionError
 
 
-class PdmDependencyManager(DependencyManager):
+class PdmEnvManager(EnvManager):
     def __init__(self, project_directory: str) -> None:
         super().__init__(project_directory)
         self._pdm = self._set_pdm_executable_based_on_os()
 
-    def setup_environment(self, python_version: str, dependencies: list[DependencyConfig]) -> None:
+    def setup(self, python_version: str, dependencies: list[DependencyConfig]) -> None:
         try:
             if self._pdm_is_not_installed():
                 self._install()
