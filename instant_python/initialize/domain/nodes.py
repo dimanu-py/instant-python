@@ -49,6 +49,9 @@ class Directory:
             init_file_path = directory_path / self._INIT_FILE_NAME
             writer.create_file(init_file_path)
 
+        for child in self._children:
+            child.create(writer, directory_path)
+
     def _build_path_for(self, path: Path) -> Path:
         return path / self._name
 
