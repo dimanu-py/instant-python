@@ -16,14 +16,14 @@ class File:
         return f"{self.__class__.__name__}(name={self._name}, extension={self._extension})"
 
     def create(self, writer: NodeWriter, destination: Path) -> None:
-        file_path = self.build_path_for(destination)
+        file_path = self._build_path_for(destination)
         writer.create_file(file_path, self._content)
-
-    def build_path_for(self, path: Path) -> Path:
-        return path / f"{self._name}{self._extension}"
 
     def is_empty(self) -> bool:
         return self._content is None or self._content == ""
+
+    def _build_path_for(self, path: Path) -> Path:
+        return path / f"{self._name}{self._extension}"
 
 
 class Directory:
