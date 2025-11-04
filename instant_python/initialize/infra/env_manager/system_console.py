@@ -1,3 +1,4 @@
+import subprocess
 from dataclasses import dataclass
 
 
@@ -13,4 +14,16 @@ class SystemConsole:
         self._working_directory = working_directory
 
     def execute(self, command: str) -> CommandExecutionResult:
-        raise NotImplementedError
+        result = subprocess.run(
+            command,
+            shell=True,
+            check=False,
+            cwd=self._working_directory,
+            capture_output=True,
+            text=True,
+        )
+        return CommandExecutionResult(
+            exit_code=result.returncode,
+            stdout=result.stdout,
+            stderr=result.stderr,
+        )
