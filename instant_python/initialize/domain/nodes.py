@@ -36,15 +36,15 @@ class Directory:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(name={self._name}, is_python_module={self._is_python_module})"
 
-    def create(self, writer: "NodeWriter", destination: Path) -> None:
-        directory_path = self.build_path_for(destination)
-        writer.create_directory(directory_path)
-
-    def build_path_for(self, path: Path) -> Path:
-        return path / self._name
-
     def __iter__(self) -> Iterator["Node"]:
         return iter(self._children)
+
+    def create(self, writer: "NodeWriter", destination: Path) -> None:
+        directory_path = self._build_path_for(destination)
+        writer.create_directory(directory_path)
+
+    def _build_path_for(self, path: Path) -> Path:
+        return path / self._name
 
 
 class NodeType(str, Enum):

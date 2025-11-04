@@ -34,13 +34,6 @@ class TestFile:
 
 
 class TestDirectory:
-    def test_should_build_directory_path_inside_project(self) -> None:
-        directory = Directory(name="config", is_python_module=True, children=[])
-
-        path = directory.build_path_for(path=Path("my_project"))
-
-        expect(str(path)).to(equal("my_project/config"))
-
     def test_should_create_empty_directory(self) -> None:
         directory = Directory(name="docs", is_python_module=False, children=[])
         directory_writer = Spy(NodeWriter)
