@@ -34,5 +34,8 @@ class TestSystemCommandExecutor:
 
         expect(result.exit_code).to_not(equal(0))
 
+    def test_should_capture_empty_stdout_when_no_output(self) -> None:
+        result = self._console.execute("true")
 
-
+        expect(result.success()).to(be_true)
+        expect(result.stdout).to(equal(""))
