@@ -12,21 +12,23 @@ from test.initialize.domain.mothers.project_structure_mother import ProjectStruc
 
 
 class TestProjectInitializer:
+    def setup_method(self) -> None:
+        self._renderer = Mock(ProjectRenderer)
+        self._writer = Mock(ProjectWriter)
+
     def test_should_initialize_project(self) -> None:
-        renderer = Mock(ProjectRenderer)
-        writer = Mock(ProjectWriter)
         config = ConfigSchemaMother.any()
         project_structure = ProjectStructureMother.any()
         destination_folder = Path.cwd()
 
-        expect_call(renderer).render(config).returns(project_structure)
-        expect_call(writer).write(project_structure, config, destination_folder).returns(None)
+        expect_call(self._renderer).render(config).returns(project_structure)
+        expect_call(self._writer).write(project_structure, config, destination_folder).returns(None)
 
         project_initializer = ProjectInitializer(
-            renderer=renderer,
-            writer=writer,
+            renderer=self._renderer,
+            writer=self._writer,
         )
         project_initializer.execute(config=config, destination_project_folder=destination_folder)
 
-        expect(renderer).to(have_been_satisfied)
-        expect(writer).to(have_been_satisfied)
+        expect(self._renderer).to(have_been_satisfied)
+        expect(self._writer).to(have_been_satisfied)
