@@ -28,6 +28,8 @@ class File:
 
 
 class Directory:
+    _INIT_FILE_NAME = "__init__.py"
+
     def __init__(self, name: str, is_python_module: bool, children: list["Node"]) -> None:
         self._name = name
         self._is_python_module = is_python_module
@@ -42,6 +44,10 @@ class Directory:
     def create(self, writer: "NodeWriter", destination: Path) -> None:
         directory_path = self._build_path_for(destination)
         writer.create_directory(directory_path)
+
+        if self._is_python_module:
+            init_file_path = directory_path / self._INIT_FILE_NAME
+            writer.create_file(init_file_path)
 
     def _build_path_for(self, path: Path) -> Path:
         return path / self._name
