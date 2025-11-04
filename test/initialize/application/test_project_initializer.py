@@ -22,7 +22,7 @@ class TestProjectInitializer:
         destination_folder = Path.cwd()
 
         expect_call(self._renderer).render(config).returns(project_structure)
-        expect_call(self._writer).write(project_structure, config, destination_folder).returns(None)
+        expect_call(self._writer).write(project_structure, destination_folder).returns(None)
 
         project_initializer = ProjectInitializer(
             renderer=self._renderer,

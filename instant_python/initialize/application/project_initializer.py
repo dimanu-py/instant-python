@@ -16,4 +16,4 @@ class ProjectInitializer:
 
     def execute(self, config: ConfigSchema, destination_project_folder: Path) -> None:
         project_structure = self._project_renderer.render(context_config=config)
-        self._writer.write(project_structure=project_structure, config=config, destination=destination_project_folder)
+        self._writer.write(project_structure=project_structure, destination=destination_project_folder)

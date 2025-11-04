@@ -1,6 +1,5 @@
 from pathlib import Path
 
-from instant_python.config.domain.config_schema import ConfigSchema
 from instant_python.initialize.domain.project_structure import ProjectStructure
 from instant_python.initialize.domain.project_writer import ProjectWriter, NodeWriter
 
@@ -19,6 +18,6 @@ class FileSystemProjectWriter(ProjectWriter):
     def __init__(self) -> None:
         self._node_writer = FileSystemNodeWriter()
 
-    def write(self, project_structure: ProjectStructure, config: ConfigSchema, destination: Path) -> None:
+    def write(self, project_structure: ProjectStructure, destination: Path) -> None:
         for node in project_structure:
             node.create(writer=self._node_writer, destination=destination)
