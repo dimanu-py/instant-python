@@ -1,37 +1,32 @@
-import subprocess
 import sys
 from pathlib import Path
 
 from instant_python.config.domain.dependency_config import DependencyConfig
 from instant_python.initialize.domain.env_manager import EnvManager, CommandExecutionError
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole, CommandExecutionResult
 
 
 class PdmEnvManager(EnvManager):
-    def __init__(self, project_directory: str) -> None:
+    def __init__(self, project_directory: str, console: SystemConsole | None = None) -> None:
+        self._console = console
         self._project_directory = project_directory
         self._system_os = sys.platform
         self._pdm = self._set_pdm_executable_based_on_os()
 
     def setup(self, python_version: str, dependencies: list[DependencyConfig]) -> None:
-        try:
-            if self._pdm_is_not_installed():
-                self._install()
-            self._install_python(python_version)
-            self._install_dependencies(dependencies)
-        except subprocess.CalledProcessError as error:
-            raise CommandExecutionError(exit_code=error.returncode, stderr_output=error.stderr)
+        if self._pdm_is_not_installed():
+            self._install()
+        self._install_python(python_version)
+        self._install_dependencies(dependencies)
 
     def _pdm_is_not_installed(self) -> bool:
-        try:
-            self._run_command(f"{self._pdm} --version")
-            print(">>> pdm is already installed, skipping installation")
-            return False
-        except subprocess.CalledProcessError:
-            return True
+        result = self._console.execute(f"{self._pdm} --version")
+        return not result.success()
 
     def _install(self) -> None:
         print(">>> Installing pdm...")
-        self._run_command(command=self._get_installation_command_based_on_os())
+        result = self._console.execute(self._get_installation_command_based_on_os())
+        self._raise_command_execution_error(result)
         print(">>> pdm installed successfully")
 
     def _set_pdm_executable_based_on_os(self):
@@ -48,16 +43,21 @@ class PdmEnvManager(EnvManager):
 
     def _install_python(self, version: str) -> None:
         print(f">>> Installing Python {version}...")
-        self._run_command(command=f"{self._pdm} python install {version}")
+        result = self._console.execute(f"{self._pdm} python install {version}")
+        self._raise_command_execution_error(result)
         print(f">>> Python {version} installed successfully")
 
     def _install_dependencies(self, dependencies: list[DependencyConfig]) -> None:
         self._create_virtual_environment()
         print(">>> Installing dependencies...")
         for dependency in dependencies:
-            command = self._build_dependency_install_command(dependency)
-            self._run_command(command)
+            result = self._install_dependency(dependency)
+            self._raise_command_execution_error(result)
         print(">>> Dependencies installed successfully")
+
+    def _install_dependency(self, dependency: DependencyConfig) -> CommandExecutionResult:
+        command = self._build_dependency_install_command(dependency)
+        return self._console.execute(command)
 
     def _build_dependency_install_command(self, dependency: DependencyConfig) -> str:
         command = [f"{self._pdm} add"]
@@ -67,14 +67,10 @@ class PdmEnvManager(EnvManager):
         return " ".join(command)
 
     def _create_virtual_environment(self) -> None:
-        self._run_command(f"{self._pdm} install")
+        result = self._console.execute(f"{self._pdm} install")
+        self._raise_command_execution_error(result)
 
-    def _run_command(self, command: str) -> None:
-        subprocess.run(
-            command,
-            shell=True,
-            check=True,
-            cwd=self._project_directory,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.PIPE,
-        )
+    @staticmethod
+    def _raise_command_execution_error(result: CommandExecutionResult) -> None:
+        if not result.success():
+            raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)

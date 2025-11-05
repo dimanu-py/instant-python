@@ -1,60 +1,91 @@
 import os
 
+from doublex import Mock, Mimic, expect_call
+from doublex_expects import have_been_satisfied
 from expects import expect, raise_error
 
-from instant_python.config.domain.dependency_config import DependencyConfig
 from instant_python.initialize.domain.env_manager import CommandExecutionError
-from test.initialize.infra.env_manager.mock_pdm_env_manager import (
-    MockPdmEnvManagerWithError,
-    MockPdmEnvManager,
-)
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole
+from instant_python.initialize.infra.env_manager.pdm_env_manager import PdmEnvManager
+from test.config.domain.mothers.dependency_config_mother import DependencyConfigMother
+from test.initialize.infra.env_manager.mother.command_execution_result_mother import CommandExecutionResultMother
 
 
 class TestPdmEnvManager:
+    _PDM_EXECUTABLE = "~/.local/bin/pdm"
+    _SUCCESSFUL_COMMAND_RESULT = CommandExecutionResultMother.success()
+    _FAILED_COMMAND_RESULT = CommandExecutionResultMother.failure()
+    _A_PYTHON_VERSION = "3.12"
+    _A_DEPENDENCY = DependencyConfigMother.with_parameter(name="requests", version="latest")
+    _NO_DEPENDENCIES = []
+
     def setup_method(self) -> None:
-        self._pdm_dependency_manager = MockPdmEnvManager(project_directory=os.getcwd())
+        self._console = Mimic(Mock, SystemConsole)
+        self._pdm_env_manager = PdmEnvManager(project_directory=os.getcwd(), console=self._console)
 
-    def test_should_install_pdm(self) -> None:
-        self._pdm_dependency_manager._install()
+    def test_should_setup_environment_without_installing_pdm_when_is_already_installed(self) -> None:
+        self._should_check_that_pdm_is_installed()
+        self._should_install_python_version()
+        self._should_create_virtual_environment()
 
-        self._pdm_dependency_manager.expect_to_have_been_called_with(
-            "curl -sSL https://pdm-project.org/install-pdm.py | python3 -"
-        )
+        self._pdm_env_manager.setup(python_version=self._A_PYTHON_VERSION, dependencies=self._NO_DEPENDENCIES)
 
-    def test_should_install_specific_pyton_version(self) -> None:
-        python_version = "3.12"
+        expect(self._console).to(have_been_satisfied)
 
-        self._pdm_dependency_manager._install_python(version=f"{python_version}")
+    def test_should_setup_environment_installing_pdm_when_is_not_installed(self) -> None:
+        self._should_check_that_pdm_is_not_installed()
+        self._should_install_pdm()
+        self._should_install_python_version()
+        self._should_create_virtual_environment()
 
-        self._pdm_dependency_manager.expect_to_have_been_called_with(
-            f"~/.local/bin/pdm python install {python_version}"
-        )
+        self._pdm_env_manager.setup(python_version=self._A_PYTHON_VERSION, dependencies=self._NO_DEPENDENCIES)
 
-    def test_should_install_dependencies(self) -> None:
-        dependencies = [
-            DependencyConfig(
-                name="pytest",
-                version="latest",
-                is_dev=True,
-                group="test",
-            ),
-            DependencyConfig(
-                name="requests",
-                version="2.32.0",
-            ),
-        ]
+        expect(self._console).to(have_been_satisfied)
 
-        self._pdm_dependency_manager._install_dependencies(dependencies=dependencies)
+    def test_should_setup_environment_installing_specified_dependencies(self) -> None:
+        self._should_check_that_pdm_is_installed()
+        self._should_install_python_version()
+        self._should_create_virtual_environment()
+        self._should_install_dependencies()
 
-        self._pdm_dependency_manager.expect_to_have_been_called_with(
-            "~/.local/bin/pdm install",
-            "~/.local/bin/pdm add --group test pytest",
-            "~/.local/bin/pdm add requests==2.32.0",
-        )
+        self._pdm_env_manager.setup(python_version=self._A_PYTHON_VERSION, dependencies=[self._A_DEPENDENCY])
 
-    def test_should_raise_error_when_command_fails(self) -> None:
-        pdm_dependency_manager = MockPdmEnvManagerWithError(project_directory=os.getcwd())
+        expect(self._console).to(have_been_satisfied)
 
-        expect(lambda: pdm_dependency_manager.setup_environment(python_version="3.12", dependencies=[])).to(
+    def test_should_raise_error_when_a_command_execution_fails(self) -> None:
+        self._should_check_that_pdm_is_installed()
+        self._should_fail_installing_python()
+
+        expect(lambda: self._pdm_env_manager.setup(python_version=self._A_PYTHON_VERSION, dependencies=[])).to(
             raise_error(CommandExecutionError)
         )
+
+    def _should_check_that_pdm_is_installed(self) -> None:
+        expect_call(self._console).execute(f"{self._PDM_EXECUTABLE} --version").returns(self._SUCCESSFUL_COMMAND_RESULT)
+
+    def _should_check_that_pdm_is_not_installed(self) -> None:
+        expect_call(self._console).execute(f"{self._PDM_EXECUTABLE} --version").returns(self._FAILED_COMMAND_RESULT)
+
+    def _should_install_python_version(self) -> None:
+        expect_call(self._console).execute(f"{self._PDM_EXECUTABLE} python install {self._A_PYTHON_VERSION}").returns(
+            self._SUCCESSFUL_COMMAND_RESULT
+        )
+
+    def _should_create_virtual_environment(self) -> None:
+        expect_call(self._console).execute(f"{self._PDM_EXECUTABLE} install").returns(self._SUCCESSFUL_COMMAND_RESULT)
+
+    def _should_install_pdm(self) -> None:
+        expect_call(self._console).execute("curl -sSL https://pdm-project.org/install-pdm.py | python3 -").returns(
+            self._SUCCESSFUL_COMMAND_RESULT
+        )
+
+    def _should_install_dependencies(self) -> None:
+        expect_call(self._console).execute(f"{self._PDM_EXECUTABLE} add requests").returns(
+            self._SUCCESSFUL_COMMAND_RESULT
+        )
+
+    def _should_fail_installing_python(self) -> None:
+        expect_call(self._console).execute(f"{self._PDM_EXECUTABLE} python install {self._A_PYTHON_VERSION}").returns(
+            self._FAILED_COMMAND_RESULT
+        )
+
