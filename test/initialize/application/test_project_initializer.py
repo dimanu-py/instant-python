@@ -4,6 +4,7 @@ from doublex import Mock, expect_call
 from doublex_expects import have_been_satisfied
 from expects import expect
 
+from instant_python.formatter.project_formatter import ProjectFormatter
 from instant_python.initialize.application.project_initializer import ProjectInitializer
 from instant_python.initialize.domain.env_manager import EnvManager
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
@@ -17,6 +18,7 @@ class TestProjectInitializer:
         self._renderer = Mock(ProjectRenderer)
         self._writer = Mock(ProjectWriter)
         self._env_manager = Mock(EnvManager)
+        self._formatter = Mock(ProjectFormatter)
 
     def test_should_initialize_project(self) -> None:
         config = ConfigSchemaMother.any()
@@ -26,14 +28,17 @@ class TestProjectInitializer:
         expect_call(self._renderer).render(config).returns(project_structure)
         expect_call(self._writer).write(project_structure, destination_folder).returns(None)
         expect_call(self._env_manager).setup(config.python_version, config.dependencies).returns(None)
+        expect_call(self._formatter).format().returns(None)
 
         project_initializer = ProjectInitializer(
             renderer=self._renderer,
             writer=self._writer,
             env_manager=self._env_manager,
+            formatter=self._formatter,
         )
         project_initializer.execute(config=config, destination_project_folder=destination_folder)
 
         expect(self._renderer).to(have_been_satisfied)
         expect(self._writer).to(have_been_satisfied)
         expect(self._env_manager).to(have_been_satisfied)
+        expect(self._formatter).to(have_been_satisfied)
