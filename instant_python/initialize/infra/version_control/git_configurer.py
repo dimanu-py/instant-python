@@ -2,10 +2,12 @@ import subprocess
 
 from instant_python.config.domain.git_config import GitConfig
 from instant_python.initialize.domain.version_control_configurer import VersionControlConfigurer
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole
 
 
 class GitConfigurer(VersionControlConfigurer):
-    def __init__(self, project_directory: str) -> None:
+    def __init__(self, project_directory: str, console: SystemConsole | None = None) -> None:
+        self._console = console
         self._project_directory = project_directory
 
     def setup(self, config: GitConfig) -> None:
