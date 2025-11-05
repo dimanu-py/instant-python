@@ -31,6 +31,7 @@ class TestUvEnvManager:
         expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {python_version}").returns(
             self._SUCCESSFUL_COMMAND_RESULT
         )
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} sync").returns(self._SUCCESSFUL_COMMAND_RESULT)
         expect_call(self._console).execute(f"{self._UV_EXECUTABLE} add requests").returns(self._SUCCESSFUL_COMMAND_RESULT)
 
         self._uv_env_manager.setup(python_version=python_version, dependencies=[dependency])
