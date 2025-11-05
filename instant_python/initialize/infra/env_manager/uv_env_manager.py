@@ -3,7 +3,7 @@ from pathlib import Path
 
 from instant_python.config.domain.dependency_config import DependencyConfig
 from instant_python.initialize.domain.env_manager import EnvManager, CommandExecutionError
-from instant_python.initialize.infra.env_manager.system_console import SystemConsole
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole, CommandExecutionResult
 
 
 class UvEnvManager(EnvManager):
@@ -22,8 +22,7 @@ class UvEnvManager(EnvManager):
     def _install(self) -> None:
         print(">>> Installing uv...")
         result = self._console.execute(self._get_installation_command_based_on_os())
-        if not result.success():
-            raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
+        self._raise_command_execution_error(result)
         print(">>> uv installed successfully")
         if self._system_os.startswith("win"):
             print(
@@ -50,8 +49,7 @@ class UvEnvManager(EnvManager):
     def _install_python(self, version: str) -> None:
         print(f">>> Installing Python {version}...")
         result = self._console.execute(f"{self._uv} python install {version}")
-        if not result.success():
-            raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
+        self._raise_command_execution_error(result)
         print(f">>> Python {version} installed successfully")
 
     def _install_dependencies(self, dependencies: list[DependencyConfig]) -> None:
@@ -60,8 +58,7 @@ class UvEnvManager(EnvManager):
         for dependency in dependencies:
             command = self._build_dependency_install_command(dependency)
             result = self._console.execute(command)
-            if not result.success():
-                raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
+            self._raise_command_execution_error(result)
         print(">>> Dependencies installed successfully")
 
     def _build_dependency_install_command(self, dependency: DependencyConfig) -> str:
@@ -72,9 +69,13 @@ class UvEnvManager(EnvManager):
 
     def _create_virtual_environment(self) -> None:
         result = self._console.execute(f"{self._uv} sync")
-        if not result.success():
-            raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
+        self._raise_command_execution_error(result)
 
     def _uv_is_not_installed(self) -> bool:
         result = self._console.execute(f"{self._uv} --version")
         return not result.success()
+
+    @staticmethod
+    def _raise_command_execution_error(result: CommandExecutionResult) -> None:
+        if not result.success():
+            raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
