@@ -46,13 +46,3 @@ class GitConfigurer(VersionControlConfigurer):
     def _raise_command_execution_error(result: CommandExecutionResult) -> None:
         if not result.success():
             raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
-
-    def _run_command(self, command: str) -> None:
-        subprocess.run(
-            command,
-            shell=True,
-            check=True,
-            cwd=self._project_directory,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.PIPE,
-        )
