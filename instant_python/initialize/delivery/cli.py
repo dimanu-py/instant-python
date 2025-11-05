@@ -43,16 +43,17 @@ def create_new_project(
         context=config,
     )
 
+    console = SystemConsole(working_directory=config.project_folder_name)
     dependency_manager = EnvManagerFactory.create(
         dependency_manager=config.dependency_manager,
-        console=SystemConsole(working_directory=config.project_folder_name)
+        console=console
     )
     dependency_manager.setup(
         python_version=config.python_version,
         dependencies=config.dependencies,
     )
 
-    formatter = RuffProjectFormatter()
+    formatter = RuffProjectFormatter(console)
     formatter.format()
 
     config.save_on_project_folder()

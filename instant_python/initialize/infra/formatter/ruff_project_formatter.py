@@ -3,7 +3,7 @@ from instant_python.initialize.infra.env_manager.system_console import SystemCon
 
 
 class RuffProjectFormatter:
-    def __init__(self, console: SystemConsole | None = None) -> None:
+    def __init__(self, console: SystemConsole) -> None:
         self._console = console
 
     def format(self) -> None:
