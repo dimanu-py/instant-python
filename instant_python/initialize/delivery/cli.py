@@ -44,10 +44,7 @@ def create_new_project(
     )
 
     console = SystemConsole(working_directory=config.project_folder_name)
-    dependency_manager = EnvManagerFactory.create(
-        dependency_manager=config.dependency_manager,
-        console=console
-    )
+    dependency_manager = EnvManagerFactory.create(dependency_manager=config.dependency_manager, console=console)
     dependency_manager.setup(
         python_version=config.python_version,
         dependencies=config.dependencies,

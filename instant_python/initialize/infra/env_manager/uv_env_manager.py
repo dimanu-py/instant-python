@@ -72,4 +72,3 @@ class UvEnvManager(EnvManager):
     def _uv_is_not_installed(self) -> bool:
         result = self._console.execute(f"{self._uv} --version")
         return not result.success()
-

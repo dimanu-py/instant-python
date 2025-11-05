@@ -1,5 +1,3 @@
-import os
-
 from doublex import Mock, Mimic, expect_call
 from doublex_expects import have_been_satisfied
 from expects import expect, raise_error

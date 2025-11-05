@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from doublex import Mock, expect_call, assert_that, verify
+from doublex import Mock, expect_call
 from doublex_expects import have_been_satisfied
 from expects import expect
 
