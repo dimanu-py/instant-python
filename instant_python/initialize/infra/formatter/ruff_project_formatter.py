@@ -9,7 +9,10 @@ class RuffProjectFormatter:
         self._project_directory = project_directory
 
     def format(self) -> None:
-        self._run_command(command="uvx ruff format")
+        if self._console is None:
+            self._run_command(command="uvx ruff format")
+        else:
+            self._console.execute(command="uvx ruff format")
 
     def _run_command(self, command: str) -> None:
         subprocess.run(
