@@ -1,5 +1,3 @@
-import os
-
 from doublex import Mock, Mimic, expect_call
 from doublex_expects import have_been_satisfied
 from expects import expect
@@ -33,7 +31,7 @@ class TestGitConfigurer:
         expect(self._console).to(have_been_satisfied)
 
     def _should_create_repository(self) -> None:
-        expect_call(self._console).execute("git init").returns(self._SUCCESSFUL_COMMAND_RESULT)
+        expect_call(self._console).execute_or_raise("git init").returns(self._SUCCESSFUL_COMMAND_RESULT)
 
     def _should_set_user_information(self) -> None:
         expect_call(self._console).execute(f"git config user.name {self._A_USERNAME}").returns(self._SUCCESSFUL_COMMAND_RESULT)
