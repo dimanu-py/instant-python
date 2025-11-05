@@ -1,4 +1,3 @@
-import subprocess
 import sys
 from pathlib import Path
 
@@ -79,13 +78,3 @@ class UvEnvManager(EnvManager):
     def _uv_is_not_installed(self) -> bool:
         result = self._console.execute(f"{self._uv} --version")
         return not result.success()
-
-    def _run_command(self, command: str) -> None:
-        subprocess.run(
-            command,
-            shell=True,
-            check=True,
-            cwd=self._project_directory,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.PIPE,
-        )
