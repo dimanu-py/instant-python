@@ -1,7 +1,8 @@
+from instant_python.initialize.domain.project_formatter import ProjectFormatter
 from instant_python.initialize.infra.env_manager.system_console import SystemConsole, CommandExecutionError
 
 
-class RuffProjectFormatter:
+class RuffProjectFormatter(ProjectFormatter):
     def __init__(self, console: SystemConsole) -> None:
         self._console = console
 

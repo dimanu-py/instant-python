@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from instant_python.config.domain.config_schema import ConfigSchema
+from instant_python.initialize.domain.project_formatter import ProjectFormatter
 from instant_python.initialize.infra.formatter.ruff_project_formatter import RuffProjectFormatter
 from instant_python.initialize.domain.env_manager import EnvManager
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
@@ -13,7 +14,7 @@ class ProjectInitializer:
         renderer: ProjectRenderer,
         writer: ProjectWriter,
         env_manager: EnvManager,
-        formatter: RuffProjectFormatter,
+        formatter: ProjectFormatter,
     ) -> None:
         self._project_renderer = renderer
         self._writer = writer

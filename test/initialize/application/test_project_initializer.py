@@ -4,9 +4,9 @@ from doublex import Mock, expect_call
 from doublex_expects import have_been_satisfied
 from expects import expect
 
-from instant_python.initialize.infra.formatter.ruff_project_formatter import RuffProjectFormatter
 from instant_python.initialize.application.project_initializer import ProjectInitializer
 from instant_python.initialize.domain.env_manager import EnvManager
+from instant_python.initialize.domain.project_formatter import ProjectFormatter
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
 from instant_python.initialize.domain.project_writer import ProjectWriter
 from test.config.domain.mothers.config_schema_mother import ConfigSchemaMother
@@ -18,7 +18,7 @@ class TestProjectInitializer:
         self._renderer = Mock(ProjectRenderer)
         self._writer = Mock(ProjectWriter)
         self._env_manager = Mock(EnvManager)
-        self._formatter = Mock(RuffProjectFormatter)
+        self._formatter = Mock(ProjectFormatter)
 
     def test_should_initialize_project(self) -> None:
         config = ConfigSchemaMother.any()
