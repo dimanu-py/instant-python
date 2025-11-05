@@ -1,5 +1,6 @@
 import subprocess
 
+from instant_python.initialize.domain.env_manager import CommandExecutionError
 from instant_python.initialize.infra.env_manager.system_console import SystemConsole
 
 
@@ -12,7 +13,12 @@ class RuffProjectFormatter:
         if self._console is None:
             self._run_command(command="uvx ruff format")
         else:
-            self._console.execute(command="uvx ruff format")
+            result = self._console.execute(command="uvx ruff format")
+            if not result.success():
+                raise CommandExecutionError(
+                    exit_code=result.exit_code,
+                    stderr_output=result.stderr,
+                )
 
     def _run_command(self, command: str) -> None:
         subprocess.run(
