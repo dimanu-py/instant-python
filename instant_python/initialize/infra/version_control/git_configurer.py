@@ -2,7 +2,11 @@ import subprocess
 
 from instant_python.config.domain.git_config import GitConfig
 from instant_python.initialize.domain.version_control_configurer import VersionControlConfigurer
-from instant_python.initialize.infra.env_manager.system_console import SystemConsole, CommandExecutionResult, CommandExecutionError
+from instant_python.initialize.infra.env_manager.system_console import (
+    SystemConsole,
+    CommandExecutionResult,
+    CommandExecutionError,
+)
 
 
 class GitConfigurer(VersionControlConfigurer):
@@ -21,33 +25,22 @@ class GitConfigurer(VersionControlConfigurer):
         print(">>> Git repository created successfully")
 
     def _initialize_repository(self) -> None:
-        if self._console is None:
-            self._run_command(command="git init")
-        else:
-            result = self._console.execute(command="git init")
-            self._raise_command_execution_error(result=result)
+        result = self._console.execute(command="git init")
+        self._raise_command_execution_error(result=result)
 
     def _set_user_information(self, username: str, email: str) -> None:
-        if self._console is None:
-            self._run_command(command=f"git config user.name {username}")
-            self._run_command(command=f"git config user.email {email}")
-        else:
-            result_name = self._console.execute(command=f"git config user.name {username}")
-            self._raise_command_execution_error(result=result_name)
+        result_name = self._console.execute(command=f"git config user.name {username}")
+        self._raise_command_execution_error(result=result_name)
 
-            result_email = self._console.execute(command=f"git config user.email {email}")
-            self._raise_command_execution_error(result=result_email)
+        result_email = self._console.execute(command=f"git config user.email {email}")
+        self._raise_command_execution_error(result=result_email)
 
     def _make_initial_commit(self) -> None:
-        if self._console is None:
-            self._run_command(command="git add .")
-            self._run_command(command='git commit -m "🎉 chore: initial commit"')
-        else:
-            result_add = self._console.execute(command="git add .")
-            self._raise_command_execution_error(result=result_add)
+        result_add = self._console.execute(command="git add .")
+        self._raise_command_execution_error(result=result_add)
 
-            result_commit = self._console.execute(command='git commit -m "🎉 chore: initial commit"')
-            self._raise_command_execution_error(result=result_commit)
+        result_commit = self._console.execute(command='git commit -m "🎉 chore: initial commit"')
+        self._raise_command_execution_error(result=result_commit)
 
     @staticmethod
     def _raise_command_execution_error(result: CommandExecutionResult) -> None:
