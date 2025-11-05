@@ -8,9 +8,6 @@ class GitConfigurer:
         self._project_directory = project_directory
 
     def setup_repository(self, configuration: GitConfig) -> None:
-        if not configuration.initialize:
-            return
-
         print(">>> Setting up git repository...")
         self._initialize_repository()
         self._set_user_information(
