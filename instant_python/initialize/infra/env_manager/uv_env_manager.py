@@ -15,13 +15,10 @@ class UvEnvManager(EnvManager):
         self._uv = self._set_uv_executable_based_on_os()
 
     def setup(self, python_version: str, dependencies: list[DependencyConfig]) -> None:
-        try:
-            if self._uv_is_not_installed():
-                self._install()
-            self._install_python(python_version)
-            self._install_dependencies(dependencies)
-        except subprocess.CalledProcessError as error:
-            raise CommandExecutionError(exit_code=error.returncode, stderr_output=error.stderr)
+        if self._uv_is_not_installed():
+            self._install()
+        self._install_python(python_version)
+        self._install_dependencies(dependencies)
 
     def _install(self) -> None:
         print(">>> Installing uv...")
