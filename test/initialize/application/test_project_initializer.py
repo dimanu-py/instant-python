@@ -21,6 +21,13 @@ class TestProjectInitializer:
         self._env_manager = Mock(EnvManager)
         self._version_control_configurer = Mock(VersionControlConfigurer)
         self._formatter = Mock(ProjectFormatter)
+        self._project_initializer = ProjectInitializer(
+            renderer=self._renderer,
+            writer=self._writer,
+            env_manager=self._env_manager,
+            version_control_configurer=self._version_control_configurer,
+            formatter=self._formatter,
+        )
 
     def test_should_initialize_project_with_git_repository(self) -> None:
         config = ConfigSchemaMother.any()
@@ -33,14 +40,7 @@ class TestProjectInitializer:
         expect_call(self._version_control_configurer).setup(config.git).returns(None)
         expect_call(self._formatter).format().returns(None)
 
-        project_initializer = ProjectInitializer(
-            renderer=self._renderer,
-            writer=self._writer,
-            env_manager=self._env_manager,
-            version_control_configurer=self._version_control_configurer,
-            formatter=self._formatter,
-        )
-        project_initializer.execute(config=config, destination_project_folder=destination_folder)
+        self._project_initializer.execute(config=config, destination_project_folder=destination_folder)
 
         expect(self._renderer).to(have_been_satisfied)
         expect(self._writer).to(have_been_satisfied)
@@ -58,14 +58,7 @@ class TestProjectInitializer:
         expect_call(self._env_manager).setup(config.python_version, config.dependencies).returns(None)
         expect_call(self._formatter).format().returns(None)
 
-        project_initializer = ProjectInitializer(
-            renderer=self._renderer,
-            writer=self._writer,
-            env_manager=self._env_manager,
-            version_control_configurer=self._version_control_configurer,
-            formatter=self._formatter,
-        )
-        project_initializer.execute(config=config, destination_project_folder=destination_folder)
+        self._project_initializer.execute(config=config, destination_project_folder=destination_folder)
 
         expect(self._renderer).to(have_been_satisfied)
         expect(self._writer).to(have_been_satisfied)
