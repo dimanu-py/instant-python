@@ -25,7 +25,12 @@ class UvEnvManager(EnvManager):
 
     def _install(self) -> None:
         print(">>> Installing uv...")
-        self._run_command(command=self._get_installation_command_based_on_os())
+        if self._console is None:
+            self._run_command(command=self._get_installation_command_based_on_os())
+        else:
+            result = self._console.execute(self._get_installation_command_based_on_os())
+            if not result.success():
+                raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
         print(">>> uv installed successfully")
         if self._system_os.startswith("win"):
             print(
