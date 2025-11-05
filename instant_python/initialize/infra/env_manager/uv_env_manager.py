@@ -56,10 +56,13 @@ class UvEnvManager(EnvManager):
         self._create_virtual_environment()
         print(">>> Installing dependencies...")
         for dependency in dependencies:
-            command = self._build_dependency_install_command(dependency)
-            result = self._console.execute(command)
+            result = self._install_dependency(dependency)
             self._raise_command_execution_error(result)
         print(">>> Dependencies installed successfully")
+
+    def _install_dependency(self, dependency: DependencyConfig) -> CommandExecutionResult:
+        command = self._build_dependency_install_command(dependency)
+        return self._console.execute(command)
 
     def _build_dependency_install_command(self, dependency: DependencyConfig) -> str:
         command = [f"{self._uv} add"]
