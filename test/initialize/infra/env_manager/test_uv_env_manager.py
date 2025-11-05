@@ -15,63 +15,57 @@ class TestUvEnvManager:
     _UV_EXECUTABLE = "~/.local/bin/uv"
     _SUCCESSFUL_COMMAND_RESULT = CommandExecutionResultMother.success()
     _FAILED_COMMAND_RESULT = CommandExecutionResultMother.failure()
+    _A_PYTHON_VERSION = "3.12"
+    _A_DEPENDENCY = DependencyConfigMother.with_parameter(name="requests", version="latest")
+    _NO_DEPENDENCIES = []
 
     def setup_method(self) -> None:
         self._console = Mimic(Mock, SystemConsole)
         self._uv_env_manager = UvEnvManager(project_directory=os.getcwd(), console=self._console)
 
     def test_should_setup_environment_without_installing_uv_when_is_already_installed(self) -> None:
-        python_version = "3.12"
-
         expect_call(self._console).execute(f"{self._UV_EXECUTABLE} --version").returns(self._SUCCESSFUL_COMMAND_RESULT)
-        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {python_version}").returns(
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {self._A_PYTHON_VERSION}").returns(
             self._SUCCESSFUL_COMMAND_RESULT
         )
         expect_call(self._console).execute(f"{self._UV_EXECUTABLE} sync").returns(self._SUCCESSFUL_COMMAND_RESULT)
 
-        self._uv_env_manager.setup(python_version=python_version, dependencies=[])
+        self._uv_env_manager.setup(python_version=self._A_PYTHON_VERSION, dependencies=self._NO_DEPENDENCIES)
 
         expect(self._console).to(have_been_satisfied)
 
     def test_should_setup_environment_installing_uv_when_is_not_installed(self) -> None:
-        python_version = "3.12"
-
         expect_call(self._console).execute(f"{self._UV_EXECUTABLE} --version").returns(self._FAILED_COMMAND_RESULT)
         expect_call(self._console).execute("curl -LsSf https://astral.sh/uv/install.sh | sh").returns(
             self._SUCCESSFUL_COMMAND_RESULT
         )
-        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {python_version}").returns(
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {self._A_PYTHON_VERSION}").returns(
             self._SUCCESSFUL_COMMAND_RESULT
         )
         expect_call(self._console).execute(f"{self._UV_EXECUTABLE} sync").returns(self._SUCCESSFUL_COMMAND_RESULT)
 
-        self._uv_env_manager.setup(python_version=python_version, dependencies=[])
+        self._uv_env_manager.setup(python_version=self._A_PYTHON_VERSION, dependencies=self._NO_DEPENDENCIES)
 
         expect(self._console).to(have_been_satisfied)
 
     def test_should_setup_environment_installing_specified_dependencies(self) -> None:
-        dependency = DependencyConfigMother.with_parameter(name="requests", version="latest")
-        python_version = "3.12"
-
         expect_call(self._console).execute(f"{self._UV_EXECUTABLE} --version").returns(self._SUCCESSFUL_COMMAND_RESULT)
-        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {python_version}").returns(
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {self._A_PYTHON_VERSION}").returns(
             self._SUCCESSFUL_COMMAND_RESULT
         )
         expect_call(self._console).execute(f"{self._UV_EXECUTABLE} sync").returns(self._SUCCESSFUL_COMMAND_RESULT)
         expect_call(self._console).execute(f"{self._UV_EXECUTABLE} add requests").returns(self._SUCCESSFUL_COMMAND_RESULT)
 
-        self._uv_env_manager.setup(python_version=python_version, dependencies=[dependency])
+        self._uv_env_manager.setup(python_version=self._A_PYTHON_VERSION, dependencies=[self._A_DEPENDENCY])
 
         expect(self._console).to(have_been_satisfied)
 
     def test_should_raise_error_when_a_command_execution_fails(self) -> None:
-        python_version = "3.12"
-
         expect_call(self._console).execute(f"{self._UV_EXECUTABLE} --version").returns(self._SUCCESSFUL_COMMAND_RESULT)
-        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {python_version}").returns(
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {self._A_PYTHON_VERSION}").returns(
             self._FAILED_COMMAND_RESULT
         )
 
-        expect(lambda: self._uv_env_manager.setup(python_version=python_version, dependencies=[])).to(
+        expect(lambda: self._uv_env_manager.setup(python_version=self._A_PYTHON_VERSION, dependencies=[])).to(
             raise_error(CommandExecutionError)
         )
