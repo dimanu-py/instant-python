@@ -74,7 +74,12 @@ class UvEnvManager(EnvManager):
         return " ".join(command)
 
     def _create_virtual_environment(self) -> None:
-        self._run_command(f"{self._uv} sync")
+        if self._console is None:
+            self._run_command(f"{self._uv} sync")
+        else:
+            result = self._console.execute(f"{self._uv} sync")
+            if not result.success():
+                raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
 
     def _uv_is_not_installed(self) -> bool:
         if self._console is None:
