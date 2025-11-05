@@ -58,7 +58,7 @@ def create_new_project(
 
     config.save_on_project_folder()
     if config.git.initialize:
-        git_configurer = GitConfigurer(project_directory=config.project_folder_name)
+        git_configurer = GitConfigurer()
         git_configurer.setup_repository(config.git)
 
 

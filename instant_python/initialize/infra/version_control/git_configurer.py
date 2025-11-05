@@ -10,9 +10,8 @@ from instant_python.initialize.infra.env_manager.system_console import (
 
 
 class GitConfigurer(VersionControlConfigurer):
-    def __init__(self, project_directory: str, console: SystemConsole | None = None) -> None:
+    def __init__(self, console: SystemConsole | None = None) -> None:
         self._console = console
-        self._project_directory = project_directory
 
     def setup(self, config: GitConfig) -> None:
         print(">>> Setting up git repository...")

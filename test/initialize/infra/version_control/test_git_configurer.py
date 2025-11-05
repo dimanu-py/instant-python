@@ -20,7 +20,7 @@ class TestGitConfigurer:
         self._console = Mimic(Mock, SystemConsole)
 
     def test_should_configure_git_repository_successfully(self) -> None:
-        configurer = GitConfigurer(project_directory=os.getcwd(), console=self._console)
+        configurer = GitConfigurer(console=self._console)
 
         self._should_create_repository()
         self._should_set_user_information()
