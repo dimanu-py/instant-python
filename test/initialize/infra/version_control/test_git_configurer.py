@@ -1,8 +1,8 @@
 from doublex import Mock, Mimic, expect_call
 from doublex_expects import have_been_satisfied
-from expects import expect
+from expects import expect, raise_error
 
-from instant_python.initialize.infra.env_manager.system_console import SystemConsole
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole, CommandExecutionError
 from instant_python.initialize.infra.version_control.git_configurer import GitConfigurer
 from test.config.domain.mothers.git_config_mother import GitConfigMother
 from test.initialize.infra.env_manager.mother.command_execution_result_mother import CommandExecutionResultMother
@@ -32,6 +32,11 @@ class TestGitConfigurer:
 
         expect(self._console).to(have_been_satisfied)
 
+    def test_should_raise_error_when_repository_initialization_fails(self) -> None:
+        self._should_fail_to_create_repository()
+
+        expect(lambda: self._git_configurer.setup(GitConfigMother.initialize())).to(raise_error(CommandExecutionError))
+
     def _should_create_repository(self) -> None:
         expect_call(self._console).execute_or_raise("git init").returns(self._SUCCESSFUL_COMMAND_RESULT)
 
@@ -47,4 +52,12 @@ class TestGitConfigurer:
         expect_call(self._console).execute("git add .").returns(self._SUCCESSFUL_COMMAND_RESULT)
         expect_call(self._console).execute('git commit -m "🎉 chore: initial commit"').returns(
             self._SUCCESSFUL_COMMAND_RESULT
+        )
+
+    def _should_fail_to_create_repository(self) -> None:
+        expect_call(self._console).execute_or_raise("git init").raises(
+            CommandExecutionError(
+                exit_code=self._FAILED_COMMAND_RESULT.exit_code,
+                stderr_output=self._FAILED_COMMAND_RESULT.stderr,
+            )
         )
