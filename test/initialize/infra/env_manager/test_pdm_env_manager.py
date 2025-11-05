@@ -21,7 +21,7 @@ class TestPdmEnvManager:
 
     def setup_method(self) -> None:
         self._console = Mimic(Mock, SystemConsole)
-        self._pdm_env_manager = PdmEnvManager(project_directory=os.getcwd(), console=self._console)
+        self._pdm_env_manager = PdmEnvManager(console=self._console)
 
     def test_should_setup_environment_without_installing_pdm_when_is_already_installed(self) -> None:
         self._should_check_that_pdm_is_installed()

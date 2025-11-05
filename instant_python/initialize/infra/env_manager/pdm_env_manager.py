@@ -7,9 +7,8 @@ from instant_python.initialize.infra.env_manager.system_console import SystemCon
 
 
 class PdmEnvManager(EnvManager):
-    def __init__(self, project_directory: str, console: SystemConsole | None = None) -> None:
+    def __init__(self, console: SystemConsole | None = None) -> None:
         self._console = console
-        self._project_directory = project_directory
         self._system_os = sys.platform
         self._pdm = self._set_pdm_executable_based_on_os()
 
