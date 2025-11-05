@@ -2,10 +2,10 @@ from pathlib import Path
 
 from instant_python.config.domain.config_schema import ConfigSchema
 from instant_python.initialize.domain.project_formatter import ProjectFormatter
-from instant_python.initialize.infra.formatter.ruff_project_formatter import RuffProjectFormatter
 from instant_python.initialize.domain.env_manager import EnvManager
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
 from instant_python.initialize.domain.project_writer import ProjectWriter
+from instant_python.initialize.domain.version_control_configurer import VersionControlConfigurer
 
 
 class ProjectInitializer:
@@ -14,11 +14,13 @@ class ProjectInitializer:
         renderer: ProjectRenderer,
         writer: ProjectWriter,
         env_manager: EnvManager,
+        version_control_configurer: VersionControlConfigurer,
         formatter: ProjectFormatter,
     ) -> None:
         self._project_renderer = renderer
         self._writer = writer
         self._env_manager = env_manager
+        self._version_control_configurer = version_control_configurer
         self._formatter = formatter
 
     def execute(self, config: ConfigSchema, destination_project_folder: Path) -> None:
