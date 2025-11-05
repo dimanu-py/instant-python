@@ -1,9 +1,9 @@
 from expects import expect, contain
 
-from instant_python.initialize.infra.formatter.project_formatter import ProjectFormatter
+from instant_python.initialize.infra.formatter.ruff_project_formatter import RuffProjectFormatter
 
 
-class MockProjectFormatter(ProjectFormatter):
+class MockRuffProjectFormatter(RuffProjectFormatter):
     def __init__(self, project_directory: str) -> None:
         super().__init__(project_directory)
         self._commands: list[str] = []
