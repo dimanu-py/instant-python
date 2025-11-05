@@ -52,7 +52,7 @@ def create_new_project(
         dependencies=config.dependencies,
     )
 
-    formatter = RuffProjectFormatter(project_directory=config.project_folder_name)
+    formatter = RuffProjectFormatter()
     formatter.format()
 
     config.save_on_project_folder()
