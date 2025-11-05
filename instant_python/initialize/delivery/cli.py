@@ -5,6 +5,7 @@ from instant_python.initialize.infra.env_manager.env_manager_factory import EnvM
 from instant_python.formatter.project_formatter import ProjectFormatter
 from instant_python.git.git_configurer import GitConfigurer
 from instant_python.initialize.application.config_reader import ConfigReader
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole
 from instant_python.initialize.infra.persistence.config_repository import YamlConfigRepository
 from instant_python.project_creator.file_system import FileSystem
 from instant_python.render.custom_project_renderer import CustomProjectRenderer
@@ -44,7 +45,7 @@ def create_new_project(
 
     dependency_manager = EnvManagerFactory.create(
         dependency_manager=config.dependency_manager,
-        project_directory=config.project_folder_name,
+        console=SystemConsole(working_directory=config.project_folder_name)
     )
     dependency_manager.setup(
         python_version=config.python_version,
