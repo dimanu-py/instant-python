@@ -30,4 +30,5 @@ class ProjectInitializer:
             python_version=config.python_version,
             dependencies=config.dependencies,
         )
+        self._version_control_configurer.setup(config.git)
         self._formatter.format()
