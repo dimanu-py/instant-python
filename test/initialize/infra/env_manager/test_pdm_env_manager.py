@@ -66,25 +66,30 @@ class TestPdmEnvManager:
         expect_call(self._console).execute(f"{self._PDM_EXECUTABLE} --version").returns(self._FAILED_COMMAND_RESULT)
 
     def _should_install_python_version(self) -> None:
-        expect_call(self._console).execute(f"{self._PDM_EXECUTABLE} python install {self._A_PYTHON_VERSION}").returns(
-            self._SUCCESSFUL_COMMAND_RESULT
-        )
+        expect_call(self._console).execute_or_raise(
+            f"{self._PDM_EXECUTABLE} python install {self._A_PYTHON_VERSION}"
+        ).returns(self._SUCCESSFUL_COMMAND_RESULT)
 
     def _should_create_virtual_environment(self) -> None:
-        expect_call(self._console).execute(f"{self._PDM_EXECUTABLE} install").returns(self._SUCCESSFUL_COMMAND_RESULT)
-
-    def _should_install_pdm(self) -> None:
-        expect_call(self._console).execute("curl -sSL https://pdm-project.org/install-pdm.py | python3 -").returns(
+        expect_call(self._console).execute_or_raise(f"{self._PDM_EXECUTABLE} install").returns(
             self._SUCCESSFUL_COMMAND_RESULT
         )
 
+    def _should_install_pdm(self) -> None:
+        expect_call(self._console).execute_or_raise(
+            "curl -sSL https://pdm-project.org/install-pdm.py | python3 -"
+        ).returns(self._SUCCESSFUL_COMMAND_RESULT)
+
     def _should_install_dependencies(self) -> None:
-        expect_call(self._console).execute(f"{self._PDM_EXECUTABLE} add requests").returns(
+        expect_call(self._console).execute_or_raise(f"{self._PDM_EXECUTABLE} add requests").returns(
             self._SUCCESSFUL_COMMAND_RESULT
         )
 
     def _should_fail_installing_python(self) -> None:
-        expect_call(self._console).execute(f"{self._PDM_EXECUTABLE} python install {self._A_PYTHON_VERSION}").returns(
-            self._FAILED_COMMAND_RESULT
+        expect_call(self._console).execute_or_raise(
+            f"{self._PDM_EXECUTABLE} python install {self._A_PYTHON_VERSION}"
+        ).raises(
+            CommandExecutionError(
+                exit_code=self._FAILED_COMMAND_RESULT.exit_code, stderr_output=self._FAILED_COMMAND_RESULT.stderr
+            )
         )
-
