@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from doublex import Mock, expect_call
+from doublex import Mock, expect_call, assert_that, verify
 from doublex_expects import have_been_satisfied
 from expects import expect
 
@@ -56,6 +56,7 @@ class TestProjectInitializer:
         expect_call(self._renderer).render(config).returns(project_structure)
         expect_call(self._writer).write(project_structure, destination_folder).returns(None)
         expect_call(self._env_manager).setup(config.python_version, config.dependencies).returns(None)
+        expect_call(self._formatter).format().returns(None)
 
         project_initializer = ProjectInitializer(
             renderer=self._renderer,
@@ -69,5 +70,5 @@ class TestProjectInitializer:
         expect(self._renderer).to(have_been_satisfied)
         expect(self._writer).to(have_been_satisfied)
         expect(self._env_manager).to(have_been_satisfied)
-        expect(self._version_control_configurer).to_not(have_been_satisfied)
+        expect(self._version_control_configurer).to(have_been_satisfied)
         expect(self._formatter).to(have_been_satisfied)
