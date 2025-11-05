@@ -1,6 +1,6 @@
 import os
 
-from test.formatter.mock_project_formatter import MockProjectFormatter
+from test.initialize.infra.formatter.mock_project_formatter import MockProjectFormatter
 
 
 class TestProjectFormatter:

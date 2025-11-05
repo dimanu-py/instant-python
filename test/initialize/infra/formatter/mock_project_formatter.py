@@ -1,6 +1,6 @@
 from expects import expect, contain
 
-from instant_python.formatter.project_formatter import ProjectFormatter
+from instant_python.initialize.infra.formatter.project_formatter import ProjectFormatter
 
 
 class MockProjectFormatter(ProjectFormatter):

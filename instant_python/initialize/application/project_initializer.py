@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from instant_python.config.domain.config_schema import ConfigSchema
-from instant_python.formatter.project_formatter import ProjectFormatter
+from instant_python.initialize.infra.formatter.project_formatter import ProjectFormatter
 from instant_python.initialize.domain.env_manager import EnvManager
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
 from instant_python.initialize.domain.project_writer import ProjectWriter
