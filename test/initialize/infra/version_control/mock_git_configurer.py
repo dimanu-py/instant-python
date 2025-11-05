@@ -1,6 +1,6 @@
 from expects import expect, be_empty, contain
 
-from instant_python.git.git_configurer import GitConfigurer
+from instant_python.initialize.infra.version_control.git_configurer import GitConfigurer
 
 
 class MockGitConfigurer(GitConfigurer):

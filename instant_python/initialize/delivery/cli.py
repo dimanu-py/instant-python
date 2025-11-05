@@ -3,7 +3,7 @@ import typer
 from instant_python.config.infra.parser.parser import Parser
 from instant_python.initialize.infra.env_manager.env_manager_factory import EnvManagerFactory
 from instant_python.initialize.infra.formatter.ruff_project_formatter import RuffProjectFormatter
-from instant_python.git.git_configurer import GitConfigurer
+from instant_python.initialize.infra.version_control.git_configurer import GitConfigurer
 from instant_python.initialize.application.config_reader import ConfigReader
 from instant_python.initialize.infra.env_manager.system_console import SystemConsole
 from instant_python.initialize.infra.persistence.config_repository import YamlConfigRepository

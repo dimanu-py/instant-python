@@ -1,7 +1,7 @@
 import os
 
 from test.config.domain.mothers.git_config_mother import GitConfigMother
-from test.git.mock_git_configurer import MockGitConfigurer
+from test.initialize.infra.version_control.mock_git_configurer import MockGitConfigurer
 
 
 class TestGitConfigurer:
