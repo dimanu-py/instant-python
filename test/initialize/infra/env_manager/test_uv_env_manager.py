@@ -1,5 +1,3 @@
-import os
-
 from doublex import Mock, Mimic, expect_call
 from doublex_expects import have_been_satisfied
 from expects import expect, raise_error
@@ -66,24 +64,30 @@ class TestUvEnvManager:
         expect_call(self._console).execute(f"{self._UV_EXECUTABLE} --version").returns(self._FAILED_COMMAND_RESULT)
 
     def _should_install_python_version(self) -> None:
-        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {self._A_PYTHON_VERSION}").returns(
+        expect_call(self._console).execute_or_raise(
+            f"{self._UV_EXECUTABLE} python install {self._A_PYTHON_VERSION}"
+        ).returns(self._SUCCESSFUL_COMMAND_RESULT)
+
+    def _should_create_virtual_environment(self) -> None:
+        expect_call(self._console).execute_or_raise(f"{self._UV_EXECUTABLE} sync").returns(
             self._SUCCESSFUL_COMMAND_RESULT
         )
 
-    def _should_create_virtual_environment(self) -> None:
-        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} sync").returns(self._SUCCESSFUL_COMMAND_RESULT)
-
     def _should_install_uv(self) -> None:
-        expect_call(self._console).execute("curl -LsSf https://astral.sh/uv/install.sh | sh").returns(
+        expect_call(self._console).execute_or_raise("curl -LsSf https://astral.sh/uv/install.sh | sh").returns(
             self._SUCCESSFUL_COMMAND_RESULT
         )
 
     def _should_install_dependencies(self) -> None:
-        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} add requests").returns(
+        expect_call(self._console).execute_or_raise(f"{self._UV_EXECUTABLE} add requests").returns(
             self._SUCCESSFUL_COMMAND_RESULT
         )
 
     def _should_fail_installing_python(self) -> None:
-        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {self._A_PYTHON_VERSION}").returns(
-            self._FAILED_COMMAND_RESULT
+        expect_call(self._console).execute_or_raise(
+            f"{self._UV_EXECUTABLE} python install {self._A_PYTHON_VERSION}"
+        ).raises(
+            CommandExecutionError(
+                exit_code=self._FAILED_COMMAND_RESULT.exit_code, stderr_output=self._FAILED_COMMAND_RESULT.stderr
+            )
         )
