@@ -47,3 +47,27 @@ class TestProjectInitializer:
         expect(self._env_manager).to(have_been_satisfied)
         expect(self._version_control_configurer).to(have_been_satisfied)
         expect(self._formatter).to(have_been_satisfied)
+
+    def test_should_initialize_project_without_git_repository(self) -> None:
+        config = ConfigSchemaMother.without_git()
+        project_structure = ProjectStructureMother.any()
+        destination_folder = Path.cwd()
+
+        expect_call(self._renderer).render(config).returns(project_structure)
+        expect_call(self._writer).write(project_structure, destination_folder).returns(None)
+        expect_call(self._env_manager).setup(config.python_version, config.dependencies).returns(None)
+
+        project_initializer = ProjectInitializer(
+            renderer=self._renderer,
+            writer=self._writer,
+            env_manager=self._env_manager,
+            version_control_configurer=self._version_control_configurer,
+            formatter=self._formatter,
+        )
+        project_initializer.execute(config=config, destination_project_folder=destination_folder)
+
+        expect(self._renderer).to(have_been_satisfied)
+        expect(self._writer).to(have_been_satisfied)
+        expect(self._env_manager).to(have_been_satisfied)
+        expect(self._version_control_configurer).to_not(have_been_satisfied)
+        expect(self._formatter).to(have_been_satisfied)

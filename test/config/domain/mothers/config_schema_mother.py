@@ -23,3 +23,12 @@ class ConfigSchemaMother:
             template=TemplateConfigMother.with_parameters(name=template),
             git=GitConfigMother.initialize(),
         )
+
+    @staticmethod
+    def without_git() -> ConfigSchema:
+        return ConfigSchema(
+            general=GeneralConfigMother.any(),
+            dependencies=[DependencyConfigMother.any() for _ in range(3)],
+            template=TemplateConfigMother.any(),
+            git=GitConfigMother.not_initialize(),
+        )
