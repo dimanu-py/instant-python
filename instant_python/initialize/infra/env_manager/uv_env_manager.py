@@ -64,7 +64,12 @@ class UvEnvManager(EnvManager):
         print(">>> Installing dependencies...")
         for dependency in dependencies:
             command = self._build_dependency_install_command(dependency)
-            self._run_command(command)
+            if self._console is None:
+                self._run_command(command)
+            else:
+                result = self._console.execute(command)
+                if not result.success():
+                    raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
         print(">>> Dependencies installed successfully")
 
     def _build_dependency_install_command(self, dependency: DependencyConfig) -> str:
