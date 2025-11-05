@@ -1,9 +1,9 @@
 import shutil
 import tempfile
 
-from expects import expect, be_true, be_false, equal, contain
+from expects import expect, be_true, be_false, equal, contain, raise_error
 
-from instant_python.initialize.infra.env_manager.system_console import SystemConsole
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole, CommandExecutionError
 
 
 class TestSystemCommandExecutor:
@@ -39,3 +39,13 @@ class TestSystemCommandExecutor:
 
         expect(result.success()).to(be_true)
         expect(result.stdout).to(equal(""))
+
+    def test_should_return_result_when_execute_or_raise_succeeds(self) -> None:
+        result = self._console.execute_or_raise("echo 'hello'")
+
+        expect(result.success()).to(be_true)
+
+    def test_should_raise_error_when_execute_or_raise_fails(self) -> None:
+        expect(lambda: self._console.execute_or_raise("ls /nonexistent_directory_xyz")).to(
+            raise_error(CommandExecutionError)
+        )

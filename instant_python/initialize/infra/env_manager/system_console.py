@@ -25,6 +25,15 @@ class SystemConsole:
         except Exception as error:
             return self._unexpected_error_result(error)
 
+    def execute_or_raise(self, command: str) -> CommandExecutionResult:
+        result = self.execute(command)
+        if not result.success():
+            raise CommandExecutionError(
+                exit_code=result.exit_code,
+                stderr_output=result.stderr,
+            )
+        return result
+
     def _run_command(self, command: str) -> CommandExecutionResult:
         result = subprocess.run(
             command,
