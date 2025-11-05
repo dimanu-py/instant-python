@@ -23,10 +23,12 @@ class TestGitConfigurer:
         self._should_set_user_information()
         self._should_make_first_commit()
 
-        self._git_configurer.setup(GitConfigMother.with_parameters(
-            username=self._A_USERNAME,
-            email=self._A_EMAIL,
-        ))
+        self._git_configurer.setup(
+            GitConfigMother.with_parameters(
+                username=self._A_USERNAME,
+                email=self._A_EMAIL,
+            )
+        )
 
         expect(self._console).to(have_been_satisfied)
 
@@ -34,9 +36,15 @@ class TestGitConfigurer:
         expect_call(self._console).execute_or_raise("git init").returns(self._SUCCESSFUL_COMMAND_RESULT)
 
     def _should_set_user_information(self) -> None:
-        expect_call(self._console).execute(f"git config user.name {self._A_USERNAME}").returns(self._SUCCESSFUL_COMMAND_RESULT)
-        expect_call(self._console).execute(f"git config user.email {self._A_EMAIL}").returns(self._SUCCESSFUL_COMMAND_RESULT)
+        expect_call(self._console).execute(f"git config user.name {self._A_USERNAME}").returns(
+            self._SUCCESSFUL_COMMAND_RESULT
+        )
+        expect_call(self._console).execute(f"git config user.email {self._A_EMAIL}").returns(
+            self._SUCCESSFUL_COMMAND_RESULT
+        )
 
     def _should_make_first_commit(self) -> None:
         expect_call(self._console).execute("git add .").returns(self._SUCCESSFUL_COMMAND_RESULT)
-        expect_call(self._console).execute('git commit -m "🎉 chore: initial commit"').returns(self._SUCCESSFUL_COMMAND_RESULT)
+        expect_call(self._console).execute('git commit -m "🎉 chore: initial commit"').returns(
+            self._SUCCESSFUL_COMMAND_RESULT
+        )
