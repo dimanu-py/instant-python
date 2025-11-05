@@ -25,12 +25,9 @@ class UvEnvManager(EnvManager):
 
     def _install(self) -> None:
         print(">>> Installing uv...")
-        if self._console is None:
-            self._run_command(command=self._get_installation_command_based_on_os())
-        else:
-            result = self._console.execute(self._get_installation_command_based_on_os())
-            if not result.success():
-                raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
+        result = self._console.execute(self._get_installation_command_based_on_os())
+        if not result.success():
+            raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
         print(">>> uv installed successfully")
         if self._system_os.startswith("win"):
             print(
@@ -56,12 +53,9 @@ class UvEnvManager(EnvManager):
 
     def _install_python(self, version: str) -> None:
         print(f">>> Installing Python {version}...")
-        if self._console is None:
-            self._run_command(command=f"{self._uv} python install {version}")
-        else:
-            result = self._console.execute(f"{self._uv} python install {version}")
-            if not result.success():
-                raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
+        result = self._console.execute(f"{self._uv} python install {version}")
+        if not result.success():
+            raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
         print(f">>> Python {version} installed successfully")
 
     def _install_dependencies(self, dependencies: list[DependencyConfig]) -> None:
@@ -69,12 +63,9 @@ class UvEnvManager(EnvManager):
         print(">>> Installing dependencies...")
         for dependency in dependencies:
             command = self._build_dependency_install_command(dependency)
-            if self._console is None:
-                self._run_command(command)
-            else:
-                result = self._console.execute(command)
-                if not result.success():
-                    raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
+            result = self._console.execute(command)
+            if not result.success():
+                raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
         print(">>> Dependencies installed successfully")
 
     def _build_dependency_install_command(self, dependency: DependencyConfig) -> str:
@@ -84,24 +75,13 @@ class UvEnvManager(EnvManager):
         return " ".join(command)
 
     def _create_virtual_environment(self) -> None:
-        if self._console is None:
-            self._run_command(f"{self._uv} sync")
-        else:
-            result = self._console.execute(f"{self._uv} sync")
-            if not result.success():
-                raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
+        result = self._console.execute(f"{self._uv} sync")
+        if not result.success():
+            raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
 
     def _uv_is_not_installed(self) -> bool:
-        if self._console is None:
-            try:
-                self._run_command(f"{self._uv} --version")
-                print(">>> uv is already installed, skipping installation")
-                return False
-            except subprocess.CalledProcessError:
-                return True
-        else:
-            result = self._console.execute(f"{self._uv} --version")
-            return not result.success()
+        result = self._console.execute(f"{self._uv} --version")
+        return not result.success()
 
     def _run_command(self, command: str) -> None:
         subprocess.run(
