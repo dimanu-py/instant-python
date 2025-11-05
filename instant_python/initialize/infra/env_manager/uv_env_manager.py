@@ -72,12 +72,16 @@ class UvEnvManager(EnvManager):
         self._run_command(f"{self._uv} sync")
 
     def _uv_is_not_installed(self) -> bool:
-        try:
-            self._run_command(f"{self._uv} --version")
-            print(">>> uv is already installed, skipping installation")
-            return False
-        except subprocess.CalledProcessError:
-            return True
+        if self._console is None:
+            try:
+                self._run_command(f"{self._uv} --version")
+                print(">>> uv is already installed, skipping installation")
+                return False
+            except subprocess.CalledProcessError:
+                return True
+        else:
+            result = self._console.execute(f"{self._uv} --version")
+            return not result.success()
 
     def _run_command(self, command: str) -> None:
         subprocess.run(
