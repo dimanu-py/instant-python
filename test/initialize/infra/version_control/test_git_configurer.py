@@ -18,15 +18,14 @@ class TestGitConfigurer:
 
     def setup_method(self) -> None:
         self._console = Mimic(Mock, SystemConsole)
+        self._git_configurer = GitConfigurer(console=self._console)
 
     def test_should_configure_git_repository_successfully(self) -> None:
-        configurer = GitConfigurer(console=self._console)
-
         self._should_create_repository()
         self._should_set_user_information()
         self._should_make_first_commit()
 
-        configurer.setup(GitConfigMother.with_parameters(
+        self._git_configurer.setup(GitConfigMother.with_parameters(
             username=self._A_USERNAME,
             email=self._A_EMAIL,
         ))
