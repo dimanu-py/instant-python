@@ -51,7 +51,12 @@ class UvEnvManager(EnvManager):
 
     def _install_python(self, version: str) -> None:
         print(f">>> Installing Python {version}...")
-        self._run_command(command=f"{self._uv} python install {version}")
+        if self._console is None:
+            self._run_command(command=f"{self._uv} python install {version}")
+        else:
+            result = self._console.execute(f"{self._uv} python install {version}")
+            if not result.success():
+                raise CommandExecutionError(exit_code=result.exit_code, stderr_output=result.stderr)
         print(f">>> Python {version} installed successfully")
 
     def _install_dependencies(self, dependencies: list[DependencyConfig]) -> None:
