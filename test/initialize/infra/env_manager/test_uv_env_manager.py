@@ -8,6 +8,7 @@ from instant_python.config.domain.dependency_config import DependencyConfig
 from instant_python.initialize.domain.env_manager import CommandExecutionError
 from instant_python.initialize.infra.env_manager.system_console import SystemConsole
 from instant_python.initialize.infra.env_manager.uv_env_manager import UvEnvManager
+from test.config.domain.mothers.dependency_config_mother import DependencyConfigMother
 from test.initialize.infra.env_manager.mock_uv_env_manager import MockUvEnvManager, MockUvEnvManagerWithError
 from test.initialize.infra.env_manager.mother.command_execution_result_mother import CommandExecutionResultMother
 
@@ -48,6 +49,21 @@ class TestUvEnvManager:
         expect_call(self._console).execute(f"{self._UV_EXECUTABLE} sync").returns(self._SUCCESSFUL_COMMAND_RESULT)
 
         self._uv_env_manager.setup(python_version=python_version, dependencies=[])
+
+        expect(self._console).to(have_been_satisfied)
+
+    def test_should_setup_environment_installing_specified_dependencies(self) -> None:
+        dependency = DependencyConfigMother.with_parameter(name="requests", version="latest")
+        python_version = "3.12"
+
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} --version").returns(self._SUCCESSFUL_COMMAND_RESULT)
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {python_version}").returns(
+            self._SUCCESSFUL_COMMAND_RESULT
+        )
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} sync").returns(self._SUCCESSFUL_COMMAND_RESULT)
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} add requests").returns(self._SUCCESSFUL_COMMAND_RESULT)
+
+        self._uv_env_manager.setup(python_version=python_version, dependencies=[dependency])
 
         expect(self._console).to(have_been_satisfied)
 
