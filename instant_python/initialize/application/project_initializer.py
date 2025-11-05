@@ -27,3 +27,4 @@ class ProjectInitializer:
             python_version=config.python_version,
             dependencies=config.dependencies,
         )
+        self._formatter.format()
