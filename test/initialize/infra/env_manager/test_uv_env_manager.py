@@ -67,6 +67,18 @@ class TestUvEnvManager:
 
         expect(self._console).to(have_been_satisfied)
 
+    def test_should_raise_error_when_a_command_execution_fails(self) -> None:
+        python_version = "3.12"
+
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} --version").returns(self._SUCCESSFUL_COMMAND_RESULT)
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {python_version}").returns(
+            self._FAILED_COMMAND_RESULT
+        )
+
+        expect(lambda: self._uv_env_manager.setup(python_version=python_version, dependencies=[])).to(
+            raise_error(CommandExecutionError)
+        )
+
     def test_should_install_uv(self) -> None:
         self._uv_dependency_manager._install()
 
