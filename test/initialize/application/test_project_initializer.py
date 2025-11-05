@@ -22,7 +22,7 @@ class TestProjectInitializer:
         self._version_control_configurer = Mock(VersionControlConfigurer)
         self._formatter = Mock(ProjectFormatter)
 
-    def test_should_initialize_project(self) -> None:
+    def test_should_initialize_project_with_git_repository(self) -> None:
         config = ConfigSchemaMother.any()
         project_structure = ProjectStructureMother.any()
         destination_folder = Path.cwd()
