@@ -2,8 +2,8 @@ import sys
 from pathlib import Path
 
 from instant_python.config.domain.dependency_config import DependencyConfig
-from instant_python.initialize.domain.env_manager import EnvManager, CommandExecutionError
-from instant_python.initialize.infra.env_manager.system_console import SystemConsole, CommandExecutionResult
+from instant_python.initialize.domain.env_manager import EnvManager
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole, CommandExecutionResult, CommandExecutionError
 
 
 class PdmEnvManager(EnvManager):

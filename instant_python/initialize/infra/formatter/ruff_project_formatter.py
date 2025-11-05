@@ -1,5 +1,4 @@
-from instant_python.initialize.domain.env_manager import CommandExecutionError
-from instant_python.initialize.infra.env_manager.system_console import SystemConsole
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole, CommandExecutionError
 
 
 class RuffProjectFormatter:

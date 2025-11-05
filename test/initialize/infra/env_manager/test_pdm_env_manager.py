@@ -4,8 +4,7 @@ from doublex import Mock, Mimic, expect_call
 from doublex_expects import have_been_satisfied
 from expects import expect, raise_error
 
-from instant_python.initialize.domain.env_manager import CommandExecutionError
-from instant_python.initialize.infra.env_manager.system_console import SystemConsole
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole, CommandExecutionError
 from instant_python.initialize.infra.env_manager.pdm_env_manager import PdmEnvManager
 from test.config.domain.mothers.dependency_config_mother import DependencyConfigMother
 from test.initialize.infra.env_manager.mother.command_execution_result_mother import CommandExecutionResultMother
