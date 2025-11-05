@@ -71,6 +71,10 @@ class ConfigSchema:
     def python_version(self) -> str:
         return self.general.python_version
 
+    @property
+    def version_control_has_to_be_initialized(self) -> bool:
+        return self.git.initialize
+
 
 class ConfigSchemaPrimitives(TypedDict):
     general: dict[str, str]
