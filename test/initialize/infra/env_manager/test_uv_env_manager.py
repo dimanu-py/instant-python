@@ -35,6 +35,22 @@ class TestUvEnvManager:
 
         expect(self._console).to(have_been_satisfied)
 
+    def test_should_setup_environment_installing_uv_when_is_not_installed(self) -> None:
+        python_version = "3.12"
+
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} --version").returns(self._FAILED_COMMAND_RESULT)
+        expect_call(self._console).execute("curl -LsSf https://astral.sh/uv/install.sh | sh").returns(
+            self._SUCCESSFUL_COMMAND_RESULT
+        )
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} python install {python_version}").returns(
+            self._SUCCESSFUL_COMMAND_RESULT
+        )
+        expect_call(self._console).execute(f"{self._UV_EXECUTABLE} sync").returns(self._SUCCESSFUL_COMMAND_RESULT)
+
+        self._uv_env_manager.setup(python_version=python_version, dependencies=[])
+
+        expect(self._console).to(have_been_satisfied)
+
     def test_should_install_uv(self) -> None:
         self._uv_dependency_manager._install()
 
