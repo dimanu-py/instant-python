@@ -1,11 +1,15 @@
 import os
 
+from doublex import Mock, Mimic
+
+from instant_python.initialize.infra.env_manager.system_console import SystemConsole
 from test.config.domain.mothers.git_config_mother import GitConfigMother
 from test.initialize.infra.version_control.mock_git_configurer import MockGitConfigurer
 
 
 class TestGitConfigurer:
     def setup_method(self) -> None:
+        self._console = Mimic(Mock, SystemConsole)
         self._git_configurer = MockGitConfigurer(project_directory=os.getcwd())
 
     def test_should_initialize_git_repository(self) -> None:
