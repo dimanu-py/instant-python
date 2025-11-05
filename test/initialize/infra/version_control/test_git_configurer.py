@@ -35,7 +35,7 @@ class TestGitConfigurer:
             email="test_email@gmail.com",
         )
 
-        self._git_configurer.setup_repository(configuration=configuration)
+        self._git_configurer.setup(config=configuration)
 
         self._git_configurer.expect_to_have_been_called_with(
             "git init",

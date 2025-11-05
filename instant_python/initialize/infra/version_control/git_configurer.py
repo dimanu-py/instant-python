@@ -1,18 +1,19 @@
 import subprocess
 
 from instant_python.config.domain.git_config import GitConfig
+from instant_python.initialize.domain.version_control_configurer import VersionControlConfigurer
 
 
-class GitConfigurer:
+class GitConfigurer(VersionControlConfigurer):
     def __init__(self, project_directory: str) -> None:
         self._project_directory = project_directory
 
-    def setup_repository(self, configuration: GitConfig) -> None:
+    def setup(self, config: GitConfig) -> None:
         print(">>> Setting up git repository...")
         self._initialize_repository()
         self._set_user_information(
-            username=configuration.username,
-            email=configuration.email,
+            username=config.username,
+            email=config.email,
         )
         self._make_initial_commit()
         print(">>> Git repository created successfully")
