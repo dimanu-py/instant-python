@@ -36,8 +36,9 @@ class TestProjectInitializer:
         config = ConfigSchemaMother.any()
         project_structure = ProjectStructureMother.any()
         destination_folder = Path.cwd()
+        config_path = "ipy.yml"
 
-        expect_call(self._repository).read("ipy.yml").returns(config)
+        expect_call(self._repository).read(config_path).returns(config)
         expect_call(self._renderer).render(config).returns(project_structure)
         expect_call(self._writer).write(project_structure, destination_folder).returns(None)
         expect_call(self._env_manager).setup(config.python_version, config.dependencies).returns(None)
@@ -45,7 +46,7 @@ class TestProjectInitializer:
         expect_call(self._formatter).format().returns(None)
         expect_call(self._repository).write(config, destination_folder).returns(None)
 
-        self._project_initializer.execute(config=config, destination_project_folder=destination_folder)
+        self._project_initializer.execute(config=config, destination_project_folder=destination_folder, config_path=config_path)
 
         expect(self._renderer).to(have_been_satisfied)
         expect(self._writer).to(have_been_satisfied)
@@ -58,15 +59,16 @@ class TestProjectInitializer:
         config = ConfigSchemaMother.without_git()
         project_structure = ProjectStructureMother.any()
         destination_folder = Path.cwd()
+        config_path = "ipy.yml"
 
-        expect_call(self._repository).read("ipy.yml").returns(config)
+        expect_call(self._repository).read(config_path).returns(config)
         expect_call(self._renderer).render(config).returns(project_structure)
         expect_call(self._writer).write(project_structure, destination_folder).returns(None)
         expect_call(self._env_manager).setup(config.python_version, config.dependencies).returns(None)
         expect_call(self._formatter).format().returns(None)
         expect_call(self._repository).write(config, destination_folder).returns(None)
 
-        self._project_initializer.execute(config=config, destination_project_folder=destination_folder)
+        self._project_initializer.execute(config=config, destination_project_folder=destination_folder, config_path=config_path)
 
         expect(self._renderer).to(have_been_satisfied)
         expect(self._writer).to(have_been_satisfied)
