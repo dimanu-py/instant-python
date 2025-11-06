@@ -9,13 +9,13 @@ from instant_python.initialize.domain.config_repository import ConfigRepository
 
 
 class YamlConfigRepository(ConfigRepository):
-    def read(self, path: str) -> ConfigSchema:
+    def read(self, path: Path) -> ConfigSchema:
         try:
-            with Path(path).open("r") as file:
+            with path.open("r") as file:
                 raw_config = yaml.safe_load(file)
                 return ConfigSchema.from_primitives(content=raw_config, custom_config_path=path)
         except FileNotFoundError:
-            raise ConfigurationFileNotFound(path)
+            raise ConfigurationFileNotFound(str(path))
 
     def write(self, config: ConfigSchema, destination_path: Path) -> None:
         final_destination = config.calculate_config_destination_path(

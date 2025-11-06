@@ -11,7 +11,7 @@ from test.utils import resources_path
 class TestYamlConfigRepository:
     def test_should_read_existing_config_file(self) -> None:
         repository = YamlConfigRepository()
-        config_path = str(resources_path() / "base_ipy_config.yml")
+        config_path = resources_path() / self._CONFIG_FILE
 
         config = repository.read(config_path)
 
@@ -20,6 +20,6 @@ class TestYamlConfigRepository:
 
     def test_should_raise_error_when_file_to_read_does_not_exist(self) -> None:
         repository = YamlConfigRepository()
-        config_path = "non/existing/path/config.yml"
+        config_path = Path("non/existing/path/config.yml")
 
         expect(lambda: repository.read(config_path)).to(raise_error(ConfigurationFileNotFound))

@@ -35,7 +35,7 @@ class ConfigSchema:
 
     @classmethod
     def from_primitives(
-        cls, content: dict[str, Union[dict, list]], custom_config_path: Union[str, None] = None
+        cls, content: dict[str, Union[dict, list]], custom_config_path: Union[Path, None] = None
     ) -> "ConfigSchema":
         cls._ensure_config_is_not_empty(content)
         cls._ensure_all_required_sections_are_present(content)
@@ -44,7 +44,7 @@ class ConfigSchema:
             dependencies=[DependencyConfig(**dep) for dep in content[_DEPENDENCIES]] if content[_DEPENDENCIES] else [],
             template=TemplateConfig(**content[_TEMPLATE]),
             git=GitConfig(**content[_GIT]),
-            config_file_path=Path(custom_config_path) if custom_config_path else cls._DEFAULT_CONFIG_PATH,
+            config_file_path=custom_config_path if custom_config_path else cls._DEFAULT_CONFIG_PATH,
         )
 
     @classmethod

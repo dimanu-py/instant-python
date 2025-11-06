@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from doublex import Mock, expect_call
 from doublex_expects import have_been_satisfied
 from expects import expect, be_none
@@ -11,7 +13,7 @@ class TestConfigReader:
     def test_should_read_existing_configuration_from_file(self) -> None:
         configuration_repository = Mock(ConfigRepository)
         config_reader = ConfigReader(repository=configuration_repository)
-        config_file_path = "path/to/config/file.yml"
+        config_file_path = Path("path/to/config/file.yml")
         config = ConfigSchemaMother.any()
 
         expect_call(configuration_repository).read(config_file_path).returns(config.to_primitives())
