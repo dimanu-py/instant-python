@@ -11,13 +11,12 @@ from {{ general.source_name }}.event.event_bus import EventBus
 
 
 class MockEventBus(EventBus):
+    def __init__(self) -> None:
+        self._mock_publish = AsyncMock()
 
-	def __init__(self) -> None:
-		self._mock_publish = AsyncMock()
+    async def publish(self, events: list[DomainEvent]) -> None:
+        await self._mock_publish(events)
 
-	async def publish(self, events: list[DomainEvent]) -> None:
-		await self._mock_publish(events)
-
-	def should_have_published(self, event: DomainEvent) -> None:
-		self._mock_publish.assert_awaited_once_with([event])
-		self._mock_publish.reset_mock()
+    def should_have_published(self, event: DomainEvent) -> None:
+        self._mock_publish.assert_awaited_once_with([event])
+        self._mock_publish.reset_mock()

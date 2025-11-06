@@ -24,9 +24,7 @@ class DomainEventJsonDeserializer:
     _events_mapping: dict[str, type[DomainEvent]]
 
     def __init__(self, subscriber: DomainEventSubscriber[DomainEvent]) -> None:
-        self._events_mapping = {
-            event.name(): event for event in subscriber.subscribed_to()
-        }
+        self._events_mapping = {event.name(): event for event in subscriber.subscribed_to()}
 
     def deserialize(self, body: bytes) -> DomainEvent:
         content = json.loads(body)

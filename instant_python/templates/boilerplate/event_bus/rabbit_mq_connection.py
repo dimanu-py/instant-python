@@ -44,9 +44,7 @@ class RabbitMqConnection:
             password=self._connection_settings.password,
         )
         self._connection = pika.BlockingConnection(
-            parameters=pika.ConnectionParameters(
-                host=self._connection_settings.host, credentials=credentials
-            )
+            parameters=pika.ConnectionParameters(host=self._connection_settings.host, credentials=credentials)
         )
         self._channel = self._connection.channel()
 
@@ -67,9 +65,7 @@ class RabbitMqConnection:
             properties=pika.BasicProperties(delivery_mode=pika.DeliveryMode.Persistent),
         )
 
-    def bind_queue_to_exchange(
-        self, queue_name: str, exchange_name: str, routing_key: str
-    ) -> None:
+    def bind_queue_to_exchange(self, queue_name: str, exchange_name: str, routing_key: str) -> None:
         self._ensure_channel_exists()
         self._channel.queue_bind(  # type: ignore
             exchange=exchange_name, queue=queue_name, routing_key=routing_key

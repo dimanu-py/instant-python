@@ -1,5 +1,5 @@
 {% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
-{% if pythono_version in ["3.12", "3.13"] %}
+{% if python_version in ["3.12", "3.13"] %}
 from abc import ABC, abstractmethod
 
 {% if template_domain_import %}

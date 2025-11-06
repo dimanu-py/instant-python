@@ -1,6 +1,11 @@
 {% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
+{% if template_domain_import %}
 from {{ general.source_name }}.{{ template_domain_import }}.event.domain_event import DomainEvent
 from {{ general.source_name }}.{{ template_domain_import }}.value_objects.aggregate import Aggregate
+{% else %}
+from {{ general.source_name }}.event.domain_event import DomainEvent
+from {{ general.source_name }}.value_objects.aggregate import Aggregate
+{% endif %}
 
 
 class EventAggregate(Aggregate):
