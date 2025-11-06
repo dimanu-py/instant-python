@@ -1,12 +1,11 @@
 import typer
 
-from instant_python.config.infra.parser.parser import Parser
-from instant_python.initialize.infra.env_manager.env_manager_factory import EnvManagerFactory
-from instant_python.initialize.infra.formatter.ruff_project_formatter import RuffProjectFormatter
-from instant_python.initialize.infra.version_control.git_configurer import GitConfigurer
 from instant_python.initialize.application.config_reader import ConfigReader
+from instant_python.initialize.infra.env_manager.env_manager_factory import EnvManagerFactory
 from instant_python.initialize.infra.env_manager.system_console import SystemConsole
+from instant_python.initialize.infra.formatter.ruff_project_formatter import RuffProjectFormatter
 from instant_python.initialize.infra.persistence.config_repository import YamlConfigRepository
+from instant_python.initialize.infra.version_control.git_configurer import GitConfigurer
 from instant_python.project_creator.file_system import FileSystem
 from instant_python.render.custom_project_renderer import CustomProjectRenderer
 from instant_python.render.jinja_environment import JinjaEnvironment
@@ -20,10 +19,7 @@ def create_new_project(
     config_file: str = typer.Option("ipy.yml", "--config", "-c", help="Path to yml configuration file"),
     template: str | None = typer.Option(None, "--template", "-t", help="Path to custom template file"),
 ) -> None:
-    config_reader = ConfigReader(
-        repository=YamlConfigRepository(),
-        parser=Parser(),
-    )
+    config_reader = ConfigReader(repository=YamlConfigRepository())
     config = config_reader.execute(config_file_path=config_file)
     environment = JinjaEnvironment(package_name="instant_python", template_directory="templates")
 
