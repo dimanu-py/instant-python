@@ -26,8 +26,8 @@ class ProjectInitializer:
         self._version_control_configurer = version_control_configurer
         self._formatter = formatter
 
-    def execute(self, config: ConfigSchema, destination_project_folder: Path, config_path: str | None = None) -> None:
-        config = self._repository.read(config_path) if config_path else config
+    def execute(self, destination_project_folder: Path, config_path: str) -> None:
+        config = self._repository.read(config_path)
         project_structure = self._project_renderer.render(context_config=config)
         self._writer.write(project_structure=project_structure, destination=destination_project_folder)
         self._env_manager.setup(

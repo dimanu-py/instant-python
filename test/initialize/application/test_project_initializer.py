@@ -46,7 +46,7 @@ class TestProjectInitializer:
         expect_call(self._formatter).format().returns(None)
         expect_call(self._repository).write(config, destination_folder).returns(None)
 
-        self._project_initializer.execute(config=config, destination_project_folder=destination_folder, config_path=config_path)
+        self._project_initializer.execute(destination_project_folder=destination_folder, config_path=config_path)
 
         expect(self._renderer).to(have_been_satisfied)
         expect(self._writer).to(have_been_satisfied)
@@ -68,7 +68,7 @@ class TestProjectInitializer:
         expect_call(self._formatter).format().returns(None)
         expect_call(self._repository).write(config, destination_folder).returns(None)
 
-        self._project_initializer.execute(config=config, destination_project_folder=destination_folder, config_path=config_path)
+        self._project_initializer.execute(destination_project_folder=destination_folder, config_path=config_path)
 
         expect(self._renderer).to(have_been_satisfied)
         expect(self._writer).to(have_been_satisfied)
