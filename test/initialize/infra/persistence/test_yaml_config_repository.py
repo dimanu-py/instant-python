@@ -8,7 +8,7 @@ from instant_python.initialize.infra.persistence.yaml_config_repository import Y
 from test.utils import resources_path
 
 
-class TestYamlConfigurationRepository:
+class TestYamlConfigRepository:
     def test_should_read_existing_config_file(self) -> None:
         repository = YamlConfigRepository()
         config_path = str(resources_path() / "base_ipy_config.yml")
