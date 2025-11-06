@@ -3,7 +3,6 @@ from doublex_expects import have_been_satisfied
 from expects import expect
 
 from instant_python.config.application.config_generator import ConfigGenerator
-from instant_python.config.domain.config_parser import ConfigParser
 from instant_python.config.domain.question_wizard import QuestionWizard
 from instant_python.config.domain.config_writer import ConfigWriter
 from test.config.domain.mothers.config_schema_mother import ConfigSchemaMother
