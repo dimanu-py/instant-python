@@ -37,3 +37,4 @@ class ProjectInitializer:
         if config.version_control_has_to_be_initialized:
             self._version_control_configurer.setup(config.git)
         self._formatter.format()
+        self._repository.write(config, destination_project_folder)
