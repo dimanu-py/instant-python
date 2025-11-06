@@ -3,7 +3,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import TypedDict, Union
 
-
 from instant_python.config.domain.dependency_config import (
     DependencyConfig,
 )
@@ -14,6 +13,13 @@ from instant_python.config.domain.git_config import GitConfig
 from instant_python.config.domain.template_config import (
     TemplateConfig,
 )
+from instant_python.config.infra.parser.errors import EmptyConfigurationNotAllowed, ConfigKeyNotPresent
+
+_GENERAL = "general"
+_DEPENDENCIES = "dependencies"
+_TEMPLATE = "template"
+_GIT = "git"
+_REQUIRED_CONFIG_KEYS = [_GENERAL, _DEPENDENCIES, _TEMPLATE, _GIT]
 
 
 @dataclass
@@ -22,7 +28,34 @@ class ConfigSchema:
     dependencies: list[DependencyConfig]
     template: TemplateConfig
     git: GitConfig
-    config_file_path: Path = field(default_factory=lambda: Path("ipy.yml"))
+    config_file_path: Path = field(default_factory=lambda: ConfigSchema._DEFAULT_CONFIG_PATH)
+
+    _DEFAULT_CONFIG_PATH: Path = Path("ipy.yml")
+
+    @classmethod
+    def from_primitives(
+        cls, content: dict[str, Union[dict, list]], custom_config_path: Union[str, None] = None
+    ) -> "ConfigSchema":
+        cls._ensure_config_is_not_empty(content)
+        cls._ensure_all_required_sections_are_present(content)
+        return cls(
+            general=GeneralConfig(**content[_GENERAL]),
+            dependencies=[DependencyConfig(**dep) for dep in content[_DEPENDENCIES]] if content[_DEPENDENCIES] else [],
+            template=TemplateConfig(**content[_TEMPLATE]),
+            git=GitConfig(**content[_GIT]),
+            config_file_path=Path(custom_config_path) if custom_config_path else cls._DEFAULT_CONFIG_PATH,
+        )
+
+    @classmethod
+    def _ensure_config_is_not_empty(cls, content: dict[str, Union[dict, list]]) -> None:
+        if not content:
+            raise EmptyConfigurationNotAllowed
+
+    @classmethod
+    def _ensure_all_required_sections_are_present(cls, content: dict[str, Union[dict, list]]):
+        missing_keys = [key for key in _REQUIRED_CONFIG_KEYS if key not in content]
+        if missing_keys:
+            raise ConfigKeyNotPresent(missing_keys, _REQUIRED_CONFIG_KEYS)
 
     @classmethod
     def from_file(
