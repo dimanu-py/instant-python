@@ -5,7 +5,7 @@ from instant_python.initialize.infra.renderer.jinja_environment import JinjaEnvi
 from instant_python.initialize.infra.renderer.jinja_project_renderer import JinjaProjectRenderer
 from instant_python.shared.supported_templates import SupportedTemplates
 from test.config.domain.mothers.config_schema_mother import ConfigSchemaMother
-from test.initialize.utils import resources_path
+from test.utils import resources_path
 
 
 class TestJinjaProjectRenderer:

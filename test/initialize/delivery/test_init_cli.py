@@ -12,7 +12,7 @@ from instant_python.shared.supported_licenses import SupportedLicenses
 from instant_python.shared.supported_managers import SupportedManagers
 from instant_python.shared.supported_python_versions import SupportedPythonVersions
 from instant_python.shared.supported_templates import SupportedTemplates
-from test.initialize.utils import resources_path
+from test.utils import resources_path
 
 
 @pytest.mark.acceptance
