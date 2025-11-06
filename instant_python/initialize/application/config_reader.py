@@ -8,5 +8,5 @@ class ConfigReader:
     def __init__(self, repository: ConfigRepository) -> None:
         self._repository = repository
 
-    def execute(self, config_file_path: Path) -> ConfigSchema:
-        return self._repository.read(config_file_path)
+    def execute(self, config_file_path: str) -> ConfigSchema:
+        return self._repository.read(Path(config_file_path))
