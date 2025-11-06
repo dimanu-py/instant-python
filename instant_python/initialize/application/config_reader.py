@@ -7,6 +7,4 @@ class ConfigReader:
         self._repository = repository
 
     def execute(self, config_file_path: str) -> ConfigSchema:
-        raw_config = self._repository.read(config_file_path)
-        configuration = ConfigSchema.from_primitives(raw_config, config_file_path)
-        return configuration
+        return self._repository.read(config_file_path)

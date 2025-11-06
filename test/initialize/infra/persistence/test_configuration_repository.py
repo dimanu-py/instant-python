@@ -13,10 +13,10 @@ class TestConfigurationRepository:
         repository = YamlConfigRepository()
         config_path = str(resources_path() / "base_ipy_config.yml")
 
-        raw_config = repository.read(config_path)
+        config = repository.read(config_path)
 
-        expect(raw_config).to_not(be_none)
-        verify(json.dumps(raw_config, indent=2))
+        expect(config).to_not(be_none)
+        verify(json.dumps(config.to_primitives(), indent=2))
 
     def test_should_raise_error_when_file_to_read_does_not_exist(self) -> None:
         repository = YamlConfigRepository()
