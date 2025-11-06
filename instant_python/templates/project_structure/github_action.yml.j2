@@ -7,15 +7,18 @@
         - name: python_setup
           type: directory
           children:
-            - name: github/action
-              type: boilerplate_file
+            - name:
+              type: file
               extension: .yml
+              template: github/action.yml
     - name: workflows
       type: directory
       children:
-        - name: github/ci
-          type: boilerplate_file
+        - name:
+          type: file
           extension: .yml
-        - name: github/release
-          type: boilerplate_file
+          template: github/ci.yml
+        - name:
+          type: file
           extension: .yml
+          template: github/release.yml

@@ -2,9 +2,11 @@
   type: directory
   python: True
   children:
-    - name: fastapi/error_response
-      type: boilerplate_file
+    - name: error_response
+      type: file
       extension: .py
-    - name: fastapi/success_response
-      type: boilerplate_file
+      template: fastapi/error_response.py
+    - name: success_response
+      type: file
       extension: .py
+      template: fastapi/success_response.py

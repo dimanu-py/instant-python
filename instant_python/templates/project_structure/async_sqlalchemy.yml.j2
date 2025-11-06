@@ -6,12 +6,15 @@
       type: directory
       python: True
       children:
-        - name: persistence/base
-          type: boilerplate_file
+        - name: base
+          type: file
           extension: .py
-        - name: persistence/async/async_session
-          type: boilerplate_file
+          template: persistence/base.py
+        - name: async_session
+          type: file
           extension: .py
-        - name: persistence/async/postgres_settings
-          type: boilerplate_file
+          template: persistence/async/async_session.py
+        - name: postgres_settings
+          type: file
           extension: .py
+          template: persistence/async/postgres_settings.py

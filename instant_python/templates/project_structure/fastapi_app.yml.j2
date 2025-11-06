@@ -2,27 +2,31 @@
   type: directory
   python: True
   children:
-    - name: fastapi/application
-      type: boilerplate_file
+    - name: application
+      type: file
       extension: .py
+      template: fastapi/application.py
     - name: handlers
       type: directory
       python: True
       children:
-        - name: fastapi/error_handlers
-          type: boilerplate_file
+        - name: error_handlers
+          type: file
           extension: .py
+          template: fastapi/error_handlers.py
     {% if "async_alembic" in template.built_in_features %}
-    - name: fastapi/lifespan
-      type: boilerplate_file
+    - name: lifespan
+      type: file
       extension: .py
+      template: fastapi/lifespan.py
     {% endif %}
     {%  if "logger" in template.built_in_features %}
     - name: middleware
       type: directory
       python: True
       children:
-        - name: fastapi/fastapi_log_middleware
-          type: boilerplate_file
+        - name: fastapi_log_middleware
+          type: file
           extension: .py
+          template: fastapi/fastapi_log_middleware.py
     {% endif %}

@@ -6,12 +6,15 @@
       type: directory
       python: True
       children:
-        - name: persistence/base
-          type: boilerplate_file
+        - name: base
+          type: file
           extension: .py
-        - name: persistence/synchronous/session_maker
-          type: boilerplate_file
+          template: persistence/base.py
+        - name: session_maker
+          type: file
           extension: .py
-        - name: persistence/synchronous/sqlalchemy_repository
-          type: boilerplate_file
+          template: persistence/synchronous/session_maker.py
+        - name: sqlalchemy_repository
+          type: file
           extension: .py
+          template: persistence/synchronous/sqlalchemy_repository.py

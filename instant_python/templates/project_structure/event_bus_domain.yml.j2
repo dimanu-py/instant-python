@@ -2,44 +2,55 @@
   type: directory
   python: True
   children:
-    - name: event_bus/domain_event
-      type: boilerplate_file
+    - name: domain_event
+      type: file
       extension: .py
-    - name: event_bus/domain_event_subscriber
-      type: boilerplate_file
+      template: event_bus/domain_event.py
+    - name: domain_event_subscriber
+      type: file
       extension: .py
-    - name: event_bus/event_bus
-      type: boilerplate_file
+      template: event_bus/domain_event_subscriber.py
+    - name: event_bus
+      type: file
       extension: .py
-    - name: event_bus/exchange_type
-      type: boilerplate_file
+      template: event_bus/event_bus.py
+    - name: exchange_type
+      type: file
       extension: .py
+      template: event_bus/exchange_type.py
 - name: errors
   type: directory
   python: True
   children:
-    - name: exceptions/base_error
-      type: boilerplate_file
+    - name: base_error
+      type: file
       extension: .py
-    - name: exceptions/domain_error
-      type: boilerplate_file
+      template: exceptions/base_error.py
+    - name: domain_error
+      type: file
       extension: .py
-    - name: exceptions/domain_event_type_not_found_error
-      type: boilerplate_file
+      template: exceptions/domain_error.py
+    - name: domain_event_type_not_found_error
+      type: file
       extension: .py
-    - name: exceptions/rabbit_mq_connection_not_established_error
-      type: boilerplate_file
+      template: exceptions/domain_event_type_not_found_error.py
+    - name: rabbit_mq_connection_not_established_error
+      type: file
       extension: .py
+      template: exceptions/rabbit_mq_connection_not_established_error.py
 - name: value_objects
   type: directory
   python: True
   children:
-    - name: value_object/aggregate
-      type: boilerplate_file
+    - name: aggregate
+      type: file
       extension: .py
-    - name: value_object/value_object
-      type: boilerplate_file
+      template: value_object/aggregate.py
+    - name: value_object
+      type: file
       extension: .py
-    - name: event_bus/event_aggregate
-      type: boilerplate_file
+      template: value_object/value_object.py
+    - name: event_aggregate
+      type: file
       extension: .py
+      template: event_bus/event_aggregate.py

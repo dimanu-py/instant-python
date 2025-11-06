@@ -12,9 +12,10 @@
         {{ macros.include_and_indent("project_structure/test_value_objects.yml.j2", 8) }}
       {% endif %}
       {% if "event_bus" in template.built_in_features %}
-        - name: event_bus/mock_event_bus
-          type: boilerplate_file
+        - name: mock_event_bus
+          type: file
           extension: .py
+          template: event_bus/mock_event_bus.py
       {% endif %}
       {% endif %}
     - name: infrastructure
@@ -24,5 +25,6 @@
       type: directory
       python: True
     - name: random_generator
-      type: boilerplate_file
+      type: file
       extension: .py
+      template: random_generator.py

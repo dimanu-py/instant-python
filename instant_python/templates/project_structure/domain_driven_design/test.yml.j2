@@ -12,8 +12,9 @@
           python: True
           children:
             - name: random_generator
-              type: boilerplate_file
+              type: file
               extension: .py
+              template: random_generator.py
             {% if "value_objects" in template.built_in_features %}
             {{ macros.include_and_indent("project_structure/test_value_objects.yml.j2", 12) }}
             {% endif %}
@@ -22,9 +23,10 @@
           type: directory
           python: True
           children:
-            - name: event_bus/mock_event_bus
-              type: boilerplate_file
+            - name: mock_event_bus
+              type: file
               extension: .py
+              template: event_bus/mock_event_bus.py
         {% endif %}
     {% if template.specify_bounded_context %}
     {{ macros.include_and_indent("project_structure/domain_driven_design/bounded_context.yml.j2", 4) }}

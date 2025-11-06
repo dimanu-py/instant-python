@@ -2,12 +2,15 @@
   type: directory
   python: True
   children:
-    - name: logger/json_formatter
-      type: boilerplate_file
+    - name: json_formatter
+      type: file
       extension: .py
-    - name: logger/file_logger
-      type: boilerplate_file
+      template: logger/json_formatter.py
+    - name: file_logger
+      type: file
       extension: .py
-    - name: logger/file_rotating_handler
-      type: boilerplate_file
+      template: logger/file_logger.py
+    - name: file_rotating_handler
+      type: file
       extension: .py
+      template: logger/file_rotating_handler.py

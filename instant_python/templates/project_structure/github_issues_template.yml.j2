@@ -4,9 +4,11 @@
     - name: ISSUE_TEMPLATE
       type: directory
       children:
-        - name: github/bug_report
-          type: boilerplate_file
+        - name: bug_report
+          type: file
           extension: .yml
-        - name: github/feature_request
-          type: boilerplate_file
+          template: github/bug_report.yml
+        - name: feature_request
+          type: file
           extension: .yml
+          template: github/feature_request.yml

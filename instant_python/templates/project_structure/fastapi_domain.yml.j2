@@ -2,9 +2,11 @@
   type: directory
   python: True
   children:
-    - name: exceptions/domain_error
-      type: boilerplate_file
+    - name: domain_error
+      type: file
       extension: .py
-    - name: exceptions/base_error
-      type: boilerplate_file
+      template: exceptions/domain_error.py
+    - name: base_error
+      type: file
       extension: .py
+      template: exceptions/base_error.py
