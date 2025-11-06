@@ -15,3 +15,6 @@ class YamlConfigRepository(ConfigRepository):
                 return ConfigSchema.from_primitives(content=raw_config, custom_config_path=path)
         except FileNotFoundError:
             raise ConfigurationFileNotFound(path)
+
+    def write(self, config: ConfigSchema, destination_path: Path) -> None:
+        raise NotImplementedError
