@@ -95,7 +95,7 @@ constraint-dependencies = [
 exclude = ["instant_python/templates/**", "test/**/resources/**"]
 line-length = 120
 
-[tools.pytest.ini_options]
+[tool.pytest.ini_options]
 testpaths = ["test"]
 markers = [
     "acceptance: mark a test as an acceptance test.",
