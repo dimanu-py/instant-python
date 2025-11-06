@@ -13,7 +13,8 @@ from instant_python.config.domain.git_config import GitConfig
 from instant_python.config.domain.template_config import (
     TemplateConfig,
 )
-from instant_python.config.infra.parser.errors import EmptyConfigurationNotAllowed, ConfigKeyNotPresent
+from instant_python.shared.application_error import ApplicationError
+from instant_python.shared.error_types import ErrorTypes
 
 _GENERAL = "general"
 _DEPENDENCIES = "dependencies"
@@ -114,3 +115,16 @@ class ConfigSchemaPrimitives(TypedDict):
     dependencies: list[dict[str, Union[str, bool]]]
     template: dict[str, Union[str, list[str]]]
     git: dict[str, Union[str, bool]]
+
+
+class ConfigKeyNotPresent(ApplicationError):
+    def __init__(self, missing_keys: list[str], required_keys: list[str]) -> None:
+        super().__init__(
+            message=f"The following required keys are missing from the config file: {', '.join(missing_keys)}. Required keys are: {', '.join(required_keys)}.",
+            error_type=ErrorTypes.CONFIGURATION.value,
+        )
+
+
+class EmptyConfigurationNotAllowed(ApplicationError):
+    def __init__(self) -> None:
+        super().__init__(message="Configuration file cannot be empty.", error_type=ErrorTypes.CONFIGURATION.value)

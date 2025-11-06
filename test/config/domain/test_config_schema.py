@@ -1,6 +1,8 @@
 from expects import expect, raise_error, be_none
 
 from instant_python.config.domain.config_schema import ConfigSchema, ConfigKeyNotPresent, EmptyConfigurationNotAllowed
+from instant_python.config.domain.config_schema import ConfigSchema, ConfigKeyNotPresent, EmptyConfigurationNotAllowed
+from instant_python.config.infra.parser.parser import Parser
 
 
 class TestConfigSchema:

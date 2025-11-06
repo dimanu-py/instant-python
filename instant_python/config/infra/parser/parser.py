@@ -1,14 +1,12 @@
 from typing import Union
 
 from instant_python.config.domain.config_parser import ConfigParser
-from instant_python.config.domain.config_schema import ConfigSchema
+from instant_python.config.domain.config_schema import ConfigSchema, ConfigKeyNotPresent, EmptyConfigurationNotAllowed
 from instant_python.config.domain.dependency_config import DependencyConfig
 from instant_python.config.domain.general_config import GeneralConfig
 from instant_python.config.domain.git_config import GitConfig
 from instant_python.config.domain.template_config import TemplateConfig
 from instant_python.config.infra.parser.errors import (
-    ConfigKeyNotPresent,
-    EmptyConfigurationNotAllowed,
     MissingMandatoryFields,
 )
 

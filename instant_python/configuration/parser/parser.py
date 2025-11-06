@@ -3,11 +3,9 @@ from typing import Union
 import yaml
 
 from instant_python.config.infra.parser.errors import (
-    ConfigKeyNotPresent,
-    EmptyConfigurationNotAllowed,
     MissingMandatoryFields,
 )
-from instant_python.config.domain.config_schema import ConfigSchema
+from instant_python.config.domain.config_schema import ConfigSchema, ConfigKeyNotPresent, EmptyConfigurationNotAllowed
 from instant_python.config.domain.dependency_config import (
     DependencyConfig,
 )
