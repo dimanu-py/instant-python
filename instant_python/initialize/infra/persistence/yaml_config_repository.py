@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import shutil
 import yaml
 
 from instant_python.config.domain.config_schema import ConfigSchema
@@ -17,4 +18,7 @@ class YamlConfigRepository(ConfigRepository):
             raise ConfigurationFileNotFound(path)
 
     def write(self, config: ConfigSchema, destination_path: Path) -> None:
-        raise NotImplementedError
+        final_destination = config.calculate_config_destination_path(
+            destination_folder=destination_path,
+        )
+        shutil.move(config.config_file_path, final_destination)

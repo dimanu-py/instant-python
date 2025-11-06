@@ -109,6 +109,9 @@ class ConfigSchema:
     def version_control_has_to_be_initialized(self) -> bool:
         return self.git.initialize
 
+    def calculate_config_destination_path(self, destination_folder: Path) -> Path:
+        return destination_folder / self.project_folder_name / self.config_file_path.name
+
 
 class ConfigSchemaPrimitives(TypedDict):
     general: dict[str, str]
