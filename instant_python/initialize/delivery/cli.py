@@ -4,7 +4,7 @@ from instant_python.initialize.application.config_reader import ConfigReader
 from instant_python.initialize.infra.env_manager.env_manager_factory import EnvManagerFactory
 from instant_python.initialize.infra.env_manager.system_console import SystemConsole
 from instant_python.initialize.infra.formatter.ruff_project_formatter import RuffProjectFormatter
-from instant_python.initialize.infra.persistence.config_repository import YamlConfigRepository
+from instant_python.initialize.infra.persistence.yaml_config_repository import YamlConfigRepository
 from instant_python.initialize.infra.version_control.git_configurer import GitConfigurer
 from instant_python.project_creator.file_system import FileSystem
 from instant_python.render.custom_project_renderer import CustomProjectRenderer
