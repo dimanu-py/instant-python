@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from instant_python.config.domain.config_schema import ConfigSchema
+from instant_python.initialize.domain.config_repository import ConfigRepository
 from instant_python.initialize.domain.project_formatter import ProjectFormatter
 from instant_python.initialize.domain.env_manager import EnvManager
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
@@ -11,12 +12,14 @@ from instant_python.initialize.domain.version_control_configurer import VersionC
 class ProjectInitializer:
     def __init__(
         self,
+        repository: ConfigRepository,
         renderer: ProjectRenderer,
         writer: ProjectWriter,
         env_manager: EnvManager,
         version_control_configurer: VersionControlConfigurer,
         formatter: ProjectFormatter,
     ) -> None:
+        self._repository = repository
         self._project_renderer = renderer
         self._writer = writer
         self._env_manager = env_manager

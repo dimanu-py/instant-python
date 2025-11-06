@@ -5,6 +5,7 @@ from doublex_expects import have_been_satisfied
 from expects import expect
 
 from instant_python.initialize.application.project_initializer import ProjectInitializer
+from instant_python.initialize.domain.config_repository import ConfigRepository
 from instant_python.initialize.domain.env_manager import EnvManager
 from instant_python.initialize.domain.project_formatter import ProjectFormatter
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
@@ -16,12 +17,14 @@ from test.initialize.domain.mothers.project_structure_mother import ProjectStruc
 
 class TestProjectInitializer:
     def setup_method(self) -> None:
+        self._repository = Mock(ConfigRepository)
         self._renderer = Mock(ProjectRenderer)
         self._writer = Mock(ProjectWriter)
         self._env_manager = Mock(EnvManager)
         self._version_control_configurer = Mock(VersionControlConfigurer)
         self._formatter = Mock(ProjectFormatter)
         self._project_initializer = ProjectInitializer(
+            repository=self._repository,
             renderer=self._renderer,
             writer=self._writer,
             env_manager=self._env_manager,
