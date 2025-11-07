@@ -1,52 +1,46 @@
+from pathlib import Path
+
 import typer
 
-from instant_python.initialize.application.config_reader import ConfigReader
+from instant_python.initialize.application.project_initializer import ProjectInitializer
 from instant_python.initialize.infra.env_manager.env_manager_factory import EnvManagerFactory
 from instant_python.initialize.infra.env_manager.system_console import SystemConsole
 from instant_python.initialize.infra.formatter.ruff_project_formatter import RuffProjectFormatter
 from instant_python.initialize.infra.persistence.yaml_config_repository import YamlConfigRepository
+from instant_python.initialize.infra.renderer.jinja_environment import JinjaEnvironment
+from instant_python.initialize.infra.renderer.jinja_project_renderer import JinjaProjectRenderer
 from instant_python.initialize.infra.version_control.git_configurer import GitConfigurer
-from instant_python.project_creator.file_system import FileSystem
-from instant_python.render.jinja_environment import JinjaEnvironment
-from instant_python.render.jinja_project_renderer import JinjaProjectRenderer
+from instant_python.initialize.infra.writer.file_system_project_writer import FileSystemProjectWriter
 
 app = typer.Typer()
 
 
 @app.command("init", help="Create a new project")
 def create_new_project(
-    config_file: str = typer.Option("ipy.yml", "--config", "-c", help="Path to yml configuration file. Default: ipy.yml"),
+    config_file: str = typer.Option(
+        "ipy.yml", "--config", "-c", help="Path to yml configuration file. Default: ipy.yml"
+    ),
+    custom_templates_path: str | None = typer.Option(
+        None, "--templates", "-t", help="Path to custom templates folder."
+    ),
 ) -> None:
-    config_reader = ConfigReader(repository=YamlConfigRepository())
-    config = config_reader.execute(config_file_path=config_file)
-    environment = JinjaEnvironment(package_name="instant_python", template_directory="templates")
+    repository = YamlConfigRepository()
+    config = repository.read(path=Path(config_file))
 
-    project_renderer = JinjaProjectRenderer(jinja_environment=environment)
-    project_structure = project_renderer.render_project_structure(
-        context_config=config,
-        template_base_dir="project_structure",
+    console = SystemConsole(working_directory=str(Path.cwd()))
+    project_initializer = ProjectInitializer(
+        renderer=JinjaProjectRenderer(env=JinjaEnvironment(user_template_path=custom_templates_path)),
+        writer=FileSystemProjectWriter(),
+        env_manager=EnvManagerFactory.create(dependency_manager=config.dependency_manager, console=console),
+        version_control_configurer=GitConfigurer(console=console),
+        formatter=RuffProjectFormatter(console=console),
     )
 
-    file_system = FileSystem(project_structure=project_structure)
-    file_system.write_on_disk(
-        file_renderer=environment,
-        context=config,
+    project_initializer.execute(
+        config=config,
+        destination_project_folder=Path.cwd(),
     )
-
-    console = SystemConsole(working_directory=config.project_folder_name)
-    dependency_manager = EnvManagerFactory.create(dependency_manager=config.dependency_manager, console=console)
-    dependency_manager.setup(
-        python_version=config.python_version,
-        dependencies=config.dependencies,
-    )
-
-    formatter = RuffProjectFormatter(console)
-    formatter.format()
-
-    config.save_on_project_folder()
-    if config.git.initialize:
-        git_configurer = GitConfigurer(console)
-        git_configurer.setup(config.git)
+    repository.write(config=config, destination_path=Path(config_file))
 
 
 if __name__ == "__main__":
