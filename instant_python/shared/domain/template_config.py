@@ -13,6 +13,7 @@ class TemplateConfig:
     specify_bounded_context: bool = field(default=False)
     bounded_context: Optional[str] = field(default=None)
     aggregate_name: Optional[str] = field(default=None)
+    source_path: Optional[str] = field(default=None)
 
     _SUPPORTED_TEMPLATES: ClassVar[list[str]] = SupportedTemplates.get_supported_templates()
     _SUPPORTED_BUILT_IN_FEATURES: ClassVar[list[str]] = SupportedBuiltInFeatures.get_supported_built_in_features()
