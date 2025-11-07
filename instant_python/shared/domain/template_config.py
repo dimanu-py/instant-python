@@ -72,3 +72,8 @@ class InvalidTemplateValue(ApplicationError):
     def __init__(self, value: str, supported_values: list[str]) -> None:
         message = f"Invalid template: '{value}'. Supported templates are: {', '.join(supported_values)}."
         super().__init__(message=message)
+
+
+class CustomTemplateWithoutSourcePath(ApplicationError):
+    def __init__(self) -> None:
+        super().__init__("Custom template requires a source path to be specified.")
