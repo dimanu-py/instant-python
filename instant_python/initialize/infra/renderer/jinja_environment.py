@@ -13,11 +13,11 @@ class JinjaEnvironment:
     _PROJECT_STRUCTURE_TEMPLATE_PATH = "templates/project_structure"
     _BOILERPLATE_TEMPLATE_PATH = "templates/boilerplate"
 
-    def __init__(self, user_template_path: str) -> None:
+    def __init__(self, user_template_path: str | None = None) -> None:
         self._env = Environment(
             loader=ChoiceLoader(
                 [
-                    FileSystemLoader(user_template_path),
+                    FileSystemLoader(user_template_path if user_template_path else []),
                     PackageLoader(
                         package_name=self._BASE_PACKAGE_NAME, package_path=self._PROJECT_STRUCTURE_TEMPLATE_PATH
                     ),
