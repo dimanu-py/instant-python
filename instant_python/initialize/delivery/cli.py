@@ -41,7 +41,7 @@ def create_new_project(
         config=config,
         destination_project_folder=current_working_directory / config.project_folder_name,
     )
-    repository.move(config=config, destination_path=current_working_directory)
+    repository.move(config=config, base_directory=current_working_directory)
 
 
 if __name__ == "__main__":
