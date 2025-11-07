@@ -6,8 +6,7 @@ from pathlib import Path
 from approvaltests import verify
 from expects import expect, be_none, raise_error, be_true
 
-from instant_python.configuration.parser.configuration_file_not_found import ConfigurationFileNotFound
-from instant_python.initialize.infra.persistence.yaml_config_repository import YamlConfigRepository
+from instant_python.initialize.infra.persistence.yaml_config_repository import YamlConfigRepository, ConfigurationFileNotFound
 from test.utils import resources_path
 
 

@@ -4,8 +4,9 @@ import shutil
 import yaml
 
 from instant_python.config.domain.config_schema import ConfigSchema
-from instant_python.configuration.parser.configuration_file_not_found import ConfigurationFileNotFound
 from instant_python.initialize.domain.config_repository import ConfigRepository
+from instant_python.shared.application_error import ApplicationError
+from instant_python.shared.error_types import ErrorTypes
 
 
 class YamlConfigRepository(ConfigRepository):
@@ -22,3 +23,9 @@ class YamlConfigRepository(ConfigRepository):
             destination_folder=destination_path,
         )
         shutil.move(config.config_file_path, final_destination)
+
+
+class ConfigurationFileNotFound(ApplicationError):
+    def __init__(self, path: str) -> None:
+        message = f"Configuration file not found at '{path}'."
+        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
