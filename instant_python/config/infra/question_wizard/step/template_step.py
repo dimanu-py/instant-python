@@ -23,6 +23,9 @@ class TemplateStep(Step):
         if name != SupportedTemplates.CUSTOM:
             self._select_built_in_features()
 
+        if name == SupportedTemplates.CUSTOM:
+            self._ask_custom_template_file_path()
+
         return {self._KEY: self._answers}
 
     def _choose_template_name_from_options(self) -> str:
@@ -61,3 +64,10 @@ class TemplateStep(Step):
             options=SupportedBuiltInFeatures.get_supported_built_in_features(),
         )
         self._answers["built_in_features"] = answer
+
+    def _ask_custom_template_file_path(self) -> None:
+        answer = self._questionary.free_text_question(
+            message="Enter the location of your custom project structure template file",
+            default="./my_custom_template.yaml",
+        )
+        self._answers["source_path"] = answer
