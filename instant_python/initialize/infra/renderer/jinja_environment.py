@@ -1,10 +1,10 @@
 from collections.abc import Callable
 from typing import Any
 
-from jinja2 import Environment, FileSystemLoader, ChoiceLoader, PackageLoader
-
-from instant_python.render.unknown_template_error import UnknownTemplateError
+from instant_python.shared.application_error import ApplicationError
+from instant_python.shared.error_types import ErrorTypes
 from instant_python.shared.supported_templates import SupportedTemplates
+from jinja2 import Environment, FileSystemLoader, ChoiceLoader, PackageLoader
 
 
 class JinjaEnvironment:
@@ -38,6 +38,12 @@ class JinjaEnvironment:
 
     def add_filter(self, name: str, filter_: Callable) -> None:
         self._env.filters[name] = filter_
+
+
+class UnknownTemplateError(ApplicationError):
+    def __init__(self, template_name: str) -> None:
+        message = f"Unknown template type: {template_name}"
+        super().__init__(message=message, error_type=ErrorTypes.GENERATOR.value)
 
 
 def _is_in(values: list[str], container: list) -> bool:
