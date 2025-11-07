@@ -39,7 +39,7 @@ class TestYamlConfigRepository:
             repository = YamlConfigRepository()
 
             config = repository.read(config_file_temp)
-            repository.write(config, temp_dir_path)
+            repository.move(config, temp_dir_path)
 
             final_config_path = project_folder / self._CONFIG_FILE
             expect(final_config_path.exists()).to(be_true)

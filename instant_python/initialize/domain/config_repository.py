@@ -10,5 +10,5 @@ class ConfigRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def write(self, config: ConfigSchema, destination_path: Path) -> None:
+    def move(self, config: ConfigSchema, destination_path: Path) -> None:
         raise NotImplementedError

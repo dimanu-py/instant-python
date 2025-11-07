@@ -17,7 +17,7 @@ class YamlConfigRepository(ConfigRepository):
         except FileNotFoundError:
             raise ConfigurationFileNotFound(str(path))
 
-    def write(self, config: ConfigSchema, destination_path: Path) -> None:
+    def move(self, config: ConfigSchema, destination_path: Path) -> None:
         final_destination = config.calculate_config_destination_path(
             destination_folder=destination_path,
         )

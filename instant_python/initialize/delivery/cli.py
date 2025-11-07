@@ -40,7 +40,7 @@ def create_new_project(
         config=config,
         destination_project_folder=Path.cwd(),
     )
-    repository.write(config=config, destination_path=Path(config_file))
+    repository.move(config=config, destination_path=Path(config_file))
 
 
 if __name__ == "__main__":
