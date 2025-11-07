@@ -1,28 +1,28 @@
-{% import "project_structure/macros.j2" as macros with context %}
+{% import "macros.j2" as macros with context %}
 - name: {{ general.source_name }}
   type: directory
   python: True
   {% if ["value_objects", "event_bus", "async_alembic", "logger", "async_sqlalchemy", "fastapi_application"] | is_in(template.built_in_features) %}
   children:
     {% if "value_objects" in template.built_in_features %}
-    {{ macros.include_and_indent("project_structure/value_objects.yml.j2", 4) }}
+    {{ macros.include_and_indent("value_objects.yml.j2", 4) }}
     {% endif %}
     {% if "event_bus" in template.built_in_features %}
-    {{ macros.include_and_indent("project_structure/event_bus_domain.yml.j2", 4) }}
-    {{ macros.include_and_indent("project_structure/event_bus_infra.yml.j2", 4) }}
+    {{ macros.include_and_indent("event_bus_domain.yml.j2", 4) }}
+    {{ macros.include_and_indent("event_bus_infra.yml.j2", 4) }}
     {% endif %}
     {% if ["logger"] | is_in(template.built_in_features) %}
-    {{ macros.include_and_indent("project_structure/logger.yml.j2", 4) }}
+    {{ macros.include_and_indent("logger.yml.j2", 4) }}
     {% endif %}
     {% if "async_sqlalchemy" in template.built_in_features %}
-    {{ macros.include_and_indent("project_structure/async_sqlalchemy.yml.j2", 4) }}
+    {{ macros.include_and_indent("async_sqlalchemy.yml.j2", 4) }}
     {% endif %}
     {% if ["async_alembic"] | is_in(template.built_in_features) %}
-    {{ macros.include_and_indent("project_structure/alembic_migrator.yml.j2", 4) }}
+    {{ macros.include_and_indent("alembic_migrator.yml.j2", 4) }}
     {% endif %}
     {% if "fastapi_application" in template.built_in_features %}
-    {{ macros.include_and_indent("project_structure/fastapi_app.yml.j2", 4) }}
-    {{ macros.include_and_indent("project_structure/fastapi_infra.yml.j2", 4) }}
-    {{ macros.include_and_indent("project_structure/fastapi_domain.yml.j2", 4) }}
+    {{ macros.include_and_indent("fastapi_app.yml.j2", 4) }}
+    {{ macros.include_and_indent("fastapi_infra.yml.j2", 4) }}
+    {{ macros.include_and_indent("fastapi_domain.yml.j2", 4) }}
     {% endif %}
   {% endif %}
