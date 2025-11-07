@@ -23,6 +23,7 @@ class TemplateConfig:
         self._ensure_built_in_features_are_supported()
         self._ensure_bounded_context_is_only_applicable_for_ddd_template()
         self._ensure_bounded_context_is_set_if_specified()
+        self._ensure_source_path_is_set_if_custom_template()
 
     def _ensure_template_is_supported(self) -> None:
         if self.name not in self._SUPPORTED_TEMPLATES:
@@ -47,6 +48,10 @@ class TemplateConfig:
 
     def to_primitives(self) -> dict[str, Union[str, list[str]]]:
         return asdict(self)
+
+    def _ensure_source_path_is_set_if_custom_template(self) -> None:
+        if self.name == SupportedTemplates.CUSTOM and not self.source_path:
+            raise CustomTemplateWithoutSourcePath()
 
 
 class BoundedContextNotApplicable(ApplicationError):
