@@ -27,7 +27,8 @@ def create_new_project(
     repository = YamlConfigRepository()
     config = repository.read(path=Path(config_file))
 
-    console = SystemConsole(working_directory=str(Path.cwd()))
+    current_working_directory = Path.cwd()
+    console = SystemConsole(working_directory=str(current_working_directory / config.project_folder_name))
     project_initializer = ProjectInitializer(
         renderer=JinjaProjectRenderer(env=JinjaEnvironment(user_template_path=custom_templates_path)),
         writer=FileSystemProjectWriter(),
@@ -38,9 +39,9 @@ def create_new_project(
 
     project_initializer.execute(
         config=config,
-        destination_project_folder=Path.cwd(),
+        destination_project_folder=current_working_directory / config.project_folder_name,
     )
-    repository.move(config=config, destination_path=Path(config_file))
+    repository.move(config=config, destination_path=current_working_directory)
 
 
 if __name__ == "__main__":
