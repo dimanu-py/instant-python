@@ -56,16 +56,16 @@ class GeneralConfig:
 class InvalidDependencyManagerValue(ApplicationError):
     def __init__(self, value: str, supported_values: list[str]) -> None:
         message = f"Invalid dependency manager: {value}. Allowed values are {', '.join(supported_values)}."
-        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
+        super().__init__(message=message)
 
 
 class InvalidLicenseValue(ApplicationError):
     def __init__(self, value: str, supported_values: list[str]) -> None:
         message = f"Invalid license: {value}. Allowed values are {', '.join(supported_values)}."
-        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
+        super().__init__(message=message)
 
 
 class InvalidPythonVersionValue(ApplicationError):
     def __init__(self, value: str, supported_values: list[str]) -> None:
         message = f"Invalid Python version: {value}. Allowed versions are {', '.join(supported_values)}."
-        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
+        super().__init__(message=message)

@@ -123,11 +123,9 @@ class ConfigSchemaPrimitives(TypedDict):
 class ConfigKeyNotPresent(ApplicationError):
     def __init__(self, missing_keys: list[str], required_keys: list[str]) -> None:
         super().__init__(
-            message=f"The following required keys are missing from the config file: {', '.join(missing_keys)}. Required keys are: {', '.join(required_keys)}.",
-            error_type=ErrorTypes.CONFIGURATION.value,
-        )
+            message=f"The following required keys are missing from the config file: {', '.join(missing_keys)}. Required keys are: {', '.join(required_keys)}.")
 
 
 class EmptyConfigurationNotAllowed(ApplicationError):
     def __init__(self) -> None:
-        super().__init__(message="Configuration file cannot be empty.", error_type=ErrorTypes.CONFIGURATION.value)
+        super().__init__(message="Configuration file cannot be empty.")

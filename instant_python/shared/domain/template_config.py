@@ -52,13 +52,13 @@ class TemplateConfig:
 class BoundedContextNotApplicable(ApplicationError):
     def __init__(self, value: str) -> None:
         message = f"Bounded context feature is not applicable for template '{value}'. Is only applicable for 'domain_driven_design' template."
-        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
+        super().__init__(message=message)
 
 
 class BoundedContextNotSpecified(ApplicationError):
     def __init__(self) -> None:
         message = "Option to specify bounded context is set as True, but either bounded context or aggregate name is not specified."
-        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
+        super().__init__(message=message)
 
 
 class InvalidBuiltInFeaturesValues(ApplicationError):
@@ -66,10 +66,10 @@ class InvalidBuiltInFeaturesValues(ApplicationError):
         message = (
             f"Features {', '.join(values)} are not supported. Supported features are: {', '.join(supported_values)}."
         )
-        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
+        super().__init__(message=message)
 
 
 class InvalidTemplateValue(ApplicationError):
     def __init__(self, value: str, supported_values: list[str]) -> None:
         message = f"Invalid template: '{value}'. Supported templates are: {', '.join(supported_values)}."
-        super().__init__(message=message, error_type=ErrorTypes.CONFIGURATION.value)
+        super().__init__(message=message)

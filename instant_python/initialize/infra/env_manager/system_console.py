@@ -63,4 +63,4 @@ class CommandExecutionError(ApplicationError):
         message = f"Unexpected error when executing a command, exit code {exit_code}"
         if stderr_output:
             message += f": {stderr_output}"
-        super().__init__(message=message, error_type=ErrorTypes.INSTALLER.value)
+        super().__init__(message=message)
