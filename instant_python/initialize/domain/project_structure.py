@@ -1,7 +1,8 @@
 from collections.abc import Iterator
 
 from instant_python.initialize.domain.node import Node, NodeType, Directory, File
-from instant_python.project_creator.unknown_node_typer_error import UnknownNodeTypeError
+from instant_python.shared.application_error import ApplicationError
+from instant_python.shared.error_types import ErrorTypes
 
 
 class ProjectStructure:
@@ -50,3 +51,9 @@ class ProjectStructure:
             yield child
             if isinstance(child, Directory):
                 yield from self._flatten_directory(child)
+
+
+class UnknownNodeTypeError(ApplicationError):
+    def __init__(self, node_type: str) -> None:
+        message = f"Unknown node type: {node_type}"
+        super().__init__(message=message, error_type=ErrorTypes.GENERATOR.value)
