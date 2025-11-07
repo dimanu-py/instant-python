@@ -24,12 +24,24 @@ class ProjectInitializer:
         self._formatter = formatter
 
     def execute(self, config: ConfigSchema, destination_project_folder: Path) -> None:
-        project_structure = self._project_renderer.render(context_config=config)
-        self._writer.write(project_structure=project_structure, destination=destination_project_folder)
+        self._create_project_at_destination_folder(config, destination_project_folder)
+        self._setup_development_environment(config)
+        if config.version_control_has_to_be_initialized:
+            self._setup_version_control_system(config)
+        self._format_final_project()
+
+    def _format_final_project(self) -> None:
+        self._formatter.format()
+
+    def _setup_version_control_system(self, config: ConfigSchema) -> None:
+        self._version_control_configurer.setup(config.git)
+
+    def _setup_development_environment(self, config: ConfigSchema) -> None:
         self._env_manager.setup(
             python_version=config.python_version,
             dependencies=config.dependencies,
         )
-        if config.version_control_has_to_be_initialized:
-            self._version_control_configurer.setup(config.git)
-        self._formatter.format()
+
+    def _create_project_at_destination_folder(self, config: ConfigSchema, destination_project_folder: Path) -> None :
+        project_structure = self._project_renderer.render(context_config=config)
+        self._writer.write(project_structure=project_structure, destination=destination_project_folder)
