@@ -41,8 +41,7 @@ class JinjaEnvironment:
 
 class UnknownTemplateError(ApplicationError):
     def __init__(self, template_name: str) -> None:
-        message = f"Unknown template type: {template_name}"
-        super().__init__(message=message)
+        super().__init__(message=f"Unknown template type: {template_name}")
 
 
 def _is_in(values: list[str], container: list) -> bool:

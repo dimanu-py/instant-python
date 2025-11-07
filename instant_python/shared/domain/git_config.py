@@ -29,5 +29,4 @@ class GitConfig:
 
 class GitUserOrEmailNotPresent(ApplicationError):
     def __init__(self) -> None:
-        message = "When initializing a git repository, both username and email must be provided."
-        super().__init__(message=message)
+        super().__init__(message="When initializing a git repository, both username and email must be provided.")

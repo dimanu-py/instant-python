@@ -54,5 +54,4 @@ class ProjectStructure:
 
 class UnknownNodeTypeError(ApplicationError):
     def __init__(self, node_type: str) -> None:
-        message = f"Unknown node type: {node_type}"
-        super().__init__(message=message)
+        super().__init__(message=f"Unknown node type: {node_type}")

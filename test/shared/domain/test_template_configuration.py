@@ -4,7 +4,8 @@ from instant_python.shared.domain.template_config import (
     BoundedContextNotApplicable,
     BoundedContextNotSpecified,
     InvalidBuiltInFeaturesValues,
-    InvalidTemplateValue, CustomTemplateWithoutSourcePath,
+    InvalidTemplateValue,
+    CustomTemplateWithoutSourcePath,
 )
 from test.shared.domain.mothers.template_config_mother import (
     TemplateConfigMother,

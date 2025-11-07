@@ -26,5 +26,4 @@ class YamlConfigRepository(ConfigRepository):
 
 class ConfigurationFileNotFound(ApplicationError):
     def __init__(self, path: str) -> None:
-        message = f"Configuration file not found at '{path}'."
-        super().__init__(message=message)
+        super().__init__(message=f"Configuration file not found at '{path}'.")

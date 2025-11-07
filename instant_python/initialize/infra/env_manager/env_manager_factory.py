@@ -22,5 +22,6 @@ class EnvManagerFactory:
 class UnknownDependencyManagerError(ApplicationError):
     def __init__(self, manager: str) -> None:
         supported_managers = ".".join(SupportedManagers.get_supported_managers())
-        message = f"Unknown env manager: {manager}. Please use some of the supported managers: '{supported_managers}'."
-        super().__init__(message=message)
+        super().__init__(
+            message=f"Unknown env manager: {manager}. Please use some of the supported managers: '{supported_managers}'."
+        )

@@ -50,30 +50,32 @@ class TemplateConfig:
 
 class BoundedContextNotApplicable(ApplicationError):
     def __init__(self, value: str) -> None:
-        message = f"Bounded context feature is not applicable for template '{value}'. Is only applicable for 'domain_driven_design' template."
-        super().__init__(message=message)
+        super().__init__(
+            message=f"Bounded context feature is not applicable for template '{value}'. Is only applicable for 'domain_driven_design' template."
+        )
 
 
 class BoundedContextNotSpecified(ApplicationError):
     def __init__(self) -> None:
-        message = "Option to specify bounded context is set as True, but either bounded context or aggregate name is not specified."
-        super().__init__(message=message)
+        super().__init__(
+            message="Option to specify bounded context is set as True, but either bounded context or aggregate name is not specified."
+        )
 
 
 class InvalidBuiltInFeaturesValues(ApplicationError):
     def __init__(self, values: list[str], supported_values: list[str]) -> None:
-        message = (
-            f"Features {', '.join(values)} are not supported. Supported features are: {', '.join(supported_values)}."
+        super().__init__(
+            message=f"Features {', '.join(values)} are not supported. Supported features are: {', '.join(supported_values)}."
         )
-        super().__init__(message=message)
 
 
 class InvalidTemplateValue(ApplicationError):
     def __init__(self, value: str, supported_values: list[str]) -> None:
-        message = f"Invalid template: '{value}'. Supported templates are: {', '.join(supported_values)}."
-        super().__init__(message=message)
+        super().__init__(
+            message=f"Invalid template: '{value}'. Supported templates are: {', '.join(supported_values)}."
+        )
 
 
 class CustomTemplateWithoutSourcePath(ApplicationError):
     def __init__(self) -> None:
-        super().__init__("Custom template requires a source path to be specified.")
+        super().__init__(message="Custom template requires a source path to be specified.")
