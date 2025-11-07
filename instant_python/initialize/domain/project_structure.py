@@ -2,7 +2,6 @@ from collections.abc import Iterator
 
 from instant_python.initialize.domain.node import Node, NodeType, Directory, File
 from instant_python.shared.application_error import ApplicationError
-from instant_python.shared.error_types import ErrorTypes
 
 
 class ProjectStructure:

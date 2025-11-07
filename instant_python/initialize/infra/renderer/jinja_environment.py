@@ -2,7 +2,6 @@ from collections.abc import Callable
 from typing import Any
 
 from instant_python.shared.application_error import ApplicationError
-from instant_python.shared.error_types import ErrorTypes
 from instant_python.shared.supported_templates import SupportedTemplates
 from jinja2 import Environment, FileSystemLoader, ChoiceLoader, PackageLoader
 

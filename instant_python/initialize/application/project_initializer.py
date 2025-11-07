@@ -42,6 +42,6 @@ class ProjectInitializer:
             dependencies=config.dependencies,
         )
 
-    def _create_project_at_destination_folder(self, config: ConfigSchema, destination_project_folder: Path) -> None :
+    def _create_project_at_destination_folder(self, config: ConfigSchema, destination_project_folder: Path) -> None:
         project_structure = self._project_renderer.render(context_config=config)
         self._writer.write(project_structure=project_structure, destination=destination_project_folder)

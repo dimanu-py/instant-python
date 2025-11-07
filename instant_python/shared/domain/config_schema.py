@@ -14,7 +14,6 @@ from instant_python.shared.domain.template_config import (
     TemplateConfig,
 )
 from instant_python.shared.application_error import ApplicationError
-from instant_python.shared.error_types import ErrorTypes
 
 _GENERAL = "general"
 _DEPENDENCIES = "dependencies"
@@ -123,7 +122,8 @@ class ConfigSchemaPrimitives(TypedDict):
 class ConfigKeyNotPresent(ApplicationError):
     def __init__(self, missing_keys: list[str], required_keys: list[str]) -> None:
         super().__init__(
-            message=f"The following required keys are missing from the config file: {', '.join(missing_keys)}. Required keys are: {', '.join(required_keys)}.")
+            message=f"The following required keys are missing from the config file: {', '.join(missing_keys)}. Required keys are: {', '.join(required_keys)}."
+        )
 
 
 class EmptyConfigurationNotAllowed(ApplicationError):

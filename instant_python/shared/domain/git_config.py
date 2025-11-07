@@ -2,7 +2,6 @@ from dataclasses import dataclass, field, asdict
 from typing import Optional
 
 from instant_python.shared.application_error import ApplicationError
-from instant_python.shared.error_types import ErrorTypes
 
 
 @dataclass

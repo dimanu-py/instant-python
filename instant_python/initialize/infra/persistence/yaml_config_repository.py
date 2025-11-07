@@ -6,7 +6,6 @@ import yaml
 from instant_python.shared.domain.config_schema import ConfigSchema
 from instant_python.initialize.domain.config_repository import ConfigRepository
 from instant_python.shared.application_error import ApplicationError
-from instant_python.shared.error_types import ErrorTypes
 
 
 class YamlConfigRepository(ConfigRepository):

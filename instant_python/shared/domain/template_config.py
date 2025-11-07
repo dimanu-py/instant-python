@@ -2,7 +2,6 @@ from dataclasses import dataclass, field, asdict
 from typing import ClassVar, Optional, Union
 
 from instant_python.shared.application_error import ApplicationError
-from instant_python.shared.error_types import ErrorTypes
 from instant_python.shared.supported_built_in_features import SupportedBuiltInFeatures
 from instant_python.shared.supported_templates import SupportedTemplates
 

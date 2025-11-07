@@ -3,7 +3,6 @@ from instant_python.initialize.infra.env_manager.pdm_env_manager import PdmEnvMa
 from instant_python.initialize.infra.env_manager.system_console import SystemConsole
 from instant_python.initialize.infra.env_manager.uv_env_manager import UvEnvManager
 from instant_python.shared.application_error import ApplicationError
-from instant_python.shared.error_types import ErrorTypes
 from instant_python.shared.supported_managers import SupportedManagers
 
 

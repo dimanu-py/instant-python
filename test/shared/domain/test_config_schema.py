@@ -21,11 +21,7 @@ class TestConfigSchema:
                 "python_version": "3.13",
                 "dependency_manager": "uv",
             },
-            "git": {
-                "initialize": True,
-                "username": "dimanu-py",
-                "email": "dimanu.py@gmail.com"
-            }
+            "git": {"initialize": True, "username": "dimanu-py", "email": "dimanu.py@gmail.com"},
         }
 
         expect(lambda: ConfigSchema.from_primitives(raw_config)).to(raise_error(ConfigKeyNotPresent))
@@ -43,26 +39,11 @@ class TestConfigSchema:
                 "dependency_manager": "uv",
             },
             "dependencies": [
-                {
-                    "name": "pytest",
-                    "version": "latest",
-                    "is_dev": True,
-                    "group": "test"
-                },
-                {
-                    "name": "fastapi",
-                    "version": "latest",
-                    "is_dev": False
-                }
+                {"name": "pytest", "version": "latest", "is_dev": True, "group": "test"},
+                {"name": "fastapi", "version": "latest", "is_dev": False},
             ],
-            "git": {
-                "initialize": True,
-                "username": "dimanu-py",
-                "email": "dimanu.py@gmail.com"
-            },
-            "template": {
-                "name": "domain_driven_design"
-            }
+            "git": {"initialize": True, "username": "dimanu-py", "email": "dimanu.py@gmail.com"},
+            "template": {"name": "domain_driven_design"},
         }
 
         config = ConfigSchema.from_primitives(raw_config)
