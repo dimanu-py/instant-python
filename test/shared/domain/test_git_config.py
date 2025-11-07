@@ -3,8 +3,8 @@ from typing import Union
 import pytest
 from expects import expect, be_true, be_none, be_false, raise_error
 
-from instant_python.config.domain.git_config import GitUserOrEmailNotPresent
-from test.config.domain.mothers.git_config_mother import GitConfigMother
+from instant_python.shared.domain.git_config import GitUserOrEmailNotPresent
+from test.shared.domain.mothers.git_config_mother import GitConfigMother
 
 
 class TestGitConfig:

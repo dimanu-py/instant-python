@@ -3,14 +3,14 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import TypedDict, Union
 
-from instant_python.config.domain.dependency_config import (
+from instant_python.shared.domain.dependency_config import (
     DependencyConfig,
 )
-from instant_python.config.domain.general_config import (
+from instant_python.shared.domain.general_config import (
     GeneralConfig,
 )
-from instant_python.config.domain.git_config import GitConfig
-from instant_python.config.domain.template_config import (
+from instant_python.shared.domain.git_config import GitConfig
+from instant_python.shared.domain.template_config import (
     TemplateConfig,
 )
 from instant_python.shared.application_error import ApplicationError

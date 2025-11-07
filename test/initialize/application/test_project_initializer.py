@@ -10,7 +10,7 @@ from instant_python.initialize.domain.project_formatter import ProjectFormatter
 from instant_python.initialize.domain.project_renderer import ProjectRenderer
 from instant_python.initialize.domain.project_writer import ProjectWriter
 from instant_python.initialize.domain.version_control_configurer import VersionControlConfigurer
-from test.config.domain.mothers.config_schema_mother import ConfigSchemaMother
+from test.shared.domain.mothers.config_schema_mother import ConfigSchemaMother
 from test.initialize.domain.mothers.project_structure_mother import ProjectStructureMother
 
 

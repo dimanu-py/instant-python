@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
 
-from instant_python.config.domain.config_schema import ConfigSchema
+from instant_python.shared.domain.config_schema import ConfigSchema
 
 
 class ConfigRepository(ABC):

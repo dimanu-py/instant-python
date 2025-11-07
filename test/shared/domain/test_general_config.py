@@ -1,12 +1,12 @@
 import pytest
 from expects import expect, raise_error
 
-from instant_python.config.domain.general_config import (
+from instant_python.shared.domain.general_config import (
     InvalidDependencyManagerValue,
     InvalidLicenseValue,
     InvalidPythonVersionValue,
 )
-from test.config.domain.mothers.general_config_mother import (
+from test.shared.domain.mothers.general_config_mother import (
     GeneralConfigMother,
 )
 

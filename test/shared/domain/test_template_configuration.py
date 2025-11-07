@@ -1,12 +1,12 @@
 from expects import expect, raise_error
 
-from instant_python.config.domain.template_config import (
+from instant_python.shared.domain.template_config import (
     BoundedContextNotApplicable,
     BoundedContextNotSpecified,
     InvalidBuiltInFeaturesValues,
     InvalidTemplateValue,
 )
-from test.config.domain.mothers.template_config_mother import (
+from test.shared.domain.mothers.template_config_mother import (
     TemplateConfigMother,
 )
 

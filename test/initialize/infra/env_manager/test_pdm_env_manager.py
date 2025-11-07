@@ -4,7 +4,7 @@ from expects import expect, raise_error
 
 from instant_python.initialize.infra.env_manager.system_console import SystemConsole, CommandExecutionError
 from instant_python.initialize.infra.env_manager.pdm_env_manager import PdmEnvManager
-from test.config.domain.mothers.dependency_config_mother import DependencyConfigMother
+from test.shared.domain.mothers.dependency_config_mother import DependencyConfigMother
 from test.initialize.infra.env_manager.mother.command_execution_result_mother import CommandExecutionResultMother
 
 

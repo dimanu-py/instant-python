@@ -1,8 +1,8 @@
-from instant_python.config.domain.config_schema import ConfigSchema
-from test.config.domain.mothers.dependency_config_mother import DependencyConfigMother
-from test.config.domain.mothers.general_config_mother import GeneralConfigMother
-from test.config.domain.mothers.git_config_mother import GitConfigMother
-from test.config.domain.mothers.template_config_mother import TemplateConfigMother
+from instant_python.shared.domain.config_schema import ConfigSchema
+from test.shared.domain.mothers.dependency_config_mother import DependencyConfigMother
+from test.shared.domain.mothers.general_config_mother import GeneralConfigMother
+from test.shared.domain.mothers.git_config_mother import GitConfigMother
+from test.shared.domain.mothers.template_config_mother import TemplateConfigMother
 
 
 class ConfigSchemaMother:

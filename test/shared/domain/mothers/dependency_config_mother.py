@@ -1,4 +1,4 @@
-from instant_python.config.domain.dependency_config import (
+from instant_python.shared.domain.dependency_config import (
     DependencyConfig,
 )
 from test.random_generator import RandomGenerator

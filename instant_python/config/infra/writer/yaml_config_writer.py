@@ -3,7 +3,7 @@ from pathlib import Path
 import yaml
 
 from instant_python.config.domain.config_writer import ConfigWriter
-from instant_python.config.domain.config_schema import ConfigSchema
+from instant_python.shared.domain.config_schema import ConfigSchema
 
 
 class YamlConfigWriter(ConfigWriter):

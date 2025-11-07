@@ -1,4 +1,4 @@
-from instant_python.config.domain.config_schema import ConfigSchema
+from instant_python.shared.domain.config_schema import ConfigSchema
 from instant_python.config.domain.config_writer import ConfigWriter
 from instant_python.config.domain.question_wizard import QuestionWizard
 

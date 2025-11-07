@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from instant_python.config.infra.writer.yaml_config_writer import YamlConfigWriter
-from test.config.domain.mothers.config_schema_mother import ConfigSchemaMother
+from test.shared.domain.mothers.config_schema_mother import ConfigSchemaMother
 
 
 class TestYamlConfigWriter:

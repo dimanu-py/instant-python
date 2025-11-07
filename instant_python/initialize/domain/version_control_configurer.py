@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from instant_python.config.domain.git_config import GitConfig
+from instant_python.shared.domain.git_config import GitConfig
 
 
 class VersionControlConfigurer(ABC):

@@ -4,7 +4,7 @@ from instant_python.initialize.domain.node import File
 from instant_python.initialize.infra.renderer.jinja_environment import JinjaEnvironment
 from instant_python.initialize.infra.renderer.jinja_project_renderer import JinjaProjectRenderer
 from instant_python.shared.supported_templates import SupportedTemplates
-from test.config.domain.mothers.config_schema_mother import ConfigSchemaMother
+from test.shared.domain.mothers.config_schema_mother import ConfigSchemaMother
 from test.utils import resources_path
 
 

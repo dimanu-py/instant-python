@@ -4,7 +4,7 @@ from expects import expect, raise_error
 
 from instant_python.initialize.infra.env_manager.system_console import SystemConsole, CommandExecutionError
 from instant_python.initialize.infra.version_control.git_configurer import GitConfigurer
-from test.config.domain.mothers.git_config_mother import GitConfigMother
+from test.shared.domain.mothers.git_config_mother import GitConfigMother
 from test.initialize.infra.env_manager.mother.command_execution_result_mother import CommandExecutionResultMother
 
 

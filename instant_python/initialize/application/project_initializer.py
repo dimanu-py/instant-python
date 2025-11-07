@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from instant_python.config.domain.config_schema import ConfigSchema
+from instant_python.shared.domain.config_schema import ConfigSchema
 from instant_python.initialize.domain.env_manager import EnvManager
 from instant_python.initialize.domain.project_formatter import ProjectFormatter
 from instant_python.initialize.domain.project_renderer import ProjectRenderer

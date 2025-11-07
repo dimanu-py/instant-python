@@ -1,6 +1,6 @@
 from abc import abstractmethod, ABC
 
-from instant_python.config.domain.config_schema import ConfigSchema
+from instant_python.shared.domain.config_schema import ConfigSchema
 from instant_python.initialize.domain.project_structure import ProjectStructure
 
 
