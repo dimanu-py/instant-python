@@ -20,7 +20,7 @@ class TestInitCli:
     def setup_method(self) -> None:
         self._runner = CliRunner()
 
-    def test_initializes_project_with_general_section_combinations(self) -> None:
+    def test_should_initialize_project_with_general_section_combinations(self) -> None:
         dependency_managers = SupportedManagers.get_supported_managers()
         licenses = SupportedLicenses.get_supported_licenses()
         python_versions = SupportedPythonVersions.get_supported_versions()
@@ -34,7 +34,7 @@ class TestInitCli:
             ],
         )
 
-    def test_initializes_project_with_git_section_combinations(self) -> None:
+    def test_should_initialize_project_with_git_section_combinations(self) -> None:
         create_git_repository = [True, False]
 
         verify_all_combinations(
@@ -44,7 +44,7 @@ class TestInitCli:
             ],
         )
 
-    def test_initializes_project_with_template_section_combinations(self) -> None:
+    def test_should_initialize_project_with_template_section_combinations(self) -> None:
         templates = SupportedTemplates.get_supported_templates()
         built_in_features = SupportedBuiltInFeatures.get_supported_built_in_features()
 
@@ -56,7 +56,7 @@ class TestInitCli:
             ],
         )
 
-    def test_should_initializes_project_with_predefined_dependencies_and_different_managers(self) -> None:
+    def test_should_initialize_project_with_predefined_dependencies_and_different_managers(self) -> None:
         dependency_managers = SupportedManagers.get_supported_managers()
         predefined_dependencies = [
             {"name": "requests", "version": "latest", "is_dev": False, "group": ""},
