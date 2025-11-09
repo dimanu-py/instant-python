@@ -27,3 +27,15 @@ class TestJinjaProjectRenderer:
         first_file = next((node for node in project_structure.flatten() if isinstance(node, File)), None)
         expect(first_file).to_not(be_none)
         expect(first_file.is_empty()).to(be_false)
+
+    def test_should_include_file_template_content_in_custom_project_when_name_and_extension_match_default_template(
+        self,
+    ) -> None:
+        config = ConfigSchemaMother.with_template(template=SupportedTemplates.CUSTOM.value)
+        renderer = JinjaProjectRenderer(env=JinjaEnvironment(str(resources_path())))
+
+        project_structure = renderer.render(context_config=config)
+
+        first_file = next((node for node in project_structure.flatten() if isinstance(node, File)), None)
+        expect(first_file).to_not(be_none)
+        expect(first_file.is_empty()).to(be_false)
