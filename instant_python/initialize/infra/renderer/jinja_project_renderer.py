@@ -36,8 +36,9 @@ class JinjaProjectRenderer(ProjectRenderer):
 
     def _populate_file_content(self, context_config: ConfigSchema, node: dict) -> None:
         if node.get("type") == NodeType.FILE:
+            template_name = node.get("template") or f"{node['name']}{node['extension']}"
             file_content = self._env.render_template(
-                name=node["template"],
+                name=template_name,
                 context={
                     **context_config.to_primitives(),
                     "template_types": SupportedTemplates,
