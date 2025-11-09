@@ -160,7 +160,9 @@ class TestInitCli:
             config_file_path = config_file.name
 
         with self._runner.isolated_filesystem():
-            result = self._runner.invoke(app, ["--config", str(config_file_path), "--templates", str(custom_template_folder)])
+            result = self._runner.invoke(
+                app, ["--config", str(config_file_path), "--templates", str(custom_template_folder)]
+            )
 
         return {
             "exit_code": result.exit_code,
