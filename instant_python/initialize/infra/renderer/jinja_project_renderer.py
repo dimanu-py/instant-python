@@ -1,4 +1,5 @@
 import yaml
+from jinja2 import TemplateNotFound
 
 from instant_python.shared.domain.config_schema import ConfigSchema
 from instant_python.initialize.domain.node import NodeType
@@ -37,13 +38,16 @@ class JinjaProjectRenderer(ProjectRenderer):
     def _populate_file_content(self, context_config: ConfigSchema, node: dict) -> None:
         if node.get("type") == NodeType.FILE:
             template_name = node.get("template") or f"{node['name']}{node['extension']}"
-            file_content = self._env.render_template(
-                name=template_name,
-                context={
-                    **context_config.to_primitives(),
-                    "template_types": SupportedTemplates,
-                },
-            )
+            try:
+                file_content = self._env.render_template(
+                    name=template_name,
+                    context={
+                        **context_config.to_primitives(),
+                        "template_types": SupportedTemplates,
+                    },
+                )
+            except TemplateNotFound:
+                file_content = None
             node["content"] = file_content
 
         for child in node.get("children", []):
