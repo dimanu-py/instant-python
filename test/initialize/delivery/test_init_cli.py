@@ -138,7 +138,6 @@ class TestInitCli:
         config = json.loads(json.dumps(self._read_base_config()))
 
         config["template"]["name"] = template
-        config["template"]["source_path"] = custom_template_path
 
         return self._run_cli_with_custom_config(config, custom_template_path)
 

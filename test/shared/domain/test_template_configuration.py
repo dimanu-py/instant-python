@@ -5,7 +5,6 @@ from instant_python.shared.domain.template_config import (
     BoundedContextNotSpecified,
     InvalidBuiltInFeaturesValues,
     InvalidTemplateValue,
-    CustomTemplateWithoutSourcePath,
 )
 from test.shared.domain.mothers.template_config_mother import (
     TemplateConfigMother,
@@ -48,11 +47,3 @@ class TestTemplateConfig:
                 aggregate_name=None,
             )
         ).to(raise_error(BoundedContextNotSpecified))
-
-    def test_should_raise_error_when_custom_template_does_not_contain_path_to_template(self) -> None:
-        expect(
-            lambda: TemplateConfigMother.with_parameters(
-                name="custom",
-                source_path="",
-            )
-        ).to(raise_error(CustomTemplateWithoutSourcePath))

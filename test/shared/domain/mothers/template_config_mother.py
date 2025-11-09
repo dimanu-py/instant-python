@@ -26,7 +26,7 @@ class TemplateConfigMother:
     @classmethod
     def any(cls) -> TemplateConfig:
         return TemplateConfig(
-            name=random.choice(cls._SUPPORTED_TEMPLATES[:-1]),
+            name=random.choice(cls._SUPPORTED_TEMPLATES),
             built_in_features=random.sample(
                 cls._SUPPORTED_BUILT_IN_FEATURES,
                 k=random.randint(0, len(cls._SUPPORTED_BUILT_IN_FEATURES)),
