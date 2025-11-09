@@ -3,7 +3,7 @@ import tempfile
 
 import pytest
 import yaml
-from approvaltests import verify_all_combinations
+from approvaltests import verify_all_combinations, verify
 from typer.testing import CliRunner
 
 from instant_python.initialize.delivery.cli import app
@@ -71,6 +71,14 @@ class TestInitCli:
             ],
         )
 
+    def test_should_initialize_project_with_custom_project_structure(self) -> None:
+        verify(
+            self._run_cli_with_custom_template_config(
+                template=SupportedTemplates.CUSTOM.value,
+                custom_template_path=str(resources_path()),
+            )
+        )
+
     def _run_cli_with_general_config(
         self,
         dependency_manager: str,
@@ -122,6 +130,18 @@ class TestInitCli:
 
         return self._run_cli_with_config(config)
 
+    def _run_cli_with_custom_template_config(
+        self,
+        template: str,
+        custom_template_path: str,
+    ) -> dict:
+        config = json.loads(json.dumps(self._read_base_config()))
+
+        config["template"]["name"] = template
+        config["template"]["source_path"] = custom_template_path
+
+        return self._run_cli_with_custom_config(config, custom_template_path)
+
     def _run_cli_with_config(self, config: dict) -> dict:
         with tempfile.NamedTemporaryFile(mode="w", suffix=".yml", delete=False) as config_file:
             yaml.dump(config, config_file)
@@ -129,6 +149,19 @@ class TestInitCli:
 
         with self._runner.isolated_filesystem():
             result = self._runner.invoke(app, ["--config", str(config_file_path)])
+
+        return {
+            "exit_code": result.exit_code,
+            "errors": result.exception,
+        }
+
+    def _run_cli_with_custom_config(self, config: dict, custom_template_folder: str) -> dict:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".yml", delete=False) as config_file:
+            yaml.dump(config, config_file)
+            config_file_path = config_file.name
+
+        with self._runner.isolated_filesystem():
+            result = self._runner.invoke(app, ["--config", str(config_file_path), "--templates", str(custom_template_folder)])
 
         return {
             "exit_code": result.exit_code,

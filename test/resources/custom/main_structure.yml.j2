@@ -1,0 +1,21 @@
+- name: {{ general.source_name }}
+  type: directory
+  python: True
+  children:
+    - name: ports
+      type: directory
+      python: True
+      children:
+        - name: driving
+          type: directory
+          python: True
+    - name: adapters
+      type: directory
+      python: True
+      children:
+        - name: driving
+          type: directory
+          python: True
+- name: pyproject
+  type: file
+  extension: .toml
