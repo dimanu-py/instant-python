@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import yaml
 from jinja2 import TemplateNotFound
 
@@ -16,7 +18,7 @@ class JinjaProjectRenderer(ProjectRenderer):
         self._env = env
 
     def render(self, context_config: ConfigSchema) -> ProjectStructure:
-        template_name = self._get_project_main_structure_template(context_config.template_type)
+        template_name = self._get_project_main_structure_template(context_config)
         basic_project_structure = self._render_project_structure_with_jinja(context_config, template_name)
         project_structure_with_files_content = self._add_template_content_to_files(
             context_config, basic_project_structure
@@ -27,8 +29,8 @@ class JinjaProjectRenderer(ProjectRenderer):
         raw_project_structure = self._env.render_template(name=template_name, context=context_config.to_primitives())
         return yaml.safe_load(raw_project_structure)
 
-    def _get_project_main_structure_template(self, template_type: str) -> str:
-        return f"{template_type}/{self._MAIN_STRUCTURE_TEMPLATE_FILE}"
+    def _get_project_main_structure_template(self, config: ConfigSchema) -> str:
+        return str(Path(config.calculate_project_structure_template_name()) / self._MAIN_STRUCTURE_TEMPLATE_FILE)
 
     def _add_template_content_to_files(self, context_config: ConfigSchema, project_structure: list[dict]) -> list[dict]:
         for node in project_structure:

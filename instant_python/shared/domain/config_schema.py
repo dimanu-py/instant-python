@@ -13,6 +13,7 @@ from instant_python.shared.domain.template_config import (
     TemplateConfig,
 )
 from instant_python.shared.application_error import ApplicationError
+from instant_python.shared.supported_templates import SupportedTemplates
 
 _GENERAL = "general"
 _DEPENDENCIES = "dependencies"
@@ -58,6 +59,11 @@ class ConfigSchema:
 
     def calculate_config_destination_path(self, base_directory: Path) -> Path:
         return base_directory / self.project_folder_name / self.config_file_path.name
+
+    def calculate_project_structure_template_name(self) -> str:
+        if self.template_type == SupportedTemplates.CUSTOM:
+            return ""
+        return self.template_type
 
     def to_primitives(self) -> "ConfigSchemaPrimitives":
         return ConfigSchemaPrimitives(
