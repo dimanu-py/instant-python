@@ -10,7 +10,9 @@ class ProjectStructure:
 
     @classmethod
     def from_raw_structure(cls, structure: list[dict]) -> "ProjectStructure":
-        return cls(nodes=cls._build_project_structure(structure))
+        nodes = cls._build_project_structure(structure)
+        cls._ensure_pyproject_file_is_present(nodes)
+        return cls(nodes=nodes)
 
     def flatten(self) -> Iterator[Node]:
         for node in self._nodes:
@@ -39,6 +41,13 @@ class ProjectStructure:
         else:
             raise UnknownNodeTypeError(node_type)
 
+    @classmethod
+    def _ensure_pyproject_file_is_present(cls, nodes: list[Node]) -> None:
+        for node in nodes:
+            if isinstance(node, File) and node.is_pyproject_toml():
+                return
+        raise MissingPyprojectTomlError()
+
     def __iter__(self) -> Iterator[Node]:
         return iter(self._nodes)
 
@@ -55,3 +64,14 @@ class ProjectStructure:
 class UnknownNodeTypeError(ApplicationError):
     def __init__(self, node_type: str) -> None:
         super().__init__(message=f"Unknown node type: {node_type}")
+
+
+class MissingPyprojectTomlError(ApplicationError):
+    def __init__(self) -> None:
+        super().__init__(
+            message="Missing pyproject.toml file in project structure. Add the following "
+            "to your project structure definition:\n"
+            "- name: pyproject\n"
+            "  type: file\n"
+            "  extension: .toml"
+        )

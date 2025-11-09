@@ -32,6 +32,9 @@ class File(Node):
     def is_empty(self) -> bool:
         return self._content is None or self._content == ""
 
+    def is_pyproject_toml(self) -> bool:
+        return self._name == "pyproject" and self._extension == ".toml"
+
     def _build_path_for(self, path: Path) -> Path:
         return path / f"{self._name}{self._extension}"
 
