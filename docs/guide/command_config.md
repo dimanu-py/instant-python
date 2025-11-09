@@ -10,6 +10,11 @@ ipy config
 Running it will create an **ipy.yml** file in the current directory containing all your answers. 
 Later this file can be used with the [`init`](command_init.md) command.
 
+!!! tip
+    You can also create the configuration file manually. We still recommend using the `config` command
+    to avoid mistakes, but if you prefer to write it yourself, that's fine.
+    Just make sure to follow the [file format](#file-format) and [restrictions](#restrictions) described below.
+
 ## File format
 
 The configuration file contains four top level keys:
