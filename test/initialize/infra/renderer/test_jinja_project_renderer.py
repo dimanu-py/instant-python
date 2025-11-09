@@ -1,4 +1,3 @@
-
 from expects import be_none, expect, be_empty, be_false, be_true
 
 from instant_python.initialize.domain.node import File
