@@ -21,7 +21,8 @@ class YamlConfigRepository(ConfigRepository):
         final_destination = config.calculate_config_destination_path(
             base_directory=base_directory,
         )
-        shutil.move(config.config_file_path, final_destination)
+        ipy_config_project_folder = final_destination.parent / "ipy.yml"
+        shutil.move(config.config_file_path, ipy_config_project_folder)
 
 
 class ConfigurationFileNotFound(ApplicationError):

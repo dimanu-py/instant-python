@@ -43,7 +43,7 @@ class TestYamlConfigRepository:
             config = repository.read(config_file_temp)
             repository.move(config, temp_dir_path)
 
-            final_config_path = project_folder / self._CONFIG_FILE
+            final_config_path = project_folder / "ipy.yml"
             expect(final_config_path.exists()).to(be_true)
             expect(config_file_temp.exists()).to_not(be_true)
 
