@@ -57,28 +57,8 @@ class ConfigSchema:
         if missing_keys:
             raise ConfigKeyNotPresent(missing_keys, _REQUIRED_CONFIG_KEYS)
 
-    @classmethod
-    def from_file(
-        cls,
-        config_file_path: str,
-        general: GeneralConfig,
-        dependencies: list[DependencyConfig],
-        template: TemplateConfig,
-        git: GitConfig,
-    ) -> "ConfigSchema":
-        return cls(
-            general=general,
-            dependencies=dependencies,
-            template=template,
-            git=git,
-            config_file_path=Path(config_file_path),
-        )
-
-    def save_on_project_folder(self) -> None:
-        destination_folder = Path.cwd() / self.project_folder_name
-        destination_path = destination_folder / self.config_file_path.name
-
-        shutil.move(self.config_file_path, destination_path)
+    def calculate_config_destination_path(self, base_directory: Path) -> Path:
+        return base_directory / self.project_folder_name / self.config_file_path.name
 
     def to_primitives(self) -> "ConfigSchemaPrimitives":
         return ConfigSchemaPrimitives(
@@ -107,9 +87,6 @@ class ConfigSchema:
     @property
     def version_control_has_to_be_initialized(self) -> bool:
         return self.git.initialize
-
-    def calculate_config_destination_path(self, base_directory: Path) -> Path:
-        return base_directory / self.project_folder_name / self.config_file_path.name
 
 
 class ConfigSchemaPrimitives(TypedDict):
