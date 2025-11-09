@@ -8,16 +8,26 @@ ipy init
 
 By default `instant-python` will look for **ipy.yml** in the current directory. A different file can be provided with `--config` or `-c` flags. 
 
-Additionally, a [custom template](#using-custom-template) for your project structure can be used, you tell `ipy` to use that
-template with the `--template` or `-t` flag and providing the path to the template file.
-
 ```bash
-ipy init -t /path/to/template.yml
+ipy init -c /path/to/config.yml
 ```
 
+Additionally, you can use [custom templates](#using-custom-template) if you want to define your own project structure and
+even if you have specific templates that you want to apply instead of the [default templates](#default-templates).
+You can achieve this by using the `--templates` or `-t` flags.
+
 !!! important
-    When using a [custom template](#using-custom-template), the possibility of using [out-of-the-box implementations](#out-of-the-box-implementations)
-    is not available. The custom template will only create the folder structure and files defined in it.
+    When using [custom templates](#using-custom-template), `instant-python` will first look for a template in the provided path.
+    If no template is found, it will try to find a template with that name in the library's defaults templates. In case no template
+    is found, the file will be created with no content inside.
+
+```bash
+ipy init -t /path/to/templates/folder
+```
+
+!!! warning
+    When using [custom templates](#using-custom-template), the possibility of using [out-of-the-box implementations](#out-of-the-box-implementations)
+    is not available.
 
 ## Overview 
 
@@ -36,7 +46,7 @@ Choose between two of the most popular dependencies and project manager for Pyth
 - [_uv_](https://docs.astral.sh/uv)
 - [_pdm_](https://pdm-project.org/en/latest/)
 
-Instant Python will automatically download the selected dependency manager and create a virtual environment. This will
+Instant Python will automatically download the selected dependency manager if it's not installed, and create a virtual environment. This will
 allow you to install your dependencies and run tasks out of the box.
 
 ## Creating a git repository
@@ -603,15 +613,32 @@ This feature will include a _CITATION.cff_ file that will help users to cite you
 
 ## Using custom template
 
-You can create a new project using a custom template instead of one of the [default templates](#default-templates).
+You can personalize all your project generation by creating a custom template folder and placing there all your
+personal templates.
 
-!!! important
+In this folder you can place your own project structure template and any other file templates that you want to use
+when generating your project. For concrete examples visit the [custom templates examples section](../examples/custom_template.md).
+
+!!! warning
     When using a custom template, the possibility of using [out-of-the-box implementations](#out-of-the-box-implementations)
     is not available.
 
-This custom template must follow a specific structure and syntax to be able to generate the project correctly.
+To be able to use `instant-python` to create your own custom project follow these steps:
 
+1. Create a folder where you want to store all your custom templates, e.g., `custom_templates`.
+2. Inside this folder, create a file named `main_structure.yml.j2`. This file will define the structure of your project.
+3. (Optional) Create any other file templates that you want to use in your project structure.
+4. When running the `ipy init` command, provide the path to your custom templates folder using the `--templates` or `-t` flags.
+
+### Restrictions
+
+The project structure custom template must follow a specific structure and syntax to be able to generate the project correctly.
+
+- The custom template for your project structure must always be named `main_structure.yml.j2`.
+- This file must be placed in the root of your custom template folder.
 - You must use a yml file to define the folder structure.
+- You must include in your structure the file _pyproject.toml_. This file is required for
+  the dependency manager to work correctly. If this file is not defined, `instant-python` will raise an error.
 - The hierarchy of your project will be declared as a list of elements with the following structure:
     - `name`: The name of the folder or file to create.
     - `type`: The type of the element, which can be `directory` or `file`.
@@ -619,4 +646,14 @@ This custom template must follow a specific structure and syntax to be able to g
       ignore this field.
     - `extension`: **Only for files**. The extension of the file to create. If the file do not have an extension, you can ignore
       this field.
+    - `template`: **Only for files**. Inside your folder for custom templates, the name of the template to use when creating the file. If no template is provided,
+      the file will be created empty.
     - `children`: A list of elements that will be created inside the folder. This can be either another directory or files.
+
+!!! important
+    When using a folder for custom templates, `instant-python` will always prioritize your templates over the default ones. If
+    you don't provide a `template` field for a file, it will try to find a template with that name in the default templates defined
+    internally. If no template is found, the file will be created empty.
+
+!!! info
+    For more complex and complete examples of custom templates, visit the [custom templates examples section](../examples/custom_template.md).
