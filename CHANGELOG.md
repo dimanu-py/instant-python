@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.15.2 (2025-11-10)
+
+### 🪲 Bug Fixes
+
+- **initialize**: Add warning for missing templates in file content
+  ([`6574822`](https://github.com/dimanu-py/instant-python/commit/65748223287161c86d7e663e28a8f2a7bd786624))
+
+
 ## v0.15.1 (2025-11-10)
 
 ### 🪲 Bug Fixes
