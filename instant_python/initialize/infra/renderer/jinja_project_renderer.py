@@ -49,6 +49,7 @@ class JinjaProjectRenderer(ProjectRenderer):
                     },
                 )
             except (TemplateNotFound, KeyError):
+                print(f"Warning: Template not found for file {node.get('name')}, leaving content empty.")
                 file_content = None
             node["content"] = file_content
 
