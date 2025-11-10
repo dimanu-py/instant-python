@@ -2,6 +2,447 @@
 
 <!-- version list -->
 
+## v0.15.0 (2025-11-10)
+
+### ✨ Features
+
+- **initialize**: Modify how custom project structure is discover but not making compulsory create a
+  folder named 'custom'
+  ([`e35d882`](https://github.com/dimanu-py/instant-python/commit/e35d8825083c5fe1a542b6fb3d39b0a5c9dea828))
+
+- **initialize**: Ensure presence of pyproject.toml file in project structure
+  ([`d677228`](https://github.com/dimanu-py/instant-python/commit/d677228541cf87838b899908c013ac4ff73f1d43))
+
+- **shared**: Temporary remove source_path attribute in template section if custom template is
+  selected
+  ([`c6f9e0c`](https://github.com/dimanu-py/instant-python/commit/c6f9e0c9c4c6daa148e41ffdb6e353b1bb55e980))
+
+- **initialize**: Modify 'move' method from yaml config repository to store config file always with
+  the name ipy.yml even if it's a file created by the user
+  ([`2e3d53f`](https://github.com/dimanu-py/instant-python/commit/2e3d53febea46247c0939aa61fb6c372eaec509e))
+
+- **initialize**: Handle missing templates by setting content to None
+  ([`deb6195`](https://github.com/dimanu-py/instant-python/commit/deb61959f62184f7e7881eabf0d17d4cc4749344))
+
+- **shared**: Prompt user for custom template file path when selecting custom template
+  ([`1b30673`](https://github.com/dimanu-py/instant-python/commit/1b3067327b20cc2937c932ab4f009730161bbba4))
+
+- **shared**: Ensure source path is set for custom templates
+  ([`5f51c83`](https://github.com/dimanu-py/instant-python/commit/5f51c8300ad70439007b5a2e7c79eaf8532166b9))
+
+- **shared**: Add source path attribute to template config object
+  ([`a3f5e40`](https://github.com/dimanu-py/instant-python/commit/a3f5e4066ffa8d14a220619f7c368ec75f7fbdc0))
+
+- Delete old implementation for init command
+  ([`c99e43d`](https://github.com/dimanu-py/instant-python/commit/c99e43dbd1a3195b02e386f6876a8b7b70b85fdb))
+
+- **initialize**: Update path parameters to use Path type for improved type safety
+  ([`8dc2bc2`](https://github.com/dimanu-py/instant-python/commit/8dc2bc21058bfbd803407639f7bec0cb06f9689b))
+
+- **initialize**: Implement write method in YamlConfigRepository to move config file
+  ([`39f6c88`](https://github.com/dimanu-py/instant-python/commit/39f6c88b856709c9e9a0b7c6c80e6f2f67321310))
+
+- **initialize**: Remove config parameter from ProjectInitializer execute method
+  ([`459c8c2`](https://github.com/dimanu-py/instant-python/commit/459c8c266135dc041d5a2af13ca13661dafb7b5e))
+
+- **initialize**: Invoke repository write method in ProjectInitializer
+  ([`20d1c1d`](https://github.com/dimanu-py/instant-python/commit/20d1c1dc027fb641a346739c95c563e4e679bbf3))
+
+- **initialize**: Add config_path parameter to ProjectInitializer execute method
+  ([`fa92d33`](https://github.com/dimanu-py/instant-python/commit/fa92d33f6789b546c0287571fe79c17fc89cb164))
+
+- **repository**: Add write method to ConfigRepository interface
+  ([`04ab916`](https://github.com/dimanu-py/instant-python/commit/04ab916492accc666a763adba74e213223524332))
+
+- **config**: Update ConfigSchema class to allow instantiation from primitives and validate content
+  structure to avoid inconsistent data
+  ([`a6dc931`](https://github.com/dimanu-py/instant-python/commit/a6dc9311f1d363294ee1a35e5a08844b0fd818d6))
+
+- **initialize**: Add 'execute_or_raise' method to SystemConsole to encapsulate command execution
+  and error handling when needed
+  ([`87f2b6f`](https://github.com/dimanu-py/instant-python/commit/87f2b6ff55bf0d26176b5d842cf9efba549d8844))
+
+- **initialize**: Add property to check if version control needs initialization
+  ([`ac41ab0`](https://github.com/dimanu-py/instant-python/commit/ac41ab07d407193f579cb5f6e3d9067d298822ba))
+
+- **initialize**: Conditionally initialize git repository based on config setting
+  ([`187f334`](https://github.com/dimanu-py/instant-python/commit/187f33432b4300ff97dfa290a94ba0e152035888))
+
+- **initialize**: Integrate version control setup in ProjectInitializer
+  ([`0a706c2`](https://github.com/dimanu-py/instant-python/commit/0a706c2b020821718638d62b15fa8ac7bda0f17c))
+
+- **initialize**: Inject VersionControlConfigurer into ProjectInitializer
+  ([`5cf1669`](https://github.com/dimanu-py/instant-python/commit/5cf16697aa9864019aa8f7958fc53ffb0d13b620))
+
+- **initialize**: Add abstract VersionControlConfigurer class for git configuration setup
+  ([`43a24a5`](https://github.com/dimanu-py/instant-python/commit/43a24a58d7751d1a03b410592fcfc8541a1ba3f7))
+
+- **initialize**: Add abstract ProjectFormatter class for project formatting
+  ([`ab8c177`](https://github.com/dimanu-py/instant-python/commit/ab8c1777ae31bc9673be26adefd6354f5db71036))
+
+- **initialize**: Add error handling for command execution in RuffProjectFormatter
+  ([`2bc7b2d`](https://github.com/dimanu-py/instant-python/commit/2bc7b2d58fa776ff0a0e69872f25babccadd39b6))
+
+- **initialize**: Call formatter after project configuration for improved output formatting
+  ([`7c467cd`](https://github.com/dimanu-py/instant-python/commit/7c467cd72bc578ee2b6c2c21fa8d7925dd7d1efa))
+
+- **initialize**: Use console when is injected to install uv
+  ([`8feeb28`](https://github.com/dimanu-py/instant-python/commit/8feeb28e8a015c2aac625b59afb4d15ce0b11670))
+
+- **initialize**: Use console when is injected to install dependencies
+  ([`e74c046`](https://github.com/dimanu-py/instant-python/commit/e74c0464bfaeeeac7213de10bff99cbe91200e78))
+
+- **initialize**: Use console when is injected to create virtual environment
+  ([`38f85ab`](https://github.com/dimanu-py/instant-python/commit/38f85ab218c16d7537e80c1ad8bf4cf2fb92d784))
+
+- **initialize**: Use console when is injected to install python version
+  ([`8eb81e4`](https://github.com/dimanu-py/instant-python/commit/8eb81e407c372c603be3c68ae79687afd6eaaace))
+
+- **initialize**: Use console when is injected to check if uv has been installed
+  ([`f202a3d`](https://github.com/dimanu-py/instant-python/commit/f202a3d97056eb81b48ef356b84a98106de40013))
+
+- **initialize**: Inject system console to uv manager
+  ([`a5b6dae`](https://github.com/dimanu-py/instant-python/commit/a5b6daedc080276f8c39aa82d67a7b0df2982dbd))
+
+- **initialize**: Handle unexpected errors during command execution
+  ([`951398c`](https://github.com/dimanu-py/instant-python/commit/951398c2a6ea07848c5e7bc98d734df4b704ee33))
+
+- **initialize**: Add method to CommandExecutionResult to know if it has succeeded or not
+  ([`6dd97dc`](https://github.com/dimanu-py/instant-python/commit/6dd97dc085f4d1c254ffdf4b029b6af1efb59ca8))
+
+- **initialize**: Implement command execution using subprocess
+  ([`1bad062`](https://github.com/dimanu-py/instant-python/commit/1bad062dcac0f61aa2167d82bd34e96cee5d306a))
+
+- **initialize**: Modify EnvManager interface to adhere to previous DependencyManager manager to
+  keep the same behavior until refactor
+  ([`09d68fc`](https://github.com/dimanu-py/instant-python/commit/09d68fcdfbd630054b8b42d3bcc96dbfd7a2e79b))
+
+- **initialize**: Integrate EnvManager into ProjectInitializer for environment setup
+  ([`e307135`](https://github.com/dimanu-py/instant-python/commit/e3071354d0bef7316cd5b9d1052f9870b0d13783))
+
+- **initialize**: Introduce abstract Node class with create method for extensibility
+  ([`8fbde36`](https://github.com/dimanu-py/instant-python/commit/8fbde36ab47a7ece26d79377af13229926d603e6))
+
+- **initialize**: Implement directory and file creation methods in FileSystemNodeWriter
+  ([`126f87c`](https://github.com/dimanu-py/instant-python/commit/126f87c8f202d4d1cfaa3c56742290322321a9f8))
+
+- **initialize**: Add FileSystemNodeWriter for directory and file creation
+  ([`6d555da`](https://github.com/dimanu-py/instant-python/commit/6d555da88f086f05457b7ddd4a3a4f5fd6c415d2))
+
+- **initialize**: Implement recursive creation of child nodes in directory
+  ([`94a0a46`](https://github.com/dimanu-py/instant-python/commit/94a0a46e3b1e9c8639facd159b59108f8fcc7de6))
+
+- **initialize**: Add support for creating __init__.py in Python modules
+  ([`45d77c2`](https://github.com/dimanu-py/instant-python/commit/45d77c2a91fb7e1c120f5bfc8a0debc274cbe0af))
+
+- **initialize**: Add create method to handle directory creation with NodeWriter
+  ([`f97ebb1`](https://github.com/dimanu-py/instant-python/commit/f97ebb185dd43309e4441fcfcf3920de455f2efc))
+
+- **initialize**: Add create method to handle file creation using NodeWriter
+  ([`dd741c4`](https://github.com/dimanu-py/instant-python/commit/dd741c4a44a4092caa3a78c05802d99ff78de2eb))
+
+- **initialize**: Create abstract base class for file and directory creation
+  ([`339ca96`](https://github.com/dimanu-py/instant-python/commit/339ca961bb4aab8f1a492ac98c02a85116bb4f6a))
+
+- **initialize**: Add support for creating files in the file system
+  ([`7845c4d`](https://github.com/dimanu-py/instant-python/commit/7845c4d47188c0e13fbc5796042921afb252373e))
+
+- **writer**: Implement write method to create directories and __init__.py for Python modules
+  ([`d720f7d`](https://github.com/dimanu-py/instant-python/commit/d720f7db78d24e273daa0808cf9b5d0af65e0889))
+
+- **initialize**: Modify project initializer use case to receive the folder where the project will
+  be created
+  ([`b507bc4`](https://github.com/dimanu-py/instant-python/commit/b507bc4d263ccdb1db97bbc5e9b3bc6a2fa17b9f))
+
+- **initialize**: Write project structure using writer
+  ([`c9952ba`](https://github.com/dimanu-py/instant-python/commit/c9952baa7d070eb84c1365153ffcddde91d65299))
+
+- **initialize**: Add ProjectWriter dependency to ProjectInitializer
+  ([`16a645c`](https://github.com/dimanu-py/instant-python/commit/16a645c6560e4315de1f52413ce51eba12cd746c))
+
+- **initialize**: Make Directory iterable through iteration of its children
+  ([`0c4bf05`](https://github.com/dimanu-py/instant-python/commit/0c4bf05f5c122bafca870a42f856ef166873d390))
+
+- **initialize**: Add flatten method to ProjectStructure for iterating through nodes
+  ([`724b96c`](https://github.com/dimanu-py/instant-python/commit/724b96cfa6dff7bdd00599787306c57be0fa660d))
+
+- **initialize**: Modify ProjectRenderer port and adapter signatures to return a ProjectStructure
+  ([`b0c251f`](https://github.com/dimanu-py/instant-python/commit/b0c251f7df1820240b81ef74375c808d9ee34cef))
+
+- **initialize**: Add __iter__ and __len__ methods to ProjectStructure class to be able to iterate
+  through them
+  ([`d733664`](https://github.com/dimanu-py/instant-python/commit/d733664053ee8f13e0da2756659415d8cf6e7091))
+
+- **initialize**: Implement ProjectStructure class for building project nodes
+  ([`a8a36c2`](https://github.com/dimanu-py/instant-python/commit/a8a36c29a92d847e59b81c043bb355cfaf9dbc11))
+
+- **initialize**: Add Directory class with path building and representation methods
+  ([`bdfcd14`](https://github.com/dimanu-py/instant-python/commit/bdfcd143205a16da9f2ae5d0a8a961b78f052180))
+
+- **initialize**: Add __repr__ method to File class
+  ([`2e88d75`](https://github.com/dimanu-py/instant-python/commit/2e88d75f678d5d422efed04f836723c751431363))
+
+### 🪲 Bug Fixes
+
+- **initialize**: Add pyproject file to standard template in acceptance tests
+  ([`1a9e6e3`](https://github.com/dimanu-py/instant-python/commit/1a9e6e3531b07d2d865a8899b27ebcf26ccc021e))
+
+- **initialize**: Use file name and extension as default template name if not provided in file node
+  ([`e07a2cb`](https://github.com/dimanu-py/instant-python/commit/e07a2cb6129aea90f4720b7268f1b647ec544e24))
+
+- **templates**: Correct template path for value_object in YAML configuration
+  ([`cd4d6a4`](https://github.com/dimanu-py/instant-python/commit/cd4d6a4b956adb7f82131512b5e39f6d15a46d83))
+
+- **templates**: Write correct template name for python version file
+  ([`b6adb23`](https://github.com/dimanu-py/instant-python/commit/b6adb236ce1cea9b021f2b4296321c04d5c87ecd))
+
+- **templates**: Remove 'project_structure/' prefix from all templates
+  ([`60cecf0`](https://github.com/dimanu-py/instant-python/commit/60cecf08ea9592a3733aa8511343acb055562024))
+
+- **initialize**: Introduce UnknownTemplateError
+  ([`d507ed7`](https://github.com/dimanu-py/instant-python/commit/d507ed726ccc4cddc5be75a7dd68a28d644c06e1))
+
+- **initialize**: Introduce UnknownNodeTypeError
+  ([`b155055`](https://github.com/dimanu-py/instant-python/commit/b1550557508b6af6b8377530c1e000bc0bf7beb0))
+
+- **templates**: Format templates correctly so ruff formatter does not fail
+  ([`30bb6b1`](https://github.com/dimanu-py/instant-python/commit/30bb6b1cbeaf5969eace22f40997af95db1bfd4a))
+
+- **initialize**: Improve error message formatting for command execution failures
+  ([`d8bfc8d`](https://github.com/dimanu-py/instant-python/commit/d8bfc8dcafb8d6a35133eb4c138e1c80fbd60ae9))
+
+- **initialize**: Correct failing uv test due to interface change
+  ([`a65910f`](https://github.com/dimanu-py/instant-python/commit/a65910f7a207c96d23f75077c479d600756ca357))
+
+- **initialize**: Update import of NodeWriter to be conditional for type checking
+  ([`1afe2ad`](https://github.com/dimanu-py/instant-python/commit/1afe2adc7d2d50afcd3838d5e3e4a37f504a30cb))
+
+### ⚙️ Build System
+
+- Fix misspelling in pyproject.toml pytest config section
+  ([`84cf27c`](https://github.com/dimanu-py/instant-python/commit/84cf27ce01d6aca47f79f90e572f6220c3e62b1e))
+
+### ♻️ Refactoring
+
+- **shared**: Remove unused methods from ConfigSchema class
+  ([`5ef231f`](https://github.com/dimanu-py/instant-python/commit/5ef231fd3d36ce1801cdf4d0c9d84d0e9af4b0a9))
+
+- Inline all messages in call to super method in application errors
+  ([`3980af5`](https://github.com/dimanu-py/instant-python/commit/3980af5bc6252bf036838c431d2ac456d548105a))
+
+- **shared**: Delete error types enum
+  ([`9ef7981`](https://github.com/dimanu-py/instant-python/commit/9ef798172abce517ddec1bcfa9e2558657ea0642))
+
+- **shared**: Remove 'type' attribute in application errors as it's not used
+  ([`00674fa`](https://github.com/dimanu-py/instant-python/commit/00674fa87a429330c1ee1de3d36d19f016dd3a70))
+
+- **initialize**: Streamline project setup process by modularizing methods
+  ([`f9f0632`](https://github.com/dimanu-py/instant-python/commit/f9f063286bfaf95b29e6fe1f1b7f13a2f81f3d21))
+
+- **config**: Move ConfigSchema domain object to shared folder
+  ([`fbd8bd0`](https://github.com/dimanu-py/instant-python/commit/fbd8bd0febca0f1890e991f364429e4036f64e87))
+
+- **initialize**: Delete config reader use case
+  ([`2bfe0cc`](https://github.com/dimanu-py/instant-python/commit/2bfe0cc824ca166ea8130ed9baac24861dd2ff96))
+
+- **initialize**: Rename destination_path to base_directory for clarity
+  ([`bc96230`](https://github.com/dimanu-py/instant-python/commit/bc96230ecffab2407fd68c12a2e57f5107283032))
+
+- **cli**: Update working directory handling for project initialization
+  ([`b9025e8`](https://github.com/dimanu-py/instant-python/commit/b9025e8a359841388d220caac691bca32f23be93))
+
+- **initialize**: Add custom error for missing configuration files
+  ([`1daec9d`](https://github.com/dimanu-py/instant-python/commit/1daec9dcc27a456022fea9e09cc7d3cb299bf760))
+
+- **initialize**: Rename write method to move for clarity
+  ([`f29dbaa`](https://github.com/dimanu-py/instant-python/commit/f29dbaabda7caccbd42ea8a0a21413685ad54410))
+
+- **initialize**: Allow optional user template path in initializer
+  ([`6b722e2`](https://github.com/dimanu-py/instant-python/commit/6b722e2cc852d1d40b9de4e57a5aa9e72566751c))
+
+- **initialize**: Streamline project initialization by integrating ProjectInitializer and
+  simplifying config handling
+  ([`791a841`](https://github.com/dimanu-py/instant-python/commit/791a8410fe8ca06e808d6408f72f40c65989cc73))
+
+- **templates**: Add 'template' field to all templates structures
+  ([`745bcd7`](https://github.com/dimanu-py/instant-python/commit/745bcd76ee6efdf5a400d20b59e08d431184fcd8))
+
+- **initialize**: Remove repository dependency and update execute method signature
+  ([`148d3bb`](https://github.com/dimanu-py/instant-python/commit/148d3bb4afed116be36cc71066562f16fe7f1d5d))
+
+- **initialize**: Simplify project creation by removing custom template option
+  ([`ca697d0`](https://github.com/dimanu-py/instant-python/commit/ca697d0a9d1b58779edc114b14530fca80e2bf04))
+
+- **initialize**: Change config_file_path type to str and convert to Path in execute method
+  ([`961b162`](https://github.com/dimanu-py/instant-python/commit/961b162df244136d0771edb18897474038782458))
+
+- **repository**: Rename config_repository to yaml_config_repository and update imports
+  ([`688937a`](https://github.com/dimanu-py/instant-python/commit/688937a66f1caa239298509f1efbd9f7a86caa23))
+
+- **config**: Update ConfigRepository to return ConfigSchema instead of dict
+  ([`4d5e4ed`](https://github.com/dimanu-py/instant-python/commit/4d5e4ed1e6fa7584f5c4e6dbe27e5bb33223ba25))
+
+- **initialize**: Add ConfigRepository dependency to ProjectInitializer
+  ([`440a420`](https://github.com/dimanu-py/instant-python/commit/440a420143b5f5a21777f8ad036a8e88c89c1221))
+
+- **config**: Remove parser port and adapter now that config schema validates structure
+  ([`d228200`](https://github.com/dimanu-py/instant-python/commit/d22820066f8437f87e9eab4c9e79e66a9ae2a54a))
+
+- **initialize**: Simplify ConfigReader by removing parser dependency and using ConfigSchema for
+  configuration parsing
+  ([`ed8b871`](https://github.com/dimanu-py/instant-python/commit/ed8b871dd15b2bd7944315d996c4ebecd2ad2f55))
+
+- **config**: Modify config generator to instantiate a ConfigSchema instead of using parser
+  ([`4ac7e15`](https://github.com/dimanu-py/instant-python/commit/4ac7e158bb812c413927e5844f10d2ce19385fcd))
+
+- **config**: Move ConfigKeyNotPresent and EmptyConfigurationNotAllowed to config_schema.py
+  ([`0ecb482`](https://github.com/dimanu-py/instant-python/commit/0ecb48244e31c3b8b7c7f27bb7f90e6d43bbb271))
+
+- **initialize**: Replace command execution with execute_or_raise for improved error handling in pdm
+  env manager
+  ([`4903ece`](https://github.com/dimanu-py/instant-python/commit/4903ece3c63a9485d01ea8086400b3799b4d7db2))
+
+- **initialize**: Replace command execution with execute_or_raise for improved error handling in uv
+  env manager
+  ([`2972f57`](https://github.com/dimanu-py/instant-python/commit/2972f57083c8fa8e9e3ce01f341f69a2698d5d00))
+
+- **initialize**: Replace command execution with execute_or_raise for improved error handling
+  ([`506cd56`](https://github.com/dimanu-py/instant-python/commit/506cd561d2be59e537a46d46019b55fe1b4ca0a4))
+
+- **initialize**: Modify GitConfigurer internal methods to use 'execute_or_raise' from console for
+  those commands that can fail
+  ([`3c18406`](https://github.com/dimanu-py/instant-python/commit/3c18406d27da61b4633f5a239a5540468aaf6514))
+
+- **initialize**: Inject console into GitConfigurer and update setup method
+  ([`551419c`](https://github.com/dimanu-py/instant-python/commit/551419c35e4070c2477ac1767110989611ab132a))
+
+- **initialize**: Remove project_directory parameter from GitConfigurer
+  ([`d376364`](https://github.com/dimanu-py/instant-python/commit/d37636439f2ed519a40ff5037b4914f02bc245dd))
+
+- **initialize**: Remove unused _run_command method from GitConfigurer
+  ([`ac76479`](https://github.com/dimanu-py/instant-python/commit/ac76479eb0e3a116bcf2806447c17b294ac675c2))
+
+- **initialize**: Streamline command execution by removing console checks in GitConfigurer methods
+  ([`cd88a92`](https://github.com/dimanu-py/instant-python/commit/cd88a9233da914e6399ca200c446e146884e4eff))
+
+- **initialize**: Use console when is injected to execute git commands
+  ([`1299f0a`](https://github.com/dimanu-py/instant-python/commit/1299f0a6483342cfd8cf329ed754a8b5bc14f2ad))
+
+- **initialize**: Add console parameter to GitConfigurer constructor
+  ([`4f9e9e9`](https://github.com/dimanu-py/instant-python/commit/4f9e9e9baa4aef3b796c7037f8b1191357f11063))
+
+- **initialize**: Rename setup_repository to setup and update parameter naming
+  ([`4bff249`](https://github.com/dimanu-py/instant-python/commit/4bff249562649645babb821ae66061346ef07847))
+
+- **initialize**: Reorganize git configurer imports and file structure
+  ([`e894a87`](https://github.com/dimanu-py/instant-python/commit/e894a87b899481a5e484c905dfafa61f1720ccaa))
+
+- **initialize**: Make RuffProjectFormatter inherit from ProjectFormatter
+  ([`278b16e`](https://github.com/dimanu-py/instant-python/commit/278b16e89344f8159f2663868c4dd4383776d2dc))
+
+- **initialize**: Reorganize CommandExecutionError import and remove redundant definitions
+  ([`b8f1074`](https://github.com/dimanu-py/instant-python/commit/b8f1074e20cf2900b5fe6a69ad32a857f5b50e8d))
+
+- **initialize**: Inject console into RuffProjectFormatter
+  ([`4e147b7`](https://github.com/dimanu-py/instant-python/commit/4e147b788411ef67c6bd036d05129f2746807237))
+
+- **initialize**: Remove project_directory parameter from RuffProjectFormatter
+  ([`0a6d292`](https://github.com/dimanu-py/instant-python/commit/0a6d292de9bb733b3d67260c264a4c004410763b))
+
+- **initialize**: Use console when is injected to run format command
+  ([`f87905c`](https://github.com/dimanu-py/instant-python/commit/f87905cfd83472e4bc299479272a3740fabfb9ce))
+
+- **formatter**: Add console parameter to RuffProjectFormatter for enhanced flexibility
+  ([`b741778`](https://github.com/dimanu-py/instant-python/commit/b7417781d08f39e0543aafb398eab92aa26417f5))
+
+- **initialize**: Rename ProjectFormatter to UvxProjectFormatter and update references
+  ([`bf3078c`](https://github.com/dimanu-py/instant-python/commit/bf3078c04f85cc58dedea911ab0ff0283aeeac4d))
+
+- **initialize**: Move ProjectFormatter to initialize.infra for better organization
+  ([`8be7870`](https://github.com/dimanu-py/instant-python/commit/8be787092f02ada1584c251332c6ab5452e5f909))
+
+- **initialize**: Add ProjectFormatter to ProjectInitializer for enhanced project formatting
+  ([`2603d66`](https://github.com/dimanu-py/instant-python/commit/2603d665c75a5618416941086c014ee2034126ad))
+
+- **initialize**: Inject console instance into env manager factory instead of passing project folder
+  path
+  ([`bc695ef`](https://github.com/dimanu-py/instant-python/commit/bc695eff244709a8fdd6843e7b0afcb1e1e5a969))
+
+- **initialize**: Remove 'project_directory' attribute from env managers as is console who executes
+  the commands
+  ([`327922f`](https://github.com/dimanu-py/instant-python/commit/327922f9d6bab25f2cce1e475350f560d13dbfe2))
+
+- **initialize**: Replace subprocess calls with SystemConsole for command execution in pdm env
+  manager
+  ([`fba2167`](https://github.com/dimanu-py/instant-python/commit/fba2167a5210ff7ed32f24097344509e74cd4a10))
+
+- **initialize**: Extract method to encapsulate all the logic executed to install one dependency
+  ([`750f7e7`](https://github.com/dimanu-py/instant-python/commit/750f7e785776e812e115b1cf8ccd75d5976aef1c))
+
+- **initialize**: Extract method for raising command execution error
+  ([`02edb57`](https://github.com/dimanu-py/instant-python/commit/02edb57777f0d3037db96e7b17e5c526d281856f))
+
+- **initialize**: Remove unused subprocess command execution method
+  ([`380bb4f`](https://github.com/dimanu-py/instant-python/commit/380bb4fc78ff042bcd82d50e5032ec8743ceb70c))
+
+- **initialize**: Simplify setup method by removing unnecessary try-except block
+  ([`88bb72a`](https://github.com/dimanu-py/instant-python/commit/88bb72aa61ed4e3a006ad33a222713fac19ebcd3))
+
+- **initialize**: Clean up UvEnvManager removing old implementation that run directly commands in
+  the console
+  ([`699db31`](https://github.com/dimanu-py/instant-python/commit/699db31414748d6e428bbae7f1dc8377ec8c0936))
+
+- **initialize**: Pull down _run_command and attributes from EnvManager to leave it as a pure
+  interface and begin refactor to inject SystemConsole
+  ([`b197e68`](https://github.com/dimanu-py/instant-python/commit/b197e68b622a719ac13c5ed63c67dbd71ee4fcd3))
+
+- **initialize**: Extract command execution method to run commands
+  ([`1753fd4`](https://github.com/dimanu-py/instant-python/commit/1753fd40e05f984be3e5943bd1649c2e1312ce13))
+
+- **initialize**: Enhance error message for unknown dependency managers
+  ([`e1dcb29`](https://github.com/dimanu-py/instant-python/commit/e1dcb290a70b7999b4b57dc34017671b4eedfcd2))
+
+- **dependency-manager**: Remove old files for dependency manager concept
+  ([`41b2558`](https://github.com/dimanu-py/instant-python/commit/41b255870f8138e3abcd7f71e68821348f364a33))
+
+- **initialize**: Move previous implementation for dependencies managers to env manager concept in
+  new initialize command architecture
+  ([`aacc3d3`](https://github.com/dimanu-py/instant-python/commit/aacc3d3d4e864be902d732d6080d78da7b453bae))
+
+- **initialize**: Remove config parameter from write method in ProjectWriter and
+  FileSystemProjectWriter
+  ([`d30d142`](https://github.com/dimanu-py/instant-python/commit/d30d142b68e80f2459a80a64d358485b972ec65f))
+
+- **initialize**: Convert File and Directory classes to inherit from Node
+  ([`6abad70`](https://github.com/dimanu-py/instant-python/commit/6abad7077d45d212d070683ecb5c15ae0ffc3073))
+
+- **initialize**: Rename nodes module to node and update imports
+  ([`f91b46c`](https://github.com/dimanu-py/instant-python/commit/f91b46c0cfe59949e51ee274eb693766126694e1))
+
+- **initialize**: Simplify node writing logic by delegating to node's create method
+  ([`ad2b780`](https://github.com/dimanu-py/instant-python/commit/ad2b78082da62cbb6b2fbed01194f86cea23604a))
+
+- **initialize**: Rename build_path_for to _build_path_for and update create method
+  ([`5fc167d`](https://github.com/dimanu-py/instant-python/commit/5fc167de71228d2e2003336bed8c8cc2a33d5654))
+
+- **initialize**: Convert 'build_path_for' method in File to protected as now it wont be accessed
+  from outside
+  ([`f211a85`](https://github.com/dimanu-py/instant-python/commit/f211a857047072f33575406da612463142637bf4))
+
+- **initialize**: Build path for file and directory using Path instead of string
+  ([`a0ca50c`](https://github.com/dimanu-py/instant-python/commit/a0ca50c0fe6e36374bd0b481b756f7c00ffcf126))
+
+- **initialize**: Update import statement for NodeType in jinja_project_renderer.py
+  ([`6c1531c`](https://github.com/dimanu-py/instant-python/commit/6c1531c43899c9f82d027c2b12d9bcbaeaf938a9))
+
+- **initialize**: Update jinja project renderer to return ProjectStructure using named constructor
+  ([`6e20b78`](https://github.com/dimanu-py/instant-python/commit/6e20b78fe29767f70ea95a0a3516239b611d80e5))
+
+- **initialize**: Modify project structure constructor to receive the list of Nodes and implement a
+  named constructor to build the nodes from raw structure
+  ([`2eeba6f`](https://github.com/dimanu-py/instant-python/commit/2eeba6fbb87186c039a3852ae5d1fd81a9f5698c))
+
+
 ## v0.14.0 (2025-11-03)
 
 ### ✨ Features
