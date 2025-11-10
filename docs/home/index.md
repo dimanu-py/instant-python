@@ -8,7 +8,7 @@
 <b>Instant Python</b> replaces extensive manual setup with a simple command to get started quickly. Its motivation is to emulate
 commands like `ng new` or `create-react-app`, but for Python projects.
 
-<br><br>
+<br>
 
 <b>Why use Instant Python?</b> Generating your Python project with Instant Python lets you:
 
@@ -24,14 +24,30 @@ commands like `ng new` or `create-react-app`, but for Python projects.
 
 </td></tr></table></div>
 
-## Documentation
+## Navigation Guide
 
-This section provides a high-level overview of the `instant-python` library, its features, and how to get started. 
-For detailed instructions and examples, please refer to the [Commands documentation](../guide/command_config.md).
+This section provides a high-level overview of the `instant-python` documentation
+so can quickly find what you need.
 
-- [Installation](#installation)
-- [Getting Started](getting_started.md)
-- [Examples](../examples/configuration.md)
+### For Users
+
+- [Installation]: begin by learning how to install `instant-python`.
+- [First Steps]: get started with the basic features of `instant-python`.
+- [Advanced Usage and Customization]: explore advanced features and customization options.
+
+[Installation]: ../getting_started/installation.md
+[First Steps]: ../getting_started/first_steps.md
+[Advanced Usage and Customization]: ../guide/index.md
+
+### For Developers
+
+- [Contributing]: learn how to contribute to `instant-python` development.
+- [Releases]: understand our release process and versioning.
+- [Security]: understand our security policies and reporting procedures.
+
+[Contributing]: ../development/contributing.md
+[Releases]: ../development/releases.md
+[Security]: ../development/security.md
 
 ### Need help?
 
@@ -40,22 +56,6 @@ For detailed instructions and examples, please refer to the [Commands documentat
 
 [GitHub Discussions]: https://github.com/dimanu-py/instant-python/discussions
 [GitHub Issues]: https://github.com/dimanu-py/instant-python/issues
-
-## Installation
-
-The latest version of `instant-python` can be installed from PyPI:
-
-```bash
-pip install instant-python
-```
-
-!!! tip
-    We highly recommend using a virtual environment to avoid conflicts with other Python packages.
-
-### Requirements
-
-Instant Python tries to support the latest Python versions, we officially support from Python 3.10 to 3.13.
-Older versions of Python may work, but they are not guaranteed to be compatible.
 
 [//]: # (### Do Not Track)
 
@@ -68,8 +68,3 @@ Older versions of Python may work, but they are not guaranteed to be compatible.
 [//]: # (You can disable this feature by setting the environment variable `INSTANT_PYTHON_NO_TRACK` to `1` or )
 
 [//]: # (passing the `--no-track` option to any command.)
-
-## Contributing
-
-We welcome contributions to `instant-python`! If you have ideas, suggestions, or improvements, please check out our
-[contributing guide](contributing.md) for details on how to get involved.

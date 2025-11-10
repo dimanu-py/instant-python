@@ -70,15 +70,17 @@ theme:
       primary: '#B4BEFE'
       accent: '#FAB387'
 nav:
-  - Home:
-      - home/index.md
-      - Getting Started: home/getting_started.md
-      - Releases: home/releases.md
-      - Contributing: home/contributing.md
-      - Security: home/security.md
-  - Commands:
-      - Config: guide/command_config.md
-      - Init: guide/command_init.md
-  - Examples:
-      - Configuration: examples/configuration.md
-      - Custom Template: examples/custom_template.md
+  - Home: home/index.md
+  - Getting Started:
+      - Installation: getting_started/installation.md
+      - First Steps: getting_started/first_steps.md
+  - Advanced Usage and Customization:
+      - guide/index.md
+      - Default Features: guide/default_features.md
+      - Config command: guide/command_config.md
+      - Init command: guide/command_init.md
+      - Custom Projects: guide/custom_projects.md
+  - Development:
+      - Contributing: development/contributing.md
+      - Releases: development/releases.md
+      - Security: development/security.md
