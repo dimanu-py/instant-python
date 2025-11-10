@@ -9,20 +9,12 @@
   <a href="https://dimanu-py.github.io/instant-python/examples/configuration/">Examples</a>&nbsp;&nbsp;•&nbsp;
   <a href="https://dimanu-py.github.io/instant-python/home/contributing/">Contributing</a>
 </p>
-<p align="center">
-  <img 
-    src="https://github.com/user-attachments/assets/132513c0-e472-4523-a0fd-c27b70dfd78a"
-    alt="instant-python-demo" 
-    width="80%"
-  />
-  <br>
-</p>
 
 <div align="center"><table><tr><td>
 <b>Instant Python</b> replaces extensive manual setup with a simple command to get started quickly. Its motivation is to emulate
 commands like `ng new` or `create-react-app`, but for Python projects.
 
-<br><br>
+<br>
 
 <b>Why use Instant Python?</b> Generating your Python project with Instant Python lets you:
 
@@ -38,14 +30,34 @@ commands like `ng new` or `create-react-app`, but for Python projects.
 
 </td></tr></table></div>
 
-## Documentation
+## Navigation Guide
 
-This section provides a high-level overview of the `instant-python` library, its features, and how to get started.
-For detailed instructions and examples, please refer to the [full Instant Python documentation](https://dimanu-py.github.io/instant-python/home/).
+This section provides a high-level overview of the `instant-python` documentation
+so can quickly find what you need.
 
 - [Installation](https://dimanu-py.github.io/instant-python/home/#installation)
 - [Getting Started](https://dimanu-py.github.io/instant-python/home/getting_started/)
 - [Examples](https://dimanu-py.github.io/instant-python/examples/configuration/)
+
+### For Users
+
+- [Installation]: begin by learning how to install `instant-python`.
+- [First Steps]: get started with the basic features of `instant-python`.
+- [Advanced Usage and Customization]: explore advanced features and customization options.
+
+[Installation]: https://dimanu-py.github.io/instant-python/getting_started/installation/
+[First Steps]: https://dimanu-py.github.io/instant-python/getting_started/first_steps/
+[Advanced Usage and Customization]: https://dimanu-py.github.io/instant-python/guide/
+
+### For Developers
+
+- [Contributing]: learn how to contribute to `instant-python` development.
+- [Releases]: understand our release process and versioning.
+- [Security]: understand our security policies and reporting procedures.
+
+[Contributing]: https://dimanu-py.github.io/instant-python/development/contributing/
+[Releases]: https://dimanu-py.github.io/instant-python/development/releases/
+[Security]: https://dimanu-py.github.io/instant-python/development/security/
 
 ### Need help?
 
@@ -54,22 +66,6 @@ For detailed instructions and examples, please refer to the [full Instant Python
 
 [GitHub Discussions]: https://github.com/dimanu-py/instant-python/discussions
 [GitHub Issues]: https://github.com/dimanu-py/instant-python/issues
-
-## Installation
-
-The latest version of `instant-python` can be installed from PyPI:
-
-```bash
-pip install instant-python
-```
-
-> [!TIP]
-> We highly recommend using a virtual environment to avoid conflicts with other Python packages.
-
-### Requirements
-
-Instant Python tries to support the latest Python versions, we officially support from Python 3.10 to 3.13.
-Older versions of Python may work, but they are not guaranteed to be compatible.
 
 [//]: # (### Do Not Track)
 
