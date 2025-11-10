@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.15.1 (2025-11-10)
+
+### 🪲 Bug Fixes
+
+- **initialize**: Handle KeyError in template rendering
+  ([`cedeb7b`](https://github.com/dimanu-py/instant-python/commit/cedeb7b065c6032a21490c9e256a882376fdfe3d))
+
+
 ## v0.15.0 (2025-11-10)
 
 ### ✨ Features
