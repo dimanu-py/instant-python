@@ -1,24 +1,29 @@
+{% set feature_to_main_dependencies = {
+    "async_sqlalchemy": ["sqlalchemy", "asyncpg", "psycopg2-binary"],
+    "async_alembic": ["alembic"],
+    "event_bus": ["pika"],
+    "fastapi_application": ["fastapi[standard]"]
+} %}
+{% macro get_main_dependencies() -%}
+    {%- set deps = [] -%}
+    {%- for feature, dependencies in feature_to_main_dependencies.items() -%}
+        {%- if feature in template.built_in_features -%}
+            {%- set _ = deps.extend(dependencies) -%}
+        {%- endif -%}
+    {%- endfor -%}
+    {%- for dep in deps %}
+    "{{ dep }}",
+    {%- endfor -%}
+{%- endmacro %}
 {% set has_github_actions_or_makefile = ["github_actions", "makefile"] | is_in(template.built_in_features) %}
+
 [project]
 name = "{{ general.slug }}"
 version = "{{ general.version }}"
 description = "{{ general.description }}"
 authors = [{name = "{{ general.author }}", email = "{{ git.email }}"}]
 dependencies = [
-    {% if "async_sqlalchemy" in template.built_in_features %}
-    "sqlalchemy",
-    "asyncpg",
-    "psycopg2-binary",
-    {% endif %}
-    {% if "async_alembic" in template.built_in_features %}
-    "alembic",
-    {% endif %}
-    {% if "event_bus" in template.built_in_features %}
-    "pika",
-    {% endif %}
-    {% if "fastapi_application" in template.built_in_features %}
-    "fastapi[standard]",
-    {% endif %}
+    {{ get_main_dependencies() }}
 ]
 requires-python = "=={{ general.python_version }}.*"
 readme = "README.md"
