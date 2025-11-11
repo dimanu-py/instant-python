@@ -1,3 +1,7 @@
+{% set has_uv = general.dependency_manager == "uv" %}
+{% set has_pdm = general.dependency_manager == "pdm" %}
+{% set has_pre_commit_hooks = "precommit_hook" in template.built_in_features %}
+{% set has_github_actions_or_makefile = ["github_actions", "makefile"] | is_in(template.built_in_features) %}
 .DEFAULT_GOAL := help
 
 .PHONY: help
@@ -9,39 +13,37 @@ help:  ## Show this help.
 local-setup:  ## Setup git hooks and install dependencies.
 	@echo "⌛ Setting up the project...\n"
 	@make install
-{% if "precommit_hook" in template.built_in_features %}
-	@uv run -m pre_commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
-{% else %}
-	@uv run scripts/local_setup.py
+{% if has_pre_commit_hooks %}
+	@{{ general.dependency_manager }} run -m pre_commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
 {% endif %}
 
 .PHONY: install
 install:  ## Install dependencies.
 	@echo "⌛ Installing dependencies...\n"
-	{% if general.dependency_manager == "uv" %}
+	{% if has_uv %}
 	@uv sync --all-groups
-	{% elif general.dependency_manager == "pdm" %}
+	{% elif has_pdm %}
 	@pdm install
 	{% endif %}
 
 .PHONY: update
 update:  ## Update dependencies.
 	@echo "⌛ Updating dependencies...\n"
-	{% if general.dependency_manager == "uv" %}
+	{% if has_uv %}
 	@uv sync --upgrade
-	{% elif general.dependency_manager == "pdm" %}
+	{% elif has_pdm %}
 	@pdm update
 	{% endif %}
 
 .PHONY: add-dep
-add-dep:  ## Add a new dependency <make add-dep dep="pytest --group test>"
-	@uv add $(dep)
+add-dep:  ## Add a new dependency
+	@{{ general.dependency_manager }} add $(dep)
 
 .PHONY: remove-dep
-remove-dep:  ## Remove a dependency <make remove-dep dep="pytest --group test">
-	@uv remove $(dep)
+remove-dep:  ## Remove a dependency
+	@{{ general.dependency_manager }} remove $(dep)
 
-{% if dependencies | has_dependency("pytest") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
+{% if dependencies | has_dependency("pytest") or has_github_actions_or_makefile %}
 .PHONY: test
 test:  ## Run all test.
 	@echo "⌛ Running tests...\n"
@@ -80,65 +82,59 @@ watch:  ## Run all test with every change.
 .PHONY: check-typing
 check-typing:  ## Run mypy type checking.
 	@echo "⌛ Running type checking...\n"
-{% if dependencies | has_dependency("mypy") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
+{% if dependencies | has_dependency("mypy") or has_github_actions_or_makefile %}
 	@{{ general.dependency_manager }} run mypy
-{% elif dependencies | has_dependency("ty") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
+{% elif dependencies | has_dependency("ty") or has_github_actions_or_makefile %}
 	@{{ general.dependency_manager }} run ty
-{% elif dependencies | has_dependency("pyright") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
+{% elif dependencies | has_dependency("pyright") or has_github_actions_or_makefile %}
 	@{{ general.dependency_manager }} run pyright
-{% elif dependencies | has_dependency("pyrefly") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
+{% elif dependencies | has_dependency("pyrefly") or has_github_actions_or_makefile %}
 	@{{ general.dependency_manager }} run pyrefly
 {% endif %}
 
-{% if dependencies | has_dependency("ruff") or ["github_actions", "makefile"] | is_in(template.built_in_features) %}
+{% if dependencies | has_dependency("ruff") or has_github_actions_or_makefile %}
 .PHONY: check-lint
 check-lint:  ## Run ruff linting check.
 	@echo "⌛ Running linting check...\n"
-	{% if general.dependency_manager == "pdm" %}
+	{% if has_pdm %}
 	@pdm run ruff check src test
-	{% elif general.dependency_manager == "uv" %}
+	{% elif has_uv %}
 	@uvx ruff check src test
 	{% endif %}
 
 .PHONY: lint
 lint:  ## Apply ruff linting fix.
 	@echo "\n⌛ Applying linting fixes...\n"
-	{% if general.dependency_manager == "pdm" %}
+	{% if has_pdm %}
 	@pdm run ruff check --fix src test
-	{% elif general.dependency_manager == "uv" %}
+	{% elif has_uv %}
 	@uvx ruff check --fix src test
 	{% endif %}
 
 .PHONY: check-format
 check-format:  ## Run ruff format check.
 	@echo "⌛ Checking code formatting...\n"
-	{% if general.dependency_manager == "pdm" %}
+	{% if has_pdm %}
 	@pdm run ruff format --check src test
-	{% elif general.dependency_manager == "uv" %}
+	{% elif has_uv %}
 	@uvx ruff format --check src test
 	{% endif %}
 
 .PHONY: format
 format:  ## Apply ruff format fix.
 	@echo "⌛ Formatting project code...\n"
-	{% if general.dependency_manager == "pdm" %}
+	{% if has_pdm %}
 	@pdm run ruff format src test
-	{% elif general.dependency_manager == "uv" %}
+	{% elif has_uv %}
 	@uvx ruff format src test
 	{% endif %}
 {% endif %}
 
-{% if "precommit_hook" in template.built_in_features %}
+{% if has_pre_commit_hooks %}
 .PHONY: secrets
 secrets: # Check for secrets in the source code
 	@echo "⌛ Checking secrets...\n"
-	@uv run -m pre_commit run gitleaks --all-files
-{% else %}
-.PHONY: pre-commit
-pre-commit: check-typing check-lint check-format all-unit ## Run pre-commit checks.
-
-.PHONY: pre-push
-pre-push:  all-integration all-acceptance ## Run pre-push checks.
+	@{{ general.dependency_manager }} run -m pre_commit run gitleaks --all-files
 {% endif %}
 
 {% if "github_actions" in template.built_in_features %}
@@ -167,18 +163,17 @@ clean: # Clean up the project, removing the virtual environment and some files
 
 .PHONY: show
 show:  ## Show installed dependencies.
-	{% if general.dependency_manager == "pdm" %}
+	{% if has_pdm %}
 	@pdm list
-	{% elif general.dependency_manager == "uv" %}
+	{% elif has_uv %}
 	@uv tree
 	{% endif %}
 
 .PHONY: search
 search:  ## Show package details.
 	@read -p "Enter package name to search: " package;\
-	{% if general.dependency_manager == "pdm" %}
+	{% if has_pdm %}
 	@pdm show $$package
-	{% elif general.dependency_manager == "uv" %}
+	{% elif has_uv %}
 	@uv pip show $$package
 	{% endif %}
-
