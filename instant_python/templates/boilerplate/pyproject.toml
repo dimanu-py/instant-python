@@ -1,3 +1,4 @@
+{% set has_github_actions_or_makefile = ["github_actions", "makefile"] | is_in(template.built_in_features) %}
 [project]
 name = "{{ general.slug }}"
 version = "{{ general.version }}"
@@ -71,6 +72,7 @@ test = [
 {% endif %}
 {% endif %}
 
+{% if dependencies | has_dependency("ruff") or has_github_actions_or_makefile %}
 [tool.ruff]
 line-length = 120
 
@@ -85,7 +87,7 @@ known-first-party = ["{{ general.source_name }}", "test"]
 quote-style = "double"
 indent-style = "space"
 skip-magic-trailing-comma = false
-
+{% endif %}
 
 {% if "github_actions" in template.built_in_features %}
 [project.optional-dependencies]
@@ -101,8 +103,8 @@ no_git_verify = false
 tag_format = "{version}"
 build_command = """
     pip install -e '.[build]'
-    uv lock --upgrade-package instant-python
-    git add uv.lock
+    {{ general.dependency_manager }} lock --upgrade-package {{ general.slug }}
+    git add {{ general.dependency_manager }}.lock
 """
 
 [tool.semantic_release.commit_parser_options]
