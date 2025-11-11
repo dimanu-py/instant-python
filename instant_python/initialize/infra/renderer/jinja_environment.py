@@ -30,6 +30,7 @@ class JinjaEnvironment:
         self.add_filter("is_in", _is_in)
         self.add_filter("compute_base_path", _compute_base_path)
         self.add_filter("has_dependency", _has_dependency)
+        self.add_filter("resolve_import_path", _resolve_import_path)
 
     def render_template(self, name: str, context: dict[str, Any] | None = None) -> str:
         template = self._env.get_template(name)
