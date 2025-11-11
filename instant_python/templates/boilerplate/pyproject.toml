@@ -11,9 +11,9 @@
             {%- set _ = deps.extend(dependencies) -%}
         {%- endif -%}
     {%- endfor -%}
-    {%- for dep in deps %}
+    {% for dep in deps %}
     "{{ dep }}",
-    {%- endfor -%}
+    {% endfor -%}
 {%- endmacro %}
 {% set has_github_actions_or_makefile = ["github_actions", "makefile"] | is_in(template.built_in_features) %}
 {% set feature_to_dev_dependencies = {
@@ -33,17 +33,17 @@
     }
 } %}
 {% macro get_dev_group_dependencies(group_name) -%}
-{%- set deps_result = [] -%}
-{%- set group = feature_to_dev_dependencies[group_name] -%}
-{%- for dep, required_features in group.items() -%}
-{%- if required_features | length == 0 or required_features | is_in(template.built_in_features) -%}
-{%- set _ = deps_result.append(dep) -%}
-{%- endif -%}
-{%- endfor -%}
-{%- for dep in deps_result %}
-"{{ dep }}",
-{%- endfor -%}
-{%- endmacro %}
+    {%- set deps_result = [] -%}
+    {%- set group = feature_to_dev_dependencies[group_name] -%}
+    {%- for dep, required_features in group.items() -%}
+        {%- if required_features | length == 0 or required_features | is_in(template.built_in_features) -%}
+            {%- set _ = deps_result.append(dep) -%}
+        {%- endif -%}
+    {%- endfor -%}
+    {%- for dep in deps_result %}
+    "{{ dep }}",
+    {% endfor -%}
+{%- endmacro -%}
 {% set release_deps = get_dev_group_dependencies("release") %}
 {% set lint_deps = get_dev_group_dependencies("lint") %}
 {% set test_deps = get_dev_group_dependencies("test") %}
@@ -53,8 +53,7 @@ version = "{{ general.version }}"
 description = "{{ general.description }}"
 authors = [{name = "{{ general.author }}", email = "{{ git.email }}"}]
 dependencies = [
-    {{ get_main_dependencies() }}
-]
+{{ get_main_dependencies() }}]
 requires-python = "=={{ general.python_version }}.*"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -67,17 +66,18 @@ distribution = false
 [dependency-groups]
 {% if release_deps.strip() %}
 release = [
-    {{ release_deps }}]
+{{ release_deps }}]
 {% endif %}
 {% if lint_deps.strip() %}
 lint = [
-    {{ lint_deps }}]
+{{ lint_deps }}]
 {% endif %}
 {% if test_deps.strip() %}
 test = [
-    {{ test_deps }}]
+{{ test_deps }}]
 {% endif %}
 {% endif %}
+
 {% if dependencies | has_dependency("ruff") or has_github_actions_or_makefile %}
 [tool.ruff]
 line-length = 120
