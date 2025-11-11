@@ -16,7 +16,37 @@
     {%- endfor -%}
 {%- endmacro %}
 {% set has_github_actions_or_makefile = ["github_actions", "makefile"] | is_in(template.built_in_features) %}
-
+{% set feature_to_dev_dependencies = {
+    "release": {
+    "python-semantic-release": ["github_actions"]
+    },
+    "lint": {
+    "mypy": ["github_actions", "makefile", "precommit_hook"],
+    "ruff": ["github_actions", "makefile", "precommit_hook"],
+    "pip-audit": ["github_actions"],
+    "pre-commit": ["precommit_hook"]
+    },
+    "test": {
+    "faker": [],
+    "pytest": ["github_actions", "makefile", "precommit_hook", "value_objects"],
+    "pytest-asyncio": ["async_alembic", "async_sqlalchemy"]
+    }
+} %}
+{% macro get_dev_group_dependencies(group_name) -%}
+{%- set deps_result = [] -%}
+{%- set group = feature_to_dev_dependencies[group_name] -%}
+{%- for dep, required_features in group.items() -%}
+{%- if required_features | length == 0 or required_features | is_in(template.built_in_features) -%}
+{%- set _ = deps_result.append(dep) -%}
+{%- endif -%}
+{%- endfor -%}
+{%- for dep in deps_result %}
+"{{ dep }}",
+{%- endfor -%}
+{%- endmacro %}
+{% set release_deps = get_dev_group_dependencies("release") %}
+{% set lint_deps = get_dev_group_dependencies("lint") %}
+{% set test_deps = get_dev_group_dependencies("test") %}
 [project]
 name = "{{ general.slug }}"
 version = "{{ general.version }}"
@@ -33,50 +63,21 @@ license = { file = "LICENSE" }
 [tool.pdm]
 distribution = false
 {% endif %}
-
-{% if ["github_actions", "makefile", "precommit_hook"] | is_in(template.built_in_features) or dependencies | has_dependency("pytest") and template.name != template_types.CUSTOM %}
+{% if release_deps.strip() or lint_deps.strip() or test_deps.strip() %}
 [dependency-groups]
-{% if "github_actions" in template.built_in_features %}
+{% if release_deps.strip() %}
 release = [
-    "python-semantic-release",
-]
+    {{ release_deps }}]
 {% endif %}
-{% if ["github_actions", "makefile", "precommit_hook"] | is_in(template.built_in_features) and dependencies | has_dependency("pytest") %}
+{% if lint_deps.strip() %}
 lint = [
-    "mypy",
-    "ruff",
-    "pip-audit",
-    "pre-commit",
-]
+    {{ lint_deps }}]
+{% endif %}
+{% if test_deps.strip() %}
 test = [
-    "faker",
-    "pytest",
-    "pytest-asyncio",
-]
-{% elif ["github_actions", "makefile", "precommit_hook"] | is_in(template.built_in_features) %}
-lint = [
-    "mypy",
-    "ruff",
-    "pip-audit",
-    "pre-commit",
-]
-test = [
-    "faker",
-    "pytest",
-    "pytest-asyncio",
-]
-{% elif dependencies | has_dependency("pytest") %}
-test = [
-    "faker",
-    "pytest-asyncio",
-]
-{% elif template.name != template_types.CUSTOM %}
-test = [
-    "faker",
-]
+    {{ test_deps }}]
 {% endif %}
 {% endif %}
-
 {% if dependencies | has_dependency("ruff") or has_github_actions_or_makefile %}
 [tool.ruff]
 line-length = 120
