@@ -183,10 +183,10 @@ jobs:
         uses: ./.github/actions/python_setup
 
       - name: 📦 Install test dependencies
-        run: uv pip install pytest pytest-cov
+        run: {{ general.dependency_manager }} add pytest pytest-cov
 
       - name: 🏃 Run tests
-        run: uv run pytest --cov --cov-report=xml --cov-branch test -ra -s
+        run: {{ general.dependency_manager }} run pytest --cov --cov-report=xml --cov-branch test -ra -s
 
       - name: 📥 Upload coverage report to Codecov
         uses: codecov/codecov-action@v5
