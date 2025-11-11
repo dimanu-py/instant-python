@@ -1,9 +1,4 @@
-{% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
-{% if template_infra_import %}
-from {{ general.source_name }}.{{ template_domain_import }}.errors.base_error import BaseError
-{% else %}
-from {{ general.source_name }}.errors.base_error import BaseError
-{% endif %}
+from {{ general.source_name }}{{ "shared.domain.errors.base_error" | resolve_import_path(template.name) }} import BaseError
 
 
 class DomainError(BaseError):

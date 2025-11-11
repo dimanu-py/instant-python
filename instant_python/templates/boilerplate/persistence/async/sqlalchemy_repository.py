@@ -1,17 +1,7 @@
-{% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
-{% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 from typing import TypeVar
 
-{% if template_domain_import %}
-from {{ general.source_name }}.{{ template_domain_import }}.value_objects.uuid import Uuid
-{% else %}
-from {{ general.source_name }}.value_objects.uuid import Uuid
-{% endif %}
-{% if template_infra_import %}
-from {{ general.source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.base import Base
-{% else %}
-from {{ general.source_name }}.persistence.sqlalchemy.base import Base
-{% endif %}
+from {{ general.source_name }}{{ "shared.domain.value_objects.uuid" | resolve_import_path(template.name) }} import Uuid
+from {{ general.source_name }}{{ "shared.infra.persistence.sqlalchemy.base" | resolve_import_path(template.name) }} import Base
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker
 
 

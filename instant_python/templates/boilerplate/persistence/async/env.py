@@ -1,4 +1,3 @@
-{% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 import asyncio
 from logging.config import fileConfig
 
@@ -8,11 +7,7 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from migrations.models_metadata import base
-{% if template_infra_import %}
-from {{ general.source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.postgres_settings import PostgresSettings
-{% else %}
-from {{ general.source_name }}.persistence.sqlalchemy.postgres_settings import PostgresSettings
-{% endif %}
+from {{ general.source_name }}{{ "shared.infra.persistence.sqlalchemy.postgres_settings" | resolve_import_path(template.name) }} import PostgresSettings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

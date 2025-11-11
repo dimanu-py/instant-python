@@ -1,14 +1,9 @@
-{% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-{% if template_infra_import %}
-from {{ general.source_name }}.{{ template_infra_import }}.alembic_migrator import AlembicMigrator
-{% else %}
-from {{ general.source_name }}.alembic_migrator import AlembicMigrator
-{% endif %}
+from {{ general.source_name }}{{ "shared.infra.alembic_migrator" | resolve_import_path(template.name) }} import AlembicMigrator
 
 
 @asynccontextmanager

@@ -1,16 +1,9 @@
-{% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 from sqlalchemy import create_engine, Engine
 from sqlalchemy.orm import sessionmaker, Session
 
-{% if template_infra_import %}
-from {{ general.source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.base import (
+from {{ general.source_name }}{{ "shared.infra.persistence.sqlalchemy.base" | resolve_import_path(template.name) }} import (
 	Base,
 )
-{% else %}
-from {{ general.source_name }}.persistence.sqlalchemy.base import (
-	Base,
-)
-{% endif %}
 
 
 class SessionMaker:

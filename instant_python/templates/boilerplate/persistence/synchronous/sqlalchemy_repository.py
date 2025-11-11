@@ -1,27 +1,14 @@
-{% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
-{% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 {% if general.python_version in ["3.13", "3.12", "3.11"] %}
 from typing import TypeVar
 {% else %}
 from typing import TypeVar, Generic
 {% endif %}
 
-{% if template_domain_import %}
-from {{ general.source_name }}.{{ template_domain_import }}.value_object.uuid import Uuid
-{% else %}
-from {{ general.source_name }}.value_object.uuid import Uuid
-{% endif %}
-{% if template_infra_import %}
-from {{ general.source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.base import Base
-from {{ general.source_name }}.{{ template_infra_import }}.persistence.sqlalchemy.session_maker import (
+from {{ general.source_name }}{{ "shared.domain.value_object.uuid" | resolve_import_path(template.name) }} import Uuid
+from {{ general.source_name }}{{ "shared.infra.persistence.sqlalchemy.base" | resolve_import_path(template.name) }} import Base
+from {{ general.source_name }}{{ "shared.infra.persistence.sqlalchemy.session_maker" | resolve_import_path(template.name) }} import (
 	SessionMaker,
 )
-{% else %}
-from {{ general.source_name }}.persistence.sqlalchemy.base import Base
-from {{ general.source_name }}.persistence.sqlalchemy.session_maker import (
-	SessionMaker,
-)
-{% endif %}
 
 Entity = TypeVar("Entity")
 {% if general.python_version in ["3.13", "3.12", "3.11"] %}

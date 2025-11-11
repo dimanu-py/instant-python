@@ -1,27 +1,11 @@
-{% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
-{% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
-{% if template_domain_import %}
-from {{ general.source_name }}.{{ template_domain_import }}.event.domain_event import DomainEvent
-from {{ general.source_name }}.{{ template_domain_import }}.event.event_bus import EventBus
-{% else %}
-from {{ general.source_name }}.event.domain_event import DomainEvent
-from {{ general.source_name }}.event.event_bus import EventBus
-{% endif %}
-{% if template_infra_import %}
-from {{ general.source_name }}.{{ template_infra_import }}.event.domain_event_json_serializer import (
+from {{ general.source_name }}{{ "shared.domain.event.domain_event" | resolve_import_path(template.name) }} import DomainEvent
+from {{ general.source_name }}{{ "shared.domain.event.event_bus" | resolve_import_path(template.name) }} import EventBus
+from {{ general.source_name }}{{ "shared.infra.event.domain_event_json_serializer" | resolve_import_path(template.name) }} import (
     DomainEventJsonSerializer,
 )
-from {{ general.source_name }}.{{ template_infra_import }}.event.rabbit_mq.rabbit_mq_connection import (
+from {{ general.source_name }}{{ "shared.infra.event.rabbit_mq.rabbit_mq_connection" | resolve_import_path(template.name) }} import (
     RabbitMqConnection,
 )
-{% else %}
-from {{ general.source_name }}.event.domain_event_json_serializer import (
-    DomainEventJsonSerializer,
-)
-from {{ general.source_name }}.event.rabbit_mq.rabbit_mq_connection import (
-    RabbitMqConnection,
-)
-{% endif %}
 
 
 class RabbitMqEventBus(EventBus):

@@ -1,9 +1,4 @@
-{% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
-{% if template_domain_import %}
-from test.{{ template_domain_import }}.random_generator import RandomGenerator
-{% else %}
-from test.random_generator import RandomGenerator
-{% endif %}
+from test{{ "shared.domain.random_generator" | resolve_import_path(template.name) }} import RandomGenerator
 
 
 class UuidPrimitivesMother:

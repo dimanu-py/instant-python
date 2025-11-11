@@ -1,4 +1,3 @@
-{% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 import logging
 from collections.abc import Sequence
 from datetime import date
@@ -6,11 +5,7 @@ from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
 from typing import Self
 
-{% if template_infra_import %}
-from {{ general.source_name }}.{{ template_infra_import }}.logger.json_formatter import JSONFormatter
-{% else %}
-from {{ general.source_name }}.logger.json_formatter import JSONFormatter
-{% endif %}
+from {{ general.source_name }}{{ "shared.infra.logger.json_formatter" | resolve_import_path(template.name) }} import JSONFormatter
 
 
 class TimeRotatingFileHandler(logging.Handler):

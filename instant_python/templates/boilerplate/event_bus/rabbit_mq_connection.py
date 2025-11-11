@@ -1,30 +1,15 @@
-{% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
-{% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 from typing import Callable
 
 import pika
 from pika.adapters.blocking_connection import BlockingChannel
 
-{% if template_domain_import %}
-from {{ general.source_name }}.{{ template_domain_import }}.event.exchange_type import ExchangeType
-from {{ general.source_name }}.{{ template_domain_import }}.errors.rabbit_mq_connection_not_established_error import (
+from {{ general.source_name }}{{ "shared.domain.event.exchange_type" | resolve_import_path(template.name) }} import ExchangeType
+from {{ general.source_name }}{{ "shared.domain.errors.rabbit_mq_connection_not_established_error" | resolve_import_path(template.name) }} import (
     RabbitMqConnectionNotEstablishedError,
 )
-{% else %}
-from {{ general.source_name }}.event.exchange_type import ExchangeType
-from {{ general.source_name }}.errors.rabbit_mq_connection_not_established_error import (
-    RabbitMqConnectionNotEstablishedError,
-)
-{% endif %}
-{% if template_infra_import %}
-from {{ general.source_name }}.{{ template_infra_import }}.event.rabbit_mq.rabbit_mq_settings import (
+from {{ general.source_name }}{{ "shared.infra.event.rabbit_mq.rabbit_mq_settings" | resolve_import_path(template.name) }} import (
     RabbitMqSettings,
 )
-{% else %}
-from {{ general.source_name }}.event.rabbit_mq.rabbit_mq_settings import (
-    RabbitMqSettings,
-)
-{% endif %}
 
 
 class RabbitMqConnection:

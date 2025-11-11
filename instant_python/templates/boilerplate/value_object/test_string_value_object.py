@@ -1,32 +1,18 @@
-{% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
 import pytest
 {% if dependencies | has_dependency("expects") %}
 from expects import expect, equal, raise_error
 {% endif %}
 
-{% if template_domain_import %}
-from {{ general.source_name }}.{{ template_domain_import }}.errors.incorrect_value_type_error import (
+from {{ general.source_name }}{{ "shared.domain.errors.incorrect_value_type_error" | resolve_import_path(template.name) }} import (
 	IncorrectValueTypeError,
 )
-from {{ general.source_name }}.{{ template_domain_import }}.errors.required_value_error import RequiredValueError
-from {{ general.source_name }}.{{ template_domain_import }}.value_objects.usables.string_value_object import (
+from {{ general.source_name }}{{ "shared.domain.errors.required_value_error" | resolve_import_path(template.name) }} import RequiredValueError
+from {{ general.source_name }}{{ "shared.domain.value_objects.usables.string_value_object" | resolve_import_path(template.name) }} import (
 	StringValueObject,
 )
-from test.{{ template_domain_import }}.value_objects.string_primitives_mother import (
+from test{{ "shared.domain.value_objects.string_primitives_mother" | resolve_import_path(template.name) }} import (
 	StringPrimitivesMother,
 )
-{% else %}
-from {{ general.source_name }}.errors.incorrect_value_type_error import (
-	IncorrectValueTypeError,
-)
-from {{ general.source_name }}.errors.required_value_error import RequiredValueError
-from {{ general.source_name }}.value_objects.usables.string_value_object import (
-	StringValueObject,
-)
-from test.value_objects.string_primitives_mother import (
-	StringPrimitivesMother,
-)
-{% endif %}
 
 
 @pytest.mark.unit

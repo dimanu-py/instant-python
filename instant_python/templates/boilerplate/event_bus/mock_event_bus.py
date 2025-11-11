@@ -1,13 +1,7 @@
-{% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
 from unittest.mock import AsyncMock
 
-{% if template_domain_import %}
-from {{ general.source_name }}.{{ template_domain_import }}.event.domain_event import DomainEvent
-from {{ general.source_name }}.{{ template_domain_import }}.event.event_bus import EventBus
-{% else %}
-from {{ general.source_name }}.event.domain_event import DomainEvent
-from {{ general.source_name }}.event.event_bus import EventBus
-{% endif %}
+from {{ general.source_name }}{{ "shared.domain.event.domain_event" | resolve_import_path(template.name) }} import DomainEvent
+from {{ general.source_name }}{{ "shared.domain.event.event_bus" | resolve_import_path(template.name) }} import EventBus
 
 
 class MockEventBus(EventBus):

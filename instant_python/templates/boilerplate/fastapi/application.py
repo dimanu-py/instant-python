@@ -1,5 +1,3 @@
-{% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
-{% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 from fastapi import FastAPI
 {% if "logger" in template.built_in_features %}
 from fastapi.errors import RequestValidationError
@@ -40,17 +38,9 @@ from {{ general.source_name }}.api.lifespan import lifespan
 from {{ general.source_name }}.delivery.api.lifespan import lifespan
 {% endif %}
 {% endif %}
-{% if template_domain_import %}
-from {{ general.source_name }}.{{ template_domain_import }}.errors.domain_error import DomainError
-{% else %}
-from {{ general.source_name }}.errors.domain_error import DomainError
-{% endif %}
+from {{ general.source_name }}{{ "shared.domain.errors.domain_error" | resolve_import_path(template.name) }} import DomainError
 {% if "logger" in template.built_in_features %}
-{% if template_infra_import %}
-from {{ general.source_name }}.{{ template_infra_import }}.logger.file_logger import create_file_logger
-{% else %}
-from {{ general.source_name }}.logger.file_logger import create_file_logger
-{% endif %}
+from {{ general.source_name }}{{ "shared.infra.logger.file_logger" | resolve_import_path(template.name) }} import create_file_logger
 {% if template.name == template_types.STANDARD %}
 from {{ general.source_name }}.api.middleare.fast_api_log_middleware import FastapiLogMiddleware
 {% else %}

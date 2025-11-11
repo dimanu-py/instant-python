@@ -1,14 +1,9 @@
-{% set template_infra_import = "shared.infra"|compute_base_path(template.name) %}
 import time
 
 from fastapi import Request, Response, FastAPI
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 
-{% if template_infra_import %}
-from {{ general.source_name }}.{{ template_infra_import }}.logger.file_logger import FileLogger
-{% else %}
-from {{ general.source_name }}.logger.file_logger import FileLogger
-{% endif %}
+from {{ general.source_name }}{{ "shared.infra.logger.file_logger" | resolve_import_path(template.name) }} import FileLogger
 
 
 class FastapiLogMiddleware(BaseHTTPMiddleware):

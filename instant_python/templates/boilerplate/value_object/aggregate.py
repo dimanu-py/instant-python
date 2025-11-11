@@ -1,4 +1,3 @@
-{% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
 from abc import ABC, abstractmethod
 from enum import Enum
 {% if general.python_version in ["3.13", "3.12", "3.11"] %}
@@ -9,11 +8,7 @@ from typing_extensions import override
 {% endif %}
 from inspect import Parameter, _empty, signature
 
-{% if template_domain_import %}
-from {{ general.source_name }}.{{ template_domain_import }}.value_objects.value_object import ValueObject
-{% else %}
-from {{ general.source_name }}.value_objects.value_object import ValueObject
-{% endif %}
+from {{ general.source_name }}{{ "shared.domain.value_objects.value_object" | resolve_import_path(template.name) }} import ValueObject
 
 
 class Aggregate(ABC):

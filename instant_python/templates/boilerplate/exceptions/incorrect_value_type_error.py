@@ -1,11 +1,6 @@
-{% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
 from typing import TypeVar
 
-{% if template_domain_import %}
-from {{ general.source_name }}.{{ template_domain_import }}.errors.domain_error import DomainError
-{% else %}
-from {{ general.source_name }}.errors.domain_error import DomainError
-{% endif %}
+from {{ general.source_name }}{{ "shared.domain.errors.domain_error" | resolve_import_path(template.name) }} import DomainError
 
 T = TypeVar("T")
 

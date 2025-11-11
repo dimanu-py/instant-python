@@ -1,38 +1,21 @@
-{% set template_domain_import = "shared.domain"|compute_base_path(template.name) %}
 import pytest
 {% if dependencies | has_dependency("expects") %}
 from expects import expect, equal, raise_error
 {% endif %}
 
-{% if template_domain_import %}
-from {{ general.source_name }}.{{ template_domain_import }}.errors.incorrect_value_type_error import (
+from {{ general.source_name }}{{ "shared.domain.errors.incorrect_value_type_error" | resolve_import_path(template.name) }} import (
 	IncorrectValueTypeError,
 )
-from {{ general.source_name }}.{{ template_domain_import }}.errors.invalid_id_format_error import (
+from {{ general.source_name }}{{ "shared.domain.errors.invalid_id_format_error" | resolve_import_path(template.name) }} import (
 	InvalidIdFormatError,
 )
-from {{ general.source_name }}.{{ template_domain_import }}.errors.required_value_error import RequiredValueError
-from {{ general.source_name }}.{{ template_domain_import }}.value_objects.usables.uuid import (
+from {{ general.source_name }}{{ "shared.domain.errors.required_value_error" | resolve_import_path(template.name) }} import RequiredValueError
+from {{ general.source_name }}{{ "shared.domain.value_objects.usables.uuid" | resolve_import_path(template.name) }} import (
 	Uuid,
 )
-from test.{{ template_domain_import }}.value_objects.uuid_primitives_mother import (
+from test{{ "shared.domain.value_objects.uuid_primitives_mother" | resolve_import_path(template.name) }} import (
 	UuidPrimitivesMother,
 )
-{% else %}
-from {{ general.source_name }}.errors.incorrect_value_type_error import (
-	IncorrectValueTypeError,
-)
-from {{ general.source_name }}.errors.invalid_id_format_error import (
-	InvalidIdFormatError,
-)
-from {{ general.source_name }}.errors.required_value_error import RequiredValueError
-from {{ general.source_name }}.value_objects.usables.uuid import (
-	Uuid,
-)
-from test.value_objects.uuid_primitives_mother import (
-	UuidPrimitivesMother,
-)
-{% endif %}
 
 
 @pytest.mark.unit
