@@ -7,6 +7,7 @@ from instant_python.initialize.infra.renderer.jinja_environment import (
     _has_dependency,
     _compute_base_path,
     UnknownTemplateError,
+    _resolve_import_path,
 )
 from instant_python.shared.supported_templates import SupportedTemplates
 from test.utils import resources_path
@@ -117,3 +118,28 @@ class TestComputeBasePathFilter:
 
     def test_should_raise_error_for_unknown_template_type(self) -> None:
         expect(lambda: _compute_base_path(self._INITIAL_PATH, "unknown_template")).to(raise_error(UnknownTemplateError))
+
+
+class TestResolveImportPathFilter:
+    _INITIAL_PATH = "shared.domain.event.handlers"
+
+    def test_should_resolve_path_when_template_is_ddd(self) -> None:
+        template_type = SupportedTemplates.DDD
+
+        result = _resolve_import_path(self._INITIAL_PATH, template_type)
+
+        expect(result).to(equal(f".{self._INITIAL_PATH}"))
+
+    def test_should_resolve_path_when_template_is_clean(self) -> None:
+        template_type = SupportedTemplates.CLEAN
+
+        result = _resolve_import_path(self._INITIAL_PATH, template_type)
+
+        expect(result).to(equal(".domain.event.handlers"))
+
+    def test_should_resolve_path_when_template_is_standard(self) -> None:
+        template_type = SupportedTemplates.STANDARD
+
+        result = _resolve_import_path(self._INITIAL_PATH, template_type)
+
+        expect(result).to(equal(".event.handlers"))

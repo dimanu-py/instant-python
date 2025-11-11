@@ -63,3 +63,8 @@ def _compute_base_path(initial_path: str, template_type: str) -> str:
         return ".".join(path_components[2:])
     else:
         raise UnknownTemplateError(template_type)
+
+
+def _resolve_import_path(initial_path: str, template_type: str) -> str:
+    base_path = _compute_base_path(initial_path, template_type)
+    return f".{base_path}" if base_path else ""
