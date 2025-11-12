@@ -71,7 +71,6 @@ coverage:  ## Run all test with coverage.
 	@{{ general.dependency_manager }} run coverage html
 	@$(BROWSER) htmlcov/index.html
 {% endif %}
-
 {% if dependencies | has_dependency("pytest-watch") %}
 .PHONY: watch
 watch:  ## Run all test with every change.
@@ -129,7 +128,6 @@ format:  ## Apply ruff format fix.
 	@uvx ruff format src test
 	{% endif %}
 {% endif %}
-
 {% if has_pre_commit_hooks %}
 .PHONY: secrets
 secrets: # Check for secrets in the source code
