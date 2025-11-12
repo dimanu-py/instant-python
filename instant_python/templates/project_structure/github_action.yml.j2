@@ -7,18 +7,18 @@
         - name: python_setup
           type: directory
           children:
-            - name:
+            - name: action
               type: file
               extension: .yml
               template: github/action.yml
     - name: workflows
       type: directory
       children:
-        - name:
+        - name: ci
           type: file
           extension: .yml
           template: github/ci.yml
-        - name:
+        - name: release
           type: file
           extension: .yml
           template: github/release.yml
