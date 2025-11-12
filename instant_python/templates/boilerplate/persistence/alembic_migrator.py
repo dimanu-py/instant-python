@@ -1,6 +1,6 @@
 import asyncio
 
-from {{ general.source_name }}{{ "shared.infra.persistence.sqlalchemy.postgres_settings" | resolve_import_path(template.name) }} import PostgresSettings
+from {{ general.source_name }}{{ "shared.infra.persistence.postgres_settings" | resolve_import_path(template.name) }} import PostgresSettings
 from alembic import command
 from alembic.config import Config
 

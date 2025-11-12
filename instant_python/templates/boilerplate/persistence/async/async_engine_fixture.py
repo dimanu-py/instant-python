@@ -2,7 +2,7 @@ from collections.abc import AsyncGenerator
 import pytest
 from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 
-from {{ general.source_name }}{{ "shared.infra.persistence.sqlalchemy.postgres_settings" | resolve_import_path(template.name) }} import PostgresSettings
+from {{ general.source_name }}{{ "shared.infra.persistence.postgres_settings" | resolve_import_path(template.name) }} import PostgresSettings
 
 
 @pytest.fixture

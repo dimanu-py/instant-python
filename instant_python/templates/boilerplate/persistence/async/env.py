@@ -7,7 +7,7 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from migrations.models_metadata import base
-from {{ general.source_name }}{{ "shared.infra.persistence.sqlalchemy.postgres_settings" | resolve_import_path(template.name) }} import PostgresSettings
+from {{ general.source_name }}{{ "shared.infra.persistence.postgres_settings" | resolve_import_path(template.name) }} import PostgresSettings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

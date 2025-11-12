@@ -3,7 +3,7 @@ from collections.abc import AsyncGenerator
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
-from {{ general.source_name }}{{ "shared.infra.persistence.sqlalchemy.postgres_settings" | resolve_import_path(template.name) }} import PostgresSettings
+from {{ general.source_name }}{{ "shared.infra.persistence.postgres_settings" | resolve_import_path(template.name) }} import PostgresSettings
 
 
 settings = PostgresSettings()  # type: ignore
