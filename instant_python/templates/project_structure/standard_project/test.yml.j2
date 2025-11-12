@@ -10,6 +10,12 @@
     {% if "value_objects" in template.built_in_features %}
     {{ macros.include_and_indent("test_value_objects.yml.j2", 4) }}
     {% endif %}
+    {% if "async_sqlalchemy" in template.built_in_features %}
+    - name: conftest
+      type: file
+      extension: .py
+      template: persistence/async/async_engine_fixture.py
+    {% endif %}
     {% if "event_bus" in template.built_in_features %}
     - name: event
       type: directory
