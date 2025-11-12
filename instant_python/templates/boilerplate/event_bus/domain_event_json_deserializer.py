@@ -1,10 +1,10 @@
 import json
 
 from {{ general.source_name }}{{ "shared.domain.event.domain_event" | resolve_import_path(template.name) }} import DomainEvent
-from {{ general.source_name }}{{ "shared.domain.event.domain_event" | resolve_import_path(template.name) }} import (
+from {{ general.source_name }}{{ "shared.domain.event.domain_event_subscriber" | resolve_import_path(template.name) }} import (
     DomainEventSubscriber,
 )
-from {{ general.source_name }}{{ "shared.domain.event.domain_event" | resolve_import_path(template.name) }} import (
+from {{ general.source_name }}{{ "shared.domain.event.domain_event_type_not_found_errorr" | resolve_import_path(template.name) }} import (
     DomainEventTypeNotFoundError,
 )
 
