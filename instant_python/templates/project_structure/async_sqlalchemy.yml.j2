@@ -1,7 +1,5 @@
-- name: persistence
-  type: directory
-  python: True
-  children:
+{% import "macros.j2" as macros with context %}
+{{ macros.include_and_indent("persistence.yml.j2", 0) }}
     - name: sqlalchemy
       type: directory
       python: True
@@ -14,7 +12,3 @@
           type: file
           extension: .py
           template: persistence/async/async_session.py
-    - name: postgres_settings
-      type: file
-      extension: .py
-      template: persistence/async/postgres_settings.py
