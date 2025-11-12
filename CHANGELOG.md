@@ -2,6 +2,23 @@
 
 <!-- version list -->
 
+## v0.17.0 (2025-11-12)
+
+### ✨ Features
+
+- **templates**: Include conftest with async session fixture when async sqlalchemy built in feature
+  is included
+  ([`b105b6a`](https://github.com/dimanu-py/instant-python/commit/b105b6a2ce1fcc2c8f0d4005d11e314fcf554422))
+
+### 🪲 Bug Fixes
+
+- **initialize**: Modify virtual environment creation with uv to install main and dev dependencies
+  ([`73696f6`](https://github.com/dimanu-py/instant-python/commit/73696f6f63364c0497349e058ce6d063a21da8a0))
+
+- **templates**: Include correctly logger templates when is selected in domain driven design
+  ([`5348fe3`](https://github.com/dimanu-py/instant-python/commit/5348fe3624729997836a45c3196ec3d5554ab814))
+
+
 ## v0.16.0 (2025-11-12)
 
 ### ✨ Features
