@@ -2,6 +2,86 @@
 
 <!-- version list -->
 
+## v0.16.0 (2025-11-12)
+
+### ✨ Features
+
+- **initialize**: Add resolve_import_path filter to jinja environment
+  ([`22d7fa7`](https://github.com/dimanu-py/instant-python/commit/22d7fa7d9d671f21a9807e8f08ea5882f99eefcb))
+
+- **initialize**: Add _resolve_import_path function to be able to get the full import path
+  ([`1b284ab`](https://github.com/dimanu-py/instant-python/commit/1b284ab4821d3ff91c73bac00717dd96b366b566))
+
+### 🪲 Bug Fixes
+
+- **templates**: Include pydantic and pydantic settings deps by default when async sqlalchemy is
+  selected
+  ([`a8b1f5d`](https://github.com/dimanu-py/instant-python/commit/a8b1f5df7ffb96040ea0abaa78c4f884b6eaa097))
+
+- **templates**: Correct import in domain_event_json_deserializer.py template
+  ([`33a8864`](https://github.com/dimanu-py/instant-python/commit/33a88646e57251b7c818839388373a1c0ee9ca6d))
+
+- **templates**: Correct templates names in event_bus_infra.yml.j2
+  ([`41a49f8`](https://github.com/dimanu-py/instant-python/commit/41a49f8ddb5a7c456025e7996a511fe8f4fdb1fb))
+
+- **templates**: Write correct names in GitHub action and value object templates
+  ([`7b96b4c`](https://github.com/dimanu-py/instant-python/commit/7b96b4c0378a0b92cf65c5ad5d43ada73e87e4fa))
+
+- **templates**: Import UUID inside uuid.py template
+  ([`c5d0045`](https://github.com/dimanu-py/instant-python/commit/c5d0045defadf3d36f323a0e878dce32abc89b70))
+
+- **templates**: Correct wrong indentation in dependencies in pyproject.toml file and write them in
+  separate lines
+  ([`60c6ca0`](https://github.com/dimanu-py/instant-python/commit/60c6ca059d99451a73287d147e107581c95e3f96))
+
+### ♻️ Refactoring
+
+- **templates**: Move persistence folder with postgres settings structure to its separate template
+  and import it as expected in sqlalchemy and migrator
+  ([`022ead8`](https://github.com/dimanu-py/instant-python/commit/022ead8119bcb53147e796311a6396643d1fb102))
+
+- **templates**: Modify imports in boilerplate to import postgres settings from persistence
+  ([`f5cefc3`](https://github.com/dimanu-py/instant-python/commit/f5cefc333c268a26cf8e95c7684df7dfda1c158c))
+
+- **templates**: Write postgres settings file inside persistence folder instead of
+  persistence/sqlalchemy
+  ([`841f24e`](https://github.com/dimanu-py/instant-python/commit/841f24ea8c39967f759ae1b1e0210f4e50697ce4))
+
+- **templates**: Include models metadata file only if async sqlalchemy has been included
+  ([`ca892e6`](https://github.com/dimanu-py/instant-python/commit/ca892e61973761b6dba52ccdb813ea99a0e69a0b))
+
+- **templates**: Remove extra empty lines in makefile template
+  ([`1cb2153`](https://github.com/dimanu-py/instant-python/commit/1cb2153f6c7a59bebb751c5d07452a21faae75c8))
+
+- **templates**: Update how development dependencies are set in the pyproject.toml template file
+  ([`9613543`](https://github.com/dimanu-py/instant-python/commit/961354338756f6d8d2f95eaca173fdc540ecd67f))
+
+- **templates**: Update how production dependencies are set in the pyproject.toml template file
+  ([`7dd9be7`](https://github.com/dimanu-py/instant-python/commit/7dd9be7051cae7dacb7c780c072383410111602b))
+
+- **templates**: Update pyproject.toml to support dynamic dependency manager and conditional ruff
+  configuration
+  ([`5209286`](https://github.com/dimanu-py/instant-python/commit/52092862625d8d75d920afabf266562f92c32fb5))
+
+- **templates**: Modify github release workflow to use user's dependency manager to build library
+  instead of hardcoding uv
+  ([`6555ba1`](https://github.com/dimanu-py/instant-python/commit/6555ba12921c4e052bce1d64ed093cb339b8d6bb))
+
+- **templates**: Modify default github ci workflow to use user's dependency manager to run tests
+  instead of hardcoding uv
+  ([`d2a8fd0`](https://github.com/dimanu-py/instant-python/commit/d2a8fd014e3988a0aa5874202a77d07e8b4bb3cd))
+
+- **templates**: Modify makefile template to be easier to change with local variables
+  ([`9ba8ead`](https://github.com/dimanu-py/instant-python/commit/9ba8eadc8578c2a93f0b6a21906d09adbb2abcc3))
+
+- **templates**: Include pre push stages in pre commit hook file only if makefile built in feature
+  is selected
+  ([`e138a0e`](https://github.com/dimanu-py/instant-python/commit/e138a0ec765cabcb1cd7d028fa805a42916df8ef))
+
+- **templates**: Simplify import statements using resolve_import_path filter
+  ([`644da31`](https://github.com/dimanu-py/instant-python/commit/644da319a4a8694aa235ee855e0282f10e5a17a9))
+
+
 ## v0.15.2 (2025-11-10)
 
 ### 🪲 Bug Fixes
