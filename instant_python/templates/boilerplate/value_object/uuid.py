@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from {{ general.source_name }}{{ "shared.domain.errors.incorrect_value_type_error" | resolve_import_path(template.name) }} import IncorrectValueTypeError
 from {{ general.source_name }}{{ "shared.domain.errors.invalid_id_format_error" | resolve_import_path(template.name) }} import InvalidIdFormatError
 from {{ general.source_name }}{{ "shared.domain.errors.required_value_error" | resolve_import_path(template.name) }} import RequiredValueError
