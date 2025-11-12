@@ -4,10 +4,9 @@
 </div>
 
 <p align="center">
-  <a href="https://dimanu-py.github.io/instant-python/home/getting_started/">Getting Started</a>&nbsp;&nbsp;•&nbsp;
-  <a href="https://dimanu-py.github.io/instant-python/guide/command_config/">Usage</a>&nbsp;&nbsp;•&nbsp;
-  <a href="https://dimanu-py.github.io/instant-python/examples/configuration/">Examples</a>&nbsp;&nbsp;•&nbsp;
-  <a href="https://dimanu-py.github.io/instant-python/home/contributing/">Contributing</a>
+  <a href="https://dimanu-py.github.io/instant-python/getting_started/installation/">Getting Started</a>&nbsp;&nbsp;•&nbsp;
+  <a href="https://dimanu-py.github.io/instant-python/guide/">Usage</a>&nbsp;&nbsp;•&nbsp;
+  <a href="https://dimanu-py.github.io/instant-python/guide/custom_projects/">How to: Custom Projects</a>&nbsp;&nbsp;•&nbsp;
 </p>
 
 <div align="center"><table><tr><td>
@@ -34,10 +33,6 @@ commands like `ng new` or `create-react-app`, but for Python projects.
 
 This section provides a high-level overview of the `instant-python` documentation
 so can quickly find what you need.
-
-- [Installation](https://dimanu-py.github.io/instant-python/home/#installation)
-- [Getting Started](https://dimanu-py.github.io/instant-python/home/getting_started/)
-- [Examples](https://dimanu-py.github.io/instant-python/examples/configuration/)
 
 ### For Users
 
