@@ -1,6 +1,6 @@
 {% set feature_to_main_dependencies = {
-    "async_sqlalchemy": ["sqlalchemy", "asyncpg", "psycopg2-binary"],
-    "async_alembic": ["alembic"],
+    "async_sqlalchemy": ["sqlalchemy", "asyncpg", "psycopg2-binary", "pydantic", "pydantic-settings"],
+    "async_alembic": ["alembic", "pydantic", "pydantic-settings"],
     "event_bus": ["pika"],
     "fastapi_application": ["fastapi[standard]"]
 } %}
