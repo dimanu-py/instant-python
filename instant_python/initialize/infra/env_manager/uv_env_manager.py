@@ -67,7 +67,7 @@ class UvEnvManager(EnvManager):
         return " ".join(command)
 
     def _create_virtual_environment(self) -> None:
-        self._console.execute_or_raise(f"{self._uv} sync")
+        self._console.execute_or_raise(f"{self._uv} sync --all-groups")
 
     def _uv_is_not_installed(self) -> bool:
         result = self._console.execute(f"{self._uv} --version")

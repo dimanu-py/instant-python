@@ -69,7 +69,7 @@ class TestUvEnvManager:
         ).returns(self._SUCCESSFUL_COMMAND_RESULT)
 
     def _should_create_virtual_environment(self) -> None:
-        expect_call(self._console).execute_or_raise(f"{self._UV_EXECUTABLE} sync").returns(
+        expect_call(self._console).execute_or_raise(f"{self._UV_EXECUTABLE} sync --all-groups").returns(
             self._SUCCESSFUL_COMMAND_RESULT
         )
 
