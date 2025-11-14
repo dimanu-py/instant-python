@@ -2,7 +2,8 @@
     "async_sqlalchemy": ["sqlalchemy", "asyncpg", "psycopg2-binary", "pydantic", "pydantic-settings"],
     "async_alembic": ["alembic", "pydantic", "pydantic-settings"],
     "event_bus": ["pika"],
-    "fastapi_application": ["fastapi[standard]"]
+    "fastapi_application": ["fastapi[standard]"],
+    "value_objects": ["sindripy"]
 } %}
 {% macro get_main_dependencies() -%}
     {%- set deps = [] -%}
