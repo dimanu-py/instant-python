@@ -29,6 +29,19 @@ commands like `ng new` or `create-react-app`, but for Python projects.
 
 </td></tr></table></div>
 
+## ✨ NEW ✨ Create Fully Customized Projects
+
+Take full control of your project generation! With **custom templates**, you can:
+
+- 🎨 Design your own project structure that matches your architectural patterns (like Hexagonal Architecture)
+- 📝 Create reusable file templates with your standardized code and best practices
+- 🔄 Enforce consistency across all your Python projects
+- ⚡ Eliminate repetitive boilerplate and setup tasks
+
+Whether you have a standardized project structure you always use or specific architectural patterns you want to enforce, 
+custom templates let you generate projects exactly the way you want them. 
+[Learn how to create your first custom template](https://dimanu-py.github.io/instant-python/guide/custom_projects/) and level up your project generation workflow!
+
 ## Navigation Guide
 
 This section provides a high-level overview of the `instant-python` documentation
@@ -73,8 +86,3 @@ so can quickly find what you need.
 [//]: # (You can disable this feature by setting the environment variable `INSTANT_PYTHON_NO_TRACK` to `1` or )
 
 [//]: # (passing the `--no-track` option to any command.)
-
-## Contributing
-
-We welcome contributions to `instant-python`! If you have ideas, suggestions, or improvements, please check out our
-[contributing guide](https://dimanu-py.github.io/instant-python/home/contributing/) for details on how to get involved.
