@@ -2,12 +2,13 @@
 - name: test
   type: directory
   python: True
+  {% if ["async_sqlalchemy", "event_bus"] | is_in(template.built_in_features) or "value_objects" not in template.built_in_features %}
   children:
+    {% if "value_objects" not in template.built_in_features %}
     - name: random_generator
       type: file
       extension: .py
       template: random_generator.py
-    {% if "value_objects" in template.built_in_features %}
     {% endif %}
     {% if "async_sqlalchemy" in template.built_in_features %}
     - name: conftest
@@ -25,3 +26,4 @@
           extension: .py
           template: event_bus/mock_event_bus.py
     {% endif %}
+  {% endif %}
