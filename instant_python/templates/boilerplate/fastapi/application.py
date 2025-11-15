@@ -2,18 +2,22 @@ from fastapi import FastAPI
 {% if "logger" in template.built_in_features %}
 from fastapi.errors import RequestValidationError
 {% endif %}
-
+{% if "value_objects" in template.built_in_features %}
+from sindripy.value_objects import SindriValidationError
+{% endif %}
 {% if template.name == template_types.STANDARD %}
 {% if "logger" in template.built_in_features %}
 from {{ general.source_name }}.api.handlers.error_handlers import (
 	unexpected_exception_handler,
 	domain_error_handler,
 	validation_error_handler,
+    {% if "value_objects" in template.built_in_features %}sindri_validation_error_handler,{% endif %}
 )
 {% else %}
 from {{ general.source_name }}.api.handlers.error_handlers import (
 	unexpected_exception_handler,
 	domain_error_handler,
+    {% if "value_objects" in template.built_in_features %}sindri_validation_error_handler,{% endif %}
 )
 {% endif %}
 {% else %}
@@ -22,11 +26,13 @@ from {{ general.source_name }}.delivery.api.handlers.error_handlers import (
 	unexpected_exception_handler,
 	domain_error_handler,
 	validation_error_handler,
+    {% if "value_objects" in template.built_in_features %}sindri_validation_error_handler,{% endif %}
 )
 {% else %}
 from {{ general.source_name }}.delivery.api.handlers.error_handlers import (
 	unexpected_exception_handler,
 	domain_error_handler,
+    {% if "value_objects" in template.built_in_features %}sindri_validation_error_handler,{% endif %}
 )
 {% endif %}
 {% endif %}
@@ -60,6 +66,9 @@ logger = create_file_logger(name="{{ general.slug }}")
 
 app.add_middleware(FastapiLogMiddleware, logger=logger)
 app.add_exception_handler(RequestValidationError, validation_error_handler)
+{% endif %}
+{% if "value_objects" in template.built_in_features %}
+app.add_exception_handler(SindriValidationError, sindri_validation_error_handler)
 {% endif %}
 app.add_exception_handler(Exception, unexpected_exception_handler)
 app.add_exception_handler(DomainError, domain_error_handler)
