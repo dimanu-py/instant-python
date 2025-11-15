@@ -16,7 +16,6 @@
               extension: .py
               template: random_generator.py
             {% if "value_objects" in template.built_in_features %}
-            {{ macros.include_and_indent("test_value_objects.yml.j2", 12) }}
             {% endif %}
         {% if ["event_bus", "async_sqlalchemy"] | is_in(template.built_in_features) %}
         - name: infra
