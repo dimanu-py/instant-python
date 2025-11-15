@@ -29,7 +29,7 @@
     },
     "test": {
     "faker": [],
-    "pytest": ["github_actions", "makefile", "precommit_hook", "value_objects"],
+    "pytest": ["github_actions", "makefile", "precommit_hook"],
     "pytest-asyncio": ["async_alembic", "async_sqlalchemy"]
     }
 } %}
