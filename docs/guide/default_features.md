@@ -255,297 +255,48 @@ needed to configure the migrations and run them asynchronously.
 
 ### Value objects and exceptions
 
-Value objects are a common pattern to encapsulate primitives and encapsulate domain logic. If
-you choose this option, it will include the following value objects:
+Value object pattern is a design pattern that emphasizes the use of immutable objects to represent values in a system. It encourages the creation of small, focused classes that encapsulate domain logic.
 
-A base class for all aggregates of your project with some common methods and utilities.
+They act as behavior magnets and try to avoid the code smells of anemic domain models and primitive obsession among others.
 
-???+ example "Aggregate"
+Value objects are characterized by:
 
-    ```python
-    class Aggregate(ABC):
-        @abstractmethod
-        def __init__(self) -> None:
-            raise NotImplementedError
-    
-        @override
-        def __repr__(self) -> str:
-            attributes = []
-            for key, value in sorted(self._to_dict().items()):
-                attributes.append(f"{key}={value!r}")
-    
-            return f"{self.__class__.__name__}({', '.join(attributes)})"
-    
-        @override
-        def __eq__(self, other: Self) -> bool:
-            if not isinstance(other, self.__class__):
-                return NotImplemented
-    
-            return self._to_dict() == other._to_dict()
-    
-        def _to_dict(self, *, ignore_private: bool = True) -> dict[str, Any]:
-            dictionary: dict[str, Any] = {}
-            for key, value in self.__dict__.items():
-                if ignore_private and key.startswith(f"_{self.__class__.__name__}__"):
-                    continue  # ignore private attributes
-    
-                key = key.replace(f"_{self.__class__.__name__}__", "")
-    
-                if key.startswith("_"):
-                    key = key[1:]
-    
-                dictionary[key] = value
-    
-            return dictionary
-    
-        @classmethod
-        def from_primitives(cls, primitives: dict[str, Any]) -> Self:
-            if not isinstance(primitives, dict) or not all(
-                    isinstance(key, str) for key in primitives
-            ):
-                raise TypeError(f'{cls.__name__} primitives <<<{primitives}>>> must be a dictionary of strings. Got <<<{type(primitives).__name__}>>> type.')  # noqa: E501  # fmt: skip
-    
-            constructor_signature = signature(obj=cls.__init__)
-            parameters: dict[str, Parameter] = {parameter.name: parameter for parameter in constructor_signature.parameters.values() if parameter.name != 'self'}  # noqa: E501  # fmt: skip
-            missing = {name for name, parameter in parameters.items() if parameter.default is _empty and name not in primitives}  # noqa: E501  # fmt: skip
-            extra = set(primitives) - parameters.keys()
-    
-            if missing or extra:
-                cls._raise_value_constructor_parameters_mismatch(
-                    primitives=set(primitives), missing=missing, extra=extra
-                )
-    
-            return cls(**primitives)
-    
-        @classmethod
-        def _raise_value_constructor_parameters_mismatch(
-                cls,
-                primitives: set[str],
-                missing: set[str],
-                extra: set[str],
-        ) -> None:
-            primitives_names = ", ".join(sorted(primitives))
-            missing_names = ", ".join(sorted(missing))
-            extra_names = ", ".join(sorted(extra))
-    
-            raise ValueError(f'{cls.__name__} primitives <<<{primitives_names}>>> must contain all constructor parameters. Missing parameters: <<<{missing_names}>> and extra parameters: <<<{extra_names}>>>.')  # noqa: E501  # fmt: skip
-    
-        def to_primitives(self) -> dict[str, Any]:
-            primitives = self._to_dict()
-            for key, value in primitives.items():
-                if isinstance(value, Aggregate) or hasattr(value, "to_primitives"):
-                    value = value.to_primitives()
-    
-                elif isinstance(value, Enum):
-                    value = value.value
-    
-                elif isinstance(value, ValueObject) or hasattr(value, "value"):
-                    value = value.value
-    
-                    if isinstance(value, Enum):
-                        value = value.value
-    
-                primitives[key] = value
-    
-            return primitives
-    ```
+- Immutability: Once created, a value object's state cannot be changed
+- Value equality: Two value objects are equal if their values are equal, regardless of identity
+- Self-validation: Value objects validate their state upon construction
+- Domain semantics: They represent meaningful concepts in the domain rather than primitive types
 
-A base value object class that will automatically be able to gather all methods decorated with `@validate` to be able
-to validate any pre-condition of the value object. This class is also configured to be immutable, meaning that once
-initialized, the value cannot be changed.
+!!! info "New versions use `sindripy`"
+    `instant-python` versions previous to 0.18.0 implemented value objects directly in the generated project.
+    All these implementations have been moved to the [`sindripy`](https://pypi.org/project/sindripy/) library 
+    to promote reusability and better maintenance.
+    When selecting this feature, the generated project will include `sindripy` as a dependency.
 
-???+ example "Base ValueObject"
+Along with `sindripy` to model value objects, this feature will include:
 
-    ```python
-    class ValueObject[T](ABC):
-        __slots__ = ("_value",)
-        __match_args__ = ("_value",)
-    
-        _value: T
-    
-        def __init__(self, value: T) -> None:
-            self._validate(value)
-            object.__setattr__(self, "_value", value)
-    
-        def _validate(self, value: T) -> None:
-            """Gets all methods decorated with @validate and calls them to validate all domain conditions."""
-            validators: list[Callable[[T], None]] = []
-            for cls in reversed(self.__class__.__mro__):
-                if cls is object:
-                    continue
-                for name, member in cls.__dict__.items():
-                    if getattr(member, "_is_validator", False):
-                        validators.append(getattr(self, name))
-    
-            for validator in validators:
-                validator(value)
-    
-        @property
-        def value(self) -> T:
-            return self._value
-    
-        @override
-        def __eq__(self, other: Self) -> bool:
-            return self.value == other.value
-    
-        @override
-        def __repr__(self) -> str:
-            return f"{self.__class__.__name__}({self._value!r})"
-    
-        @override
-        def __str__(self) -> str:
-            return str(self._value)
-    
-        @override
-        def __setattr__(self, name: str, value: T) -> None:
-            """Prevents modification of the value after initialization."""
-            if name in self.__slots__:
-                raise AttributeError("Cannot modify the value of a ValueObject")
-    
-            public_name = name.replace("_", "")
-            public_slots = [slot.replace("_", "") for slot in self.__slots__]
-            if public_name in public_slots:
-                raise AttributeError("Cannot modify the value of a ValueObject")
-    
-            raise AttributeError(
-                f"Class {self.__class__.__name__} object has no attribute '{name}'"
-            )
-    ```
+1. A base exception class that you can use to create your own exceptions:
 
-Some common value objects that will be placed at _usables_ folder.
-
-???+ example "UUID"
-
-    ```python
-    class Uuid(ValueObject[str]):
-        @validate
-        def _ensure_has_value(self, value: str) -> None:
-            if value is None:
-                raise RequiredValueError
+    ???+ example "Implementation"
     
-        @validate
-        def _ensure_value_is_string(self, value: str) -> None:
-            if not isinstance(value, str):
-                raise IncorrectValueTypeError(value)
+        ```python
+        class BaseError(Exception, ABC):
+            def __init__(self, message: str) -> None:
+                self._message = message
+                super().__init__(self._message)
+        
+            @property
+            def message(self) -> str:
+                return self._message
+        ```
+
+2. A `DomainError` class that extends the base exception class. You can use this class to raise domain errors in your application.
+
+    ???+ example "Implementation"
     
-        @validate
-        def _ensure_value_has_valid_uuid_format(self, value: str) -> None:
-            try:
-                UUID(value)
-            except ValueError:
-                raise InvalidIdFormatError
-    ```
-
-???+ example "StringValueObject"
-
-    ```python
-    class StringValueObject(ValueObject[str]):
-        @validate
-        def _ensure_has_value(self, value: str) -> None:
-            if value is None:
-                raise RequiredValueError
-    
-        @validate
-        def _ensure_is_string(self, value: str) -> None:
-            if not isinstance(value, str):
-                raise IncorrectValueTypeError(value)
-    ```
-???+ example "IntValueObject"
-
-    ```python
-    class IntValueObject(ValueObject[int]):
-        @validate
-        def _ensure_has_value(self, value: int) -> None:
-            if value is None:
-                raise RequiredValueError
-    
-        @validate
-        def _ensure_value_is_integer(self, value: int) -> None:
-            if not isinstance(value, int):
-                raise IncorrectValueTypeError(value)
-    
-        @validate
-        def _ensure_value_is_positive(self, value: int) -> None:
-            if value < 0:
-                raise InvalidNegativeValueError(value)
-    ```
-
-Along with these value objects, it will include a base exception class that you can use to create your own exceptions and
-some common exceptions that you can use in your project:
-
-???+ example "Base Error"
-
-    ```python
-    class Error(Exception, ABC):
-        def __init__(self, message: str, error_type: str) -> None:
-            self._message = message
-            self._type = error_type
-            super().__init__(self._message)
-    
-        @property
-        def type(self) -> str:
-            return self._type
-    
-        @property
-        def message(self) -> str:
-            return self._message
-    
-        def to_primitives(self) -> dict[str, str]:
-            return {
-                "type": self.type,
-                "message": self.message,
-            }
-    ```
-
-???+ example "Domain Error"
-
-    ```python
-    class DomainError(Error):
-        ...
-    ```
-
-???+ example "IncorrectValueTypeError"
-
-    ```python
-    T = TypeVar("T")
-    
-    
-    class IncorrectValueTypeError(DomainError):
-        def __init__(self, value: T) -> None:
-            self._message = f"Value '{value}' is not of type {type(value).__name__}"
-            self._type = "incorrect_value_type"
-            super().__init__(message=self._message, error_type=self._type)
-    ```
-
-???+ example "InvalidIdFormatError"
-
-    ```python
-    class InvalidIdFormatError(DomainError):
-        def __init__(self) -> None:
-            self._message = "User id must be a valid UUID"
-            self._type = "invalid_id_format"
-            super().__init__(message=self._message, error_type=self._type)
-    ```
-
-???+ example "InvalidNegativeValueError"
-
-    ```python
-    class InvalidNegativeValueError(DomainError):
-        def __init__(self, value: int) -> None:
-            self._message = f"Invalid negative value: {value}"
-            self._type = "invalid_negative_value"
-            super().__init__(message=self._message, error_type=self._type)
-    ```
-
-???+ example "RequiredValueError"
-
-    ```python
-    class RequiredValueError(DomainError):
-        def __init__(self) -> None:
-            self._message = "Value is required, can't be None"
-            self._type = "required_value"
-            super().__init__(message=self._message, error_type=self._type)
-    ```
+        ```python
+        class DomainError(BaseError):
+            ...
+        ```
 
 ### Event bus
 
