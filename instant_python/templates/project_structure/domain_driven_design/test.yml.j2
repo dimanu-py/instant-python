@@ -13,13 +13,6 @@
         - name: domain
           type: directory
           python: True
-          {% if "value_objects" not in template.built_in_features %}
-          children:
-            - name: random_generator
-              type: file
-              extension: .py
-              template: random_generator.py
-          {% endif %}
         - name: infra
           type: directory
           python: True

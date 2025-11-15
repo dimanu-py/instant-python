@@ -28,7 +28,6 @@
     "pre-commit": ["precommit_hook"]
     },
     "test": {
-    "faker": [],
     "pytest": ["github_actions", "makefile", "precommit_hook"],
     "pytest-asyncio": ["async_alembic", "async_sqlalchemy"]
     }
