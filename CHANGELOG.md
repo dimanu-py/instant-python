@@ -2,6 +2,41 @@
 
 <!-- version list -->
 
+## v0.18.0 (2025-11-17)
+
+### ✨ Features
+
+- **templates**: Add sindri value objects error handler for fastapi application if value objects
+  feature is selected
+  ([`8ac4773`](https://github.com/dimanu-py/instant-python/commit/8ac47733f7e33932a23be3bb5665275209d2ab50))
+
+- **templates**: Remove value object folders from project structure templates
+  ([`6029ca6`](https://github.com/dimanu-py/instant-python/commit/6029ca6fcb5fc565040bbdcf9bdb151787b15361))
+
+- **templates**: Remove value object implementation templates now that this feature is provided by
+  sindripy
+  ([`1164d85`](https://github.com/dimanu-py/instant-python/commit/1164d85d5a0e5410f492b6e6f327946cde20345b))
+
+- **templates**: Add sindripy to value_objects dependencies
+  ([`b563be5`](https://github.com/dimanu-py/instant-python/commit/b563be513465603f45966b33e57bdb5b535c30b6))
+
+### ♻️ Refactoring
+
+- **templates**: Remove faker and random generator as it's not need it
+  ([`0ba348b`](https://github.com/dimanu-py/instant-python/commit/0ba348bc5cd36ebb64c653f4ff32e1b8b17f76a5))
+
+- **templates**: Stop including pytest if value objects feature is selected as it doesn't include
+  tests anymore
+  ([`c747731`](https://github.com/dimanu-py/instant-python/commit/c74773198cc939996e5e166e755a90e22865393a))
+
+- **templates**: Include random generator template only if value objects feature is not selected
+  ([`2ad49c3`](https://github.com/dimanu-py/instant-python/commit/2ad49c323f9596b854e85b46094d343f202f9de3))
+
+- **templates**: Remove test value object templates from project structures now that it has been
+  substituted by sindripy library
+  ([`9e27b5b`](https://github.com/dimanu-py/instant-python/commit/9e27b5b792a9f2b28d1f582451d044f7c0195152))
+
+
 ## v0.17.0 (2025-11-12)
 
 ### ✨ Features
