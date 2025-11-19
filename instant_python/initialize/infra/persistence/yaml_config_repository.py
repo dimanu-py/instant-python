@@ -27,4 +27,8 @@ class YamlConfigRepository(ConfigRepository):
 
 class ConfigurationFileNotFound(ApplicationError):
     def __init__(self, path: str) -> None:
-        super().__init__(message=f"Configuration file not found at '{path}'.")
+        super().__init__(
+            message=f"Configuration file not found at '{path}'. To create a project, you first"
+            f" need a configuration file. Please, run 'ipy config' command to create one.\n"
+            f"If you have the configuration file in another location, use the '-c' flag.",
+        )
