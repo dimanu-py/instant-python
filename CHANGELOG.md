@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.18.1 (2025-11-19)
+
+### ♻️ Refactoring
+
+- **initialize**: Improve error message when configuration file is not found
+  ([`851f725`](https://github.com/dimanu-py/instant-python/commit/851f725e91482bc3a5d40aa96a7cd522955909ca))
+
+
 ## v0.18.0 (2025-11-17)
 
 ### ✨ Features
