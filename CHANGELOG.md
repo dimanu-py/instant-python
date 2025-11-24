@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.19.0 (2025-11-24)
+
+### ✨ Features
+
+- **cli**: Add logic to return installed version of instant python with --version flag
+  ([`f083e18`](https://github.com/dimanu-py/instant-python/commit/f083e189a621c627bbac8611d2eaa03f4d08df20))
+
+
 ## v0.18.1 (2025-11-19)
 
 ### ♻️ Refactoring
