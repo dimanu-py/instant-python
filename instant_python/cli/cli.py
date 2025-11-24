@@ -1,3 +1,6 @@
+from typing import Annotated
+
+import typer
 from rich.console import Console
 from rich.panel import Panel
 
@@ -8,6 +11,28 @@ from instant_python.cli.instant_python_typer import InstantPythonTyper
 
 app = InstantPythonTyper()
 console = Console()
+
+
+def version_callback(value: bool) -> None:
+    if value:
+        raise NotImplementedError("Version callback not implemented yet")
+
+
+@app.callback(invoke_without_command=True)
+def main(
+    version: Annotated[
+        bool | None,
+        typer.Option(
+            "--version",
+            "-V",
+            help="Show the application version",
+            callback=version_callback,
+            is_eager=True,
+        ),
+    ] = None,
+) -> None:
+    ...  # The version_callback will handle the version display
+
 
 app.add_typer(init.app)
 app.add_typer(config.app)
