@@ -4,6 +4,7 @@ import typer
 from rich.console import Console
 from rich.panel import Panel
 
+from instant_python import __version__
 from instant_python.config.delivery import cli as config
 from instant_python.initialize.delivery import cli as init
 from instant_python.shared.application_error import ApplicationError
@@ -15,7 +16,8 @@ console = Console()
 
 def version_callback(value: bool) -> None:
     if value:
-        raise NotImplementedError("Version callback not implemented yet")
+        console.print(f"instant-python {__version__}")
+        raise typer.Exit()
 
 
 @app.callback(invoke_without_command=True)
@@ -30,8 +32,7 @@ def main(
             is_eager=True,
         ),
     ] = None,
-) -> None:
-    ...  # The version_callback will handle the version display
+) -> None: ...  # The version_callback will handle the version display
 
 
 app.add_typer(init.app)
