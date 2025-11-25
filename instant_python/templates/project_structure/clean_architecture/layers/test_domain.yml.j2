@@ -1,0 +1,16 @@
+{#
+  Test Domain Layer Template
+
+  Defines test structure for the domain layer.
+#}
+{% import "clean_architecture/layer_macros.j2" as layer with context %}
+- name: domain
+  type: directory
+  python: True
+{%- if "event_bus" in template.built_in_features %}
+  children:
+    - name: mock_event_bus
+      type: file
+      extension: .py
+      template: event_bus/mock_event_bus.py
+{%- endif %}

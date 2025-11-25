@@ -1,0 +1,18 @@
+{#
+  Infrastructure Layer Template for Clean Architecture
+
+  This template defines the infrastructure layer structure and conditionally
+  includes infrastructure-related features based on configuration.
+#}
+{% import "clean_architecture/layer_macros.j2" as layer with context %}
+{%- set infra_features = [
+  {"feature": "event_bus", "template": "event_bus_infra.yml.j2"},
+  {"feature": "logger", "template": "logger.yml.j2"},
+  {"feature": "async_sqlalchemy", "template": "async_sqlalchemy.yml.j2"},
+  {"feature": "async_alembic", "template": "alembic_migrator.yml.j2"},
+  {"feature": "fastapi_application", "template": "fastapi_infra.yml.j2"}
+] %}
+- name: infra
+  type: directory
+  python: True
+{{ layer.render_children_for(infra_features, 2) }}

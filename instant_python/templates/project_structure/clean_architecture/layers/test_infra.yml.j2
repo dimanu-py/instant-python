@@ -1,0 +1,25 @@
+{#
+  Test Infrastructure Layer Template
+
+  Defines test structure for the infrastructure layer including fixtures.
+#}
+{% import "clean_architecture/layer_macros.j2" as layer with context %}
+- name: infra
+  type: directory
+  python: True
+{%- if ["event_bus", "async_sqlalchemy"] | is_in(template.built_in_features) %}
+  children:
+    {%- if "event_bus" in template.built_in_features %}
+    - name: mock_event_bus
+      type: file
+      extension: .py
+      template: event_bus/mock_event_bus.py
+    {%- endif %}
+    {%- if "async_sqlalchemy" in template.built_in_features %}
+    - name: conftest
+      type: file
+      extension: .py
+      template: persistence/async/async_engine_fixture.py
+    {%- endif %}
+{%- endif %}
+
