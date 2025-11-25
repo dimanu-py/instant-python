@@ -1,0 +1,51 @@
+{% import "macros.j2" as macros with context %}
+- name: {{ general.source_name }}
+  type: directory
+  python: True
+  children:
+    - name: delivery
+      type: directory
+      python: True
+      {% if "fastapi_application" in template.built_in_features %}
+      children:
+        {{ macros.include_and_indent("fastapi_app.yml.j2", 8) }}
+      {% endif %}
+    - name: domain
+      type: directory
+      python: True
+      {% if ["value_objects", "event_bus", "fastapi_application"] | is_in(template.built_in_features) %}
+      children:
+        {% if "value_objects" in template.built_in_features %}
+        {{ macros.include_and_indent("value_objects.yml.j2", 8) }}
+        {% endif %}
+        {% if "event_bus" in template.built_in_features %}
+        {{ macros.include_and_indent("event_bus_domain.yml.j2", 8) }}
+        {% endif %}
+        {% if "fastapi_application" in template.built_in_features %}
+        {{ macros.include_and_indent("fastapi_domain.yml.j2", 8) }}
+        {% endif %}
+      {% endif %}
+    - name: application
+      type: directory
+      python: True
+    - name: infra
+      type: directory
+      python: True
+      {% if ["event_bus", "logger", "async_sqlalchemy", "async_alembic", "fastapi_application"] | is_in(template.built_in_features) %}
+      children:
+        {% if "event_bus" in template.built_in_features %}
+        {{ macros.include_and_indent("event_bus_infra.yml.j2", 8) }}
+        {% endif %}
+        {% if ["logger"] | is_in(template.built_in_features) %}
+        {{ macros.include_and_indent("logger.yml.j2", 8) }}
+        {% endif %}
+        {% if "async_sqlalchemy" in template.built_in_features %}
+        {{ macros.include_and_indent("async_sqlalchemy.yml.j2", 8) }}
+        {% endif %}
+        {% if ["async_alembic"] | is_in(template.built_in_features) %}
+        {{ macros.include_and_indent("alembic_migrator.yml.j2", 8) }}
+        {% endif %}
+        {% if "fastapi_application" in template.built_in_features %}
+        {{ macros.include_and_indent("fastapi_infra.yml.j2", 8) }}
+        {% endif %}
+      {% endif %}

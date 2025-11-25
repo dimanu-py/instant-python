@@ -1,36 +1,8 @@
-{% import "macros.j2" as macros with context %}
+{% import "clean_architecture/layer_macros.j2" as macros with context %}
 - name: test
   type: directory
   python: True
   children:
-    - name: domain
-      type: directory
-      python: True
-      {% if "event_bus" in template.built_in_features %}
-      children:
-        - name: mock_event_bus
-          type: file
-          extension: .py
-          template: event_bus/mock_event_bus.py
-      {% endif %}
-    - name: infra
-      type: directory
-      python: True
-      {% if ["event_bus", "async_sqlalchemy"] | is_in(template.built_in_features) %}
-      children:
-        {% if "event_bus" in template.built_in_features %}
-        - name: mock_event_bus
-          type: file
-          extension: .py
-          template: event_bus/mock_event_bus.py
-        {% endif %}
-        {% if "async_sqlalchemy" in template.built_in_features %}
-        - name: conftest
-          type: file
-          extension: .py
-          template: persistence/async/async_engine_fixture.py
-        {% endif %}
-      {% endif %}
-    - name: delivery
-      type: directory
-      python: True
+{{ macros.include_block("clean_architecture/layers/test_domain.yml.j2", 4) }}
+{{ macros.include_block("clean_architecture/layers/test_infra.yml.j2", 4) }}
+{{ macros.include_block("clean_architecture/layers/test_delivery.yml.j2", 4) }}
