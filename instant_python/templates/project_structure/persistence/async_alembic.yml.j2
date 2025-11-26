@@ -1,0 +1,27 @@
+- name: alembic
+  type: file
+  extension: .ini
+  template: persistence/async/alembic.ini
+- name: migrations
+  type: directory
+  children:
+    - name: versions
+      type: directory
+    - name: README
+      type: file
+      extension: .md
+      template: persistence/async/README.md
+    - name: env
+      type: file
+      extension: .py
+      template: persistence/async/env.py
+    {% if "async_sqlalchemy" in template.built_in_features %}
+    - name: models_metadata
+      type: file
+      extension: .py
+      template: persistence/async/models_metadata.py
+    {% endif %}
+    - name: script
+      type: file
+      extension: .py.mako
+      template: persistence/async/script.py.mako

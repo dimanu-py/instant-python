@@ -1,0 +1,20 @@
+- name: persistence
+  type: directory
+  python: True
+  children:
+    - name: sqlalchemy
+      type: directory
+      python: True
+      children:
+        - name: base
+          type: file
+          extension: .py
+          template: persistence/base.py
+        - name: session_maker
+          type: file
+          extension: .py
+          template: persistence/synchronous/session_maker.py
+        - name: sqlalchemy_repository
+          type: file
+          extension: .py
+          template: persistence/synchronous/sqlalchemy_repository.py
