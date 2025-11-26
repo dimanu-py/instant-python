@@ -4,8 +4,8 @@
 {{ layer.include_block("clean_architecture/test.yml.j2", 0) }}
 
 {# === Base Configuration Files === #}
-{{ layer.include_block("pyproject.yml.j2", 0) }}
-{{ layer.include_block("python_version.yml.j2", 0) }}
+{{ layer.include_block("config_files/pyproject.yml.j2", 0) }}
+{{ layer.include_block("config_files/python_version.yml.j2", 0) }}
 {{ layer.include_block("documentation/license.yml.j2", 0) }}
 
 {# === CI/CD and Automation Features === #}
@@ -21,16 +21,16 @@
 
 {# === Git Features === #}
 {% if git.initialize %}
-{{ layer.include_block("gitignore.yml.j2", 0) }}
+{{ layer.include_block("config_files/gitignore.yml.j2", 0) }}
 {{ layer.include_block("documentation/readme.yml.j2", 0) }}
 {% endif %}
 
 {# === Testing and Type Checking === #}
 {% if dependencies | has_dependency("pytest") %}
-{{ layer.include_block("pytest.yml.j2", 0) }}
+{{ layer.include_block("config_files/pytest.yml.j2", 0) }}
 {% endif %}
 {% if dependencies | has_dependency("mypy") %}
-{{ layer.include_block("mypy.yml.j2", 0) }}
+{{ layer.include_block("config_files/mypy.yml.j2", 0) }}
 {% endif %}
 
 {# === Database Migration === #}
