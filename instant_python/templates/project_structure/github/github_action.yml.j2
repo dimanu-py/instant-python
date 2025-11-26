@@ -1,0 +1,24 @@
+- name: .github
+  type: directory
+  children:
+    - name: actions
+      type: directory
+      children:
+        - name: python_setup
+          type: directory
+          children:
+            - name: action
+              type: file
+              extension: .yml
+              template: github/action.yml
+    - name: workflows
+      type: directory
+      children:
+        - name: ci
+          type: file
+          extension: .yml
+          template: github/ci.yml
+        - name: release
+          type: file
+          extension: .yml
+          template: github/release.yml
