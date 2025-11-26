@@ -1,39 +1,44 @@
-{% import "macros.j2" as macros with context %}
-{{ macros.include_and_indent("domain_driven_design/source.yml.j2", 0) }}
-{{ macros.include_and_indent("domain_driven_design/test.yml.j2", 0) }}
-{{ macros.include_and_indent("pyproject.yml.j2", 0) }}
-{{ macros.include_and_indent("python_version.yml.j2", 0) }}
-{{ macros.include_and_indent("license.yml.j2", 0) }}
-{% if "github_actions" in template.built_in_features %}
-{{ macros.include_and_indent("github_action.yml.j2", 0) }}
-{{ macros.include_and_indent("makefile.yml.j2", 0) }}
-{% endif %}
-{%  if "github_issues_template" in template.built_in_features %}
-{{ macros.include_and_indent("github_issues_template.yml.j2", 0) }}
-{%  endif %}
-{% if "makefile" in template.built_in_features %}
-{{ macros.include_and_indent("makefile.yml.j2", 0) }}
-{% endif %}
+{% import "domain_driven_design/layer_macros.j2" as layer with context %}
+{# === Core Project Structure === #}
+{{ layer.include_block("domain_driven_design/source.yml.j2", 0) }}
+{{ layer.include_block("domain_driven_design/test.yml.j2", 0) }}
+
+{# === Base Configuration Files === #}
+{{ layer.include_block("config_files/pyproject.yml.j2", 0) }}
+{{ layer.include_block("config_files/python_version.yml.j2", 0) }}
+{{ layer.include_block("license.yml.j2", 0) }}
+
+{# === CI/CD and Automation Features === #}
+{% set ci_cd_features = [
+    {"feature": "github_actions", "template": "github/github_action.yml.j2"},
+    {"feature": "github_actions", "template": "github/makefile.yml.j2"},
+    {"feature": "github_issues_template", "template": "github/github_issues_template.yml.j2"},
+    {"feature": "makefile", "template": "github/makefile.yml.j2"},
+    {"feature": "precommit_hook", "template": "github/precommit_hook.yml.j2"},
+    {"feature": "precommit_hook", "template": "github/makefile.yml.j2"}
+] %}
+{{ layer.render_features(ci_cd_features, 0) }}
+
+{# === Git Features === #}
 {% if git.initialize %}
-{{ macros.include_and_indent("gitignore.yml.j2", 0) }}
-{{ macros.include_and_indent("readme.yml.j2", 0) }}
+{{ layer.include_block("config_files/gitignore.yml.j2", 0) }}
+{{ layer.include_block("documentation/readme.yml.j2", 0) }}
 {% endif %}
+
+{# === Testing and Type Checking === #}
 {% if dependencies | has_dependency("pytest") %}
-{{ macros.include_and_indent("pytest.yml.j2", 0) }}
+{{ layer.include_block("config_files/pytest.yml.j2", 0) }}
 {% endif %}
 {% if dependencies | has_dependency("mypy") %}
-{{ macros.include_and_indent("mypy.yml.j2", 0) }}
+{{ layer.include_block("config_files/mypy.yml.j2", 0) }}
 {% endif %}
-{% if "async_alembic" in template.built_in_features %}
-{{ macros.include_and_indent("async_alembic.yml.j2", 0) }}
-{% endif %}
-{% if "precommit_hook" in template.built_in_features %}
-{{ macros.include_and_indent("precommit_hook.yml.j2", 0) }}
-{{ macros.include_and_indent("makefile.yml.j2", 0) }}
-{%  endif %}
-{% if "citation_file" in template.built_in_features %}
-{{ macros.include_and_indent("citation.yml.j2", 0) }}
-{%  endif %}
-{% if "security_file" in template.built_in_features %}
-{{ macros.include_and_indent("security.yml.j2", 0) }}
-{%  endif %}
+
+{# === Database Migration === #}
+{{ layer.render_feature_if_enabled("async_alembic", "persistence/async_alembic.yml.j2", 0) }}
+
+{# === Documentation and Metadata === #}
+{% set doc_features = [
+    {"feature": "citation_file", "template": "documentation/citation.yml.j2"},
+    {"feature": "security_file", "template": "documentation/security.yml.j2"}
+] %}
+{{ layer.render_features(doc_features, 0) }}
