@@ -1,0 +1,73 @@
+{#
+  Macro to include a template and indent its content
+
+  Args:
+    template_name: Name of the template file to include
+    indent: Number of spaces to indent the content
+#}
+{%- macro include_block(template_name, indent) -%}
+{%- set content -%}
+{%- include template_name -%}
+{%- endset -%}
+{{ content | indent(indent, true) }}
+{%- endmacro -%}
+
+{#
+  Renders a specific feature if it's enabled in template.built_in_features
+
+  Args:
+    feature_name: Name of the feature to check
+    template_path: Path to the template file to include
+    indent_level: Number of spaces to indent the content
+#}
+{%- macro render_feature_if_enabled(feature_name, template_path, indent=0) -%}
+{%- if feature_name in template.built_in_features -%}
+{{ include_block(template_path, indent) }}
+{%- endif -%}
+{%- endmacro -%}
+
+{#
+  Renders multiple features from a list
+
+  Args:
+    features: List of dicts with 'feature' and 'template' keys
+    indent_level: Number of spaces to indent the content
+
+  Example:
+    {% set features = [
+      {"feature": "event_bus", "template": "events/event_bus_domain.yml.j2"},
+      {"feature": "value_objects", "template": "value_objects.yml.j2"}
+    ] %}
+    {{ render_features(features, 8) }}
+#}
+{%- macro render_features(features, indent=0) -%}
+{%- set rendered_templates = [] -%}
+{%- for item in features -%}
+{%- if item.feature in template.built_in_features and item.template not in rendered_templates -%}
+{{ include_block(item.template, indent) }}
+{% set _ = rendered_templates.append(item.template) -%}
+{%- endif -%}
+{%- endfor -%}
+{%- endmacro -%}
+
+{#
+  Conditional wrapper for children nodes
+  Only renders the "children:" key and content if there are active features
+
+  Args:
+    features: List of features to check
+    indent_level: Base indentation for the children key
+#}
+{%- macro render_children_for(features, indent=0) -%}
+{%- set active_features = [] -%}
+{%- for item in features -%}
+{%- if item.feature in template.built_in_features -%}
+{%- set _ = active_features.append(item) -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if active_features | length > 0 %}
+{{ "children:" | indent(indent, true) }}
+{{ render_features(active_features, indent + 2) }}
+{%- endif -%}
+{%- endmacro -%}
+
