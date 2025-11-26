@@ -1,23 +1,5 @@
-{% import "macros.j2" as macros with context %}
+{% import "standard_project/layer_macros.j2" as macros with context %}
 - name: test
   type: directory
   python: True
-  {% if ["async_sqlalchemy", "event_bus"] | is_in(template.built_in_features) %}
-  children:
-    {% if "async_sqlalchemy" in template.built_in_features %}
-    - name: conftest
-      type: file
-      extension: .py
-      template: persistence/async/async_engine_fixture.py
-    {% endif %}
-    {% if "event_bus" in template.built_in_features %}
-    - name: event
-      type: directory
-      python: True
-      children:
-        - name: mock_event_bus
-          type: file
-          extension: .py
-          template: event_bus/mock_event_bus.py
-    {% endif %}
-  {% endif %}
+{{ macros.include_block("standard_project/layers/test_features.yml.j2", 2) }}
