@@ -6,7 +6,7 @@
 {# === Base Configuration Files === #}
 {{ layer.include_block("pyproject.yml.j2", 0) }}
 {{ layer.include_block("python_version.yml.j2", 0) }}
-{{ layer.include_block("license.yml.j2", 0) }}
+{{ layer.include_block("documentation/license.yml.j2", 0) }}
 
 {# === CI/CD and Automation Features === #}
 {% set ci_cd_features = [
@@ -22,7 +22,7 @@
 {# === Git Features === #}
 {% if git.initialize %}
 {{ layer.include_block("gitignore.yml.j2", 0) }}
-{{ layer.include_block("readme.yml.j2", 0) }}
+{{ layer.include_block("documentation/readme.yml.j2", 0) }}
 {% endif %}
 
 {# === Testing and Type Checking === #}
@@ -38,7 +38,7 @@
 
 {# === Documentation and Metadata === #}
 {% set doc_features = [
-    {"feature": "citation_file", "template": "citation.yml.j2"},
-    {"feature": "security_file", "template": "security.yml.j2"}
+    {"feature": "citation_file", "template": "documentation/citation.yml.j2"},
+    {"feature": "security_file", "template": "documentation/security.yml.j2"}
 ] %}
 {{ layer.render_features(doc_features, 0) }}
