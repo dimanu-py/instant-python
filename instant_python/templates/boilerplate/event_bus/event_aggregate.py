@@ -1,11 +1,12 @@
+from sindripy.value_objects import Aggregate
 from {{ general.source_name }}{{ "shared.domain.event.domain_event" | resolve_import_path(template.name) }} import DomainEvent
-from {{ general.source_name }}{{ "shared.domain.value_objects.aggregate" | resolve_import_path(template.name) }} import Aggregate
 
 
 class EventAggregate(Aggregate):
     _domain_events: list[DomainEvent]
 
     def __init__(self) -> None:
+        super().__init__()
         self._domain_events = []
 
     def record(self, event: DomainEvent) -> None:
