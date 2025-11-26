@@ -34,7 +34,7 @@
 {% endif %}
 
 {# === Database Migration === #}
-{{ layer.render_feature_if_enabled("async_alembic", "async_alembic.yml.j2", 0) }}
+{{ layer.render_feature_if_enabled("async_alembic", "persistence/async_alembic.yml.j2", 0) }}
 
 {# === Documentation and Metadata === #}
 {% set doc_features = [
