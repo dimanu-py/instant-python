@@ -1,0 +1,40 @@
+- name: event
+  type: directory
+  python: True
+  children:
+    - name: domain_event_json_deserializer
+      type: file
+      extension: .py
+      template: event_bus/domain_event_json_deserializer.py
+    - name: domain_event_json_serializer
+      type: file
+      extension: .py
+      template: event_bus/domain_event_json_serializer.py
+    - name: rabbit_mq
+      type: directory
+      python: True
+      children:
+        - name: rabbit_mq_configurer
+          type: file
+          extension: .py
+          template: event_bus/rabbit_mq_configurer.py
+        - name: rabbit_mq_connection
+          type: file
+          extension: .py
+          template: event_bus/rabbit_mq_connection.py
+        - name: rabbit_mq_consumer
+          type: file
+          extension: .py
+          template: event_bus/rabbit_mq_consumer.py
+        - name: rabbit_mq_event_bus
+          type: file
+          extension: .py
+          template: event_bus/rabbit_mq_event_bus.py
+        - name: rabbit_mq_queue_formatter
+          type: file
+          extension: .py
+          template: event_bus/rabbit_mq_queue_formatter.py
+        - name: rabbit_mq_settings
+          type: file
+          extension: .py
+          template: event_bus/rabbit_mq_settings.py
