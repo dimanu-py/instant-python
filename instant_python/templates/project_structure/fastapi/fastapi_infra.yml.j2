@@ -1,0 +1,12 @@
+- name: http
+  type: directory
+  python: True
+  children:
+    - name: error_response
+      type: file
+      extension: .py
+      template: fastapi/error_response.py
+    - name: success_response
+      type: file
+      extension: .py
+      template: fastapi/success_response.py

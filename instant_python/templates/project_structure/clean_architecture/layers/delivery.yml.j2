@@ -5,7 +5,7 @@
 #}
 {% import "clean_architecture/layer_macros.j2" as layer with context %}
 {%- set delivery_features = [
-  {"feature": "fastapi_application", "template": "fastapi_app.yml.j2"}
+  {"feature": "fastapi_application", "template": "fastapi/fastapi_app.yml.j2"}
 ] %}
 - name: delivery
   type: directory

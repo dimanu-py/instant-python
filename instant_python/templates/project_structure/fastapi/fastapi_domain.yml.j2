@@ -1,0 +1,12 @@
+- name: errors
+  type: directory
+  python: True
+  children:
+    - name: domain_error
+      type: file
+      extension: .py
+      template: exceptions/domain_error.py
+    - name: base_error
+      type: file
+      extension: .py
+      template: exceptions/base_error.py

@@ -1,0 +1,32 @@
+- name: api
+  type: directory
+  python: True
+  children:
+    - name: application
+      type: file
+      extension: .py
+      template: fastapi/application.py
+    - name: handlers
+      type: directory
+      python: True
+      children:
+        - name: error_handlers
+          type: file
+          extension: .py
+          template: fastapi/error_handlers.py
+    {% if "async_alembic" in template.built_in_features %}
+    - name: lifespan
+      type: file
+      extension: .py
+      template: fastapi/lifespan.py
+    {% endif %}
+    {%  if "logger" in template.built_in_features %}
+    - name: middleware
+      type: directory
+      python: True
+      children:
+        - name: fastapi_log_middleware
+          type: file
+          extension: .py
+          template: fastapi/fastapi_log_middleware.py
+    {% endif %}
