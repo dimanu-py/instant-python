@@ -4,12 +4,11 @@
   Defines test structure for the infrastructure layer including fixtures.
 #}
 {% import "clean_architecture/layer_macros.j2" as layer with context %}
+{%- set infra_features = [
+  {"feature": "event_bus", "template": "events/mock_event_bus.yml.j2"},
+  {"feature": "async_sqlalchemy", "template": "persistence/async_engine_conftest.yml.j2"},
+] %}
 - name: infra
   type: directory
   python: True
-{%- if ["event_bus", "async_sqlalchemy"] | is_in(template.built_in_features) %}
-  children:
-    {{ layer.render_feature_if_enabled("event_bus", "events/mock_event_bus.yml.j2", 4) }}
-    {{ layer.render_feature_if_enabled("async_sqlalchemy", "persistence/async_engine_conftest.yml.j2", 4) }}
-{%- endif %}
-
+{{ layer.render_children_for(infra_features, 2) }}
