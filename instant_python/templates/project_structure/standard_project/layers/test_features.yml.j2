@@ -1,0 +1,11 @@
+{#
+  Test Features Template for Standard Project
+
+  This template defines all features that can be included in the test directory.
+#}
+{% import "standard_project/layer_macros.j2" as layer with context %}
+{%- set test_features = [
+  {"feature": "async_sqlalchemy", "template": "persistence/async_engine_conftest.yml.j2"},
+  {"feature": "event_bus", "template": "standard_project/layers/test_event_bus.yml.j2"}
+] %}
+{{ layer.render_children_for(test_features, 2) }}

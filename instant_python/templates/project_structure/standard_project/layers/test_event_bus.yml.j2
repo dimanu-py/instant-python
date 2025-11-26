@@ -1,0 +1,9 @@
+{#
+  Test event_bus directory with mock
+#}
+{% import "standard_project/layer_macros.j2" as layer with context %}
+- name: event
+  type: directory
+  python: True
+  children:
+{{ layer.include_block("events/mock_event_bus.yml.j2", 4) }}
