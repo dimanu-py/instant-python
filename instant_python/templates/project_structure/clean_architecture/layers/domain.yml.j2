@@ -7,7 +7,7 @@
 {% import "clean_architecture/layer_macros.j2" as layer with context %}
 {%- set domain_features = [
   {"feature": "value_objects", "template": "value_objects.yml.j2"},
-  {"feature": "event_bus", "template": "event_bus_domain.yml.j2"},
+  {"feature": "event_bus", "template": "events/event_bus_domain.yml.j2"},
   {"feature": "fastapi_application", "template": "fastapi_domain.yml.j2"}
 ] %}
 - name: domain

@@ -6,7 +6,7 @@
 #}
 {% import "clean_architecture/layer_macros.j2" as layer with context %}
 {%- set infra_features = [
-  {"feature": "event_bus", "template": "event_bus_infra.yml.j2"},
+  {"feature": "event_bus", "template": "events/event_bus_infra.yml.j2"},
   {"feature": "logger", "template": "logger.yml.j2"},
   {"feature": "async_sqlalchemy", "template": "persistence/async_sqlalchemy.yml.j2"},
   {"feature": "async_alembic", "template": "persistence/alembic_migrator.yml.j2"},
