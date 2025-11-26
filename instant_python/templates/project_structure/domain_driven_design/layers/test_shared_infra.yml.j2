@@ -1,0 +1,14 @@
+{#
+  Test Shared Infrastructure Layer Template for Domain-Driven Design
+
+  This template defines test fixtures and mocks for infrastructure testing.
+#}
+{% import "clean_architecture/layer_macros.j2" as layer with context %}
+{%- set infra_features = [
+  {"feature": "event_bus", "template": "events/mock_event_bus.yml.j2"},
+  {"feature": "async_sqlalchemy", "template": "persistence/async_engine_conftest.yml.j2"},
+] %}
+- name: infra
+  type: directory
+  python: True
+{{ layer.render_children_for(infra_features, 2) }}

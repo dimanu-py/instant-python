@@ -1,0 +1,19 @@
+{#
+  Shared Infrastructure Layer Template for Domain-Driven Design
+
+  This template defines the shared infrastructure layer structure and conditionally
+  includes infrastructure-related features based on configuration.
+#}
+{% import "domain_driven_design/layer_macros.j2" as layer with context %}
+{%- set infra_features = [
+  {"feature": "event_bus", "template": "events/event_bus_infra.yml.j2"},
+  {"feature": "logger", "template": "logger.yml.j2"},
+  {"feature": "async_sqlalchemy", "template": "persistence/async_sqlalchemy.yml.j2"},
+  {"feature": "async_alembic", "template": "persistence/alembic_migrator.yml.j2"},
+  {"feature": "fastapi_application", "template": "fastapi/fastapi_infra.yml.j2"}
+] %}
+- name: infra
+  type: directory
+  python: True
+{{ layer.render_children_for(infra_features, 2) }}
+
