@@ -1,10 +1,4 @@
-{#
-  Shared Layer Template for Domain-Driven Design
-
-  This template defines the shared layer structure and conditionally
-  includes shared domain and infrastructure layers.
-#}
-{% import "domain_driven_design/layer_macros.j2" as layer with context %}
+{% import "macros.j2" as macros with context %}
 {%- set domain_related_features = ["value_objects", "event_bus", "fastapi_application"] %}
 {%- set infra_related_features = ["event_bus", "logger", "async_sqlalchemy", "async_alembic", "fastapi_application"] %}
 {%- set has_domain = domain_related_features | is_in(template.built_in_features) -%}
@@ -15,10 +9,10 @@
 {% if has_domain or has_infra %}
   children:
 {% if has_domain %}
-{{ layer.include_block("domain_driven_design/layers/shared_domain.yml.j2", 4) }}
+{{ macros.include_block("domain_driven_design/layers/shared_domain.yml.j2", 4) }}
 {% endif %}
 {% if has_infra %}
-{{ layer.include_block("domain_driven_design/layers/shared_infra.yml.j2", 4) }}
+{{ macros.include_block("domain_driven_design/layers/shared_infra.yml.j2", 4) }}
 {% endif %}
 {% endif %}
 

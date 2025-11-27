@@ -1,10 +1,4 @@
-{#
-  Domain Layer Template for Clean Architecture
-
-  This template defines the domain layer structure and conditionally
-  includes domain-related features based on configuration.
-#}
-{% import "clean_architecture/layer_macros.j2" as layer with context %}
+{% import "macros.j2" as macros with context %}
 {%- set domain_features = [
   {"feature": "value_objects", "template": "value_objects.yml.j2"},
   {"feature": "event_bus", "template": "events/event_bus_domain.yml.j2"},
@@ -13,4 +7,4 @@
 - name: domain
   type: directory
   python: True
-{{ layer.render_children_for(domain_features, 2) }}
+{{ macros.render_children_for(domain_features, 2) }}

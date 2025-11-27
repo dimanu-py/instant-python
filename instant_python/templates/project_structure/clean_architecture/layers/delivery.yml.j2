@@ -1,13 +1,8 @@
-{#
-  Delivery Layer Template for Clean Architecture
-
-  This template defines the delivery/presentation layer structure.
-#}
-{% import "clean_architecture/layer_macros.j2" as layer with context %}
+{% import "macros.j2" as macros with context %}
 {%- set delivery_features = [
   {"feature": "fastapi_application", "template": "fastapi/fastapi_app.yml.j2"}
 ] %}
 - name: delivery
   type: directory
   python: True
-{{ layer.render_children_for(delivery_features, 2) }}
+{{ macros.render_children_for(delivery_features, 2) }}

@@ -1,5 +1,5 @@
 {% import "macros.j2" as macros with context %}
-{{ macros.include_and_indent("persistence.yml.j2", 0) }}
+{{ macros.include_block("persistence/persistence.yml.j2", 0) }}
 - name: alembic_migrator
   type: file
   extension: .py

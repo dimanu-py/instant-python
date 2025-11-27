@@ -1,9 +1,4 @@
-{#
-  Source Features Template for Standard Project
-
-  This template defines all features that can be included in the source directory.
-#}
-{% import "standard_project/layer_macros.j2" as layer with context %}
+{% import "macros.j2" as macros with context %}
 {%- set source_features = [
   {"feature": "value_objects", "template": "value_objects.yml.j2"},
   {"feature": "event_bus", "template": "events/event_bus_domain.yml.j2"},
@@ -15,5 +10,5 @@
   {"feature": "fastapi_application", "template": "fastapi/fastapi_infra.yml.j2"},
   {"feature": "fastapi_application", "template": "fastapi/fastapi_domain.yml.j2"}
 ] %}
-{{ layer.render_children_for(source_features, 2) }}
+{{ macros.render_children_for(source_features, 2) }}
 

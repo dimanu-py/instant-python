@@ -1,13 +1,8 @@
-{#
-  Delivery Layer Template for Domain-Driven Design
-
-  This template defines the delivery layer structure and conditionally includes delivery-related features based on configuration.
-#}
-{% import "domain_driven_design/layer_macros.j2" as layer with context %}
+{% import "macros.j2" as macros with context %}
 {%- set delivery_features = [
   {"feature": "fastapi_application", "template": "fastapi/fastapi_app.yml.j2"}
 ] %}
 - name: delivery
   type: directory
   python: True
-{{ layer.render_children_for(delivery_features, 2) }}
+{{ macros.render_children_for(delivery_features, 2) }}

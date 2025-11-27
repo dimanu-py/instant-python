@@ -1,14 +1,8 @@
-{#
-  Test Shared Layer Template for Domain-Driven Design
-
-  This template defines the test shared layer structure with delivery,
-  domain, and infrastructure test directories.
-#}
-{% import "domain_driven_design/layer_macros.j2" as layer with context %}
+{% import "macros.j2" as macros with context %}
 - name: shared
   type: directory
   python: True
   children:
-{{ layer.include_block("domain_driven_design/layers/test_shared_delivery.yml.j2", 4) }}
-{{ layer.include_block("domain_driven_design/layers/test_shared_domain.yml.j2", 4) }}
-{{ layer.include_block("domain_driven_design/layers/test_shared_infra.yml.j2", 4) }}
+{{ macros.include_block("domain_driven_design/layers/test_shared_delivery.yml.j2", 4) }}
+{{ macros.include_block("domain_driven_design/layers/test_shared_domain.yml.j2", 4) }}
+{{ macros.include_block("domain_driven_design/layers/test_shared_infra.yml.j2", 4) }}
