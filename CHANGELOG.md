@@ -2,6 +2,121 @@
 
 <!-- version list -->
 
+## v0.19.1 (2025-11-27)
+
+### 🪲 Bug Fixes
+
+- **templates**: Correct indentation level for source and test templates in standard project
+  ([`54b36ca`](https://github.com/dimanu-py/instant-python/commit/54b36cac14dc9a12157223207b47236b063262ef))
+
+- **templates**: Remove aggregate and value object file from event bus folder structure now that
+  these implementation have delegated to sindripy
+  ([`13a7780`](https://github.com/dimanu-py/instant-python/commit/13a7780f0263edf83ac5751c26bf6d5f04073b2a))
+
+- **templates**: Modify EventAggregate template to use Aggregate from sindripy instead of legacy
+  aggregate that doesn't exist anymore
+  ([`dcbf2d3`](https://github.com/dimanu-py/instant-python/commit/dcbf2d3f913327a2f909ab48526f32c958e26db2))
+
+- **templates**: Include sindripy dependency when event bus feature is selected to be able to use
+  the Aggregate implementation
+  ([`b5c3000`](https://github.com/dimanu-py/instant-python/commit/b5c30002596fc639316f93d403b4bedc18cb1e7c))
+
+### ♻️ Refactoring
+
+- **templates**: Rename value objects template to errors now that it only contains errors and value
+  objects are handled with sindripy
+  ([`df8458b`](https://github.com/dimanu-py/instant-python/commit/df8458b18497574f48a075550e3d75e0a11e58e1))
+
+- **templates**: Move new advanced macros to root of templates folder and use it along project
+  structure templates
+  ([`736314c`](https://github.com/dimanu-py/instant-python/commit/736314c5612b7d7518e780d8026951372a189755))
+
+- **templates**: Remove legacy templates now that they are better organized
+  ([`c1b6c44`](https://github.com/dimanu-py/instant-python/commit/c1b6c44a04837f06db6a4db91d1e6d389b352be5))
+
+- **templates**: Update main templates for standard project structure using new macros and organized
+  templates folder
+  ([`4fe22f3`](https://github.com/dimanu-py/instant-python/commit/4fe22f3b4bb4efca55531b52b8612aa29d2a3047))
+
+- **templates**: Add advanced macros to be able to reuse render logic for templates and avoid
+  conditionals
+  ([`76cc909`](https://github.com/dimanu-py/instant-python/commit/76cc9090ef73f7e17ef7736ec64a50a86d6dea65))
+
+- **templates**: Separate and modularize structure of standard project template in layers
+  ([`7123c85`](https://github.com/dimanu-py/instant-python/commit/7123c85bfbbabecd0ad1245b58ac668546343721))
+
+- **templates**: Update main templates for ddd project structure using new macros and organized
+  templates folder
+  ([`613f361`](https://github.com/dimanu-py/instant-python/commit/613f36175902befddf45d8a0b56ef9069ae30df1))
+
+- **templates**: Add advanced macros to be able to reuse render logic for templates and avoid
+  conditionals
+  ([`f96a178`](https://github.com/dimanu-py/instant-python/commit/f96a1787d978e6e56fae478a26ddf6d858f14da9))
+
+- **templates**: Separate and modularize structure of ddd template in layers
+  ([`66044d5`](https://github.com/dimanu-py/instant-python/commit/66044d56011e28b695b5a0b7af591415732ad426))
+
+- **templates**: Move config files for projects templates to specific folder for better organization
+  ([`5bc4e15`](https://github.com/dimanu-py/instant-python/commit/5bc4e15fcbdd6f20eaf69ffe24ae92866175c138))
+
+- **templates**: Move github related templates to specific folder for better organization
+  ([`ee42c25`](https://github.com/dimanu-py/instant-python/commit/ee42c2556037af6ba69bb0a973cf67c0659b9e0e))
+
+- **templates**: Move fastapi templates to specific folders for better organization
+  ([`7437c95`](https://github.com/dimanu-py/instant-python/commit/7437c9513f7e963e41f51a28a6ba90a432cef12c))
+
+- **templates**: Move documentation templates such as readme, citation and security to specific
+  folders for better organization
+  ([`3608d27`](https://github.com/dimanu-py/instant-python/commit/3608d2777cd324a51f3d841cd5c92a651d6ee7e5))
+
+- **templates**: Modify test structure to include application folder too
+  ([`b0bc458`](https://github.com/dimanu-py/instant-python/commit/b0bc45873d3ee57b86282fccba8ddc89b54a1d80))
+
+- **templates**: Remove conditional logic to include features in infra tests for clean architecture
+  and use render_children_for macro to make it clearer and easier to extend
+  ([`87fe7fc`](https://github.com/dimanu-py/instant-python/commit/87fe7fc32b65f8933699402d508a4770f5a0c748))
+
+- **templates**: Update test infra template to include mock event bus from template
+  ([`20fd887`](https://github.com/dimanu-py/instant-python/commit/20fd88768cd12acaea632bb6af16de37d9a1ae96))
+
+- **templates**: Do not include mock event bus in test domain folder for clean architecture template
+  ([`20e1d73`](https://github.com/dimanu-py/instant-python/commit/20e1d73cf632f022d8541b3ed625217cb17b15b1))
+
+- **templates**: Modify template paths for event features pointing to better organized folders
+  ([`35e56ac`](https://github.com/dimanu-py/instant-python/commit/35e56ac685d7d88fe7d0a3b2dcd54c9c409bde8a))
+
+- **templates**: Organize events templates inside a specific folder to keep them better organized
+  ([`2552a60`](https://github.com/dimanu-py/instant-python/commit/2552a60e49df586ec890a628e51db10002820907))
+
+- **templates**: Update template paths in clean architecture project structure to use new organized
+  persistence templates
+  ([`ad4fced`](https://github.com/dimanu-py/instant-python/commit/ad4fced04cc5c127acbd2b2c96d79e514454d9ac))
+
+- **templates**: Organize persistence templates inside a specific folder to keep them better
+  organized
+  ([`b3ff817`](https://github.com/dimanu-py/instant-python/commit/b3ff8170ad24c280796a3f21dac341bd4e7be95f))
+
+- **templates**: Remove legacy templates for clean architecture structure now that new version is
+  stable
+  ([`d5293fc`](https://github.com/dimanu-py/instant-python/commit/d5293fc4ca28164859521978532554d34f22fa0b))
+
+- **templates**: Modify jinja macro to be able to handle cases where one template file has to be
+  included in more than once scenario so it's not get created two times
+  ([`99e6572`](https://github.com/dimanu-py/instant-python/commit/99e6572e16e9388dc5e3491a1b8bc3dbfc11a25e))
+
+- **templates**: Rename old main structure, source and test templates files to mark them as legacy
+  but having them as backup
+  ([`2ea3614`](https://github.com/dimanu-py/instant-python/commit/2ea361497d722b2eb15ad57d5bdaf2e44a2c1e6f))
+
+- **templates**: Separate clean architecture source and test structure in separate folders to handle
+  easily each folder and its features
+  ([`f92b499`](https://github.com/dimanu-py/instant-python/commit/f92b4992b57ecdf62689b58a044264e298591452))
+
+- **templates**: Write advanced macros to render children blocks and built in features for clean
+  architecture
+  ([`720bf69`](https://github.com/dimanu-py/instant-python/commit/720bf694ebfa12105d58f46549977dc072c786aa))
+
+
 ## v0.19.0 (2025-11-24)
 
 ### ✨ Features
