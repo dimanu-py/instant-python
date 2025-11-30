@@ -19,7 +19,5 @@ runs:
       shell: bash
 
     - name: 📦 Install dependencies
-      run: |
-        uv sync --all-groups
-        uv run -m pre_commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
+      run: make install
       shell: bash

@@ -31,7 +31,7 @@ jobs:
 
       - name: 🧐 Check linting
         id: check_lint
-        run: uvx ruff check --exclude "instant_python/templates,test/**/resources/**" instant_python test
+        run: make check-lint
 
   format:
     name: format
@@ -54,7 +54,7 @@ jobs:
 
       - name: 🧐 Check code format
         id: check_format
-        run: uvx ruff format --check --exclude "instant_python/templates,test/**/resources/**" instant_python test
+        run: make check-format
 
   analyze-code-quality:
     name: analyze-code-quality
