@@ -6,6 +6,10 @@ from instant_python.shared.domain.config_schema import ConfigSchema
 
 class ConfigRepository(ABC):
     @abstractmethod
+    def write(self, config: ConfigSchema) -> None:
+        raise NotImplementedError
+
+    @abstractmethod
     def read(self, path: Path) -> ConfigSchema:
         raise NotImplementedError
 

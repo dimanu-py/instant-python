@@ -9,6 +9,9 @@ from instant_python.shared.application_error import ApplicationError
 
 
 class YamlConfigRepository(ConfigRepository):
+    def write(self, config: ConfigSchema) -> None:
+        raise NotImplementedError
+
     def read(self, path: Path) -> ConfigSchema:
         try:
             with path.open("r") as file:
