@@ -10,7 +10,9 @@ from instant_python.shared.application_error import ApplicationError
 
 class YamlConfigRepository(ConfigRepository):
     def write(self, config: ConfigSchema) -> None:
-        raise NotImplementedError
+        destination_folder = Path.cwd() / config.config_file_path
+        with destination_folder.open("w") as file:
+            yaml.dump(config.to_primitives(), file)
 
     def read(self, path: Path) -> ConfigSchema:
         try:
