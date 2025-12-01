@@ -4,7 +4,7 @@ import tempfile
 from pathlib import Path
 
 from approvaltests import verify
-from expects import expect, be_none, raise_error, be_true
+from expects import expect, be_none, raise_error, be_true, equal
 
 from instant_python.initialize.infra.persistence.yaml_config_repository import (
     YamlConfigRepository,
@@ -26,9 +26,9 @@ class TestYamlConfigRepository:
 
         self._repository.write(config)
 
-        expected_output_path = Path.cwd() / config.config_file_path
-        expect(expected_output_path.exists()).to(be_true)
-        expected_output_path.unlink()
+        saved_config = self._repository.read(config.config_file_path)
+        expect(saved_config).to(equal(config))
+        config.config_file_path.unlink()
 
     def test_should_read_existing_config_file(self) -> None:
         config_path = resources_path() / self._CONFIG_FILE
