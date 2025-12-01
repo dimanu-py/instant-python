@@ -45,6 +45,6 @@ class TestYamlConfigRepository:
 
     @staticmethod
     def _create_project_folder_in_temp_dir(temp_dir_path: Path, project_folder: str) -> Path:
-        project_folder = temp_dir_path / project_folder
-        project_folder.mkdir()
-        return project_folder
+        project_folder_path = temp_dir_path / project_folder
+        project_folder_path.mkdir()
+        return project_folder_path
