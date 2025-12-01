@@ -66,6 +66,13 @@ format:  ## Apply ruff format fix.
 	@echo "\n⌛ Formatting project code...\n"
 	@uvx ruff format instant_python test
 
+.PHONY: autostyle
+autostyle:  ## Apply all code style fixes.
+	@echo "\n⌛ Applying all code style fixes...\n"
+	@make format
+	@make lint
+	@git add . && git commit -m "style: apply code style fixes"
+
 .PHONY: watch
 watch:  ## Run all test with every change.
 	@uv run ptw --runner "pytest -n auto test -ra"
