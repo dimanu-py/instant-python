@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from instant_python.shared.domain.config_schema import ConfigSchema
 from test.shared.domain.mothers.dependency_config_mother import DependencyConfigMother
 from test.shared.domain.mothers.general_config_mother import GeneralConfigMother
@@ -31,4 +33,14 @@ class ConfigSchemaMother:
             dependencies=[DependencyConfigMother.any() for _ in range(3)],
             template=TemplateConfigMother.any(),
             git=GitConfigMother.not_initialize(),
+        )
+
+    @staticmethod
+    def with_config_path(path: Path) -> ConfigSchema:
+        return ConfigSchema(
+            general=GeneralConfigMother.any(),
+            dependencies=[DependencyConfigMother.any() for _ in range(3)],
+            template=TemplateConfigMother.any(),
+            git=GitConfigMother.initialize(),
+            config_file_path=path,
         )

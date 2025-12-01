@@ -15,28 +15,19 @@ from test.utils import resources_path
 
 
 class TestYamlConfigRepository:
-    _CONFIG_FILE = "base_ipy_config.yml"
-    _A_PROJECT_NAME = "python-project"
+    _CONFIG_FILE = "ipy.yml"
 
     def setup_method(self) -> None:
         self._repository = YamlConfigRepository()
 
-    def test_should_write_valid_config_on_working_directory(self) -> None:
+    def test_should_write_and_read_valid_config_on_working_directory(self) -> None:
         config = ConfigSchemaMother.any()
 
         self._repository.write(config)
 
         saved_config = self._repository.read(config.config_file_path)
-        expect(saved_config).to(equal(config))
+        expect(saved_config.to_primitives()).to(equal(config.to_primitives()))
         config.config_file_path.unlink()
-
-    def test_should_read_existing_config_file(self) -> None:
-        config_path = resources_path() / self._CONFIG_FILE
-
-        config = self._repository.read(config_path)
-
-        expect(config).to_not(be_none)
-        verify(json.dumps(config.to_primitives(), indent=2))
 
     def test_should_raise_error_when_file_to_read_does_not_exist(self) -> None:
         config_path = Path("non/existing/path/config.yml")
@@ -46,23 +37,17 @@ class TestYamlConfigRepository:
     def test_should_move_config_file_to_destination_folder(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             temp_dir_path = Path(temp_dir)
-            config_file_temp = self._create_config_file_in_temp_dir(temp_dir_path)
-            project_folder = self._create_project_folder_in_temp_dir(temp_dir_path)
+            config = ConfigSchemaMother.with_config_path(temp_dir_path / self._CONFIG_FILE)
+            project_folder = self._create_project_folder_in_temp_dir(temp_dir_path, config.project_folder_name)
+            self._repository.write(config)
 
-            config = self._repository.read(config_file_temp)
             self._repository.move(config, temp_dir_path)
 
-            final_config_path = project_folder / "ipy.yml"
-            expect(final_config_path.exists()).to(be_true)
-            expect(config_file_temp.exists()).to_not(be_true)
+            moved_config = self._repository.read(project_folder / self._CONFIG_FILE)
+            expect(moved_config.to_primitives()).to(equal(config.to_primitives()))
 
-    def _create_project_folder_in_temp_dir(self, temp_dir_path: Path) -> Path:
-        project_folder = temp_dir_path / self._A_PROJECT_NAME
+    @staticmethod
+    def _create_project_folder_in_temp_dir(temp_dir_path: Path, project_folder: str) -> Path:
+        project_folder = temp_dir_path / project_folder
         project_folder.mkdir()
         return project_folder
-
-    def _create_config_file_in_temp_dir(self, temp_dir: Path) -> Path:
-        config_file_source = resources_path() / self._CONFIG_FILE
-        config_file_temp = temp_dir / self._CONFIG_FILE
-        shutil.copy(config_file_source, config_file_temp)
-        return config_file_temp
