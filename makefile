@@ -34,12 +34,12 @@ update:  ## Update dependencies.
 	@uv sync --upgrade
 
 .PHONY: add-dep
-add-dep:  ## Add a new dependency.
-	@uv run scripts/add_dependency.py
+add-dep:  ## Add a new dependency
+	@uv add $(dep)
 
 .PHONY: remove-dep
-remove-dep:  ## Remove a dependency.
-	@uv run scripts/remove_dependency.py
+remove-dep:  ## Remove a dependency
+	@uv remove $(dep)
 
 .PHONY: check-typing
 check-typing:  ## Run mypy type checking.
