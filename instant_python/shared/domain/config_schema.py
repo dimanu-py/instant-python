@@ -30,7 +30,7 @@ class ConfigSchema:
     git: GitConfig
     config_file_path: Path = field(default_factory=lambda: ConfigSchema._DEFAULT_CONFIG_PATH)
 
-    _DEFAULT_CONFIG_PATH: Path = Path("ipy.yml")
+    _DEFAULT_CONFIG_PATH: Path = Path.cwd() / "ipy.yml"
 
     @classmethod
     def from_primitives(
