@@ -22,6 +22,7 @@ def version_callback(value: bool) -> None:
 
 @app.callback(invoke_without_command=True)
 def main(
+    ctx: typer.Context,
     version: Annotated[
         bool | None,
         typer.Option(
@@ -32,7 +33,9 @@ def main(
             is_eager=True,
         ),
     ] = None,
-) -> None: ...  # The version_callback will handle the version display
+) -> None:
+    if ctx.invoked_subcommand is None:
+        console.print(ctx.get_help())
 
 
 app.add_typer(init.app)
