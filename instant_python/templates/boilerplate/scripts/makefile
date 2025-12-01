@@ -127,6 +127,13 @@ format:  ## Apply ruff format fix.
 	{% elif has_uv %}
 	@uvx ruff format src test
 	{% endif %}
+
+.PHONY: autostyle
+autostyle:  ## Apply all code style fixes.
+	@echo "\n⌛ Applying all code style fixes...\n"
+	@make format
+	@make lint
+	@git add . && git commit -m "style: apply code style fixes"
 {% endif %}
 {% if has_pre_commit_hooks %}
 .PHONY: secrets
