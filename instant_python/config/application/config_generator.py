@@ -10,8 +10,11 @@ class ConfigGenerator:
 
     def execute(self) -> None:
         answers = self._ask_project_configuration_to_user()
-        config = ConfigSchema.from_primitives(answers)
+        config = self._create_configuration_based_on_answers(answers)
         self._save_configuration(config)
+
+    def _create_configuration_based_on_answers(self, answers: dict) -> ConfigSchema:
+        return ConfigSchema.from_primitives(answers)
 
     def _save_configuration(self, config: ConfigSchema) -> None:
         self._repository.write(config)
