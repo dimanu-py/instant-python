@@ -15,6 +15,7 @@ dependencies = [
     "jinja2>=3.1.6",
     "questionary>=2.1.0",
     "pyyaml>=6.0.2",
+    "posthog>=6.9.3",
 ]
 classifiers = [
     "Environment :: Console",
