@@ -3,7 +3,7 @@ from pathlib import Path
 
 from expects import expect, raise_error, equal
 
-from instant_python.initialize.infra.persistence.yaml_config_repository import (
+from instant_python.shared.infra.persistence.yaml_config_repository import (
     YamlConfigRepository,
     ConfigurationFileNotFound,
 )

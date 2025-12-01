@@ -4,7 +4,7 @@ from expects import expect
 
 from instant_python.config.application.config_generator import ConfigGenerator
 from instant_python.config.domain.question_wizard import QuestionWizard
-from instant_python.initialize.domain.config_repository import ConfigRepository
+from instant_python.shared.domain.config_repository import ConfigRepository
 from test.shared.domain.mothers.config_schema_mother import ConfigSchemaMother
 
 
