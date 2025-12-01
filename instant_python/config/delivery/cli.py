@@ -3,7 +3,7 @@ import typer
 from instant_python.config.application.config_generator import ConfigGenerator
 from instant_python.config.infra.question_wizard.step.questionary import Questionary
 from instant_python.config.infra.question_wizard.questionary_console_wizard import QuestionaryConsoleWizard
-from instant_python.config.infra.writer.yaml_config_writer import YamlConfigWriter
+from instant_python.initialize.infra.persistence.yaml_config_repository import YamlConfigRepository
 
 app = typer.Typer()
 
@@ -14,6 +14,6 @@ def generate_ipy_configuration_file() -> None:
         question_wizard=QuestionaryConsoleWizard(
             questionary=Questionary(),
         ),
-        writer=YamlConfigWriter(),
+        repository=YamlConfigRepository(),
     )
     config_generator.execute()
