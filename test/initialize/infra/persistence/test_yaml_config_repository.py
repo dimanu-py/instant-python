@@ -1,17 +1,13 @@
-import json
-import shutil
 import tempfile
 from pathlib import Path
 
-from approvaltests import verify
-from expects import expect, be_none, raise_error, be_true, equal
+from expects import expect, raise_error, equal
 
 from instant_python.initialize.infra.persistence.yaml_config_repository import (
     YamlConfigRepository,
     ConfigurationFileNotFound,
 )
 from test.shared.domain.mothers.config_schema_mother import ConfigSchemaMother
-from test.utils import resources_path
 
 
 class TestYamlConfigRepository:
@@ -21,13 +17,14 @@ class TestYamlConfigRepository:
         self._repository = YamlConfigRepository()
 
     def test_should_write_and_read_valid_config_on_working_directory(self) -> None:
-        config = ConfigSchemaMother.any()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_dir_path = Path(temp_dir)
+            config = ConfigSchemaMother.with_config_path(temp_dir_path / self._CONFIG_FILE)
 
-        self._repository.write(config)
+            self._repository.write(config)
 
-        saved_config = self._repository.read(config.config_file_path)
-        expect(saved_config.to_primitives()).to(equal(config.to_primitives()))
-        config.config_file_path.unlink()
+            saved_config = self._repository.read(config.config_file_path)
+            expect(saved_config.to_primitives()).to(equal(config.to_primitives()))
 
     def test_should_raise_error_when_file_to_read_does_not_exist(self) -> None:
         config_path = Path("non/existing/path/config.yml")
