@@ -1,0 +1,280 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/dimanu-py/instant-python/main/schemas/ipy-schema.json",
+  "title": "Instant Python Configuration",
+  "description": "Configuration schema for instant-python project generation tool",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["general", "dependencies", "template", "git"],
+  "properties": {
+    "general": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "General project configuration",
+      "required": [
+        "slug",
+        "source_name",
+        "description",
+        "version",
+        "author",
+        "license",
+        "python_version",
+        "dependency_manager"
+      ],
+      "properties": {
+        "slug": {
+          "type": "string",
+          "description": "Project folder name (will be created as a directory)",
+          "minLength": 1,
+          "pattern": "^[a-zA-Z_-]+$"
+        },
+        "source_name": {
+          "type": "string",
+          "description": "Name of the source code directory",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Project description"
+        },
+        "version": {
+          "type": ["string", "number"],
+          "description": "Initial project version",
+          "default": "0.1.0"
+        },
+        "author": {
+          "type": "string",
+          "description": "Project author name",
+          "minLength": 1
+        },
+        "license": {
+          "type": "string",
+          "description": "Project license type",
+          "enum": ["MIT", "Apache", "GPL"]
+        },
+        "python_version": {
+          "type": "string",
+          "description": "Python version for the project",
+          "enum": ["3.10", "3.11", "3.12", "3.13"]
+        },
+        "dependency_manager": {
+          "type": "string",
+          "description": "Package and dependency manager",
+          "enum": ["uv", "pdm"]
+        },
+        "year": {
+          "type": "integer",
+          "description": "Year for license and copyright (defaults to current year)",
+          "minimum": 2000,
+          "maximum": 2100
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "List of project dependencies",
+      "items": {
+        "type": "object",
+        "required": ["name", "version"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Package name",
+            "minLength": 1
+          },
+          "version": {
+            "type": ["string", "number"],
+            "description": "Package version (use 'latest' for latest version)",
+            "default": "latest"
+          },
+          "is_dev": {
+            "type": "boolean",
+            "description": "Whether this is a development dependency",
+            "default": false
+          },
+          "group": {
+            "type": "string",
+            "description": "Dependency group (only for dev dependencies)",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "group": {
+                  "minLength": 1
+                }
+              },
+              "required": ["group"]
+            },
+            "then": {
+              "properties": {
+                "is_dev": {
+                  "const": true
+                }
+              },
+              "required": ["is_dev"]
+            }
+          }
+        ]
+      }
+    },
+    "template": {
+      "type": "object",
+      "description": "Project template configuration",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Template type to use",
+          "enum": [
+            "domain_driven_design",
+            "clean_architecture",
+            "standard_project",
+            "custom"
+          ]
+        },
+        "built_in_features": {
+          "type": "array",
+          "description": "Built-in features to include in the project",
+          "items": {
+            "type": "string",
+            "enum": [
+              "value_objects",
+              "github_actions",
+              "github_issues_template",
+              "makefile",
+              "logger",
+              "event_bus",
+              "async_sqlalchemy",
+              "async_alembic",
+              "fastapi_application",
+              "precommit_hook",
+              "citation_file",
+              "security_file"
+            ]
+          },
+          "uniqueItems": true,
+          "default": []
+        },
+        "specify_bounded_context": {
+          "type": "boolean",
+          "description": "Whether to specify bounded context (only for DDD template)",
+          "default": false
+        },
+        "bounded_context": {
+          "type": ["string", "null"],
+          "description": "Bounded context name (only for DDD template when specify_bounded_context is true)",
+          "default": null
+        },
+        "aggregate_name": {
+          "type": ["string", "null"],
+          "description": "Aggregate name (only for DDD template when specify_bounded_context is true)",
+          "default": null
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "not": {
+                  "const": "domain_driven_design"
+                }
+              }
+            },
+            "required": ["name"]
+          },
+          "then": {
+            "properties": {
+              "specify_bounded_context": {
+                "const": false
+              },
+              "bounded_context": {
+                "const": null
+              },
+              "aggregate_name": {
+                "const": null
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "specify_bounded_context": {
+                "const": true
+              }
+            },
+            "required": ["specify_bounded_context"]
+          },
+          "then": {
+            "required": ["bounded_context", "aggregate_name"],
+            "properties": {
+              "bounded_context": {
+                "type": "string",
+                "minLength": 1
+              },
+              "aggregate_name": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "git": {
+      "type": "object",
+      "description": "Git repository configuration",
+      "required": ["initialize"],
+      "properties": {
+        "initialize": {
+          "type": "boolean",
+          "description": "Whether to initialize a git repository"
+        },
+        "username": {
+          "type": ["string", "null"],
+          "description": "Git username (required if initialize is true)",
+          "default": null
+        },
+        "email": {
+          "type": ["string", "null"],
+          "description": "Git email (required if initialize is true)",
+          "format": "email",
+          "default": null
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "initialize": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": ["username", "email"],
+            "properties": {
+              "username": {
+                "type": "string",
+                "minLength": 1
+              },
+              "email": {
+                "type": "string",
+                "minLength": 1,
+                "format": "email"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
