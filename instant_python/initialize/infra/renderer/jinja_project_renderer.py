@@ -12,7 +12,7 @@ from instant_python.shared.supported_templates import SupportedTemplates
 
 
 class JinjaProjectRenderer(ProjectRenderer):
-    _MAIN_STRUCTURE_TEMPLATE_FILE = "main_structure.yml.j2"
+    _MAIN_STRUCTURE_TEMPLATE_FILE = "main_structure.yml"
 
     def __init__(self, env: JinjaEnvironment) -> None:
         self._env = env
