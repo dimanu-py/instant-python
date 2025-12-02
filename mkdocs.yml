@@ -80,6 +80,7 @@ nav:
       - Config command: guide/command_config.md
       - Init command: guide/command_init.md
       - Custom Projects: guide/custom_projects.md
+      - Template Reference: guide/template_reference.md
   - Development:
       - Contributing: development/contributing.md
       - Releases: development/releases.md
