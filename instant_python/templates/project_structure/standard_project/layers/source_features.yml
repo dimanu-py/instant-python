@@ -1,0 +1,13 @@
+{% import "macros.j2" as macros with context %}
+{%- set source_features = [
+  {"feature": "value_objects", "template": "errors.yml"},
+  {"feature": "event_bus", "template": "events/event_bus_domain.yml"},
+  {"feature": "event_bus", "template": "events/event_bus_infra.yml"},
+  {"feature": "logger", "template": "logger.yml"},
+  {"feature": "async_sqlalchemy", "template": "persistence/async_sqlalchemy.yml"},
+  {"feature": "async_alembic", "template": "persistence/alembic_migrator.yml"},
+  {"feature": "fastapi_application", "template": "fastapi/fastapi_app.yml"},
+  {"feature": "fastapi_application", "template": "fastapi/fastapi_infra.yml"},
+  {"feature": "fastapi_application", "template": "fastapi/fastapi_domain.yml"}
+] %}
+{{ macros.render_children_for(source_features, 2) }}

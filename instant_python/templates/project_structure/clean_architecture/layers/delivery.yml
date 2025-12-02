@@ -1,6 +1,6 @@
 {% import "macros.j2" as macros with context %}
 {%- set delivery_features = [
-  {"feature": "fastapi_application", "template": "fastapi/fastapi_app.yml.j2"}
+  {"feature": "fastapi_application", "template": "fastapi/fastapi_app.yml"}
 ] %}
 - name: delivery
   type: directory

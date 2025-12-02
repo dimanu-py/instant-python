@@ -1,0 +1,10 @@
+{% import "macros.j2" as macros with context %}
+{%- set domain_features = [
+  {"feature": "value_objects", "template": "errors.yml"},
+  {"feature": "event_bus", "template": "events/event_bus_domain.yml"},
+  {"feature": "fastapi_application", "template": "fastapi/fastapi_domain.yml"}
+] %}
+- name: domain
+  type: directory
+  python: True
+{{ macros.render_children_for(domain_features, 2) }}

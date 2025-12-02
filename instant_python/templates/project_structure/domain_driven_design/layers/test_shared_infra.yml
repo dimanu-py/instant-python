@@ -1,7 +1,7 @@
 {% import "macros.j2" as macros with context %}
 {%- set infra_features = [
-  {"feature": "event_bus", "template": "events/mock_event_bus.yml.j2"},
-  {"feature": "async_sqlalchemy", "template": "persistence/async_engine_conftest.yml.j2"},
+  {"feature": "event_bus", "template": "events/mock_event_bus.yml"},
+  {"feature": "async_sqlalchemy", "template": "persistence/async_engine_conftest.yml"},
 ] %}
 - name: infra
   type: directory

@@ -1,9 +1,0 @@
-{% import "macros.j2" as macros with context %}
-- name: test
-  type: directory
-  python: True
-  children:
-{{ macros.include_block("domain_driven_design/layers/test_shared.yml.j2", 4) }}
-{%- if template.specify_bounded_context %}
-{{ macros.include_block("domain_driven_design/layers/bounded_context.yml.j2", 4) }}
-{%- endif %}

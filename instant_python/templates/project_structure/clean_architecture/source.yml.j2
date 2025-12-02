@@ -1,9 +1,0 @@
-{% import "macros.j2" as macros with context %}
-- name: {{ general.source_name }}
-  type: directory
-  python: True
-  children:
-{{ macros.include_block("clean_architecture/layers/delivery.yml.j2", 4) }}
-{{ macros.include_block("clean_architecture/layers/domain.yml.j2", 4) }}
-{{ macros.include_block("clean_architecture/layers/application.yml.j2", 4) }}
-{{ macros.include_block("clean_architecture/layers/infra.yml.j2", 4) }}

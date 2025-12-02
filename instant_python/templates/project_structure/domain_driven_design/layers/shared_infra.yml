@@ -1,0 +1,12 @@
+{% import "macros.j2" as macros with context %}
+{%- set infra_features = [
+  {"feature": "event_bus", "template": "events/event_bus_infra.yml"},
+  {"feature": "logger", "template": "logger.yml"},
+  {"feature": "async_sqlalchemy", "template": "persistence/async_sqlalchemy.yml"},
+  {"feature": "async_alembic", "template": "persistence/alembic_migrator.yml"},
+  {"feature": "fastapi_application", "template": "fastapi/fastapi_infra.yml"}
+] %}
+- name: infra
+  type: directory
+  python: True
+{{ macros.render_children_for(infra_features, 2) }}

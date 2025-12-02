@@ -9,10 +9,10 @@
 {% if has_domain or has_infra %}
   children:
 {% if has_domain %}
-{{ macros.include_block("domain_driven_design/layers/shared_domain.yml.j2", 4) }}
+{{ macros.include_block("domain_driven_design/layers/shared_domain.yml", 4) }}
 {% endif %}
 {% if has_infra %}
-{{ macros.include_block("domain_driven_design/layers/shared_infra.yml.j2", 4) }}
+{{ macros.include_block("domain_driven_design/layers/shared_infra.yml", 4) }}
 {% endif %}
 {% endif %}
 

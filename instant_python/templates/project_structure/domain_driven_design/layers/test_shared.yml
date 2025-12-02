@@ -1,0 +1,8 @@
+{% import "macros.j2" as macros with context %}
+- name: shared
+  type: directory
+  python: True
+  children:
+{{ macros.include_block("domain_driven_design/layers/test_shared_delivery.yml", 4) }}
+{{ macros.include_block("domain_driven_design/layers/test_shared_domain.yml", 4) }}
+{{ macros.include_block("domain_driven_design/layers/test_shared_infra.yml", 4) }}

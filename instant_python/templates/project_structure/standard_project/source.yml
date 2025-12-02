@@ -2,4 +2,4 @@
 - name: {{ general.source_name }}
   type: directory
   python: True
-{{ macros.include_block("standard_project/layers/source_features.yml.j2", 0) }}
+{{ macros.include_block("standard_project/layers/source_features.yml", 0) }}

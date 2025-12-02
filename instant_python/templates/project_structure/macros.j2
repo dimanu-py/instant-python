@@ -35,8 +35,8 @@
 
   Example:
     {% set features = [
-      {"feature": "event_bus", "template": "event_bus_domain.yml.j2"},
-      {"feature": "value_objects", "template": "errors.yml.j2"}
+      {"feature": "event_bus", "template": "event_bus_domain.yml"},
+      {"feature": "value_objects", "template": "errors.yml"}
     ] %}
     {{ render_features(features, 8) }}
 #}

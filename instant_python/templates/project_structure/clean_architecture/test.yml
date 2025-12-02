@@ -1,0 +1,9 @@
+{% import "macros.j2" as macros with context %}
+- name: test
+  type: directory
+  python: True
+  children:
+{{ macros.include_block("clean_architecture/layers/test_delivery.yml", 4) }}
+{{ macros.include_block("clean_architecture/layers/test_domain.yml", 4) }}
+{{ macros.include_block("clean_architecture/layers/test_application.yml", 4) }}
+{{ macros.include_block("clean_architecture/layers/test_infra.yml", 4) }}

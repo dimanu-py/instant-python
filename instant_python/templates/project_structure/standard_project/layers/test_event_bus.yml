@@ -3,4 +3,4 @@
   type: directory
   python: True
   children:
-{{ macros.include_block("events/mock_event_bus.yml.j2", 4) }}
+{{ macros.include_block("events/mock_event_bus.yml", 4) }}

@@ -1,0 +1,38 @@
+{% import "macros.j2" as macros with context %}
+{# === Core Project Structure === #}
+{{ macros.include_block("domain_driven_design/source.yml", 0) }}
+{{ macros.include_block("domain_driven_design/test.yml", 0) }}
+{# === Base Configuration Files === #}
+{{ macros.include_block("config_files/pyproject.yml", 0) }}
+{{ macros.include_block("config_files/python_version.yml", 0) }}
+{{ macros.include_block("documentation/license.yml", 0) }}
+{# === CI/CD and Automation Features === #}
+{% set ci_cd_features = [
+    {"feature": "github_actions", "template": "github/github_action.yml"},
+    {"feature": "github_actions", "template": "github/makefile.yml"},
+    {"feature": "github_issues_template", "template": "github/github_issues_template.yml"},
+    {"feature": "makefile", "template": "github/makefile.yml"},
+    {"feature": "precommit_hook", "template": "github/precommit_hook.yml"},
+    {"feature": "precommit_hook", "template": "github/makefile.yml"}
+] %}
+{{ macros.render_features(ci_cd_features, 0) }}
+{# === Git Features === #}
+{% if git.initialize %}
+{{ macros.include_block("config_files/gitignore.yml", 0) }}
+{{ macros.include_block("documentation/readme.yml", 0) }}
+{% endif %}
+{# === Testing and Type Checking === #}
+{% if dependencies | has_dependency("pytest") %}
+{{ macros.include_block("config_files/pytest.yml", 0) }}
+{% endif %}
+{% if dependencies | has_dependency("mypy") %}
+{{ macros.include_block("config_files/mypy.yml", 0) }}
+{% endif %}
+{# === Database Migration === #}
+{{ macros.render_feature_if_enabled("async_alembic", "persistence/async_alembic.yml", 0) }}
+{# === Documentation and Metadata === #}
+{% set doc_features = [
+    {"feature": "citation_file", "template": "documentation/citation.yml"},
+    {"feature": "security_file", "template": "documentation/security.yml"}
+] %}
+{{ macros.render_features(doc_features, 0) }}
