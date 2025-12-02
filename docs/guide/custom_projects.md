@@ -21,15 +21,15 @@ Follow these steps to create and use your first custom template:
 
     ```
     my_templates/
-    ├── main_structure.yml.j2    (required: defines your project structure)
+    ├── main_structure.yml    (required: defines your project structure)
     ├── authentication.py         (optional: custom file templates)
     ├── database.py              (optional: more templates)
     └── config.py                (optional: more templates)
     ```
 
-2. Define Your Project Structure: create a file named `main_structure.yml.j2` in your template folder. 
+2. Define Your Project Structure: create a file named `main_structure.yml` in your template folder. 
 
-    !!! warning "File *main_structure.yml.j2* is required"
+    !!! warning "File *main_structure.yml* is required"
         This is the **required** file that defines what your projects will look like.
 
 3. (Optional) Add Custom File Templates: create any additional template files (like `authentication.py`, `config.py`, etc.) that 
@@ -49,13 +49,13 @@ Your custom template must follow specific rules to generate projects correctly. 
 
 ### File Naming & Location
 
-- **File name:** Your main structure file **must** be named exactly `main_structure.yml.j2`
+- **File name:** Your main structure file **must** be named exactly `main_structure.yml`
 - **Location:** This file **must** be at the root of your custom templates folder
 - **Format:** Must be a YAML file (`.yml` extension)
 
 ### Required Elements
 
-- **pyproject.toml:** You **must** include a `pyproject.toml` file in your `main_structure.yml.j2` structure. This 
+- **pyproject.toml:** You **must** include a `pyproject.toml` file in your `main_structure.yml` structure. This 
 is required for the dependency manager to work. If missing, `instant-python` will raise an error.
 
 ### Structure Definition Format
@@ -109,7 +109,7 @@ gitignore, README and pyproject files.
 !!! important
     Remember that the _pyproject.toml_ file is always required for `instant-python` to be able to set up the environment of your project.
 
-Create a file named `main_structure.yml.j2` in your templates folder with the following content:
+Create a file named `main_structure.yml` in your templates folder with the following content:
 
 ```yaml
 - name: src
@@ -189,7 +189,7 @@ def authenticate_user(username: str, password: str) -> bool:
     return username == "admin" and password == "secret"
 ```
 
-**Step 2:** Reference this template in your `main_structure.yml.j2`:
+**Step 2:** Reference this template in your `main_structure.yml`:
 
 ```yaml
 - name: src
