@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/dimanu-py/instant-python/main/schemas/main-structure-schema.json",
+  "title": "Custom Template Structure Configuration",
+  "description": "Schema for defining custom project structure in instant-python templates. This file must be named 'main_structure.yml.j2' and placed in your custom template directory.",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "oneOf": [
+      {
+        "$ref": "#/definitions/directoryElement"
+      },
+      {
+        "$ref": "#/definitions/fileElement"
+      }
+    ]
+  },
+  "definitions": {
+    "directoryElement": {
+      "type": "object",
+      "description": "A directory element in the project structure",
+      "required": ["name", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Directory name",
+          "minLength": 1,
+          "pattern": "^[^/\\\\:*?\"<>|]+$"
+        },
+        "type": {
+          "type": "string",
+          "const": "directory",
+          "description": "Element type"
+        },
+        "python": {
+          "type": "boolean",
+          "description": "Whether this directory is a Python module (will create __init__.py)",
+          "default": false
+        },
+        "children": {
+          "type": "array",
+          "description": "Child elements (files or directories) within this directory",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/directoryElement"
+              },
+              {
+                "$ref": "#/definitions/fileElement"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "fileElement": {
+      "type": "object",
+      "description": "A file element in the project structure",
+      "required": ["name", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "File name (without extension)",
+          "minLength": 1,
+          "pattern": "^[^/\\\\:*?\"<>|]+$"
+        },
+        "type": {
+          "type": "string",
+          "const": "file",
+          "description": "Element type"
+        },
+        "extension": {
+          "type": "string",
+          "description": "File extension (must include the dot, e.g., .py, .md, .toml)",
+          "pattern": "^\\.[a-zA-Z0-9]+$"
+        },
+        "template": {
+          "type": "string",
+          "description": "Path to the template file that will be rendered for this file",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
+
