@@ -2,6 +2,77 @@
 
 <!-- version list -->
 
+## v0.20.0 (2025-12-05)
+
+### ✨ Features
+
+- **schema**: Add JSON schema for custom project template structure to enable syntax and key/value
+  detection
+  ([`bf918b5`](https://github.com/dimanu-py/instant-python/commit/bf918b5b1efdcb9ddc38786814a5038144ca958b))
+
+- **schema**: Add JSON schema for instant-python project configuration to enable syntax and
+  key/value detection when modifying ipy config file manually
+  ([`2e3d4f7`](https://github.com/dimanu-py/instant-python/commit/2e3d4f786020ead95324784497015e698477a891))
+
+- **templates**: Add autostyle command to makefile to automatically format, lint and commit modified
+  files
+  ([`96c4610`](https://github.com/dimanu-py/instant-python/commit/96c46109c811198b70598df2c9f3e0674f6be1e7))
+
+- **initialize**: Implement 'write' method in yaml config repository to be able to write ipy config
+  file in working directory
+  ([`ca04b4c`](https://github.com/dimanu-py/instant-python/commit/ca04b4c97392970399ed7b8a6e3a86984ed6779b))
+
+- **initialize**: Add 'write' method to config repository to be able to use it with config command
+  and move it to shared
+  ([`e081a34`](https://github.com/dimanu-py/instant-python/commit/e081a342ccac66e45cef0cad728681c5aa9f301d))
+
+### ⚙️ Build System
+
+- **makefile**: Add command to makefile to automatically format, lint and commit modified files
+  ([`2837703`](https://github.com/dimanu-py/instant-python/commit/28377039628f755b503192aef85723f3e3b4704c))
+
+- **pyproject**: Add posthog dependency
+  ([`b3df1c0`](https://github.com/dimanu-py/instant-python/commit/b3df1c0587709a39e9e702142bdad4e8e293b07a))
+
+- **makefile**: Modify add-dep and remove-dep commands in makefile to not need scripts files
+  ([`b9d5286`](https://github.com/dimanu-py/instant-python/commit/b9d528636f5a051c865f4ea45196443ff322b55e))
+
+### ♻️ Refactoring
+
+- **templates**: Rename all templates for project structure to remove the '.j2' extension as it is
+  not need it
+  ([`cde9f87`](https://github.com/dimanu-py/instant-python/commit/cde9f87670273e6711fd08919c525208e7075fd9))
+
+- **initialize**: Modify file name for project structure template to not include j2 extension
+  ([`e8cd1f1`](https://github.com/dimanu-py/instant-python/commit/e8cd1f1aadb637f0a359783f11f95b164ca4cbd8))
+
+- **cli**: Modify main callback to print ipy help if no subcommand is called
+  ([`1784a3d`](https://github.com/dimanu-py/instant-python/commit/1784a3d129253cd197640680fbd85351ff074ec8))
+
+- **initialize**: Move config repository port and its adapter to shared folder so it can be properly
+  shared among commands
+  ([`438f89c`](https://github.com/dimanu-py/instant-python/commit/438f89cdf75ff58ce0477e88a54cad55ad4e93ae))
+
+- **config**: Remove legacy config writer now that its behavior has been unified in the config
+  repository
+  ([`3bcd3c9`](https://github.com/dimanu-py/instant-python/commit/3bcd3c9d858e342d9deca9bdc7bcd5db766de94b))
+
+- **config**: Extract semantic method to keep use case with the same abstraction level and make it
+  more readable
+  ([`7077e6a`](https://github.com/dimanu-py/instant-python/commit/7077e6a50a23df5e3d080b89265a935d83d8d68c))
+
+- **config**: Modify config generator dependency to receive a config repository instead of a config
+  writer
+  ([`89ed351`](https://github.com/dimanu-py/instant-python/commit/89ed35135d679a4fb4375eece5329162c454fb91))
+
+- **initialize**: Modify 'write' method so it uses absolute config file path instead of creating it
+  ([`5acc795`](https://github.com/dimanu-py/instant-python/commit/5acc795ba127292d5144d18da3ba718faf880b9e))
+
+- **shared**: Make default config file path absolute from users root folder to avoid incorrect
+  destination and relative path errors
+  ([`074e4a7`](https://github.com/dimanu-py/instant-python/commit/074e4a76f5319f2d167243935ca449a3ff80ca10))
+
+
 ## v0.19.1 (2025-11-27)
 
 ### 🪲 Bug Fixes
