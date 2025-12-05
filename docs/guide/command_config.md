@@ -9,6 +9,7 @@ project.
 
 - [Overview](#overview) - What the config command does
 - [Usage](#usage) - How to run the config command
+- [JSON Schema Support](#json-schema-support) - IDE autocompletion and validation
 - [Configuration File Structure](#configuration-file-structure-and-restrictions) - All available options and their restrictions
     - [General](#general) - Project metadata
     - [Template](#template) - Project structure and features
@@ -112,6 +113,69 @@ Each dependency can have the following fields and restrictions:
 | `version`    | The version of the dependency to install.        | Must be a valid version or `latest`         | Yes                   |
 | `development` | Whether the dependency is a development dependency. | Must be either `true` or `false`.          | No                    |
 | `group`      | The development dependency group.                 | Only available if `development` is `true`. | Based on restrictions |
+
+## JSON Schema Support
+
+`instant-python` provides a JSON Schema to help you write and validate your configuration files with autocompletion and validation in your IDE.
+
+### What is a JSON Schema?
+
+A JSON Schema is a specification that defines the structure and validation rules for JSON and YAML files. By using a schema, your IDE can:
+
+- **Autocomplete** field names and values
+- **Validate** your configuration in real-time
+- **Show inline documentation** for each field
+- **Detect errors** before running the command
+
+### How to Use the Schema
+
+The schema is available at:
+```
+https://raw.githubusercontent.com/dimanu-py/instant-python/main/schemas/ipy-schema.json
+```
+
+!!! tip "Schema autodetection"
+If your configuration file is named `ipy.yml`, some IDEs may automatically detect and apply the schema
+from [SchemaStore](https://www.schemastore.org/). However, as it may take some time to updated and listed there,
+we recommend configuring it manually to ensure you are using the latest version.
+
+#### For Visual Studio Code
+
+Add the following line at the top of your `ipy.yml` file:
+
+```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/dimanu-py/instant-python/main/schemas/ipy-schema.json
+
+general:
+  slug: my-project
+  # ...
+```
+
+Alternatively, you can configure it globally in your VS Code settings (`.vscode/settings.json`):
+
+```json
+{
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/dimanu-py/instant-python/main/schemas/ipy-schema.json": "ipy.yml"
+  }
+}
+```
+
+#### For PyCharm / IntelliJ IDEA
+
+1. Open your `ipy.yml` file
+2. At the top of the file, add:
+   ```yaml
+   # yaml-language-server: $schema=https://raw.githubusercontent.com/dimanu-py/instant-python/main/schemas/ipy-schema.json
+   ```
+3. PyCharm will automatically detect and use the schema
+
+Alternatively, you can configure it manually:
+
+1. Go to **Settings** → **Languages & Frameworks** → **Schemas and DTDs** → **JSON Schema Mappings**
+2. Click the **+** button to add a new mapping
+3. Set the **Schema URL** to: `https://raw.githubusercontent.com/dimanu-py/instant-python/main/schemas/ipy-schema.json`
+4. Add a file pattern: `ipy.yml`
 
 ## Configuration File Examples
 

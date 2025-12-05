@@ -99,6 +99,71 @@ When you specify a `template` field for a file:
 
 This means you can optionally use built-in templates without having to provide your own.
 
+## JSON Schema Support for Custom Templates
+
+`instant-python` provides a JSON Schema specifically designed to help you create your `main_structure.yml` file with IDE assistance.
+
+### What is a JSON Schema?
+
+A JSON Schema is a specification that defines the structure and validation rules for JSON and YAML files. By using a schema when writing your custom template structure, your IDE can:
+
+- **Autocomplete** field names (like `name`, `type`, `python`, `children`, etc.)
+- **Validate** your structure definition in real-time
+- **Show inline documentation** explaining what each field does
+- **Detect errors** before generating your project (like missing required fields or invalid values)
+
+### How to Use the Schema
+
+The schema for custom template structures is available at:
+```
+https://raw.githubusercontent.com/dimanu-py/instant-python/main/schemas/main-structure-schema.json
+```
+
+!!! tip "Schema autodetection"
+If your configuration file is named `ipy.yml`, some IDEs may automatically detect and apply the schema
+from [SchemaStore](https://www.schemastore.org/). However, as it may take some time to updated and listed there,
+we recommend configuring it manually to ensure you are using the latest version.
+
+#### For Visual Studio Code
+
+Add the following line at the top of your `main_structure.yml` file:
+
+```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/dimanu-py/instant-python/main/schemas/main-structure-schema.json
+
+- name: src
+  type: directory
+  python: True
+  children:
+    # ...
+```
+
+Alternatively, you can configure it globally in your VS Code settings (`.vscode/settings.json`) for all your custom templates:
+
+```json
+{
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/dimanu-py/instant-python/main/schemas/main-structure-schema.json": "**/main_structure.yml"
+  }
+}
+```
+
+#### For PyCharm / IntelliJ IDEA
+
+1. Open your `main_structure.yml` file
+2. At the top of the file, add:
+   ```yaml
+   # yaml-language-server: $schema=https://raw.githubusercontent.com/dimanu-py/instant-python/main/schemas/main-structure-schema.json
+   ```
+3. PyCharm will automatically detect and use the schema
+
+Alternatively, you can configure it manually:
+
+1. Go to **Settings** → **Languages & Frameworks** → **Schemas and DTDs** → **JSON Schema Mappings**
+2. Click the **+** button to add a new mapping
+3. Set the **Schema URL** to: `https://raw.githubusercontent.com/dimanu-py/instant-python/main/schemas/main-structure-schema.json`
+4. Add a file pattern: `main_structure.yml`
+
 ## Examples
 
 ### Hexagonal Architecture Project
