@@ -1,3 +1,5 @@
+import uuid
+
 from posthog import Posthog
 
 from instant_python.metrics.domain.metric_reporter import MetricReporter
@@ -10,8 +12,13 @@ class PostHogMetricReporter(MetricReporter):
         self._client = Posthog(
             config.api_key,
             host=config.host,
-            disabled=config.disabled_for_testing,
+            enable_exception_autocapture=True,
         )
 
     def send(self, metrics: UsageMetricsData) -> None:
-        raise NotImplementedError
+        self._client.capture(
+            distinct_id=uuid.getnode(),
+            event="ipy_usage",
+            properties=metrics.to_primitives(),
+        )
+        self._client.flush()

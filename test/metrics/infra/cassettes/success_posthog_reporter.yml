@@ -1,0 +1,51 @@
+interactions:
+- request:
+    body: '{"batch": [{"properties": {"ipy_version": "1.2.3", "operating_system":
+      "linux", "python_version": "3.12", "command": "init", "success": true, "template":
+      "clean_architecture", "built_in_features": ["makefile"], "error_message": null,
+      "$python_runtime": "CPython", "$python_version": "3.12.10", "$os": "Linux",
+      "$os_version": "24.04", "$lib": "posthog-python", "$lib_version": "7.0.1", "$geoip_disable":
+      true}, "timestamp": "2025-12-09T12:33:35.113284+00:00", "distinct_id": "274057121278981",
+      "event": "ipy_usage", "uuid": "78ff1635-ce8d-45e0-bb19-24762abed923"}], "historical_migration":
+      false, "sentAt": "2025-12-09T12:33:35.600626+00:00", "api_key": "****"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '703'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - posthog-python/7.0.1
+    method: POST
+    uri: https://eu.i.posthog.com/batch/
+  response:
+    body:
+      string: '{"status":"Ok"}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '15'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 09 Dec 2025 12:33:35 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      access-control-allow-credentials:
+      - 'true'
+      server:
+      - envoy
+      vary:
+      - origin, access-control-request-method, access-control-request-headers
+      x-envoy-upstream-service-time:
+      - '48'
+    status:
+      code: 200
+      message: OK
+version: 1
