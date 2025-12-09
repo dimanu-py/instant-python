@@ -13,6 +13,7 @@ class PostHogMetricReporter(MetricReporter):
             config.api_key,
             host=config.host,
             enable_exception_autocapture=True,
+            sync_mode=True,
         )
 
     def send(self, metrics: UsageMetricsData) -> None:
