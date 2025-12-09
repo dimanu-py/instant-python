@@ -17,9 +17,12 @@ class PostHogMetricReporter(MetricReporter):
         )
 
     def send(self, metrics: UsageMetricsData) -> None:
-        self._client.capture(
-            distinct_id=uuid.getnode(),
-            event="ipy_usage",
-            properties=metrics.to_primitives(),
-        )
-        self._client.flush()
+        try:
+            self._client.capture(
+                distinct_id=uuid.getnode(),
+                event="ipy_usage",
+                properties=metrics.to_primitives(),
+            )
+            self._client.flush()
+        except Exception:
+            pass  # Fire and forget strategy to avoid impacting user experience
