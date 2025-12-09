@@ -81,6 +81,7 @@ test = [
     "pytest-sugar>=1.0.0",
     "pytest-watch>=4.2.0",
     "tox>=4.25.0",
+    "vcrpy>=4.3.0",
     "vermin>=1.6.0",
 ]
 
