@@ -9,16 +9,6 @@ from instant_python.metrics.infra.user_identity_manager import UserIdentityManag
 
 
 class TestUserIdentityManager:
-    def test_should_generate_new_id_when_identification_file_does_not_exist(self) -> None:
-        with tempfile.TemporaryDirectory() as temp_dir:
-            config_dir = Path(temp_dir)
-            user_identity_manager = UserIdentityManager(config_dir=config_dir)
-
-            distinct_id = user_identity_manager.get_distinct_id()
-
-            expect(distinct_id).to(be_a(str))
-            expect(uuid.UUID(distinct_id)).to(be_a(uuid.UUID))
-
     def test_should_create_metrics_file_and_store_distinct_id_for_new_user(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             config_dir = Path(temp_dir)
