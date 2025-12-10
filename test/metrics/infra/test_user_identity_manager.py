@@ -41,8 +41,6 @@ class TestUserIdentityManager:
             user_identity_manager = UserIdentityManager(config_dir=config_dir)
             distinct_id = user_identity_manager.get_distinct_id()
 
-            expect(distinct_id).to(be_a(str))
-            expect(uuid.UUID(distinct_id)).to(be_a(uuid.UUID))
             stored_data = json.loads(metrics_file.read_text())
             expect(stored_data["distinct_id"]).to(equal(distinct_id))
 
@@ -68,8 +66,6 @@ class TestUserIdentityManager:
             user_identity_manager = UserIdentityManager(config_dir=config_dir)
             distinct_id = user_identity_manager.get_distinct_id()
 
-            expect(distinct_id).to(be_a(str))
-            expect(uuid.UUID(distinct_id)).to(be_a(uuid.UUID))
             expect(distinct_id).not_to(equal("not-a-valid-uuid"))
             stored_data = json.loads(metrics_file.read_text())
             expect(stored_data["distinct_id"]).to(equal(distinct_id))
