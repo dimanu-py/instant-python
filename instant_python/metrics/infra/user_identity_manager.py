@@ -10,8 +10,11 @@ class UserIdentityManager:
 
     def get_distinct_id(self) -> str:
         if self._metrics_file and self._metrics_file.exists():
-            content = json.loads(self._metrics_file.read_text())
-            return content["distinct_id"]
+            try:
+                content = json.loads(self._metrics_file.read_text())
+                return content["distinct_id"]
+            except (json.JSONDecodeError, KeyError):
+                pass
 
         distinct_id = str(uuid.uuid4())
 
