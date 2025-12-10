@@ -18,9 +18,15 @@ class UserIdentityManager:
 
         try:
             content = json.loads(self._metrics_file.read_text())
-            return content["distinct_id"]
-        except (json.JSONDecodeError, KeyError):
+            distinct_id = content["distinct_id"]
+            self._ensure_distinct_id_has_valid_format(distinct_id)
+            return distinct_id
+        except (json.JSONDecodeError, KeyError, ValueError):
             return None
+
+    @staticmethod
+    def _ensure_distinct_id_has_valid_format(distinct_id: str) -> None:
+        uuid.UUID(distinct_id)
 
     def _create_and_store_new_distinct_id(self) -> str:
         new_id = str(uuid.uuid4())
