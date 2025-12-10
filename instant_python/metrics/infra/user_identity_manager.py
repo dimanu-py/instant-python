@@ -9,9 +9,13 @@ class UserIdentityManager:
         self._metrics_file = self._config_dir / "metrics.json" if config_dir else None
 
     def get_distinct_id(self) -> str:
+        if self._metrics_file and self._metrics_file.exists():
+            content = json.loads(self._metrics_file.read_text())
+            return content["distinct_id"]
+
         distinct_id = str(uuid.uuid4())
 
-        if not self._metrics_file.exists():
+        if self._metrics_file:
             self._config_dir.mkdir(parents=True, exist_ok=True)
             self._metrics_file.write_text(json.dumps({"distinct_id": distinct_id}))
 
