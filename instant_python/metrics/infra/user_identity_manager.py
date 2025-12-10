@@ -2,11 +2,20 @@ import json
 import uuid
 from pathlib import Path
 
+from platformdirs import user_config_dir
+
 
 class UserIdentityManager:
+    _CONFIG_FOLDER_NAME = "ipy"
+    _METRICS_FILE_NAME = "metrics.json"
+
     def __init__(self, config_dir: Path | None = None) -> None:
-        self._config_dir = config_dir
-        self._metrics_file = self._config_dir / "metrics.json" if config_dir else None
+        self._config_dir = Path(
+            user_config_dir(
+                appname=self._CONFIG_FOLDER_NAME,
+            )
+        ) if not config_dir else config_dir
+        self._metrics_file = self._config_dir / self._METRICS_FILE_NAME
 
     def get_distinct_id(self) -> str:
         existing_id = self._load_existing_distinct_id()
