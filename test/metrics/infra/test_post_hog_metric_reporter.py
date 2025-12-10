@@ -1,11 +1,13 @@
-from pathlib import Path
 import json
+import tempfile
+from pathlib import Path
 
 import vcr
 from vcr.request import Request
 
 from instant_python.metrics.infra.post_hog_config import PostHogConfig
 from instant_python.metrics.infra.post_hog_metric_reporter import PostHogMetricReporter
+from instant_python.metrics.infra.user_identity_manager import UserIdentityManager
 from test.metrics.domain.usage_metrics_data_mother import UsageMetricsDataMother
 
 
@@ -29,8 +31,11 @@ posthog_vcr = vcr.VCR(
 class TestPostHogMetricReporter:
     @posthog_vcr.use_cassette("success_posthog_reporter.yml")
     def test_should_send_metrics_to_posthog(self) -> None:
-        config = PostHogConfig()
-        reporter = PostHogMetricReporter(config=config)
-        metrics = UsageMetricsDataMother.any()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            config = PostHogConfig()
+            user_identity_manager = UserIdentityManager(config_dir=Path(temp_dir))
+            reporter = PostHogMetricReporter(config=config, user_identity_manager=user_identity_manager)
+            metrics = UsageMetricsDataMother.any()
 
-        reporter.send(metrics)
+            reporter.send(metrics)
+
