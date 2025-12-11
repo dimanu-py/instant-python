@@ -15,8 +15,9 @@ class UsageMetricsSender:
         metrics_event = UsageMetricsEvent(
             ipy_version=__version__,
             operating_system=platform.system(),
-            python_version=config["python_version"],
             command=command_name,
+            python_version=config["python_version"],
+            dependency_manager=config["dependency_manager"],
             template=config["template_type"],
             built_in_features=config["built_in_features"],
         )

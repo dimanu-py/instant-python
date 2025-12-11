@@ -7,8 +7,9 @@ class UsageMetricsDataMother:
         return UsageMetricsEvent(
             ipy_version="1.2.3",
             operating_system="linux",
-            python_version="3.12",
             command="init",
+            python_version="3.12",
+            dependency_manager="uv",
             template="clean_architecture",
             built_in_features=["makefile"],
         )
