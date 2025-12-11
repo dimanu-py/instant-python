@@ -1,3 +1,13 @@
+from typing import TypedDict
+
+
+class ConfigSnapshotPrimitives(TypedDict):
+    python_version: str
+    dependency_manager: str
+    template_type: str
+    built_in_features: list[str]
+
+
 class ConfigSnapshot:
     _UNKNOWN = "unknown"
 
@@ -22,6 +32,14 @@ class ConfigSnapshot:
         return all(
             value == self._UNKNOWN or value == []
             for value in [self._python_version, self._dependency_manager, self._template, self._built_in_features]
+        )
+
+    def to_primitives(self) -> ConfigSnapshotPrimitives:
+        return ConfigSnapshotPrimitives(
+            python_version=self._python_version,
+            dependency_manager=self._dependency_manager,
+            template_type=self._template,
+            built_in_features=self._built_in_features,
         )
 
     def __eq__(self, other: object) -> bool:
