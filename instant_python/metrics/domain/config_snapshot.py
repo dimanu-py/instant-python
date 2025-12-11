@@ -9,6 +9,15 @@ class ConfigSnapshot:
         self._template = template
         self._built_in_features = built_in_features
 
+    @classmethod
+    def unknown(cls) -> "ConfigSnapshot":
+        return cls(
+            python_version=cls._UNKNOWN,
+            dependency_manager=cls._UNKNOWN,
+            template=cls._UNKNOWN,
+            built_in_features=[],
+        )
+
     def is_unknown(self) -> bool:
         return all(
             value == self._UNKNOWN or value == []
