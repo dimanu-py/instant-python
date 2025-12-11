@@ -12,7 +12,7 @@ from test.shared.domain.mothers.config_schema_mother import ConfigSchemaMother
 class TestConfigSnapshotCreator:
     def setup_method(self) -> None:
         self._repository = Mock(ConfigRepository)
-        self._config_snapshot_creator = ConfigSnapshotCreator()
+        self._config_snapshot_creator = ConfigSnapshotCreator(repository=self._repository)
 
     def test_should_create_snapshot_when_config_exists(self) -> None:
         snapshot = ConfigSnapshotMother.any()
