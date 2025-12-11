@@ -2,7 +2,7 @@ from dataclasses import dataclass, field, asdict
 
 
 @dataclass(frozen=True)
-class UsageMetricsData:
+class UsageMetricsEvent:
     ipy_version: str
     operating_system: str
     python_version: str

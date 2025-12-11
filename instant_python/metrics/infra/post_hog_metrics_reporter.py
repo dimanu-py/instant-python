@@ -1,7 +1,7 @@
 from posthog import Posthog
 
 from instant_python.metrics.domain.metrics_reporter import MetricsReporter
-from instant_python.metrics.domain.usage_metrics_data import UsageMetricsData
+from instant_python.metrics.domain.usage_metrics_data import UsageMetricsEvent
 from instant_python.metrics.infra.post_hog_config import PostHogConfig
 from instant_python.metrics.infra.user_identity_manager import UserIdentityManager
 
@@ -16,7 +16,7 @@ class PostHogMetricsReporter(MetricsReporter):
         )
         self._user_identity_manager = user_identity_manager
 
-    def send(self, metrics: UsageMetricsData) -> None:
+    def send(self, metrics: UsageMetricsEvent) -> None:
         try:
             self._client.capture(
                 distinct_id=self._user_identity_manager.get_or_create_distinct_id(),

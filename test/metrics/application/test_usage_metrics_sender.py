@@ -7,7 +7,7 @@ from instant_python.metrics.domain.metrics_reporter import MetricsReporter
 
 
 class TestUsageMetricsSender:
-    def test_should_send_usage_metrics_data(self) -> None:
+    def test_should_send_usage_metrics_event(self) -> None:
         reporter = Mock(MetricsReporter)
         usage_metrics_sender = UsageMetricsSender(reporter=reporter)
 

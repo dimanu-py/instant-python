@@ -1,10 +1,10 @@
-from instant_python.metrics.domain.usage_metrics_data import UsageMetricsData
+from instant_python.metrics.domain.usage_metrics_data import UsageMetricsEvent
 
 
 class UsageMetricsDataMother:
     @staticmethod
-    def any() -> UsageMetricsData:
-        return UsageMetricsData(
+    def any() -> UsageMetricsEvent:
+        return UsageMetricsEvent(
             ipy_version="1.2.3",
             operating_system="linux",
             python_version="3.12",
