@@ -73,6 +73,14 @@ class ConfigSchema:
             git=self.git.to_primitives(),
         )
 
+    def for_metrics(self) -> dict[str, str | list[str]]:
+        return {
+            "python_version": self.python_version,
+            "dependency_manager": self.dependency_manager,
+            "template": self.template_type,
+            "built_in_features": self.template.built_in_features,
+        }
+
     @property
     def template_type(self) -> str:
         return self.template.name
