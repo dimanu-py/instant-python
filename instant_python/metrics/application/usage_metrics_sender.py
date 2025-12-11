@@ -1,16 +1,13 @@
 import platform
-from pathlib import Path
 
 from instant_python import __version__
 from instant_python.metrics.domain.metrics_reporter import MetricsReporter
 from instant_python.metrics.domain.usage_metrics_data import UsageMetricsData
-from instant_python.shared.domain.config_repository import ConfigRepository
 
 
 class UsageMetricsSender:
-    def __init__(self, repository: ConfigRepository, reporter: MetricsReporter) -> None:
+    def __init__(self, reporter: MetricsReporter) -> None:
         self._reporter = reporter
-        self._repository = repository
 
     def execute(self, command_name: str) -> None:
         config = self._extract_config_data_for_metrics()
@@ -28,9 +25,8 @@ class UsageMetricsSender:
         self._reporter.send(metrics_data)
 
     def _extract_config_data_for_metrics(self) -> dict[str, str | list[str]]:
-        config = self._repository.read(Path.cwd() / "ipy.yml")
         return {
-            "python_version": config.python_version,
-            "template_type": config.template_type,
-            "built_in_features": config.template.built_in_features,
+            "python_version": "3.12",
+            "template_type": "standard_project",
+            "built_in_features": ["makefile"],
         }

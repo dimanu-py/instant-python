@@ -16,13 +16,10 @@ class MetricsMiddleware(TyperGroup):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self._config_snapshot_creator = ConfigSnapshotCreator(repository=YamlConfigRepository())
-        self._metrics_sender = UsageMetricsSender(
-            repository=YamlConfigRepository(),
-            reporter=PostHogMetricsReporter(
-                config=PostHogConfig(),
-                user_identity_manager=UserIdentityManager(),
-            ),
-        )
+        self._metrics_sender = UsageMetricsSender(reporter=PostHogMetricsReporter(
+            config=PostHogConfig(),
+            user_identity_manager=UserIdentityManager(),
+        ))
 
     def invoke(self, ctx: Context) -> Any:
         try:
