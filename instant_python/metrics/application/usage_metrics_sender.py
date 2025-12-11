@@ -1,9 +1,9 @@
-from instant_python.metrics.domain.metric_reporter import MetricReporter
+from instant_python.metrics.domain.metrics_reporter import MetricsReporter
 from instant_python.shared.domain.config_repository import ConfigRepository
 
 
 class UsageMetricsSender:
-    def __init__(self, repository: ConfigRepository, reporter: MetricReporter) -> None:
+    def __init__(self, repository: ConfigRepository, reporter: MetricsReporter) -> None:
         self._reporter = reporter
         self._repository = repository
 

@@ -1,12 +1,12 @@
 from posthog import Posthog
 
-from instant_python.metrics.domain.metric_reporter import MetricReporter
+from instant_python.metrics.domain.metrics_reporter import MetricsReporter
 from instant_python.metrics.domain.usage_metrics_data import UsageMetricsData
 from instant_python.metrics.infra.post_hog_config import PostHogConfig
 from instant_python.metrics.infra.user_identity_manager import UserIdentityManager
 
 
-class PostHogMetricReporter(MetricReporter):
+class PostHogMetricsReporter(MetricsReporter):
     def __init__(self, config: PostHogConfig, user_identity_manager: UserIdentityManager) -> None:
         self._client = Posthog(
             config.api_key,
