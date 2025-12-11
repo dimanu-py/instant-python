@@ -14,9 +14,9 @@ from test.metrics.domain.usage_metrics_data_mother import UsageMetricsDataMother
 def filter_api_key(request) -> Request:
     """Filter api_key from request body before recording"""
     if request.body:
-        body = json.loads(request.body.decode('utf-8'))
-        body['api_key'] = '****'
-        request.body = json.dumps(body).encode('utf-8')
+        body = json.loads(request.body.decode("utf-8"))
+        body["api_key"] = "****"
+        request.body = json.dumps(body).encode("utf-8")
     return request
 
 
@@ -38,4 +38,3 @@ class TestPostHogMetricsReporter:
             metrics = UsageMetricsDataMother.any()
 
             reporter.send(metrics)
-

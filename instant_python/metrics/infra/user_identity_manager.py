@@ -10,11 +10,15 @@ class UserIdentityManager:
     _METRICS_FILE_NAME = "metrics.json"
 
     def __init__(self, config_dir: Path | None = None) -> None:
-        self._config_dir = Path(
-            user_config_dir(
-                appname=self._CONFIG_FOLDER_NAME,
+        self._config_dir = (
+            Path(
+                user_config_dir(
+                    appname=self._CONFIG_FOLDER_NAME,
+                )
             )
-        ) if not config_dir else config_dir
+            if not config_dir
+            else config_dir
+        )
         self._metrics_file = self._config_dir / self._METRICS_FILE_NAME
 
     def get_or_create_distinct_id(self) -> str:

@@ -69,4 +69,3 @@ class TestUserIdentityManager:
             expect(distinct_id).not_to(equal("not-a-valid-uuid"))
             stored_data = json.loads(metrics_file.read_text())
             expect(stored_data["distinct_id"]).to(equal(distinct_id))
-
