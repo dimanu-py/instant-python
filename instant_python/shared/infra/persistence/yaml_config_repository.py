@@ -19,8 +19,8 @@ class YamlConfigRepository(ConfigRepository):
             with path.open("r") as file:
                 raw_config = yaml.safe_load(file)
                 return ConfigSchema.from_primitives(content=raw_config, custom_config_path=path)
-        except FileNotFoundError:
-            raise ConfigurationFileNotFound(str(path))
+        except FileNotFoundError as error:
+            raise ConfigurationFileNotFound(str(path)) from error
 
     def move(self, config: ConfigSchema, base_directory: Path) -> None:
         final_destination = config.calculate_config_destination_path(
