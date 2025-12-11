@@ -1,4 +1,5 @@
 import threading
+from pathlib import Path
 from typing import Any
 
 from click import Context
@@ -6,6 +7,7 @@ from typer.core import TyperGroup
 
 from instant_python.metrics.application.config_snapshot_creator import ConfigSnapshotCreator
 from instant_python.metrics.application.usage_metrics_sender import UsageMetricsSender
+from instant_python.metrics.domain.config_snapshot import ConfigSnapshot
 from instant_python.metrics.infra.post_hog_config import PostHogConfig
 from instant_python.metrics.infra.post_hog_metrics_reporter import PostHogMetricsReporter
 from instant_python.metrics.infra.user_identity_manager import UserIdentityManager
@@ -24,13 +26,16 @@ class MetricsMiddleware(TyperGroup):
         )
 
     def invoke(self, ctx: Context) -> Any:
+        config_path = self._extract_config_path(ctx)
+        config_snapshot = self._take_first_config_snapshot(config_path)
         try:
             self._execute_command(ctx)
         except Exception as exception:
             raise exception
         finally:
+            config_snapshot = self._retake_config_snapshot_if_needed(config_snapshot, config_path)
             command = self._extract_executed_command(ctx)
-            self._send_metrics_data(command)
+            self._send_metrics_data(command, config_snapshot)
 
     def _execute_command(self, ctx: Context) -> None:
         super().invoke(ctx)
@@ -39,10 +44,28 @@ class MetricsMiddleware(TyperGroup):
     def _extract_executed_command(ctx: Context) -> str:
         return ctx.invoked_subcommand
 
-    def _send_metrics_data(self, command: str) -> None:
+    @staticmethod
+    def _extract_config_path(ctx: Context) -> Path:
+        if ctx.args and ["--config", "-c"] in ctx.args:
+            return (
+                Path(ctx.args[ctx.args.index("--config") + 1])
+                if "--config" in ctx.args
+                else Path(ctx.args[ctx.args.index("-c") + 1])
+            )
+        return Path("ipy.yml")
+
+    def _take_first_config_snapshot(self, config_path: Path) -> ConfigSnapshot:
+        return self._config_snapshot_creator.execute(config_path)
+
+    def _retake_config_snapshot_if_needed(self, config_snapshot: ConfigSnapshot, config_path: Path) -> ConfigSnapshot:
+        if config_snapshot.is_unknown():
+            return self._config_snapshot_creator.execute(config_path)
+        return config_snapshot
+
+    def _send_metrics_data(self, command: str, config_snapshot: ConfigSnapshot) -> None:
         thread = threading.Thread(
             target=self._metrics_sender.execute,
-            args=(command,),
+            args=(command, config_snapshot),
             daemon=True,
         )
         thread.start()
