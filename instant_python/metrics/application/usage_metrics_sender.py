@@ -13,13 +13,24 @@ class UsageMetricsSender:
         self._repository = repository
 
     def execute(self, command_name: str) -> None:
-        config = self._repository.read(Path.cwd() / "ipy.yml")
+        config = self._extract_config_data_for_metrics()
         metrics_data = UsageMetricsData(
             ipy_version=__version__,
             operating_system=platform.system(),
-            python_version=config.python_version,
+            python_version=config["python_version"],
             command=command_name,
-            template=config.template_type,
-            built_in_features=config.template.built_in_features,
+            template=config["template_type"],
+            built_in_features=config["built_in_features"],
         )
+        self._send_metrics_report(metrics_data)
+
+    def _send_metrics_report(self, metrics_data: UsageMetricsData) -> None:
         self._reporter.send(metrics_data)
+
+    def _extract_config_data_for_metrics(self) -> dict[str, str | list[str]]:
+        config = self._repository.read(Path.cwd() / "ipy.yml")
+        return {
+            "python_version": config.python_version,
+            "template_type": config.template_type,
+            "built_in_features": config.template.built_in_features,
+        }
