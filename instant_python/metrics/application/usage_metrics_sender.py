@@ -7,5 +7,5 @@ class UsageMetricsSender:
         self._reporter = reporter
         self._repository = repository
 
-    def execute(self, command_name: str, success: bool, error_message: str | None) -> None:
+    def execute(self, command_name: str) -> None:
         pass

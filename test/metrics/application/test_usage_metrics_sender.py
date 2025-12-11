@@ -23,7 +23,7 @@ class TestUsageMetricsSender:
         expect_call(repository).read(ANY_ARG).returns(config)
         expect_call(reporter).send(usage_metrics)
 
-        usage_metrics_sender.execute(command_name="init", success=True, error_message=None)
+        usage_metrics_sender.execute(command_name="init")
 
         expect(repository).to(have_been_satisfied)
         expect(reporter).to(have_been_satisfied)
