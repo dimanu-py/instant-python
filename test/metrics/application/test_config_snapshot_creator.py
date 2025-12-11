@@ -1,11 +1,11 @@
 from pathlib import Path
 
 from doublex import expect_call, Mock
-from expects import expect, equal, be_false
+from expects import expect, equal, be_false, be_true
 
 from instant_python.metrics.application.config_snapshot_creator import ConfigSnapshotCreator
+from instant_python.metrics.domain.config_snapshot import ConfigSnapshot
 from instant_python.shared.domain.config_repository import ConfigRepository
-from test.metrics.domain.config_snapshot_mother import ConfigSnapshotMother
 from test.shared.domain.mothers.config_schema_mother import ConfigSchemaMother
 
 
@@ -15,11 +15,19 @@ class TestConfigSnapshotCreator:
         self._config_snapshot_creator = ConfigSnapshotCreator(repository=self._repository)
 
     def test_should_create_snapshot_when_config_exists(self) -> None:
-        snapshot = ConfigSnapshotMother.any()
         config_path = Path("ipy.yml")
-        expect_call(self._repository).read(config_path).returns(ConfigSchemaMother.any())
+        config = ConfigSchemaMother.any()
+        expect_call(self._repository).read(config_path).returns(config)
 
         snapshot_taken = self._config_snapshot_creator.execute(config_path)
 
         expect(snapshot_taken.is_unknown()).to(be_false)
-        expect(snapshot_taken).to(equal(snapshot))
+        expect(snapshot_taken).to(equal(ConfigSnapshot(**config.for_metrics())))
+
+    def test_should_create_unknown_snapshot_when_config_does_not_exist(self) -> None:
+        config_path = Path("ipy.yml")
+        expect_call(self._repository).read(config_path).raises(FileNotFoundError)
+
+        snapshot_taken = self._config_snapshot_creator.execute(config_path)
+
+        expect(snapshot_taken.is_unknown()).to(be_true)
