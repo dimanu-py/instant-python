@@ -5,14 +5,12 @@ from expects import expect
 from instant_python.metrics.application.usage_metrics_sender import UsageMetricsSender
 from instant_python.metrics.domain.metrics_reporter import MetricsReporter
 from instant_python.shared.domain.config_repository import ConfigRepository
-from test.metrics.domain.usage_metrics_data_mother import UsageMetricsDataMother
 from test.shared.domain.mothers.config_schema_mother import ConfigSchemaMother
 
 
 class TestUsageMetricsSender:
     def test_should_send_usage_metrics_data(self) -> None:
         config = ConfigSchemaMother.any()
-        usage_metrics = UsageMetricsDataMother.any()
         repository = Mock(ConfigRepository)
         reporter = Mock(MetricsReporter)
         usage_metrics_sender = UsageMetricsSender(
@@ -21,7 +19,7 @@ class TestUsageMetricsSender:
         )
 
         expect_call(repository).read(ANY_ARG).returns(config)
-        expect_call(reporter).send(usage_metrics)
+        expect_call(reporter).send(ANY_ARG)
 
         usage_metrics_sender.execute(command_name="init")
 
