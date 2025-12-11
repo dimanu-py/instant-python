@@ -13,10 +13,10 @@ class ConfigSnapshotCreator:
 
     def execute(self, config_path: Path) -> Any:
         try:
-            config = self._read_config_and_filter_metrics_values(config_path)
+            config = self._read_config_from(config_path)
         except ConfigurationFileNotFound:
             return ConfigSnapshot.unknown()
         return ConfigSnapshot(**config.for_metrics())
 
-    def _read_config_and_filter_metrics_values(self, config_path: Path) -> ConfigSchema:
+    def _read_config_from(self, config_path: Path) -> ConfigSchema:
         return self._repository.read(config_path)
