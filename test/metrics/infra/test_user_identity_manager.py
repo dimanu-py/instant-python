@@ -15,7 +15,7 @@ class TestUserIdentityManager:
             metrics_file = config_dir / "metrics.json"
             user_identity_manager = UserIdentityManager(config_dir=config_dir)
 
-            distinct_id = user_identity_manager.get_distinct_id()
+            distinct_id = user_identity_manager.get_or_create_distinct_id()
 
             expect(metrics_file.exists()).to(be_true)
             stored_distinct_id = json.loads(metrics_file.read_text())
@@ -27,8 +27,8 @@ class TestUserIdentityManager:
             config_dir = Path(temp_dir)
             user_identity_manager = UserIdentityManager(config_dir=config_dir)
 
-            first_id = user_identity_manager.get_distinct_id()
-            second_id = user_identity_manager.get_distinct_id()
+            first_id = user_identity_manager.get_or_create_distinct_id()
+            second_id = user_identity_manager.get_or_create_distinct_id()
 
             expect(first_id).to(equal(second_id))
 
@@ -39,7 +39,7 @@ class TestUserIdentityManager:
             metrics_file.write_text("invalid json content")
 
             user_identity_manager = UserIdentityManager(config_dir=config_dir)
-            distinct_id = user_identity_manager.get_distinct_id()
+            distinct_id = user_identity_manager.get_or_create_distinct_id()
 
             stored_data = json.loads(metrics_file.read_text())
             expect(stored_data["distinct_id"]).to(equal(distinct_id))
@@ -52,7 +52,7 @@ class TestUserIdentityManager:
             metrics_file.write_text(json.dumps({"distinct_id": existing_uuid}))
 
             user_identity_manager = UserIdentityManager(config_dir=config_dir)
-            distinct_id = user_identity_manager.get_distinct_id()
+            distinct_id = user_identity_manager.get_or_create_distinct_id()
 
             expect(distinct_id).to(equal(existing_uuid))
             expect(uuid.UUID(distinct_id)).to(be_a(uuid.UUID))
@@ -64,7 +64,7 @@ class TestUserIdentityManager:
             metrics_file.write_text(json.dumps({"distinct_id": "not-a-valid-uuid"}))
 
             user_identity_manager = UserIdentityManager(config_dir=config_dir)
-            distinct_id = user_identity_manager.get_distinct_id()
+            distinct_id = user_identity_manager.get_or_create_distinct_id()
 
             expect(distinct_id).not_to(equal("not-a-valid-uuid"))
             stored_data = json.loads(metrics_file.read_text())

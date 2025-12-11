@@ -17,7 +17,7 @@ class UserIdentityManager:
         ) if not config_dir else config_dir
         self._metrics_file = self._config_dir / self._METRICS_FILE_NAME
 
-    def get_distinct_id(self) -> str:
+    def get_or_create_distinct_id(self) -> str:
         existing_id = self._load_existing_distinct_id()
         return existing_id if existing_id else self._create_and_store_new_distinct_id()
 

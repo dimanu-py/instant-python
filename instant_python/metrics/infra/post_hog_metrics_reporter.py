@@ -19,7 +19,7 @@ class PostHogMetricsReporter(MetricsReporter):
     def send(self, metrics: UsageMetricsData) -> None:
         try:
             self._client.capture(
-                distinct_id=self._user_identity_manager.get_distinct_id(),
+                distinct_id=self._user_identity_manager.get_or_create_distinct_id(),
                 event="ipy_usage",
                 properties=metrics.to_primitives(),
             )
