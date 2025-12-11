@@ -4,6 +4,7 @@ from expects import expect
 
 from instant_python.metrics.application.usage_metrics_sender import UsageMetricsSender
 from instant_python.metrics.domain.metrics_reporter import MetricsReporter
+from test.metrics.domain.config_snapshot_mother import ConfigSnapshotMother
 
 
 class TestUsageMetricsSender:
@@ -13,6 +14,6 @@ class TestUsageMetricsSender:
 
         expect_call(reporter).send(ANY_ARG)
 
-        usage_metrics_sender.execute(command_name="init")
+        usage_metrics_sender.execute(command_name="init", config_snapshot=ConfigSnapshotMother.any())
 
         expect(reporter).to(have_been_satisfied)
