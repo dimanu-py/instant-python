@@ -45,4 +45,3 @@ class TestPostHogConfig:
         config = PostHogConfig()
 
         expect(config.host).to(equal("https://example.com"))
-

@@ -44,4 +44,3 @@ class PostHogMetricsReporter(MetricsReporter):
             self._client.flush()
         except Exception:
             pass  # Fire and forget strategy to avoid impacting user experience
-
