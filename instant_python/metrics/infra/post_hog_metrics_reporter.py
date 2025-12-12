@@ -1,5 +1,6 @@
 from posthog import Posthog
 
+from instant_python.metrics.application.usage_metrics_sender import ErrorMetricsEvent
 from instant_python.metrics.domain.metrics_reporter import MetricsReporter
 from instant_python.metrics.domain.usage_metrics_data import UsageMetricsEvent
 from instant_python.metrics.infra.post_hog_config import PostHogConfig
@@ -26,3 +27,7 @@ class PostHogMetricsReporter(MetricsReporter):
             self._client.flush()
         except Exception:
             pass  # Fire and forget strategy to avoid impacting user experience
+
+    def send_error(self, metrics: ErrorMetricsEvent) -> None:
+        pass
+
