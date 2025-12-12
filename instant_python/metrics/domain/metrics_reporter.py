@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from instant_python.metrics.application.usage_metrics_sender import ErrorMetricsEvent
+from instant_python.metrics.domain.error_metrics_event import ErrorMetricsEvent
 from instant_python.metrics.domain.usage_metrics_data import UsageMetricsEvent
 
 

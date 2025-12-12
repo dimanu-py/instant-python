@@ -1,6 +1,6 @@
 from posthog import Posthog
 
-from instant_python.metrics.application.usage_metrics_sender import ErrorMetricsEvent
+from instant_python.metrics.domain.error_metrics_event import ErrorMetricsEvent
 from instant_python.metrics.domain.metrics_reporter import MetricsReporter
 from instant_python.metrics.domain.usage_metrics_data import UsageMetricsEvent
 from instant_python.metrics.infra.post_hog_config import PostHogConfig
