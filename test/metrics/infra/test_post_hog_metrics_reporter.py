@@ -8,7 +8,7 @@ from vcr.request import Request
 from instant_python.metrics.infra.post_hog_config import PostHogConfig
 from instant_python.metrics.infra.post_hog_metrics_reporter import PostHogMetricsReporter
 from instant_python.metrics.infra.user_identity_manager import UserIdentityManager
-from test.metrics.domain.usage_metrics_data_mother import UsageMetricsDataMother
+from test.metrics.domain.usage_metrics_event_mother import UsageMetricsEventMother
 
 
 def filter_api_key(request) -> Request:
@@ -35,6 +35,6 @@ class TestPostHogMetricsReporter:
             config = PostHogConfig()
             user_identity_manager = UserIdentityManager(config_dir=Path(temp_dir))
             reporter = PostHogMetricsReporter(config=config, user_identity_manager=user_identity_manager)
-            metrics = UsageMetricsDataMother.any()
+            metrics = UsageMetricsEventMother.any()
 
             reporter.send_success(metrics)

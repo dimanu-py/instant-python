@@ -1,7 +1,7 @@
 from instant_python.metrics.domain.usage_metrics_data import UsageMetricsEvent
 
 
-class UsageMetricsDataMother:
+class UsageMetricsEventMother:
     @staticmethod
     def any() -> UsageMetricsEvent:
         return UsageMetricsEvent(
