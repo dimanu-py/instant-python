@@ -1,0 +1,336 @@
+interactions:
+- request:
+    body: '{"batch": [{"properties": {"$exception_type": "ValueError", "$exception_message":
+      "", "$exception_list": [{"mechanism": {"type": "generic", "handled": true},
+      "module": null, "type": "ValueError", "value": "", "stacktrace": {"frames":
+      [{"platform": "python", "filename": "posthog/exception_utils.py", "abs_path":
+      "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/posthog/exception_utils.py",
+      "function": "construct_artificial_traceback", "module": "posthog.exception_utils",
+      "lineno": 839, "pre_context": ["", "    frames.reverse()", "", "    tb = None",
+      "    for frame in frames:"], "context_line": "        tb = types.TracebackType(tb,
+      frame, frame.f_lasti, frame.f_lineno)", "post_context": ["", "    setattr(e,
+      \"__traceback__\", tb)", "", "", "def _module_in_list(name, items):"], "in_app":
+      false}, {"platform": "python", "filename": "posthog/exception_utils.py", "abs_path":
+      "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/posthog/exception_utils.py",
+      "function": "exc_info_from_error", "module": "posthog.exception_utils", "lineno":
+      792, "pre_context": ["    # type: (ExceptionArg) -> ExcInfo", "    if isinstance(error,
+      tuple) and len(error) == 3:", "        exc_type, exc_value, tb = error", "    elif
+      isinstance(error, BaseException):", "        try:"], "context_line": "            construct_artificial_traceback(error)",
+      "post_context": ["        except Exception:", "            pass", "        tb
+      = getattr(error, \"__traceback__\", None)", "        if tb is not None:", "            exc_type
+      = type(error)"], "in_app": false}, {"platform": "python", "filename": "posthog/client.py",
+      "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/posthog/client.py",
+      "function": "capture_exception", "module": "posthog.client", "lineno": 959,
+      "pre_context": ["            if exception is not None and exception_is_already_captured(exception):",
+      "                self.log.debug(\"Exception already captured, skipping\")",
+      "                return None", "", "            if exception is not None:"],
+      "context_line": "                exc_info = exc_info_from_error(exception)",
+      "post_context": ["            else:", "                exc_info = sys.exc_info()",
+      "", "            if exc_info is None or exc_info == (None, None, None):", "                self.log.warning(\"No
+      exception information available\")"], "in_app": false}, {"platform": "python",
+      "filename": "instant_python/metrics/infra/post_hog_metrics_reporter.py", "abs_path":
+      "/home/dmartinez/Developer/instant-python/instant_python/metrics/infra/post_hog_metrics_reporter.py",
+      "function": "send_error", "module": "instant_python.metrics.infra.post_hog_metrics_reporter",
+      "lineno": 33, "pre_context": ["        except Exception:", "            pass  #
+      Fire and forget strategy to avoid impacting user experience", "", "    def send_error(self,
+      error: Exception, metrics: ErrorMetricsEvent) -> None:", "        try:"], "context_line":
+      "            self._client.capture_exception(", "post_context": ["                exception=error,",
+      "                distinct_id=self._user_identity_manager.get_or_create_distinct_id(),",
+      "                properties=metrics.to_primitives(),", "            )", "            self._client.flush()"],
+      "in_app": true}, {"platform": "python", "filename": "test/metrics/infra/test_post_hog_metrics_reporter.py",
+      "abs_path": "/home/dmartinez/Developer/instant-python/test/metrics/infra/test_post_hog_metrics_reporter.py",
+      "function": "test_should_send_error_metrics_to_posthog", "module": "test.metrics.infra.test_post_hog_metrics_reporter",
+      "lineno": 51, "pre_context": ["            config = PostHogConfig()", "            user_identity_manager
+      = UserIdentityManager(config_dir=Path(temp_dir))", "            reporter = PostHogMetricsReporter(config=config,
+      user_identity_manager=user_identity_manager)", "            metrics = ErrorMetricsEventMother.any()",
+      ""], "context_line": "            reporter.send_error(ValueError(), metrics)",
+      "post_context": [], "in_app": true}, {"platform": "python", "filename": "vcr/cassette.py",
+      "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/vcr/cassette.py",
+      "function": "handle_function", "module": "vcr.cassette", "lineno": 114, "pre_context":
+      ["    def _execute_function(self, function, args, kwargs):", "        def handle_function(cassette):",
+      "            if cassette.inject:", "                return function(cassette,
+      *args, **kwargs)", "            else:"], "context_line": "                return
+      function(*args, **kwargs)", "post_context": ["", "        if iscoroutinefunction(function):",
+      "            return handle_coroutine(vcr=self, fn=handle_function)", "        if
+      inspect.isgeneratorfunction(function):", "            return self._handle_generator(fn=handle_function)"],
+      "in_app": false}, {"platform": "python", "filename": "vcr/cassette.py", "abs_path":
+      "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/vcr/cassette.py",
+      "function": "_handle_function", "module": "vcr.cassette", "lineno": 132, "pre_context":
+      ["        with self as cassette:", "            return (yield from fn(cassette))",
+      "", "    def _handle_function(self, fn):", "        with self as cassette:"],
+      "context_line": "            return fn(cassette)", "post_context": ["", "    @staticmethod",
+      "    def get_function_name(function):", "        return function.__name__",
+      ""], "in_app": false}, {"platform": "python", "filename": "vcr/cassette.py",
+      "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/vcr/cassette.py",
+      "function": "_execute_function", "module": "vcr.cassette", "lineno": 121, "pre_context":
+      ["        if iscoroutinefunction(function):", "            return handle_coroutine(vcr=self,
+      fn=handle_function)", "        if inspect.isgeneratorfunction(function):", "            return
+      self._handle_generator(fn=handle_function)", ""], "context_line": "        return
+      self._handle_function(fn=handle_function)", "post_context": ["", "    def _handle_generator(self,
+      fn):", "        \"\"\"Wraps a generator so that we''re inside the cassette context
+      for the", "        duration of the generator.", "        \"\"\""], "in_app":
+      false}, {"platform": "python", "filename": "vcr/cassette.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/vcr/cassette.py",
+      "function": "__call__", "module": "vcr.cassette", "lineno": 107, "pre_context":
+      ["    def __call__(self, function, instance, args, kwargs):", "        # This
+      awkward cloning thing is done to ensure that decorated", "        # functions
+      are reentrant. This is required for thread", "        # safety and the correct
+      operation of recursive functions.", "        args_getter = self._build_args_getter_for_decorator(function)"],
+      "context_line": "        return type(self)(self.cls, args_getter)._execute_function(function,
+      args, kwargs)", "post_context": ["", "    def _execute_function(self, function,
+      args, kwargs):", "        def handle_function(cassette):", "            if cassette.inject:",
+      "                return function(cassette, *args, **kwargs)"], "in_app": false},
+      {"platform": "python", "filename": "_pytest/python.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/python.py",
+      "function": "pytest_pyfunc_call", "module": "_pytest.python", "lineno": 166,
+      "pre_context": ["    testfunction = pyfuncitem.obj", "    if is_async_function(testfunction):",
+      "        async_fail(pyfuncitem.nodeid)", "    funcargs = pyfuncitem.funcargs",
+      "    testargs = {arg: funcargs[arg] for arg in pyfuncitem._fixtureinfo.argnames}"],
+      "context_line": "    result = testfunction(**testargs)", "post_context": ["    if
+      hasattr(result, \"__await__\") or hasattr(result, \"__aiter__\"):", "        async_fail(pyfuncitem.nodeid)",
+      "    elif result is not None:", "        warnings.warn(", "            PytestReturnNotNoneWarning("],
+      "in_app": false}, {"platform": "python", "filename": "pluggy/_manager.py", "abs_path":
+      "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/pluggy/_manager.py",
+      "function": "_hookexec", "module": "pluggy._manager", "lineno": 120, "pre_context":
+      ["        kwargs: Mapping[str, object],", "        firstresult: bool,", "    )
+      -> object | list[object]:", "        # called from all hookcaller instances.",
+      "        # enable_tracing will set its own wrapping function at self._inner_hookexec"],
+      "context_line": "        return self._inner_hookexec(hook_name, methods, kwargs,
+      firstresult)", "post_context": ["", "    def register(self, plugin: _Plugin,
+      name: str | None = None) -> str | None:", "        \"\"\"Register a plugin and
+      return its name.", "", "        :param name:"], "in_app": false}, {"platform":
+      "python", "filename": "pluggy/_hooks.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/pluggy/_hooks.py",
+      "function": "__call__", "module": "pluggy._hooks", "lineno": 512, "pre_context":
+      ["            \"Cannot directly call a historic hook - use call_historic instead.\"",
+      "        )", "        self._verify_all_args_are_provided(kwargs)", "        firstresult
+      = self.spec.opts.get(\"firstresult\", False) if self.spec else False", "        #
+      Copy because plugins may register other plugins during iteration (#438)."],
+      "context_line": "        return self._hookexec(self.name, self._hookimpls.copy(),
+      kwargs, firstresult)", "post_context": ["", "    def call_historic(", "        self,",
+      "        result_callback: Callable[[Any], None] | None = None,", "        kwargs:
+      Mapping[str, object] | None = None,"], "in_app": false}, {"platform": "python",
+      "filename": "_pytest/python.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/python.py",
+      "function": "runtest", "module": "_pytest.python", "lineno": 1720, "pre_context":
+      ["        \"\"\"(compatonly) for code expecting pytest-2.2 style request objects.\"\"\"",
+      "        return self", "", "    def runtest(self) -> None:", "        \"\"\"Execute
+      the underlying test function.\"\"\""], "context_line": "        self.ihook.pytest_pyfunc_call(pyfuncitem=self)",
+      "post_context": ["", "    def setup(self) -> None:", "        self._request._fillfixtures()",
+      "", "    def _traceback_filter(self, excinfo: ExceptionInfo[BaseException])
+      -> Traceback:"], "in_app": false}, {"platform": "python", "filename": "_pytest/runner.py",
+      "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/runner.py",
+      "function": "pytest_runtest_call", "module": "_pytest.runner", "lineno": 179,
+      "pre_context": ["        if sys.version_info >= (3, 12, 0):", "            del
+      sys.last_exc  # type:ignore[attr-defined]", "    except AttributeError:", "        pass",
+      "    try:"], "context_line": "        item.runtest()", "post_context": ["    except
+      Exception as e:", "        # Store trace info to allow postmortem debugging",
+      "        sys.last_type = type(e)", "        sys.last_value = e", "        if
+      sys.version_info >= (3, 12, 0):"], "in_app": false}, {"platform": "python",
+      "filename": "pluggy/_manager.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/pluggy/_manager.py",
+      "function": "_hookexec", "module": "pluggy._manager", "lineno": 120, "pre_context":
+      ["        kwargs: Mapping[str, object],", "        firstresult: bool,", "    )
+      -> object | list[object]:", "        # called from all hookcaller instances.",
+      "        # enable_tracing will set its own wrapping function at self._inner_hookexec"],
+      "context_line": "        return self._inner_hookexec(hook_name, methods, kwargs,
+      firstresult)", "post_context": ["", "    def register(self, plugin: _Plugin,
+      name: str | None = None) -> str | None:", "        \"\"\"Register a plugin and
+      return its name.", "", "        :param name:"], "in_app": false}, {"platform":
+      "python", "filename": "pluggy/_hooks.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/pluggy/_hooks.py",
+      "function": "__call__", "module": "pluggy._hooks", "lineno": 512, "pre_context":
+      ["            \"Cannot directly call a historic hook - use call_historic instead.\"",
+      "        )", "        self._verify_all_args_are_provided(kwargs)", "        firstresult
+      = self.spec.opts.get(\"firstresult\", False) if self.spec else False", "        #
+      Copy because plugins may register other plugins during iteration (#438)."],
+      "context_line": "        return self._hookexec(self.name, self._hookimpls.copy(),
+      kwargs, firstresult)", "post_context": ["", "    def call_historic(", "        self,",
+      "        result_callback: Callable[[Any], None] | None = None,", "        kwargs:
+      Mapping[str, object] | None = None,"], "in_app": false}, {"platform": "python",
+      "filename": "_pytest/runner.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/runner.py",
+      "function": "<lambda>", "module": "_pytest.runner", "lineno": 245, "pre_context":
+      ["        runtest_hook = ihook.pytest_runtest_teardown", "    else:", "        assert
+      False, f\"Unhandled runtest hook case: {when}\"", "", "    call = CallInfo.from_call("],
+      "context_line": "        lambda: runtest_hook(item=item, **kwds),", "post_context":
+      ["        when=when,", "        reraise=get_reraise_exceptions(item.config),",
+      "    )", "    report: TestReport = ihook.pytest_runtest_makereport(item=item,
+      call=call)", "    if log:"], "in_app": false}, {"platform": "python", "filename":
+      "_pytest/runner.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/runner.py",
+      "function": "from_call", "module": "_pytest.runner", "lineno": 353, "pre_context":
+      ["            function, instead of being wrapped in the CallInfo.", "        \"\"\"",
+      "        excinfo = None", "        instant = timing.Instant()", "        try:"],
+      "context_line": "            result: TResult | None = func()", "post_context":
+      ["        except BaseException:", "            excinfo = ExceptionInfo.from_current()",
+      "            if reraise is not None and isinstance(excinfo.value, reraise):",
+      "                raise", "            result = None"], "in_app": false}, {"platform":
+      "python", "filename": "_pytest/runner.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/runner.py",
+      "function": "call_and_report", "module": "_pytest.runner", "lineno": 244, "pre_context":
+      ["    elif when == \"teardown\":", "        runtest_hook = ihook.pytest_runtest_teardown",
+      "    else:", "        assert False, f\"Unhandled runtest hook case: {when}\"",
+      ""], "context_line": "    call = CallInfo.from_call(", "post_context": ["        lambda:
+      runtest_hook(item=item, **kwds),", "        when=when,", "        reraise=get_reraise_exceptions(item.config),",
+      "    )", "    report: TestReport = ihook.pytest_runtest_makereport(item=item,
+      call=call)"], "in_app": false}, {"platform": "python", "filename": "_pytest/runner.py",
+      "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/runner.py",
+      "function": "runtestprotocol", "module": "_pytest.runner", "lineno": 137, "pre_context":
+      ["    reports = [rep]", "    if rep.passed:", "        if item.config.getoption(\"setupshow\",
+      False):", "            show_test_item(item)", "        if not item.config.getoption(\"setuponly\",
+      False):"], "context_line": "            reports.append(call_and_report(item,
+      \"call\", log))", "post_context": ["    # If the session is about to fail or
+      stop, teardown everything - this is", "    # necessary to correctly report fixture
+      teardown errors (see #11706)", "    if item.session.shouldfail or item.session.shouldstop:",
+      "        nextitem = None", "    reports.append(call_and_report(item, \"teardown\",
+      log, nextitem=nextitem))"], "in_app": false}, {"platform": "python", "filename":
+      "_pytest/runner.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/runner.py",
+      "function": "pytest_runtest_protocol", "module": "_pytest.runner", "lineno":
+      118, "pre_context": ["", "", "def pytest_runtest_protocol(item: Item, nextitem:
+      Item | None) -> bool:", "    ihook = item.ihook", "    ihook.pytest_runtest_logstart(nodeid=item.nodeid,
+      location=item.location)"], "context_line": "    runtestprotocol(item, nextitem=nextitem)",
+      "post_context": ["    ihook.pytest_runtest_logfinish(nodeid=item.nodeid, location=item.location)",
+      "    return True", "", "", "def runtestprotocol("], "in_app": false}, {"platform":
+      "python", "filename": "pluggy/_manager.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/pluggy/_manager.py",
+      "function": "_hookexec", "module": "pluggy._manager", "lineno": 120, "pre_context":
+      ["        kwargs: Mapping[str, object],", "        firstresult: bool,", "    )
+      -> object | list[object]:", "        # called from all hookcaller instances.",
+      "        # enable_tracing will set its own wrapping function at self._inner_hookexec"],
+      "context_line": "        return self._inner_hookexec(hook_name, methods, kwargs,
+      firstresult)", "post_context": ["", "    def register(self, plugin: _Plugin,
+      name: str | None = None) -> str | None:", "        \"\"\"Register a plugin and
+      return its name.", "", "        :param name:"], "in_app": false}, {"platform":
+      "python", "filename": "pluggy/_hooks.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/pluggy/_hooks.py",
+      "function": "__call__", "module": "pluggy._hooks", "lineno": 512, "pre_context":
+      ["            \"Cannot directly call a historic hook - use call_historic instead.\"",
+      "        )", "        self._verify_all_args_are_provided(kwargs)", "        firstresult
+      = self.spec.opts.get(\"firstresult\", False) if self.spec else False", "        #
+      Copy because plugins may register other plugins during iteration (#438)."],
+      "context_line": "        return self._hookexec(self.name, self._hookimpls.copy(),
+      kwargs, firstresult)", "post_context": ["", "    def call_historic(", "        self,",
+      "        result_callback: Callable[[Any], None] | None = None,", "        kwargs:
+      Mapping[str, object] | None = None,"], "in_app": false}, {"platform": "python",
+      "filename": "_pytest/main.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/main.py",
+      "function": "pytest_runtestloop", "module": "_pytest.main", "lineno": 396, "pre_context":
+      ["    if session.config.option.collectonly:", "        return True", "", "    for
+      i, item in enumerate(session.items):", "        nextitem = session.items[i +
+      1] if i + 1 < len(session.items) else None"], "context_line": "        item.config.hook.pytest_runtest_protocol(item=item,
+      nextitem=nextitem)", "post_context": ["        if session.shouldfail:", "            raise
+      session.Failed(session.shouldfail)", "        if session.shouldstop:", "            raise
+      session.Interrupted(session.shouldstop)", "    return True"], "in_app": false},
+      {"platform": "python", "filename": "pluggy/_manager.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/pluggy/_manager.py",
+      "function": "_hookexec", "module": "pluggy._manager", "lineno": 120, "pre_context":
+      ["        kwargs: Mapping[str, object],", "        firstresult: bool,", "    )
+      -> object | list[object]:", "        # called from all hookcaller instances.",
+      "        # enable_tracing will set its own wrapping function at self._inner_hookexec"],
+      "context_line": "        return self._inner_hookexec(hook_name, methods, kwargs,
+      firstresult)", "post_context": ["", "    def register(self, plugin: _Plugin,
+      name: str | None = None) -> str | None:", "        \"\"\"Register a plugin and
+      return its name.", "", "        :param name:"], "in_app": false}, {"platform":
+      "python", "filename": "pluggy/_hooks.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/pluggy/_hooks.py",
+      "function": "__call__", "module": "pluggy._hooks", "lineno": 512, "pre_context":
+      ["            \"Cannot directly call a historic hook - use call_historic instead.\"",
+      "        )", "        self._verify_all_args_are_provided(kwargs)", "        firstresult
+      = self.spec.opts.get(\"firstresult\", False) if self.spec else False", "        #
+      Copy because plugins may register other plugins during iteration (#438)."],
+      "context_line": "        return self._hookexec(self.name, self._hookimpls.copy(),
+      kwargs, firstresult)", "post_context": ["", "    def call_historic(", "        self,",
+      "        result_callback: Callable[[Any], None] | None = None,", "        kwargs:
+      Mapping[str, object] | None = None,"], "in_app": false}, {"platform": "python",
+      "filename": "_pytest/main.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/main.py",
+      "function": "_main", "module": "_pytest.main", "lineno": 372, "pre_context":
+      ["", "def _main(config: Config, session: Session) -> int | ExitCode | None:",
+      "    \"\"\"Default command line protocol for initialization, session,", "    running
+      tests and reporting.\"\"\"", "    config.hook.pytest_collection(session=session)"],
+      "context_line": "    config.hook.pytest_runtestloop(session=session)", "post_context":
+      ["", "    if session.testsfailed:", "        return ExitCode.TESTS_FAILED",
+      "    elif session.testscollected == 0:", "        return ExitCode.NO_TESTS_COLLECTED"],
+      "in_app": false}, {"platform": "python", "filename": "_pytest/main.py", "abs_path":
+      "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/main.py",
+      "function": "wrap_session", "module": "_pytest.main", "lineno": 318, "pre_context":
+      ["        try:", "            config._do_configure()", "            initstate
+      = 1", "            config.hook.pytest_sessionstart(session=session)", "            initstate
+      = 2"], "context_line": "            session.exitstatus = doit(config, session)
+      or 0", "post_context": ["        except UsageError:", "            session.exitstatus
+      = ExitCode.USAGE_ERROR", "            raise", "        except Failed:", "            session.exitstatus
+      = ExitCode.TESTS_FAILED"], "in_app": false}, {"platform": "python", "filename":
+      "_pytest/main.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/main.py",
+      "function": "pytest_cmdline_main", "module": "_pytest.main", "lineno": 365,
+      "pre_context": ["        config._ensure_unconfigure()", "    return session.exitstatus",
+      "", "", "def pytest_cmdline_main(config: Config) -> int | ExitCode:"], "context_line":
+      "    return wrap_session(config, _main)", "post_context": ["", "", "def _main(config:
+      Config, session: Session) -> int | ExitCode | None:", "    \"\"\"Default command
+      line protocol for initialization, session,", "    running tests and reporting.\"\"\""],
+      "in_app": false}, {"platform": "python", "filename": "pluggy/_manager.py", "abs_path":
+      "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/pluggy/_manager.py",
+      "function": "_hookexec", "module": "pluggy._manager", "lineno": 120, "pre_context":
+      ["        kwargs: Mapping[str, object],", "        firstresult: bool,", "    )
+      -> object | list[object]:", "        # called from all hookcaller instances.",
+      "        # enable_tracing will set its own wrapping function at self._inner_hookexec"],
+      "context_line": "        return self._inner_hookexec(hook_name, methods, kwargs,
+      firstresult)", "post_context": ["", "    def register(self, plugin: _Plugin,
+      name: str | None = None) -> str | None:", "        \"\"\"Register a plugin and
+      return its name.", "", "        :param name:"], "in_app": false}, {"platform":
+      "python", "filename": "pluggy/_hooks.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/pluggy/_hooks.py",
+      "function": "__call__", "module": "pluggy._hooks", "lineno": 512, "pre_context":
+      ["            \"Cannot directly call a historic hook - use call_historic instead.\"",
+      "        )", "        self._verify_all_args_are_provided(kwargs)", "        firstresult
+      = self.spec.opts.get(\"firstresult\", False) if self.spec else False", "        #
+      Copy because plugins may register other plugins during iteration (#438)."],
+      "context_line": "        return self._hookexec(self.name, self._hookimpls.copy(),
+      kwargs, firstresult)", "post_context": ["", "    def call_historic(", "        self,",
+      "        result_callback: Callable[[Any], None] | None = None,", "        kwargs:
+      Mapping[str, object] | None = None,"], "in_app": false}, {"platform": "python",
+      "filename": "_pytest/config/__init__.py", "abs_path": "/home/dmartinez/Developer/instant-python/.venv/lib/python3.12/site-packages/_pytest/config/__init__.py",
+      "function": "main", "module": "_pytest.config", "lineno": 199, "pre_context":
+      ["        except ConftestImportFailure as e:", "            print_conftest_import_error(e,
+      file=sys.stderr)", "            return ExitCode.USAGE_ERROR", "", "        try:"],
+      "context_line": "            ret: ExitCode | int = config.hook.pytest_cmdline_main(config=config)",
+      "post_context": ["            try:", "                return ExitCode(ret)",
+      "            except ValueError:", "                return ret", "        finally:"],
+      "in_app": false}, {"platform": "python", "filename": "_jb_pytest_runner.py",
+      "abs_path": "/home/dmartinez/.local/share/JetBrains/Toolbox/apps/pycharm-professional/plugins/python-ce/helpers/pycharm/_jb_pytest_runner.py",
+      "function": "<module>", "module": "__main__", "lineno": 85, "pre_context": ["                set_parallel_mode()",
+      "            start_protocol()", "", "    os.environ[\"_JB_PPRINT_PRIMITIVES\"]
+      = \"1\"", "    try:"], "context_line": "        sys.exit(pytest.main(args, plugins_to_load
+      + [Plugin]))", "post_context": ["    finally:", "        jb_finish_tests()"]}],
+      "type": "raw"}}], "ipy_version": "1.2.3", "operating_system": "linux", "command":
+      "init", "error_type": "ValueError", "error_message": "An error occurred", "$python_runtime":
+      "CPython", "$python_version": "3.12.10", "$os": "Linux", "$os_version": "24.04",
+      "$lib": "posthog-python", "$lib_version": "7.0.1", "$geoip_disable": true},
+      "timestamp": "2025-12-12T07:21:45.202405+00:00", "distinct_id": "1c6c3831-9ead-47fc-8e71-b0de4e03480e",
+      "event": "$exception", "uuid": "19b88981-3748-4c41-b758-07d8881828ed"}], "historical_migration":
+      false, "sentAt": "2025-12-12T07:21:45.203179+00:00", "api_key": "****"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '26531'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - posthog-python/7.0.1
+    method: POST
+    uri: https://eu.i.posthog.com/batch/
+  response:
+    body:
+      string: '{"status":"Ok"}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '15'
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 12 Dec 2025 07:21:45 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      access-control-allow-credentials:
+      - 'true'
+      server:
+      - envoy
+      vary:
+      - origin, access-control-request-method, access-control-request-headers
+      x-envoy-upstream-service-time:
+      - '66'
+    status:
+      code: 200
+      message: OK
+version: 1

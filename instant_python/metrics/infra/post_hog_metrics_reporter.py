@@ -28,7 +28,14 @@ class PostHogMetricsReporter(MetricsReporter):
         except Exception:
             pass  # Fire and forget strategy to avoid impacting user experience
 
-    def send_error(self, metrics: ErrorMetricsEvent) -> None:
-        pass
     def send_error(self, error: Exception, metrics: ErrorMetricsEvent) -> None:
+        try:
+            self._client.capture_exception(
+                exception=error,
+                distinct_id=self._user_identity_manager.get_or_create_distinct_id(),
+                properties=metrics.to_primitives(),
+            )
+            self._client.flush()
+        except Exception:
+            pass  # Fire and forget strategy to avoid impacting user experience
 
