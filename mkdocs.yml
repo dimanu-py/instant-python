@@ -74,6 +74,7 @@ nav:
   - Getting Started:
       - Installation: getting_started/installation.md
       - First Steps: getting_started/first_steps.md
+      - Privacy & Metrics: getting_started/privacy_and_metrics.md
   - Advanced Usage and Customization:
       - guide/index.md
       - Default Features: guide/default_features.md

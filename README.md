@@ -51,10 +51,12 @@ so can quickly find what you need.
 
 - [Installation]: begin by learning how to install `instant-python`.
 - [First Steps]: get started with the basic features of `instant-python`.
+- [Privacy & Metrics]: learn about the anonymous usage data we collect and how to opt out.
 - [Advanced Usage and Customization]: explore advanced features and customization options.
 
 [Installation]: https://dimanu-py.github.io/instant-python/getting_started/installation/
 [First Steps]: https://dimanu-py.github.io/instant-python/getting_started/first_steps/
+[Privacy & Metrics]: https://dimanu-py.github.io/instant-python/getting_started/privacy_and_metrics/
 [Advanced Usage and Customization]: https://dimanu-py.github.io/instant-python/guide/
 
 ### For Developers
@@ -75,14 +77,23 @@ so can quickly find what you need.
 [GitHub Discussions]: https://github.com/dimanu-py/instant-python/discussions
 [GitHub Issues]: https://github.com/dimanu-py/instant-python/issues
 
-[//]: # (### Do Not Track)
+## 🔒 Privacy & Usage Metrics
 
-[//]: # ()
-[//]: # (In order to get better insights about the usage of the library, we collect anonymous usage data. The only)
+To improve `instant-python` and provide a better experience, we collect **anonymous usage metrics**. 
+No personal or sensitive information is collected.
 
-[//]: # (data we collect is the commands you run. No personal data is collected as part of this request.)
+**What we collect:**
+- Command executed and IPY version
+- Operating system type
+- Python version, dependency manager, and template choices
+- Error types (when commands fail)
 
-[//]: # ()
-[//]: # (You can disable this feature by setting the environment variable `INSTANT_PYTHON_NO_TRACK` to `1` or )
+**What we DON'T collect:**
+- No file paths, project names, or code content
+- No personal information or IP addresses
 
-[//]: # (passing the `--no-track` option to any command.)
+**How to opt out:**
+Set the environment variable `IPY_METRICS_ENABLE=false`
+
+For complete details, see our [Privacy & Metrics documentation](https://dimanu-py.github.io/instant-python/getting_started/privacy_and_metrics/).
+

@@ -33,10 +33,12 @@ so can quickly find what you need.
 
 - [Installation]: begin by learning how to install `instant-python`.
 - [First Steps]: get started with the basic features of `instant-python`.
+- [Privacy & Metrics]: learn about the anonymous usage data we collect and how to opt out.
 - [Advanced Usage and Customization]: explore advanced features and customization options.
 
 [Installation]: ../getting_started/installation.md
 [First Steps]: ../getting_started/first_steps.md
+[Privacy & Metrics]: ../getting_started/privacy_and_metrics.md
 [Advanced Usage and Customization]: ../guide/index.md
 
 ### For Developers
