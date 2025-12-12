@@ -2,6 +2,203 @@
 
 <!-- version list -->
 
+## v0.21.0 (2025-12-12)
+
+### ✨ Features
+
+- **metrics**: Set default values for api_key and host in PostHogConfig
+  ([`8cfd3c2`](https://github.com/dimanu-py/instant-python/commit/8cfd3c23ebe08ec54bb06d8ed7f646a7d8105a13))
+
+- **metrics**: Add metrics disabled check in PostHogMetricsReporter to prevent sending metrics when
+  disabled
+  ([`11e3cd3`](https://github.com/dimanu-py/instant-python/commit/11e3cd3f8a5e97065e54bf2d101647fb59d913a8))
+
+- **config**: Add metrics_enabled field to configuration for controlling metrics collection
+  ([`841cd9f`](https://github.com/dimanu-py/instant-python/commit/841cd9f73a8d6aa779a05f48cc160fe5f33d0123))
+
+- **metrics**: Add error metrics handling in metrics middleware for improved exception tracking
+  ([`7192e88`](https://github.com/dimanu-py/instant-python/commit/7192e88fc6c294065bd2c4d74223f0de552c0d6b))
+
+- **metrics**: Implement error handling in send_error method for capturing exceptions
+  ([`49d227f`](https://github.com/dimanu-py/instant-python/commit/49d227f700de0a550e7849a169f146df7fc33cde))
+
+- **metrics**: Add error handling for command failures in usage metrics sender
+  ([`364a731`](https://github.com/dimanu-py/instant-python/commit/364a7317b0ed8c08a29d7525f98366eae7715835))
+
+- **metrics**: Create class to store all data related to error event
+  ([`8174b3f`](https://github.com/dimanu-py/instant-python/commit/8174b3fc9f975cd338aeefcc0b28fb0cad86c180))
+
+- **metrics**: Add send_error method to metrics reporter for error handling
+  ([`c3e2cdb`](https://github.com/dimanu-py/instant-python/commit/c3e2cdb6676c23c8476cb222f7d37c0de1b05a84))
+
+- **metrics**: Add ConfigSnapshotPrimitives type and to_primitives method
+  ([`eb28115`](https://github.com/dimanu-py/instant-python/commit/eb28115bd5a3a62c3996d03fdc5f4fc3daadd168))
+
+- **metrics**: Add snapshot creator instance inside metrics middleware
+  ([`a7f4984`](https://github.com/dimanu-py/instant-python/commit/a7f498437b503bf956ed9f40b95f1c6ebf9deaf2))
+
+- **metrics**: Add method to create unknown ConfigSnapshot and handle missing config file
+  ([`4e17a87`](https://github.com/dimanu-py/instant-python/commit/4e17a8750b2c3d292da8d3280a4f25a4f521abda))
+
+- **metrics**: Implement method to be able to compare two snapshots
+  ([`ec00d47`](https://github.com/dimanu-py/instant-python/commit/ec00d47167a5a47bb34394ce02a2fc663f542fb9))
+
+- **metrics**: Implement 'is_unknown' method in config snapshot class to determine if it has been
+  properly read or not
+  ([`910c8d1`](https://github.com/dimanu-py/instant-python/commit/910c8d1502fa076167092ecad57dfd93314a9ccf))
+
+- **metrics**: Implement use case to create a snapshot of the configuration file
+  ([`4ab1892`](https://github.com/dimanu-py/instant-python/commit/4ab18922bb15f5e73353ee646baa8be339445494))
+
+- **shared**: Add 'for_metrics' method in config schema to be able to get only the data I need for
+  metrics and not need to access all the internals of the class
+  ([`feb27b7`](https://github.com/dimanu-py/instant-python/commit/feb27b77e9feab6c4a2b37bc5c790fb83544a2a2))
+
+- **metrics**: Inject config repository to snapshot creator to be able to read an existing
+  configuration file
+  ([`e10e26c`](https://github.com/dimanu-py/instant-python/commit/e10e26cc0d46c46895cd4551897994a88f64008e))
+
+- **metrics**: Create config snapshot class to store all the data related to the config file that
+  will be sent to metrics
+  ([`32db003`](https://github.com/dimanu-py/instant-python/commit/32db00308a09cecf12aa202574ad9e1a3f945d3b))
+
+- **metrics**: Integrate MetricsMiddleware into InstantPythonTyper for enhanced command execution
+  metrics
+  ([`2b9db62`](https://github.com/dimanu-py/instant-python/commit/2b9db621867a196018afd6348c78e2b2adf0559a))
+
+- **metrics**: Add MetricsMiddleware to handle command execution and send usage metrics data after
+  command execution has finished
+  ([`bdbbe00`](https://github.com/dimanu-py/instant-python/commit/bdbbe000e191ab72ca5c0eda97ba8a364346b5b4))
+
+- **metrics**: Implement execute method in metrics sender use case to send usage metrics data
+  ([`2fbecb8`](https://github.com/dimanu-py/instant-python/commit/2fbecb804c15b95228df6612abaadc5a74e50ef1))
+
+- **metrics**: Validate distinct ID format when loading from metrics file
+  ([`007c9d2`](https://github.com/dimanu-py/instant-python/commit/007c9d2958082d4b15d96eb0f5c0a4666153e24a))
+
+- **metrics**: Handle JSON decoding errors and missing distinct ID in metrics file
+  ([`c2e6be6`](https://github.com/dimanu-py/instant-python/commit/c2e6be60a8191b710402356daddac43c6cb8f30b))
+
+- **metrics**: Retrieve distinct ID from metrics.json if it exists so an existing user does not
+  generate a new id
+  ([`9b52f46`](https://github.com/dimanu-py/instant-python/commit/9b52f469598ee8b197448693e4a94e91f8396ab1))
+
+- **metrics**: Store distinct ID in metrics.json on first execution
+  ([`da050c9`](https://github.com/dimanu-py/instant-python/commit/da050c94e57653fe56ad09e5aee3704d6e3638fb))
+
+- **metrics**: Add UserIdentityManager to generate distinct user IDs
+  ([`36ef740`](https://github.com/dimanu-py/instant-python/commit/36ef7401467d4b20502e0c6d19cc80ffe8e0c588))
+
+- **metrics**: Implement fire-and-forget strategy for metric sending
+  ([`6cc0761`](https://github.com/dimanu-py/instant-python/commit/6cc0761a8ca86d15472448f03724105cdb4e47e2))
+
+- **metrics**: Enable sync mode for PostHog client initialization
+  ([`51c52bc`](https://github.com/dimanu-py/instant-python/commit/51c52bc235f16a70c5f646d3445fecc889063d78))
+
+- **metrics**: Capture event to be sent to posthog using a temporary distinct_id
+  ([`db27119`](https://github.com/dimanu-py/instant-python/commit/db27119b567f438caf5444b0cc91e0a7872d85f1))
+
+- **metrics**: Create posthog client inside reporter to be able to send metrics
+  ([`59aa393`](https://github.com/dimanu-py/instant-python/commit/59aa3938c5c9c29af31b5f52f21245c5d0a058c5))
+
+- **metrics**: Create post hog config class to handle env variables related with post hog
+  ([`95a4516`](https://github.com/dimanu-py/instant-python/commit/95a4516df3defeb2f0b528b1a08d4f0426586869))
+
+- **metrics**: Create dataclass to store all data related to usage metrics that will be send to
+  posthog
+  ([`0368a98`](https://github.com/dimanu-py/instant-python/commit/0368a98c71f82ab96db4e4bcb23e6142f6c3703a))
+
+### ⚙️ Build System
+
+- **pyproject**: Add platformdirs as production dependency as it's not built-in with all supported
+  python versions
+  ([`ef5dcf3`](https://github.com/dimanu-py/instant-python/commit/ef5dcf34c9b1b9c6f16e6a0e83f29d67898a6694))
+
+- **pyproject**: Update dependencies to remove vulnerability
+  ([`c858003`](https://github.com/dimanu-py/instant-python/commit/c858003272d4516a6b13e11f478a2cb9f2de895b))
+
+- **pyproject**: Add vcr dependency to run posthog integration test without affecting current
+  project
+  ([`ccc11f0`](https://github.com/dimanu-py/instant-python/commit/ccc11f011ffe615c3b581c89de68db774c353033))
+
+- **pyproject**: Add pydantic settings dependency to handle env variables gracefully
+  ([`0b8b19f`](https://github.com/dimanu-py/instant-python/commit/0b8b19fd7c315403f134c08272ca5ad9f0d0813f))
+
+### ♻️ Refactoring
+
+- **metrics**: Streamline success metrics handling in metrics middleware
+  ([`65962b6`](https://github.com/dimanu-py/instant-python/commit/65962b630f2b049b0aec1336991dc79cf4757587))
+
+- **metrics**: Update send_error method to include error parameter
+  ([`61210ac`](https://github.com/dimanu-py/instant-python/commit/61210acf4724a307a3b838821a59e00c06b97e87))
+
+- **metrics**: Rename send method to send_success in metrics reporter
+  ([`462db4c`](https://github.com/dimanu-py/instant-python/commit/462db4c55778647dc82fe7095cb20a5712083951))
+
+- **metrics**: Rename execute method to execute_on_success
+  ([`ac34809`](https://github.com/dimanu-py/instant-python/commit/ac34809dc85437768c9db23e429ddf44e2b622b5))
+
+- **metrics**: Modify metrics middleware to take config snapshots to avoid errors when init command
+  finished its execution and config file is moved
+  ([`0716f62`](https://github.com/dimanu-py/instant-python/commit/0716f62fc01aaf4c598e3580714110fcb9807fbd))
+
+- **metrics**: Enhance UsageMetricsEvent with dependency_manager and adjust built_in_features
+  initialization
+  ([`0281909`](https://github.com/dimanu-py/instant-python/commit/0281909b089a0bbfab5dc46dc8d0088e7ab0e59d))
+
+- **metrics**: Update execute method to accept config_snapshot parameter and not need to read
+  configuration file
+  ([`ee03fc9`](https://github.com/dimanu-py/instant-python/commit/ee03fc9cb1e1c391caf0d650dbbe9514eaef9131))
+
+- **metrics**: Rename UsageMetricsData to UsageMetricsEvent for clarity
+  ([`24a47ab`](https://github.com/dimanu-py/instant-python/commit/24a47ab97fc30bd7f9ad43a4acbb6a3573b1dacc))
+
+- **metrics**: Simplify UsageMetricsSender initialization by removing repository parameter
+  ([`e5d5917`](https://github.com/dimanu-py/instant-python/commit/e5d5917df1044368f709183b0d5fa0a2c0bf41aa))
+
+- **metrics**: Rename method to improve clarity in config reading
+  ([`9468e1a`](https://github.com/dimanu-py/instant-python/commit/9468e1a4ed7d96ef69c4eae1b4a52f712fdb37b9))
+
+- **metrics**: Update ConfigSnapshotCreator to utilize for_metrics method for improved config
+  handling
+  ([`2ce0140`](https://github.com/dimanu-py/instant-python/commit/2ce0140eda8234fdcf722b7d0ef3c48ee612ce59))
+
+- **config**: Improve error handling in configuration file loading
+  ([`1114c17`](https://github.com/dimanu-py/instant-python/commit/1114c17d570b989d85245dd0a032aeaf2a9af9f5))
+
+- **metrics**: Extract configuration data handling into a separate method and streamline metrics
+  data creation
+  ([`e316523`](https://github.com/dimanu-py/instant-python/commit/e31652391e93f7da8c254a4e8283792eeb62f63e))
+
+- **metrics**: Simplify execute method by removing success and error message parameters now that it
+  will be handled automatically by posthog reporter
+  ([`77469a9`](https://github.com/dimanu-py/instant-python/commit/77469a93fb411ef5ce6c8d000b25da1d2c9bc700))
+
+- **metrics**: Rename get_distinct_id method to get_or_create_distinct_id for clarity
+  ([`0a068c7`](https://github.com/dimanu-py/instant-python/commit/0a068c7e6903e00a590d76b058510627108be592))
+
+- **metrics**: Rename metric reporter classes for consistency
+  ([`15f122f`](https://github.com/dimanu-py/instant-python/commit/15f122f472c3e270e2ec3461be626c9b874eb12d))
+
+- **metrics**: Remove success an error message data from metrics object as posthog is configured to
+  report errors automatically
+  ([`0f4eb0b`](https://github.com/dimanu-py/instant-python/commit/0f4eb0b94f5fbe63477a8da6586ad39d74219125))
+
+- **metrics**: Update post hog metric reporter to use user identity manager and create consistent
+  distinct ids
+  ([`b5ad406`](https://github.com/dimanu-py/instant-python/commit/b5ad406236641adaad3590a767245caad610427f))
+
+- **metrics**: Set config dir to be the .config folder of user system if is not passed and extract
+  named variables to improve readability
+  ([`2e54e8e`](https://github.com/dimanu-py/instant-python/commit/2e54e8edc72ca118f47222302d4fa6c2c2e94556))
+
+- **metrics**: Modify distinct ID handling to improve readability and maintainability
+  ([`aa8d52b`](https://github.com/dimanu-py/instant-python/commit/aa8d52b462f486c47a72a3c33cc2d392ae726249))
+
+- **metrics**: Use usage metrics data class for send method in metric reporter
+  ([`96393c2`](https://github.com/dimanu-py/instant-python/commit/96393c27088fbfb691b9c0fbb205bdd31f609ad2))
+
+
 ## v0.20.0 (2025-12-05)
 
 ### ✨ Features
