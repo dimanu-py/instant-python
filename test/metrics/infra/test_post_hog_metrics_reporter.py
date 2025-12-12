@@ -8,6 +8,7 @@ from vcr.request import Request
 from instant_python.metrics.infra.post_hog_config import PostHogConfig
 from instant_python.metrics.infra.post_hog_metrics_reporter import PostHogMetricsReporter
 from instant_python.metrics.infra.user_identity_manager import UserIdentityManager
+from test.metrics.domain.error_metrics_event_mother import ErrorMetricsEventMother
 from test.metrics.domain.usage_metrics_event_mother import UsageMetricsEventMother
 
 
@@ -38,3 +39,13 @@ class TestPostHogMetricsReporter:
             metrics = UsageMetricsEventMother.any()
 
             reporter.send_success(metrics)
+
+    @posthog_vcr.use_cassette("error_posthog_reporter.yml")
+    def test_should_send_error_metrics_to_posthog(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            config = PostHogConfig()
+            user_identity_manager = UserIdentityManager(config_dir=Path(temp_dir))
+            reporter = PostHogMetricsReporter(config=config, user_identity_manager=user_identity_manager)
+            metrics = ErrorMetricsEventMother.any()
+
+            reporter.send_error(metrics)
