@@ -30,4 +30,5 @@ class PostHogMetricsReporter(MetricsReporter):
 
     def send_error(self, metrics: ErrorMetricsEvent) -> None:
         pass
+    def send_error(self, error: Exception, metrics: ErrorMetricsEvent) -> None:
 

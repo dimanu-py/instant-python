@@ -48,4 +48,4 @@ class TestPostHogMetricsReporter:
             reporter = PostHogMetricsReporter(config=config, user_identity_manager=user_identity_manager)
             metrics = ErrorMetricsEventMother.any()
 
-            reporter.send_error(metrics)
+            reporter.send_error(ValueError(), metrics)

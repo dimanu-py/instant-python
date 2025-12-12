@@ -32,10 +32,10 @@ class UsageMetricsSender:
             error_type=type(error).__name__,
             error_message=str(error),
         )
-        self._send_error_report(error_event)
+        self._send_error_report(error, error_event)
 
     def _send_metrics_report(self, metrics_data: UsageMetricsEvent) -> None:
         self._reporter.send_success(metrics_data)
 
-    def _send_error_report(self, error_data: ErrorMetricsEvent) -> None:
-        self._reporter.send_error(error_data)
+    def _send_error_report(self, error: Exception, error_event: ErrorMetricsEvent) -> None:
+        self._reporter.send_error(error, error_event)

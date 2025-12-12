@@ -21,9 +21,10 @@ class TestUsageMetricsSender:
     def test_should_send_error_metrics_event(self) -> None:
         reporter = Mock(MetricsReporter)
         usage_metrics_sender = UsageMetricsSender(reporter=reporter)
+        error = ValueError("Test error")
 
-        expect_call(reporter).send_error(ANY_ARG)
+        expect_call(reporter).send_error(error, ANY_ARG)
 
-        usage_metrics_sender.execute_on_failure(command_name="init", error=ValueError("Test error"))
+        usage_metrics_sender.execute_on_failure(command_name="init", error=error)
 
         expect(reporter).to(have_been_satisfied)

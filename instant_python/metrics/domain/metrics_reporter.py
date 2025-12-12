@@ -10,5 +10,5 @@ class MetricsReporter(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def send_error(self, metrics: ErrorMetricsEvent) -> None:
+    def send_error(self, error: Exception, metrics: ErrorMetricsEvent) -> None:
         raise NotImplementedError
