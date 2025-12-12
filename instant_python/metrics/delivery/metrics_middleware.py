@@ -31,6 +31,7 @@ class MetricsMiddleware(TyperGroup):
         try:
             self._execute_command(ctx)
         except Exception as exception:
+            self._send_error_metrics(ctx, exception)
             raise exception
         self._send_success_metrics(config_path, config_snapshot, ctx)
 
@@ -38,6 +39,10 @@ class MetricsMiddleware(TyperGroup):
         config_snapshot = self._retake_config_snapshot_if_needed(config_snapshot, config_path)
         command = self._extract_executed_command(ctx)
         self._send_metrics_data(command, config_snapshot)
+
+    def _send_error_metrics(self, ctx: Context, exception: Exception) -> None:
+        command = self._extract_executed_command(ctx)
+        self._send_error_data(command, exception)
 
     def _execute_command(self, ctx: Context) -> None:
         super().invoke(ctx)
@@ -68,6 +73,15 @@ class MetricsMiddleware(TyperGroup):
         thread = threading.Thread(
             target=self._metrics_sender.execute_on_success,
             args=(command, config_snapshot),
+            daemon=True,
+        )
+        thread.start()
+        thread.join(timeout=5.0)
+
+    def _send_error_data(self, command: str, exception: Exception) -> None:
+        thread = threading.Thread(
+            target=self._metrics_sender.execute_on_failure,
+            args=(command, exception),
             daemon=True,
         )
         thread.start()
