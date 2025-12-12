@@ -64,7 +64,7 @@ class MetricsMiddleware(TyperGroup):
 
     def _send_metrics_data(self, command: str, config_snapshot: ConfigSnapshot) -> None:
         thread = threading.Thread(
-            target=self._metrics_sender.execute,
+            target=self._metrics_sender.execute_on_success,
             args=(command, config_snapshot),
             daemon=True,
         )

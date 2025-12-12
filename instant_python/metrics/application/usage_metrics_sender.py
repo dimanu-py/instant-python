@@ -10,7 +10,7 @@ class UsageMetricsSender:
     def __init__(self, reporter: MetricsReporter) -> None:
         self._reporter = reporter
 
-    def execute(self, command_name: str, config_snapshot: ConfigSnapshot) -> None:
+    def execute_on_success(self, command_name: str, config_snapshot: ConfigSnapshot) -> None:
         config = config_snapshot.to_primitives()
         metrics_event = UsageMetricsEvent(
             ipy_version=__version__,

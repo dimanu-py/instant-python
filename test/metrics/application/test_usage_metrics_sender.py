@@ -14,6 +14,6 @@ class TestUsageMetricsSender:
 
         expect_call(reporter).send(ANY_ARG)
 
-        usage_metrics_sender.execute(command_name="init", config_snapshot=ConfigSnapshotMother.any())
+        usage_metrics_sender.execute_on_success(command_name="init", config_snapshot=ConfigSnapshotMother.any())
 
         expect(reporter).to(have_been_satisfied)
