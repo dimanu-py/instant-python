@@ -37,4 +37,4 @@ class TestPostHogMetricsReporter:
             reporter = PostHogMetricsReporter(config=config, user_identity_manager=user_identity_manager)
             metrics = UsageMetricsDataMother.any()
 
-            reporter.send(metrics)
+            reporter.send_success(metrics)

@@ -16,7 +16,7 @@ class PostHogMetricsReporter(MetricsReporter):
         )
         self._user_identity_manager = user_identity_manager
 
-    def send(self, metrics: UsageMetricsEvent) -> None:
+    def send_success(self, metrics: UsageMetricsEvent) -> None:
         try:
             self._client.capture(
                 distinct_id=self._user_identity_manager.get_or_create_distinct_id(),

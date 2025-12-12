@@ -12,7 +12,7 @@ class TestUsageMetricsSender:
         reporter = Mock(MetricsReporter)
         usage_metrics_sender = UsageMetricsSender(reporter=reporter)
 
-        expect_call(reporter).send(ANY_ARG)
+        expect_call(reporter).send_success(ANY_ARG)
 
         usage_metrics_sender.execute_on_success(command_name="init", config_snapshot=ConfigSnapshotMother.any())
 

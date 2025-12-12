@@ -24,4 +24,4 @@ class UsageMetricsSender:
         self._send_metrics_report(metrics_event)
 
     def _send_metrics_report(self, metrics_data: UsageMetricsEvent) -> None:
-        self._reporter.send(metrics_data)
+        self._reporter.send_success(metrics_data)
