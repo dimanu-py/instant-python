@@ -32,10 +32,12 @@ class MetricsMiddleware(TyperGroup):
             self._execute_command(ctx)
         except Exception as exception:
             raise exception
-        finally:
-            config_snapshot = self._retake_config_snapshot_if_needed(config_snapshot, config_path)
-            command = self._extract_executed_command(ctx)
-            self._send_metrics_data(command, config_snapshot)
+        self._send_success_metrics(config_path, config_snapshot, ctx)
+
+    def _send_success_metrics(self, config_path: Path, config_snapshot: ConfigSnapshot, ctx: Context) -> None:
+        config_snapshot = self._retake_config_snapshot_if_needed(config_snapshot, config_path)
+        command = self._extract_executed_command(ctx)
+        self._send_metrics_data(command, config_snapshot)
 
     def _execute_command(self, ctx: Context) -> None:
         super().invoke(ctx)
