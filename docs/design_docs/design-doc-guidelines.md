@@ -164,7 +164,7 @@ No status, no date, no structured sections.
 
 | Number | Title | Created | Link |
 |--------|-------|---------|------|
-| -      | -     | -       | -    |
+| 0001   | MetricsMiddleware Refactor | 2026-06-03 | [link](0001-metrics-middleware-refactor.md) |
 
 ### In Progress
 
