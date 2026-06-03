@@ -22,9 +22,6 @@
 {{ macros.include_block("documentation/readme.yml", 0) }}
 {% endif %}
 {# === Testing and Type Checking === #}
-{% if dependencies | has_dependency("pytest") %}
-{{ macros.include_block("config_files/pytest.yml", 0) }}
-{% endif %}
 {% if dependencies | has_dependency("mypy") %}
 {{ macros.include_block("config_files/mypy.yml", 0) }}
 {% endif %}

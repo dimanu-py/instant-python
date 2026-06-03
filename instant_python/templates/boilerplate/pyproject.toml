@@ -107,6 +107,20 @@ indent-style = "space"
 skip-magic-trailing-comma = false
 {% endif %}
 
+{% if dependencies | has_dependency("pytest") %}
+[tool.pytest.ini_options]
+markers = [
+    "unit: mark a test as a unit test",
+    "acceptance: mark a test as an acceptance test",
+    "integration: mark a test as an integration test",
+]
+testpaths = ["test"]
+{% if ["async_alembic", "async_sqlalchemy"] | is_in(template.built_in_features) %}
+asyncio_default_fixture_loop_scope = "function"
+asyncio_mode = "auto"
+{% endif %}
+{% endif %}
+
 {% if "github_actions" in template.built_in_features %}
 [project.optional-dependencies]
 build = ["uv"]
