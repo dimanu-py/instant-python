@@ -37,6 +37,8 @@ class MetricsMiddleware(TyperGroup):
 
     def _send_success_metrics(self, config_path: Path, config_snapshot: ConfigSnapshot, ctx: Context) -> None:
         config_snapshot = self._retake_config_snapshot_if_needed(config_snapshot, config_path)
+        if config_snapshot.is_unknown():
+            return
         command = self._extract_executed_command(ctx)
         self._send_metrics_data(command, config_snapshot)
 
