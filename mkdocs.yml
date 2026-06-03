@@ -6,6 +6,7 @@ site_description: >
   all the built in implementations you want to have.
 repo_name: instant-python
 repo_url: https://github.com/dimanu-py/instant-python
+docs_dir: docs/documentation
 plugins:
   - search
   - tags
