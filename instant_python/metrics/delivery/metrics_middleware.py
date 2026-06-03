@@ -55,7 +55,7 @@ class MetricsMiddleware(TyperGroup):
 
     @staticmethod
     def _extract_config_path(ctx: Context) -> Path:
-        if ctx.args and ["--config", "-c"] in ctx.args:
+        if ctx.args and ("--config" in ctx.args or "-c" in ctx.args):
             return (
                 Path(ctx.args[ctx.args.index("--config") + 1])
                 if "--config" in ctx.args
