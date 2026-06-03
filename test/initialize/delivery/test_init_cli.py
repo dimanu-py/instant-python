@@ -1,5 +1,9 @@
 import json
+import os
+import shutil
 import tempfile
+from collections.abc import Generator
+from contextlib import contextmanager
 
 import pytest
 import yaml
@@ -13,6 +17,18 @@ from instant_python.shared.supported_managers import SupportedManagers
 from instant_python.shared.supported_python_versions import SupportedPythonVersions
 from instant_python.shared.supported_templates import SupportedTemplates
 from test.utils import resources_path
+
+
+@contextmanager
+def _isolated_filesystem() -> Generator[None, None, None]:
+    cwd = os.getcwd()
+    tmp_dir = tempfile.mkdtemp()
+    os.chdir(tmp_dir)
+    try:
+        yield
+    finally:
+        os.chdir(cwd)
+        shutil.rmtree(tmp_dir)
 
 
 @pytest.mark.acceptance
@@ -146,7 +162,7 @@ class TestInitCli:
             yaml.dump(config, config_file)
             config_file_path = config_file.name
 
-        with self._runner.isolated_filesystem():
+        with _isolated_filesystem():
             result = self._runner.invoke(app, ["--config", str(config_file_path)])
 
         return {
@@ -159,7 +175,7 @@ class TestInitCli:
             yaml.dump(config, config_file)
             config_file_path = config_file.name
 
-        with self._runner.isolated_filesystem():
+        with _isolated_filesystem():
             result = self._runner.invoke(
                 app, ["--config", str(config_file_path), "--templates", str(custom_template_folder)]
             )
