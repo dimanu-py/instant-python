@@ -65,6 +65,17 @@ distribution = false
 {% endif %}
 {% if release_deps.strip() or lint_deps.strip() or test_deps.strip() %}
 [dependency-groups]
+dev = [
+{% if release_deps.strip() %}
+    {include-group = "release"},
+{% endif %}
+{% if lint_deps.strip() %}
+    {include-group = "lint"},
+{% endif %}
+{% if test_deps.strip() %}
+    {include-group = "test"},
+{% endif %}
+]
 {% if release_deps.strip() %}
 release = [
 {{ release_deps }}]
