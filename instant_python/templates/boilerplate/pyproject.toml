@@ -1,9 +1,9 @@
 {% set feature_to_main_dependencies = {
     "async_sqlalchemy": ["sqlalchemy", "asyncpg", "psycopg2-binary", "pydantic", "pydantic-settings"],
     "async_alembic": ["alembic", "pydantic", "pydantic-settings"],
-    "event_bus": ["pika", "sindripy"],
+    "event_bus": ["pika", "value-object-sindri"],
     "fastapi_application": ["fastapi[standard]"],
-    "value_objects": ["sindripy"]
+    "value_objects": ["value-object-sindri"]
 } %}
 {% macro get_main_dependencies() -%}
     {%- set deps = [] -%}
@@ -29,7 +29,8 @@
     },
     "test": {
     "pytest": ["github_actions", "makefile", "precommit_hook"],
-    "pytest-asyncio": ["async_alembic", "async_sqlalchemy"]
+    "pytest-asyncio": ["async_alembic", "async_sqlalchemy"],
+    "object-mother-sindri": ["value_objects"]
     }
 } %}
 {% macro get_dev_group_dependencies(group_name) -%}
@@ -97,7 +98,7 @@ skip-magic-trailing-comma = false
 
 {% if "github_actions" in template.built_in_features %}
 [project.optional-dependencies]
-build = ["uv>=0.7.21"]
+build = ["uv"]
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
@@ -109,8 +110,9 @@ no_git_verify = false
 tag_format = "{version}"
 build_command = """
     pip install -e '.[build]'
-    {{ general.dependency_manager }} lock --upgrade-package {{ general.slug }}
+    {{ general.dependency_manager }} lock --upgrade-package "$PACKAGE_NAME"
     git add {{ general.dependency_manager }}.lock
+    uv build
 """
 
 [tool.semantic_release.commit_parser_options]
