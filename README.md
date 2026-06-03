@@ -25,6 +25,7 @@ commands like `ng new` or `create-react-app`, but for Python projects.
   <li>🔄 Initialize a Git repo in just a few clicks</li>
   <li>📦 Auto-install all your go-to dependencies</li>
   <li>🚀 Ship with production-ready boilerplates out of the box</li>
+  <li>🤖 Include a complete AI agent setup for assisted development</li>
 </ul>
 
 </td></tr></table></div>
@@ -41,6 +42,20 @@ Take full control of your project generation! With **custom templates**, you can
 Whether you have a standardized project structure you always use or specific architectural patterns you want to enforce, 
 custom templates let you generate projects exactly the way you want them. 
 [Learn how to create your first custom template](https://dimanu-py.github.io/instant-python/guide/custom_projects/) and level up your project generation workflow!
+
+## 🤖 AI Agents Setup
+
+Generate projects with a pre-configured AI agent environment to assist your development workflow. When you include the
+`ai_agents` built-in feature, your project comes with:
+
+- **`AGENTS.md`** — Project rules and guidelines that configure AI agents to follow your coding standards
+- **Skills** — Reusable instruction sets for common tasks: code review, refactoring, story splitting, test analysis, and more
+- **Commands** — On-demand workflows for recurring operations: committing changes, running security reviews, analyzing technical debt
+- **Architecture Decision Records (ADR)** — Templates to document and track technical decisions
+- **Design Docs** — Templates to capture feature requirements and implementation plans
+
+All generated under `docs/` and `.agents/` directories, ready to use with any AI coding assistant that supports agent configuration.
+[See all available skills and commands](https://dimanu-py.github.io/instant-python/guide/default_features/#ai-agents).
 
 ## Navigation Guide
 

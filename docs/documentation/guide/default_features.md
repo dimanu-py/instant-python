@@ -327,3 +327,62 @@ will set up a decoupled implementation of an event bus using RabbitMQ. This impl
 - Modeled domain events that will be published through the event bus.
 - Interface for the event bus and subscriber.
 - Concrete implementation of the event bus using RabbitMQ
+
+### AI Agents
+
+This feature sets up a complete environment for AI-assisted software development by including an `AGENTS.md` file with project
+rules, a collection of specialized skills for common development tasks, and commands for recurring workflows. When selected,
+it creates the following structure in your project:
+
+```
+├── AGENTS.md
+├── docs
+│   ├── adrs
+│   │   └── adr-guidelines.md
+│   └── design-docs
+│       └── design-doc-guidelines.md
+└── .agents
+    ├── commands
+    │   ├── code-review.md
+    │   ├── commit.md
+    │   ├── security-review.md
+    │   └── technical-debt-review.md
+    └── skills
+        ├── adr
+        ├── code-review
+        ├── complexity-review
+        ├── design-doc
+        ├── hamburger-method
+        ├── micro-steps-coach
+        ├── mutation-testing
+        ├── story-splitting
+        ├── test-desiderata
+        └── xp-refactor
+```
+
+#### Skills
+
+Each skill provides detailed instructions for an AI agent to perform a specific task effectively.
+
+| Skill                 | When to use                                                                                   | What it does                                                                                                       |
+|-----------------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| **adr**               | Discussing a new convention or pattern; requesting improvements to existing ADR documentation | Identifies conventions and decisions from the conversation, creates or updates ADR files with consistent structure |
+| **complexity-review** | Evaluating technical solutions or designs; proposing system architectures                     | Questions every complexity driver, proposes progressively simpler alternatives, identifies what can be postponed   |
+| **design-doc**        | Planning a new feature; discussing architectural changes                                      | Extracts feature ideas and requirements from conversation, creates or updates design docs with consistent format   |
+| **hamburger-method**  | Breaking down large features into layers; composing minimal vertical slices                   | Applies the Hamburger Method to slice features into vertical deliverable pieces                                    |
+| **micro-steps-coach** | Facing large refactorings; making breaking changes                                            | Breaks down work into 1-3 hour micro-steps, applies expand-contract pattern for safe changes                       |
+| **mutation-testing**  | Analyzing test effectiveness; validating refactoring                                          | Runs mutation testing, analyzes results to identify weak tests, provides actionable recommendations                |
+| **story-splitting**   | Stories that feel too large or vague; multiple features bundled together                      | Detects oversized stories and applies splitting heuristics                                                         |
+| **test-desiderata**   | Analyzing test files; reviewing test quality                                                  | Evaluates tests across 12 quality dimensions using Kent Beck's Test Desiderata framework                           |
+| **xp-refactor**       | Cleaning up existing code; reducing duplication                                               | Applies XP Simple Design principles, prioritizes refactors by ROI                                                  |
+
+#### Commands
+
+Commands define recurring workflows that an AI agent can execute on demand.
+
+| Command                   | Description                                                                                                                  |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| **commit**                | Splits uncommitted changes into atomic conventional commits with user confirmation before each decision                      |
+| **code-review**           | Reviews pending, uncommitted changes focusing on test quality, maintainability, simplicity, and alignment with project rules |
+| **security-review**       | Analyzes code, architecture, or system from a security perspective identifying vulnerabilities and recommending mitigations  |
+| **technical-debt-review** | Identifies and prioritizes technical debt in the codebase including code smells, weak tests, and outdated dependencies       |

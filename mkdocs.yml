@@ -12,7 +12,7 @@ plugins:
   - tags
   - section-index
   - macros:
-      module_name: docs/downloads_macro
+      module_name: docs/documentation/downloads_macro
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/chart.js
 markdown_extensions:

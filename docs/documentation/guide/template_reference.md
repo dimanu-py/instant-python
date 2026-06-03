@@ -327,6 +327,100 @@ Templates for database persistence with SQLAlchemy.
 
 ---
 
+## Agents
+
+Templates for AI-assisted software development environment.
+
+### Root Files
+
+| Template Name | Path | Description |
+|--------------|------|-------------|
+| AGENTS.md | `agents/AGENTS.md` | Main project rules and guidelines for AI agents |
+| ADR Guidelines | `agents/adr-guidelines.md` | Guidelines for writing Architecture Decision Records |
+| Design Doc Guidelines | `agents/design-doc-guidelines.md` | Guidelines for writing design documents |
+
+### Commands
+
+| Template Name | Path | Description |
+|--------------|------|-------------|
+| Code Review | `agents/commands/code-review.md` | Review pending changes for quality and maintainability |
+| Commit | `agents/commands/commit.md` | Split changes into atomic conventional commits |
+| Security Review | `agents/commands/security-review.md` | Security analysis and risk assessment |
+| Technical Debt Review | `agents/commands/technical-debt-review.md` | Technical debt identification and prioritization |
+
+### Skills
+
+| Skill                         | Path                                           | Description                                                |
+|-------------------------------|------------------------------------------------|------------------------------------------------------------|
+| ADR                           | `agents/skills/adr/SKILL.md`                   | Create or improve Architecture Decision Records            |
+| Complexity Review             | `agents/skills/complexity-review/SKILL.md`     | Evaluate technical proposals against complexity dimensions |
+| Complexity Review (Reference) | `agents/skills/complexity-review/REFERENCE.md` | Reference for complexity review dimensions                 |
+| Design Doc                    | `agents/skills/design-doc/SKILL.md`            | Create or improve design documents                         |
+| Hamburger Method              | `agents/skills/hamburger-method/SKILL.md`      | Slice features into vertical deliverable pieces            |
+| Hamburger Method (Reference)  | `agents/skills/hamburger-method/REFERENCE.md`  | Reference for hamburger method patterns                    |
+| Micro Steps Coach             | `agents/skills/micro-steps-coach/SKILL.md`     | Break down work into 1-3 hour micro-steps                  |
+| Micro Steps Coach (Reference) | `agents/skills/micro-steps-coach/REFERENCE.md` | Reference for expand-contract patterns                     |
+| Mutation Testing              | `agents/skills/mutation-testing/SKILL.md`      | Apply mutation testing analysis in Python                  |
+| Story Splitting               | `agents/skills/story-splitting/SKILL.md`       | Split large stories using proven heuristics                |
+| Story Splitting (Reference)   | `agents/skills/story-splitting/REFERENCE.md`   | Reference for story splitting patterns                     |
+| Test Desiderata               | `agents/skills/test-desiderata/SKILL.md`       | Analyze test quality using Test Desiderata framework       |
+| Test Desiderata (Reference)   | `agents/skills/test-desiderata/REFERENCE.md`   | Reference for the 12 test quality dimensions               |
+| XP Refactor                   | `agents/skills/xp-refactor/SKILL.md`           | Apply XP Simple Design principles when refactoring         |
+
+### Example Usage
+
+```yaml
+- name: AGENTS.md
+  type: file
+  extension: .md
+  template: agents/AGENTS.md
+
+- name: docs
+  type: directory
+  children:
+    - name: adrs
+      type: directory
+      children:
+        - name: adr-guidelines
+          type: file
+          extension: .md
+          template: agents/adr-guidelines.md
+    - name: design-docs
+      type: directory
+      children:
+        - name: design-doc-guidelines
+          type: file
+          extension: .md
+          template: agents/design-doc-guidelines.md
+
+- name: .agents
+  type: directory
+  children:
+    - name: commands
+      type: directory
+      children:
+        - name: code-review
+          type: file
+          extension: .md
+          template: agents/commands/code-review.md
+        - name: commit
+          type: file
+          extension: .md
+          template: agents/commands/commit.md
+    - name: skills
+      type: directory
+      children:
+        - name: adr
+          type: directory
+          children:
+            - name: SKILL
+              type: file
+              extension: .md
+              template: agents/skills/adr/SKILL.md
+```
+
+---
+
 ## Complete Example
 
 Here's a complete example showing how to create a custom project that uses multiple built-in templates:
