@@ -1,7 +1,7 @@
 fail_fast: true
 
 default_language_version:
-  python: {{ general.python_version }}
+  python: "{{ general.python_version }}"
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
