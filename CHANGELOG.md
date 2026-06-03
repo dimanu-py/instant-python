@@ -2,6 +2,70 @@
 
 <!-- version list -->
 
+## v0.22.0 (2026-06-03)
+
+### ✨ Features
+
+- **config**: Add ai agents built in feature option to be selected when generating config file
+  ([`9c87804`](https://github.com/dimanu-py/instant-python/commit/9c878045be4010923ef7599bb9b9b30c074e5f76))
+
+- **templates**: Include agents built in feature in project main structure for the different default
+  templates
+  ([`022f676`](https://github.com/dimanu-py/instant-python/commit/022f676633d788eeef8db0e1fdf85840d2f9040a))
+
+- **templates**: Add folder and file structure for agents built in feature
+  ([`25d1ae5`](https://github.com/dimanu-py/instant-python/commit/25d1ae5ccfa667f541493930e571baa73a7ec380))
+
+- **templates**: Add compatibility commands with CLAUDE and opencode agents when agents built in
+  feature is selected
+  ([`0dca00d`](https://github.com/dimanu-py/instant-python/commit/0dca00d288fc95d20ca31e3db30bc146b8d68bd2))
+
+- **templates**: Add boilerplate with AI agents configuration, commands and skills
+  ([`be65472`](https://github.com/dimanu-py/instant-python/commit/be65472f0ccb76576c05b12975b0a32f7a8e8dea))
+
+- **templates**: Embed pytest config in pyproject.toml instead of generating separate pytest.ini
+  ([`b589bd6`](https://github.com/dimanu-py/instant-python/commit/b589bd6f8335bbb1b82e82c78cae19807de18cf2))
+
+- **templates**: Add dev dependency group with conditional includes for release, lint, and test
+  ([`ae52934`](https://github.com/dimanu-py/instant-python/commit/ae52934819f198723e445c9335a7eef50d055870))
+
+- **templates**: Migrate sindripy dependency when value_objects built in feature is selected to
+  value-object-sindri
+  ([`e941a39`](https://github.com/dimanu-py/instant-python/commit/e941a39f49bb5c70d40e601d52859c5a485c75e7))
+
+### 🪲 Bug Fixes
+
+- **metrics**: Evaluate correctly when init command has been executed with custom path to config
+  file when sending metrics
+  ([`7fe9c46`](https://github.com/dimanu-py/instant-python/commit/7fe9c468c6b5371525dc336a6fe2e714ee6de8d0))
+
+- **metrics**: Avoid sending error as successfull metrics
+  ([`3cb2fcf`](https://github.com/dimanu-py/instant-python/commit/3cb2fcfa86ac6e9e61489b965dae2a6e257fc91d))
+
+- **tests**: Replace Typer CliRunner isolated_filesystem with standalone helper to fix
+  AttributeError
+  ([`d403571`](https://github.com/dimanu-py/instant-python/commit/d4035715f1bdc45a6a4f16249ec271bc330638b5))
+
+- **templates**: Modify precommit template to create the file with 'yaml' format instead of 'yml'
+  and avoid error
+  ([`cb5cb5b`](https://github.com/dimanu-py/instant-python/commit/cb5cb5b8f94b877c9cf59593bbb3e99a4a7327d6))
+
+- **templates**: Write python version in pre commit config file as a string instead of as a float to
+  avoid error when executing precommit
+  ([`0cc2506`](https://github.com/dimanu-py/instant-python/commit/0cc2506ded939a05786a7764e870f22144e7cde1))
+
+### ⚙️ Build System
+
+- Update uv.lock dependencies
+  ([`340d09c`](https://github.com/dimanu-py/instant-python/commit/340d09cb1cf8db20f379f3a6375132b7f84368b5))
+
+- **cli**: Add missing explicit dependencies
+  ([`c4e46e0`](https://github.com/dimanu-py/instant-python/commit/c4e46e095bacddbe7cfb197f02a04ae941c15c08))
+
+- Update dependencies versions
+  ([`5dad140`](https://github.com/dimanu-py/instant-python/commit/5dad14074de3815404879a976b5a75d2956748af))
+
+
 ## v0.21.0 (2025-12-12)
 
 ### ✨ Features

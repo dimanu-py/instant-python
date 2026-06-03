@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "instant-python"
-version = "0.21.0"
+version = "0.22.0"
 description = "Instant boilerplate generation for Python projects"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -33,7 +33,6 @@ classifiers = [
     "Operating System :: Unix",
     "Operating System :: Microsoft :: Windows",
 ]
-
 include = [
     "instant_python/templates/**/*",
 ]
@@ -44,6 +43,10 @@ repository = "https://github.com/dimanu-py/instant-python/"
 
 [project.scripts]
 ipy = "instant_python.cli.cli:app"
+
+[project.optional-dependencies]
+build = ["uv>=0.7.21"]
+
 
 [dependency-groups]
 dev = [
@@ -86,9 +89,6 @@ test = [
     "vcrpy>=4.3.0",
     "vermin>=1.6.0",
 ]
-
-[project.optional-dependencies]
-build = ["uv>=0.7.21"]
 
 [tool.uv]
 constraint-dependencies = [
