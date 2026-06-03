@@ -125,3 +125,18 @@ clean: # It cleans up the project, removing the virtual environment and some fil
 .PHONY: docs-serve
 docs-serve:  ## Start server for documentation.
 	@uv run mkdocs serve
+
+.PHONY: claude
+claude:  ## Create symlinks for Claude Code compatibility (CLAUDE.md → AGENTS.md, .claude → .agents).
+	@echo "\n⌛ Creating Claude Code symlinks...\n"
+	@ln -sf AGENTS.md CLAUDE.md
+	@ln -sfn .agents .claude
+	@ls -la CLAUDE.md .claude
+
+.PHONY: opencode
+opencode:  ## Create symlinks for OpenCode compatibility.
+	@echo "\n⌛ Creating OpenCode symlinks...\n"
+	@mkdir -p .opencode
+	@rm -rf .opencode/commands
+	@ln -s ../.agents/commands .opencode/commands
+	@ls -la .opencode
