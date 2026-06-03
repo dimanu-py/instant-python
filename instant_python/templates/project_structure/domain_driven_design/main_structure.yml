@@ -27,6 +27,8 @@
 {% endif %}
 {# === Database Migration === #}
 {{ macros.render_feature_if_enabled("async_alembic", "persistence/async_alembic.yml", 0) }}
+{# === AI Agents === #}
+{{ macros.render_feature_if_enabled("ai_agents", "agents/agents.yml", 0) }}
 {# === Documentation and Metadata === #}
 {% set doc_features = [
     {"feature": "citation_file", "template": "documentation/citation.yml"},
