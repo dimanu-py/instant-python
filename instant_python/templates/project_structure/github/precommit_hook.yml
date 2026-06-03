@@ -1,4 +1,4 @@
 - name: .pre-commit-config
   type: file
-  extension: .yml
-  template: .pre-commit-config.yml
+  extension: .yaml
+  template: .pre-commit-config.yaml
