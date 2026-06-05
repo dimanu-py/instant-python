@@ -20,7 +20,7 @@ jobs:
           egress-policy: audit
 
       - name: 📥 Checkout the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
         with:
           ref: {% raw %}${{ github.head_ref }}{% endraw %}
 
@@ -43,7 +43,7 @@ jobs:
           egress-policy: audit
 
       - name: 📥 Checkout the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
         with:
           ref: {% raw %}${{ github.head_ref }}{% endraw %}
 
@@ -65,7 +65,7 @@ jobs:
           egress-policy: audit
 
       - name: 📥 Checkout the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
         with:
           ref: {% raw %}${{ github.head_ref }}{% endraw %}
 
@@ -92,7 +92,7 @@ jobs:
           egress-policy: audit
 
       - name: 📥 Checkout the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
         with:
           ref: {% raw %}${{ github.head_ref }}{% endraw %}
 
@@ -128,7 +128,7 @@ jobs:
           egress-policy: audit
 
       - name: 📥 Checkout the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -153,7 +153,7 @@ jobs:
           egress-policy: audit
 
       - name: 📥 Checkout the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -174,7 +174,7 @@ jobs:
           egress-policy: audit
 
       - name: 📥 Checkout the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd  # v5.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -189,7 +189,7 @@ jobs:
         run: {{ general.dependency_manager }} run pytest --cov --cov-report=xml --cov-branch test -ra -s
 
       - name: 📥 Upload coverage report to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe  # v5
         with:
           files: coverage.xml
           flags: unittests
