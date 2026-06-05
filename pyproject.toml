@@ -9,7 +9,7 @@ description = "Instant boilerplate generation for Python projects"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [{name = "dimanu-py", email = "dimanu.py@gmail.com"}]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "typer>=0.15.1",
     "click>=8.1.0",
@@ -91,10 +91,6 @@ test = [
 ]
 
 [tool.uv]
-constraint-dependencies = [
-    "requests>=2.32.4",
-    "urllib3>=2.5.0",
-]
 exclude-newer = "3 days"
 
 [tool.ruff]
