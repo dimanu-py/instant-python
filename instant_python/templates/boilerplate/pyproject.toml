@@ -31,6 +31,13 @@
     "pytest": ["github_actions", "makefile", "precommit_hook"],
     "pytest-asyncio": ["async_alembic", "async_sqlalchemy"],
     "object-mother-sindri": ["value_objects"]
+    },
+    "docs": {
+    "mkdocs": ["custom_documentation"],
+    "mkdocs-literate-nav": ["custom_documentation"],
+    "mkdocs-macros-plugin": ["custom_documentation"],
+    "mkdocs-material": ["custom_documentation"],
+    "mkdocs-section-index": ["custom_documentation"]
     }
 } %}
 {% macro get_dev_group_dependencies(group_name) -%}
@@ -48,6 +55,7 @@
 {% set release_deps = get_dev_group_dependencies("release") %}
 {% set lint_deps = get_dev_group_dependencies("lint") %}
 {% set test_deps = get_dev_group_dependencies("test") %}
+{% set docs_deps = get_dev_group_dependencies("docs") %}
 [project]
 name = "{{ general.slug }}"
 version = "{{ general.version }}"
@@ -75,6 +83,9 @@ dev = [
 {% if test_deps.strip() %}
     {include-group = "test"},
 {% endif %}
+{% if docs_deps.strip() %}
+    {include-group = "docs"},
+{% endif %}
 ]
 {% if release_deps.strip() %}
 release = [
@@ -87,6 +98,10 @@ lint = [
 {% if test_deps.strip() %}
 test = [
 {{ test_deps }}]
+{% endif %}
+{% if docs_deps.strip() %}
+docs = [
+{{ docs_deps }}]
 {% endif %}
 {% endif %}
 
