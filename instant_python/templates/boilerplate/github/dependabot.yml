@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "6:00"
+      time: "06:00"
       timezone: "Europe/Madrid"
     cooldown:
       semver-major-days: 90
@@ -36,7 +36,7 @@ updates:
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "6:00"
+      time: "06:00"
       timezone: "Europe/Madrid"
 
   - package-ecosystem: "docker"
@@ -47,7 +47,7 @@ updates:
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "6:00"
+      time: "06:00"
       timezone: "Europe/Madrid"
 
   - package-ecosystem: "docker-compose"
@@ -58,5 +58,5 @@ updates:
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "6:00"
+      time: "06:00"
       timezone: "Europe/Madrid"
