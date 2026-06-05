@@ -32,6 +32,7 @@
 {# === Documentation and Metadata === #}
 {% set doc_features = [
     {"feature": "citation_file", "template": "documentation/citation.yml"},
-    {"feature": "security_file", "template": "documentation/security.yml"}
+    {"feature": "security_file", "template": "documentation/security.yml"},
+    {"feature": "custom_documentation", "template": "documentation/documentation.yml"}
 ] %}
 {{ macros.render_features(doc_features, 0) }}
