@@ -2,6 +2,26 @@
 
 <!-- version list -->
 
+## v0.23.1 (2026-06-05)
+
+### ⚙️ Build System
+
+- Remove pinned dependencies that generated problems in the past
+  ([`709490c`](https://github.com/dimanu-py/instant-python/commit/709490c3391f61a0f74fdd23803a27e84a5b77a2))
+
+- Update dependencies due to detected vulnerabilities
+  ([`77084a1`](https://github.com/dimanu-py/instant-python/commit/77084a14475798566e96895e29b69a6077cd54e0))
+
+### ♻️ Refactoring
+
+- **templates**: Update 'make upgrade' command when using uv to perfom uv lock --upgrade and uv sync
+  --all-groups instead of uv sync --upgrade
+  ([`3416e31`](https://github.com/dimanu-py/instant-python/commit/3416e315c471499d0afc14316679cffc5beecadf))
+
+- **templates**: Update github actions versions in boilerplate templates
+  ([`f913c6a`](https://github.com/dimanu-py/instant-python/commit/f913c6ad94940ea4470ba59d8939b92a4bded7bc))
+
+
 ## v0.23.0 (2026-06-05)
 
 ### ✨ Features
