@@ -3,6 +3,7 @@
 {% set has_pre_commit_hooks = "precommit_hook" in template.built_in_features %}
 {% set has_github_actions_or_makefile = ["github_actions", "makefile"] | is_in(template.built_in_features) %}
 {% set has_agents = "ai_agents" in template.built_in_features %}
+{% set has_custom_docs = "custom_docs" in template.built_in_features %}
 .DEFAULT_GOAL := help
 
 .PHONY: help
@@ -183,7 +184,6 @@ search:  ## Show package details.
 	{% elif has_uv %}
 	@uv pip show $$package
 	{% endif %}
-
 {% if has_agents %}
 .PHONY: claude
 claude:  ## Create symlinks for Claude Code compatibility (CLAUDE.md → AGENTS.md, .claude → .agents).
@@ -200,4 +200,9 @@ opencode:  ## Create symlinks for OpenCode compatibility.
 	@ln -s ../.agents/commands .opencode/commands
 	@ls -la .opencode
 
+{% endif %}
+{% if has_custom_docs %}
+.PHONY: docs-serve
+docs-serve:  ## Start server for documentation.
+	@uv run mkdocs serve
 {% endif %}
