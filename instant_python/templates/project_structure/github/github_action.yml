@@ -26,3 +26,9 @@
           type: file
           extension: .yml
           template: github/release.yml
+      {% if ["custom_documentation"] | is_in(template.built_in_features) %}
+        - name: documentation
+          type: file
+          extension: .yml
+          template: github/pages.yml
+      {% endif %}
