@@ -2,6 +2,53 @@
 
 <!-- version list -->
 
+## v0.23.0 (2026-06-05)
+
+### ✨ Features
+
+- **config**: Add new custom documentation to built in features selection
+  ([`73f9976`](https://github.com/dimanu-py/instant-python/commit/73f99763c39082d1d9b9b1bf3d63eaf55976bdf1))
+
+- **templates**: Introduce custom documentation structure in main default applications when is
+  selected
+  ([`a6a101d`](https://github.com/dimanu-py/instant-python/commit/a6a101d5b8171af2113bad93951486ba2bac56b1))
+
+- **templates**: Specify documentation folder structure to be created when custom documentation
+  feature is selected
+  ([`482aa99`](https://github.com/dimanu-py/instant-python/commit/482aa99e84bf5edb2ea9e7b4059727ec51708d71))
+
+- **templates**: Add github action to publish documentation to github pages when built in feature
+  for custom docs is selected
+  ([`bae3778`](https://github.com/dimanu-py/instant-python/commit/bae37789a0845a281ee6a6f1c791ded35ef8648e))
+
+- **templates**: Add mkdocs dependencies to pyproject.toml template when custom documentation built
+  in feature is selected
+  ([`4c52158`](https://github.com/dimanu-py/instant-python/commit/4c52158fdb6e429dfb0be5815e312360c7b3ea67))
+
+- **templates**: Add new command to makefile template to allow serving documentation locally when
+  built in feature is selected
+  ([`390b4f7`](https://github.com/dimanu-py/instant-python/commit/390b4f798dd8d1d3342dfaba3e89ca84286c9aa9))
+
+- **templates**: Add mkdocs basic template with single Home section and common features
+  ([`11901d8`](https://github.com/dimanu-py/instant-python/commit/11901d84b4c7b38fc419d61efd18f91ba36c33e1))
+
+- **templates**: Add dependabot automatically when github actions built in feature is selected
+  ([`08db5de`](https://github.com/dimanu-py/instant-python/commit/08db5de21af8bfa7decfed1572a5df94da785344))
+
+- **templates**: Avoid installing dependencies newer than 3 days when uv is selected
+  ([`feae9d7`](https://github.com/dimanu-py/instant-python/commit/feae9d790802b02bb723d2eecf6dd8d611ae9cc8))
+
+### 🪲 Bug Fixes
+
+- **templates**: Correct invalid time format when dependabot.yml is updated
+  ([`aa4c67a`](https://github.com/dimanu-py/instant-python/commit/aa4c67a40bc858b6e0949dcfd3bf3980493e511c))
+
+### ♻️ Refactoring
+
+- **templates**: Update github actions versions in templates to newer versions and using commit sha
+  ([`a6a96de`](https://github.com/dimanu-py/instant-python/commit/a6a96de5c49a8f94959f6222dd4a65beda47e210))
+
+
 ## v0.22.0 (2026-06-03)
 
 ### ✨ Features
