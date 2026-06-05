@@ -95,6 +95,7 @@ constraint-dependencies = [
     "requests>=2.32.4",
     "urllib3>=2.5.0",
 ]
+exclude-newer = "3 days"
 
 [tool.ruff]
 exclude = ["instant_python/templates/**", "test/**/resources/**"]
