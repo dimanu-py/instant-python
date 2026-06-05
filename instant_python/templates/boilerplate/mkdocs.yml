@@ -1,0 +1,70 @@
+site_name: {{ general.slug }}
+site_url: https://{{ git.username }}.github.io/{{ general.slug }}/
+site_description: >
+  {{ general.description }}
+repo_name: {{ general.slug }}
+repo_url: https://github.com/{{ git.username }}/{{ general.slug }}
+docs_dir: docs/documentation
+plugins:
+  - search
+  - tags
+  - section-index
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/chart.js
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+  - attr_list:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite:
+  - pymdownx.snippets:
+  - pymdownx.superfences:
+theme:
+  name: material
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.svg
+  logo: assets/logo.svg
+  icon:
+    logo: logo
+  features:
+    - navigation.path
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.sections
+    - navigation.indexes
+    - navigation.tracking
+    - content.code.annotate
+    - toc.follow
+    - navigation.footer
+    - navigation.top
+    - content.code.copy
+    - content.tabs.link
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - search.suggest
+    - search.highlight
+  palette:
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Dark Mode
+      primary: '#B4BEFE'
+      accent: '#FAB387'
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Light Mode
+      primary: '#B4BEFE'
+      accent: '#FAB387'
+nav:
+  - Home: HOME.md
