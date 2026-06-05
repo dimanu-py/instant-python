@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.23.2 (2026-06-05)
+
+### 🪲 Bug Fixes
+
+- **templates**: Remove extra '.md' from AGENTS.md project structure template
+  ([`dda40ba`](https://github.com/dimanu-py/instant-python/commit/dda40bab7c5e1249e4306b608e91a90bb3f25f7d))
+
+
 ## v0.23.1 (2026-06-05)
 
 ### ⚙️ Build System
