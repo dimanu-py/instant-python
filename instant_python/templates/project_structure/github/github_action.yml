@@ -1,6 +1,10 @@
 - name: .github
   type: directory
   children:
+    - name: dependabot
+      type: file
+      extension: .yml
+      template: github/dependabot.yml
     - name: actions
       type: directory
       children:

@@ -1,0 +1,62 @@
+version: 2
+
+updates:
+  - package-ecosystem: "{{ general.dependency_manager }}"
+    directory: "/"
+    versioning-strategy: "increase"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "build"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "6:00"
+      timezone: "Europe/Madrid"
+    cooldown:
+      semver-major-days: 90
+      semver-minor-days: 7
+      semver-patch-days: 3
+    groups:
+      development-minor-patch:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+      production-minor-patch:
+        dependency-type: "production"
+        update-types:
+           - "minor"
+           - "patch"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "6:00"
+      timezone: "Europe/Madrid"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "build"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "6:00"
+      timezone: "Europe/Madrid"
+
+  - package-ecosystem: "docker-compose"
+    directory: "/"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "build"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "6:00"
+      timezone: "Europe/Madrid"
