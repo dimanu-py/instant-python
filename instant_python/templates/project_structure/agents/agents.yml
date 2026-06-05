@@ -1,4 +1,4 @@
-- name: AGENTS.md
+- name: AGENTS
   type: file
   extension: .md
   template: agents/AGENTS.md
