@@ -15,6 +15,7 @@ class SupportedBuiltInFeatures(str, Enum):
     CITATION = "citation_file"
     SECURITY = "security_file"
     AI_AGENTS = "ai_agents"
+    DOCS = "custom_documentation"
 
     @classmethod
     def get_supported_built_in_features(cls) -> list[str]:
