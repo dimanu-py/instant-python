@@ -31,7 +31,8 @@ install:  ## Install dependencies.
 .PHONY: update
 update:  ## Update dependencies.
 	@echo "\n⌛ Updating dependencies...\n"
-	@uv sync --upgrade
+	@uv lock --upgrade
+	@uv sync --all-groups
 
 .PHONY: add-dep
 add-dep:  ## Add a new dependency
