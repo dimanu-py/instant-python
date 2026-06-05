@@ -90,6 +90,11 @@ test = [
 {% endif %}
 {% endif %}
 
+{% if general.dependency_manager == "uv" %}
+[tool.uv]
+exclude-newer = "3 days"
+{% endif %}
+
 {% if dependencies | has_dependency("ruff") or has_github_actions_or_makefile %}
 [tool.ruff]
 line-length = 120
