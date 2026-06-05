@@ -32,7 +32,8 @@ install:  ## Install dependencies.
 update:  ## Update dependencies.
 	@echo "⌛ Updating dependencies...\n"
 	{% if has_uv %}
-	@uv sync --upgrade
+	@uv lock --upgrade
+	@uv sync --all-groups
 	{% elif has_pdm %}
 	@pdm update
 	{% endif %}
