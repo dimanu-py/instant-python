@@ -1,165 +1,74 @@
 # AI Agent Development Rules
 
-## 1. Core Principles
+## 1. Core Identity & Principles
 
-- **Baby Steps**: Always work in baby steps, one at a time. Never go forward more than one step.
-- **Test-Driven Development**: Start with a failing test for any new functionality (TDD).
-- **Progressive Revelation**: Never show all the code at once; only the next step.
-- **Type Safety**: All code must be fully typed.
-- **Simplicity First**: Use the simplest working solution; avoid unnecessary abstractions.
-- **Small Components**: Classes and methods should be small.
-- **Clear Naming**: Use clear, descriptive names for all variables and functions.
-- **Incremental Changes**: Prefer incremental, focused changes over large, complex modifications.
-- **Question Assumptions**: Always question assumptions and inferences.
-- **Refactoring Awareness**: Highlight opportunities for refactoring and flag functions exceeding 20 lines.
-- **Pattern Detection**: Detect and highlight repeated code patterns.
+- **Baby Steps**: Work in baby steps — one test, one file, one change at a time. Never skip or rush steps.
+- **TDD Workflow**: Test-Driven Development is the default. Always write the failing test first, then implement.
+- **Simplicity First**: Use the simplest working solution at every level — architecture, code, tests, and communication.
+- **OOP Design**: Use Object-Oriented Programming for all components and features.
+- **Type Safety**: All code, including tests and helpers, must be fully typed.
+- **Question Assumptions**: Always question assumptions, requirements, inferences, and design choices.
+- **Incremental Changes**: Prefer focused, incremental changes. No large, sweeping modifications.
+- **Progressive Revelation**: Never show all code at once. Only present the next step.
+- **Persistence**: Persist through multiple attempts until resolution. Iterate thoroughly on complex problems.
+- **Embrace Uncertainty**: Embrace uncertainty and revision. Frequently reassess and revise.
 
-## 2. Code Quality & Coverage
+## 2. Response Format & Communication
 
-- **MANDATORY Validation**: Before EVERY commit, run `make lint` and `make format`. Zero tolerance.
-- **Quality Requirements**: The project has strict requirements for code quality and maintainability.
-- **High Coverage**: All code must have very high test coverage; strive for 100% where practical.
-- **Pre-commit Checks**: All code must pass the following before any commit:
-    - `make check-typing`
-    - `make check-format`
-    - `make check-lint`
-- **TDD Workflow**: Test-Driven Development (TDD) is the default workflow: always write tests first.
-- **OOP Design**: Use Object-Oriented Programming (OOP) for all components and features.
-
-## 3. Style Guidelines
-
-- **Natural Expression**: Express all reasoning in a natural, conversational internal monologue.
-- **Progressive Building**: Use progressive, stepwise building: start with basics, build on previous points, break down complex thoughts.
-- **Simple Communication**: Use short, simple sentences that mirror natural thought patterns.
-- **Avoid Rushing**: Never rush to conclusions; frequently reassess and revise.
-- **Seek Clarification**: If in doubt, always ask for clarification before proceeding.
-- **Self-Documenting Code**: Avoid comments in code; rely on self-documenting names. Eliminate superficial comments (Arrange/Act/Assert, describing obvious code behavior, historical references that Git already manages).
-
-## 4. Output Format Requirements
-
-- **Contemplation Phase**: Every response must begin with a <CONTEMPLATOR> section: show all work, doubts, and natural thought progression.
-- **Final Answer**: Only provide a <FINAL_ANSWER> if reasoning converges to a clear conclusion.
+- **Contemplation Phase**: Every response begins with `<CONTEMPLATOR>` showing all work, doubts, and reasoning progression.
+- **Final Answer**: Only provide `<FINAL_ANSWER>` if reasoning converges to a clear conclusion.
 - **No Skipping**: Never skip the contemplation phase.
 - **No Moralizing**: Never include moralizing warnings in the final answer.
-- **Progress Indicators**: When outlining plans, use numbers/metrics and emojis to indicate progress.
+- **Natural Expression**: Express reasoning in a natural, conversational internal monologue.
+- **Simple Communication**: Use short, simple sentences. Be concise — aim for fewer than 4 lines unless detail is requested.
+- **Seek Clarification**: Ask one question at a time, building on previous answers. In doubt? Ask before proceeding.
+- **Progress Indicators**: When outlining plans, use numbers and emojis to indicate progress.
+- **Single Test Display**: Show only one test at a time; never present multiple tests in one step.
+- **Single File Display**: Show only one file at a time.
 
-## 5. Process & Key Requirements
+## 3. Development Workflow
 
-- **Extensive Contemplation**: Never skip the extensive contemplation phase.
-- **Show Work**: Show all work and thinking.
-- **Embrace Uncertainty**: Embrace uncertainty and revision.
-- **Persistence**: Persist through multiple attempts until resolution.
-- **Thorough Iteration**: Break down complex thoughts and iterate thoroughly.
-- **Sequential Questions**: Only one question at a time; each question should build on previous answers.
-
-## 6. Mental Preparation
-
-- **Contemplative Walk**: Before every response, take a contemplative walk through the woods.
-- **Deep Reflection**: Use this time for deep reflection on the query.
-- **Confirmation**: Confirm completion of this preparatory walk before proceeding.
-
-## 7. Language Standards
-
-- **Communication Flexibility**: Team communication can be conducted in Spanish or English for convenience and comfort.
-- **English-Only Artifacts**: All technical artifacts must always use English, including:
-    - Code (variables, functions, classes, comments)
-    - Documentation (README, guides, API docs)
-    - Jira tickets (titles, descriptions, comments)
-    - Data schemas and database names
-    - Configuration files and scripts
-    - Git commit messages
-    - Test names and descriptions
-- **Professional Consistency**: This ensures global collaboration, tool compatibility, and industry best practices.
-
-## 8. Documentation Standards
-
-- **User-Focused README**: README.md must be user-focused, containing only information relevant to table authors and end users.
-- **Separate Dev Docs**: All technical documentation and conventions must be maintained in `docs/adrs/`
-- **Separate Design Docs**: All design decisions, feature specifications, and architectural discussions must be maintained in `docs/design_docs/`
-- **Error Examples**: User-facing documentation should include example error messages for common validation failures to help users quickly resolve issues.
-
-```
-docs/adrs/
-├── adr-guidelines.md          # This file. Standard for documenting conventions
-├── database/                  # Database-related conventions (planned)
-├── testing/                   # Testing-related conventions (planned)
-├── ...
-```
-
-## 9. Development Best Practices
-
-### Error Handling & Debugging
-- **Graceful Error Handling**: Always implement proper error handling with meaningful error messages.
-- **Debugging First**: When encountering issues, use debugging tools and logging before asking for help.
-- **Error Context**: Provide sufficient context in error messages to enable quick problem resolution.
-- **Fail Fast**: Design code to fail fast and fail clearly when errors occur.
-
-### Code Review & Collaboration
-- **Pair Programming**: Prefer pairing sessions for complex features and knowledge sharing.
-- **Small Pull Requests**: Keep changes small and focused for easier review and faster integration.
-- **Code Review Standards**: All code must be reviewed before merging, following project quality standards.
-- **Knowledge Sharing**: Document decisions and share context with team members.
-
-### Security Considerations
-- **Security by Design**: Consider security implications in all design decisions.
-- **Input Validation**: Always validate and sanitize user inputs and external data.
-- **Secrets Management**: Never hardcode secrets; use proper secret management systems.
-- **Dependency Security**: Regularly update dependencies and monitor for security vulnerabilities.
-
-### Testing Strategy Distinction
-- **Unit Tests**: Fast, isolated tests for individual components (majority of test suite).
-- **Integration Tests**: Test interactions between components and external systems (limited, focused).
-- **E2E Tests**: Full system validation (minimal, critical user paths only).
-- **Test Pyramid**: Follow the test pyramid - many unit tests, some integration tests, few E2E tests.
-
-## 10. Test-Driven Development Rules
-
-### TDD Approach
-- **Failing Test First**: Always start with a failing test before implementing new functionality.
-- **Single Test**: Write only one test at a time; never create more than one test per change.
-- **Complete Coverage**: Ensure every new feature or bugfix is covered by a test.
-
-### Test Structure & Style
-- **Test Runner**: Use pytest as the test runner.
-- **Assertion Library**: Use the expects library for assertions (BDD style).
-- **Mocking**: Use doublex and doublex-expects for mocking and spy assertions if functionality is synchronous. For asynchronous code, use pytest-asyncio and appropriate async mocking tools.
-- **Type Hints**: All test functions and helpers must have full type hints.
-- **Focused Tests**: Keep each test focused and under 20 lines.
-- **Clear Naming**: Use clear, descriptive names for test functions and variables.
-- **No Comments**: Avoid comments; make code self-documenting through naming.
-- **Simple Helpers**: Use helper methods (e.g., object mothers/factories) for repeated setup, but keep them simple and typed.
-- **Strategic Mocking Rule**: Use `@patch` from unittest.mock ONLY for Python system modules (readline, atexit, subprocess, sys, os, etc.). Use doublex for all application code mocking. This provides clear separation: system modules = @patch, application code = doublex.
-
-### Test Simplicity & Maintainability
-- **Simplest Setup**: Prefer the simplest test setup that covers the requirement.
-- **Refactor Tests**: Refactor tests to remove duplication and improve readability.
-- **Consistent Assertions**: Use one assertion style (expects) consistently throughout the suite.
-- **Extract Helpers**: If a test setup is repeated, extract a helper or fixture.
-- **Readable Tests**: Always keep tests readable and easy to modify.
-
-### Test Process & Output
-- **Single Test Display**: Only show one test at a time; never present multiple tests in a single step.
-- **Single File Display**: Never show more than one file at a time.
-- **Self-Contained Tests**: Each test should be self-contained and not depend on the order of execution.
-- **Clarify Requirements**: If in doubt about requirements, ask for clarification before writing the test.
-- **Verify Failure**: After writing a test, run it to ensure it fails before implementing the feature.
-- **Automatic Test Running**: After every code or test change, always run the relevant tests using the appropriate Makefile target. Do not ask for permission to run tests—just do it.
-
-### Test Naming & Coverage
-- **Descriptive Names**: Test function names should clearly describe the scenario and expected outcome.
-- **Purpose-Driven Variables**: Use descriptive variable names that reflect their purpose in the test.
-- **Incremental Coverage**: Ensure all code paths and edge cases are eventually covered by tests, but add them incrementally.
-
-### Test Review & Refactoring
+- **Failing Test First**: Start every change by writing a test that fails.
+- **Verify Failure**: After writing the test, run it to confirm it fails before implementing.
+- **Automatic Test Running**: After every code or test change, run relevant tests using the appropriate Make target. Do not ask for permission.
 - **Post-Pass Review**: After a test passes, review for opportunities to simplify or clarify.
-- **Helper Refactoring**: Refactor test helpers and fixtures as needed to keep the suite DRY and maintainable.
+- **Clarify Requirements**: If requirements are unclear, ask before writing code or tests.
+- **Self-Contained Tests**: Each test must be self-contained and not depend on execution order.
+- **Debugging First**: When encountering issues, debug and investigate before asking for help.
 
-These guides are the canonical resources for writing and maintaining tests in this project.
+## 4. Code Quality Standards
 
-## 11. Makefile Targets Usage
+- **Self-Documenting Code**: Avoid comments. Rely entirely on clear naming. Remove comments that describe obvious behavior or duplicate Git history (Arrange/Act/Assert labels, historical references, etc.).
+- **Clear Naming**: Use descriptive, purpose-revealing names for all variables, functions, classes, and test functions.
+- **Small Components**: Keep classes and methods small. Flag any function exceeding 20 lines.
+- **Refactoring Awareness**: Highlight refactoring opportunities and detect repeated code patterns.
+- **Graceful Error Handling**: Always implement proper error handling with meaningful messages.
+- **Fail Fast**: Design code to fail fast and fail clearly.
+- **Input Validation**: Always validate and sanitize external inputs.
+- **Secrets Management**: Never hardcode secrets; use proper secret management systems.
+- **Security Awareness**: Consider security implications in all design decisions.
+
+## 5. Testing Standards
+
+### Tools & Conventions
+- **Test Runner**: Use pytest.
+- **Assertion Library**: Use `expects` (BDD style). Use one assertion style consistently throughout the suite.
+- **Mocking**: Use doublex and doublex-expects for all application code mocking if the codebase is synchronous. For async codebases, use `unittest.mock` (doublex does not work well with async). Use `@patch` from `unittest.mock` ONLY for Python system modules (readline, atexit, subprocess, sys, os, etc.) regardless of sync/async.
+- **Type Hints**: All test functions and helpers must have full type hints.
+
+### Test Quality
+- **Focused Tests**: Keep each test under 20 lines.
+- **Simple Helpers**: Use helper methods or object mothers/factories for repeated setup. Keep them simple and typed.
+- **Complete Coverage**: Ensure every new feature or bugfix has a covering test.
+- **Incremental Coverage**: Cover all code paths and edge cases incrementally, one test at a time.
+- **Refactor Tests**: Remove duplication and improve readability in test code.
+- **Consistent Assertions**: Use `expects` consistently throughout the suite.
+- **Test Pyramid**: Write many unit tests, some integration tests, and few acceptance tests.
+
+## 6. Tool Usage & Make Targets
 
 ### Core Rule
-**NEVER** call tools like `pytest`, `black`, `mypy`, or similar directly. Always use the corresponding `make` target.
+**NEVER** call tools like `pytest`, `ruff`, `mypy`, or similar directly. Always use the corresponding `make` target.
 
 ### Available Make Targets
 - `make help` — Show this help.
@@ -191,13 +100,12 @@ These guides are the canonical resources for writing and maintaining tests in th
 - `make secrets` — Check for secrets in source code.
 
 ### Usage Rules
-1. **Testing**: When running tests, use `make test-unit` or `make test-e2e` as appropriate.
-2. **Formatting**: For formatting, use `make format` or `make check-format`.
-3. **Type Checking**: For type checking, use `make check-typing`.
-4. **Lint Checks**: For lint checks, use `make check-lint`.
-5. **Building**: For building or updating the app, use `make build` or `make update`.
-6. **Help**: If you are unsure which target to use, run `make help` to see all available options.
-7. **New Operations**: If a new operation is needed, prefer adding a new Makefile target rather than running a tool directly.
+1. **Testing**: Use `make unit`, `make integration` or `make acceptance` as appropriate.
+2. **Formatting**: Use `make format` or `make check-format`.
+3. **Type Checking**: Use `make check-typing`.
+4. **Lint Checks**: Use `make check-lint`.
+5. **Help**: If unsure which target to use, run `make help`.
+6. **New Operations**: Prefer adding a new Makefile target over running a tool directly.
 
 ### Good vs Bad Examples
 ```sh
@@ -208,19 +116,33 @@ make unit
 pytest tests
 ```
 
-## 12. Quick Reference for All AI Agents
+## 7. Documentation Standards
 
-When working on this project:
+- **User-Focused README**: README.md must be user-focused, containing only information relevant to table authors and end users.
+- **Separate Dev Docs**: All technical documentation, architectural decisions, and conventions must be maintained in `docs/conventions/`.
+- **Separate Specs Docs**: All design decisions, feature specifications, and requirements must be maintained in `docs/features/`.
+- **Error Examples**: User-facing documentation should include example error messages for common validation failures to help users quickly resolve issues.
 
-1. **Start every response with contemplation** 🌲
-2. **Take baby steps** - one test, one file, one change at a time 👣
-3. **Always write the failing test first** (TDD) ❌➡️✅
-4. **Use make targets** - never call tools directly 🔧
-5. **Keep code small and typed** - max 20 lines per method 📏
-6. **Show your thinking process** - be conversational and progressive 💭
-7. **Question everything** - assumptions, requirements, design choices ❓
-8. **Run tests automatically** after every change 🧪
-9. **Focus on simplicity** over cleverness ✨
-10. **Ask for clarification** when in doubt 🤔
+### Repository Structure
 
-Remember: This is a high-quality, test-driven, incremental development environment. Quality over speed, clarity over cleverness, baby steps over big leaps. 
+| File / Directory           | Content                                                        | When to read                      |
+|----------------------------|----------------------------------------------------------------|-----------------------------------|
+| `docs/progress/current.md` | Current session state                                          | Always when starting              |
+| `docs/progress/history.md` | Logbook — append-only of previous sessions                     | When historic knowledge is needed |
+| `docs/features/`           | Feature specs: requirements and acceptance criteria in Gherkin | When implementing a feature       |
+| `docs/conventions/`        | Architecture, workflow, and testing conventions                | When coding or reviewing          |
+| `instat_python/`           | Source code                                                    | When implementing                 |
+| `test/`                    | Automated tests                                                | When implementing and verifying   |
+
+## 8. Quick Reference
+
+1.  Start every response with `**<CONTEMPLATOR>**` 🌲
+2.  One test, one file, one change at a time 👣
+3.  Failing test first, then implementation ❌➡️✅
+4.  Use `make` targets, never tools directly 🔧
+5.  Keep everything small and typed 📏
+6.  Show thinking conversationally 💭
+7.  Question everything ❓
+8.  Run tests automatically after every change 🧪
+9.  Simplest solution, no abstractions ✨
+10. Ask when in doubt 🤔
