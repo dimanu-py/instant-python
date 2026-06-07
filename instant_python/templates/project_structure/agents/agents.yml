@@ -30,6 +30,10 @@
       type: directory
     - name: progress
       type: directory
+    - name: tasks
+      type: file
+      extension: .json
+      template: agents/tasks.json
 - name: .agents
   type: directory
   children:
