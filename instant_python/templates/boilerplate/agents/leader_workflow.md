@@ -9,11 +9,11 @@ through these phases:
 pending
     → [spec_partner]  conversation + Gherkin distillation → .spec and .feature files
     → ⏸ HUMAN APPROVES the scenarios
-    → In Progress
+    → in_progress
     → [tdd_craftsman]  Red → Green → Refactor cycle (one test at a time)
     → [judge]          review + mutation testing
     → [convention_keeper]  capture learnings → update convention docs
-    → Release
+    → done
 ```
 
 One feature at a time. One human approval gate: on the Gherkin scenarios,
@@ -46,7 +46,7 @@ catches defects. Only when both review and mutation succeed does the leader run 
 | `progress/judge_<name>.md`     | judge              | Review verdict + mutation score                 |
 | `docs/conventions/`           | convention_keeper  | New or updated convention docs                  |
 
-Linear tracks feature status: `Todo → In Progress → Release`.
+The `docs/tasks.json` file tracks feature status: `pending → spec_ready → in_progress → done`.
 
 ### Anti-broken-telephone rule
 
@@ -66,16 +66,16 @@ the content through chat. This prevents information loss and keeps the audit tra
 
 ### Good: Following the full pipeline
 
-A feature enters `Todo` in Linear. The leader launches `spec_partner`, which debates with the human, 
+A feature enters `pending` in `docs/tasks.json`. The leader launches `spec_partner`, which debates with the human, 
 writes `docs/features/new-feature.spec`, then generates `docs/features/new-feature.feature`. The leader
 stops and asks the human to approve. 
 The human reads the scenarios, approves them. 
-The leader moves the issue to `In Progress`, launches `tdd_craftsman`. 
-Once tests pass, `judge` reviews and runs mutation. All green → `convention_keeper` captures learnings and updates conventions. Feature moves to `Release`.
+The leader updates the task to `in_progress`, launches `tdd_craftsman`. 
+Once tests pass, `judge` reviews and runs mutation. All green → `convention_keeper` captures learnings and updates conventions. Task status moves to `done`.
 
 ### Bad: Skipping the spec conversation
 
-A leader launches `tdd_craftsman` directly on a `Todo` feature because the requirements seem clear. The coder writes tests that pass but miss the actual business behavior. No `.feature` file exists. The `judge` rejects for missing spec coverage, and everything rolls back.
+A leader launches `tdd_craftsman` directly on a `pending` feature because the requirements seem clear. The coder writes tests that pass but miss the actual business behavior. No `.feature` file exists. The `judge` rejects for missing spec coverage, and everything rolls back.
 
 ### Bad: Two features in flight
 
