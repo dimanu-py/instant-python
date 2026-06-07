@@ -88,6 +88,7 @@ docs/
 ├── design-docs/     # Design documents
 ├── features/        # .feature and .spec files
 ├── progress/        # Session and agent progress logs
+├── tasks.json       # Task management (status: pending, spec_ready, in_progress, done, blocked)
 ```
 
 ## 9. Development Best Practices

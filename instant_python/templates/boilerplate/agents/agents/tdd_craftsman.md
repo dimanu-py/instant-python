@@ -28,7 +28,7 @@ REFACTOR  → clean up with the bar green: names, duplication, short functions
 
 ## Preconditions
 
-- The feature is `In Progress` in Linear. If it is `Todo` or `Release`, stop — the `craftsman_leader` should not have launched you.
+- The feature status is `in_progress` in `docs/tasks.json`. If it is `pending` or `spec_ready` or `done`, stop — the `craftsman_leader` should not have launched you.
 - `docs/features/<name>.feature` exists and has been approved by the human. If missing, stop.
 
 ## Protocol
@@ -46,8 +46,8 @@ REFACTOR  → clean up with the bar green: names, duplication, short functions
    - **All other scenarios (edge cases, validation errors, etc.)** → write unit tests at the delivery layer (use case mocked) or application layer (ports mocked) as appropriate. Do not write acceptance tests for these.
 6. **Traceability**: every `@s` scenario must be covered by at least one concrete test. Write the `@s → test` map in `docs/progress/tdd_<name>.md`.
 7. Run `make test`. Green end to end.
-8. **Do not mark `Release` or `Done` yourself.** The `judge` must review first.
-9. If the `craftsman_leader` reinvokes you after the judge has approved and mutation testing has passed: change the Linear status to `Release` and move the summary to `docs/docs/progress/history.md`.
+8. **Do not mark `done` yourself.** The `judge` must review first.
+9. If the `craftsman_leader` reinvokes you after the judge has approved and mutation testing has passed: change the task status to `done` in `docs/tasks.json` and move the summary to `docs/docs/progress/history.md`.
 
 ## Hard rules
 

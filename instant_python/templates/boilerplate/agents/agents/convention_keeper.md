@@ -30,7 +30,7 @@ You do not write code, tests, or spec files. You maintain the convention library
 ## Hard rules
 
 - NEVER edit `{{ general.source_name }}`, `test/`, or `docs/features/`.
-- NEVER change the feature status in Linear.
+- NEVER change the task status in `docs/tasks.json`.
 - NEVER write code or tests.
 - Each convention goes in its own standalone file. No bundling.
 - Always ask the human to approve new convention files.

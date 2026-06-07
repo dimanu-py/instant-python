@@ -54,7 +54,7 @@ section containing:
 ## Hard rules
 
 - NEVER edit `{{ general.source_name }}` or `test/`.
-- NEVER change the feature status in Linear.
+- NEVER change the task status in `docs/tasks.json`.
 - NEVER write code or tests.
 - If a decision remains unresolved, write it as an **OPEN QUESTION** in the `.spec` and do not mark it as resolved.
 - Every claim in the `.spec` must be convertible to a Given/When/Then scenario. If it is not testable, refine it or mark it as open.
