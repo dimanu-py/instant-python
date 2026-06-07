@@ -48,24 +48,24 @@ remove-dep:  ## Remove a dependency
 
 {% if dependencies | has_dependency("pytest") or has_github_actions_or_makefile %}
 .PHONY: test
-test:  ## Run all test.
+test:  ## Run all tests (optional: TESTS_PATH=tests/module/).
 	@echo "⌛ Running tests...\n"
-	@{{ general.dependency_manager }} run pytest test -ra
+	@{{ general.dependency_manager }} run pytest $(or $(TESTS_PATH),test) -ra
 
 .PHONY: unit
-unit:  ## Run all unit test.
+unit:  ## Run all unit test (optional: TESTS_PATH=tests/module/).
 	@echo "⌛ Running unit tests...\n"
-	@{{ general.dependency_manager }} run pytest -m "unit" -ra
+	@{{ general.dependency_manager }} run pytest -m "unit" $(TESTS_PATH) -ra
 
 .PHONY: integration
-integration:  ## Run all integration test.
+integration:  ## Run all integration test (optional: TESTS_PATH=tests/module/).
 	@echo "⌛ Running integration tests...\n"
-	@{{ general.dependency_manager }} run pytest -m "integration" -ra
+	@{{ general.dependency_manager }} run pytest -m "integration" $(TESTS_PATH) -ra
 
 .PHONY: acceptance
-acceptance:  ## Run all acceptance test.
+acceptance:  ## Run all acceptance test (optional: TESTS_PATH=tests/module/).
 	@echo "⌛ Running acceptance tests...\n"
-	@{{ general.dependency_manager }} run pytest -m "acceptance" -ra
+	@{{ general.dependency_manager }} run pytest -m "acceptance" $(TESTS_PATH) -ra
 
 .PHONY: coverage
 coverage:  ## Run all test with coverage.
