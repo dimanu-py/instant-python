@@ -336,36 +336,53 @@ Templates for AI-assisted software development environment.
 | Template Name | Path | Description |
 |--------------|------|-------------|
 | AGENTS.md | `agents/AGENTS.md` | Main project rules and guidelines for AI agents |
-| ADR Guidelines | `agents/adr-guidelines.md` | Guidelines for writing Architecture Decision Records |
-| Design Doc Guidelines | `agents/design-doc-guidelines.md` | Guidelines for writing design documents |
+
+### Documentation (docs/)
+
+| Template Name | Path | Description |
+|--------------|------|-------------|
+| Convention Guidelines | `agents/convention_guidelines.md` | Convention document structure standard |
+| Leader Workflow | `agents/leader_workflow.md` | Full development pipeline description |
+| TDD Outside-In | `agents/tdd_outside_in.md` | Outside-In TDD convention and test structure |
+| Tasks JSON | `agents/tasks.json` | Task management file (status: pending, spec_ready, in_progress, done, blocked) |
+
+### Agents
+
+| Template Name | Path | Description |
+|--------------|------|-------------|
+| Convention Keeper | `agents/agents/convention_keeper.md` | Captures learnings into convention docs |
+| Craftsman Leader | `agents/agents/craftsman_leader.md` | Orchestrates the full development pipeline |
+| Judge | `agents/agents/judge.md` | Reviews code and runs mutation testing |
+| Spec Partner | `agents/agents/spec_partner.md` | Debates and distills specs into .spec and .feature files |
+| TDD Craftsman | `agents/agents/tdd_craftsman.md` | Implements features by Outside-In TDD |
 
 ### Commands
 
 | Template Name | Path | Description |
 |--------------|------|-------------|
-| Code Review | `agents/commands/code-review.md` | Review pending changes for quality and maintainability |
+| Code Review | `agents/commands/code_review.md` | Review pending changes for quality and maintainability |
 | Commit | `agents/commands/commit.md` | Split changes into atomic conventional commits |
-| Security Review | `agents/commands/security-review.md` | Security analysis and risk assessment |
-| Technical Debt Review | `agents/commands/technical-debt-review.md` | Technical debt identification and prioritization |
+| Security Review | `agents/commands/security_review.md` | Security analysis and risk assessment |
+| Technical Debt Review | `agents/commands/technical_debt_review.md` | Technical debt identification and prioritization |
 
 ### Skills
 
 | Skill                         | Path                                           | Description                                                |
 |-------------------------------|------------------------------------------------|------------------------------------------------------------|
-| ADR                           | `agents/skills/adr/SKILL.md`                   | Create or improve Architecture Decision Records            |
-| Complexity Review             | `agents/skills/complexity-review/SKILL.md`     | Evaluate technical proposals against complexity dimensions |
-| Complexity Review (Reference) | `agents/skills/complexity-review/REFERENCE.md` | Reference for complexity review dimensions                 |
-| Design Doc                    | `agents/skills/design-doc/SKILL.md`            | Create or improve design documents                         |
-| Hamburger Method              | `agents/skills/hamburger-method/SKILL.md`      | Slice features into vertical deliverable pieces            |
-| Hamburger Method (Reference)  | `agents/skills/hamburger-method/REFERENCE.md`  | Reference for hamburger method patterns                    |
-| Micro Steps Coach             | `agents/skills/micro-steps-coach/SKILL.md`     | Break down work into 1-3 hour micro-steps                  |
-| Micro Steps Coach (Reference) | `agents/skills/micro-steps-coach/REFERENCE.md` | Reference for expand-contract patterns                     |
-| Mutation Testing              | `agents/skills/mutation-testing/SKILL.md`      | Apply mutation testing analysis in Python                  |
-| Story Splitting               | `agents/skills/story-splitting/SKILL.md`       | Split large stories using proven heuristics                |
-| Story Splitting (Reference)   | `agents/skills/story-splitting/REFERENCE.md`   | Reference for story splitting patterns                     |
-| Test Desiderata               | `agents/skills/test-desiderata/SKILL.md`       | Analyze test quality using Test Desiderata framework       |
-| Test Desiderata (Reference)   | `agents/skills/test-desiderata/REFERENCE.md`   | Reference for the 12 test quality dimensions               |
-| XP Refactor                   | `agents/skills/xp-refactor/SKILL.md`           | Apply XP Simple Design principles when refactoring         |
+| Complexity Review             | `agents/skills/complexity_review/SKILL.md`     | Evaluate technical proposals against complexity dimensions |
+| Complexity Review (Reference) | `agents/skills/complexity_review/REFERENCE.md` | Reference for complexity review dimensions                 |
+| Convention                    | `agents/skills/convention/SKILL.md`            | Create or update convention documentation                  |
+| Hamburger Method              | `agents/skills/hamburger_method/SKILL.md`      | Slice features into vertical deliverable pieces            |
+| Hamburger Method (Reference)  | `agents/skills/hamburger_method/REFERENCE.md`  | Reference for hamburger method patterns                    |
+| Micro Steps Coach             | `agents/skills/micro_steps_coach/SKILL.md`     | Break down work into 1-3 hour micro-steps                  |
+| Micro Steps Coach (Reference) | `agents/skills/micro_steps_coach/REFERENCE.md` | Reference for expand-contract patterns                     |
+| Mutation Testing              | `agents/skills/mutation_testing/SKILL.md`      | Apply mutation testing analysis in Python                  |
+| Spec                          | `agents/skills/spec/SKILL.md`                  | Create or update feature specifications                    |
+| Story Splitting               | `agents/skills/story_splitting/SKILL.md`       | Split large stories using proven heuristics                |
+| Story Splitting (Reference)   | `agents/skills/story_splitting/REFERENCE.md`   | Reference for story splitting patterns                     |
+| Test Desiderata               | `agents/skills/test_desiderata/SKILL.md`       | Analyze test quality using Test Desiderata framework       |
+| Test Desiderata (Reference)   | `agents/skills/test_desiderata/REFERENCE.md`   | Reference for the 12 test quality dimensions               |
+| XP Refactor                   | `agents/skills/xp_refactor/SKILL.md`           | Apply XP Simple Design principles when refactoring         |
 
 ### Example Usage
 
@@ -378,45 +395,167 @@ Templates for AI-assisted software development environment.
 - name: docs
   type: directory
   children:
-    - name: adrs
+    - name: conventions
       type: directory
       children:
-        - name: adr-guidelines
+        - name: convention_guidelines
           type: file
           extension: .md
-          template: agents/adr-guidelines.md
-    - name: design-docs
+          template: agents/convention_guidelines.md
+        - name: testing
+          type: directory
+          children:
+            - name: tdd_outside_in
+              type: file
+              extension: .md
+              template: agents/tdd_outside_in.md
+        - name: workflow
+          type: directory
+          children:
+            - name: leader_workflow
+              type: file
+              extension: .md
+              template: agents/leader_workflow.md
+    - name: features
       type: directory
-      children:
-        - name: design-doc-guidelines
-          type: file
-          extension: .md
-          template: agents/design-doc-guidelines.md
+    - name: progress
+      type: directory
+    - name: tasks
+      type: file
+      extension: .json
+      template: agents/tasks.json
 
 - name: .agents
   type: directory
   children:
+    - name: agents
+      type: directory
+      children:
+        - name: craftsman_leader
+          type: file
+          extension: .md
+          template: agents/agents/craftsman_leader.md
+        - name: spec_partner
+          type: file
+          extension: .md
+          template: agents/agents/spec_partner.md
+        - name: tdd_craftsman
+          type: file
+          extension: .md
+          template: agents/agents/tdd_craftsman.md
+        - name: judge
+          type: file
+          extension: .md
+          template: agents/agents/judge.md
+        - name: convention_keeper
+          type: file
+          extension: .md
+          template: agents/agents/convention_keeper.md
     - name: commands
       type: directory
       children:
-        - name: code-review
+        - name: code_review
           type: file
           extension: .md
-          template: agents/commands/code-review.md
+          template: agents/commands/code_review.md
         - name: commit
           type: file
           extension: .md
           template: agents/commands/commit.md
+        - name: security_review
+          type: file
+          extension: .md
+          template: agents/commands/security_review.md
+        - name: technical_debt_review
+          type: file
+          extension: .md
+          template: agents/commands/technical_debt_review.md
     - name: skills
       type: directory
       children:
-        - name: adr
+        - name: complexity_review
           type: directory
           children:
             - name: SKILL
               type: file
               extension: .md
-              template: agents/skills/adr/SKILL.md
+              template: agents/skills/complexity_review/SKILL.md
+            - name: REFERENCE
+              type: file
+              extension: .md
+              template: agents/skills/complexity_review/REFERENCE.md
+        - name: convention
+          type: directory
+          children:
+            - name: SKILL
+              type: file
+              extension: .md
+              template: agents/skills/convention/SKILL.md
+        - name: hamburger_method
+          type: directory
+          children:
+            - name: SKILL
+              type: file
+              extension: .md
+              template: agents/skills/hamburger_method/SKILL.md
+            - name: REFERENCE
+              type: file
+              extension: .md
+              template: agents/skills/hamburger_method/REFERENCE.md
+        - name: micro_steps_coach
+          type: directory
+          children:
+            - name: SKILL
+              type: file
+              extension: .md
+              template: agents/skills/micro_steps_coach/SKILL.md
+            - name: REFERENCE
+              type: file
+              extension: .md
+              template: agents/skills/micro_steps_coach/REFERENCE.md
+        - name: mutation_testing
+          type: directory
+          children:
+            - name: SKILL
+              type: file
+              extension: .md
+              template: agents/skills/mutation_testing/SKILL.md
+        - name: spec
+          type: directory
+          children:
+            - name: SKILL
+              type: file
+              extension: .md
+              template: agents/skills/spec/SKILL.md
+        - name: story_splitting
+          type: directory
+          children:
+            - name: SKILL
+              type: file
+              extension: .md
+              template: agents/skills/story_splitting/SKILL.md
+            - name: REFERENCE
+              type: file
+              extension: .md
+              template: agents/skills/story_splitting/REFERENCE.md
+        - name: test_desiderata
+          type: directory
+          children:
+            - name: SKILL
+              type: file
+              extension: .md
+              template: agents/skills/test_desiderata/SKILL.md
+            - name: REFERENCE
+              type: file
+              extension: .md
+              template: agents/skills/test_desiderata/REFERENCE.md
+        - name: xp_refactor
+          type: directory
+          children:
+            - name: SKILL
+              type: file
+              extension: .md
+              template: agents/skills/xp_refactor/SKILL.md
 ```
 
 ---

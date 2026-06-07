@@ -266,13 +266,14 @@ Value objects are characterized by:
 - Self-validation: Value objects validate their state upon construction
 - Domain semantics: They represent meaningful concepts in the domain rather than primitive types
 
-!!! info "New versions use `sindripy`"
+!!! info "New versions use `value-objects-sindri`"
     `instant-python` versions previous to 0.18.0 implemented value objects directly in the generated project.
-    All these implementations have been moved to the [`sindripy`](https://pypi.org/project/sindripy/) library 
+    All these implementations have been moved to the [`value-objects-sindri`](https://pypi.org/project/value-objects-sindri/) library 
     to promote reusability and better maintenance.
-    When selecting this feature, the generated project will include `sindripy` as a dependency.
+    When selecting this feature, the generated project will include `value-objects-sindri` as a prod dependency, and
+    `object-mother-sindri` as dev dependency for tests.
 
-Along with `sindripy` to model value objects, this feature will include:
+Along with `value-object-sindri` to model value objects, this feature will include:
 
 1. A base exception class that you can use to create your own exceptions:
 
@@ -331,58 +332,125 @@ will set up a decoupled implementation of an event bus using RabbitMQ. This impl
 ### AI Agents
 
 This feature sets up a complete environment for AI-assisted software development by including an `AGENTS.md` file with project
-rules, a collection of specialized skills for common development tasks, and commands for recurring workflows. When selected,
-it creates the following structure in your project:
+rules, a collection of specialized agents for orchestrating development phases, skills for common tasks, and commands for
+recurring workflows. When selected, it creates the following structure in your project:
 
 ```
 ├── AGENTS.md
 ├── docs
-│   ├── adrs
-│   │   └── adr-guidelines.md
-│   └── design-docs
-│       └── design-doc-guidelines.md
+│   ├── conventions
+│   │   ├── convention_guidelines.md
+│   │   ├── testing
+│   │   │   └── tdd_outside_in.md
+│   │   └── workflow
+│   │       └── leader_workflow.md
+│   ├── features
+│   ├── progress
+│   └── tasks.json
 └── .agents
+    ├── agents
+    │   ├── convention_keeper.md
+    │   ├── craftsman_leader.md
+    │   ├── judge.md
+    │   ├── spec_partner.md
+    │   └── tdd_craftsman.md
     ├── commands
-    │   ├── code-review.md
+    │   ├── code_review.md
     │   ├── commit.md
-    │   ├── security-review.md
-    │   └── technical-debt-review.md
+    │   ├── security_review.md
+    │   └── technical_debt_review.md
     └── skills
-        ├── adr
-        ├── code-review
-        ├── complexity-review
-        ├── design-doc
-        ├── hamburger-method
-        ├── micro-steps-coach
-        ├── mutation-testing
-        ├── story-splitting
-        ├── test-desiderata
-        └── xp-refactor
+        ├── complexity_review
+        ├── convention
+        ├── hamburger_method
+        ├── micro_steps_coach
+        ├── mutation_testing
+        ├── spec
+        ├── story_splitting
+        ├── test_desiderata
+        └── xp_refactor
 ```
+
+#### Two Workflows
+
+This feature supports two usage modes. You can use one, both, or neither — they are independent.
+
+**1. Skills & Commands (manual workflow):** Use the [skills](#skills) and [commands](#commands) directly with any AI agent. These are general-purpose tools for code review, refactoring, commit organization, security analysis, story splitting, and more. No subagents required. Open a chat and invoke a skill or command by name.
+
+**2. Agent harness (pipeline workflow):** Use the [orchestration agents](#orchestration-agents) for a structured development pipeline where each phase (spec → TDD → review → conventions) is handled by a specialized subagent. This requires invoking the `craftsman_leader` subagent.
+
+!!! tip "Subagents are optional"
+    The agent harness subagents are **not mandatory**. You can use just the skills and commands without ever invoking a subagent, combine 
+    them as needed, or ignore the entire harness and use only `AGENTS.md` as a project rules reference.
+
+#### Task Management
+
+!!! info "Default local task management"
+    By default, `instant-python` will use a local system to track tasks so users do not
+    require setting up any external tooling. This can be easily changed to use a remote system
+    such as Jira, GitHub, Linear, etc.
+
+Features are tracked through `docs/tasks.json` which defines the project's task queue:
+
+```json
+{
+  "project": "<project-name>",
+  "description": "<project-description>",
+  "rules": {
+    "one_feature_at_a_time": true,
+    "require_tests_to_close": true,
+    "require_approved_spec_to_implement": true,
+    "valid_status": ["pending", "spec_ready", "in_progress", "done", "blocked"]
+  },
+  "tasks": []
+}
+```
+
+Valid statuses: `pending` → `spec_ready` → `in_progress` → `done` (or `blocked`).
+
+#### Orchestration Agents
+
+!!! warning "Personal Starting Point"
+    This agent harness is extremely personal and reflects specific development preferences. You are expected to customize
+    the agents, skills, commands, and prompts to match your own workflow. Treat it as a starting point, not a definitive setup.
+
+The development pipeline is coordinated by a leader agent and executed by specialized subagents:
+
+| Agent                 | Role                                                           |
+|-----------------------|----------------------------------------------------------------|
+| **craftsman_leader**  | Orchestrates the full pipeline; never writes code or tests     |
+| **spec_partner**      | Debates and distills specs into `.spec` and `.feature` files   |
+| **tdd_craftsman**     | Implements one feature by strict Outside-In TDD                |
+| **judge**             | Reviews code and runs mutation testing; approves or rejects    |
+| **convention_keeper** | Captures learnings into reusable convention docs               |
+
+!!! info "Manual Invocation Required"
+    Subagents are not triggered automatically. You must manually invoke the `craftsman_leader` agent using the `/agent` command
+    in opencode to start the development pipeline. The leader will then delegate to the appropriate subagents.
 
 #### Skills
 
 Each skill provides detailed instructions for an AI agent to perform a specific task effectively.
 
-| Skill                 | When to use                                                                                   | What it does                                                                                                       |
-|-----------------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| **adr**               | Discussing a new convention or pattern; requesting improvements to existing ADR documentation | Identifies conventions and decisions from the conversation, creates or updates ADR files with consistent structure |
-| **complexity-review** | Evaluating technical solutions or designs; proposing system architectures                     | Questions every complexity driver, proposes progressively simpler alternatives, identifies what can be postponed   |
-| **design-doc**        | Planning a new feature; discussing architectural changes                                      | Extracts feature ideas and requirements from conversation, creates or updates design docs with consistent format   |
-| **hamburger-method**  | Breaking down large features into layers; composing minimal vertical slices                   | Applies the Hamburger Method to slice features into vertical deliverable pieces                                    |
-| **micro-steps-coach** | Facing large refactorings; making breaking changes                                            | Breaks down work into 1-3 hour micro-steps, applies expand-contract pattern for safe changes                       |
-| **mutation-testing**  | Analyzing test effectiveness; validating refactoring                                          | Runs mutation testing, analyzes results to identify weak tests, provides actionable recommendations                |
-| **story-splitting**   | Stories that feel too large or vague; multiple features bundled together                      | Detects oversized stories and applies splitting heuristics                                                         |
-| **test-desiderata**   | Analyzing test files; reviewing test quality                                                  | Evaluates tests across 12 quality dimensions using Kent Beck's Test Desiderata framework                           |
-| **xp-refactor**       | Cleaning up existing code; reducing duplication                                               | Applies XP Simple Design principles, prioritizes refactors by ROI                                                  |
+| Skill                   | When to use                                                                                   | What it does                                                                                                       |
+|-------------------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| **complexity_review**   | Evaluating technical solutions or designs; proposing system architectures                     | Questions every complexity driver, proposes progressively simpler alternatives, identifies what can be postponed   |
+| **convention**          | Creating or updating convention documentation                                                 | Provides guidance on structure and format for convention docs                                                      |
+| **hamburger_method**    | Breaking down large features into layers; composing minimal vertical slices                   | Applies the Hamburger Method to slice features into vertical deliverable pieces                                    |
+| **micro_steps_coach**   | Facing large refactorings; making breaking changes                                            | Breaks down work into 1-3 hour micro-steps, applies expand-contract pattern for safe changes                       |
+| **mutation_testing**    | Analyzing test effectiveness; validating refactoring                                          | Runs mutation testing, analyzes results to identify weak tests, provides actionable recommendations                |
+| **spec**                | Creating or updating feature specifications                                                   | Provides guidance on spec structure and conventions                                                                |
+| **story_splitting**     | Stories that feel too large or vague; multiple features bundled together                      | Detects oversized stories and applies splitting heuristics                                                         |
+| **test_desiderata**     | Analyzing test files; reviewing test quality                                                  | Evaluates tests across 12 quality dimensions using Kent Beck's Test Desiderata framework                           |
+| **xp_refactor**         | Cleaning up existing code; reducing duplication                                               | Applies XP Simple Design principles, prioritizes refactors by ROI                                                  |
 
 #### Commands
 
 Commands define recurring workflows that an AI agent can execute on demand.
 
-| Command                   | Description                                                                                                                  |
-|---------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| **commit**                | Splits uncommitted changes into atomic conventional commits with user confirmation before each decision                      |
-| **code-review**           | Reviews pending, uncommitted changes focusing on test quality, maintainability, simplicity, and alignment with project rules |
-| **security-review**       | Analyzes code, architecture, or system from a security perspective identifying vulnerabilities and recommending mitigations  |
-| **technical-debt-review** | Identifies and prioritizes technical debt in the codebase including code smells, weak tests, and outdated dependencies       |
+| Command                     | Description                                                                                                                  |
+|-----------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| **commit**                  | Splits uncommitted changes into atomic conventional commits with user confirmation before each decision                      |
+| **code_review**             | Reviews pending, uncommitted changes focusing on test quality, maintainability, simplicity, and alignment with project rules |
+| **security_review**         | Analyzes code, architecture, or system from a security perspective identifying vulnerabilities and recommending mitigations  |
+| **technical_debt_review**   | Identifies and prioritizes technical debt in the codebase including code smells, weak tests, and outdated dependencies       |
