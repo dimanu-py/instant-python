@@ -5,125 +5,159 @@
 - name: docs
   type: directory
   children:
-    - name: adrs
+    - name: conventions
       type: directory
       children:
-        - name: adr-guidelines
+        - name: convention_guidelines
           type: file
           extension: .md
-          template: agents/adr-guidelines.md
-    - name: design-docs
+          template: agents/convention_guidelines.md
+        - name: testing
+          type: directory
+          children:
+            - name: tdd_outside_in
+              type: file
+              extension: .md
+              template: agents/tdd_outside_in.md
+        - name: workflow
+          type: directory
+          children:
+            - name: leader_workflow
+              type: file
+              extension: .md
+              template: agents/leader_workflow.md
+    - name: features
       type: directory
-      children:
-        - name: design-doc-guidelines
-          type: file
-          extension: .md
-          template: agents/design-doc-guidelines.md
+    - name: progress
+      type: directory
 - name: .agents
   type: directory
   children:
+    - name: agents
+      type: directory
+      children:
+        - name: convention_keeper
+          type: file
+          extension: .md
+          template: agents/agents/convention_keeper.md
+        - name: craftsman_leader
+          type: file
+          extension: .md
+          template: agents/agents/craftsman_leader.md
+        - name: judge
+          type: file
+          extension: .md
+          template: agents/agents/judge.md
+        - name: spec_partner
+          type: file
+          extension: .md
+          template: agents/agents/spec_partner.md
+        - name: tdd_craftsman
+          type: file
+          extension: .md
+          template: agents/agents/tdd_craftsman.md
     - name: commands
       type: directory
       children:
-        - name: code-review
+        - name: code_review
           type: file
           extension: .md
-          template: agents/commands/code-review.md
+          template: agents/commands/code_review.md
         - name: commit
           type: file
           extension: .md
           template: agents/commands/commit.md
-        - name: security-review
+        - name: security_review
           type: file
           extension: .md
-          template: agents/commands/security-review.md
-        - name: technical-debt-review
+          template: agents/commands/security_review.md
+        - name: technical_debt_review
           type: file
           extension: .md
-          template: agents/commands/technical-debt-review.md
+          template: agents/commands/technical_debt_review.md
     - name: skills
       type: directory
       children:
-        - name: adr
+        - name: complexity_review
           type: directory
           children:
             - name: SKILL
               type: file
               extension: .md
-              template: agents/skills/adr/SKILL.md
-        - name: complexity-review
-          type: directory
-          children:
-            - name: SKILL
-              type: file
-              extension: .md
-              template: agents/skills/complexity-review/SKILL.md
+              template: agents/skills/complexity_review/SKILL.md
             - name: REFERENCE
               type: file
               extension: .md
-              template: agents/skills/complexity-review/REFERENCE.md
-        - name: design-doc
+              template: agents/skills/complexity_review/REFERENCE.md
+        - name: convention
           type: directory
           children:
             - name: SKILL
               type: file
               extension: .md
-              template: agents/skills/design-doc/SKILL.md
-        - name: hamburger-method
+              template: agents/skills/convention/SKILL.md
+        - name: hamburger_method
           type: directory
           children:
             - name: SKILL
               type: file
               extension: .md
-              template: agents/skills/hamburger-method/SKILL.md
+              template: agents/skills/hamburger_method/SKILL.md
             - name: REFERENCE
               type: file
               extension: .md
-              template: agents/skills/hamburger-method/REFERENCE.md
-        - name: micro-steps-coach
+              template: agents/skills/hamburger_method/REFERENCE.md
+        - name: micro_steps_coach
           type: directory
           children:
             - name: SKILL
               type: file
               extension: .md
-              template: agents/skills/micro-steps-coach/SKILL.md
+              template: agents/skills/micro_steps_coach/SKILL.md
             - name: REFERENCE
               type: file
               extension: .md
-              template: agents/skills/micro-steps-coach/REFERENCE.md
-        - name: mutation-testing
+              template: agents/skills/micro_steps_coach/REFERENCE.md
+        - name: mutation_testing
           type: directory
           children:
             - name: SKILL
               type: file
               extension: .md
-              template: agents/skills/mutation-testing/SKILL.md
-        - name: story-splitting
+              template: agents/skills/mutation_testing/SKILL.md
+        - name: spec
           type: directory
           children:
             - name: SKILL
               type: file
               extension: .md
-              template: agents/skills/story-splitting/SKILL.md
+              template: agents/skills/spec/SKILL.md
+        - name: story_splitting
+          type: directory
+          children:
+            - name: SKILL
+              type: file
+              extension: .md
+              template: agents/skills/story_splitting/SKILL.md
             - name: REFERENCE
               type: file
               extension: .md
-              template: agents/skills/story-splitting/REFERENCE.md
-        - name: test-desiderata
+              template: agents/skills/story_splitting/REFERENCE.md
+        - name: test_desiderata
           type: directory
           children:
             - name: SKILL
               type: file
               extension: .md
-              template: agents/skills/test-desiderata/SKILL.md
+              template: agents/skills/test_desiderata/SKILL.md
             - name: REFERENCE
               type: file
               extension: .md
-              template: agents/skills/test-desiderata/REFERENCE.md
-        - name: xp-refactor
+              template: agents/skills/test_desiderata/REFERENCE.md
+        - name: xp_refactor
           type: directory
           children:
             - name: SKILL
               type: file
               extension: .md
-              template: agents/skills/xp-refactor/SKILL.md
+              template: agents/skills/xp_refactor/SKILL.md
