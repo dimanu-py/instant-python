@@ -1,5 +1,5 @@
 ---
-name: xp-refactor
+name: xp_refactor
 description: Apply XP Simple Design principles when refactoring code — reduce duplication, improve clarity, and keep the fewest elements needed. Use when the user asks to clean up, improve, or refactor existing code.
 ---
 

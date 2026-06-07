@@ -1,5 +1,5 @@
 ---
-name: test-desiderata
+name: test_desiderata
 description: Analyze and improve test code quality using Kent Beck's Test Desiderata framework. Use when analyzing test files, reviewing test code, identifying test quality issues, suggesting test improvements, or when asked to evaluate tests against best practices. Applies to unit tests, integration tests, and any automated test code.
 ---
 

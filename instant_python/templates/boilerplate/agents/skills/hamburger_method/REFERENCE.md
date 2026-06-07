@@ -566,19 +566,19 @@ Use these quality gradients to generate 4-5 options per layer systematically.
 
 ## Integration with Other Techniques
 
-**Combine with story-splitting heuristics:**
+**Combine with story_splitting heuristics:**
 - Use hamburger method for features that are large but not obviously splittable
-- Use story-splitting heuristics for stories with clear "and", "or", "manage" indicators
+- Use story_splitting heuristics for stories with clear "and", "or", "manage" indicators
 - Use both: Split story first, then apply hamburger method to each split
 
-**Combine with complexity-review:**
+**Combine with complexity_review:**
 - Generate options using hamburger method
-- Use complexity-review to challenge high-complexity options
+- Use complexity_review to challenge high-complexity options
 - Result: Ensure simplest options are truly simple
 
-**Combine with micro-steps-coach:**
+**Combine with micro_steps_coach:**
 - Use hamburger method to choose vertical slice
-- Use micro-steps-coach to break the slice into 1-3h steps
+- Use micro_steps_coach to break the slice into 1-3h steps
 - Result: Clear path from feature → slice → implementation steps
 
 ---
