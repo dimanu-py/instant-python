@@ -1,5 +1,5 @@
 ---
-name: story-splitting
+name: story_splitting
 description: |
   Expert at detecting stories that are too big and applying splitting heuristics.
   Use when user describes work that seems large, mentions multiple features in one story, or needs help breaking down requirements.
@@ -13,8 +13,8 @@ description: |
 
   Do NOT use when:
   - Story is already small and focused (< 1 day work)
-  - Feature needs layered analysis without obvious split points (use hamburger-method instead)
-  - User asks HOW to implement (use micro-steps-coach instead)
+  - Feature needs layered analysis without obvious split points (use hamburger_method instead)
+  - User asks HOW to implement (use micro_steps_coach instead)
 allowed-tools:
   - Read
   - AskUserQuestion
@@ -366,26 +366,26 @@ Each feature area can be split further:
 This skill works in sequence with other skills:
 
 **Typical workflow:**
-1. **story-splitting** (THIS SKILL): Detect linguistic red flags, split stories into smaller ones
-2. **hamburger-method**: For stories still large after splitting, apply layered analysis
-3. **complexity-review**: Review technical approach for each small story
-4. **micro-steps-coach**: Break each story into 1-3h implementation steps
+1. **story_splitting** (THIS SKILL): Detect linguistic red flags, split stories into smaller ones
+2. **hamburger_method**: For stories still large after splitting, apply layered analysis
+3. **complexity_review**: Review technical approach for each small story
+4. **micro_steps_coach**: Break each story into 1-3h implementation steps
 
 **Use this skill when:**
 - Story contains obvious red flags ("manage", "and", "or", "including")
 - User describes multiple features bundled together
 - Story feels too big or vague
 
-**Vs. hamburger-method:**
-- **story-splitting**: Best when story has clear linguistic indicators of multiple features
-- **hamburger-method**: Best when feature is large but doesn't have obvious split points
-- Use **story-splitting FIRST** to remove obvious bundling, **then** hamburger-method if still needed
+**Vs. hamburger_method:**
+- **story_splitting**: Best when story has clear linguistic indicators of multiple features
+- **hamburger_method**: Best when feature is large but doesn't have obvious split points
+- Use **story_splitting FIRST** to remove obvious bundling, **then** hamburger_method if still needed
 
 **Integration example:**
 - Original: "Admin can manage users and roles"
-- Apply story-splitting → Split into: (1) "Create user", (2) "Edit user", (3) "Assign role"
-- Story #1 still feels large → Apply hamburger-method to identify layers + options
-- Choose simplest vertical slice → Apply micro-steps-coach to plan 1-3h steps
+- Apply story_splitting → Split into: (1) "Create user", (2) "Edit user", (3) "Assign role"
+- Story #1 still feels large → Apply hamburger_method to identify layers + options
+- Choose simplest vertical slice → Apply micro_steps_coach to plan 1-3h steps
 
 ---
 

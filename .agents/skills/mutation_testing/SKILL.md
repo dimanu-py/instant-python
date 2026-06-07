@@ -1,5 +1,5 @@
 ---
-name: mutation-testing-python
+name: mutation_testing_python
 description: Mutation testing patterns for Python using mutmut. Use when analyzing Python code to find weak or missing tests, verifying pytest effectiveness, strengthening Python test suites, or validating TDD workflows in Python projects.
 ---
 

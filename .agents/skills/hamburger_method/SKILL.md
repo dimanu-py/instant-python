@@ -1,19 +1,19 @@
 ---
-name: hamburger-method
+name: hamburger_method
 description: |
   Applies the Hamburger Method to slice features into vertical deliverable pieces.
   Use when user asks how to slice work, break down features into layers, or wants to deliver incrementally.
   Helps generate 4-5 options per layer and compose minimal vertical slices.
 
   Use when:
-  - Feature feels large but not obviously splittable with story-splitting heuristics
+  - Feature feels large but not obviously splittable with story_splitting heuristics
   - User asks "how to slice" or "how to deliver incrementally"
   - Need to generate multiple implementation options
   - Want to compose end-to-end vertical slices
 
   Do NOT use when:
-  - Story has obvious "and", "or", "manage" indicators (use story-splitting instead)
-  - User is asking HOW to implement (use micro-steps-coach instead)
+  - Story has obvious "and", "or", "manage" indicators (use story_splitting instead)
+  - User is asking HOW to implement (use micro_steps_coach instead)
   - Feature is already small (< 1 day work)
 allowed-tools:
   - Read
@@ -216,26 +216,26 @@ Source: https://gojko.net/2012/01/23/splitting-user-stories-the-hamburger-method
 This skill works in sequence with other skills:
 
 **Typical workflow:**
-1. **story-splitting**: Detect and split oversized stories with obvious red flags
-2. **hamburger-method** (THIS SKILL): For stories that are large but not obviously splittable, generate layers + options
-3. **complexity-review**: Review proposed vertical slice, simplify if needed
-4. **micro-steps-coach**: Break chosen vertical slice into 1-3h implementation steps
+1. **story_splitting**: Detect and split oversized stories with obvious red flags
+2. **hamburger_method** (THIS SKILL): For stories that are large but not obviously splittable, generate layers + options
+3. **complexity_review**: Review proposed vertical slice, simplify if needed
+4. **micro_steps_coach**: Break chosen vertical slice into 1-3h implementation steps
 
 **Use this skill when:**
 - Feature is large but doesn't have obvious "and", "or", "manage" indicators
 - Need to explore multiple implementation options systematically
 - Want to compose minimal end-to-end slice
 
-**Vs. story-splitting:**
-- **story-splitting**: Best for stories with clear linguistic red flags ("manage users and roles")
-- **hamburger-method**: Best for features that need layered analysis ("implement notifications")
+**Vs. story_splitting:**
+- **story_splitting**: Best for stories with clear linguistic red flags ("manage users and roles")
+- **hamburger_method**: Best for features that need layered analysis ("implement notifications")
 - Can use BOTH: Split story first, then apply hamburger method to each smaller story
 
 **Integration example:**
 - User: "Implement user notifications" (no obvious split points)
-- Apply hamburger-method → Identify 5 layers, generate options, compose smallest slice
-- Then use complexity-review → Ensure simplest slice is truly simple
-- Then use micro-steps-coach → Break slice into 1-3h steps
+- Apply hamburger_method → Identify 5 layers, generate options, compose smallest slice
+- Then use complexity_review → Ensure simplest slice is truly simple
+- Then use micro_steps_coach → Break slice into 1-3h steps
 
 ---
 

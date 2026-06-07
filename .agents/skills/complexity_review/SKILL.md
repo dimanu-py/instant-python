@@ -1,5 +1,5 @@
 ---
-name: complexity-review
+name: complexity_review
 description: |
   Reviews technical proposals and architectural decisions against 30 complexity dimensions.
   Use when user proposes technical solutions, designs systems, or evaluates architectural choices.
@@ -13,9 +13,9 @@ description: |
   - Someone says "we need" followed by complex infrastructure
 
   Do NOT use when:
-  - Simple feature implementation (use hamburger-method or story-splitting instead)
+  - Simple feature implementation (use hamburger_method or story_splitting instead)
   - Work is already planned and simple
-  - User asks "how to" implement something specific (use micro-steps-coach instead)
+  - User asks "how to" implement something specific (use micro_steps_coach instead)
 allowed-tools:
   - Read
   - AskUserQuestion
@@ -357,9 +357,9 @@ The cheapest code to maintain is the code you never wrote.
 This skill works in sequence with other skills:
 
 **Typical workflow:**
-1. **story-splitting** or **hamburger-method**: Break down features into small slices
-2. **complexity-review** (THIS SKILL): Review proposed technical approach, simplify
-3. **micro-steps-coach**: Break simplified approach into 1-3h steps
+1. **story_splitting** or **hamburger_method**: Break down features into small slices
+2. **complexity_review** (THIS SKILL): Review proposed technical approach, simplify
+3. **micro_steps_coach**: Break simplified approach into 1-3h steps
 
 **Use this skill when:**
 - User proposes a specific technical solution (after understanding what they want to achieve)
@@ -368,7 +368,7 @@ This skill works in sequence with other skills:
 
 **Do NOT use this skill when:**
 - The approach is already simple (single database, monolith, basic API)
-- User is asking "how to implement" (that's micro-steps-coach territory)
+- User is asking "how to implement" (that's micro_steps_coach territory)
 
 ---
 
