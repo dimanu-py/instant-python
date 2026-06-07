@@ -30,7 +30,8 @@
     "test": {
     "pytest": ["github_actions", "makefile", "precommit_hook"],
     "pytest-asyncio": ["async_alembic", "async_sqlalchemy"],
-    "object-mother-sindri": ["value_objects"]
+    "object-mother-sindri": ["value_objects"],
+    "mutmut": ["ai_agents"]
     },
     "docs": {
     "mkdocs": ["custom_documentation"],
