@@ -136,14 +136,13 @@ def get_user_address(user_id):
     result = db.query("SELECT address_structured FROM users WHERE id = ?", user_id)
     return json.loads(result)
 
-{% raw %}
+
 # Step 2: Update UI to display structured address (2h)
 # Now can display fields separately:
 # {{ address.street }}
 # {{ address.city }}, {{ address.state }} {{ address.zip }}
 
 # Still dual-writing!
-{% endraw %}
 ```
 
 #### Phase 3: CONTRACT

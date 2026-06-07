@@ -1,5 +1,5 @@
 ---
-name: micro-steps-coach
+name: micro_steps_coach
 description: |
   Breaks down ANY work into 1-3 hour micro-steps with zero downtime.
   Use for large refactorings, technical improvements, debugging, research, migrations, or any work that feels too big or risky.
@@ -13,9 +13,9 @@ description: |
   - Work will take more than 1 day
 
   Do NOT use when:
-  - User is still deciding WHAT to build (use story-splitting or hamburger-method first)
+  - User is still deciding WHAT to build (use story_splitting or hamburger_method first)
   - Work is already small (< 3 hours)
-  - User asks for architectural review (use complexity-review instead)
+  - User asks for architectural review (use complexity_review instead)
 allowed-tools:
   - Read
   - AskUserQuestion
@@ -268,24 +268,24 @@ Watch for these signs:
 This skill works in sequence with other skills:
 
 **Typical workflow:**
-1. **story-splitting**: Break down large user stories into smaller ones
-2. **hamburger-method**: Choose vertical slice to implement first
-3. **complexity-review**: Review and simplify technical approach
-4. **micro-steps-coach** (THIS SKILL): Break simplified approach into 1-3h steps
+1. **story_splitting**: Break down large user stories into smaller ones
+2. **hamburger_method**: Choose vertical slice to implement first
+3. **complexity_review**: Review and simplify technical approach
+4. **micro_steps_coach** (THIS SKILL): Break simplified approach into 1-3h steps
 
 **Use this skill when:**
 - User knows WHAT to build and asks HOW to implement it
-- After architectural decisions are made (complexity-review)
+- After architectural decisions are made (complexity_review)
 - When planning execution of a story/feature/refactoring
 
 **Integration examples:**
-- Use **story-splitting** first → "Admin can create user" → Then use micro-steps-coach to plan the 1-3h steps
-- Use **hamburger-method** first → Choose slice (manual email notification) → Then use micro-steps-coach for implementation steps
-- Use **complexity-review** first → Simplify to PostgreSQL instead of Kafka → Then use micro-steps-coach for migration steps
+- Use **story_splitting** first → "Admin can create user" → Then use micro_steps_coach to plan the 1-3h steps
+- Use **hamburger_method** first → Choose slice (manual email notification) → Then use micro_steps_coach for implementation steps
+- Use **complexity_review** first → Simplify to PostgreSQL instead of Kafka → Then use micro_steps_coach for migration steps
 
 **Do NOT use this skill when:**
-- User hasn't decided what to build yet (use story-splitting first)
-- User is proposing complex architecture (use complexity-review first)
+- User hasn't decided what to build yet (use story_splitting first)
+- User is proposing complex architecture (use complexity_review first)
 
 ---
 

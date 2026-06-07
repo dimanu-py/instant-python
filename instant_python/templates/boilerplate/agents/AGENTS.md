@@ -76,14 +76,18 @@
 - **User-Focused README**: README.md must be user-focused, containing only information relevant to table authors and end users.
 - **Separate Dev Docs**: All technical documentation and conventions must be maintained in `docs/adrs/`
 - **Separate Design Docs**: All design decisions, feature specifications, and architectural discussions must be maintained in `docs/design_docs/`
+- **Conventions**: Reusable patterns and practices captured by the convention_keeper agent go in `docs/conventions/`
+- **Feature Specs**: Executable Gherkin scenarios and spec documents live in `docs/features/`
+- **Progress Tracking**: Session logs and agent progress go in `docs/progress/`
 - **Error Examples**: User-facing documentation should include example error messages for common validation failures to help users quickly resolve issues.
 
 ```
-docs/adrs/
-├── adr-guidelines.md          # This file. Standard for documenting conventions
-├── database/                  # Database-related conventions (planned)
-├── testing/                   # Testing-related conventions (planned)
-├── ...
+docs/
+├── adrs/            # Architecture Decision Records
+├── conventions/     # Reusable conventions (organized by area)
+├── design-docs/     # Design documents
+├── features/        # .feature and .spec files
+├── progress/        # Session and agent progress logs
 ```
 
 ## 9. Development Best Practices
