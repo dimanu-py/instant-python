@@ -31,9 +31,6 @@ MANIFEST
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
-{% if ["ai_agents"] | is_in(template.built_in_features) %}
-!docs/features/*.spec
-{% endif %}
 
 # Installer logs
 pip-log.txt
@@ -171,4 +168,5 @@ cython_debug/
 docs/progress
 .opencode
 .claude
+!docs/features/*.spec
 {% endif %}
