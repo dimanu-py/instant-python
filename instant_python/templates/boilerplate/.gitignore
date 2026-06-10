@@ -166,7 +166,7 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-{% if ["ai_agents"] | is_in(template.built_in_features) %}
+{% if "ai_agents" in template.built_in_features %}
 # AI Agents
 docs/progress
 .opencode
