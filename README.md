@@ -7,6 +7,7 @@
   <a href="https://dimanu-py.github.io/instant-python/getting_started/installation/">Getting Started</a>&nbsp;&nbsp;•&nbsp;
   <a href="https://dimanu-py.github.io/instant-python/guide/">Usage</a>&nbsp;&nbsp;•&nbsp;
   <a href="https://dimanu-py.github.io/instant-python/guide/custom_projects/">How to: Custom Projects</a>&nbsp;&nbsp;•&nbsp;
+  <a href="https://dimanu-py.github.io/instant-python/guide/default_features/#ai-agents">AI Agent Harness</a>
 </p>
 
 <div align="center"><table><tr><td>
