@@ -7,7 +7,7 @@ through these phases:
 
 ```
 pending
-    → [spec_partner]  conversation + Gherkin distillation → .spec and .feature files
+    → [spec_partner]  conversation + Gherkin distillation → .md spec and .feature files
     → ⏸ HUMAN APPROVES the scenarios
     → in_progress
     → [tdd_craftsman]  Red → Green → Refactor cycle (one test at a time)
@@ -22,7 +22,7 @@ before writing production code.
 ### Phase details
 
 1. **spec_partner**: the spec is born from conversation, not dictation. The agent debates edge cases, 
-output contracts, and discarded alternatives with the human. The result is a reasoned `.spec` file 
+output contracts, and discarded alternatives with the human. The result is a reasoned `.md` spec file 
 documenting decisions and their rationale. The same agent then distills the spec into executable Gherkin 
 scenarios in a `.feature` file.
 2. **Human approval gate**: the `.feature` scenarios are the executable contract. The human must read and 
@@ -33,13 +33,13 @@ Refactor (clean up in green). No code is written that no test asks for.
 4. **judge**: reviews all code and tests, then runs mutation testing. The review step is the whole 
 game: agents draft, judgment prunes. Mutation testing validates that the test suite actually 
 catches defects. Only when both review and mutation succeed does the leader run the **convention_keeper**.
-5. **convention_keeper**: reviews the completed feature's artifacts (`.spec`, progress logs, judge verdict), identifies new patterns or practices worth standardising, and creates or updates convention docs in `docs/conventions/`. Always asks the human to approve new convention files before finalising.
+5. **convention_keeper**: reviews the completed feature's artifacts (spec, progress logs, judge verdict), identifies new patterns or practices worth standardising, and creates or updates convention docs in `docs/conventions/`. Always asks the human to approve new convention files before finalising.
 
 ### Artifact map
 
 | File                           | Created by    | Content                                         |
 |--------------------------------|---------------|-------------------------------------------------|
-| `docs/features/<name>.spec`    | spec_partner  | Spec conversation: purpose, contract, decisions |
+| `docs/specs/<name>.md`         | spec_partner  | Spec conversation: purpose, contract, decisions |
 | `docs/features/<name>.feature` | spec_partner  | Gherkin scenarios (the signed contract)         |
 | `src/`, `test/`                | tdd_craftsman | Production code and tests, carved by TDD        |
 | `progress/tdd_<name>.md`       | tdd_craftsman | Cycle log + scenario-to-test map                |
@@ -67,7 +67,7 @@ the content through chat. This prevents information loss and keeps the audit tra
 ### Good: Following the full pipeline
 
 A feature enters `pending` in `docs/tasks.json`. The leader launches `spec_partner`, which debates with the human, 
-writes `docs/features/new-feature.spec`, then generates `docs/features/new-feature.feature`. The leader
+writes `docs/specs/new-feature.md`, then generates `docs/features/new-feature.feature`. The leader
 stops and asks the human to approve. 
 The human reads the scenarios, approves them. 
 The leader updates the task to `in_progress`, launches `tdd_craftsman`. 
@@ -83,7 +83,8 @@ The leader starts spec for feature A, then launches TDD for feature B while wait
 
 ## Real world examples
 
-- `docs/features/` — contains `.feature` and `.spec` files produced by this pipeline
+- `docs/specs/` — contains `.md` spec files produced by this pipeline
+- `docs/features/` — contains `.feature` files produced by this pipeline
 - `.agents/agents/craftsman_leader.md` — the orchestrator agent that implements this workflow
 - `.agents/agents/spec_partner.md` — spec conversation agent
 - `.agents/agents/tdd_craftsman.md` — TDD execution agent

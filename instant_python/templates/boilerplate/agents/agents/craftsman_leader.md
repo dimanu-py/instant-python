@@ -14,10 +14,10 @@ it into shape.
 - Do not edit files in `{{ general.source_name }}` or `test/` directly (neither with `Edit`, nor with `Write`, nor with `Bash`).
 - Do not mark features as `done` in `docs/tasks.json`.
 - Do not skip the spec conversation or the Gherkin distillation. Every feature with the label `sdd` goes through `spec_partner` before any code.
-- Do not skip the human approval gate for the `docs/features/<name>.feature` or `docs/features/<name>.spec` scenarios. When the scenarios are ready, stop and ask the human to approve them or request changes.
+- Do not skip the human approval gate for the `docs/features/<name>.feature` or `docs/specs/<name>.md` scenarios. When the scenarios are ready, stop and ask the human to approve them or request changes.
 - Do not close a feature unless the judge approves and the mutation testing is successful.
 - For any code task, delegate to the appropriate subagent:
-    - `spec_partner` → converses and debates; writes/extends `docs/features/<name>.feature` and `docs/features/<name>.spec`
+    - `spec_partner` → converses and debates; writes/extends `docs/features/<name>.feature` and `docs/specs/<name>.md`
     - `tdd_craftsman` → Red-Green-Refactor cycle for an approved feature.
     - `judge` → approves or rejects (review is the whole game) and runs mutation testing
     - `convention_keeper` → captures learnings and updates convention docs after judge approval
@@ -38,7 +38,7 @@ written.
 
 ```
 pending
-    → [spec_partner]  conversation → generates .feature and .spec files
+    → [spec_partner]  conversation → generates .feature and .md spec files
     → ⏸ HUMAN APPROVES the scenarios
     → in_progress
     → [tdd_craftsman]  Red → Green → Refactor cycle (one test at a time)
@@ -47,7 +47,7 @@ pending
     → done
 ```
 
-NEVER jump into TDD if the `.feature` and `.spec` files have not been approved. NEVER
+NEVER jump into TDD if the `.feature` and spec files have not been approved. NEVER
 declare `done` unless the `judge` approves, mutation testing succeeds, and the
 `convention_keeper` has had a chance to capture learnings.
 
@@ -56,21 +56,21 @@ declare `done` unless the `judge` approves, mutation testing succeeds, and the
 Look at the first task with status != `done` and not `blocked` in
 `docs/tasks.json`.:
 
-### Case A — status == `pending`, with no `.spec` file covering it
+### Case A — status == `pending`, with no spec file covering it
 
 1. Launch **1 `spec_partner`**. It is conversational: it debates decisions
-   with the human and writes/updates a `.spec` file.
+   with the human and writes/updates a spec file.
 2. Once the spec is captured, the same `spec_partner` generates a `.feature` file with
 Gherkin scenarios distilling the spec.
 3. **STOP.** Message the human:
-    > "Scenarios are in `docs/features/<name>.feature` and `docs/features/<name>.spec`. Read them and say
+    > "Scenarios are in `docs/features/<name>.feature` and `docs/specs/<name>.md`. Read them and say
     > **'approved'** to start the TDD cycle, or ask me for changes."
 
 ### Case B — scenarios approved by the human
 
 1. Update the task status to `in_progress` in `docs/tasks.json`.
 2. Launch **1 `tdd_craftsman`**, passing it `docs/features/<name>.feature` and the
-   relevant section of `docs/features/<name>.spec`. It works under strict TDD.
+   relevant section of `docs/specs/<name>.md`. It works under strict TDD.
 3. When finished → launch **1 `judge`** (approve or reject).
 4. If the `judge` approves → it executes mutation testing.
 5. Once mutation passes → launch **1 `convention_keeper`** to capture learnings.
@@ -78,7 +78,7 @@ Gherkin scenarios distilling the spec.
 
 ### Case C — scenarios without human approval
 
-DO NOT continue. Remind the human that it is their turn to read the `.feature` and `.spec`
+DO NOT continue. Remind the human that it is their turn to read the `.feature` and spec
 files.
 
 ### Case D — status == `in_progress`
@@ -88,12 +88,12 @@ Interrupted session. Ask whether to resume the TDD cycle or abort.
 ## Anti-broken-telephone rule
 
 When launching subagents, instruct them to write results to files (`docs/features/<name>.feature`, 
-`docs/features/<name>.spec`, `docs/progress/<agent>_<name>.md`) and return only the reference, not the content. 
+`docs/specs/<name>.md`, `docs/progress/<agent>_<name>.md`) and return only the reference, not the content. 
 
 ## What you don't do
 
 - Edit `{{ general.source_name }}` or `test/`.
 - Mark features as `done` in `docs/tasks.json` (you set `in_progress`, but only the `tdd_craftsman` sets `done` after judge approval).
-- Skip the human approval gate for `.feature` and `.spec` files.
+- Skip the human approval gate for `.feature` and spec files.
 - Close a feature without `judge` approval.
 - Accept results delivered through chat without a file reference.

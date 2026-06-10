@@ -1,15 +1,15 @@
 ---
 name: spec
-description: Create or update .spec files in docs/features/ using the established format. Use when a feature needs to be documented before Gherkin scenarios are written.
+description: Create or update spec .md files in docs/specs/ using the established format. Use when a feature needs to be documented before Gherkin scenarios are written.
 ---
 
 # Spec
 
-Creates or updates `.spec` files inside `docs/features/`. A `.spec` captures a feature's purpose, behavior, contract, edge cases, and decisions before any code is written.
+Creates or updates spec `.md` files inside `docs/specs/`. A spec captures a feature's purpose, behavior, contract, edge cases, and decisions before any code is written.
 
 ## Format
 
-Every `.spec` document MUST include these sections in order:
+Every spec document MUST include these sections in order:
 
 ```markdown
 # Feature Name
@@ -43,11 +43,15 @@ Each decision with its rationale and the discarded alternative.
 ## Open Questions
 
 Unresolved items (mark as resolved or remove when decided).
+
+## Related Features
+
+Reference to the generated `.feature` file: `See [<name>.feature](../features/<name>.feature)`
 ```
 
 ## Rules
 
-- One `.spec` per feature, named `docs/features/<name>.spec`
+- One spec per feature, named `docs/specs/<name>.md`
 - Every claim must be convertible to a Given/When/Then scenario. If not testable, refine it or mark as open.
 - Every decision must record the alternative that was rejected and why.
 - Do not include implementation details or code.

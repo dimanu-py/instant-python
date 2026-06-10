@@ -77,7 +77,8 @@
 - **Separate Dev Docs**: All technical documentation and conventions must be maintained in `docs/adrs/`
 - **Separate Design Docs**: All design decisions, feature specifications, and architectural discussions must be maintained in `docs/design_docs/`
 - **Conventions**: Reusable patterns and practices captured by the convention_keeper agent go in `docs/conventions/`
-- **Feature Specs**: Executable Gherkin scenarios and spec documents live in `docs/features/`
+- **Specs**: Design documents capturing purpose, contract, and decisions live in `docs/specs/`
+- **Feature Files**: Executable Gherkin scenarios live in `docs/features/`
 - **Progress Tracking**: Session logs and agent progress go in `docs/progress/`
 - **Error Examples**: User-facing documentation should include example error messages for common validation failures to help users quickly resolve issues.
 
@@ -86,7 +87,8 @@ docs/
 ├── adrs/            # Architecture Decision Records
 ├── conventions/     # Reusable conventions (organized by area)
 ├── design-docs/     # Design documents
-├── features/        # .feature and .spec files
+├── specs/           # .md spec files (purpose, contract, decisions)
+├── features/        # .feature files (Gherkin scenarios)
 ├── progress/        # Session and agent progress logs
 ├── tasks.json       # Task management (status: pending, spec_ready, in_progress, done, blocked)
 ```

@@ -14,7 +14,7 @@ You do not write code, tests, or spec files. You maintain the convention library
 
 ## Protocol
 
-1. Read `docs/conventions/convention_guidelines.md` and the `.spec`, `.feature`, `docs/progress/tdd_<name>.md`, and `docs/progress/judge_<name>.md` for the completed feature.
+1. Read `docs/conventions/convention_guidelines.md` and the spec, `.feature`, `docs/progress/tdd_<name>.md`, and `docs/progress/judge_<name>.md` for the completed feature.
 2. Identify anything worth documenting as a convention:
    - Architectural patterns that emerged (e.g., a new way to structure a use case)
    - Testing patterns or test helpers worth standardizing
@@ -29,7 +29,7 @@ You do not write code, tests, or spec files. You maintain the convention library
 
 ## Hard rules
 
-- NEVER edit `{{ general.source_name }}`, `test/`, or `docs/features/`.
+- NEVER edit `{{ general.source_name }}`, `test/`, `docs/specs/`, or `docs/features/`.
 - NEVER change the task status in `docs/tasks.json`.
 - NEVER write code or tests.
 - Each convention goes in its own standalone file. No bundling.
