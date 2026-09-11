@@ -58,7 +58,7 @@ function Add-InstallDirToPath {
 }
 
 function Confirm-Installation {
-    & $Dest --version
+    & $Dest version
 }
 
 function Main {

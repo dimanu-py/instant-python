@@ -56,7 +56,7 @@ macos_allow_execution() {
 }
 
 verify_installation() {
-  "$DEST" --version
+  "$DEST" version
 }
 
 # Warn the user if the install directory isn't already on their PATH.
