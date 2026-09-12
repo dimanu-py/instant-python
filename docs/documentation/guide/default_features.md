@@ -6,13 +6,9 @@ the generated project.
 
 ## Development Environment Manager
 
-Previously, `instant-python` let you choose between [_uv_](https://docs.astral.sh/uv) or [_pdm_](https://pdm-project.org/en/latest/) to handle you project environment
-and Python version.
-Since the first version was published, `uv` has gain a lot of popularity. Our data shows that all users have use `uv`. 
-For that reason, we are dropping `pdm` as an option, in order to make setup simpler and keep the questions to the things that matter
-when creating the project.
+`instant-python` uses [_uv_](https://docs.astral.sh/uv) to handle your project environment and Python version.
 
-As before, `instant-python` will automatically download `uv` if it's not installed, and create a virtual environment. This will
+`instant-python` will automatically download `uv` if it's not installed, and create a virtual environment. This will
 allow you to install your dependencies and run tasks out of the box.
 
 ## Git Repository

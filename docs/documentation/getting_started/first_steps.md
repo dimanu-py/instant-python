@@ -41,7 +41,7 @@ of the main options you will be asked:
 | Author                      | The author of the project.                                                 |
 | License                     | The license of the project.                                                |
 | Python Version              | The Python version to use in the project.                                  |
-| Project Environment Manager | The project manager to use (choose between `uv` or `pdm`).                 |
+| Project Environment Manager | The project manager used to handle the project environment (`uv`).        |
 | Default Template | Choose a default template to use as a base for your project structure.     |
 | Built in Features | Choose additional ready to use implementations to include in your project. |
 | Git Initialization          | Whether to initialize a Git repository in the project folder.              |
@@ -74,7 +74,7 @@ section to learn more about the features that `instant-python` provides and how 
 ### Common Questions
 
 **Can I add more dependencies after creating my project?**  
-→ Yes! You can use your project manager (`uv` or `pdm`) to add dependencies after creation.
+→ Yes! You can use `uv` to add dependencies after creation.
 
 **How do I use a different project structure?**  
 → See the [Custom Projects] guide to create your own project structure.
