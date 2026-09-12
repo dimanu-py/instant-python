@@ -7,10 +7,12 @@
 #
 # Overridable via env vars:
 #   IPY_BIN_DIR   install destination directory (default: $HOME/.local/bin)
+#   IPY_VERSION   release to install, e.g. "1.2.3" (default: latest)
 set -eu
 
 REPO="dimanu-py/instant-python"
 BIN_DIR="${IPY_BIN_DIR:-$HOME/.local/bin}"
+VERSION="${IPY_VERSION:-latest}"
 DEST="$BIN_DIR/ipy"
 
 # --- detect platform -> release target triple --------------------------------
@@ -33,8 +35,14 @@ detect_target() {
 download_binary() {
   destination="$1"
 
-  echo "ipy: downloading latest release for $target ..." >&2
-  curl -fsSL -o "$destination" "https://github.com/$REPO/releases/latest/download/ipy-$target"
+  if [ "$VERSION" = "latest" ]; then
+    asset_url="https://github.com/$REPO/releases/latest/download/ipy-$target"
+  else
+    asset_url="https://github.com/$REPO/releases/download/$VERSION/ipy-$target"
+  fi
+
+  echo "ipy: downloading $VERSION release for $target ..." >&2
+  curl -fsSL -o "$destination" "$asset_url"
 }
 
 # --- move the binary into place and make it executable ------------------------

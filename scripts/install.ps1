@@ -6,11 +6,13 @@
 #
 # Overridable via env vars:
 #   IPY_BIN_DIR   install destination directory (default: $env:USERPROFILE\.local\bin)
+#   IPY_VERSION   release to install, e.g. "1.2.3" (default: latest)
 
 $ErrorActionPreference = "Stop"
 
 $Repo = "dimanu-py/instant-python"
 $Target = "x86_64-pc-windows-msvc"
+$Version = if ($env:IPY_VERSION) { $env:IPY_VERSION } else { "latest" }
 $BinDir = if ($env:IPY_BIN_DIR) { $env:IPY_BIN_DIR } else { Join-Path $env:USERPROFILE ".local\bin" }
 $Dest = Join-Path $BinDir "ipy.exe"
 
@@ -27,8 +29,12 @@ function Confirm-SupportedArchitecture {
 function Get-Binary {
     param([string]$Destination)
 
-    $url = "https://github.com/$Repo/releases/latest/download/ipy-${Target}.exe"
-    Write-Host "ipy: downloading latest release for $Target ..."
+    if ($Version -eq "latest") {
+        $url = "https://github.com/$Repo/releases/latest/download/ipy-${Target}.exe"
+    } else {
+        $url = "https://github.com/$Repo/releases/download/$Version/ipy-${Target}.exe"
+    }
+    Write-Host "ipy: downloading $Version release for $Target ..."
     Invoke-WebRequest -Uri $url -OutFile $Destination -UseBasicParsing
 }
 
