@@ -1,3 +1,5 @@
+import warnings
+
 import typer
 from rich.console import Console
 from rich.panel import Panel
@@ -11,6 +13,15 @@ from instant_python.version.delivery import cli as version
 
 app = InstantPythonTyper(cls=MetricsMiddleware)
 console = Console()
+
+
+def _show_warning(message: Warning | str, *_args: object, **_kwargs: object) -> None:
+    warning_panel = Panel(str(message), title="Warning", border_style="yellow")
+    console.print(warning_panel)
+
+
+warnings.showwarning = _show_warning
+warnings.simplefilter("always", DeprecationWarning)
 
 
 @app.callback(invoke_without_command=True)
