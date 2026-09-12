@@ -11,7 +11,7 @@ class SystemInstallationMethodDetector(InstallationMethodDetector):
     _UV_RECEIPT_FILENAME = "uv-receipt.toml"
 
     def detect(self) -> InstallationMethod:
-        if os.environ.get("PYAPP") == "1":
+        if "PYAPP" in os.environ:
             return InstallationMethod.BINARY
 
         environment_root = Path(sys.prefix)

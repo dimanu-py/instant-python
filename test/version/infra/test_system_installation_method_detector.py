@@ -20,6 +20,15 @@ class TestSystemInstallationMethodDetector:
 
         expect(installation_method).to(equal(InstallationMethod.BINARY))
 
+    def test_should_detect_binary_installation_when_pyapp_env_var_holds_its_own_location(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        monkeypatch.setenv("PYAPP", "/home/user/.local/share/pyapp/ipy")
+
+        installation_method = self._detector.detect()
+
+        expect(installation_method).to(equal(InstallationMethod.BINARY))
+
     def test_should_detect_pipx_installation_when_pipx_receipt_is_present(
         self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
     ) -> None:

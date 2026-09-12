@@ -1,3 +1,4 @@
+import os
 import platform
 import shutil
 
@@ -36,6 +37,10 @@ class BinaryUpdater(Updater):
 
     @staticmethod
     def _locate_binary() -> str:
+        pyapp_location = os.environ.get("PYAPP")
+        if pyapp_location and pyapp_location != "1":
+            return pyapp_location
+
         binary_path = shutil.which("ipy")
         if binary_path is None:
             raise IpyBinaryNotFoundError()

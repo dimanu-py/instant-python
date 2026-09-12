@@ -15,7 +15,21 @@ class TestBinaryUpdater:
         self._console = Mimic(Mock, SystemConsole)
         self._binary_updater = BinaryUpdater(console=self._console)
 
-    def test_should_run_self_update_when_upgrading_to_latest_version(self, monkeypatch: pytest.MonkeyPatch) -> None:
+    def test_should_run_self_update_on_the_binary_reported_by_pyapp(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        monkeypatch.setenv("PYAPP", "/home/user/.local/share/pyapp/ipy")
+        monkeypatch.setattr(
+            binary_updater_module.shutil, "which", lambda _: "/home/user/.local/bin/ipy-from-somewhere-else"
+        )
+        expect_call(self._console).execute_or_raise('"/home/user/.local/share/pyapp/ipy" self update')
+
+        self._binary_updater.update(LATEST_VERSION)
+
+        expect(self._console).to(have_been_satisfied)
+
+    def test_should_fall_back_to_which_when_pyapp_does_not_report_its_own_location(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        monkeypatch.setenv("PYAPP", "1")
         monkeypatch.setattr(binary_updater_module.shutil, "which", lambda _: "/home/user/.local/bin/ipy")
         expect_call(self._console).execute_or_raise('"/home/user/.local/bin/ipy" self update')
 
@@ -24,6 +38,7 @@ class TestBinaryUpdater:
         expect(self._console).to(have_been_satisfied)
 
     def test_should_raise_error_when_binary_cannot_be_located(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        monkeypatch.setenv("PYAPP", "1")
         monkeypatch.setattr(binary_updater_module.shutil, "which", lambda _: None)
 
         expect(lambda: self._binary_updater.update(LATEST_VERSION)).to(raise_error(IpyBinaryNotFoundError))
