@@ -2,6 +2,21 @@
 
 <!-- version list -->
 
+## v0.27.1 (2026-09-12)
+
+### 🪲 Bug Fixes
+
+- **version**: Add pyapp location when installing instant python through a binary so update command
+  can locate the binary and run `self update` correctly
+  ([`a99c1e5`](https://github.com/dimanu-py/instant-python/commit/a99c1e52e218cc71b0bd8c6f855d8c46b1da8ef8))
+
+### ♻️ Refactoring
+
+- **version**: Add guidance to update instant python when current version is lower than latest
+  version
+  ([`68ebfde`](https://github.com/dimanu-py/instant-python/commit/68ebfde3e11aecc2f38919ae99ee167ac262df47))
+
+
 ## v0.27.0 (2026-09-12)
 
 ### ✨ Features
