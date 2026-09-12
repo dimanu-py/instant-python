@@ -2,6 +2,85 @@
 
 <!-- version list -->
 
+## v0.27.0 (2026-09-12)
+
+### ✨ Features
+
+- **version**: Implement upgrade method that autodectes installation method and upgrades instant
+  python to latest version or pinned version
+  ([`00243ab`](https://github.com/dimanu-py/instant-python/commit/00243ab382b720b65b4bd67077174f1bf24dea9c))
+
+- **cli**: Override cli show_warning logic to be able to print in console user warnings
+  ([`b546636`](https://github.com/dimanu-py/instant-python/commit/b5466368f5f3a5fc61533ab9575ff7feea37e9ef))
+
+- **config**: Send a warning to the user informing that pdm is no longer supported and it has been
+  replaced with uv by default
+  ([`c3b73f2`](https://github.com/dimanu-py/instant-python/commit/c3b73f29fadbcce919eee9f1d901d85754e97e40))
+
+- **cli**: Remove old --version flag from main app
+  ([`8329314`](https://github.com/dimanu-py/instant-python/commit/8329314cc180f91d13f1debaae79358992bd39a1))
+
+- **version**: Fetch latest version from pypi
+  ([`194cbf0`](https://github.com/dimanu-py/instant-python/commit/194cbf0c3d3832b7bba996546a46a03eacfdc92e))
+
+- **version**: Return unknown latest version when it's not reachable
+  ([`1628464`](https://github.com/dimanu-py/instant-python/commit/162846462b80494021a6ff00c908a39c3114049a))
+
+- **version**: Return latest version
+  ([`56f9e5e`](https://github.com/dimanu-py/instant-python/commit/56f9e5e9b09f38bcb069fab8b7cc7e58b8c8ed1e))
+
+- **version**: Create new version command to see current installed version of instant python and
+  latest version
+  ([`d941fe2`](https://github.com/dimanu-py/instant-python/commit/d941fe22c4f34fdcbe0ed53bd9a76b48c36152ed))
+
+- **schema**: Remove pdm dependency manager from ipy json schema
+  ([`80d960a`](https://github.com/dimanu-py/instant-python/commit/80d960a14a58f2671ad8f316f0a852f4d32aa6c3))
+
+- **config**: Set uv as the default dependency manager and add backward compatibility with pdm
+  ([`1b30207`](https://github.com/dimanu-py/instant-python/commit/1b302070439df79e39ab107b81f5a721425088e4))
+
+- **config**: Remove dependency manager question from wizard
+  ([`cbc2a96`](https://github.com/dimanu-py/instant-python/commit/cbc2a963b6dcb62e6d5dd8b2e8ceb780fb349fbd))
+
+- **config**: Remove pdm env manager as an option to handle python project
+  ([`050e00e`](https://github.com/dimanu-py/instant-python/commit/050e00e8b4a0fa688833a36f55b336a4540ae09b))
+
+### 🪲 Bug Fixes
+
+- **cli**: Import correctly version app
+  ([`1af30fb`](https://github.com/dimanu-py/instant-python/commit/1af30fbb3c80956e87d7e1fe24f1511eec3f1e11))
+
+### ⚙️ Build System
+
+- Update binary installation scripts to allow passing a specific version to pin
+  ([`440082a`](https://github.com/dimanu-py/instant-python/commit/440082a371bbdd54ee13a30b53da526dae17122e))
+
+- Update installation script to verify binary is installed with new version command
+  ([`43d7de9`](https://github.com/dimanu-py/instant-python/commit/43d7de9fc29283d46a8efe1d11931f7df79e3e50))
+
+### ♻️ Refactoring
+
+- **templates**: Update pre commit template to run format and lint commands instead of check to
+  apply automatically fixes in case of fails
+  ([`d3ca2e3`](https://github.com/dimanu-py/instant-python/commit/d3ca2e323ef558d33dde037baada64ed79d85eb8))
+
+- **templates**: Remove pdm dependency manager from all templates and put uv by default
+  ([`c625c0d`](https://github.com/dimanu-py/instant-python/commit/c625c0db9367b7536e1568ba20ad7d2c1020411e))
+
+- **version**: Simplify version command by removing unnecessary use case that acted as a middleman
+  ([`385900b`](https://github.com/dimanu-py/instant-python/commit/385900babadd75032c501650abbe1b6f408d391e))
+
+- **initialize**: Move system console to shared module to reuse it for update command
+  ([`93b7cce`](https://github.com/dimanu-py/instant-python/commit/93b7cceab2ddbb966cb44da2ebb66c5d8e0a2e44))
+
+- **initialize**: Inject directly UvEnvManager in init command cli instead of using env manager
+  factory
+  ([`5966466`](https://github.com/dimanu-py/instant-python/commit/5966466d084c6d0c162d3152d50751175c9517f7))
+
+- **initialize**: Remove console field in UvEnvManager as optional
+  ([`f9e6b00`](https://github.com/dimanu-py/instant-python/commit/f9e6b002634b6be0d1420ecc5bb40f0fd39b4355))
+
+
 ## v0.26.1 (2026-09-08)
 
 ### 🪲 Bug Fixes
