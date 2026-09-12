@@ -176,4 +176,4 @@ jobs:
             3.13
 
       - name: 🏃 Run tox
-        run: task tox
+        run: task test:tox
