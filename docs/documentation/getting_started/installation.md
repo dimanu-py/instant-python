@@ -25,6 +25,13 @@ By default the binary is installed to `~/.local/bin`. You can override this with
 IPY_BIN_DIR="$HOME/bin" curl -LsSf https://raw.githubusercontent.com/dimanu-py/instant-python/main/scripts/install.sh | sh
 ```
 
+By default the latest release is installed. To install a specific version instead, set the `IPY_VERSION` environment
+variable:
+
+```bash
+IPY_VERSION="1.2.3" curl -LsSf https://raw.githubusercontent.com/dimanu-py/instant-python/main/scripts/install.sh | sh
+```
+
 **Windows**
 
 ```powershell
@@ -32,7 +39,12 @@ powershell -ExecutionPolicy ByPass -c "irm https://raw.githubusercontent.com/dim
 ```
 
 This adds `%USERPROFILE%\.local\bin` to your user `PATH` automatically; restart your terminal afterwards so it picks up the
-change. You can override the install directory with the `IPY_BIN_DIR` environment variable.
+change. You can override the install directory with the `IPY_BIN_DIR` environment variable, and pin a specific version
+with `IPY_VERSION`:
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "$env:IPY_VERSION='1.2.3'; irm https://raw.githubusercontent.com/dimanu-py/instant-python/main/scripts/install.ps1 | iex"
+```
 
 !!! note "Supported platforms"
     The install script currently provides prebuilt binaries for macOS (Apple Silicon), Linux (x86_64 and arm64), and Windows
@@ -76,6 +88,29 @@ pip install instant-python
 ```
 
 A guide to install and configure pyenv can be found [here](https://github.com/pyenv/pyenv?tab=readme-ov-file#installation)
+
+## Updating
+
+Whichever method you used to install `instant-python`, you can update it with:
+
+```bash
+ipy update
+```
+
+`ipy update` detects how `instant-python` was installed and runs the matching upgrade command for you: the install
+script's self-update for binary installs, `uv tool upgrade`, `pipx upgrade`, or `pip install --upgrade`. You don't need
+to remember which method you used.
+
+To install a specific version instead of the latest one, pass `--version`:
+
+```bash
+ipy update --version 1.2.3
+```
+
+!!! note "Binary installations"
+    For binary installs, updating to the latest version uses the binary's own self-update mechanism, so no download
+    script is re-run. Passing `--version` instead re-runs the install script pinned to that release, the same way the
+    `IPY_VERSION` environment variable works above.
 
 ## Next steps
 
