@@ -125,6 +125,7 @@ jobs:
       - name: 🏃 Build binary
         env:
           CARGO_BUILD_TARGET: ${{ matrix.target }}
+          PYAPP_PASS_LOCATION: "true"
         run: uvx hatch build -t binary
 
       - name: 📦 Rename binary for release
