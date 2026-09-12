@@ -22,6 +22,8 @@ def show_version() -> None:
     latest_version = latest_version_repository.get_latest_version()
     current_version = __version__
     console.print(f"{current_version} - (latest) {latest_version}")
+    if current_version < str(latest_version):
+        console.print("Update to the latest version running `ipy update`")
 
 
 @app.command("update", help="Update instant-python to the latest version or a specific one")
