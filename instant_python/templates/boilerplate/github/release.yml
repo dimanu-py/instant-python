@@ -88,7 +88,7 @@ jobs:
         uses: ./.github/actions/python_setup
 
       - name: 🏃 Build package
-        run: {{ general.dependency_manager }} build
+        run: uv build
 
       - name: 🚀 Publish
         uses: pypa/gh-action-pypi-publish@release/v1

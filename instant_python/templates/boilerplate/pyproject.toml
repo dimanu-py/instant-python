@@ -68,10 +68,7 @@ requires-python = "=={{ general.python_version }}.*"
 readme = "README.md"
 license = { file = "LICENSE" }
 
-{% if general.dependency_manager == "pdm" %}
-[tool.pdm]
-distribution = false
-{% endif %}
+
 {% if release_deps.strip() or lint_deps.strip() or test_deps.strip() %}
 [dependency-groups]
 dev = [
@@ -106,10 +103,8 @@ docs = [
 {% endif %}
 {% endif %}
 
-{% if general.dependency_manager == "uv" %}
 [tool.uv]
 exclude-newer = "3 days"
-{% endif %}
 
 {% if dependencies | has_dependency("ruff") or has_github_actions_or_makefile %}
 [tool.ruff]
