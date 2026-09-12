@@ -1,4 +1,5 @@
 import re
+import warnings
 from dataclasses import asdict, dataclass, field
 
 from instant_python.shared.application_error import ApplicationError
@@ -16,7 +17,7 @@ class GeneralConfig:
     author: str
     license: str
     python_version: str
-    dependency_manager: str = field(default=SupportedManagers.UV)
+    dependency_manager: str = field(default=SupportedManagers.UV.value)
 
     def __post_init__(self) -> None:
         self.version = str(self.version)
@@ -45,7 +46,13 @@ class GeneralConfig:
     def _ensure_dependency_manager_is_supported(self) -> None:
         supported_dependency_managers = SupportedManagers.get_supported_managers()
         if self.dependency_manager == "pdm":
-            self.dependency_manager = SupportedManagers.UV
+            warnings.warn(
+                "`pdm` is no longer supported as a dependency manager and has been replaced with `uv`. "
+                "Update your ipy.yml file to remove this warning.",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            self.dependency_manager = SupportedManagers.UV.value
         if self.dependency_manager not in supported_dependency_managers:
             raise InvalidDependencyManagerValue(self.dependency_manager, supported_dependency_managers)
 

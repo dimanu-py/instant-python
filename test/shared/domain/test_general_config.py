@@ -67,3 +67,7 @@ class TestGeneralConfig:
         config = GeneralConfigMother.with_parameter(dependency_manager="pdm")
 
         expect(config.dependency_manager).to(equal("uv"))
+
+    def test_should_warn_about_deprecated_pdm_dependency_manager(self) -> None:
+        with pytest.warns(DeprecationWarning, match="pdm"):
+            GeneralConfigMother.with_parameter(dependency_manager="pdm")
