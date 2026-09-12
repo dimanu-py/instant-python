@@ -15,3 +15,8 @@ class TestVersionCli:
         result = self._runner.invoke(app, ["version"])
 
         expect(result.output).to(contain(__version__))
+
+    def test_should_expose_update_command_with_version_option(self) -> None:
+        result = self._runner.invoke(app, ["update", "--help"])
+
+        expect(result.output).to(contain("--version"))
