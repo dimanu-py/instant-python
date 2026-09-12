@@ -5,7 +5,7 @@ tasks:
     desc: Run all tests
     cmds:
       - printf "\n⌛ Running tests...\n"
-      - uv run pytest tests -ra
+      - uv run pytest test -ra
 
   unit:
     desc: Run all unit tests
