@@ -1,4 +1,4 @@
-from instant_python.initialize.infra.env_manager.system_console import CommandExecutionResult
+from instant_python.shared.infra.system_console import CommandExecutionResult
 from test.random_generator import RandomGenerator
 
 

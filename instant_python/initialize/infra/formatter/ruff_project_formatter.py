@@ -1,5 +1,5 @@
 from instant_python.initialize.domain.project_formatter import ProjectFormatter
-from instant_python.initialize.infra.env_manager.system_console import SystemConsole
+from instant_python.shared.infra.system_console import SystemConsole
 
 
 class RuffProjectFormatter(ProjectFormatter):

@@ -2,8 +2,8 @@ import sys
 from pathlib import Path
 
 from instant_python.initialize.domain.env_manager import EnvManager
-from instant_python.initialize.infra.env_manager.system_console import SystemConsole
 from instant_python.shared.domain.dependency_config import DependencyConfig
+from instant_python.shared.infra.system_console import SystemConsole
 
 
 class UvEnvManager(EnvManager):

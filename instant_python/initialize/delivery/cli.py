@@ -3,7 +3,6 @@ from pathlib import Path
 import typer
 
 from instant_python.initialize.application.project_initializer import ProjectInitializer
-from instant_python.initialize.infra.env_manager.system_console import SystemConsole
 from instant_python.initialize.infra.env_manager.uv_env_manager import UvEnvManager
 from instant_python.initialize.infra.formatter.ruff_project_formatter import RuffProjectFormatter
 from instant_python.initialize.infra.renderer.jinja_environment import JinjaEnvironment
@@ -11,6 +10,7 @@ from instant_python.initialize.infra.renderer.jinja_project_renderer import Jinj
 from instant_python.initialize.infra.version_control.git_configurer import GitConfigurer
 from instant_python.initialize.infra.writer.file_system_project_writer import FileSystemProjectWriter
 from instant_python.shared.infra.persistence.yaml_config_repository import YamlConfigRepository
+from instant_python.shared.infra.system_console import SystemConsole
 
 app = typer.Typer()
 

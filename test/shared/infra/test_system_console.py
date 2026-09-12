@@ -5,7 +5,7 @@ import tempfile
 import pytest
 from expects import be_false, be_true, contain, equal, expect, raise_error
 
-from instant_python.initialize.infra.env_manager.system_console import CommandExecutionError, SystemConsole
+from instant_python.shared.infra.system_console import CommandExecutionError, SystemConsole
 
 
 @pytest.mark.integration
