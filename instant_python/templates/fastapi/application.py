@@ -39,7 +39,7 @@ from {{ general.source_name }}.delivery.api.handlers.error_handlers import (
 
 {% if ["async_alembic"] | is_in(template.built_in_features) %}
 {% if template.name == template_types.STANDARD %}
-from {{ general.source_name }}.api.lifespan import lifespan
+from {{ general.source_name }}.api.lifespan
 {% else %}
 from {{ general.source_name }}.delivery.api.lifespan import lifespan
 {% endif %}

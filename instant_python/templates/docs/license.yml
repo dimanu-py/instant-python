@@ -1,3 +1,3 @@
 - name: LICENSE
   type: file
-  template: LICENSE
+  template: docs/LICENSE

@@ -1,4 +1,4 @@
 - name: README
   type: file
   extension: .md
-  template: README.md
+  template: docs/README.md

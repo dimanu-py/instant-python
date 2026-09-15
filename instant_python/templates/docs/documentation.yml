@@ -1,7 +1,7 @@
 - name: mkdocs
   type: file
   extension: .yml
-  template: mkdocs.yml
+  template: docs/mkdocs.yml
 - name: docs
   type: directory
   children:
@@ -11,4 +11,4 @@
         - name: HOME
           type: file
           extension: .md
-          template: README.md
+          template: docs/README.md

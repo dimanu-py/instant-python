@@ -1,0 +1,3 @@
+- name: .gitignore
+  type: file
+  template: config_files/.gitignore

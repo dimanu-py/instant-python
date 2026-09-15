@@ -1,4 +1,4 @@
 - name: CITATION
   type: file
   extension: .cff
-  template: CITATION.cff
+  template: docs/CITATION.cff

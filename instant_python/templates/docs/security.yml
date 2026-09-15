@@ -1,4 +1,4 @@
 - name: SECURITY
   type: file
   extension: .md
-  template: SECURITY.md
+  template: docs/SECURITY.md

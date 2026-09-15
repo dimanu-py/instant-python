@@ -1,4 +1,4 @@
 - name: mypy
   type: file
   extension: .ini
-  template: mypy.ini
+  template: config_files/mypy.ini
