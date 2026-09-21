@@ -39,6 +39,6 @@ updates:
       time: "06:00"
       timezone: "Europe/Madrid"
     groups:
-      codeql-action:
+      github_actions:
         patterns:
-          - "github/codeql-action*"
+          - "*"
