@@ -1,3 +1,0 @@
-- name: application
-  type: directory
-  python: True

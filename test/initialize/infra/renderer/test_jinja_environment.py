@@ -37,7 +37,7 @@ class TestJinjaEnvironment:
 
     def test_should_render_template_from_default_templates_folder_when_custom_template_is_not_found(self) -> None:
         rendered_content = self._jinja_environment.render_template(
-            ".gitignore", {"template": {"built_in_features": []}}
+            "config_files/.gitignore", {"template": {"built_in_features": []}}
         )
 
         expect(rendered_content).to_not(be_none)

@@ -1,8 +1,0 @@
-{% import "macros.j2" as macros with context %}
-{%- set delivery_features = [
-  {"feature": "fastapi_application", "template": "fastapi/fastapi_app.yml"}
-] %}
-- name: delivery
-  type: directory
-  python: True
-{{ macros.render_children_for(delivery_features, 2) }}

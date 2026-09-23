@@ -5,21 +5,21 @@
 {# === Base Configuration Files === #}
 {{ macros.include_block("config_files/pyproject.yml", 0) }}
 {{ macros.include_block("config_files/python_version.yml", 0) }}
-{{ macros.include_block("documentation/license.yml", 0) }}
+{{ macros.include_block("docs/license.yml", 0) }}
 {# === CI/CD and Automation Features === #}
 {% set ci_cd_features = [
     {"feature": "github_actions", "template": "github/github_action.yml"},
-    {"feature": "github_actions", "template": "github/makefile.yml"},
+    {"feature": "github_actions", "template": "scripts/makefile.yml"},
     {"feature": "github_issues_template", "template": "github/github_issues_template.yml"},
-    {"feature": "makefile", "template": "github/makefile.yml"},
-    {"feature": "precommit_hook", "template": "github/precommit_hook.yml"},
-    {"feature": "precommit_hook", "template": "github/makefile.yml"}
+    {"feature": "makefile", "template": "scripts/makefile.yml"},
+    {"feature": "precommit_hook", "template": "config_files/precommit_hook.yml"},
+    {"feature": "precommit_hook", "template": "scripts/makefile.yml"}
 ] %}
 {{ macros.render_features(ci_cd_features, 0) }}
 {# === Git Features === #}
 {% if git.initialize %}
 {{ macros.include_block("config_files/gitignore.yml", 0) }}
-{{ macros.include_block("documentation/readme.yml", 0) }}
+{{ macros.include_block("docs/readme.yml", 0) }}
 {% endif %}
 {# === Testing and Type Checking === #}
 {% if dependencies | has_dependency("mypy") %}
@@ -31,8 +31,8 @@
 {{ macros.render_feature_if_enabled("ai_agents", "agents/agents.yml", 0) }}
 {# === Documentation and Metadata === #}
 {% set doc_features = [
-    {"feature": "citation_file", "template": "documentation/citation.yml"},
-    {"feature": "security_file", "template": "documentation/security.yml"},
-    { "feature": "custom_documentation", "template": "documentation/documentation.yml" }
+    {"feature": "citation_file", "template": "docs/citation.yml"},
+    {"feature": "security_file", "template": "docs/security.yml"},
+    { "feature": "custom_documentation", "template": "docs/documentation.yml" }
 ] %}
 {{ macros.render_features(doc_features, 0) }}

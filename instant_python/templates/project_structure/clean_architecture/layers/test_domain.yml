@@ -1,3 +1,0 @@
-- name: domain
-  type: directory
-  python: True

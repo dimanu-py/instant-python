@@ -1,5 +1,0 @@
-{% import "macros.j2" as macros with context %}
-- name: test
-  type: directory
-  python: True
-{{ macros.include_block("standard_project/layers/test_features.yml", 0) }}

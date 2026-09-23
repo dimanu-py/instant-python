@@ -1,6 +1,9 @@
 {% import "macros.j2" as macros with context %}
 {%- set test_features = [
   {"feature": "async_sqlalchemy", "template": "persistence/async_engine_conftest.yml"},
-  {"feature": "event_bus", "template": "standard_project/layers/test_event_bus.yml"}
+  {"feature": "event_bus", "template": "event_bus/test_event_bus.yml"}
 ] %}
+- name: test
+  type: directory
+  python: True
 {{ macros.render_children_for(test_features, 2) }}

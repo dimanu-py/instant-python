@@ -1,3 +1,0 @@
-- name: delivery
-  type: directory
-  python: True

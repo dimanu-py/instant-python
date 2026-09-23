@@ -19,6 +19,7 @@
 - name: pyproject
   type: file
   extension: .toml
+  template: config_files/pyproject.toml
 - name: unmatched_file
   type: file
   extension: .txt

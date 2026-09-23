@@ -1,0 +1,42 @@
+{% import "macros.j2" as macros with context %}
+{%- set shared_infra_features = [
+  {"feature": "event_bus", "template": "event_bus/mock_event_bus.yml"},
+  {"feature": "async_sqlalchemy", "template": "persistence/async_engine_conftest.yml"},
+] %}
+- name: test
+  type: directory
+  python: True
+  children:
+    - name: shared
+      type: directory
+      python: True
+      children:
+        - name: delivery
+          type: directory
+          python: True
+        - name: domain
+          type: directory
+          python: True
+        - name: infra
+          type: directory
+          python: True
+{{ macros.render_children_for(shared_infra_features, 10) }}
+{%- if template.specify_bounded_context %}
+    - name: {{ template.bounded_context }}
+      type: directory
+      python: True
+      children:
+        - name: {{ template.aggregate_name }}
+          type: directory
+          python: True
+          children:
+            - name: application
+              type: directory
+              python: True
+            - name: domain
+              type: directory
+              python: True
+            - name: infrastructure
+              type: directory
+              python: True
+{%- endif %}

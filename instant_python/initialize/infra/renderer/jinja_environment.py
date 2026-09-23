@@ -11,18 +11,14 @@ from instant_python.shared.supported_templates import SupportedTemplates
 class JinjaEnvironment:
     _EMPTY_CONTEXT: ClassVar[dict] = {}
     _BASE_PACKAGE_NAME: ClassVar[str] = "instant_python"
-    _PROJECT_STRUCTURE_TEMPLATE_PATH: ClassVar[str] = "templates/project_structure"
-    _BOILERPLATE_TEMPLATE_PATH: ClassVar[str] = "templates/boilerplate"
+    _TEMPLATE_PATH: ClassVar[str] = "templates"
 
     def __init__(self, user_template_path: str | None = None) -> None:
         self._env = Environment(
             loader=ChoiceLoader(
                 [
                     FileSystemLoader(user_template_path if user_template_path else []),
-                    PackageLoader(
-                        package_name=self._BASE_PACKAGE_NAME, package_path=self._PROJECT_STRUCTURE_TEMPLATE_PATH
-                    ),
-                    PackageLoader(package_name=self._BASE_PACKAGE_NAME, package_path=self._BOILERPLATE_TEMPLATE_PATH),
+                    PackageLoader(package_name=self._BASE_PACKAGE_NAME, package_path=self._TEMPLATE_PATH),
                 ]
             ),
             trim_blocks=True,
