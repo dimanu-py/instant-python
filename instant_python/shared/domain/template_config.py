@@ -1,3 +1,4 @@
+import warnings
 from dataclasses import asdict, dataclass, field
 from typing import ClassVar
 
@@ -24,6 +25,13 @@ class TemplateConfig:
         self._ensure_bounded_context_is_set_if_specified()
 
     def _ensure_template_is_supported(self) -> None:
+        if self.name == SupportedTemplates.CLEAN:
+            warnings.warn(
+                "`clean_architecture` will be removed as a supported template."
+                "Update your ipy.yml file setting the template to `custom` to remove this warning and avoid future errors.",
+                DeprecationWarning,
+                stacklevel=2,
+            )
         if self.name not in self._SUPPORTED_TEMPLATES:
             raise InvalidTemplateValue(self.name, self._SUPPORTED_TEMPLATES)
 
